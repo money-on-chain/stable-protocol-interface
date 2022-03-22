@@ -1,7 +1,15 @@
 import React from 'react';
 import './_style.scss';
+const BigNumber = require('bignumber.js');
 
-function MintData() {
+function MintData(props) {
+    const calculateMoC = () => {
+        const rbtcValue =
+            window.document.getElementById('inputRbtcValue').value;
+
+        window.document.getElementById('inputDoCValue').value =
+            rbtcValue * props.Data.RBTCPrice;
+    };
     return (
         <div className="HeaderBottom">
             <div className="Card MoC MintOrRedeemToken withPadding hasTitle">
@@ -19,9 +27,13 @@ function MintData() {
                                             <div className="ant-form-item-control-input-content">
                                                 <div className="MainContainer">
                                                     <input
+                                                        id="inputRbtcValue"
                                                         type="number"
                                                         className="valueInput "
-                                                        defaultValue={0.0}
+                                                        defaultValue={0.000001}
+                                                        step="any"
+                                                        max={props.Data.Balance}
+                                                        onChange={calculateMoC}
                                                     />
                                                     <div className="SelectCurrency MoC ">
                                                         <div className="ant-select ant-select-lg ant-select-single ant-select-show-arrow">
@@ -92,7 +104,9 @@ function MintData() {
                                                 'text-align': 'left'
                                             }}
                                         >
-                                            0.014894
+                                            {new BigNumber(
+                                                props.Data.Balance
+                                            ).toFixed(6)}
                                         </span>{' '}
                                         RBTC
                                     </div>
@@ -128,6 +142,7 @@ function MintData() {
                                             <div className="ant-form-item-control-input-content">
                                                 <div className="MainContainer">
                                                     <input
+                                                        id="inputDoCValue"
                                                         type="number"
                                                         className="valueInput "
                                                         defaultValue={0.0}
@@ -206,7 +221,7 @@ function MintData() {
                                                 'text-align': 'left'
                                             }}
                                         >
-                                            577.05
+                                            {props.Data.DoCBalance}
                                         </span>{' '}
                                         DoC
                                     </div>
@@ -215,38 +230,10 @@ function MintData() {
                         </div>
                     </div>
                 </div>
-                <div className="CommissionCurrencySwitch MoC">
-                    <p>Fee (0.05%): </p>
-                    <div>
-                        <span
-                            className
-                            style={{
-                                '-webkit-text-align': 'left',
-                                'text-align': 'left'
-                            }}
-                        >
-                            0.000000
-                        </span>{' '}
-                        RBTC
-                    </div>
-                    <div className="PayWithMocToken">
-                        <div className="Switch">
-                            <button
-                                type="button"
-                                role="switch"
-                                aria-checked="false"
-                                className="ant-switch"
-                            >
-                                <div className="ant-switch-handle" />
-                                <span className="ant-switch-inner" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 <div className="MintOrRedeemTokenFooter AlignedAndCentered">
                     <div className="ReserveInUSD">
                         <span className="Conversion MoC">
-                            1 RBTC ={' '}
+                            1 RBTC ={props.Data.RBTCPrice}
                             <div className="ReservePrice">
                                 <span
                                     className
@@ -255,7 +242,10 @@ function MintData() {
                                         'text-align': 'left'
                                     }}
                                 >
-                                    38,743.84
+                                    {new BigNumber(
+                                        props.Data.Balance *
+                                            props.Data.RBTCPrice
+                                    ).toFixed(2)}
                                 </span>{' '}
                                 USD
                             </div>
@@ -273,6 +263,14 @@ function MintData() {
                             Clear
                         </button>
                         <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                props.Mint(
+                                    window.document.getElementById(
+                                        'inputRbtcValue'
+                                    ).value
+                                );
+                            }}
                             type="button"
                             className="ButtonPrimary  lowerCase  MoC"
                         >

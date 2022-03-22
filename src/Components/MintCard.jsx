@@ -17,7 +17,7 @@ function MintCard(props) {
                             <h4 className="amount">
                                 <div>
                                     <span style={{ textAlign: 'left' }}>
-                                        900.11
+                                        {props.Data.DoCBalance}
                                     </span>
                                 </div>
                             </h4>
@@ -33,17 +33,18 @@ function MintCard(props) {
                             <h1>
                                 <div>
                                     <span style={{ textAlign: 'left' }}>
-                                        0.023232
+                                        {props.Data.DoCBalance /
+                                            props.Data.RBTCPrice}
                                     </span>
                                 </div>
                             </h1>
-                            <h4> BNB </h4>
+                            <h4> RBTC </h4>
                         </div>
                         <div className="BalanceItem MoC undefined">
                             <h1>
                                 <div>
                                     <span style={{ textAlign: 'left' }}>
-                                        900.11
+                                        {props.Data.DoCBalance}
                                     </span>
                                 </div>
                             </h1>

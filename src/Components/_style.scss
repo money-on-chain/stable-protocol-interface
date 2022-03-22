@@ -63,7 +63,7 @@
     flex-direction: row;
 }
 .balancecard .amount {
-    min-width: 100px;
+    min-width: 20px;
 }
 .BalanceItem {
     display: flex;
@@ -331,10 +331,11 @@
     flex-flow: column;
     overflow: hidden;
     width: 45%;
-    height: 350px;
+    height: 200px;
     position: relative;
     border: solid 2px #2e2c2e;
     margin-left: 25%;
+    margin-bottom: 25px;
 }
 .AlignedAndCentered {
     display: flex;
