@@ -1,0 +1,18 @@
+@import '~antd/dist/antd.css';
+@import './header';
+@import './sidebar';
+@import './icons';
+@import './icons-custom';
+
+body, html {
+  font-family: "Montserrat", sans-serif;
+}
+
+.page-container {
+  height: calc(100vh - 54px);
+  background: #fafafa;
+}
+
+.Spacer {
+  flex-grow: 1;
+}

@@ -5,9 +5,20 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+import {BrowserRouter} from 'react-router-dom';
+import Router from "./Router";
+// import { AuthenticateProvider } from "./Context/Auth";
+//
+// import './assets/css/global.scss'
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <App />
+      {/*<AuthenticateProvider>*/}
+      {/*    <BrowserRouter>*/}
+      {/*        <Router/>*/}
+      {/*    </BrowserRouter>*/}
+      {/*</AuthenticateProvider>*/}
   </React.StrictMode>,
   document.getElementById('root')
 );
