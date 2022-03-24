@@ -1,10 +1,11 @@
-import {useContext} from "react";
+import {useContext} from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
 import Admin from '../Layouts/Admin'
 import Mint from '../Pages/Mint'
 import NotFound from '../Pages/NotFound'
-import Home from '../App'
+import Home from '../Pages/Home/index'
+import App from '../App'
 
 // import { AuthenticateContext } from '../Context/Auth'
 
@@ -18,7 +19,8 @@ export default function Router() {
             element: <Admin />,
             children: [
                 { path: '/', element: <Home /> },
-                { path: 'mint', element: <Mint /> },
+                { path: 'mint/doc', element: <Mint type="doc" /> },
+                { path: 'test', element: <App /> },
                 { path: '404', element: <NotFound /> },
                 { path: '*', element: <Navigate to="/404" /> }
             ]

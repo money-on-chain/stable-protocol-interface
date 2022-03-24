@@ -3,11 +3,40 @@ import { Layout, Menu, Image } from 'antd';
 import { HomeFilled } from '@ant-design/icons';
 import logoImage from '../assets/icons/logo.svg'
 import LoginButton from '../Components/Auth/LoginButton/index'
-
+import { useContext, useState, useEffect } from 'react';
+import {useNavigate, useLocation} from "react-router-dom";
+import { AuthenticateContext } from '../Context/Auth'
 const { Header, Content, Sider } = Layout;
 
 export default function Admin() {
-  return (
+  const navigate = useNavigate();
+  const location = useLocation();
+  const {accountData} = useContext(AuthenticateContext);
+  const loginButtonSettings = accountData.Wallet ?
+      {
+        title: accountData.Wallet,
+        subtitle: accountData.Balance,
+        status: 'Active'
+      } :
+      { title: 'Connect' };
+  const [selectedMenu, setSelectedMenu] = useState('');
+
+    const checkSelectedMenu = () => {
+        let selectedMenuKey = '';
+        if (location.pathname === '/') {
+            selectedMenuKey = 'home';
+        } else if (location.pathname === '/mint/doc') {
+            selectedMenuKey = 'mint-doc';
+        }
+        setSelectedMenu(selectedMenuKey);
+        console.log(location.pathname, selectedMenuKey);
+    };
+
+    useEffect(() => {
+        checkSelectedMenu();
+    }, [location.pathname]);
+
+    return (
       <Layout>
           <Sider
               className="Sidebar"
@@ -29,11 +58,17 @@ export default function Admin() {
               }}
           >
               <div className="logo" />
-              <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-                  <Menu.Item icon={<HomeFilled />} />
-                  <Menu.Item icon={
-                      <span className="icon-coin-stable"><span className="path1"></span><span className="path2"></span></span>
-                  } />
+              <Menu theme="dark" mode="inline" selectedKeys={[selectedMenu]}>
+                  <Menu.Item
+                      key="home"
+                      onClick={() => navigate('/')}
+                      icon={<HomeFilled />}
+                  />
+                  <Menu.Item
+                      key="mint-doc"
+                      onClick={() => navigate('/mint/doc')}
+                      icon={<span className="icon-coin-stable"><span className="path1"></span><span className="path2"></span></span>}
+                  />
               </Menu>
           </Sider>
           <Layout>
@@ -43,7 +78,7 @@ export default function Admin() {
                       src={logoImage}
                   />
                   <div className="Spacer"></div>
-                  <LoginButton text="Connect" status="Active" />
+                  <LoginButton {...loginButtonSettings} />
               </Header>
               <Content className="page-container">
                   <Outlet/>

@@ -1,18 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
-import RLogin  from '@rsksmart/rlogin';
-import WalletConnectProvider from '@walletconnect/web3-provider';
-import Portis from '@portis/web3';
-import Torus from '@toruslabs/torus-embed';
-import { trezorProviderOptions } from '@rsksmart/rlogin-trezor-provider';
-import { ledgerProviderOptions } from '@rsksmart/rlogin-ledger-provider';
-import { dcentProviderOptions } from '@rsksmart/rlogin-dcent-provider';
-
-const rpcUrls = {
-    30: 'https://public-node.rsk.co',
-    31: 'https://public-node.testnet.rsk.co'
-};
-
-const supportedChains = Object.keys(rpcUrls).map(Number);
+import rLogin from "../Lib/rLogin";
+import Web3 from 'web3';
+import btcContractProvider from '../btcContractProvider';
+const BigNumber = require('bignumber.js');
 
 const AuthenticateContext = createContext({
     isLoggedIn: false,
@@ -21,47 +11,11 @@ const AuthenticateContext = createContext({
     disconnect: () => {},
 });
 
-export const rLogin = new RLogin({
-    providerOptions: {
-        walletconnect: {
-            package: WalletConnectProvider,
-            options: {
-                rpc: rpcUrls
-            }
-        },
-        portis: {
-            package: Portis,
-            options: {
-                id: 'a1c8672b-7b1c-476b-b3d0-41c27d575920',
-                network: {
-                    nodeUrl: 'https://public-node.testnet.rsk.co',
-                    chainId: 31
-                }
-            }
-        },
-        torus: {
-            package: Torus
-        },
-        'custom-ledger': ledgerProviderOptions,
-        'custom-dcent': dcentProviderOptions,
-        'custom-trezor': {
-            ...trezorProviderOptions,
-            options: {
-                manifestEmail: 'info@iovlabs.org',
-                manifestAppUrl:
-                    'https://basic-sample.rlogin.identity.rifos.org/'
-            }
-        }
-    },
-    rpcUrls,
-    supportedChains
-});
-
 const AuthenticateProvider = ({children}) => {
     const [provider, setProvider] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [account, setAccount] = useState(null);
-    const [accountData, setaccountData] = useState({
+    const [accountData, setAccountData] = useState({
         Wallet: '',
         Owner: '',
         Balance: 0,
@@ -88,21 +42,76 @@ const AuthenticateProvider = ({children}) => {
         await disconnect;
         setProvider(null);
         setAccount(null);
+        setAccountData({
+            Wallet: '',
+            Owner: '',
+            Balance: 0,
+            GasPrice: 0,
+            RBTCPrice: 0
+        });
         setIsLoggedIn(false);
     };
 
     const loadAccountData = async () => {
-        setaccountData({
+        const accountData = {
             Wallet: account,
-            // Owner: await getAccount(),
-            // Balance: await getBalance(account),
-            // GasPrice: await getGasPrice(),
-            // RBTCPrice: await getBTCPrice()
-        });
+            Owner: await getAccount(),
+            Balance: await getBalance(account),
+            GasPrice: await getGasPrice(),
+            RBTCPrice: await getBTCPrice()
+        };
+        console.log(accountData);
+        setAccountData(accountData);
+    };
+    const getAccount = async () => {
+        const web3 = new Web3(provider);
+        const [owner] = await web3.eth.getAccounts();
+        return owner;
+    };
+    const getBalance = async (address) => {
+        try {
+            const web3 = new Web3(provider);
+            let balance = await web3.eth.getBalance(address);
+            balance = web3.utils.fromWei(balance);
+            return balance;
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    const getGasPrice = async () => {
+        try {
+            const web3 = new Web3(provider);
+            const gasPrice = await web3.eth.getGasPrice();
+            return gasPrice;
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const getBTCPrice = async () => {
+        try {
+            const web3 = new Web3(provider);
+            const getContract = (abi, contractAddress) =>
+                new web3.eth.Contract(abi, contractAddress);
+            const btcpriceGeter = getContract(
+                btcContractProvider.abi,
+                '0x8BF2f24AfBb9dBE4F2a54FD72748FC797BB91F81'
+            );
+            const price = await btcpriceGeter.methods
+                .peek()
+                .call({ from: '0x0000000000000000000000000000000000000001' });
+
+            const formatedPrice = new BigNumber(
+                web3.utils.fromWei(price[0])
+            ).toNumber();
+            return formatedPrice;
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     return (
-        <AuthenticateContext.Provider value={{ account, setAccount, isLoggedIn, connect, disconnect }}>
+        <AuthenticateContext.Provider value={{ account, accountData, isLoggedIn, connect, disconnect }}>
             {children}
         </AuthenticateContext.Provider>
     );

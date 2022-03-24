@@ -19,8 +19,8 @@ function LoginButton(props) {
             }}
         >
             <div className="Text">
-                <div className="Title">{ props.text }</div>
-                <div className="Subtitle">{ props.text }</div>
+                <div className="Title">{ props.title }</div>
+                <div className="Subtitle">{ props.subtitle }</div>
             </div>
             <div className={`StatusIcon ${props.status}`}>
                 <div className="Circle"></div>
