@@ -25,8 +25,12 @@ export default function Admin() {
         let selectedMenuKey = '';
         if (location.pathname === '/') {
             selectedMenuKey = 'home';
-        } else if (location.pathname === '/mint/doc') {
-            selectedMenuKey = 'mint-doc';
+        } else if (location.pathname === '/wallet/stable') {
+            selectedMenuKey = 'mint-stable';
+        } else if (location.pathname === '/wallet/pro') {
+            selectedMenuKey = 'mint-pro';
+        } else if (location.pathname === '/wallet/leveraged') {
+            selectedMenuKey = 'mint-leveraged';
         }
         setSelectedMenu(selectedMenuKey);
         console.log(location.pathname, selectedMenuKey);
@@ -65,9 +69,19 @@ export default function Admin() {
                       icon={<HomeFilled />}
                   />
                   <Menu.Item
-                      key="mint-doc"
-                      onClick={() => navigate('/mint/doc')}
-                      icon={<span className="icon-coin-stable"><span className="path1"></span><span className="path2"></span></span>}
+                      key="mint-stable"
+                      onClick={() => navigate('/wallet/stable')}
+                      icon={<span className="icon-icon-stable"></span>}
+                  />
+                  <Menu.Item
+                      key="mint-pro"
+                      onClick={() => navigate('/wallet/pro')}
+                      icon={<span className="icon-icon-riskpro"></span>}
+                  />
+                  <Menu.Item
+                      key="mint-leveraged"
+                      onClick={() => navigate('/wallet/leveraged')}
+                      icon={<span className="icon-icon-riskprox"></span>}
                   />
               </Menu>
           </Sider>

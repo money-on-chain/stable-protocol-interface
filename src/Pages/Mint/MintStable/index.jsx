@@ -1,7 +1,6 @@
-import MintCard from '../../Components/Cards/MintCard';
+import MintCard from '../../../Components/Cards/MintCard';
 import { Fragment } from 'react';
-
-import './style.scss'
+import TokenSummaryCard from '../../../Components/Cards/TokenSummaryCard';
 
 export default function Mint() {
     return (
@@ -9,7 +8,7 @@ export default function Mint() {
             <h1 className="PageTitle">DoC</h1>
             <h3 className="PageSubTitle">Manage your DoCs</h3>
             <div className="WalletCardsContainer">
-                <MintCard />
+                <MintCard token={'STABLE'} currencyOptions={['RESERVE', 'STABLE']} color="#00a651" />
             </div>
         </Fragment>
     );

@@ -22,6 +22,7 @@ a {
   font-size: 13px;
   &:hover {
     cursor: pointer;
+    color: #09c199;
   }
 }
 
@@ -65,13 +66,25 @@ a {
   }
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .CoinSelect {
   .Number {
     font-size: 14px;
     font-weight: normal;
   }
-
   .ant-input, .ant-select, .ant-select-selector {
+    box-shadow: none !important;
     border: none !important;
     background: #f7f7f7 !important;
     height: 48px !important;
@@ -100,7 +113,7 @@ a {
   border-radius: 5px;
   //padding: 0 20px;
   height: 40px;
-  &.ant-btn-ghost {
+  &.ant-btn-ghost, &.ant-btn-default {
     border: solid 1px #09c199;
     color: #09c199;
     box-shadow: 0 2px 4px rgb(9 193 153 / 20%), 0 2px 4px rgb(9 193 153 / 20%);
@@ -110,8 +123,22 @@ a {
     }
   }
   &.ant-btn-primary {
+    color: #fff;
+    box-shadow: 0 2px 4px rgb(9 193 153 / 20%), 0 2px 4px rgb(9 193 153 / 20%);
+    border: solid 1px #09c199;
+    background: #09c199;
+    &:hover {
+      background: #000;
+      border: solid 1px #000;
+      color: #fff;
+    }
+  }
+
+  &[disabled], &[disabled]:hover, &[disabled]:focus, &[disabled]:active {
     border: solid 1px #707070;
     background: #707070;
+    box-shadow: none;
+    color: #fff;
   }
 
   &.ArrowButton {
@@ -138,4 +165,36 @@ a {
 .ant-select-selection-item  {
   color: #000;
   font-weight: 400;
+}
+
+.ant-modal-footer {
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+}
+
+.TabularContent {
+  .AlignedAndCentered {
+    margin-top: 15px;
+  }
+  .Bold {
+    font-weight: bold;
+  }
+  .Gray {
+    color: gray;
+    font-size: 1em;
+  }
+  .Name {
+    font-size: 1.2em;
+    flex-grow: 1;
+  }
+  .Value {
+    font-size: 1.2em;
+    text-align: right;
+    flex-grow: 1;
+  }
+  .Legend {
+    font-size: .7em;
+    color: #878787;
+  }
 }

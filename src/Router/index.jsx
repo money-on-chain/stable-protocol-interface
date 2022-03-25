@@ -2,7 +2,9 @@ import {useContext} from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
 import Admin from '../Layouts/Admin'
-import Mint from '../Pages/Mint'
+import MintStable from '../Pages/Mint/MintStable'
+import MintLeveraged from '../Pages/Mint/MintLeveraged'
+import MintPro from '../Pages/Mint/MintPro'
 import NotFound from '../Pages/NotFound'
 import Home from '../Pages/Home/index'
 import App from '../App'
@@ -19,7 +21,9 @@ export default function Router() {
             element: <Admin />,
             children: [
                 { path: '/', element: <Home /> },
-                { path: 'mint/doc', element: <Mint type="doc" /> },
+                { path: 'wallet/pro', element: <MintPro /> },
+                { path: 'wallet/stable', element: <MintStable /> },
+                { path: 'wallet/leveraged', element: <MintLeveraged /> },
                 { path: 'test', element: <App /> },
                 { path: '404', element: <NotFound /> },
                 { path: '*', element: <Navigate to="/404" /> }

@@ -25,12 +25,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-coin-stable .path1:before {
+.icon-icon-stable:before {
   content: "\e900";
-  color: rgb(255, 255, 255);
 }
-.icon-coin-stable .path2:before {
+.icon-icon-moc:before {
   content: "\e901";
-  margin-left: -1em;
-  color: rgb(46, 44, 46);
+}
+.icon-icon-riskprox:before {
+  content: "\e902";
+}
+.icon-icon-riskpro:before {
+  content: "\e903";
 }
