@@ -6,6 +6,9 @@
   flex-direction: row;
   align-items: center;
   justify-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 
   .ant-image-img {
     vertical-align: baseline;

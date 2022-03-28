@@ -1,6 +1,7 @@
 @media all and (max-width: 600px) {
   .page-container {
     margin-left: 0 !important;
+    padding: 20px 10px !important;
   }
 
   .Sidebar {
@@ -26,6 +27,13 @@
     }
     span {
       flex-grow: 1;
+    }
+  }
+
+  .MintSelectsContainer {
+    flex-direction: column;
+    > .ant-col {
+      min-width: 100%;
     }
   }
 }

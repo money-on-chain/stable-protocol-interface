@@ -55,7 +55,7 @@ export default function MintCard(props) {
     return (
         <div className="Card MintCard">
             <h3 className="CardTitle">Mint</h3>
-            <Row gutter={15}>
+            <Row className="MintSelectsContainer" gutter={15}>
                 <Col span={12}>
                     <CoinSelect
                         label="You Exchange"
@@ -89,15 +89,15 @@ export default function MintCard(props) {
                 <Col span={12}>
                     <div style={{marginTop: 20}}>
                         <div>1 RBTC = 44,081.18 USD</div>
-                        <div className="TextLegend">* Amounts may be different at<br/> transaction confirmation</div>
+                        <div className="TextLegend">* Amounts may be different at transaction confirmation</div>
                     </div>
                 </Col>
                 <Col span={12} style={{display: 'flex', alignItems: 'end', justifyContent: 'end'}}>
                     <Row style={{marginTop: 20}} gutter={15}>
-                        <Col>
+                        <Col span={12}>
                             <Button type="ghost" onClick={onClear}>Clear</Button>
                         </Col>
-                        <Col>
+                        <Col span={12}>
                             <Button type="primary" onClick={checkShowMintModal}>{isMint ? 'Mint' : 'Redeem'}</Button>
                         </Col>
                     </Row>

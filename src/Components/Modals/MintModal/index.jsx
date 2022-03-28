@@ -56,7 +56,7 @@ export default function MintModal(props) {
                     </div>
                 </div>
 
-                <div className="AlignedAndCentered" style={{alignItems: 'start'}}>
+                <div className="AlignedAndCentered" style={{alignItems: 'start', marginBottom: 20}}>
                     <div className="Name">
                         <div className="Gray">Fee (0.05%)</div>
                         <div className="Legend">

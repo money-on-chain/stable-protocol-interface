@@ -30,7 +30,7 @@ export default function CoinSelect(props) {
         <div className="CoinSelect">
             <label className="FormLabel">{ props.label }</label>
             <Row>
-                <Col span={17}>
+                <Col xs={{span: 14}} sm={{span: 14}} md={{span: 16}} lg={{span: 18}}>
                     <Input
                         type="number"
                         placeholder="0.00"
@@ -39,7 +39,7 @@ export default function CoinSelect(props) {
                         onChange={event => handleValueChange(event.target.value)}
                     />
                 </Col>
-                <Col span={7}>
+                <Col xs={{span: 10}} sm={{span: 10}} md={{span: 8}} lg={{span: 6}}>
                     <Select
                         onChange={handleCurrencySelect}
                         defaultValue={[props.value]}
