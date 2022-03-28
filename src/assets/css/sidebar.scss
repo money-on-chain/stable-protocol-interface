@@ -40,3 +40,17 @@
     display: none !important;
   }
 }
+
+.DrawerMenu {
+  .ant-drawer-body {
+    padding: 0 !important;
+  }
+  .ant-menu-item-icon, .ant-menu-title-content {
+    color: #888888;
+  }
+  .ant-menu-item-selected {
+    &::after {
+      border-right-color: #000;
+    }
+  }
+}

@@ -4,6 +4,7 @@
 @import './page';
 @import './icons';
 @import './icons-custom';
+@import './responsive';
 
 body, html {
   font-family: "Montserrat", sans-serif;
@@ -145,6 +146,7 @@ input[type=number] {
     background: #09c199;
     border: none;
     width: 40px;
+    min-width: 40px;
     height: 40px;
     border-radius: 50%;
     color: #fff;
@@ -173,28 +175,26 @@ input[type=number] {
   column-gap: 20px;
 }
 
-.TabularContent {
-  .AlignedAndCentered {
-    margin-top: 15px;
-  }
-  .Bold {
-    font-weight: bold;
-  }
-  .Gray {
-    color: gray;
-    font-size: 1em;
-  }
-  .Name {
-    font-size: 1.2em;
-    flex-grow: 1;
-  }
-  .Value {
-    font-size: 1.2em;
-    text-align: right;
-    flex-grow: 1;
-  }
-  .Legend {
-    font-size: .7em;
-    color: #878787;
-  }
+.AlignedAndCentered {
+  margin-top: 15px;
+}
+.Bold {
+  font-weight: bold;
+}
+.Gray {
+  color: gray;
+  font-size: 1em;
+}
+.Name {
+  font-size: 1.2em;
+  flex-grow: 1;
+}
+.Value {
+  font-size: 1.2em;
+  text-align: right;
+  flex-grow: 1;
+}
+.Legend {
+  font-size: .7em;
+  color: #878787;
 }

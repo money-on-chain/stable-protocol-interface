@@ -20,15 +20,29 @@ const AuthenticateProvider = ({children}) => {
         Owner: '',
         Balance: 0,
         GasPrice: 0,
-        RBTCPrice: 0
+        RBTCPrice: 0,
+        truncatedAddress: ''
     });
+
+    window.address = "0x371e637de56de8971e6c75a17977d48862eae53e";
+    window.web3 = Web3;
+
+    // rLogin.connectTo(window.address).then(x => console.log);
 
     useEffect(() => {
         if (account) loadAccountData();
     }, [account]);
 
     const connect = () =>
-        rLogin.connect().then(({ provider, disconnect }) => {
+        rLogin.connect().then((rLoginResponse) => {
+
+            const {provider, disconnect} = rLoginResponse;
+            window.rLoginDisconnect = disconnect;
+
+            if (rLoginResponse.authKeys) {
+                console.log(rLoginResponse.authKeys.refreshToken, rLoginResponse.authKeys.accessToken);
+            }
+
             // the provider is used to operate with user's wallet
             setProvider(provider);
             // request user's account
@@ -47,18 +61,24 @@ const AuthenticateProvider = ({children}) => {
             Owner: '',
             Balance: 0,
             GasPrice: 0,
-            RBTCPrice: 0
+            RBTCPrice: 0,
+            truncatedAddress: ''
         });
         setIsLoggedIn(false);
+        await window.rLoginDisconnect();
     };
 
     const loadAccountData = async () => {
+        const owner = await getAccount();
+        const truncate_address =
+            owner.substring(0, 6) + '...' + owner.substring(owner.length - 4, owner.length);
         const accountData = {
             Wallet: account,
-            Owner: await getAccount(),
+            Owner: owner,
             Balance: await getBalance(account),
             GasPrice: await getGasPrice(),
-            RBTCPrice: await getBTCPrice()
+            RBTCPrice: await getBTCPrice(),
+            truncatedAddress: truncate_address
         };
         console.log(accountData);
         setAccountData(accountData);

@@ -14,6 +14,7 @@ const rpcUrls = {
 const supportedChains = Object.keys(rpcUrls).map(Number);
 
 const rLogin = new RLogin({
+    cacheProvider: true,
     providerOptions: {
         walletconnect: {
             package: WalletConnectProvider,
@@ -48,5 +49,7 @@ const rLogin = new RLogin({
     rpcUrls,
     supportedChains
 });
+
+window.rLogin = rLogin;
 
 export default rLogin;

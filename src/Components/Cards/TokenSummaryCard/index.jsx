@@ -22,9 +22,9 @@ export default function TokenSummaryCard(props) {
                     textAlign: 'right',
                 }}
             >
-                <Row style={{width: '100%'}}>
+                <Row className="ArrowHomeIndicators" style={{width: '100%'}}>
                     <Col
-                        span={10}
+                        span={8}
                         style={{
                             ...styleCentered,
                             justifyContent: 'flex-start',
@@ -37,11 +37,11 @@ export default function TokenSummaryCard(props) {
                         />
                     </Col>
                     <Col
-                        span={14}
+                        span={16}
                         style={{
                             ...styleCentered,
                             justifyContent: 'flex-end',
-                            textAlign: 'right',
+                            textAlign: 'right'
                         }}
                     >
                         <span className="Number" style={{color}}>969.97</span>
@@ -51,7 +51,7 @@ export default function TokenSummaryCard(props) {
             <Col span={14} style={{
                 ...styleCentered,
                 flexDirection: 'column',
-                justifyContent: 'flex-end',
+                justifyContent: 'center',
                 textAlign: 'right',
             }}>
                 <div className="Numbers Left">
@@ -61,7 +61,7 @@ export default function TokenSummaryCard(props) {
             </Col>
             <Col span={2} style={{
                 ...styleCentered,
-                justifyContent: 'flex-end',
+                justifyContent: 'flex-end'
             }}>
                 <Button
                     className="ArrowButton"

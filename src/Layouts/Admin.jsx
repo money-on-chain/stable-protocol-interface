@@ -1,21 +1,23 @@
 import {Outlet} from 'react-router-dom';
-import { Layout, Menu, Image } from 'antd';
-import { HomeFilled } from '@ant-design/icons';
+import { Layout, Menu, Image, Drawer, Button } from 'antd';
+import { HomeFilled, MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import logoImage from '../assets/icons/logo.svg'
 import LoginButton from '../Components/Auth/LoginButton/index'
 import { useContext, useState, useEffect } from 'react';
 import {useNavigate, useLocation} from "react-router-dom";
 import { AuthenticateContext } from '../Context/Auth'
+import { formatVisibleValue } from '../Lib/Formats';
 const { Header, Content, Sider } = Layout;
 
 export default function Admin() {
   const navigate = useNavigate();
   const location = useLocation();
   const {accountData} = useContext(AuthenticateContext);
+  const [drawerVisible, setDrawerVisible] = useState(false);
   const loginButtonSettings = accountData.Wallet ?
       {
-        title: accountData.Wallet,
-        subtitle: accountData.Balance,
+        title: accountData.truncatedAddress,
+        subtitle: formatVisibleValue(accountData.Balance, 'RESERVE','en', 4) + ' RBTC',
         status: 'Active'
       } :
       { title: 'Connect' };
@@ -33,12 +35,15 @@ export default function Admin() {
             selectedMenuKey = 'mint-leveraged';
         }
         setSelectedMenu(selectedMenuKey);
-        console.log(location.pathname, selectedMenuKey);
     };
 
     useEffect(() => {
         checkSelectedMenu();
     }, [location.pathname]);
+
+    const toggleDrawerVisible = () => {
+        setDrawerVisible(!drawerVisible);
+    };
 
     return (
       <Layout>
@@ -46,12 +51,8 @@ export default function Admin() {
               className="Sidebar"
               breakpoint="lg"
               collapsed={true}
-              onBreakpoint={broken => {
-                  console.log(broken);
-              }}
-              onCollapse={(collapsed, type) => {
-                  console.log(collapsed, type);
-              }}
+              onBreakpoint={broken => {}}
+              onCollapse={(collapsed, type) => {}}
               style={{
                   overflow: 'auto',
                   height: '100vh',
@@ -93,11 +94,43 @@ export default function Admin() {
                   />
                   <div className="Spacer"></div>
                   <LoginButton {...loginButtonSettings} />
+
+                  <Button onClick={toggleDrawerVisible} className="MenuCollapseButton" ghost icon={drawerVisible ? <CloseOutlined /> : <MenuOutlined />} style={{marginLeft: 10}} />
               </Header>
               <Content className="page-container">
                   <Outlet/>
               </Content>
           </Layout>
+          <Drawer
+              className="DrawerMenu"
+              placement="left"
+              visible={drawerVisible}
+              width={250}
+              onClose={toggleDrawerVisible}
+          >
+              <Menu theme="light" mode="inline" selectedKeys={[selectedMenu]}>
+                  <Menu.Item
+                      key="home"
+                      onClick={() => navigate('/')}
+                      icon={<HomeFilled style={{fontSize: 30}} />}
+                  >Home</Menu.Item>
+                  <Menu.Item
+                      key="mint-stable"
+                      onClick={() => navigate('/wallet/stable')}
+                      icon={<span className="icon-icon-stable"></span>}
+                  >DoC</Menu.Item>
+                  <Menu.Item
+                      key="mint-pro"
+                      onClick={() => navigate('/wallet/pro')}
+                      icon={<span className="icon-icon-riskpro"></span>}
+                  >BPro</Menu.Item>
+                  <Menu.Item
+                      key="mint-leveraged"
+                      onClick={() => navigate('/wallet/leveraged')}
+                      icon={<span className="icon-icon-riskprox"></span>}
+                  >BTCx</Menu.Item>
+              </Menu>
+          </Drawer>
       </Layout>
   );
 }

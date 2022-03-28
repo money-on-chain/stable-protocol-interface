@@ -18,6 +18,7 @@
     }
     .Subtitle {
       color: #ef8a13;
+      font-size: 12px;
     }
   }
   .StatusIcon {
@@ -44,5 +45,12 @@
         background: #079a7a;
       }
     }
+  }
+}
+
+.ant-drawer-header {
+  padding: 25px 10px !important;
+  .ant-drawer-header-title {
+    justify-content: end;
   }
 }
