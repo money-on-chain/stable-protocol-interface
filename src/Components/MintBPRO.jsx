@@ -2,13 +2,14 @@ import React from 'react';
 import './_style.scss';
 const BigNumber = require('bignumber.js');
 
-function MintData(props) {
+function MintBPRO(props) {
     const calculateMoC = () => {
         const rbtcValue =
-            window.document.getElementById('inputRbtcValue').value;
+            window.document.getElementById('inputMRbtcValue').value;
 
-        window.document.getElementById('inputDoCValue').value =
-            rbtcValue * props.Data.RBTCPrice;
+        window.document.getElementById('inputBPROValue').value = new BigNumber(
+            (rbtcValue * props.Data.RBTCPrice) / props.Data.BPROPrice
+        ).toFixed(6);
     };
     return (
         <div className="HeaderBottom">
@@ -27,7 +28,7 @@ function MintData(props) {
                                             <div className="ant-form-item-control-input-content">
                                                 <div className="MainContainer">
                                                     <input
-                                                        id="inputRbtcValue"
+                                                        id="inputMRbtcValue"
                                                         type="number"
                                                         className="valueInput "
                                                         defaultValue={0.000001}
@@ -112,7 +113,7 @@ function MintData(props) {
                                             <div className="ant-form-item-control-input-content">
                                                 <div className="MainContainer">
                                                     <input
-                                                        id="inputDoCValue"
+                                                        id="inputBPROValue"
                                                         type="number"
                                                         className="valueInput "
                                                         defaultValue={0.0}
@@ -128,11 +129,11 @@ function MintData(props) {
                                                                                 window
                                                                                     .location
                                                                                     .origin +
-                                                                                '/icon-stable.svg'
+                                                                                '/BPROIcon.svg'
                                                                             }
-                                                                            alt="DoC"
+                                                                            alt="BPRO"
                                                                         />
-                                                                        DoC
+                                                                        BPRO
                                                                     </div>
                                                                 </span>
                                                             </div>
@@ -193,7 +194,7 @@ function MintData(props) {
                                         >
                                             {props.Data.DoCBalance}
                                         </span>{' '}
-                                        DoC
+                                        BPRO
                                     </div>
                                 </div>
                             </div>
@@ -238,13 +239,13 @@ function MintData(props) {
                                 if (!props.IsRedeem) {
                                     props.Mint(
                                         window.document.getElementById(
-                                            'inputRbtcValue'
+                                            'inputMRbtcValue'
                                         ).value
                                     );
                                 } else {
                                     props.Redeem(
                                         window.document.getElementById(
-                                            'inputDoCValue'
+                                            'inputBPROValue'
                                         ).value
                                     );
                                 }
@@ -261,4 +262,4 @@ function MintData(props) {
     );
 }
 
-export default MintData;
+export default MintBPRO;
