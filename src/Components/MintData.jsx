@@ -1,12 +1,20 @@
 import React from 'react';
 import './_style.scss';
+const BigNumber = require('bignumber.js');
 
-function MintData() {
+function MintData(props) {
+    const calculateMoC = () => {
+        const rbtcValue =
+            window.document.getElementById('inputRbtcValue').value;
+
+        window.document.getElementById('inputDoCValue').value =
+            rbtcValue * props.Data.RBTCPrice;
+    };
     return (
         <div className="HeaderBottom">
             <div className="Card MoC MintOrRedeemToken withPadding hasTitle">
                 <div className="title">
-                    <h1>Mint</h1>
+                    <h1>{props.IsRedeem ? 'Redeem' : 'Mint'}</h1>
                 </div>
                 <div className="ExchangeInputs AlignedAndCentered">
                     <div className="YouExchange">
@@ -19,9 +27,13 @@ function MintData() {
                                             <div className="ant-form-item-control-input-content">
                                                 <div className="MainContainer">
                                                     <input
+                                                        id="inputRbtcValue"
                                                         type="number"
                                                         className="valueInput "
-                                                        defaultValue={0.0}
+                                                        defaultValue={0.000001}
+                                                        step="any"
+                                                        max={props.Data.Balance}
+                                                        onChange={calculateMoC}
                                                     />
                                                     <div className="SelectCurrency MoC ">
                                                         <div className="ant-select ant-select-lg ant-select-single ant-select-show-arrow">
@@ -30,47 +42,18 @@ function MintData() {
                                                                     <div className="currencyOption">
                                                                         <img
                                                                             className="currencyImage"
-                                                                            src="/moc/icon-reserve.svg"
+                                                                            src={
+                                                                                window
+                                                                                    .location
+                                                                                    .origin +
+                                                                                '/icon-reserve.svg'
+                                                                            }
                                                                             alt="RBTC"
                                                                         />
                                                                         RBTC
                                                                     </div>
                                                                 </span>
                                                             </div>
-                                                            <span
-                                                                className="ant-select-arrow"
-                                                                unselectable="on"
-                                                                aria-hidden="true"
-                                                                style={{
-                                                                    '-webkit-user-select':
-                                                                        'none',
-                                                                    '-moz-user-select':
-                                                                        'none',
-                                                                    '-ms-user-select':
-                                                                        'none',
-                                                                    'user-select':
-                                                                        'none'
-                                                                }}
-                                                            >
-                                                                <span
-                                                                    role="img"
-                                                                    aria-label="down"
-                                                                    className="anticon anticon-down ant-select-suffix"
-                                                                >
-                                                                    <svg
-                                                                        viewBox="64 64 896 896"
-                                                                        focusable="false"
-                                                                        className
-                                                                        data-icon="down"
-                                                                        width="1em"
-                                                                        height="1em"
-                                                                        fill="currentColor"
-                                                                        aria-hidden="true"
-                                                                    >
-                                                                        <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" />
-                                                                    </svg>
-                                                                </span>
-                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -81,7 +64,7 @@ function MintData() {
                             </form>
                             <div className="AlignedAndCentered">
                                 <span className="setValueToMaxLink MoC">
-                                    Add total available
+                                    total available
                                 </span>
                                 <div className="text-align-right">
                                     <div>
@@ -92,9 +75,10 @@ function MintData() {
                                                 'text-align': 'left'
                                             }}
                                         >
-                                            0.014894
+                                            {new BigNumber(
+                                                props.Data.Balance
+                                            ).toFixed(6)}
                                         </span>{' '}
-                                        RBTC
                                     </div>
                                 </div>
                             </div>
@@ -128,6 +112,7 @@ function MintData() {
                                             <div className="ant-form-item-control-input-content">
                                                 <div className="MainContainer">
                                                     <input
+                                                        id="inputDoCValue"
                                                         type="number"
                                                         className="valueInput "
                                                         defaultValue={0.0}
@@ -195,7 +180,7 @@ function MintData() {
                             </form>
                             <div className="AlignedAndCentered">
                                 <span className="setValueToMaxLink MoC">
-                                    Add total available
+                                    total available
                                 </span>
                                 <div className="text-align-right">
                                     <div>
@@ -206,7 +191,7 @@ function MintData() {
                                                 'text-align': 'left'
                                             }}
                                         >
-                                            577.05
+                                            {props.Data.DoCBalance}
                                         </span>{' '}
                                         DoC
                                     </div>
@@ -215,38 +200,10 @@ function MintData() {
                         </div>
                     </div>
                 </div>
-                <div className="CommissionCurrencySwitch MoC">
-                    <p>Fee (0.05%): </p>
-                    <div>
-                        <span
-                            className
-                            style={{
-                                '-webkit-text-align': 'left',
-                                'text-align': 'left'
-                            }}
-                        >
-                            0.000000
-                        </span>{' '}
-                        RBTC
-                    </div>
-                    <div className="PayWithMocToken">
-                        <div className="Switch">
-                            <button
-                                type="button"
-                                role="switch"
-                                aria-checked="false"
-                                className="ant-switch"
-                            >
-                                <div className="ant-switch-handle" />
-                                <span className="ant-switch-inner" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 <div className="MintOrRedeemTokenFooter AlignedAndCentered">
                     <div className="ReserveInUSD">
                         <span className="Conversion MoC">
-                            1 RBTC ={' '}
+                            1 RBTC ={props.Data.RBTCPrice}
                             <div className="ReservePrice">
                                 <span
                                     className
@@ -255,7 +212,10 @@ function MintData() {
                                         'text-align': 'left'
                                     }}
                                 >
-                                    38,743.84
+                                    {new BigNumber(
+                                        props.Data.Balance *
+                                            props.Data.RBTCPrice
+                                    ).toFixed(2)}
                                 </span>{' '}
                                 USD
                             </div>
@@ -273,10 +233,26 @@ function MintData() {
                             Clear
                         </button>
                         <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                if (!props.IsRedeem) {
+                                    props.Mint(
+                                        window.document.getElementById(
+                                            'inputRbtcValue'
+                                        ).value
+                                    );
+                                } else {
+                                    props.Redeem(
+                                        window.document.getElementById(
+                                            'inputDoCValue'
+                                        ).value
+                                    );
+                                }
+                            }}
                             type="button"
                             className="ButtonPrimary  lowerCase  MoC"
                         >
-                            Mint
+                            {props.IsRedeem ? 'Redeem' : 'Mint'}
                         </button>
                     </div>
                 </div>

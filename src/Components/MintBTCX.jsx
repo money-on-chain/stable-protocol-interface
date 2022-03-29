@@ -1,29 +1,57 @@
 import React from 'react';
+import { useState } from 'react';
 import './_style.scss';
+const BigNumber = require('bignumber.js');
 
-function MintCard(props) {
+function MintBTCX(props) {
+    const [RBTCUSD, setRBTCUSD] = useState(0);
+
+    const GetRBTCUSD = () => {
+        const rbtcValue =
+            window.document.getElementById('inputRbtcValue').value;
+        if (rbtcValue) {
+            setRBTCUSD(
+                new BigNumber(
+                    parseFloat(rbtcValue) * parseFloat(props.Data.RBTCPrice)
+                ).toFixed(6)
+            );
+        }
+    };
+
     return (
         <div className="Card  TokenSummaryContainer  withPadding">
             <div className="TokenSummary MoC">
                 <div className="WalletLeftSide">
                     <div className="IconWallet">
                         <img
-                            src={window.location.origin + '/icon-stable.svg'}
+                            src={window.location.origin + '/BTXIcon.svg'}
                             alt="icon-wallet"
                         />
                     </div>
-                    <div className="priceContainer">
-                        <div className="balancecard  color-stable">
-                            <h4 className="amount">
-                                <div>
-                                    <span style={{ textAlign: 'left' }}>
-                                        {props.Data.DoCBalance}
-                                    </span>
+                    <div className="ant-form-item-control-input-content">
+                        <div className="MainContainer">
+                            <input
+                                id="inputRbtcValue"
+                                type="number"
+                                className="valueInput "
+                                defaultValue={0.000001}
+                                step="any"
+                                max={props.Data.Balance}
+                                onChange={GetRBTCUSD}
+                            />
+                            <div className="SelectCurrency MoC ">
+                                <div className="ant-select ant-select-lg ant-select-single ant-select-show-arrow">
+                                    <div className="ant-select-selector">
+                                        <span className="ant-select-selection-item">
+                                            <div className="currencyOption">
+                                                {`Total available ${new BigNumber(
+                                                    props.Data.Balance
+                                                ).toFixed(6)} RBTC`}
+                                            </div>
+                                        </span>
+                                    </div>
                                 </div>
-                            </h4>
-                            <h4 className="abbr">
-                                <span>DoC</span>
-                            </h4>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -33,18 +61,7 @@ function MintCard(props) {
                             <h1>
                                 <div>
                                     <span style={{ textAlign: 'left' }}>
-                                        {props.Data.DoCBalance /
-                                            props.Data.RBTCPrice}
-                                    </span>
-                                </div>
-                            </h1>
-                            <h4> RBTC </h4>
-                        </div>
-                        <div className="BalanceItem MoC undefined">
-                            <h1>
-                                <div>
-                                    <span style={{ textAlign: 'left' }}>
-                                        {props.Data.DoCBalance}
+                                        {RBTCUSD}
                                     </span>
                                 </div>
                             </h1>
@@ -58,10 +75,14 @@ function MintCard(props) {
                             <span style={{ textAlign: 'left' }}>
                                 <button
                                     onClick={() => {
-                                        props.handleClick(false);
+                                        props.Mint(
+                                            window.document.getElementById(
+                                                'inputRbtcValue'
+                                            ).value
+                                        );
                                     }}
                                     type="button"
-                                    className="ButtonPrimary    MoC"
+                                    className="ButtonPrimary MoC"
                                 >
                                     <img
                                         src={
@@ -82,7 +103,11 @@ function MintCard(props) {
                             <span style={{ textAlign: 'left' }}>
                                 <button
                                     onClick={() => {
-                                        props.handleClick(true);
+                                        props.Redeem(
+                                            window.document.getElementById(
+                                                'inputRbtcValue'
+                                            ).value
+                                        );
                                     }}
                                     type="button"
                                     className="ButtonPrimary    MoC"
@@ -104,4 +129,5 @@ function MintCard(props) {
         </div>
     );
 }
-export default MintCard;
+
+export default MintBTCX;
