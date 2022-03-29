@@ -11,6 +11,8 @@ const AuthenticateContext = createContext({
     disconnect: () => {},
 });
 
+let checkLoginFirstTime = true;
+
 const AuthenticateProvider = ({children}) => {
     const [provider, setProvider] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,6 +30,15 @@ const AuthenticateProvider = ({children}) => {
     window.web3 = Web3;
 
     // rLogin.connectTo(window.address).then(x => console.log);
+
+    useEffect(() => {
+        if (checkLoginFirstTime) {
+            if (rLogin.cachedProvider) {
+                connect();
+            }
+            checkLoginFirstTime = false;
+        }
+    });
 
     useEffect(() => {
         if (account) loadAccountData();
