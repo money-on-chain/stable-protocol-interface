@@ -12,7 +12,7 @@ const styleCentered = {
 
 export default function TokenSummaryCard(props) {
     const navigate = useNavigate();
-    const {tokenName = '', color= '#000', page=''} = props;
+    const {tokenName = '', color= '#000', page='', colorAmount= ''} = props;
     return (
         <Row className="Card TokenSummaryCard">
             <Col
@@ -44,7 +44,7 @@ export default function TokenSummaryCard(props) {
                             textAlign: 'right'
                         }}
                     >
-                        <span className="Number" style={{color}}>969.97</span>
+                        <span className="Number" style={{color}}>{colorAmount}</span>
                     </Col>
                 </Row>
             </Col>
