@@ -13,7 +13,7 @@ const { Option } = Select;
 
 export default function CoinSelect(props) {
     const { inputValueInWei = '0.0001', onInputValueChange = () => {} } = props;
-    const { currencyOptions = [], onCurrencySelect = () => {} } = props;
+    const { currencyOptions = [], onCurrencySelect = () => {}, disabled = false } = props;
     const optionsFiltered = currenciesDetail.filter((it) =>
         currencyOptions.includes(it.value)
     );
@@ -50,6 +50,10 @@ export default function CoinSelect(props) {
         onInputValueChange(newValueInEther);
     };
 
+    const addTotalAvailable = () => {
+        onInputValueChange(parseFloat(maxAmount));
+    };
+
     return (
         <div className="CoinSelect">
             <label className="FormLabel">{props.label}</label>
@@ -67,7 +71,7 @@ export default function CoinSelect(props) {
                         max={props.AccountData.Balance}
                         step="any"
                         style={{ width: '100%' }}
-                        disabled={props.disabled}
+                        disabled={disabled}
                         onChange={(event) =>
                             handleValueChange(event.target.value)
                         }
@@ -84,7 +88,7 @@ export default function CoinSelect(props) {
                         defaultValue={[props.value]}
                         value={[props.value]}
                         style={{ width: '100%' }}
-                        disabled={props.disabled}
+                        disabled={disabled}
                     >
                         {optionsFiltered.map((option) => (
                             <Option key={option.value} value={option.value}>
@@ -104,7 +108,9 @@ export default function CoinSelect(props) {
             </Row>
             <Row style={{ marginTop: 20 }}>
                 <Col span={12}>
-                    <a className="FormLabel Selectable">Add total available</a>
+                    {disabled === false &&
+                    <a className="FormLabel Selectable" onClick={addTotalAvailable}>Add total available</a>
+                    }
                 </Col>
                 <Col span={12} style={{ textAlign: 'right' }}>
                     <div className="Number">

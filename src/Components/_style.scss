@@ -440,6 +440,13 @@ body.MoC .InputWithCurrencySelector .ant-select-selector {
 }
 .currencyOption {
     display: flex;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    span {
+        flex-grow: 1;
+        text-align: right;
+    }
 }
 .SelectCurrency .currencyOption .currencyImage {
     height: 30px;

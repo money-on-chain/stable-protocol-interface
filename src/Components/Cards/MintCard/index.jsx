@@ -39,6 +39,7 @@ export default function MintCard(props) {
     };
 
     const onClear = () => {
+        setCurrencyYouExchange(token);
         setValueYouExchange('0.0000');
         setValueYouReceive('0.0000');
     };

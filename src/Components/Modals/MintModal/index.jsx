@@ -113,14 +113,14 @@ export default function MintModal(props) {
                 </div>
             </div>
 
-            <div className="CoinSelect">
-                <label className="FormLabel">{props.label}</label>
-                <Input
-                    type="text"
-                    placeholder="Type a comment"
-                    style={{ width: '100%', fontSize: 14 }}
-                />
-            </div>
+            {/*<div className="CoinSelect">*/}
+            {/*    <label className="FormLabel">{props.label}</label>*/}
+            {/*    <Input*/}
+            {/*        type="text"*/}
+            {/*        placeholder="Type a comment"*/}
+            {/*        style={{ width: '100%', fontSize: 14 }}*/}
+            {/*    />*/}
+            {/*</div>*/}
 
             <hr style={{ border: '1px solid lightgray', marginTop: 20 }} />
 
