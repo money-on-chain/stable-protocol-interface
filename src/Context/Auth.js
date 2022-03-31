@@ -16,6 +16,8 @@ const AuthenticateContext = createContext({
     DoCReedem: async (amount) => {},
     BPROMint: async (amount) => {},
     BPROReedem: async (amount) => {},
+    Bprox2Mint: async (amount) => {},
+    Bprox2Redeem: async (amount) => {},
     disconnect: () => {}
 });
 
@@ -24,6 +26,7 @@ const vendorAddress = '0xdda74880d638451e6d2c8d3fc19987526a7af730';
 const mocStateAddress = '0xfb526c0Ace90f52049691389B040a33D03343eb7';
 const mocAddress = '0x01AD6f8E884ed4DDC089fA3efC075E9ba45C9039';
 const btcProviderAddress = '0x8BF2f24AfBb9dBE4F2a54FD72748FC797BB91F81';
+const mocInrateAddress = '0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c';
 const bucketX2 = 'X2';
 const TransactionTypeIdsMoC = {
     MINT_BPRO_FEES_RBTC: 1,
@@ -194,7 +197,7 @@ const AuthenticateProvider = ({ children }) => {
         try {
             const mocInrate = getContract(
                 MoCInrate.abi,
-                '0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c'
+                mocInrateAddress
             );
             const comission = await mocInrate.methods
                 .calcCommissionValue(amount, transactionType)
@@ -211,7 +214,7 @@ const AuthenticateProvider = ({ children }) => {
         try {
             const mocInrate = getContract(
                 MoCInrate.abi,
-                '0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c'
+                mocInrateAddress
             );
 
             const comission = await mocInrate.methods
@@ -225,22 +228,29 @@ const AuthenticateProvider = ({ children }) => {
         }
     };
 
+    const estimateGasMintBprox2 = async (address, weiAmount, totalBtcAmount) =>
+    {
+        const moc = getContract(MocAbi.abi, mocAddress);
+        moc.methods
+            .mintBProxVendors(strToBytes32(bucketX2), weiAmount, vendorAddress)
+            .estimateGas({ from: address, value: totalBtcAmount });
+    }
+
+    const strToBytes32 = (bucket) => web3.utils.asciiToHex(bucket, 32);
+
     const DoCMint = async (amount, callback) => {
-        console.log('En Mint amount' + amount);
         const web3 = new Web3(provider);
         const moc = getContract(MocAbi.abi, mocAddress);
         const amountWei = web3.utils.toWei(amount);
-        console.log('En Mint amountWei' + amountWei);
         const totalAmount = await getTotalAmount(
             amountWei,
             TransactionTypeIdsMoC.MINT_DOC_FEES_RBTC
         );
-        console.log('En Mint TotalAmount' + totalAmount);
+
         const estimateGas = await moc.methods
             .mintDocVendors(amountWei, vendorAddress)
             .estimateGas({ from: account, value: totalAmount });
-        console.log('Estimate gas' + estimateGas);
-        console.log('Gas Price' + web3.utils.toWei(accountData.GasPrice));
+
         return moc.methods.mintDocVendors(amountWei, vendorAddress).send(
             {
                 from: account,
@@ -324,7 +334,74 @@ const AuthenticateProvider = ({ children }) => {
 
         return tokenBalance;
     };
+    const Bprox2Mint = async (btcAmount, callback) => {
+        const mocInrate = getContract(
+            MoCInrate.abi,
+            mocInrateAddress
+        );
+        const from = account;
+        const moc = getContract(MocAbi.abi, mocAddress);
+        const weiAmount = new BigNumber(
+            web3.utils.toWei(btcAmount, 'ether')
+        ).toFixed(0);
+        const btcInterestAmount = mocInrate.methods
+            .calcMintInterestValues(strToBytes32(bucketX2), weiAmount)
+            .call();
 
+        // Interest Margin. TODO: Is this ok? Where did this interestFinal came from?
+        const interestFinal = new BigNumber(0.01)
+            .multipliedBy(btcInterestAmount)
+            .plus(btcInterestAmount);
+
+        const totalBtcAmount = await getTotalAmount(
+            weiAmount,
+            TransactionTypeIdsMoC.MINT_BTCX_FEES_RBTC
+        );
+
+        const duplicateEstimateGasMintBprox2 =
+            2 * (await estimateGasMintBprox2(from, weiAmount, totalBtcAmount));
+        return moc.methods
+            .mintBProxVendors(strToBytes32(bucketX2), weiAmount, vendorAddress)
+            .send(
+                {
+                    from,
+                    value: totalBtcAmount,
+                    gasPrice: web3.utils.toWei(accountData.GasPrice),
+                    gas: duplicateEstimateGasMintBprox2,
+                    gasLimit: duplicateEstimateGasMintBprox2
+                },
+                callback
+            );
+    };
+
+    const Bprox2Redeem = async (bprox2Amount, callback) => {
+        const from = account;
+        const weiAmount = web3.utils.toWei(bprox2Amount, 'ether');
+        const moc = getContract(MocAbi.abi, mocAddress);
+        const estimateGas =
+            (await moc.methods
+                .redeemBProxVendors(
+                    strToBytes32(bucketX2),
+                    weiAmount,
+                    vendorAddress
+                )
+                .estimateGas({ from })) * 2;
+        return moc.methods
+            .redeemBProxVendors(
+                strToBytes32(bucketX2),
+                weiAmount,
+                vendorAddress
+            )
+            .send(
+                {
+                    from,
+                    gas: estimateGas,
+                    gasLimit: estimateGas,
+                    gasPrice: web3.utils.toWei(accountData.GasPrice)
+                },
+                callback
+            );
+    };
     return (
         <AuthenticateContext.Provider
             value={{
@@ -336,7 +413,9 @@ const AuthenticateProvider = ({ children }) => {
                 DoCMint,
                 DoCReedem,
                 BPROMint,
-                BPROReedem
+                BPROReedem,
+                Bprox2Mint,
+                Bprox2Redeem
             }}
         >
             {children}

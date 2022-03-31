@@ -74,6 +74,12 @@ export default function MintCard(props) {
                                 parseFloat(props.AccountData.BPROPrice)
                         );
                         break;
+                    case 'RISKPROX':
+                        setValueYouReceive(newValueYouExchange);
+                        setValueYouReceiveUSD(
+                            parseFloat(newValueYouExchange) *
+                                parseFloat(reservePrice));
+                        break;
                 }
                 break;
 
@@ -86,6 +92,12 @@ export default function MintCard(props) {
                     parseFloat(newValueYouExchange) *
                         parseFloat(props.AccountData.BPROPrice)
                 );
+                break;
+            case 'RISKPROX':
+                setValueYouReceive(newValueYouExchange);
+                setValueYouReceiveUSD(
+                    parseFloat(newValueYouExchange) *
+                        parseFloat(reservePrice));
                 break;
         }
         setValueYouExchange(newValueYouExchange);

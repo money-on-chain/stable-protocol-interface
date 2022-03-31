@@ -3,7 +3,6 @@ import { AuthenticateContext } from '../../../Context/Auth';
 import { useState, useContext } from 'react';
 import { Modal } from 'antd';
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
-import { renderMatches } from 'react-router-dom';
 const BigNumber = require('bignumber.js');
 export default function MintModal(props) {
     const {
@@ -37,6 +36,9 @@ export default function MintModal(props) {
             case 'RISKPRO':
                 await auth.BPROMint(props.valueYouExchange, callback);
                 break;
+            case 'RISKPROX':
+                await auth.Bprox2Mint(props.valueYouExchange, callback);
+                break;
             case 'RESERVE':
                 await redeem();
                 break;
@@ -50,6 +52,9 @@ export default function MintModal(props) {
             case 'RISKPRO':
                 await auth.BPROReedem(props.valueYouExchange, callback);
                 break;
+            case 'RISKPROX':
+                    await auth.Bprox2Redeem(props.valueYouExchange, callback);
+                    break;
         }
     };
 
