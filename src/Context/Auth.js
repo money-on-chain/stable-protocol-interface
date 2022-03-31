@@ -1,19 +1,44 @@
 import { createContext, useEffect, useState } from 'react';
-import rLogin from "../Lib/rLogin";
+import rLogin from '../Lib/rLogin';
 import Web3 from 'web3';
 import btcContractProvider from '../btcContractProvider';
+import MocAbi from '../Contract.json';
+import MoCInrate from '../MoCInRateContract.json';
+import MocState from '../MoCState.json';
 const BigNumber = require('bignumber.js');
 
 const AuthenticateContext = createContext({
     isLoggedIn: false,
     account: null,
     connect: () => {},
-    disconnect: () => {},
+    DoCMint: async (amount) => {},
+    DoCReedem: async (amount) => {},
+    BPROMint: async (amount) => {},
+    BPROReedem: async (amount) => {},
+    disconnect: () => {}
 });
 
 let checkLoginFirstTime = true;
-
-const AuthenticateProvider = ({children}) => {
+const vendorAddress = '0xdda74880d638451e6d2c8d3fc19987526a7af730';
+const mocStateAddress = '0xfb526c0Ace90f52049691389B040a33D03343eb7';
+const mocAddress = '0x01AD6f8E884ed4DDC089fA3efC075E9ba45C9039';
+const btcProviderAddress = '0x8BF2f24AfBb9dBE4F2a54FD72748FC797BB91F81';
+const bucketX2 = 'X2';
+const TransactionTypeIdsMoC = {
+    MINT_BPRO_FEES_RBTC: 1,
+    REDEEM_BPRO_FEES_RBTC: 2,
+    MINT_DOC_FEES_RBTC: 3,
+    REDEEM_DOC_FEES_RBTC: 4,
+    MINT_BTCX_FEES_RBTC: 5,
+    REDEEM_BTCX_FEES_RBTC: 6,
+    MINT_BPRO_FEES_MOC: 7,
+    REDEEM_BPRO_FEES_MOC: 8,
+    MINT_DOC_FEES_MOC: 9,
+    REDEEM_DOC_FEES_MOC: 10,
+    MINT_BTCX_FEES_MOC: 11,
+    REDEEM_BTCX_FEES_MOC: 12
+};
+const AuthenticateProvider = ({ children }) => {
     const [provider, setProvider] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [account, setAccount] = useState(null);
@@ -23,10 +48,11 @@ const AuthenticateProvider = ({children}) => {
         Balance: 0,
         GasPrice: 0,
         RBTCPrice: 0,
+        BPROPrice: 0,
         truncatedAddress: ''
     });
 
-    window.address = "0x371e637de56de8971e6c75a17977d48862eae53e";
+    window.address = account;
     window.web3 = Web3;
 
     // rLogin.connectTo(window.address).then(x => console.log);
@@ -46,12 +72,14 @@ const AuthenticateProvider = ({children}) => {
 
     const connect = () =>
         rLogin.connect().then((rLoginResponse) => {
-
-            const {provider, disconnect} = rLoginResponse;
+            const { provider, disconnect } = rLoginResponse;
             window.rLoginDisconnect = disconnect;
 
             if (rLoginResponse.authKeys) {
-                console.log(rLoginResponse.authKeys.refreshToken, rLoginResponse.authKeys.accessToken);
+                console.log(
+                    rLoginResponse.authKeys.refreshToken,
+                    rLoginResponse.authKeys.accessToken
+                );
             }
 
             // the provider is used to operate with user's wallet
@@ -82,16 +110,19 @@ const AuthenticateProvider = ({children}) => {
     const loadAccountData = async () => {
         const owner = await getAccount();
         const truncate_address =
-            owner.substring(0, 6) + '...' + owner.substring(owner.length - 4, owner.length);
+            owner.substring(0, 6) +
+            '...' +
+            owner.substring(owner.length - 4, owner.length);
         const accountData = {
             Wallet: account,
             Owner: owner,
             Balance: await getBalance(account),
             GasPrice: await getGasPrice(),
             RBTCPrice: await getBTCPrice(),
+            BPROPrice: await getBproPrice(),
             truncatedAddress: truncate_address
         };
-        console.log(accountData);
+
         setAccountData(accountData);
     };
     const getAccount = async () => {
@@ -112,7 +143,8 @@ const AuthenticateProvider = ({children}) => {
     const getGasPrice = async () => {
         try {
             const web3 = new Web3(provider);
-            const gasPrice = await web3.eth.getGasPrice();
+            let gasPrice = await web3.eth.getGasPrice();
+            gasPrice = web3.utils.fromWei(gasPrice);
             return gasPrice;
         } catch (e) {
             console.log(e);
@@ -126,7 +158,7 @@ const AuthenticateProvider = ({children}) => {
                 new web3.eth.Contract(abi, contractAddress);
             const btcpriceGeter = getContract(
                 btcContractProvider.abi,
-                '0x8BF2f24AfBb9dBE4F2a54FD72748FC797BB91F81'
+                btcProviderAddress
             );
             const price = await btcpriceGeter.methods
                 .peek()
@@ -140,15 +172,168 @@ const AuthenticateProvider = ({children}) => {
             console.log(e);
         }
     };
+    const getBproPrice = async () => {
+        const web3 = new Web3(provider);
+        const contract = new web3.eth.Contract(MocState.abi, mocStateAddress);
+        let price = await contract.methods.bproUsdPrice().call();
+        price = new BigNumber(web3.utils.fromWei(price)).toFixed(2);
+
+        return price;
+    };
+    const getContract = (abi, contractAddress) => {
+        const web3 = new Web3(provider);
+        return new web3.eth.Contract(abi, contractAddress);
+    };
+    const getTotalAmount = async (amount, transactionType) => {
+        const comision = await getCommissionValue(amount, transactionType);
+        console.log('Comision:' + comision);
+        const vendorMarkup = await getVendorMarkup(amount);
+        console.log('vendorMarkup:' + vendorMarkup);
+        return (
+            parseFloat(amount) + parseFloat(comision) + parseFloat(vendorMarkup)
+        );
+    };
+    const getCommissionValue = async (amount, transactionType) => {
+        try {
+            const mocInrate = getContract(
+                MoCInrate.abi,
+                '0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c'
+            );
+            const comission = await mocInrate.methods
+                .calcCommissionValue(amount, transactionType)
+                .call();
+            console.log(comission);
+
+            return comission;
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const getVendorMarkup = async (amount) => {
+        try {
+            const mocInrate = getContract(
+                MoCInrate.abi,
+                '0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c'
+            );
+
+            const comission = await mocInrate.methods
+                .calculateVendorMarkup(vendorAddress, amount)
+                .call();
+            console.log('Vendor Markup:' + comission);
+
+            return comission;
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const DoCMint = async (amount, callback) => {
+        console.log('En Mint amount' + amount);
+        const web3 = new Web3(provider);
+        const moc = getContract(MocAbi.abi, mocAddress);
+        const amountWei = web3.utils.toWei(amount);
+        console.log('En Mint amountWei' + amountWei);
+        const totalAmount = await getTotalAmount(
+            amountWei,
+            TransactionTypeIdsMoC.MINT_DOC_FEES_RBTC
+        );
+        console.log('En Mint TotalAmount' + totalAmount);
+        const estimateGas = await moc.methods
+            .mintDocVendors(amountWei, vendorAddress)
+            .estimateGas({ from: account, value: totalAmount });
+        console.log('Estimate gas' + estimateGas);
+        console.log('Gas Price' + web3.utils.toWei(accountData.GasPrice));
+        return moc.methods.mintDocVendors(amountWei, vendorAddress).send(
+            {
+                from: account,
+                value: totalAmount, //Importe con comisión incluida
+                gasPrice: web3.utils.toWei(accountData.GasPrice),
+                gas: 2 * estimateGas,
+                gasLimit: 2 * estimateGas
+            },
+            callback
+        );
+    };
+
+    const DoCReedem = async (amount, callback) => {
+        const web3 = new Web3(provider);
+        const amountWei = web3.utils.toWei(amount);
+        const moc = getContract(MocAbi.abi, mocAddress);
+        const estimateGas =
+            (await moc.methods
+                .redeemFreeDocVendors(amountWei, vendorAddress)
+                .estimateGas({ from: account })) * 2;
+        return moc.methods.redeemFreeDocVendors(amountWei, vendorAddress).send(
+            {
+                from: account,
+                gasPrice: web3.utils.toWei(accountData.GasPrice),
+                gas: estimateGas,
+                gasLimit: estimateGas
+            },
+            callback
+        );
+    };
+    const BPROMint = async (amount, callback) => {
+        const web3 = new Web3(provider);
+        const amountWei = web3.utils.toWei(amount);
+        const totalAmount = await getTotalAmount(
+            amountWei,
+            TransactionTypeIdsMoC.MINT_BPRO_FEES_RBTC
+        );
+
+        const moc = getContract(MocAbi.abi, mocAddress);
+        const estimateGas = await moc.methods
+            .mintBProVendors(amountWei, vendorAddress)
+            .estimateGas({ from: account, value: totalAmount });
+
+        return moc.methods.mintBProVendors(amountWei, vendorAddress).send(
+            {
+                from: account,
+                value: totalAmount, //Importe con comisión incluida
+                gasPrice: web3.utils.toWei(accountData.GasPrice),
+                gas: 2 * estimateGas,
+                gasLimit: 2 * estimateGas
+            },
+            callback
+        );
+    };
+    const BPROReedem = async (amount, callback) => {
+        const web3 = new Web3(provider);
+        const amountWei = web3.utils.toWei(amount);
+        const moc = getContract(MocAbi.abi, mocAddress);
+        const estimateGas =
+            (await moc.methods
+                .redeemBProVendors(amountWei, vendorAddress)
+                .estimateGas({ from: account })) * 2;
+        return moc.methods.redeemBProVendors(amountWei, vendorAddress).send(
+            {
+                from: account,
+                gasPrice: web3.utils.toWei(accountData.GasPrice),
+                gas: estimateGas,
+                gasLimit: estimateGas
+            },
+            callback
+        );
+    };
 
     return (
-        <AuthenticateContext.Provider value={{ account, accountData, isLoggedIn, connect, disconnect }}>
+        <AuthenticateContext.Provider
+            value={{
+                account,
+                accountData,
+                isLoggedIn,
+                connect,
+                disconnect,
+                DoCMint,
+                DoCReedem,
+                BPROMint,
+                BPROReedem
+            }}
+        >
             {children}
         </AuthenticateContext.Provider>
     );
 };
 
-export {
-    AuthenticateContext,
-    AuthenticateProvider
-}
+export { AuthenticateContext, AuthenticateProvider };

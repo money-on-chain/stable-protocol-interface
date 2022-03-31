@@ -1,45 +1,84 @@
-import { useContext } from 'react'
-import { AuthenticateContext } from '../../../Context/Auth'
-import { formatVisibleValue, formatValueToContract } from '../../../Lib/Formats'
+import { useEffect } from 'react';
+import { AuthenticateContext } from '../../../Context/Auth';
+import {
+    formatVisibleValue,
+    formatValueToContract
+} from '../../../Lib/Formats';
 import { Row, Col, Button } from 'antd';
-import './style.scss'
+import './style.scss';
 import { Select, Input } from 'antd';
-import { currencies as currenciesDetail} from '../../../Config/currentcy';
+import { currencies as currenciesDetail } from '../../../Config/currentcy';
+const BigNumber = require('bignumber.js');
 const { Option } = Select;
 
 export default function CoinSelect(props) {
-    const {inputValueInWei = '0', onInputValueChange = () => {}} = props;
-    const {accountData} = useContext(AuthenticateContext);
-    const {currencyOptions = [], onCurrencySelect = () => {}} = props;
-    const optionsFiltered = currenciesDetail.filter(it => currencyOptions.includes(it.value));
-    const handleCurrencySelect = newCurrencySelected => {
+    const { inputValueInWei = '0.0001', onInputValueChange = () => {} } = props;
+    const { currencyOptions = [], onCurrencySelect = () => {} } = props;
+    const optionsFiltered = currenciesDetail.filter((it) =>
+        currencyOptions.includes(it.value)
+    );
+    const handleCurrencySelect = (newCurrencySelected) => {
         onCurrencySelect(newCurrencySelected);
     };
 
-    const maxAmount = 0;
-    const tokenName = props.value ? currenciesDetail.find(x => x.value === props.value).label : '';
-    const handleValueChange = newValueInEther => {
-        const newValueInWei = formatValueToContract(newValueInEther, props.value);
-        handleValueChangeInWei(newValueInWei);
-    };
-    const handleValueChangeInWei = newValueInWei => {
-        onInputValueChange(newValueInWei);
+    useEffect(() => {
+        if (
+            inputValueInWei !=
+            document.getElementById('inputValue' + props.value).value.toString()
+        ) {
+            document.getElementById('inputValue' + props.value).value =
+                new BigNumber(inputValueInWei).toFixed(4).toString();
+        }
+    }, [inputValueInWei]);
+
+    const tokenName = props.value
+        ? currenciesDetail.find((x) => x.value === props.value).label
+        : '';
+    const maxAmount =
+        tokenName == 'RBTC'
+            ? new BigNumber(props.AccountData.Balance).toFixed(4)
+            : 0.0;
+    const handleValueChange = (newValueInEther) => {
+        if (
+            props.AccountData.Balance < newValueInEther &&
+            props.value == 'RESERVE'
+        ) {
+            newValueInEther = props.AccountData.Balance;
+            document.getElementById('inputValue' + props.value).value =
+                new BigNumber(newValueInEther).toFixed(4).toString();
+        }
+        onInputValueChange(newValueInEther);
     };
 
     return (
         <div className="CoinSelect">
-            <label className="FormLabel">{ props.label }</label>
+            <label className="FormLabel">{props.label}</label>
             <Row>
-                <Col xs={{span: 14}} sm={{span: 14}} md={{span: 16}} lg={{span: 18}}>
+                <Col
+                    xs={{ span: 14 }}
+                    sm={{ span: 14 }}
+                    md={{ span: 16 }}
+                    lg={{ span: 18 }}
+                >
                     <Input
                         type="number"
-                        placeholder="0.00"
+                        id={`inputValue${props.value}`}
+                        value={inputValueInWei}
+                        max={props.AccountData.Balance}
+                        step="any"
                         style={{ width: '100%' }}
-                        value={formatVisibleValue(inputValueInWei, props.value, 'en')}
-                        onChange={event => handleValueChange(event.target.value)}
+                        disabled={props.disabled}
+                        onChange={(event) =>
+                            handleValueChange(event.target.value)
+                        }
                     />
                 </Col>
-                <Col xs={{span: 10}} sm={{span: 10}} md={{span: 8}} lg={{span: 6}}>
+                <Col
+                    xs={{ span: 10 }}
+                    sm={{ span: 10 }}
+                    md={{ span: 8 }}
+                    lg={{ span: 6 }}
+                >
                     <Select
                         onChange={handleCurrencySelect}
                         defaultValue={[props.value]}
@@ -47,26 +86,32 @@ export default function CoinSelect(props) {
                         style={{ width: '100%' }}
                         disabled={props.disabled}
                     >
-                        {
-                            optionsFiltered.map((option) =>
+                        {optionsFiltered.map((option) => (
                             <Option key={option.value} value={option.value}>
                                 <div className="currencyOption">
-                                    <img className="currencyImage" src={option.image} alt={option.value} width={30} />
+                                    <img
+                                        className="currencyImage"
+                                        src={option.image}
+                                        alt={option.value}
+                                        width={30}
+                                    />
                                     <span>{option.label}</span>
                                 </div>
-                            </Option>)
-                        }
+                            </Option>
+                        ))}
                     </Select>
                 </Col>
             </Row>
-            <Row style={{marginTop: 20}}>
+            <Row style={{ marginTop: 20 }}>
                 <Col span={12}>
                     <a className="FormLabel Selectable">Add total available</a>
                 </Col>
                 <Col span={12} style={{ textAlign: 'right' }}>
-                    <div className="Number">{maxAmount} {tokenName}</div>
+                    <div className="Number">
+                        {maxAmount} {tokenName}
+                    </div>
                 </Col>
             </Row>
         </div>
-    )
+    );
 }

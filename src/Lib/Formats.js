@@ -17,11 +17,11 @@ const formatMap = {
     COV: NumberFormat,
     LEV: NumberFormat,
     percentage: NumberFormat,
-    visiblePercentage:  NumberFormat,
-    RISKPROXInterest:  NumberFormat,
-    FreeDocInterest:   NumberFormat,
+    visiblePercentage: NumberFormat,
+    RISKPROXInterest: NumberFormat,
+    FreeDocInterest: NumberFormat,
     commissionRate: NumberFormat,
-    valueVariation:  NumberFormat,
+    valueVariation: NumberFormat
 };
 
 const formatLocalMap = {
@@ -35,7 +35,8 @@ const formatLocalMap = {
     }
 };
 
-const precision = ({ contractDecimals }) => new BigNumber(10).exponentiatedBy(contractDecimals);
+const precision = ({ contractDecimals }) =>
+    new BigNumber(10).exponentiatedBy(contractDecimals);
 
 const formatValue = (amount, currencyCode, format, decimals) => {
     const fd = formatMap[currencyCode];
@@ -50,16 +51,23 @@ const formatValueFromMap = (amount, mapEntry, format, decimals) => {
 
 const formatVisibleValue = (amount, currencyCode, language, decimals) => {
     if (amount === null || amount === undefined || !currencyCode) return '-';
-    const num = formatValue(amount, currencyCode, formatLocalMap[language], decimals);
+    const num = formatValue(
+        amount,
+        currencyCode,
+        formatLocalMap[language],
+        decimals
+    );
     return num;
 };
 
 const formatValueToContract = (amount, currencyCode) => {
-    return new BigNumber(amount).multipliedBy(precision(formatMap[currencyCode])).toFixed(0);
+    return new BigNumber(amount)
+        .multipliedBy(precision(formatMap[currencyCode]))
+        .toFixed(0);
 };
 
 const formatValueWithContractPrecision = (amount, currencyCode) => {
-    BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN});
+    BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
     const fd = formatMap[currencyCode];
     return BigNumber(amount)
         .div(precision(fd))
@@ -85,4 +93,4 @@ export {
     formatValueToContract,
     formatValueWithContractPrecision,
     convertAmount
-}
+};
