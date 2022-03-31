@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { Button } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
+import Copy from '../../../Components/Page/Copy';
 export default function MintModal(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
@@ -15,10 +16,10 @@ export default function MintModal(props) {
             width={400}
             onCancel={handleClose}
         >
-            <div style={{marginTop: 30, display: 'flex', width: '100%', paddingLeft: 20, paddingRight: 20}}>
+            <div style={{marginTop: 10, display: 'flex', width: '100%', paddingLeft: 20, paddingRight: 20}}>
                 <div className="YourAddress" style={{flexGrow: 1}}>
                     <h3>Your Address</h3>
-                    <h4>{accountData.truncatedAddress}</h4>
+                    <Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Wallet}/>
                 </div>
                 <div className="StatusLogin" style={{flexGrow: 0}}>
                     <h3>Status</h3>
@@ -32,7 +33,7 @@ export default function MintModal(props) {
                 alignItems: 'center',
                 justifyItems: 'center',
                 width: '100%',
-                marginTop: 20
+                marginTop: 10
             }}>
                 <Button
                     className="ArrowButton"
@@ -47,7 +48,7 @@ export default function MintModal(props) {
                         handleClose();
                     }}
                 />
-                <h3 style={{marginTop: 20}}>Disconnect</h3>
+                <h3 style={{marginTop: 15}}>Disconnect</h3>
             </div>
         </Modal>
     );
