@@ -5,6 +5,7 @@ import btcContractProvider from '../btcContractProvider';
 import MocAbi from '../Contract.json';
 import MoCInrate from '../MoCInRateContract.json';
 import MocState from '../MoCState.json';
+import ERC20 from '../RC20Contract';
 const BigNumber = require('bignumber.js');
 
 const AuthenticateContext = createContext({
@@ -40,6 +41,7 @@ const TransactionTypeIdsMoC = {
 };
 const AuthenticateProvider = ({ children }) => {
     const [provider, setProvider] = useState(null);
+    const [web3, setweb3] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [account, setAccount] = useState(null);
     const [accountData, setAccountData] = useState({
@@ -49,13 +51,9 @@ const AuthenticateProvider = ({ children }) => {
         GasPrice: 0,
         RBTCPrice: 0,
         BPROPrice: 0,
+        DoCBalance: 0,
         truncatedAddress: ''
     });
-
-    window.address = account;
-    window.web3 = Web3;
-
-    // rLogin.connectTo(window.address).then(x => console.log);
 
     useEffect(() => {
         if (checkLoginFirstTime) {
@@ -73,6 +71,10 @@ const AuthenticateProvider = ({ children }) => {
     const connect = () =>
         rLogin.connect().then((rLoginResponse) => {
             const { provider, disconnect } = rLoginResponse;
+            setProvider(provider);
+
+            const web3 = new Web3(provider);
+            setweb3(web3);
             window.rLoginDisconnect = disconnect;
 
             if (rLoginResponse.authKeys) {
@@ -81,9 +83,6 @@ const AuthenticateProvider = ({ children }) => {
                     rLoginResponse.authKeys.accessToken
                 );
             }
-
-            // the provider is used to operate with user's wallet
-            setProvider(provider);
             // request user's account
             provider.request({ method: 'eth_accounts' }).then(([account]) => {
                 setAccount(account);
@@ -119,6 +118,7 @@ const AuthenticateProvider = ({ children }) => {
             Balance: await getBalance(account),
             GasPrice: await getGasPrice(),
             RBTCPrice: await getBTCPrice(),
+            DoCBalance: await getDoCBalance(account),
             BPROPrice: await getBproPrice(),
             truncatedAddress: truncate_address
         };
@@ -126,13 +126,11 @@ const AuthenticateProvider = ({ children }) => {
         setAccountData(accountData);
     };
     const getAccount = async () => {
-        const web3 = new Web3(provider);
         const [owner] = await web3.eth.getAccounts();
         return owner;
     };
     const getBalance = async (address) => {
         try {
-            const web3 = new Web3(provider);
             let balance = await web3.eth.getBalance(address);
             balance = web3.utils.fromWei(balance);
             return balance;
@@ -153,7 +151,6 @@ const AuthenticateProvider = ({ children }) => {
 
     const getBTCPrice = async () => {
         try {
-            const web3 = new Web3(provider);
             const getContract = (abi, contractAddress) =>
                 new web3.eth.Contract(abi, contractAddress);
             const btcpriceGeter = getContract(
@@ -315,6 +312,17 @@ const AuthenticateProvider = ({ children }) => {
             },
             callback
         );
+    };
+
+    const getDoCBalance = async (address) => {
+        const contract = new web3.eth.Contract(
+            ERC20.abi,
+            '0xCb46C0DdC60d18eFEB0e586c17AF6Ea36452DaE0'.toLocaleLowerCase()
+        );
+
+        let tokenBalance = await contract.methods.balanceOf(address).call();
+
+        return tokenBalance;
     };
 
     return (
