@@ -2,8 +2,6 @@ const { readJsonFile } = require('./helper');
 
 const Web3 = require('web3');
 
-const { Multicall2Abi } = require('./abis/Multicall2.json');
-
 const BUCKET_X2 = '0x5832000000000000000000000000000000000000000000000000000000000000';
 const BUCKET_C0 = '0x4330000000000000000000000000000000000000000000000000000000000000';
 
@@ -27,17 +25,15 @@ const connectorAddresses  = async (web3, multicall, moc) => {
         [connectorAddress, mocConnector.methods.mocState().encodeABI()],
         [connectorAddress, mocConnector.methods.mocInrate().encodeABI()],
         [connectorAddress, mocConnector.methods.mocExchange().encodeABI()],
-        [connectorAddress, mocConnector.methods.mocSettlement().encodeABI()]
+        [connectorAddress, mocConnector.methods.mocSettlement().encodeABI()],
+        [connectorAddress, mocConnector.methods.docToken().encodeABI()],
+        [connectorAddress, mocConnector.methods.bproToken().encodeABI()]
     ]
 
     const multicallResult = await multicall.methods.tryBlockAndAggregate(false, listMethods).call();
-
-    console.log(multicallResult[2]);
-
+    
     const listReturnData = multicallResult[2].map(x => web3.eth.abi.decodeParameter('address', x.returnData));
-
-    console.log(listReturnData);
-
+    
     return listReturnData
 
 }
@@ -106,14 +102,9 @@ const contractStatus  = async (web3, multicall, moc, mocstate, mocinrate, mocset
   const cleanListMethods = listMethods.map(x => [x[0], x[1]]);
 
   const multicallResult = await multicall.methods.tryBlockAndAggregate(false, cleanListMethods).call();
-
-  console.log(multicallResult[2]);
-
-  //const listReturnData = multicallResult[2].map(x => web3.eth.abi.decodeParameter('uint256', x.returnData));
+    
   const listReturnData = multicallResult[2].map((item, itemIndex) => web3.eth.abi.decodeParameter(listMethods[itemIndex][2], item.returnData));
-
-  console.log(listReturnData);
-
+  
   const d_moc_state = {};  
   d_moc_state["blockHeight"] = multicallResult[0];
   d_moc_state["bitcoinPrice"] = listReturnData[0];
@@ -174,12 +165,56 @@ const contractStatus  = async (web3, multicall, moc, mocstate, mocinrate, mocset
   d_moc_state["getMoCPriceProvider"] = listReturnData[50];
   d_moc_state["getBtcPriceProvider"] = listReturnData[51];
   d_moc_state["getMoCVendors"] = listReturnData[52];
-
-  console.log(d_moc_state);
-
+  
   return d_moc_state
 
 }
+
+
+const userBalance  = async (web3, multicall, moc, mocinrate, moctoken, bprotoken, doctoken, user_address) => {
+    
+    console.log("Reading user balance ...");
+        
+    const listMethods = [
+        [moctoken.options.address, moctoken.methods.balanceOf(user_address).encodeABI(), 'uint256'], // 0
+        [moctoken.options.address, moctoken.methods.allowance(user_address, moc.options.address).encodeABI(), 'uint256'], // 1
+        [doctoken.options.address, doctoken.methods.balanceOf(user_address).encodeABI(), 'uint256'], // 2
+        [bprotoken.options.address, bprotoken.methods.balanceOf(user_address).encodeABI(), 'uint256'], // 3
+        [multicall.options.address, multicall.methods.getEthBalance(user_address).encodeABI(), 'uint256'], // 4
+        [moc.options.address, moc.methods.docAmountToRedeem(user_address).encodeABI(), 'uint256'], // 5
+        [moc.options.address, moc.methods.bproxBalanceOf(BUCKET_X2, user_address).encodeABI(), 'uint256'], // 6
+    ]
+
+    // Remove decode result parameter
+    const cleanListMethods = listMethods.map(x => [x[0], x[1]]);
+
+    const multicallResult = await multicall.methods.tryBlockAndAggregate(false, cleanListMethods).call();
+        
+    const listReturnData = multicallResult[2].map((item, itemIndex) => web3.eth.abi.decodeParameter(listMethods[itemIndex][2], item.returnData));
+    
+    const user_balance = {};  
+    user_balance["blockHeight"] = multicallResult[0];
+    user_balance["mocBalance"] = listReturnData[0];
+    user_balance["mocAllowance"] = listReturnData[1];
+    user_balance["docBalance"] = listReturnData[2];
+    user_balance["bproBalance"] = listReturnData[3];
+    user_balance["rbtcBalance"] = listReturnData[4];
+    user_balance["docToRedeem"] = listReturnData[5];
+    user_balance["bprox2Balance"] = listReturnData[6];
+    user_balance["potentialBprox2MaxInterest"] = "0";
+    user_balance["bProHoldIncentive"] = "0";
+    user_balance["estimateGasMintBpro"] = "2000000";
+    user_balance["estimateGasMintDoc"] = "2000000";
+    user_balance["estimateGasMintBprox2"] = "2000000";
+
+    const calcMintInterest = await mocinrate.methods.calcMintInterestValues(BUCKET_X2, user_balance["rbtcBalance"]).call();
+
+    user_balance["potentialBprox2MaxInterest"] = calcMintInterest;    
+
+    return user_balance
+
+}
+
 
 const main  = async () => {
 
@@ -194,6 +229,9 @@ const main  = async () => {
     const MoCExchange = readJsonFile('./abis/MoCExchange.json');
     const MoCInrate = readJsonFile('./abis/MoCInrate.json');
     const MoCSettlement = readJsonFile('./abis/MoCSettlement.json');
+    const DocToken = readJsonFile('./abis/DocToken.json');
+    const BProToken = readJsonFile('./abis/BProToken.json');
+    const MoCToken = readJsonFile('./abis/MoCToken.json');
     
     console.log('Reading Multicall2 Contract... address: ', config.Multicall2);
     const multicall = new web3.eth.Contract(Multicall2.abi, config.Multicall2);
@@ -202,43 +240,51 @@ const main  = async () => {
     const moc = new web3.eth.Contract(MoC.abi, config.MoC);
 
     // Read contracts addresses from connector
-    
     const [
       mocStateAddress,
       mocInrateAddress,
       mocExchangeAddress,
-      mocSettlementAddress
+      mocSettlementAddress,
+      docTokenAddress,
+      bproTokenAddress
     ] = await connectorAddresses(web3, multicall, moc);
     
-
-    /*
-    const conn = await connectorAddresses(web3, multicall, moc);
-    console.log("Connect");
-    console.log(conn);
-    const mocStateAddress = conn[0];
-    const mocInrateAddress = conn[1];
-    const mocExchangeAddress = conn[2];
-    const mocSettlementAddress = conn[3];*/
-
-    console.log('Reading MoC State... address: ', mocStateAddress);
+    console.log('Reading MoC State Contract... address: ', mocStateAddress);
     const mocstate = new web3.eth.Contract(MoCState.abi, mocStateAddress);
 
-    console.log('Reading MoC Inrate... address: ', mocInrateAddress);
+    console.log('Reading MoC Inrate Contract... address: ', mocInrateAddress);
     const mocinrate = new web3.eth.Contract(MoCInrate.abi, mocInrateAddress);
 
-    console.log('Reading MoC Exchange... address: ', mocExchangeAddress);
+    console.log('Reading MoC Exchange Contract... address: ', mocExchangeAddress);
     const mocexchange = new web3.eth.Contract(MoCExchange.abi, mocExchangeAddress);
 
-    console.log('Reading MoC Settlement... address: ', mocSettlementAddress);
+    console.log('Reading MoC Settlement  Contract... address: ', mocSettlementAddress);
     const mocsettlement = new web3.eth.Contract(MoCSettlement.abi, mocSettlementAddress);
 
+    console.log('Reading DoC Token Contract... address: ', docTokenAddress);
+    const doctoken = new web3.eth.Contract(DocToken.abi, docTokenAddress);
 
-    const dataContractStatus = contractStatus(web3, multicall, moc, mocstate, mocinrate, mocsettlement);
+    console.log('Reading BPro Token Contract... address: ', bproTokenAddress);
+    const bprotoken = new web3.eth.Contract(BProToken.abi, bproTokenAddress);
 
+    const mocTokenAddress = await mocstate.methods.getMoCToken().call();
+
+    console.log('Reading MoC Token Contract... address: ', mocTokenAddress);
+    const moctoken = new web3.eth.Contract(MoCToken.abi, mocTokenAddress);
+
+    // Read info from different contract MoCState.sol MoCInrate.sol MoCSettlement.sol MoC.sol
+    // in one call throught Multicall
+    const dataContractStatus = await contractStatus(web3, multicall, moc, mocstate, mocinrate, mocsettlement);
+
+    console.log(dataContractStatus);
+
+    const user_address = '0xCD8A1c9aCc980ae031456573e34dC05cD7daE6e3';
+
+    // Example user balance
+    const user_balance = await userBalance(web3, multicall, moc, mocinrate, moctoken, bprotoken, doctoken, user_address);
+
+    console.log(user_balance);
     
-
-
-    //return web3;
 }
 
 
