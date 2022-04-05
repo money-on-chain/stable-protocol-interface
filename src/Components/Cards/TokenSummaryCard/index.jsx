@@ -36,6 +36,18 @@ export default function TokenSummaryCard(props) {
             }
         }
     };
+    const getBalanceUSD = () => {
+        if (auth.userBalanceData) {
+            switch (tokenName) {
+                case 'stable':
+                    return auth.userBalanceData['docBalance'];
+                case 'riskpro':
+                    return auth.contractStatusData["bproPriceInUsd"];
+                case 'riskprox':
+                    return auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance'];
+            }
+        }
+    };
     return (
         <Row className="Card TokenSummaryCard">
             <Col
@@ -94,7 +106,7 @@ export default function TokenSummaryCard(props) {
                             ).label
                         }
                     </div>
-                    <div className="Number Few">969.97 USD</div>
+                    <div className="Number Few">{getBalanceUSD()} USD</div>
                 </div>
             </Col>
             <Col

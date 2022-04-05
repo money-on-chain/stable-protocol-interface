@@ -23,6 +23,7 @@ const AuthenticateContext = createContext({
     isLoggedIn: false,
     account: null,
     userBalanceData: null,
+    contractStatusData: null,
     connect: () => {},
     DoCMint: async (amount) => {},
     DoCReedem: async (amount) => {},
@@ -60,6 +61,7 @@ const TransactionTypeIdsMoC = {
     REDEEM_BTCX_FEES_MOC: 12
 };
 const AuthenticateProvider = ({ children }) => {
+    const [contractStatusData, setcontractStatusData] = useState(null);
     const [provider, setProvider] = useState(null);
     const [web3, setweb3] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -227,7 +229,8 @@ const AuthenticateProvider = ({ children }) => {
         );
 
         console.log(dataContractStatus);
-
+        setcontractStatusData(dataContractStatus);
+        
         const user_address = account;
 
         // Example user balance
@@ -520,6 +523,7 @@ const AuthenticateProvider = ({ children }) => {
                 account,
                 accountData,
                 userBalanceData,
+                contractStatusData,
                 isLoggedIn,
                 connect,
                 disconnect,
