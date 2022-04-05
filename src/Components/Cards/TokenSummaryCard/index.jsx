@@ -6,6 +6,7 @@ import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
+const BigNumber = require('bignumber.js');
 
 const styleCentered = {
     display: 'flex',
@@ -44,7 +45,7 @@ export default function TokenSummaryCard(props) {
                 case 'riskpro':
                     return auth.contractStatusData["bproPriceInUsd"];
                 case 'riskprox':
-                    return auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance'];
+                    return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4);
             }
         }
     };
