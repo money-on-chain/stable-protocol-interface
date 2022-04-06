@@ -10,6 +10,8 @@ export default function Mint(props) {
                 <MintCard
                     token={'STABLE'}
                     currencyOptions={['RESERVE', 'STABLE']}
+                    StatusData={props.Auth.contractStatusData}
+                    UserBalanceData={props.Auth.userBalanceData}
                     color="#00a651"
                     AccountData={props.Auth.accountData}
                 />

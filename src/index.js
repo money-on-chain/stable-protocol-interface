@@ -1,25 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
 // import {BrowserRouter} from 'react-router-dom';
-import {HashRouter} from 'react-router-dom';
-import Router from "./Router";
-import { AuthenticateProvider } from "./Context/Auth";
-import './assets/css/global.scss'
+import { HashRouter } from 'react-router-dom';
+import Router from './Router';
+import { AuthenticateProvider } from './Context/Auth';
+import './assets/css/global.scss';
 
 ReactDOM.render(
-  <React.StrictMode>
-      <AuthenticateProvider>
-          <HashRouter>
-              <Router />
-          </HashRouter>
-      </AuthenticateProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <AuthenticateProvider>
+            <HashRouter>
+                <Router />
+            </HashRouter>
+        </AuthenticateProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
