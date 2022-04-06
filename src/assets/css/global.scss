@@ -57,7 +57,8 @@ a {
 
 .Card {
   padding: 1.6em;
-  box-shadow: 0 1px 6px rgb(147 141 158 / 16%), 0 2px 6px rgb(52 53 62 / 16%);
+  /*box-shadow: 0 1px 6px rgb(147 141 158 / 16%), 0 2px 6px rgb(52 53 62 / 16%);*/
+  box-shadow: 0 1px 6px rgba(189, 188, 189, 0.34), 0 2px 6px rgba(189, 188, 189, 0.34);
   background: #fff;
   border-radius: 6px;
 
@@ -118,7 +119,7 @@ input[type=number] {
   &.ant-btn-ghost, &.ant-btn-default {
     border: solid 1px #09c199;
     color: #09c199;
-    box-shadow: 0 2px 4px rgb(9 193 153 / 20%), 0 2px 4px rgb(9 193 153 / 20%);
+    box-shadow: 0 2px 4px rgb(9, 193, 153 / 20%), 0 2px 4px rgb(9, 193, 153 / 20%);
     &:hover {
       border: solid 1px #000;
       color: #000;
@@ -126,7 +127,7 @@ input[type=number] {
   }
   &.ant-btn-primary {
     color: #fff;
-    box-shadow: 0 2px 4px rgb(9 193 153 / 20%), 0 2px 4px rgb(9 193 153 / 20%);
+    box-shadow: 0 2px 4px rgb(9, 193, 153 / 20%), 0 2px 4px rgb(9, 193, 153 / 20%);
     border: solid 1px #09c199;
     background: #09c199;
     &:hover {
