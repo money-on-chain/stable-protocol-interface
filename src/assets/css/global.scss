@@ -119,7 +119,7 @@ input[type=number] {
   &.ant-btn-ghost, &.ant-btn-default {
     border: solid 1px #09c199;
     color: #09c199;
-    box-shadow: 0 2px 4px rgb(9, 193, 153 / 20%), 0 2px 4px rgb(9, 193, 153 / 20%);
+    box-shadow: 0 2px 4px rgb(9, 193, 153, 20%), 0 2px 4px rgb(9, 193, 153, 20%);
     &:hover {
       border: solid 1px #000;
       color: #000;
@@ -127,7 +127,7 @@ input[type=number] {
   }
   &.ant-btn-primary {
     color: #fff;
-    box-shadow: 0 2px 4px rgb(9, 193, 153 / 20%), 0 2px 4px rgb(9, 193, 153 / 20%);
+    box-shadow: 0 2px 4px rgb(9, 193, 153, 20%), 0 2px 4px rgb(9, 193, 153, 20%);
     border: solid 1px #09c199;
     background: #09c199;
     &:hover {
