@@ -353,7 +353,7 @@ const contractStatus = async (
     d_moc_state['bproDiscountRate'] = listReturnData[24];
     d_moc_state['maxBproWithDiscount'] = listReturnData[25];
     d_moc_state['bproDiscountPrice'] = listReturnData[26];
-    d_moc_state['bprox2PriceInRbtc'] = listReturnData[27];
+    d_moc_state['bprox2PriceInRbtc'] = web3.utils.fromWei(listReturnData[27]);
     d_moc_state['bprox2PriceInBpro'] = listReturnData[28];
     d_moc_state['spotInrate'] = listReturnData[29];
 
@@ -454,7 +454,11 @@ const userBalance = async (
     const user_balance = {};
     user_balance['blockHeight'] = multicallResult[0];
     user_balance['mocBalance'] = listReturnData[0];
-    user_balance['mocAllowance'] = listReturnData[1];
+    user_balance['mocAllowance'] = new BigNumber(
+        web3.utils.fromWei(listReturnData[1])
+    ).toFixed(0);
+    console.log(user_balance['mocBalance'] + ' MoC Balance');
+    console.log(user_balance['mocAllowance'] + ' Allowance');
     user_balance['docBalance'] = new BigNumber(
         web3.utils.fromWei(listReturnData[2])
     ).toFixed(4);

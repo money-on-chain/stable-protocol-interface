@@ -79,7 +79,10 @@ export default function MintCard(props) {
                         setValueYouReceive(newValueYouExchange);
                         setValueYouReceiveUSD(
                             parseFloat(newValueYouExchange) *
-                                parseFloat(reservePrice)
+                                (parseFloat(
+                                    props.StatusData['bprox2PriceInRbtc']
+                                ) *
+                                    parseFloat(reservePrice))
                         );
                         break;
                 }
@@ -98,7 +101,9 @@ export default function MintCard(props) {
             case 'RISKPROX':
                 setValueYouReceive(newValueYouExchange);
                 setValueYouReceiveUSD(
-                    parseFloat(newValueYouExchange) * parseFloat(reservePrice)
+                    parseFloat(newValueYouExchange) *
+                        (parseFloat(props.StatusData['bprox2PriceInRbtc']) *
+                            parseFloat(reservePrice))
                 );
                 break;
         }
@@ -131,9 +136,12 @@ export default function MintCard(props) {
                             <div className="Gray">Fee (0.05%)</div>
                         </div>
                         <span className="Value" style={{ flexGrow: 1 }}>
-                            0.00 MOC
+                            {props.UserBalanceData['mocAllowance']} MOC
                         </span>
-                        <Switch disabled onChange={onFeeChange} />
+                        <Switch
+                            disabled={props.UserBalanceData['mocAllowance'] > 0}
+                            onChange={onFeeChange}
+                        />
                     </div>
                 </Col>
                 <Col span={12}>
