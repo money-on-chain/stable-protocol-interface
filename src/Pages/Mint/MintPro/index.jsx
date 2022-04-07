@@ -10,6 +10,8 @@ export default function Mint(props) {
                 <MintCard
                     token={'RISKPRO'}
                     AccountData={props.Auth.accountData}
+                    UserBalanceData={props.Auth.userBalanceData}
+                    StatusData={props.Auth.contractStatusData}
                     currencyOptions={['RESERVE', 'RISKPRO']}
                     color="#ef8a13"
                 />

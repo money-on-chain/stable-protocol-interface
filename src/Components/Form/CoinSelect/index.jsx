@@ -13,7 +13,11 @@ const { Option } = Select;
 
 export default function CoinSelect(props) {
     const { inputValueInWei = '0.0001', onInputValueChange = () => {} } = props;
-    const { currencyOptions = [], onCurrencySelect = () => {}, disabled = false } = props;
+    const {
+        currencyOptions = [],
+        onCurrencySelect = () => {},
+        disabled = false
+    } = props;
     const optionsFiltered = currenciesDetail.filter((it) =>
         currencyOptions.includes(it.value)
     );
@@ -34,10 +38,20 @@ export default function CoinSelect(props) {
     const tokenName = props.value
         ? currenciesDetail.find((x) => x.value === props.value).label
         : '';
-    const maxAmount =
-        tokenName == 'RBTC'
-            ? new BigNumber(props.AccountData.Balance).toFixed(4)
-            : 0.0;
+    const maxAmount = () => {
+        switch (tokenName) {
+            case 'RBTC':
+                return new BigNumber(props.AccountData.Balance).toFixed(4);
+            case 'DOC':
+                return props.UserBalanceData['docBalance'];
+            case 'BPRO':
+                return props.UserBalanceData['bproBalance'];
+            case 'BTCX':
+                return props.UserBalanceData['bprox2Balance'];
+            default:
+                return 0.0;
+        }
+    };
     const handleValueChange = (newValueInEther) => {
         if (
             props.AccountData.Balance < newValueInEther &&
@@ -51,7 +65,7 @@ export default function CoinSelect(props) {
     };
 
     const addTotalAvailable = () => {
-        onInputValueChange(parseFloat(maxAmount));
+        onInputValueChange(parseFloat(maxAmount()));
     };
 
     return (
@@ -108,13 +122,18 @@ export default function CoinSelect(props) {
             </Row>
             <Row style={{ marginTop: 20 }}>
                 <Col span={12}>
-                    {disabled === false &&
-                    <a className="FormLabel Selectable" onClick={addTotalAvailable}>Add total available</a>
-                    }
+                    {disabled === false && (
+                        <a
+                            className="FormLabel Selectable"
+                            onClick={addTotalAvailable}
+                        >
+                            Add total available
+                        </a>
+                    )}
                 </Col>
                 <Col span={12} style={{ textAlign: 'right' }}>
                     <div className="Number">
-                        {maxAmount} {tokenName}
+                        {maxAmount()} {tokenName}
                     </div>
                 </Col>
             </Row>

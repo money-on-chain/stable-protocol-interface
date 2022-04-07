@@ -1,17 +1,17 @@
 import { createContext, useEffect, useState } from 'react';
 import rLogin from '../Lib/rLogin';
 import Web3 from 'web3';
-import btcContractProvider from '../btcContractProvider';
-import MocAbi from '../Contract.json';
-import MoCInrate from '../MoCInRateContract.json';
-import MocState from '../MoCState.json';
-import MultiCall from '../Multicall2.json';
-import MoCExchange from '../MoCExchange.json';
-import MoCSettlement from '../MoCSettlement.json';
-import DocToken from '../DocToken.json';
-import BProToken from '../BProToken.json';
-import MoCToken from '../MoCToken.json';
-import ERC20 from '../RC20Contract';
+import btcContractProvider from '../Contracts/MoC/abi/btcContractProvider';
+import MocAbi from '../Contracts/MoC/abi/Contract.json';
+import MoCInrate from '../Contracts/MoC/abi/MoCInRateContract.json';
+import MocState from '../Contracts/MoC/abi/MoCState.json';
+import MultiCall from '../Contracts/MoC/abi/Multicall2.json';
+import MoCExchange from '../Contracts/MoC/abi/MoCExchange.json';
+import MoCSettlement from '../Contracts/MoC/abi/MoCSettlement.json';
+import DocToken from '../Contracts/MoC/abi/DocToken.json';
+import BProToken from '../Contracts/MoC/abi/BProToken.json';
+import MoCToken from '../Contracts/MoC/abi/MoCToken.json';
+import ERC20 from '../Contracts/MoC/abi/RC20Contract';
 import {
     connectorAddresses,
     contractStatus,
@@ -23,6 +23,7 @@ const AuthenticateContext = createContext({
     isLoggedIn: false,
     account: null,
     userBalanceData: null,
+    contractStatusData: null,
     connect: () => {},
     DoCMint: async (amount) => {},
     DoCReedem: async (amount) => {},
@@ -60,6 +61,7 @@ const TransactionTypeIdsMoC = {
     REDEEM_BTCX_FEES_MOC: 12
 };
 const AuthenticateProvider = ({ children }) => {
+    const [contractStatusData, setcontractStatusData] = useState(null);
     const [provider, setProvider] = useState(null);
     const [web3, setweb3] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -72,9 +74,6 @@ const AuthenticateProvider = ({ children }) => {
         BPROBalance: 0,
         BTCxBalance: 0,
         GasPrice: 0,
-        RBTCPrice: 0,
-        BPROPrice: 0,
-        DoCBalance: 0,
         truncatedAddress: ''
     });
 
@@ -103,12 +102,6 @@ const AuthenticateProvider = ({ children }) => {
             setweb3(web3);
             window.rLoginDisconnect = disconnect;
 
-            if (rLoginResponse.authKeys) {
-                console.log(
-                    rLoginResponse.authKeys.refreshToken,
-                    rLoginResponse.authKeys.accessToken
-                );
-            }
             // request user's account
             provider.request({ method: 'eth_accounts' }).then(([account]) => {
                 setAccount(account);
@@ -125,7 +118,6 @@ const AuthenticateProvider = ({ children }) => {
             Owner: '',
             Balance: 0,
             GasPrice: 0,
-            RBTCPrice: 0,
             truncatedAddress: ''
         });
         setIsLoggedIn(false);
@@ -143,9 +135,6 @@ const AuthenticateProvider = ({ children }) => {
             Owner: owner,
             Balance: await getBalance(account),
             GasPrice: await getGasPrice(),
-            RBTCPrice: await getBTCPrice(),
-            DoCBalance: await getDoCBalance(account),
-            BPROPrice: await getBproPrice(),
             truncatedAddress: truncate_address
         };
 
@@ -227,6 +216,7 @@ const AuthenticateProvider = ({ children }) => {
         );
 
         console.log(dataContractStatus);
+        setcontractStatusData(dataContractStatus);
 
         const user_address = account;
 
@@ -270,34 +260,6 @@ const AuthenticateProvider = ({ children }) => {
         }
     };
 
-    const getBTCPrice = async () => {
-        try {
-            const getContract = (abi, contractAddress) =>
-                new web3.eth.Contract(abi, contractAddress);
-            const btcpriceGeter = getContract(
-                btcContractProvider.abi,
-                btcProviderAddress
-            );
-            const price = await btcpriceGeter.methods
-                .peek()
-                .call({ from: '0x0000000000000000000000000000000000000001' });
-
-            const formatedPrice = new BigNumber(
-                web3.utils.fromWei(price[0])
-            ).toNumber();
-            return formatedPrice;
-        } catch (e) {
-            console.log(e);
-        }
-    };
-    const getBproPrice = async () => {
-        const web3 = new Web3(provider);
-        const contract = new web3.eth.Contract(MocState.abi, mocStateAddress);
-        let price = await contract.methods.bproUsdPrice().call();
-        price = new BigNumber(web3.utils.fromWei(price)).toFixed(2);
-
-        return price;
-    };
     const getContract = (abi, contractAddress) => {
         const web3 = new Web3(provider);
         return new web3.eth.Contract(abi, contractAddress);
@@ -520,6 +482,7 @@ const AuthenticateProvider = ({ children }) => {
                 account,
                 accountData,
                 userBalanceData,
+                contractStatusData,
                 isLoggedIn,
                 connect,
                 disconnect,

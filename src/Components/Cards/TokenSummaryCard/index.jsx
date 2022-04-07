@@ -6,6 +6,7 @@ import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
+const BigNumber = require('bignumber.js');
 
 const styleCentered = {
     display: 'flex',
@@ -33,6 +34,18 @@ export default function TokenSummaryCard(props) {
                     return auth.userBalanceData['bproBalance'];
                 case 'riskprox':
                     return auth.userBalanceData['bprox2Balance'];
+            }
+        }
+    };
+    const getBalanceUSD = () => {
+        if (auth.userBalanceData) {
+            switch (tokenName) {
+                case 'stable':
+                    return auth.userBalanceData['docBalance'];
+                case 'riskpro':
+                    return auth.contractStatusData["bproPriceInUsd"];
+                case 'riskprox':
+                    return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4);
             }
         }
     };
@@ -94,7 +107,7 @@ export default function TokenSummaryCard(props) {
                             ).label
                         }
                     </div>
-                    <div className="Number Few">969.97 USD</div>
+                    <div className="Number Few">{getBalanceUSD()} USD</div>
                 </div>
             </Col>
             <Col
