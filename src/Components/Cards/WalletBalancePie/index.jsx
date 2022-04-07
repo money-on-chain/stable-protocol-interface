@@ -2,27 +2,26 @@ import React, { PureComponent } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip} from 'recharts';
 
 const data = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
+    { name: 'Group A', value: 200 },
+    { name: 'Group B', value: 800 },
+    { name: 'Group C', value: 300 }
 ];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#00a651', '#00C49F', '#ef8a13'];
 
 export default class WalletBalancePie extends PureComponent {
     static demoUrl = 'https://codesandbox.io/s/pie-chart-with-padding-angle-7ux0o';
 
     render() {
         return (
-            <div style={{ width: '100%', height: 185 }}>
+            <div style={{ height: 250,width:250 }}>
                 <ResponsiveContainer>
-            <PieChart onMouseEnter={this.onPieEnter}>
+            <PieChart>
                 <Pie
                     data={data}
-                    innerRadius={75}
-                    outerRadius={80}
+                    innerRadius={115}
+                    outerRadius={120}
                     fill="#8884d8"
-                    paddingAngle={5}
+                    paddingAngle={1}
                     dataKey="value"
                 >
                     {data.map((entry, index) => (

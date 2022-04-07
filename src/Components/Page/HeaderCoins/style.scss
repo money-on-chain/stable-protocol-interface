@@ -1,0 +1,169 @@
+.HeaderCoins {
+  /*flex-grow: 1;
+  align-items: center;
+  justify-items: center;*/
+//  display: flex;
+}
+
+// Configurable CDN Url
+// $CDN: "https://static.moneyonchain.com/moc-mainnet/public";
+$CDN: "https://static.moneyonchain.com/moc-testnet/public";
+$imagePath: "#{$CDN}/images";
+$MoCImagePath: "#{$CDN}/moc";
+$RRC20ImagePath: "#{$CDN}/rrc20";
+
+// Configurable Colors
+
+$background: #f1f3f8;
+
+$primary-color: #09c199;
+$primary-dark-color: #079a7a;
+$secondary-color: #05364f;
+$secondary-dark-color: #032537;
+$accent-color: #008CFF;
+$accent-dark-color: #008CFF;
+$very-dark-blue: #05202D;
+$yellow:#E9BF4A;
+
+$color-moc-riskpro: #ef8a13;
+$color-moc-riskprox: #ed1c24;
+$color-moc-stable: #00a651;
+
+$color-roc-riskpro: #0061bb;
+$color-roc-stable: #0083ff;
+$color-roc-riskprox: #67b8ff;
+
+$color-moc: #68cdc6;
+
+$color-pending: #d49400;
+
+$theme-color-yellow: linear-gradient(90deg,rgba(247,107,28,.7),rgba(250,217,97,.7));
+
+$theme-color-riskpro: linear-gradient(to right, #ffb415, #ef8a13);
+$theme-color-riskprox: linear-gradient(to right, #f2316a, #ed1c24);
+$theme-color-stable: linear-gradient(to right, #3fcb97, #00a651);
+
+$theme-color-allowance: linear-gradient(to right, rgba(5, 54, 79, 0.7), rgba(64, 129, 201, 0.7));
+$theme-color-total-balance: linear-gradient(to right, rgba(5, 54, 79, 1), rgba(9, 193, 153, 0.8));
+$theme-color-incentives: linear-gradient(to right, rgba(0, 165, 152, 1), rgba(0, 213, 196, 0.7));
+$theme-color-pending: linear-gradient(to right, rgba(140, 165, 0, 1), rgba(213, 114, 0, 0.7));
+$theme-color-sent: linear-gradient(to right, rgba(0, 135, 182, 1), rgba(0, 183, 226, 0.7));
+
+// Configurable Font
+
+@mixin primary-text($font-size, $font-color, $font-weight) {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  @if $font-color {
+    color: $font-color;
+  }
+}
+
+@mixin secondary-text($font-size, $font-color, $font-weight) {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  @if $font-color {
+    color: $font-color;
+  }
+}
+
+// Colors
+
+$black: #000;
+$white: #fff;
+
+$darker-grey: #232222;
+$dark-grey: #575756;
+$grey: #707070;
+$medium-grey: #878787;
+$low-grey: #B9B9B9;
+$light-grey: #F7F7F7;
+
+$green: #3fcb97;
+$red: #f2316a;
+
+.MiddleSide {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-items: center;
+  @media (max-width: 800px) {
+    display: none;
+  }
+  .BtcPrice {
+    margin-right: 2em;
+  }
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
+
+.BtcPrice {
+  display: flex;
+  flex-flow: row;
+  margin-right: 1.5em;
+
+  // p {
+  //   @include primary-text(0.8em, $grey, 400);
+  //   text-transform: uppercase;
+  // }
+  > img {
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .PriceVariation {
+    p {
+      @include secondary-text(1em, $white, 600);
+    }
+
+    &.theme-value-up {
+      p {
+        color: $green;
+      }
+    }
+
+    &.theme-value-down {
+      p {
+        color: $red;
+      }
+    }
+
+    &.theme-value-equal {
+      p {
+        color: $black;
+      }
+    }
+  }
+  .BtcPriceContent {
+    display: flex;
+    align-items: baseline;
+    flex-flow: column;
+
+    .BtcValue {
+      display: flex;
+      align-items: baseline;
+      margin-right: 0.5em;
+      h4 {
+        @include secondary-text(1em, $white, 400);
+        margin-right: 0.2em;
+      }
+      p {
+        @include primary-text(0.8em, $white, 400);
+      }
+    }
+  }
+
+}
+
+.PriceVariation {
+  display: flex;
+  flex-flow: row;
+  align-items: baseline;
+  box-sizing: border-box;
+}

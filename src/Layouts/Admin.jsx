@@ -7,6 +7,7 @@ import { useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthenticateContext } from '../Context/Auth';
 import { formatVisibleValue } from '../Lib/Formats';
+import HeaderCoins from "../Components/Page/HeaderCoins";
 const BigNumber = require('bignumber.js');
 const { Header, Content, Sider } = Layout;
 
@@ -91,6 +92,7 @@ export default function Admin() {
                 <Header className="Header" style={{ paddingLeft: 18 }}>
                     <Image height={40} src={logoImage} />
                     <div className="Spacer"></div>
+                    {/*<HeaderCoins/>*/}
                     <LoginButton {...loginButtonSettings} />
 
                     <Button

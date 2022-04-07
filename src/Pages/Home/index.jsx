@@ -16,16 +16,16 @@ function Home(props) {
             <h1 className="PageTitle">Home</h1>
             <h3 className="PageSubTitle">Keep calm and Hodl on</h3>
             <div className="WalletCardsContainer">
-                <Row lg={12}>
-                    <Col lg={4} className="mrc-3">
+
+                    {/*<Col className="mrc-3" style={{  'flex-grow': 0 }}>*/}
                         <WalletBalance/>
-                    </Col>
-                    <Col lg={18} style={{ width: '100%' }}>
+                    {/*</Col>*/}
+                    <div className={"container-b"}>
                         <TokenSummaryCard tokenName="stable" color="#00a651" page="/wallet/stable" colorAmount={""} />
                         <TokenSummaryCard tokenName="riskpro" color="#ef8a13" page="/wallet/pro" colorAmount={""} />
                         <TokenSummaryCard tokenName="riskprox" color="#ed1c24" page="/wallet/leveraged" colorAmount={""} />
-                    </Col>
-                </Row>
+                    </div>
+
             </div>
         </Fragment>
     )

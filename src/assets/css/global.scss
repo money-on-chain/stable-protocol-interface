@@ -16,6 +16,9 @@ body, html {
   margin-left: 80px;
   padding: 20px;
   margin-top: 54px;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 a {
@@ -199,4 +202,11 @@ input[type=number] {
 .Legend {
   font-size: .7em;
   color: #878787;
+}
+
+.ant-layout{
+  background-color: #fafafa;
+}
+.mrb-15{
+  margin-bottom: 15px;
 }
