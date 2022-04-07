@@ -59,6 +59,7 @@ a {
 }
 
 .Card {
+  width: 100%;
   padding: 1.6em;
   /*box-shadow: 0 1px 6px rgb(147 141 158 / 16%), 0 2px 6px rgb(52 53 62 / 16%);*/
   box-shadow: 0 1px 6px rgba(189, 188, 189, 0.34), 0 2px 6px rgba(189, 188, 189, 0.34);
@@ -209,4 +210,10 @@ input[type=number] {
 }
 .mrb-15{
   margin-bottom: 15px;
+}
+.container-b{
+  flex-grow: 1;
+  display: flex;
+  row-gap: 15px;
+  flex-wrap: wrap;
 }
