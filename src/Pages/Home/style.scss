@@ -8,3 +8,14 @@
   width: 100%;
   row-gap: 15px;
 }
+
+.container-b{
+  flex-grow: 1 !important;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  row-gap: 15px;
+  .TokenSummaryCard {
+    flex-grow: 1;
+  }
+}

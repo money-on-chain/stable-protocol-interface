@@ -20,7 +20,7 @@ function Home(props) {
                     {/*<Col className="mrc-3" style={{  'flex-grow': 0 }}>*/}
                         <WalletBalance/>
                     {/*</Col>*/}
-                    <div className={"container-b"}>
+                    <div className="container-b">
                         <TokenSummaryCard tokenName="stable" color="#00a651" page="/wallet/stable" colorAmount={""} />
                         <TokenSummaryCard tokenName="riskpro" color="#ef8a13" page="/wallet/pro" colorAmount={""} />
                         <TokenSummaryCard tokenName="riskprox" color="#ed1c24" page="/wallet/leveraged" colorAmount={""} />
