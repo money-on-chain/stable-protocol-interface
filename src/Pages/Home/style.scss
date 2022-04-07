@@ -1,6 +1,10 @@
 .WalletCardsContainer {
   display: flex;
   flex-direction: column;
+  @media screen and (min-width:450px) {
+    flex-direction: row;
+  }
+
   width: 100%;
   row-gap: 15px;
 }

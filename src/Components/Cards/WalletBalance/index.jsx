@@ -17,8 +17,8 @@ function WalletBalance(props) {
 
 
     return (
-        <Row className="WalletBalance">
-            <Col>Your Wallet Balance</Col>
+        <div className="WalletBalance mrc-15">
+            <div className="mrb-15">Your Wallet Balance</div>
             <WalletBalancePie/>
                 <div className="TotalBalanceBottom">
                     <div className="CopyableText ">
@@ -31,7 +31,7 @@ function WalletBalance(props) {
                         <button type="button" className="ButtonPrimary  lowerCase ">Send</button>
                     </div>
                 </div>
-        </Row>
+        </div>
     )
 }
 
