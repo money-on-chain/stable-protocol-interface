@@ -220,3 +220,14 @@ input[type=number] {
 .mrl-25{
   margin-left: 25px;
 }
+
+.MiddleSide {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  @media (max-width: 800px) {
+    display: none;
+  }
+}

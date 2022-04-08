@@ -3,7 +3,7 @@ import { Layout, Menu, Image, Drawer, Button } from 'antd';
 import { HomeFilled, MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import logoImage from '../assets/icons/logo.svg';
 import LoginButton from '../Components/Auth/LoginButton/index';
-import { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthenticateContext } from '../Context/Auth';
 import { formatVisibleValue } from '../Lib/Formats';
@@ -93,7 +93,11 @@ export default function Admin() {
                     <Image height={40} src={logoImage} />
                     {/*<div className="Spacer"></div>*/}
                     {/*colors: #f2316a o #3fcb97*/}
-                    <HeaderCoins color1={'#f2316a'} color2={'#3fcb97'} color3={'#3fcb97'}/>
+                    <div className="MiddleSide">
+                        <HeaderCoins tokenName="stable" color={'#f2316a'} image={'icon-rbtclogo.svg'} arrow={'icon-arrow-down2.svg'} arrow_size={12}/>
+                        <HeaderCoins tokenName="riskpro" color={'#3fcb97'} image={'BPROIcon.svg'} arrow={'icon-arrow-up2.svg'} arrow_size={11}/>
+                        <HeaderCoins tokenName="riskprox" color={'#3fcb97'} image={'BTXIcon.svg'} arrow={'icon-arrow-up2.svg'} arrow_size={11}/>
+                    </div>
                     <LoginButton {...loginButtonSettings} />
 
                     <Button
