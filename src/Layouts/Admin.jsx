@@ -91,8 +91,9 @@ export default function Admin() {
             <Layout>
                 <Header className="Header" style={{ paddingLeft: 18 }}>
                     <Image height={40} src={logoImage} />
-                    <div className="Spacer"></div>
-                    {/*<HeaderCoins/>*/}
+                    {/*<div className="Spacer"></div>*/}
+                    {/*colors: #f2316a o #3fcb97*/}
+                    <HeaderCoins color1={'#f2316a'} color2={'#3fcb97'} color3={'#3fcb97'}/>
                     <LoginButton {...loginButtonSettings} />
 
                     <Button
