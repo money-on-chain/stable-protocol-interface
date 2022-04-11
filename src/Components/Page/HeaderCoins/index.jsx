@@ -11,11 +11,29 @@ function HeaderCoins(props) {
         if (auth.userBalanceData) {
             switch (props.tokenName) {
                 case 'stable':
-                    return auth.contractStatusData['bitcoinPrice'];
+                    if ( auth.contractStatusData['bitcoinPrice'] !=0 ){
+                        return (auth.contractStatusData['bitcoinPrice'] / 1000).toFixed(4);
+                    }else{
+                        return 0;
+                    }
                 case 'riskpro':
-                    return auth.contractStatusData["bproPriceInUsd"];
+                    if ( auth.contractStatusData["bproPriceInUsd"] !=0 ){
+                        return (auth.contractStatusData["bproPriceInUsd"]/ 1000).toFixed(4);
+                    }else{
+                        return 0;
+                    }
+
                 case 'riskprox':
-                    return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4);
+                    if ( auth.userBalanceData['bprox2Balance'] !=0 ){
+                        return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4)/ 1000;
+                    }
+                    else{
+                        if ( auth.contractStatusData['bitcoinPrice'] !=0 ){
+                            return new BigNumber(auth.contractStatusData['bitcoinPrice'] ).toFixed(4)/ 1000;
+                        }else{
+                            return 0;
+                        }
+                    }
             }
         }
     };
@@ -26,8 +44,8 @@ function HeaderCoins(props) {
                 <div className={'div_values'} >
                     <span className="value_usd">{getBalanceUSD()} usd</span>
                     <div className={'div_crypto'}>
-                        <img className={'crypto_img'} src={window.location.origin +'/Moc/'+props.arrow} alt="arrow" height={props.arrow_size}/>
-                        <span className={'crypto_value'} style={{color: `${props.color}`}}>+172.49 (0.62%)</span>
+                        <img className={'crypto_img'} src={window.location.origin +'/Moc/'+props.arrow} alt="arrow" height={11}/>
+                        <span className={'crypto_value'} style={{color: `${props.color}`}}>0 (0)</span>
                     </div>
                 </div>
             </div>

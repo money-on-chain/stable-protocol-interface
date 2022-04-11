@@ -94,9 +94,9 @@ export default function Admin() {
                     {/*<div className="Spacer"></div>*/}
                     {/*colors: #f2316a o #3fcb97*/}
                     <div className="MiddleSide">
-                        <HeaderCoins tokenName="stable" color={'#f2316a'} image={'icon-rbtclogo.svg'} arrow={'icon-arrow-down2.svg'} arrow_size={12}/>
-                        <HeaderCoins tokenName="riskpro" color={'#3fcb97'} image={'BPROIcon.svg'} arrow={'icon-arrow-up2.svg'} arrow_size={11}/>
-                        <HeaderCoins tokenName="riskprox" color={'#3fcb97'} image={'BTXIcon.svg'} arrow={'icon-arrow-up2.svg'} arrow_size={11}/>
+                        <HeaderCoins tokenName="stable" color={'#f2316a'} image={'icon-rbtclogo.svg'} arrow={'icon-arrow-down2.svg'}/>
+                        <HeaderCoins tokenName="riskpro" color={'#3fcb97'} image={'BPROIcon.svg'} arrow={'icon-arrow-up2.svg'}/>
+                        <HeaderCoins tokenName="riskprox" color={'#3fcb97'} image={'BTXIcon.svg'} arrow={'icon-arrow-up2.svg'}/>
                     </div>
                     <LoginButton {...loginButtonSettings} />
 
