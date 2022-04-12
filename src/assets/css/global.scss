@@ -262,3 +262,27 @@ input[type=number] {
 .CardYourAddress {
   height: 22.2em;
 }
+
+.WalletCards {
+  display: flex;
+  column-gap: 15px;
+
+  .CardAmount {
+    flex-grow: 0;
+  }
+
+  .CardYourAddress {
+    flex-grow: 0;
+  }
+
+  .MintCard {
+    flex-grow: 1;
+    min-width: 60%;
+  }
+
+  &.Stable {
+    .MintCard {
+      min-width: 80%;
+    }
+  }
+}
