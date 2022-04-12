@@ -10,7 +10,6 @@ function Home(props) {
     const auth = useContext(AuthenticateContext);
     const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
 
-
     return (
         <Fragment>
             <h1 className="PageTitle">Home</h1>
