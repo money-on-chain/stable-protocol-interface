@@ -42,7 +42,7 @@ function HeaderCoins(props) {
             <div className={'mrl-25 div_coin'}>
                 <img src={window.location.origin +'/'+props.image} alt="arrow" height={38}/>
                 <div className={'div_values'} >
-                    <span className="value_usd">{getBalanceUSD()} usd</span>
+                    <span className="value_usd">{getBalanceUSD()} USD</span>
                     <div className={'div_crypto'}>
                         <img className={'crypto_img'} src={window.location.origin +'/Moc/'+props.arrow} alt="arrow" height={11}/>
                         <span className={'crypto_value'} style={{color: `${props.color}`}}>0 (0)</span>

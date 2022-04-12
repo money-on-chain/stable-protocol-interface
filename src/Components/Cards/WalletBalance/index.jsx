@@ -28,7 +28,7 @@ function WalletBalance(props) {
                         </div>
                     </div>
                     <div className="ModalSendContainer">
-                        <button type="button" className="ButtonPrimary  lowerCase ">Send</button>
+                        {/*<button type="button" className="ButtonPrimary  lowerCase ">Send</button>*/}
                     </div>
                 </div>
         </div>

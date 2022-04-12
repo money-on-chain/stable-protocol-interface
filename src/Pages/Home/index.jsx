@@ -10,6 +10,8 @@ import Copy from "../../Components/Page/Copy";
 function Home(props) {
 
     const auth = useContext(AuthenticateContext);
+    const {docBalance = '0', bproBalance = '0', bprox2Balance = '0'} = auth.userBalanceData ? auth.userBalanceData : {};
+
 
     return (
         <Fragment>
@@ -21,9 +23,24 @@ function Home(props) {
                         <WalletBalance/>
                     {/*</Col>*/}
                     <div className={"container-b"}>
-                        <TokenSummaryCard tokenName="stable" color="#00a651" page="/wallet/stable" colorAmount={""} />
-                        <TokenSummaryCard tokenName="riskpro" color="#ef8a13" page="/wallet/pro" colorAmount={""} />
-                        <TokenSummaryCard tokenName="riskprox" color="#ed1c24" page="/wallet/leveraged" colorAmount={""} />
+                        <TokenSummaryCard
+                            tokenName="stable"
+                            color="#00a651"
+                            page="/wallet/stable"
+                            balance={docBalance}
+                        />
+                        <TokenSummaryCard
+                            tokenName="riskpro"
+                            color="#ef8a13"
+                            page="/wallet/pro"
+                            balance={bproBalance}
+                        />
+                        <TokenSummaryCard
+                            tokenName="riskprox"
+                            color="#ed1c24"
+                            page="/wallet/leveraged"
+                            balance={bprox2Balance}
+                        />
                     </div>
 
             </div>

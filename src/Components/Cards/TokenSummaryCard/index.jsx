@@ -20,7 +20,7 @@ export default function TokenSummaryCard(props) {
         tokenName = '',
         color = '#000',
         page = '',
-        colorAmount = ''
+        balance = '0'
     } = props;
 
     const auth = useContext(AuthenticateContext);
@@ -84,7 +84,7 @@ export default function TokenSummaryCard(props) {
                         }}
                     >
                         <span className="Number" style={{ color }}>
-                            {colorAmount}
+                            {balance}
                         </span>
                     </Col>
                 </Row>
