@@ -14,7 +14,7 @@ function Home(props) {
         <Fragment>
             <h1 className="PageTitle">Home</h1>
             <h3 className="PageSubTitle">Keep calm and Hodl on</h3>
-            <div className="WalletCardsContainer">
+            <div className="WalletCardsContainerPie">
                 <WalletBalance/>
                 <div className={'container-b'}>
                     <TokenSummaryCard

@@ -6,6 +6,9 @@
   background: #fff;
   border-radius: 6px;
   flex-grow: 0;
+  @media screen and (max-width:900px) {
+    text-align: -webkit-center;
+  }
 
   .CardTitle {
     font-family: Montserrat,sans-serif;
@@ -34,6 +37,9 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
+    @media screen and (max-width:900px) {
+      display: inline-block;
+    }
     .CopyableText .title {
       color: #09c199;
       font-weight: 700;
@@ -94,5 +100,24 @@
   margin-right: 0px;
   @media screen and (min-width:450px) {
     margin-right: 15px;
+  }
+}
+.WalletCardsContainerPie{
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width:900px) {
+    flex-direction: row;
+  }
+  width: 100%;
+  row-gap: 15px;
+
+  @media only screen and (max-width: 450px) and (min-width: 100px)  {
+    width: fit-content;
+    margin-left: 0px;
+  }
+
+  @media only screen and (max-width: 1575px) and (min-width: 600px)  {
+    width: fit-content;
+    margin-left: 75px;
   }
 }
