@@ -1,71 +1,54 @@
 import './style.scss'
-import React, { Fragment } from 'react';
-import { Row, Col } from 'antd';
-
-
-
+import React, {Fragment, useContext} from 'react';
+import { AuthenticateContext } from '../../../Context/Auth'
+const BigNumber = require('bignumber.js');
 
 function HeaderCoins(props) {
 
+    const auth= useContext(AuthenticateContext);
 
-    return (
-        // <Row className="WalletBalance">
-        //     <Col>Your Wallet Balance</Col>
-        //         <div className="TotalBalanceBottom">
-        //             <div className="CopyableText ">
-        //                 <span className="title">Address</span>
-        //                 <div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        // </Row>
-        // <span className={"HeaderCoins"}>aisiasi aisjaijsiasijasiai</span>
-        <div className="MiddleSide">
-            <div className="BtcPrice">
-                {/*<img src={window.location.origin +'/icon-rbtclogo.svg'} alt="img"  height={40}/>*/}
-                <div className="BtcPriceContent">
-                    {/*<div className="BtcValue">*/}
-                    {/*    <h4>*/}
-                    {/*        <div><span className="" style={{'text-align': 'left' }}>44,119.49</span></div>*/}
-                    {/*    </h4>*/}
-                    {/*    <p>USD111</p>*/}
-                    {/*</div>*/}
-                    <div className="PriceVariation theme-value-up"><img src={window.location.origin +'/icon-rbtclogo.svg'} alt="arrow111111111" height={40}/>
-                        <span className="" style={{'text-align': 'left__',color:'white' }}>44,119.49</span>
-                    <p>+272.49 (0.62%)</p>
+    const getBalanceUSD = () => {
+        if (auth.userBalanceData) {
+            switch (props.tokenName) {
+                case 'stable':
+                    if ( auth.contractStatusData['bitcoinPrice'] !=0 ){
+                        return (auth.contractStatusData['bitcoinPrice'] / 1000).toFixed(4);
+                    }else{
+                        return 0;
+                    }
+                case 'riskpro':
+                    if ( auth.contractStatusData["bproPriceInUsd"] !=0 ){
+                        return (auth.contractStatusData["bproPriceInUsd"]/ 1000).toFixed(4);
+                    }else{
+                        return 0;
+                    }
+
+                case 'riskprox':
+                    if ( auth.userBalanceData['bprox2Balance'] !=0 ){
+                        return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4)/ 1000;
+                    }
+                    else{
+                        if ( auth.contractStatusData['bitcoinPrice'] !=0 ){
+                            return new BigNumber(auth.contractStatusData['bitcoinPrice'] ).toFixed(4)/ 1000;
+                        }else{
+                            return 0;
+                        }
+                    }
+            }
+        }
+    };
+
+        return (
+            <div className={'mrl-25 div_coin'}>
+                <img src={window.location.origin +'/'+props.image} alt="arrow" height={38}/>
+                <div className={'div_values'} >
+                    <span className="value_usd">{getBalanceUSD()} USD</span>
+                    <div className={'div_crypto'}>
+                        <img className={'crypto_img'} src={window.location.origin +'/Moc/'+props.arrow} alt="arrow" height={11}/>
+                        <span className={'crypto_value'} style={{color: `${props.color}`}}>0 (0)</span>
                     </div>
                 </div>
             </div>
-            <div className="BtcPrice">
-                {/*<img src={window.location.origin +'/icon-rbtclogo.svg'} height={40}/>*/}
-                <div className="BtcPriceContent">
-                    {/*<div className="BtcValue">*/}
-                    {/*    <h4>*/}
-                    {/*        <div><span className="" style={{'text-align': 'left' }}>30,228.01</span></div>*/}
-                    {/*    </h4>*/}
-                    {/*    <p>USD</p>*/}
-                    {/*</div>*/}
-                    <div className="PriceVariation theme-value-up">
-                        <img src={window.location.origin +'/icon-rbtclogo.svg'} alt="arrow" height={40}/>
-                        <p>+107.36 (0.36%)</p>
-                    </div>
-                </div>
-            </div>
-            <div className="BtcPrice">
-                {/*<img src={window.location.origin +'/BPROIcon.svg'} height={40}/>*/}
-                <div className="BtcPriceContent">
-                {/*    <div className="BtcValue">*/}
-                {/*        <h4>*/}
-                {/*            <div><span className="" style={{'text-align': 'left' }}>44,119.49</span></div>*/}
-                {/*        </h4>*/}
-                {/*        <p>USD</p>*/}
-                {/*</div>*/}
-                    <div className="PriceVariation theme-value-up"><img src={window.location.origin +'/BTXIcon.svg'} alt="arrow" height={40}/>
-                        <p>+295.60 (0.67%)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     )
 }
 
