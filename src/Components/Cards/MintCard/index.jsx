@@ -4,9 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import CoinSelect from '../../Form/CoinSelect';
 import MintModal from '../../Modals/MintModal';
-import { convertAmount } from '../../../Lib/Formats.js';
+
 export default function MintCard(props) {
     const { token = '', color = '' } = props;
+
+    const { mocAllowance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
+    const { bitcoinPrice = 0 } = props.StatusData ? props.StatusData : {};
 
     const [currencyYouExchange, setCurrencyYouExchange] = useState(
         props.currencyOptions[0]
@@ -45,7 +48,7 @@ export default function MintCard(props) {
     };
 
     const onValueYouExchangeChange = (newValueYouExchange) => {
-        const reservePrice = props.StatusData['bitcoinPrice'];
+        const reservePrice = bitcoinPrice;
         switch (currencyYouReceive) {
             case 'STABLE':
                 setValueYouReceive(
@@ -60,29 +63,29 @@ export default function MintCard(props) {
                     case 'STABLE':
                         setValueYouReceive(
                             parseFloat(newValueYouExchange) /
-                                parseFloat(reservePrice)
+                            parseFloat(reservePrice)
                         );
                         setValueYouReceiveUSD(parseFloat(newValueYouExchange));
                         break;
                     case 'RISKPRO':
                         setValueYouReceive(
                             (newValueYouExchange *
-                                props.StatusData['bitcoinPrice']) /
-                                reservePrice
+                                bitcoinPrice) /
+                            reservePrice
                         );
                         setValueYouReceiveUSD(
                             parseFloat(newValueYouExchange) *
-                                parseFloat(props.StatusData['bitcoinPrice'])
+                            parseFloat(bitcoinPrice)
                         );
                         break;
                     case 'RISKPROX':
                         setValueYouReceive(newValueYouExchange);
                         setValueYouReceiveUSD(
                             parseFloat(newValueYouExchange) *
-                                (parseFloat(
-                                    props.StatusData['bprox2PriceInRbtc']
+                            (parseFloat(
+                                props.StatusData['bprox2PriceInRbtc']
                                 ) *
-                                    parseFloat(reservePrice))
+                                parseFloat(reservePrice))
                         );
                         break;
                 }
@@ -91,26 +94,27 @@ export default function MintCard(props) {
             case 'RISKPRO':
                 setValueYouReceive(
                     (newValueYouExchange * reservePrice) /
-                        props.StatusData['bproPriceInUsd']
+                    props.StatusData['bproPriceInUsd']
                 );
                 setValueYouReceiveUSD(
                     parseFloat(newValueYouExchange) *
-                        parseFloat(props.StatusData['bproPriceInUsd'])
+                    parseFloat(props.StatusData['bproPriceInUsd'])
                 );
                 break;
             case 'RISKPROX':
                 setValueYouReceive(newValueYouExchange);
                 setValueYouReceiveUSD(
                     parseFloat(newValueYouExchange) *
-                        (parseFloat(props.StatusData['bprox2PriceInRbtc']) *
-                            parseFloat(reservePrice))
+                    (parseFloat(props.StatusData['bprox2PriceInRbtc']) *
+                        parseFloat(reservePrice))
                 );
                 break;
         }
         setValueYouExchange(newValueYouExchange);
     };
 
-    const onFeeChange = (checked) => {};
+    const onFeeChange = (checked) => {
+    };
 
     return (
         <div className="Card MintCard">
@@ -136,10 +140,10 @@ export default function MintCard(props) {
                             <div className="Gray">Fee (0.05%)</div>
                         </div>
                         <span className="Value" style={{ flexGrow: 1 }}>
-                            {props.UserBalanceData['mocAllowance']} MOC
+                            {mocAllowance} MOC
                         </span>
                         <Switch
-                            disabled={props.UserBalanceData['mocAllowance'] > 0}
+                            disabled={mocAllowance > 0}
                             onChange={onFeeChange}
                         />
                     </div>
@@ -161,7 +165,7 @@ export default function MintCard(props) {
                 <Col span={12}>
                     <div style={{ marginTop: 20 }}>
                         <div>
-                            1 RBTC = {props.StatusData['bitcoinPrice']} USD
+                            1 RBTC = {bitcoinPrice} USD
                         </div>
                         <div className="TextLegend">
                             * Amounts may be different at transaction

@@ -231,3 +231,34 @@ input[type=number] {
     display: none;
   }
 }
+
+.CardAmount {
+  height: 22.2em;
+  img {
+    margin-top:7px;
+  }
+  .Icon {
+    color: #b9b9b9;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+
+  .tokenAndBalance {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    color: #707070;
+    .priceContainer {
+      font-size: 28px;
+      font-weight: 600;
+    }
+    .balanceItem {
+      font-size: 15px;
+      font-weight: 500;
+    }
+  }
+}
+
+.CardYourAddress {
+  height: 22.2em;
+}
