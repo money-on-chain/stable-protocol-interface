@@ -12,6 +12,7 @@ const BigNumber = require('bignumber.js');
 const { Option } = Select;
 
 export default function CoinSelect(props) {
+    const { docBalance = 0, bproBalance = 0, bprox2Balance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
     const { inputValueInWei = '0.0001', onInputValueChange = () => {} } = props;
     const {
         currencyOptions = [],
@@ -43,11 +44,11 @@ export default function CoinSelect(props) {
             case 'RBTC':
                 return new BigNumber(props.AccountData.Balance).toFixed(4);
             case 'DOC':
-                return props.UserBalanceData['docBalance'];
+                return docBalance;
             case 'BPRO':
-                return props.UserBalanceData['bproBalance'];
+                return bproBalance;
             case 'BTCX':
-                return props.UserBalanceData['bprox2Balance'];
+                return bprox2Balance;
             default:
                 return 0.0;
         }
