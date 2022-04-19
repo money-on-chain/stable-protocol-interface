@@ -32,7 +32,7 @@ const AuthenticateContext = createContext({
     Bprox2Mint: async (amount) => {},
     Bprox2Redeem: async (amount) => {},
     disconnect: () => {},
-    getTransaction: (hash) => {}
+    getTransactionReceipt: (hash) => {}
 });
 
 let checkLoginFirstTime = true;
@@ -77,6 +77,7 @@ const AuthenticateProvider = ({ children }) => {
         GasPrice: 0,
         truncatedAddress: ''
     });
+    // const [transactionReceipt, setTransactionReceipt] = useState(null);
 
     useEffect(() => {
         if (checkLoginFirstTime) {
@@ -479,9 +480,13 @@ const AuthenticateProvider = ({ children }) => {
             );
     };
 
-    const getTransaction = (hash, callback) => {
+    const getTransactionReceipt = async (hash, callback) => {
         const web3 = new Web3(provider);
-        return new web3.eth.getTransactionReceipt(hash);
+        const transactionReceipt = [];
+        web3.eth.getTransactionReceipt(hash).then((response) => {
+            transactionReceipt.push(response?.logs[0].topics);
+        });
+        return transactionReceipt;
     };
 
     return (
@@ -500,7 +505,7 @@ const AuthenticateProvider = ({ children }) => {
                 BPROReedem,
                 Bprox2Mint,
                 Bprox2Redeem,
-                getTransaction
+                getTransactionReceipt
             }}
         >
             {children}

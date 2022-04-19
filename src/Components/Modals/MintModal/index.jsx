@@ -1,6 +1,7 @@
 import { Row, Col, Input, Select, notification, Button } from 'antd';
 import { AuthenticateContext } from '../../../Context/Auth';
-import { useState, useContext } from 'react';
+import Web3 from 'web3';
+import { useState, useContext, useEffect } from 'react';
 import { Modal } from 'antd';
 import Copy from "../../Page/Copy";
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
@@ -28,6 +29,16 @@ export default function MintModal(props) {
         ? currenciesDetail.find((x) => x.value === token).label
         : '';
 
+    const [currentHash, setCurrentHash] = useState(null);
+
+    useEffect(() => {
+        if (currentHash) {
+            const interval = setInterval(() => {
+                getTransaction(currentHash)
+            }, 15000);
+            return () => clearInterval(interval);
+        }
+    });
     const handleOk = async () => {
         setLoading(true);
         switch (currencyYouReceive) {
@@ -59,13 +70,50 @@ export default function MintModal(props) {
         }
     };
 
+    const getTransaction = async (hash) => {
+        let status = await auth.getTransactionReceipt(hash);
+        if (status) {
+            notification.open({
+                message: (<p style={{ color: '#a1a1a1' }}>Operation details</p>),
+                description: (<div>
+                    <div>
+                        <p style={{ width: '50%', float: 'left' }}>Transaction status</p>
+                        <p
+                            style={{ textAlign: 'right', color: status ? '#09c199' : '#f1a954' }}
+                        >{status ? 'SUCCESSFUL' : 'PENDING'}</p>
+                    </div>
+                    <div>
+                        <p style={{ width: '50%', float: 'left' }}>Hash</p>
+                        <div style={{ textAlign: 'right' }}>
+                            <Copy textToShow={currentHash.slice(0, 5)+'...'+currentHash.slice(-4)} textToCopy={currentHash}/>
+                        </div>
+                    </div>
+                    <div style={{ clear: 'both' }}>
+                        <a
+                            style={{ color: '#09c199' }}
+                            href={`https://explorer.testnet.rsk.co/tx/${currentHash}`}
+                            target="_blank"
+                        >View on the explorer</a>
+                    </div>
+                </div>),
+                btn: (<Button
+                    type="primary"
+                    size="medium"
+                    onClick={() => notification.destroy()}
+                    >Close</Button>),
+                duration: null,
+            });
+            setCurrentHash(null);
+        }
+    } ;
+
     const callback = (error, transactionHash) => {
         setLoading(false);
         handleComplete();
         console.log(transactionHash);
-        const transaction = auth.getTransaction(transactionHash);
+        setCurrentHash(transactionHash);
+        const transaction = auth.getTransactionReceipt(transactionHash);
         // const key = `open${Date.now()}`;
-        console.log('transaction', transaction);
         notification.open({
             message: (<p style={{ color: '#a1a1a1' }}>Operation details</p>),
             description: (<div>
