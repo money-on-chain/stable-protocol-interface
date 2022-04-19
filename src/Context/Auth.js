@@ -31,7 +31,8 @@ const AuthenticateContext = createContext({
     BPROReedem: async (amount) => {},
     Bprox2Mint: async (amount) => {},
     Bprox2Redeem: async (amount) => {},
-    disconnect: () => {}
+    disconnect: () => {},
+    getTransaction: (hash) => {}
 });
 
 let checkLoginFirstTime = true;
@@ -137,7 +138,7 @@ const AuthenticateProvider = ({ children }) => {
             GasPrice: await getGasPrice(),
             truncatedAddress: truncate_address
         };
-
+        console.log('accountData', accountData);
         setAccountData(accountData);
     };
     const loadBalanceData = async () => {
@@ -318,6 +319,7 @@ const AuthenticateProvider = ({ children }) => {
     const DoCMint = async (amount, callback) => {
         const web3 = new Web3(provider);
         const moc = getContract(MocAbi.abi, mocAddress);
+        
         const amountWei = web3.utils.toWei(amount);
         const totalAmount = await getTotalAmount(
             amountWei,
@@ -476,6 +478,12 @@ const AuthenticateProvider = ({ children }) => {
                 callback
             );
     };
+
+    const getTransaction = (hash, callback) => {
+        const web3 = new Web3(provider);
+        return new web3.eth.getTransactionReceipt(hash);
+    };
+
     return (
         <AuthenticateContext.Provider
             value={{
@@ -491,7 +499,8 @@ const AuthenticateProvider = ({ children }) => {
                 BPROMint,
                 BPROReedem,
                 Bprox2Mint,
-                Bprox2Redeem
+                Bprox2Redeem,
+                getTransaction
             }}
         >
             {children}

@@ -1,7 +1,8 @@
-import { Row, Col, Input, Select } from 'antd';
+import { Row, Col, Input, Select, notification, Button } from 'antd';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { useState, useContext } from 'react';
 import { Modal } from 'antd';
+import Copy from "../../Page/Copy";
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
 const BigNumber = require('bignumber.js');
 export default function MintModal(props) {
@@ -62,6 +63,39 @@ export default function MintModal(props) {
         setLoading(false);
         handleComplete();
         console.log(transactionHash);
+        const transaction = auth.getTransaction(transactionHash);
+        // const key = `open${Date.now()}`;
+        console.log('transaction', transaction);
+        notification.open({
+            message: (<p style={{ color: '#a1a1a1' }}>Operation details</p>),
+            description: (<div>
+                <div>
+                    <p style={{ width: '50%', float: 'left' }}>Transaction status</p>
+                    <p
+                        style={{ textAlign: 'right', color: transaction.status ? '#09c199' : '#f1a954' }}
+                    >{transaction.status ? 'SUCCESSFUL' : 'PENDING'}</p>
+                </div>
+                <div>
+                    <p style={{ width: '50%', float: 'left' }}>Hash</p>
+                    <div style={{ textAlign: 'right' }}>
+                        <Copy textToShow={transactionHash.slice(0, 5)+'...'+transactionHash.slice(-4)} textToCopy={transactionHash}/>
+                    </div>
+                </div>
+                <div style={{ clear: 'both' }}>
+                    <a
+                        style={{ color: '#09c199' }}
+                        href={`https://explorer.testnet.rsk.co/tx/${transactionHash}`}
+                        target="_blank"
+                    >View on the explorer</a>
+                </div>
+            </div>),
+            btn: (<Button
+                type="primary"
+                size="medium"
+                onClick={() => notification.destroy()}
+                >Close</Button>),
+            duration: null,
+        });
     };
     const styleExchange = tokenNameExchange === tokenName ? { color } : {};
     const styleReceive = tokenNameReceive === tokenName ? { color } : {};
