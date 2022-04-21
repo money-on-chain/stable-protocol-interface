@@ -117,7 +117,8 @@ export default function MintCard(props) {
     };
 
     return (
-        <div className="Card MintCard">
+        <div className="Card MintCard" style={{ 
+            height: '23.4em'}}>
             <h3 className="CardTitle">Mint</h3>
             <Row className="MintSelectsContainer" gutter={15}>
                 <Col span={12}>
