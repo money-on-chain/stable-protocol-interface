@@ -4,6 +4,7 @@ const currencies = [
     { value: 'RISKPRO',     image: `${window.location.origin}/Moc/icon-riskpro.svg`,    label: 'BPRO' },
     { value: 'RISKPROX',    image: `${window.location.origin}/Moc/icon-riskprox.svg`,   label: 'BTCX' },
     { value: 'MOC',         image: `${window.location.origin}/Moc/icon-moc.svg`,        label: 'MOC' },
+    { value: 'RBTC',         image: `${window.location.origin}/Moc/icon-moc.svg`,        label: 'RBTC' },
 ];
 
 export {
