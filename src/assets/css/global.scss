@@ -233,7 +233,7 @@ input[type=number] {
 }
 
 .CardAmount {
-  height: 22.2em;
+  height: 23.4em;
   img {
     margin-top:7px;
   }
@@ -260,7 +260,7 @@ input[type=number] {
 }
 
 .CardYourAddress {
-  height: 22.2em;
+  height: 23.4em;
 }
 
 .WalletCards {
@@ -284,5 +284,46 @@ input[type=number] {
     .MintCard {
       min-width: 80%;
     }
+  }
+}
+
+.CardSettlement {
+  h2 {
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-size: 1.4em;
+    font-weight: 400;
+    color: #707070;
+  }
+
+  h3 {
+    margin: 0;
+  }
+  .CaptionDateSettlement {
+    font-size: 1em;
+    color: #707070;
+    font-weight: 500;
+  }
+
+  .SettlementTitle {
+    font-weight: 700;
+  }
+
+  .Icon {
+    margin-left: 0.5em;
+    cursor: pointer;
+  }
+}
+
+.Bprox2Metrix {
+  h3 {
+    margin: 0;
+  }
+  span {
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #ed1c24;
   }
 }
