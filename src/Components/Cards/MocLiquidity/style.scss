@@ -1,0 +1,147 @@
+
+.RewardsBalanceLiquidity {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex: 1;
+  h2 {
+    font-size: 1em;
+  }
+  .IncentivesItem {
+    display: flex;
+    flex-flow: row;
+    align-items: baseline;
+    h3 {
+      font-family: Montserrat,sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #68cdc6;
+      margin: 0 .15em 0 0;
+    }
+    p {
+      margin: 0;
+      font-family: Montserrat,sans-serif;
+      font-size: 1em;
+      font-weight: 400;
+      color: #68cdc6;
+    }
+  }
+}
+.Card.withPadding {
+  padding: 1.6em;
+}
+
+
+.Card{
+  .withPadding {
+    padding: 1.6em;
+  }
+  .title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.6em 1.6em 0;
+    margin-bottom: auto;
+    h1 {
+      margin: 0;
+      font-family: Montserrat,sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #707070;
+    }
+
+  }
+}
+
+.ContainerMocAmount{
+  .Metric {
+    margin-top: 10px;
+  }
+}
+
+
+
+
+
+
+
+/*
+.RewardsBalanceAmount {
+  margin-bottom: 14px;
+}
+
+.ContainerMocAmountDatas{
+  .Card.withPadding .title {
+    padding: 0;
+    h1 {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #707070;
+    }
+  }
+  .TooltipMoC {
+    position: relative;
+    top: -30px;
+    right: -225px;
+    @media only screen and (max-width: 1575px) and (min-width: 600px)  {
+      top: -30px;
+      right: -130px;
+    }
+    @media screen and (max-width:900px) {
+      top: -35px;
+      right: -280px;
+    }
+    @media screen and (max-width:400px) {
+      top: -35px;
+      right: -250px;
+    }
+  }
+  .MocLogo{
+    width: 45px;
+  }
+  .LogoAndAmount {
+    display: flex;
+    align-items: center;
+    margin-top: -10px;
+    .TotalAmountContainer {
+      margin-left: 8px;
+    }
+  }
+  h2 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    color: #8c8c8c;
+  }
+  .TotalAmount span {
+    color: #68cdc6;
+  }
+}
+.BalanceItemCard {
+  box-sizing: border-box;
+  align-items: baseline;
+}
+
+.BalanceItemCard h4 {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #032537;
+}
+
+
+@media screen and (max-width: 900px) {
+  .ContainerMocAmount {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+    margin-left: 0;
+  }
+}
+
+*/
