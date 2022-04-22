@@ -20,7 +20,8 @@ export default function TokenSummaryCard(props) {
         tokenName = '',
         color = '#000',
         page = '',
-        balance = '0'
+        balance = '0',
+        labelCoin = '',
     } = props;
 
     const auth = useContext(AuthenticateContext);
@@ -29,9 +30,10 @@ export default function TokenSummaryCard(props) {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return auth.userBalanceData['docBalance'];
+                    return (auth.userBalanceData['docBalance']/auth.contractStatusData.bitcoinPrice).toFixed(6);
                 case 'riskpro':
-                    return auth.userBalanceData['bproBalance'];
+                    return ((auth.contractStatusData['bproPriceInUsd']*auth.userBalanceData['bproBalance'])/auth.contractStatusData.bitcoinPrice).toFixed(6)
+                    // return auth.userBalanceData['bproBalance'];
                 case 'riskprox':
                     return auth.userBalanceData['bprox2Balance'];
             }
@@ -43,7 +45,7 @@ export default function TokenSummaryCard(props) {
                 case 'stable':
                     return auth.userBalanceData['docBalance'];
                 case 'riskpro':
-                    return auth.contractStatusData["bproPriceInUsd"];
+                    return new BigNumber(auth.contractStatusData['bproPriceInUsd']*auth.userBalanceData['bproBalance']).toFixed(2);
                 case 'riskprox':
                     return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4);
             }
@@ -103,7 +105,7 @@ export default function TokenSummaryCard(props) {
                         {getBalance()}{' '}
                         {
                             currenciesDetail.find(
-                                (x) => x.value === tokenName.toUpperCase()
+                                (x) => x.value === labelCoin.toUpperCase()
                             ).label
                         }
                     </div>

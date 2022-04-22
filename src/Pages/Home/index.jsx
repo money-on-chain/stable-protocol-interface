@@ -14,7 +14,7 @@ function Home(props) {
         <Fragment>
             <h1 className="PageTitle">Home</h1>
             <h3 className="PageSubTitle">Keep calm and Hodl on</h3>
-            <div className="WalletCardsContainer">
+            <div className="WalletCardsContainerPie">
                 <WalletBalance/>
                 <div className={'container-b'}>
                     <TokenSummaryCard
@@ -22,18 +22,21 @@ function Home(props) {
                         color="#00a651"
                         page="/wallet/stable"
                         balance={docBalance}
+                        labelCoin={'RBTC'}
                     />
                     <TokenSummaryCard
                         tokenName="riskpro"
                         color="#ef8a13"
                         page="/wallet/pro"
                         balance={bproBalance}
+                        labelCoin={'RBTC'}
                     />
                     <TokenSummaryCard
                         tokenName="riskprox"
                         color="#ed1c24"
                         page="/wallet/leveraged"
                         balance={bprox2Balance}
+                        labelCoin={'RBTC'}
                     />
                 </div>
 
