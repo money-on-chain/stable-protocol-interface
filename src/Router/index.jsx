@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
+import Rewards from '../Pages/Rewards';
 import Admin from '../Layouts/Admin';
 import MintStable from '../Pages/Mint/MintStable';
 import MintLeveraged from '../Pages/Mint/MintLeveraged';
@@ -25,6 +26,10 @@ export default function Router() {
                 {
                     path: 'wallet/leveraged',
                     element: <MintLeveraged Auth={auth} />
+                },
+                {
+                    path: 'rewards',
+                    element: <Rewards Auth={auth} />
                 },
                 { path: '404', element: <NotFound /> },
                 { path: '*', element: <Navigate to="/404" /> }

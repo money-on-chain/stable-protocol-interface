@@ -35,6 +35,8 @@ export default function Admin() {
             selectedMenuKey = 'mint-pro';
         } else if (location.pathname === '/wallet/leveraged') {
             selectedMenuKey = 'mint-leveraged';
+        } else if (location.pathname === '/rewards') {
+            selectedMenuKey = 'rewards';
         }
         setSelectedMenu(selectedMenuKey);
     };
@@ -85,6 +87,11 @@ export default function Admin() {
                         key="mint-leveraged"
                         onClick={() => navigate('/wallet/leveraged')}
                         icon={<span className="icon-icon-riskprox"></span>}
+                    />
+                    <Menu.Item
+                        key="rewards"
+                        onClick={() => navigate('/rewards')}
+                        icon={<span className="icon-icon-moc"></span>}
                     />
                 </Menu>
             </Sider>
@@ -147,6 +154,13 @@ export default function Admin() {
                         icon={<span className="icon-icon-riskprox"></span>}
                     >
                         BTCx
+                    </Menu.Item>
+                    <Menu.Item
+                        key="rewards"
+                        onClick={() => navigate('/rewards')}
+                        icon={<span className="icon-icon-moc"></span>}
+                    >
+                        MoC
                     </Menu.Item>
                 </Menu>
             </Drawer>
