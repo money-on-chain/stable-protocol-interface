@@ -324,3 +324,38 @@ input[type=number] {
     color: #ed1c24;
   }
 }
+
+.RewardsBalanceContainer {
+  h2 {
+    font-size: 1em;
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-weight: 400;
+    color: #8c8c8c;
+  }
+
+  h4 {
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #68cdc6;
+  }
+}
+
+.RewardsBalanceLiquidity {
+  margin-top: 1em;
+  p {
+    font-family: Montserrat,sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #68cdc6;
+    margin: 0 0.15em 0 0;
+  }
+
+  .ClaimButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+  }
+}
