@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import { Row, Col } from 'antd';
 import RewardsStakingOptions from "../../Components/Cards/RewardsStakingOptionsCard";
+import RewardsBalanceCard from "../../Components/Cards/RewardsBalanceCard";
+import YourAddressCard from '../../Components/Cards/YourAddressCard';
 
 export default function Rewards(props) {
     return (
@@ -10,6 +12,14 @@ export default function Rewards(props) {
             <Row>
                 <Col>
                     <RewardsStakingOptions />
+                </Col>
+            </Row>
+            <Row gutter={15}>
+                <Col xs={24} md={12} xl={5}>
+                    <RewardsBalanceCard />
+                </Col>
+                <Col xs={24} md={12} xl={4}>
+                    <YourAddressCard/>
                 </Col>
             </Row>
         </Fragment>

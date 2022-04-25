@@ -9,18 +9,24 @@ export default function Mint(props) {
         <Fragment>
             <h1 className="PageTitle">BPro</h1>
             <h3 className="PageSubTitle">Manage your BPros</h3>
-            <div className="WalletCards">
-                <AmountCard tokenName="riskpro" titleName="BPro"/>
-                <YourAddressCard/>
-                <MintCard
-                    token={'RISKPRO'}
-                    AccountData={props.Auth.accountData}
-                    UserBalanceData={props.Auth.userBalanceData}
-                    StatusData={props.Auth.contractStatusData}
-                    currencyOptions={['RESERVE', 'RISKPRO']}
-                    color="#ef8a13"
-                />
-            </div>
+            <Row gutter={15}>
+                <Col xs={24} md={12} xl={5}>
+                    <AmountCard tokenName="riskpro" titleName="BPro"/>
+                </Col>
+                <Col xs={24} md={12} xl={4}>
+                    <YourAddressCard/>
+                </Col>
+                <Col xs={24} xl={15}>
+                    <MintCard
+                        token={'RISKPRO'}
+                        AccountData={props.Auth.accountData}
+                        UserBalanceData={props.Auth.userBalanceData}
+                        StatusData={props.Auth.contractStatusData}
+                        currencyOptions={['RESERVE', 'RISKPRO']}
+                        color="#ef8a13"
+                    />
+                </Col>
+            </Row>
         </Fragment>
     );
 }

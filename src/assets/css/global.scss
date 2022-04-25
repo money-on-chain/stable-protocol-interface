@@ -14,11 +14,8 @@ body, html {
   height: calc(100vh - 54px);
   background: #fafafa;
   margin-left: 80px;
-  padding: 20px;
-  margin-top: 54px;
+  padding: 10px;
   max-width: 1440px;
-  margin: 0 auto;
-  width: 100%;
 }
 
 a {
@@ -328,6 +325,20 @@ input[type=number] {
   }
 }
 
+
+.Bprox2Metrix {
+  h3 {
+    margin: 0;
+  }
+  span {
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #ed1c24;
+  }
+}
+
 .RewardsStakingOptions {
   .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
     color: inherit;
@@ -338,5 +349,39 @@ input[type=number] {
 
   .ant-tabs-ink-bar {
     background: #09c199!important;
+  }
+}
+.RewardsBalanceContainer {
+  h2 {
+    font-size: 1em;
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-weight: 400;
+    color: #8c8c8c;
+  }
+
+  h4 {
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #68cdc6;
+  }
+}
+
+.RewardsBalanceLiquidity {
+  margin-top: 1em;
+  p {
+    font-family: Montserrat,sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #68cdc6;
+    margin: 0 0.15em 0 0;
+  }
+
+  .ClaimButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
   }
 }
