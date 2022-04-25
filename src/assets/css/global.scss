@@ -327,3 +327,16 @@ input[type=number] {
     color: #ed1c24;
   }
 }
+
+.RewardsStakingOptions {
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: inherit;
+  }
+  .ant-tabs-tab {
+    color: #09c199!important;
+  }
+
+  .ant-tabs-ink-bar {
+    background: #09c199!important;
+  }
+}
