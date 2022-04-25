@@ -44,7 +44,7 @@ function Home(props) {
                 <div className={'ContainerMocAmount'}>
                     <div className="ContainerMocAmountDatas">
                         <MocAmount></MocAmount>
-                        {/*<MocLiquidity></MocLiquidity>*/}
+                        <MocLiquidity></MocLiquidity>
                     </div>
                 </div>
             </div>

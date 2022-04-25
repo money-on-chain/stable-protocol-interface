@@ -26,6 +26,14 @@
       color: #68cdc6;
     }
   }
+
+  .claimButton {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    margin: 25px auto auto;
+  }
 }
 .Card.withPadding {
   padding: 1.6em;
@@ -41,7 +49,7 @@
     display: flex;
     justify-content: space-between;
     padding: 1.6em 1.6em 0;
-    margin-bottom: auto;
+    margin-bottom: 15px;
     h1 {
       margin: 0;
       font-family: Montserrat,sans-serif;
