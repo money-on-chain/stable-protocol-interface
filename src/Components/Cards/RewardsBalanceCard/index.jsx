@@ -5,6 +5,7 @@ export default function RewardsBalanceCard(props) {
 
     return (
         <div className="RewardsBalanceContainer">
+        {/* sacar y agregar los componentes de Jose */}
             <div className="Card">
                 <Row>
                     <Col span={22}>

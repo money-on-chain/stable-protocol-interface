@@ -1,0 +1,20 @@
+.StakingTabContent {
+    color: #8c8c8c;
+
+    .RewardsOptionsOverview {
+        justify-content: space-between;
+        font-family: "Montserrat", sans-serif;
+        .amount {
+            color: #000000;
+            margin: 0;
+            font-weight: 400;
+            display: flex;
+            flex-flow: row;
+            align-items: baseline;
+            font-size: 14px;
+            div {
+              margin-right: 0.15em;
+            }
+          }
+    }
+}

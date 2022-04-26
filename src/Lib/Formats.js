@@ -38,6 +38,15 @@ const formatLocalMap = {
 const precision = ({ contractDecimals }) =>
     new BigNumber(10).exponentiatedBy(contractDecimals);
 
+const adjustPrecision = (amount, currencyCode) => {
+    const fd = formatMap[currencyCode];
+    return fd
+        ?   {
+                value: new BigNumber(amount).div(precision(fd)),
+                decimals: fd.decimals
+            }
+        :   { value: new BigNumber(amount), decimals: 2};
+};
 const formatValue = (amount, currencyCode, format, decimals) => {
     const fd = formatMap[currencyCode];
     return formatValueFromMap(amount, fd, format, decimals);
@@ -89,6 +98,8 @@ const convertAmount = (source, target, amount, convertToken) => {
 };
 
 export {
+    formatLocalMap,
+    adjustPrecision,
     formatVisibleValue,
     formatValueToContract,
     formatValueWithContractPrecision,
