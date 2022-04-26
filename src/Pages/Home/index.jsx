@@ -4,6 +4,8 @@ import React, { Fragment } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../Context/Auth';
 import WalletBalance from '../../Components/Cards/WalletBalance';
+import MocAmount from "../../Components/Cards/MocAmount";
+import MocLiquidity from "../../Components/Cards/MocLiquidity";
 
 function Home(props) {
 
@@ -39,7 +41,12 @@ function Home(props) {
                         labelCoin={'RBTC'}
                     />
                 </div>
-
+                <div className={'ContainerMocAmount'}>
+                    <div className="ContainerMocAmountDatas">
+                        <MocAmount></MocAmount>
+                        <MocLiquidity></MocLiquidity>
+                    </div>
+                </div>
             </div>
         </Fragment>
     );

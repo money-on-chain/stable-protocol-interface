@@ -1,0 +1,87 @@
+
+
+.RewardsBalanceAmount {
+  margin-bottom: 14px;
+}
+
+.ContainerMocAmountDatas{
+  display: flex;
+  flex-direction: column;
+  .Card.withPadding .title {
+    padding: 0;
+    h1 {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #707070;
+    }
+  }
+  .TooltipMoC {
+    /*position: absolute;
+    top: 20px;
+    right: 20px;*/
+
+    position: relative;
+    top: -30px;
+    right: -225px;
+    @media only screen and (max-width: 1575px) and (min-width: 600px)  {
+      top: -30px;
+      right: -130px;
+    }
+    @media screen and (max-width:900px) {
+      top: -35px;
+      right: -280px;
+    }
+    @media screen and (max-width:400px) {
+      top: -35px;
+      right: -250px;
+    }
+  }
+  .MocLogo{
+    width: 45px;
+  }
+  .LogoAndAmount {
+    display: flex;
+    align-items: center;
+    //margin-top: -10px;
+    margin-top: 0.8rem;
+    .TotalAmountContainer {
+      margin-left: 8px;
+    }
+  }
+  h2 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    color: #8c8c8c;
+  }
+  .TotalAmount span {
+    color: #68cdc6;
+  }
+}
+.BalanceItemCard {
+  box-sizing: border-box;
+  align-items: baseline;
+}
+
+.BalanceItemCard h4 {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #032537;
+}
+
+
+@media screen and (max-width: 900px) {
+  .ContainerMocAmount {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+    margin-left: 0;
+  }
+}
+
