@@ -39,9 +39,9 @@ a {
   font-family: Montserrat,sans-serif;
   font-size: 20px;
   font-weight: 600;
- &.Doc {
-   color: #00a651;
- }
+  &.Doc {
+    color: #00a651;
+  }
   &.Few {
     font-size: 15px;
     font-weight: 500;
@@ -65,7 +65,7 @@ a {
   box-shadow: 0 1px 6px rgba(189, 188, 189, 0.34), 0 2px 6px rgba(189, 188, 189, 0.34);
   background: #fff;
   border-radius: 6px;
-  height: 135px;
+  //height: 135px;
 
   .CardTitle {
     font-family: Montserrat,sans-serif;
