@@ -78,7 +78,6 @@ function Home(props) {
                 <div className="title"><h1>Last Operations</h1></div>
                 <ListOperations datas={data_row_coins}></ListOperations>
             </div>
-            {/*<TableUserRows></TableUserRows>*/}
         </Fragment>
     );
 }
