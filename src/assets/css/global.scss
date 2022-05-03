@@ -11,7 +11,6 @@ body, html {
 }
 
 .page-container {
-  height: calc(100vh - 54px);
   background: #fafafa;
   padding: 20px;
   margin: 54px auto;
@@ -68,7 +67,13 @@ a {
     font-family: Montserrat,sans-serif;
     font-size: 15px;
     font-weight: 400;
+    margin: 0;
+    padding: 0;
   }
+}
+
+.recharts-responsive-container, .recharts-wrapper {
+  margin: 0 !important;
 }
 
 /* Chrome, Safari, Edge, Opera */
