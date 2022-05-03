@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Layout, Menu, Image, Drawer, Button } from 'antd';
-import { HomeFilled, MenuOutlined, CloseOutlined } from '@ant-design/icons';
+import { HomeFilled, MenuOutlined, CloseOutlined, PieChartFilled } from '@ant-design/icons';
 import logoImage from '../assets/icons/logo.svg';
 import LoginButton from '../Components/Auth/LoginButton/index';
 import React, { useContext, useState, useEffect } from 'react';
@@ -35,6 +35,8 @@ export default function Admin() {
             selectedMenuKey = 'mint-pro';
         } else if (location.pathname === '/wallet/leveraged') {
             selectedMenuKey = 'mint-leveraged';
+        } else if (location.pathname === '/metrics') {
+            selectedMenuKey = 'metrics';
         }
         setSelectedMenu(selectedMenuKey);
     };
@@ -85,6 +87,11 @@ export default function Admin() {
                         key="mint-leveraged"
                         onClick={() => navigate('/wallet/leveraged')}
                         icon={<span className="icon-icon-riskprox"></span>}
+                    />
+                    <Menu.Item
+                        key="metrics"
+                        onClick={() => navigate('/metrics')}
+                        icon={<PieChartFilled />}
                     />
                 </Menu>
             </Sider>
@@ -145,6 +152,14 @@ export default function Admin() {
                         key="mint-leveraged"
                         onClick={() => navigate('/wallet/leveraged')}
                         icon={<span className="icon-icon-riskprox"></span>}
+                    >
+                        BTCx
+                    </Menu.Item>
+
+                    <Menu.Item
+                        key="mint-leveraged"
+                        onClick={() => navigate('/metrics')}
+                        icon={PieChartFilled}
                     >
                         BTCx
                     </Menu.Item>
