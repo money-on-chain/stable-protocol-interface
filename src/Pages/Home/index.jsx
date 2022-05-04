@@ -128,7 +128,7 @@ function Home(props) {
             <div className="Card WalletOperations">
                 <div className="title"><h1>Last Operations</h1></div>
                 {/*<ListOperations datas={data_row_coins2}></ListOperations>*/}
-                <ListOperations coins={'all'}></ListOperations>
+                <ListOperations token={'all'}></ListOperations>
             </div>
         </Fragment>
     );

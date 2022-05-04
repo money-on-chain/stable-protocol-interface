@@ -141,6 +141,24 @@ class ListOperations extends React.Component {
         var set_index=0
         var json_end= []
         const data_row= (set_current)=> {
+
+            /*******************************primero filtra por el tipo (token)***********************************/
+            if( this.props.token != 'all'){
+                var  pre_datas=[]
+                data_json.transactions.map((data_j)=>{
+                    if( data_j.tokenInvolved == this.props.token){
+                        pre_datas.push(data_j)
+                    }
+                });
+            }else{
+                var  pre_datas=[]
+                data_json.transactions.map((data_j)=>{
+                    pre_datas.push(data_j)
+                });
+            }
+            /*******************************end primero filtra por el tipo (token)***********************************/
+
+
             //data=[]
             while(data.length > 0) {
                 data.pop();
@@ -148,6 +166,9 @@ class ListOperations extends React.Component {
             // console.log("1212");
             // console.log(set_current);
             // console.log("1212");
+
+
+            /*******************************setear el json para manejar limit y skip***********************************/
             const limit = 10;
             if(set_current==1){
                 console.log("===========================11111111111111111111111111");
@@ -155,18 +176,20 @@ class ListOperations extends React.Component {
                 console.log((set_current+limit)-1);
                 // console.log(data);
                 console.log("===========================11111111111111111111111111");
-                json_end= data_json.transactions.slice(set_current-1, (set_current+limit)-1);
+                json_end= pre_datas.slice(set_current-1, (set_current+limit)-1);
             }
 
             if(set_current>1){
-                json_end= data_json.transactions.slice((set_current*10)-10, (set_current*10));
+                json_end= pre_datas.slice((set_current*10)-10, (set_current*10));
                 console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>11111111111111111111111111");
                 console.log((set_current*10)-10);
                 console.log((set_current*10));
                 // console.log(data);
                 console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>11111111111111111111111111");
             }
+            /*******************************end setear el json para manejar limit y skip***********************************/
 
+            /*******************************extraer fatos del json con el json seteado por limit y skip***********************************/
             data = [];
             json_end.map((data_j, index)=>{
                 var set_event= "";
@@ -239,6 +262,7 @@ class ListOperations extends React.Component {
                     description: <RowDetail detail={element.detail} />,
                 });
             }
+            /*******************************end extraer fatos del json con el json seteado por limit y skip***********************************/
             console.log('data-------------------***********');
             console.log(data);
             console.log('data-------------------***********');
