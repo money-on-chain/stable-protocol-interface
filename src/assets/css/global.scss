@@ -11,13 +11,10 @@ body, html {
 }
 
 .page-container {
-  height: calc(100vh - 54px);
   background: #fafafa;
-  margin-left: 80px;
   padding: 20px;
-  margin-top: 54px;
+  margin: 54px auto;
   max-width: 1440px;
-  margin: 0 auto;
   width: 100%;
 }
 
@@ -65,13 +62,18 @@ a {
   box-shadow: 0 1px 6px rgba(189, 188, 189, 0.34), 0 2px 6px rgba(189, 188, 189, 0.34);
   background: #fff;
   border-radius: 6px;
-  //height: 135px;
 
   .CardTitle {
     font-family: Montserrat,sans-serif;
     font-size: 15px;
     font-weight: 400;
+    margin: 0;
+    padding: 0;
   }
+}
+
+.recharts-responsive-container, .recharts-wrapper {
+  margin: 0 !important;
 }
 
 /* Chrome, Safari, Edge, Opera */

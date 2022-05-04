@@ -130,7 +130,6 @@ function Home(props) {
                 {/*<ListOperations datas={data_row_coins2}></ListOperations>*/}
                 <ListOperations coins={'all'}></ListOperations>
             </div>
-            {/*<TableUserRows></TableUserRows>*/}
         </Fragment>
     );
 }

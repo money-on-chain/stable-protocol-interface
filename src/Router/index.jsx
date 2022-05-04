@@ -7,6 +7,7 @@ import MintLeveraged from '../Pages/Mint/MintLeveraged';
 import MintPro from '../Pages/Mint/MintPro';
 import NotFound from '../Pages/NotFound';
 import Home from '../Pages/Home/index';
+import Metrics from '../Pages/Metrics';
 import { AuthenticateContext } from '../Context/Auth';
 
 export default function Router() {
@@ -25,6 +26,10 @@ export default function Router() {
                 {
                     path: 'wallet/leveraged',
                     element: <MintLeveraged Auth={auth} />
+                },
+                {
+                    path: 'metrics',
+                    element: <Metrics />
                 },
                 { path: '404', element: <NotFound /> },
                 { path: '*', element: <Navigate to="/404" /> }
