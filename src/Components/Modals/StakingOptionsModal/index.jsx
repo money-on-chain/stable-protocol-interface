@@ -1,14 +1,18 @@
-import { Modal, Button, Spin } from 'antd';
+import { Modal, Button, Spin, notification } from 'antd';
 import { useEffect, useState, useContext } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { LargeNumber } from '../../LargeNumber';
 import { AuthenticateContext } from '../../../Context/Auth';
+import Web3 from 'web3';
 import './style.scss';
 
 export default function StakingOptionsModal(props) {
     const auth = useContext(AuthenticateContext);
+    const { accountData = {} } = auth;
     const { mode, onClose, visible, amount, onConfirm, withdrawalId, setBlockedWithdrawals } = props;
     const [step, setStep] = useState(0);
+
+   const amountInEth = Web3.utils.fromWei(amount);
 
     useEffect(() => {
         if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
@@ -16,11 +20,74 @@ export default function StakingOptionsModal(props) {
 
     if (!mode) return null;
 
-    const setAllowance = () => {
+    const setAllowance = async () => {
         setStep(1);
-
-        // ?? approveMocToken(true)
+        setStep(2); // sacar
+        /* const approveMoCToken  = await auth.approveMoCToken(true);
+        approveMoCToken.then(res => {
+                console.log('res', res);
+                setStep(2);
+                return null;
+            })
+            .catch(e => {
+                console.error(e);
+                notification['error']({
+                    message: "Operations",
+                    description: "Something went wrong! Transaction rejected!",
+                    duration: 10
+                });
+            }); */
     };
+
+    const depositMoCs = async () => {
+        onClose();
+        await auth.stakingDeposit(amountInEth, accountData.Wallet, (error, txHash) => {
+            if (error) {
+                return error;
+            }
+            const status = 'pending';
+            onConfirm(status, txHash);
+        })
+        .then(res => {
+            const status = res.status ? 'success' : 'error';
+            onConfirm(status, res.transactionHash);
+            return null;
+        })
+        .catch(e => {
+            console.error(e);
+            notification['error']({
+                message: "Operations",
+                description: "Something went wrong! Transaction rejected!",
+                duration: 10
+            });
+        })
+    };
+
+    /* const restakeMoCs = async () => {
+        onClose();
+        await window.nodeManager.staking
+            .cancelWithdraw(withdrawalId, (error, txHash) => {
+                if (error) return error;
+
+                const status = 'pending';
+                onConfirm(status, txHash);
+                setBlockedWithdrawals(prev => [...prev, withdrawalId]);
+            })
+            .then(res => {
+                const status = res.status ? 'success' : 'error';
+                onConfirm(status, res.transactionHash);
+                setBlockedWithdrawals(prev => prev.filter(val => val !== withdrawMoCs));
+                return null;
+            })
+            .catch(e => {
+                console.error(e);
+                notification['error']({
+                    message: t('global.RewardsError_Title'),
+                    description: t('global.RewardsError_Message'),
+                    duration: 10
+                });
+            });
+    }; */
 
     const renderStaking = () => {
         const steps = {
@@ -74,7 +141,7 @@ export default function StakingOptionsModal(props) {
                                 >Cancel</Button>
                                 <Button
                                     type="primary"
-                                    // onClick={depositMoCs}
+                                    onClick={depositMoCs}
                                 >Confirm</Button>
                             </div>
                         </div>
@@ -176,7 +243,7 @@ export default function StakingOptionsModal(props) {
         const modes = {
             staking: renderStaking,
             unstaking: renderUnstaking,
-            withdrwa: renderWithdraw,
+            withdraw: renderWithdraw,
             restake: renderRestaking
         };
 

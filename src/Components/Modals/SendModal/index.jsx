@@ -6,14 +6,14 @@ const BigNumber = require('bignumber.js');
 
 export default function SendModal(props) {
     const { token = '', visible = false, handleCancel } = props;
-    const { docBalance = 0, bproBalance = 0, bprox2Balance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
+    const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
     const [inputAddress, setInputAddress] = useState('');
     const [currencyYouReceive, setCurrencyYouReceive] = useState('');
     const [currencyYouExchange, setCurrencyYouExchange] = useState(
         props.currencyOptions[0]
     );
     
-    const [valueYouAddTotal, setValueYouAddTotal] = useState('0.0000');
+    const [addTotalSend, setAddTotalSend] = useState('0.0000');
 
     useEffect(() => {
         let youReceive = props.currencyOptions.filter(
@@ -25,15 +25,17 @@ export default function SendModal(props) {
     const changeValueYouAddTotal = () => {
         switch (currencyYouReceive) {
             case 'RBTC':
-                setValueYouAddTotal(new BigNumber(props.AccountData.Balance).toFixed(4));
+                setAddTotalSend(new BigNumber(props.AccountData.Balance).toFixed(4));
             case 'STABLE':
-                setValueYouAddTotal(docBalance);
+                setAddTotalSend(docBalance);
                 break;
             case 'RISKPRO':
-                setValueYouAddTotal(bproBalance);
+                setAddTotalSend(bproBalance);
                 break;
             case 'RISKPROX':
-                setValueYouAddTotal(bprox2Balance);
+                setAddTotalSend(bprox2Balance);
+            case 'MOC':
+                setAddTotalSend(mocBalance);
                 break;
         }
     };
@@ -60,7 +62,7 @@ export default function SendModal(props) {
                     token={token}
                     AccountData={props.AccountData}
                     onInputValueChange={changeValueYouAddTotal}
-                    inputValueInWei={valueYouAddTotal}
+                    inputValueInWei={addTotalSend}
                 />
                 <Row style={{ marginTop: '2em' }}>
                     <Col span={24} style={{ display: 'flex', justifyContent: 'space-evenly' }}>

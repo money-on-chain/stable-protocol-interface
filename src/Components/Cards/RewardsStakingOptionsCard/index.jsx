@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Row, Col, Tabs, Button, Table } from 'antd';
 import moment from "moment";
 import PerformanceChart from '../../../Components/PerformanceChart';
 import { LargeNumber } from '../../LargeNumber';
 import CoinSelect from '../../Form/CoinSelect';
 import StakingOptionsModal from '../../Modals/StakingOptionsModal';
+import { AuthenticateContext } from '../../../Context/Auth';
+import BigNumber from "bignumber.js";
 import './style.scss';
 
 const { TabPane } = Tabs;
@@ -48,9 +50,10 @@ const getColumns = renderActionsFunction => [
 
 export default function RewardsStakingOptions(props) {
 
+    const auth = useContext(AuthenticateContext);
     // falta los SETS
-  const [stakingAmountInputValue, setStakingAmountInputValue] = useState("0");
-  const [unstakingAmountInputValue, setUnstakingAmountInputValue] = useState("0");
+    const [stakingAmountInputValue, setStakingAmountInputValue] = useState("0");
+    const [unstakingAmountInputValue, setUnstakingAmountInputValue] = useState("0");
     const [modalMode, setModalMode] = useState(null);
     const [stackedBalance, setStakedBalance] = useState("0");
     const [mocBalance, setMocBalance] = useState("0");
@@ -68,8 +71,51 @@ export default function RewardsStakingOptions(props) {
         setStakingBalances();
     }, []);
 
-    const setStakingBalances = () => {
-        setMocBalance(props.UserBalanceData?.mocBalance);
+    const setStakingBalances = async () => {
+        let [_stakedBalance, _lockedBalance, _pendingWithdrawals] = ["0", "0", []];
+        if (props.UserBalanceData) {
+            setMocBalance(props.UserBalanceData?.mocBalance);
+            
+            [_stakedBalance, _lockedBalance, _pendingWithdrawals] = await Promise.all([
+                auth.getStackedBalance(),
+                auth.getLockedBalance(),
+                auth.getPendingWithdrawals()
+            ]);
+        }
+        console.log('_stackedBalance', _stakedBalance);
+        console.log('lockedBalance', _lockedBalance);
+        console.log('_pending', _pendingWithdrawals);
+        const pendingWithdrawalsFormatted = _pendingWithdrawals
+            .filter(withdrawal => withdrawal.expiration)
+            .map(withdrawal => {
+                const status = new Date(parseInt(withdrawal.expiration) * 1000) > new Date()
+                    ? withdrawalStatus.pending
+                    : withdrawalStatus.available;
+            
+                return {
+                    ...withdrawal,
+                    status
+                };
+            });
+        let pendingExpirationAmount = "0";
+        let readyToWithdrawAmount = "0";
+
+        pendingWithdrawalsFormatted.forEach(({ status, amount }) => {
+        if (status === withdrawalStatus.pending) {
+            pendingExpirationAmount = BigNumber.sum(pendingExpirationAmount, amount).toFixed(0);
+        } else {
+            readyToWithdrawAmount = BigNumber.sum(readyToWithdrawAmount, amount).toFixed(0);
+        }
+        });
+        setLockedBalance(_lockedBalance);
+        setStakedBalance(_stakedBalance);
+        setTotalPendingExpiration(pendingExpirationAmount);
+        setTotalAvailableToWithdraw(readyToWithdrawAmount);
+        setPendingWithdrawals(pendingWithdrawalsFormatted);
+    };
+
+    const onValueStakingChange = (newValueStakingChange) => {
+        setStakingAmountInputValue(newValueStakingChange);
     };
 
     const renderStaking = () => {
@@ -102,7 +148,7 @@ export default function RewardsStakingOptions(props) {
                                     AccountData={props.AccountData}
                                     UserBalanceData={props.UserBalanceData}
                                     token={token}
-                                    onInputValueChange={() => setStakingAmountInputValue(mocBalance)}
+                                    onInputValueChange={onValueStakingChange}
                                     inputValueInWei={stakingAmountInputValue}
                                 />
                             </Col>
@@ -236,6 +282,7 @@ export default function RewardsStakingOptions(props) {
             <Row>
                 <Col xs={11}>
                     <Button
+                        type="primary"
                         disabled={blockedWithdrawals.includes(record.id)}
                         onClick={() => {
                             setWithdrawalId(record.id);
@@ -247,6 +294,7 @@ export default function RewardsStakingOptions(props) {
                 <Col xs={1}/>
                 <Col xs={11}>
                 <Button
+                    type="primary"
                     disabled={
                     record.status === withdrawalStatus.pending || blockedWithdrawals.includes(record.id)
                     }
