@@ -23,7 +23,6 @@ export default function SendModal(props) {
     }, [currencyYouExchange]);
 
     const changeValueYouAddTotal = () => {
-        console.log('asd', currencyYouReceive);
         switch (currencyYouReceive) {
             case 'RBTC':
                 setValueYouAddTotal(new BigNumber(props.AccountData.Balance).toFixed(4));

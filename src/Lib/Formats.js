@@ -69,6 +69,13 @@ const formatVisibleValue = (amount, currencyCode, language, decimals) => {
     return num;
 };
 
+const formatValueVariation = (amount, language) => {
+    if (!amount) return '-';
+    const fd = formatMap['valueVariation'];
+    const num = formatValueFromMap(amount, fd, formatLocalMap[language]);
+    return num;
+  };
+
 const formatValueToContract = (amount, currencyCode) => {
     return new BigNumber(amount)
         .multipliedBy(precision(formatMap[currencyCode]))
@@ -97,11 +104,17 @@ const convertAmount = (source, target, amount, convertToken) => {
     return isNaN(convertedAmount) ? '' : convertedAmount.toString();
 };
 
+const formatPerc = (value, language) =>
+    Number.isNaN(value) ? '-' : parseFloat(Math.round(value * 100) / 100).toLocaleString(language, {minimumFractionDigits:2, maximumFractionDigits:2});
+
+
 export {
     formatLocalMap,
     adjustPrecision,
     formatVisibleValue,
+    formatValueVariation,
     formatValueToContract,
     formatValueWithContractPrecision,
-    convertAmount
+    convertAmount,
+    formatPerc,
 };

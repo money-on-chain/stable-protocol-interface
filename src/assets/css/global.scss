@@ -257,7 +257,11 @@ input[type=number] {
 }
 
 .CardYourAddress {
-  height: 23.4em;
+  .SendBtn {
+    position: absolute;
+    bottom: 2em;
+    left: 5em;
+  }
 }
 
 .WalletCards {

@@ -14,7 +14,7 @@ export default function Mint(props) {
                     <AmountCard tokenName="stable" titleName="DoC"/>
                 </Col>
                 <Col xs={24} md={12} xl={4}>
-                    <YourAddressCard/>
+                    <YourAddressCard height="23.4em" tokenName="STABLE" currencyOptions={['RESERVE', 'STABLE']} />
                 </Col>
                 <Col xs={24} xl={15}>
                     <MintCard

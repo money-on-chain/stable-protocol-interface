@@ -99,9 +99,9 @@ export default function Admin() {
                 <Header className="Header" style={{ paddingLeft: 18 }}>
                     <Image height={40} src={logoImage} />
                     <div className="MiddleSide">
-                        <HeaderCoins tokenName="stable" color={'#f2316a'} image={'icon-rbtclogo.svg'} arrow={'icon-arrow-down2.svg'}/>
-                        <HeaderCoins tokenName="riskpro" color={'#3fcb97'} image={'BPROIcon.svg'} arrow={'icon-arrow-up2.svg'}/>
-                        <HeaderCoins tokenName="riskprox" color={'#3fcb97'} image={'BTXIcon.svg'} arrow={'icon-arrow-up2.svg'}/>
+                        <HeaderCoins tokenName="stable" image={'icon-rbtclogo.svg'} />
+                        <HeaderCoins tokenName="riskpro" image={'BPROIcon.svg'} />
+                        <HeaderCoins tokenName="riskprox" image={'BTXIcon.svg'} />
                     </div>
                     <LoginButton {...loginButtonSettings} />
 

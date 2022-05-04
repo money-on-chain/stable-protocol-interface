@@ -14,10 +14,13 @@ export default function Rewards(props) {
                     
                 </Col>
                 <Col xs={24} md={12} xl={4}>
-                    <YourAddressCard/>
+                    <YourAddressCard  height="32.4em" tokenName="MOC" currencyOptions={['RESERVE', 'MOC']} />
                 </Col>
                 <Col xs={24} md={24} xl={15}>
-                    <RewardsStakingOptions />
+                    <RewardsStakingOptions
+                        AccountData={props.Auth.accountData}
+                        UserBalanceData={props.Auth.userBalanceData}
+                    />
                 </Col>
             </Row>
         </Fragment>

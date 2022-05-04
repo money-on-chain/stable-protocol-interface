@@ -22,7 +22,7 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
 
         return (
             <Tooltip title={value === 0 ? '0' : value.toFormat(formatLocalMap['en'])}>
-                <div>
+                <div className={className}>
                     <NumericLabel {... {params }}>{value.toString()}</NumericLabel>
                     {includeCurrency && currencyCode}
                 </div>
