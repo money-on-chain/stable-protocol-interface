@@ -1,0 +1,15 @@
+.div_crypto{
+    flex-grow: 1;
+    flex-direction:row;
+    margin-top:8px;
+
+    .crypto_img{
+      flex-grow: 0;
+      margin-right:4px;
+    }
+
+    .crypto_value{
+      flex-grow: 1;
+      font-weight: 600;
+    }
+  }

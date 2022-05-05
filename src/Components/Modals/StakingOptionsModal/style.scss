@@ -1,0 +1,48 @@
+.StakingOptionsModal{
+    .StakingOptionsModal_Title {
+        margin: 0;
+        font-family: Montserrat,sans-serif;
+        font-size: 1em;
+        font-weight: 400;
+        color: #707070;
+        position: absolute;
+        top: 15px;
+    }
+
+    .StakingOptionsModal_Content {
+        margin: 3em 1em 0em 1em;
+        max-width: 400px;
+        &.AllowanceLoading {
+            text-align: center;
+        }
+        .ant-spin {
+            span[role="img"] {
+                font-size: 72px;
+                margin: 2rem 0;
+                color: #09c199;
+            }
+        }
+    }
+
+    .InfoContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        .value {
+            &.amount {
+                color: #09c199;
+                display: flex;
+                span {
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+    .ActionButtonsRow {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 1rem;
+      }
+}

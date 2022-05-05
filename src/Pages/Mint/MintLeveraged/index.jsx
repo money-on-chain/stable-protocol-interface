@@ -63,10 +63,10 @@ export default function Mint(props) {
             <h1 className="PageTitle">BTCx</h1>
             <h3 className="PageSubTitle">Manage your BTCx Position</h3>
             <Row gutter={15}>
-                <Col span={5}>
+                <Col xs={24} md={12} xl={5}>
                     <AmountCard tokenName="riskprox" titleName="BTCx"/>
                 </Col>
-                <Col span={5}>
+                <Col xs={24} md={12} xl={5}>
                     <Row>
                         <Col span={24}>
                             <div className="Card MintCard CardSettlement">
@@ -98,7 +98,7 @@ export default function Mint(props) {
                         </Col>
                     </Row>
                 </Col>
-                <Col span={14}>
+                <Col xs={24} xl={14}>
                     <MintCard
                         token={'RISKPROX'}
                         AccountData={props.Auth.accountData}
