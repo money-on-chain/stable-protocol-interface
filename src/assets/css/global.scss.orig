@@ -12,14 +12,16 @@ body, html {
 
 .page-container {
   background: #fafafa;
-  display: flex;
-  margin-right: 15px;
-  width: calc(100% - 108px);
-  margin-left: 90px;
-  flex-flow: column;
-  min-height: 100vh;
-  padding-top: 70px;
-  padding-bottom: 20px;
+<<<<<<< HEAD
+  margin-left: 80px;
+  padding: 10px;
+  max-width: 1440px;
+=======
+  padding: 20px;
+  margin: 54px auto;
+  max-width: 1440px;
+  width: 100%;
+>>>>>>> develop
 }
 
 a {
@@ -338,6 +340,7 @@ input[type=number] {
     color: #ed1c24;
   }
 }
+<<<<<<< HEAD
 
 
 .Bprox2Metrix {
@@ -399,3 +402,5 @@ input[type=number] {
     margin-top: 2em;
   }
 }
+=======
+>>>>>>> develop

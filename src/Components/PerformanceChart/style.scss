@@ -1,0 +1,62 @@
+.ChartGraphic {
+    height: 190px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    justify-items: center;
+    width: 106px;
+    margin: 0 auto;
+
+    .ChartColumn {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 50%;
+        .Bar {
+            background: #56BEB7;
+            flex-grow: 1;
+            position: relative;
+            div {
+              color: #fff;
+              font-size: 12px;
+              bottom: 5px;
+              position: absolute;
+              text-align: center;
+              line-height: 12px;
+              width: 100%;
+              font-weight: bold;
+            }
+            &.Percent {
+              flex-grow: 0;
+              height: 0;
+              transition: ease all 0.5s;
+              background: #57A29D;
+              &.Hidden {
+                background: #fff;
+              }
+            }
+          }
+    }
+}
+
+.ChartFooter {
+    margin-top: 10px;
+    h1, h4 {
+      margin: 0;
+      padding: 0;
+      font-weight: normal;
+      text-align: center;
+      width: 100%;
+    }
+
+    h1 {
+      color: #56BEB7;
+      font-size: 28px;
+      font-weight: 300;
+    }
+
+    h4 {
+      color: #B5B5B5;
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }

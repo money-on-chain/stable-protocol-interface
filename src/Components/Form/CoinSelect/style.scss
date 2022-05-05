@@ -1,0 +1,14 @@
+.SelectCurrency {
+    display: flex;
+    justify-content: space-between;
+    &.disabled {
+        .ant-select-selection-item {
+          padding-right: 0;
+          right: 10px;
+          position: absolute;
+        }
+        .ant-select-arrow {
+          display: none;
+        }
+      }
+}

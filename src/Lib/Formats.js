@@ -38,6 +38,15 @@ const formatLocalMap = {
 const precision = ({ contractDecimals }) =>
     new BigNumber(10).exponentiatedBy(contractDecimals);
 
+const adjustPrecision = (amount, currencyCode) => {
+    const fd = formatMap[currencyCode];
+    return fd
+        ?   {
+                value: new BigNumber(amount).div(precision(fd)),
+                decimals: fd.decimals
+            }
+        :   { value: new BigNumber(amount), decimals: 2};
+};
 const formatValue = (amount, currencyCode, format, decimals) => {
     const fd = formatMap[currencyCode];
     return formatValueFromMap(amount, fd, format, decimals);
@@ -59,6 +68,13 @@ const formatVisibleValue = (amount, currencyCode, language, decimals) => {
     );
     return num;
 };
+
+const formatValueVariation = (amount, language) => {
+    if (!amount) return '-';
+    const fd = formatMap['valueVariation'];
+    const num = formatValueFromMap(amount, fd, formatLocalMap[language]);
+    return num;
+  };
 
 const formatValueToContract = (amount, currencyCode) => {
     return new BigNumber(amount)
@@ -88,9 +104,17 @@ const convertAmount = (source, target, amount, convertToken) => {
     return isNaN(convertedAmount) ? '' : convertedAmount.toString();
 };
 
+const formatPerc = (value, language) =>
+    Number.isNaN(value) ? '-' : parseFloat(Math.round(value * 100) / 100).toLocaleString(language, {minimumFractionDigits:2, maximumFractionDigits:2});
+
+
 export {
+    formatLocalMap,
+    adjustPrecision,
     formatVisibleValue,
+    formatValueVariation,
     formatValueToContract,
     formatValueWithContractPrecision,
-    convertAmount
+    convertAmount,
+    formatPerc,
 };

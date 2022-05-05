@@ -1,0 +1,45 @@
+.RewardsStakingOptions {
+    min-height: 32.4em;
+}
+
+.StakingTabContent {
+    color: #8c8c8c;
+
+    .RewardsOptionsOverview {
+        justify-content: space-between;
+        font-family: "Montserrat", sans-serif;
+        .amount {
+            color: #000000;
+            margin: 0;
+            font-weight: 400;
+            display: flex;
+            flex-flow: row;
+            align-items: baseline;
+            font-size: 14px;
+            div {
+              margin-right: 0.15em;
+            }
+          }
+    }
+
+    .StakingBtn {
+        margin: 1.5rem auto auto;
+    }
+}
+
+.WithdrawTabFooter {
+    .amount {
+        display: inline;
+    }
+    .bolder {
+        font-weight: 600;
+    }
+
+    .grey {
+        color: #707070;
+    }
+}
+
+.ant-table-tbody > tr > td {
+    border-bottom: none!important;
+}

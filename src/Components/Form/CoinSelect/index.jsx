@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import {
     formatVisibleValue,
@@ -12,7 +12,7 @@ const BigNumber = require('bignumber.js');
 const { Option } = Select;
 
 export default function CoinSelect(props) {
-    const { docBalance = 0, bproBalance = 0, bprox2Balance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
+    const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
     const { inputValueInWei = '0.0001', onInputValueChange = () => {} } = props;
     const {
         currencyOptions = [],
@@ -25,6 +25,7 @@ export default function CoinSelect(props) {
     const handleCurrencySelect = (newCurrencySelected) => {
         onCurrencySelect(newCurrencySelected);
     };
+    const [disabledSelect, setDisabledSelect] = useState(false);
 
     useEffect(() => {
         if (
@@ -33,6 +34,9 @@ export default function CoinSelect(props) {
         ) {
             document.getElementById('inputValue' + props.value).value =
                 new BigNumber(inputValueInWei).toFixed(4).toString();
+        }
+        if (props.value === 'MOC') {
+            setDisabledSelect(true);
         }
     }, [inputValueInWei]);
 
@@ -49,6 +53,8 @@ export default function CoinSelect(props) {
                 return bproBalance;
             case 'BTCX':
                 return bprox2Balance;
+            case 'MOC':
+                return mocBalance;
             default:
                 return 0.0;
         }
@@ -98,27 +104,29 @@ export default function CoinSelect(props) {
                     md={{ span: 8 }}
                     lg={{ span: 6 }}
                 >
-                    <Select
-                        onChange={handleCurrencySelect}
-                        defaultValue={[props.value]}
-                        value={[props.value]}
-                        style={{ width: '100%' }}
-                        disabled={disabled}
-                    >
-                        {optionsFiltered.map((option) => (
-                            <Option key={option.value} value={option.value}>
-                                <div className="currencyOption">
-                                    <img
-                                        className="currencyImage"
-                                        src={option.image}
-                                        alt={option.value}
-                                        width={30}
-                                    />
-                                    <span>{option.label}</span>
-                                </div>
-                            </Option>
-                        ))}
-                    </Select>
+                    <div className={`SelectCurrency ${disabledSelect || disabled ? 'disabled' : ''}`}>
+                        <Select
+                            onChange={handleCurrencySelect}
+                            defaultValue={[props.value]}
+                            value={[props.value]}
+                            style={{ width: '100%' }}
+                            disabled={disabled || disabledSelect}
+                        >
+                            {optionsFiltered.map((option) => (
+                                <Option key={option.value} value={option.value}>
+                                    <div className="currencyOption">
+                                        <img
+                                            className="currencyImage"
+                                            src={option.image}
+                                            alt={option.value}
+                                            width={30}
+                                        />
+                                        <span>{option.label}</span>
+                                    </div>
+                                </Option>
+                            ))}
+                        </Select>
+                    </div>
                 </Col>
             </Row>
             <Row style={{ marginTop: 20 }}>
