@@ -490,10 +490,11 @@ const AuthenticateProvider = ({ children }) => {
 
     const getTransactionReceipt = async (hash, callback) => {
         const web3 = new Web3(provider);
-        const transactionReceipt = [];
-        web3.eth.getTransactionReceipt(hash).then((response) => {
-            transactionReceipt.push(response?.logs[0].topics);
-        });
+        let transactionReceipt = false;
+        let transaction = await web3.eth.getTransactionReceipt(hash);
+        if (transaction) {
+            transactionReceipt = true;
+        }
         return transactionReceipt;
     };
 
