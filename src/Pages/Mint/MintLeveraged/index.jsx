@@ -3,9 +3,10 @@ import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
 import { Row, Col, Tooltip } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import TokenSummaryCard from '../../../Components/Cards/TokenSummaryCard';
 import moment from 'moment';
+import ListOperations from "../../../Components/Tables/ListOperations";
 
 export default function Mint(props) {
     const [daysHours, setDaysHours] = useState(null);
@@ -33,6 +34,29 @@ export default function Mint(props) {
     useEffect(() => {
         setDaysHours(decimaltoHour(props.Auth.contractStatusData.dayBlockSpan, props.Auth.contractStatusData.blocksToSettlement));
     }, []);
+
+    const data_row_coins = [];
+
+    data_row_coins.push({
+        key: 0,
+        info: '',
+        event: 'DOC',
+        asset: 'BTC',
+        platform: '+ 0.00',
+        wallet: '-0.000032',
+        date: '2022-04-18 18:23',
+        status: {txt:'Confirmed',percent:100},
+    });
+    data_row_coins.push({
+        key: 1,
+        info: '',
+        event: 'DOC',
+        asset: 'BTC',
+        platform: '+ 0.00',
+        wallet: '-0.000032',
+        date: '2022-04-18 18:23',
+        status: {txt:'Confirmed',percent:100},
+    });
 
     return (
         <Fragment>
@@ -85,6 +109,10 @@ export default function Mint(props) {
                     />
                 </Col>
             </Row>
+            <div className="Card WalletOperations">
+                <div className="title"><h1>Last Operations</h1></div>
+                <ListOperations datas={data_row_coins}></ListOperations>
+            </div>
         </Fragment>
     );
 }

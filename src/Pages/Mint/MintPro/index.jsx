@@ -2,9 +2,33 @@ import MintCard from '../../../Components/Cards/MintCard';
 import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
 import { Row, Col, Switch } from 'antd';
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
+import ListOperations from "../../../Components/Tables/ListOperations";
 
 export default function Mint(props) {
+    const data_row_coins = [];
+
+    data_row_coins.push({
+        key: 0,
+        info: '',
+        event: 'DOC',
+        asset: 'BPRP',
+        platform: '+ 0.00',
+        wallet: '-0.000032',
+        date: '2022-04-18 18:23',
+        status: {txt:'Confirmed',percent:100},
+    });
+    data_row_coins.push({
+        key: 1,
+        info: '',
+        event: 'DOC',
+        asset: 'BPRP',
+        platform: '+ 0.00',
+        wallet: '-0.000032',
+        date: '2022-04-18 18:23',
+        status: {txt:'Confirmed',percent:100},
+    });
+
     return (
         <Fragment>
             <h1 className="PageTitle">BPro</h1>
@@ -27,6 +51,10 @@ export default function Mint(props) {
                     />
                 </Col>
             </Row>
+            </div>
+            <div className="Card WalletOperations">
+                <div className="title"><h1>Last Operations</h1></div>
+                <ListOperations datas={data_row_coins}></ListOperations>
         </Fragment>
     );
 }
