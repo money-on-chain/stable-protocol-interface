@@ -1,22 +1,12 @@
 import React, { useContext } from 'react';
 import { AuthenticateContext } from '../../../../Context/Auth';
+import {getDatasMetrics} from '../../../../Helpers/helper'
 
 function MOC() {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
 
-    const getDatas = () => {
-        if (auth.userBalanceData) {
-            if (auth.contractStatusData) {
-                const current_price= (auth.contractStatusData['blockSpan'] / 10000).toFixed(2);
-                return {current_price:current_price};
-            } else {
-                return {current_price:0};
-            }
-        }else{
-            return {current_price:0};
-        }
-    }
+    const getDatas = getDatasMetrics(auth)
 
     return (
         <div className="Card CardSystemStatus">
@@ -32,7 +22,7 @@ function MOC() {
             <div className="CardMetricContent">
                 <div>
                     <h3>Current price</h3>
-                    {getDatas()['current_price']}
+                    {getDatas['current_price']}
                 </div>
             </div>
         </div>

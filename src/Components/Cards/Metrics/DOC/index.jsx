@@ -1,26 +1,12 @@
 import React, { useContext } from 'react';
 import { AuthenticateContext } from '../../../../Context/Auth';
+import {getDatasMetrics} from '../../../../Helpers/helper'
 
 function DOC() {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
 
-
-    const getBpro = () => {
-        if (auth.userBalanceData) {
-            if (auth.contractStatusData['bproPriceInUsd'] != 0) {
-                const b0DocAmount= (auth.contractStatusData['b0DocAmount'] /1000000000000000000000).toFixed(5);
-                const docAvailableToRedeem= (auth.contractStatusData['docAvailableToRedeem'] /1000000000000000000000).toFixed(5);
-                const docAvailableToMint= (auth.contractStatusData['docAvailableToMint'] /1000000000000000000000).toFixed(5);
-
-                return {b0DocAmount:b0DocAmount,docAvailableToRedeem:docAvailableToRedeem,docAvailableToMint:docAvailableToMint};
-            } else {
-                return {b0DocAmount:0,docAvailableToRedeem:0,docAvailableToMint:0};
-            }
-        }else{
-            return {b0DocAmount:0,docAvailableToRedeem:0,docAvailableToMint:0};
-        }
-    }
+    const getBpro = getDatasMetrics(auth)
 
     return (
         <div className="Card CardSystemStatus">
@@ -36,11 +22,11 @@ function DOC() {
             <div className="CardMetricContent">
                 <div>
                     <h3>Total in the system</h3>
-                    {getBpro()['b0DocAmount']}
+                    <span className={'space green'}>{getBpro['b0DocAmount']}</span>
                     <h3>Available to redeem</h3>
-                    {getBpro()['docAvailableToRedeem']}
+                    <span className={'green'}>{getBpro['docAvailableToRedeem']}</span>
                     <h3>Available to Mint</h3>
-                    {getBpro()['docAvailableToMint']}
+                    <span className={'green'}>{getBpro['docAvailableToMint']}</span>
                 </div>
             </div>
         </div>

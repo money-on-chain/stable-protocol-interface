@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {CheckOutlined, CheckCircleFilled} from '@ant-design/icons';
 import {AuthenticateContext} from "../../../../Context/Auth";
+import {getDatasMetrics} from '../../../../Helpers/helper'
 
 const iconCheckColor = '#09c199';
 
@@ -8,18 +9,7 @@ function SystemStatus() {
 
     const auth = useContext(AuthenticateContext);
 
-    const getDatas = () => {
-        if (auth.userBalanceData) {
-            if (auth.userBalanceData) {
-                const globalCoverage= (auth.contractStatusData['globalCoverage'] /1000000000000000000).toFixed(4);
-                return {globalCoverage:globalCoverage};
-            } else{
-                return {globalCoverage:0};
-            }
-        }else{
-            return {globalCoverage:0};
-        }
-    }
+    const getDatas= getDatasMetrics(auth)
 
     return (
         <div className="Card CardSystemStatus">
@@ -34,7 +24,7 @@ function SystemStatus() {
                 </div>
                 <div>
                     <h3>Global Coverage</h3>
-                    <span style={{color: 'rgb(0, 166, 81)'}}>{getDatas()['globalCoverage']} </span>
+                    <span style={{color: 'rgb(0, 166, 81)'}}>{getDatas['globalCoverage']} </span>
                 </div>
             </div>
             <h3 className="CardTitle" style={{marginTop: 50}}>System Operations</h3>

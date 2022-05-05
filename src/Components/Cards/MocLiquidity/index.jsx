@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import {AuthenticateContext} from "../../../Context/Auth";
 import CountUp from 'react-countup';
 import data_json from '../../../services/liquidity_mining.json';
+import {setNumber} from '../../../Helpers/helper'
 const BigNumber = require('bignumber.js');
 
 
@@ -18,8 +19,8 @@ function MocLiquidity() {
     };
 
     const setreadyClaim = () =>{
-        return Number(new BigNumber(data_json.moc_balance/100000000)).toFixed(4)
-        // return (data_json.moc_balance)
+        // return  parseFloat(Web3.utils.fromWei(data_json.moc_balance, 'ether')).toFixed(4)
+        return Number(new BigNumber(setNumber(data_json.moc_balance)/10000000000000000000000)).toFixed(9)
     }
 
     return (
