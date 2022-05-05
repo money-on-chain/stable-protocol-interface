@@ -2,6 +2,7 @@
 import React, {Fragment, useState} from 'react';
 import { useContext } from 'react'
 import {AuthenticateContext} from "../../../Context/Auth";
+import Web3 from 'web3'
 const BigNumber = require('bignumber.js');
 
 
@@ -69,11 +70,6 @@ function RowDetail(props) {
                 <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">
                     {props.detail.price}
                 </td>
-            </tr>
-            <tr className="ant-descriptions-row">
-                <th className="ant-descriptions-item-label-th" colSpan="1">Comments</th>
-                <th className="ant-descriptions-item-label-th" colSpan="1">Comments</th>
-                <td className="ant-descriptions-item-content" colSpan="5">{props.detail.comments}       </td>
             </tr>
             </tbody>
         </table>

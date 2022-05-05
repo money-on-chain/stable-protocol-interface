@@ -5,6 +5,23 @@ function DOC() {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
 
+
+    const getBpro = () => {
+        if (auth.userBalanceData) {
+            if (auth.contractStatusData['bproPriceInUsd'] != 0) {
+                const b0DocAmount= (auth.contractStatusData['b0DocAmount'] /1000000000000000000000).toFixed(5);
+                const docAvailableToRedeem= (auth.contractStatusData['docAvailableToRedeem'] /1000000000000000000000).toFixed(5);
+                const docAvailableToMint= (auth.contractStatusData['docAvailableToMint'] /1000000000000000000000).toFixed(5);
+
+                return {b0DocAmount:b0DocAmount,docAvailableToRedeem:docAvailableToRedeem,docAvailableToMint:docAvailableToMint};
+            } else {
+                return {b0DocAmount:0,docAvailableToRedeem:0,docAvailableToMint:0};
+            }
+        }else{
+            return {b0DocAmount:0,docAvailableToRedeem:0,docAvailableToMint:0};
+        }
+    }
+
     return (
         <div className="Card CardSystemStatus">
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
@@ -19,11 +36,11 @@ function DOC() {
             <div className="CardMetricContent">
                 <div>
                     <h3>Total in the system</h3>
-                    52,572.33
+                    {getBpro()['b0DocAmount']}
                     <h3>Available to redeem</h3>
-                    52,572.33
+                    {getBpro()['docAvailableToRedeem']}
                     <h3>Available to Mint</h3>
-                    4,225.45
+                    {getBpro()['docAvailableToMint']}
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import {AuthenticateContext} from "../../../Context/Auth";
 import CountUp from 'react-countup';
 import { Button } from 'antd';
+import data_json from '../../../services/liquidity_mining.json';
 const BigNumber = require('bignumber.js');
 
 function MocLiquidity(props) {
@@ -14,6 +15,11 @@ function MocLiquidity(props) {
             return Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000).toFixed(2)
         }
     };
+
+    const setreadyClaim = () =>{
+        return Number(new BigNumber(data_json.moc_balance/100000000)).toFixed(4)
+        // return (data_json.moc_balance)
+    }
 
     return (
     <div className="Card RewardsBalanceLiquidity withPadding hasTitle">
@@ -28,7 +34,7 @@ function MocLiquidity(props) {
         <div className="Metric"><h2>Ready to Claim</h2>
             <div className="IncentivesItem">
                 <h3>
-                    <div><span className="" >0.000000</span></div>
+                    <div><span className="" >{setreadyClaim()}</span></div>
                 </h3>
                 <p>MOC</p></div>
         </div>
