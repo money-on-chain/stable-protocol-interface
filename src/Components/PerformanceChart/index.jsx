@@ -4,13 +4,11 @@ import { Row, Col, Tabs } from 'antd';
 
 export default function PerformanceChart(props) {
     const [percent, setPercent] = useState(0);
-    // let height = percent && percent > 0 ? percent * 190 / 100 : 0;
-    let height = 20;
-    // setPercent(12.72)
-    /* fetch("https://api.moneyonchain.com/api/calculated/moc_last_block_performance").then(async response => {
+    let height = percent && percent > 0 ? percent * 190 / 100 : 0;
+    fetch("https://api.moneyonchain.com/api/calculated/moc_last_block_performance").then(async response => {
       const data = await response.json();
       setPercent(data.annualized_value.toFixed(2));
-    }); */
+    });
     return (
         <div>
             <Row>
@@ -31,6 +29,7 @@ export default function PerformanceChart(props) {
             </Row>
             <Row className="ChartFooter">
                 <Col xs={24}>
+                    <h1>{percent > 0 && `${percent}%`}</h1>
                     <h4>MoC Staking Annualized Performance</h4>
                 </Col>
             </Row>

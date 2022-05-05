@@ -42,11 +42,11 @@ function Home(props) {
         <Fragment>
             <h1 className="PageTitle">Home</h1>
             <h3 className="PageSubTitle">Keep calm and Hodl on</h3>
-            <Row>
+            <Row gutter={16}>
                 <Col xs={24} sm={24} md={9} xl={6}>
                     <WalletBalance/>
                 </Col>
-                <Col xs={24} sm={24} md={15} xl={18}>
+                <Col xs={24} sm={24} md={15} xl={14}>
                     <div className={'container-b'}>
                         <TokenSummaryCard
                             tokenName="stable"
@@ -70,18 +70,19 @@ function Home(props) {
                             labelCoin={'RBTC'}
                         />
                     </div>
-                <div className={'ContainerMocAmount'}>
-                    <div className="ContainerMocAmountDatas">
-                        <MocAmount></MocAmount>
-                        <MocLiquidity></MocLiquidity>
-                    </div>
-                </div>
                 </Col>
-              </Row>
-            </div>
+                <Col xs={24} sm={24} md={24} xl={4}>
+                    <div className="ContainerMocAmountDatas">
+                        <MocAmount />
+                        <MocLiquidity />
+                    </div>
+                </Col>
+            </Row>
             <div className="Card WalletOperations">
-                <div className="title"><h1>Last Operations</h1></div>
-                <ListOperations datas={data_row_coins}></ListOperations>
+                <div className="title"><h1>Last Operations</h1>
+                </div>
+            </div>
+            <ListOperations datas={data_row_coins}></ListOperations>
         </Fragment>
     );
 }

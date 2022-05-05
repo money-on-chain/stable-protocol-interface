@@ -51,9 +51,9 @@ export default function Mint(props) {
                     />
                 </Col>
             </Row>
-            </div>
             <div className="Card WalletOperations">
                 <div className="title"><h1>Last Operations</h1></div>
+            </div>
                 <ListOperations datas={data_row_coins}></ListOperations>
         </Fragment>
     );

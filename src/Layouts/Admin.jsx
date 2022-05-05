@@ -95,7 +95,7 @@ export default function Admin() {
                         onClick={() => navigate('/rewards')}
                         icon={<span className="icon-icon-moc"></span>}
                     />
-                    <Menu.Utem
+                    <Menu.Item
                         key="metrics"
                         onClick={() => navigate('/metrics')}
                         icon={<PieChartFilled />}

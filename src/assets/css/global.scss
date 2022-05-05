@@ -12,9 +12,14 @@ body, html {
 
 .page-container {
   background: #fafafa;
-  padding: 10px;
-  margin: 54px auto;
-  max-width: 1440px;
+  display: flex;
+  margin-right: 15px;
+  width: calc(100% - 108px);
+  margin-left: 90px;
+  flex-flow: column;
+  min-height: 100vh;
+  padding-top: 70px;
+  padding-bottom: 20px;
 }
 
 a {
@@ -216,7 +221,7 @@ input[type=number] {
 .container-b{
   flex-grow: 1;
   display: flex;
-  row-gap: 15px;
+  row-gap: 63px;
   flex-wrap: wrap;
 }
 .mrl-25{
