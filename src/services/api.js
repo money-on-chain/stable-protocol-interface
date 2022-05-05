@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../config/constants';
+import config from '../Config/constants';
 
 export default (method, url, params, allData = false) => {
   return new Promise((resolve, reject) => {

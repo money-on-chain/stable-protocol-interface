@@ -8,6 +8,7 @@ import api from '../../../services/api';
 import data_json from '../../../services/webapp_transactions_list';
 import Moment from 'react-moment';
 import { useState } from 'react'
+import Web3 from 'web3';
 
 
 const columns = [
@@ -205,12 +206,12 @@ class ListOperations extends React.Component {
                 const detail = {event:set_event,created:data_j.lastUpdatedAt
                     ,details:'You received in your platform 0.00 DOC'
                     ,asset:set_asset
-                    ,confirmation:'2022-04-18 18:30:00'
+                    ,confirmation:data_j.confirmationTime
                     ,address:data_j.address
-                    ,platform:'+'+data_j.amount+' ( 0.00 USD )'
+                    ,platform: parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(4) + ' ( ' + Web3.utils.fromWei(Web3.utils.toWei(data_j.USDAmount, 'ether'), 'ether') + ' USD )'
                     ,platform_fee: ' MOC ( 0.00 USD )'
                     ,block:data_j.blockNumber
-                    ,wallet:'0.000032 RBTC ( 1.29 USD )'
+                    ,wallet: `${parseFloat(Web3.utils.fromWei(Web3.utils.toWei(data_j.RBTCAmount, 'ether')), 'ether').toFixed(4)} RBTC ( ${data_j.USDAmount} USD )`
                     ,interests:data_j.USDInterests
                     ,tx_hash:data_j.transactionHash
                     ,leverage:'--'
