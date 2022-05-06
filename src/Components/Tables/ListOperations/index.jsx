@@ -9,6 +9,7 @@ import data_json from '../../../services/webapp_transactions_list';
 import Moment from 'react-moment';
 import { useState } from 'react'
 import Web3 from 'web3';
+import {setNumber} from '../../../Helpers/helper'
 
 
 const columns = [
@@ -203,20 +204,26 @@ class ListOperations extends React.Component {
                 var set_status_percent= data_j.confirmingPercent;
                 //if( set_event!='' ){
 
+                console.log('data_j.USDAmount_________________________________');
+                console.log(data_j.USDAmount);
+                console.log(setNumber(data_j.USDAmount));
+                console.log('data_j.USDAmount_________________________________');
+
                 const detail = {event:set_event,created:data_j.lastUpdatedAt
                     ,details:'You received in your platform 0.00 DOC'
                     ,asset:set_asset
                     ,confirmation:data_j.confirmationTime
                     ,address:data_j.address
-                    ,platform: parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(4) + ' ( ' + Web3.utils.fromWei(Web3.utils.toWei(data_j.USDAmount, 'ether'), 'ether') + ' USD )'
+                    // ,platform: parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(4) + ' ( ' + Web3.utils.fromWei(Web3.utils.toWei(data_j.USDAmount, 'ether'), 'ether') + ' USD )'
+                    ,platform: parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(4) + ' ( ' + Web3.utils.fromWei(Web3.utils.toWei(setNumber(data_j.USDAmount), 'ether'), 'ether') + ' USD )'
                     ,platform_fee: ' MOC ( 0.00 USD )'
                     ,block:data_j.blockNumber
-                    ,wallet: `${parseFloat(Web3.utils.fromWei(Web3.utils.toWei(data_j.RBTCAmount, 'ether')), 'ether').toFixed(4)} RBTC ( ${data_j.USDAmount} USD )`
+                    ,wallet: `${parseFloat(Web3.utils.fromWei(Web3.utils.toWei(setNumber(data_j.RBTCAmount), 'ether')), 'ether').toFixed(4)} RBTC ( ${setNumber(data_j.USDAmount)} USD )`
                     ,interests:data_j.USDInterests
                     ,tx_hash:data_j.transactionHash
                     ,leverage:'--'
-                    ,gas_fee:(data_j.gasFeeUSD!== undefined)? data_j.gasFeeUSD +' RBTC ( 1.29 USD )': ''
-                    ,price:(data_j.reservePric!== undefined)?data_j.reservePrice+' USD' : ''
+                    ,gas_fee:(data_j.gasFeeUSD!== undefined)? setNumber(data_j.gasFeeUSD) +' RBTC ( 1.29 USD )': ''
+                    ,price:(data_j.reservePric!== undefined)? setNumber(data_j.reservePrice) +' USD' : ''
                     ,comments:'--'
                 };
 
@@ -227,7 +234,7 @@ class ListOperations extends React.Component {
                     event: set_event,
                     asset: set_asset,
                     platform: '+ '+data_j.amount,
-                    wallet: '-0.000032',
+                    wallet: `${parseFloat(Web3.utils.fromWei(Web3.utils.toWei(setNumber(data_j.RBTCAmount), 'ether')), 'ether').toFixed(4)} RBTC ( ${setNumber(data_j.USDAmount)} USD )`,
                     date: data_j.lastUpdatedAt,
                     status: {txt:set_status_txt,percent:set_status_percent},
                     detail: detail,

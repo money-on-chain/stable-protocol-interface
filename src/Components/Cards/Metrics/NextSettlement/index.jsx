@@ -1,8 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { AuthenticateContext } from '../../../../Context/Auth';
-import {Row, Tooltip} from "antd";
-import {InfoCircleOutlined} from "@ant-design/icons";
 import moment from "moment";
+import {getDatasMetrics} from '../../../../Helpers/helper'
 
 function NextSettlement() {
     const auth = useContext(AuthenticateContext);
@@ -19,14 +18,14 @@ function NextSettlement() {
         var h =Math.floor(seconds %(3600*24)/3600);
         var m =Math.floor(seconds %3600/60);
         var s =Math.floor(seconds %60);
-        var dDisplay = d >0? d +(d ==1?" day ":" days "):"";
+        var dDisplay = d >0? d +(d ==1?" days ":" days "):"";
         var hDisplay = h >0? h +(h ==1?" hour ":" hours "):"";
         var mDisplay = m >0? m +(m ==1?" minute ":" minutes "):"";
         var sDisplay = s >0? s +(s ==1?" second":" seconds"):"";
-        result.time = dDisplay + hDisplay;
+        result.time = 'In '+dDisplay + hDisplay;
         const today = moment().add(d, 'd').add(h, 'h').add(m, 'm').add(s, 's');
-        result.date = moment(today).format('MMMM DD, YYYY');
-        result.date_time = moment(today).format('HH:mm:ss');
+        result.date = moment(today).format('MMMM Do YYYY,');
+        result.date_time = moment(today).format('h:mm:ss a');
         return result;
     };
 
@@ -36,20 +35,7 @@ function NextSettlement() {
         }
     }, [auth]);
 
-
-    //
-    const getDatas = () => {
-        if (auth.userBalanceData) {
-            if (auth.contractStatusData) {
-                const blocksToSettlement= (auth.contractStatusData['blocksToSettlement']);
-                return {blocksToSettlement:blocksToSettlement};
-            } else {
-                return {blocksToSettlement:0};
-            }
-        }else{
-            return {blocksToSettlement:0};
-        }
-    }
+    const getDatas= getDatasMetrics(auth)
 
     return (
         <div className="Card CardSystemStatus">
@@ -69,7 +55,7 @@ function NextSettlement() {
                 <div className="separator" />
                 <div>
                     <h3>Blocks to <br/> settlement</h3>
-                    {getDatas()['blocksToSettlement']}
+                    {getDatas['blocksToSettlement']}
                     <h3>Settlement will <br/> happen on block</h3>
                     2803398
                 </div>
