@@ -1,5 +1,5 @@
 import web3 from "web3";
-
+import config from '../Config/constants';
 
 
 export function setNumber(number){
@@ -14,7 +14,7 @@ export function setNumber(number){
 
 
 export function getDatasMetrics(auth){
-    const coin_usd= 38957.70
+    const coin_usd= config.coin_usd
     if (auth.userBalanceData) {
         if (auth.userBalanceData) {
             const globalCoverage= Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
