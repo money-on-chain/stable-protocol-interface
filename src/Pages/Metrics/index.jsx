@@ -16,34 +16,34 @@ function Metrics(props) {
             <h1 className="PageTitle">Metrics</h1>
             <h3 className="PageSubTitle">Current system information</h3>
             <Row gutter={15} className="MetricsCardsContainer">
-                <Col span={10}>
+                <Col className={'SystemStatusSection'}>
                     <SystemStatus />
                 </Col>
-                <Col span={14}>
+                <Col className={'RBTCSection'}>
                     <RBTC />
                 </Col>
             </Row>
 
             <Row style={{marginTop: 15}} gutter={15} className="MetricsCardsContainer">
-                <Col span={6}>
+                <Col className={'MetricsCardsDOC'}>
                     <DOC />
                 </Col>
-                <Col span={9}>
+                <Col className={'MetricsCardsBPRO'}>
                     <BPRO />
                 </Col>
-                <Col span={9}>
+                <Col className={'MetricsCardsBTCX'}>
                     <BTCX />
                 </Col>
             </Row>
 
             <Row style={{marginTop: 15}} gutter={15} className="MetricsCardsContainer">
-                <Col span={6}>
+                <Col className={'MetricsCardsMOC'}>
                     <MOC />
                 </Col>
-                <Col span={9}>
+                <Col className={'MetricsCardsLiquidity'}>
                     <Liquidity />
                 </Col>
-                <Col span={9}>
+                <Col className={'MetricsCardsNextSettlement'}>
                     <NextSettlement />
                 </Col>
             </Row>
