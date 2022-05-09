@@ -94,7 +94,7 @@ function Home(props) {
             <h1 className="PageTitle">Home</h1>
             <h3 className="PageSubTitle">Keep calm and Hodl on</h3>
             <Row gutter={16}>
-                <Col xs={24} sm={24} md={9} xl={6}>
+                <Col xs={24} sm={24} md={9} xl={6} className={'WalletBalance-mb'}>
                     <WalletBalance/>
                 </Col>
                 <Col xs={24} sm={24} md={15} xl={14}>

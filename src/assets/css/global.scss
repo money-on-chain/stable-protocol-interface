@@ -14,7 +14,7 @@ body, html {
   background: #fafafa;
   display: flex;
   margin-right: 15px;
-  width: calc(100% - 108px);
+  //width: calc(100% - 108px);
   margin-left: 90px;
   flex-flow: column;
   min-height: 100vh;
@@ -384,7 +384,7 @@ input[type=number] {
 }
 
 .RewardsBalanceLiquidity {
-  margin-top: 1em;
+  //margin-top: 1em;
   p {
     font-family: Montserrat,sans-serif;
     font-size: 16px;
