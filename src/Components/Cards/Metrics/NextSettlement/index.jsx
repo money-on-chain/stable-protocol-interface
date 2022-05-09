@@ -50,14 +50,14 @@ function NextSettlement() {
                     <h3>Remaining days</h3>
                     {daysHours?.time}
                     <h3>Current indexed block</h3>
-                    2802457
+                    {getDatas['blockHeight']}
                 </div>
                 <div className="separator" />
                 <div>
                     <h3>Blocks to <br/> settlement</h3>
                     {getDatas['blocksToSettlement']}
                     <h3>Settlement will <br/> happen on block</h3>
-                    2803398
+                    { Number(getDatas['blockHeight'])+ Number(getDatas['blocksToSettlement']) }
                 </div>
             </div>
         </div>

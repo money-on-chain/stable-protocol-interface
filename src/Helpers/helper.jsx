@@ -17,6 +17,9 @@ export function getDatasMetrics(auth){
     const coin_usd= config.coin_usd
     if (auth.userBalanceData) {
         if (auth.userBalanceData) {
+            console.log('auth*********************************************');
+            console.log(auth);
+            console.log('auth*********************************************');
             const globalCoverage= Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
 
             const bpro_usd= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bproPriceInUsd']), 'Kwei')).toFixed(5);
@@ -51,6 +54,7 @@ export function getDatasMetrics(auth){
             const liquidity_x2BproAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2BproAmount']), 'ether')).toFixed(6);
 
             const blocksToSettlement= (auth.contractStatusData['blocksToSettlement']);
+            const blockHeight= (auth.contractStatusData['blockHeight']);
 
             return {
                 globalCoverage:globalCoverage,
@@ -60,7 +64,7 @@ export function getDatasMetrics(auth){
                 btcx_usd:btcx_usd,interest:btcx_interest,x2Leverage:btcx_x2Leverage,x2Coverage:btcx_x2Coverage,bprox2AvailableToMint:btcx_AvailableToMint,
                 rbtc_usd:rbtc_usd,rbtc_interest:rbtc_interest,totalBTCAmount:totalBTCAmount,totalBTCAmountUsd:totalBTCAmountUsd,b0TargetCoverage:b0TargetCoverage,bitcoinMovingAverage:bitcoinMovingAverage,
                 liquidity_totalBTCAmount:liquidity_totalBTCAmount,liquidity_docAvailableToRedeem:liquidity_docAvailableToRedeem,liquidity_b0BproAmount:liquidity_b0BproAmount,liquidity_interest:liquidity_rbtc_interest,liquidity_x2DocAmount:liquidity_x2DocAmount,liquidity_x2BproAmount:liquidity_x2BproAmount,
-                blocksToSettlement:blocksToSettlement
+                blocksToSettlement:blocksToSettlement,blockHeight:blockHeight
             };
         } else {
             return {globalCoverage: 0,
@@ -70,7 +74,7 @@ export function getDatasMetrics(auth){
                     btcx_usd:0,interest:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
                     rbtc_usd:0,rbtc_interest:0,totalBTCAmount:0,totalBTCAmountUsd:0,b0TargetCoverage:0,bitcoinMovingAverage:0,
                     liquidity_totalBTCAmount:0,liquidity_docAvailableToRedeem:0,liquidity_b0BproAmount:0,liquidity_interest:0,liquidity_x2DocAmount:0,liquidity_x2BproAmount:0,
-                    blocksToSettlement:0
+                    blocksToSettlement:0,blockHeight:0
             };
         }
     }else{
@@ -81,7 +85,7 @@ export function getDatasMetrics(auth){
                 btcx_usd:0,interest:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
                 rbtc_usd:0,rbtc_interest:0,totalBTCAmount:0,totalBTCAmountUsd:0,b0TargetCoverage:0,bitcoinMovingAverage:0,
                 liquidity_totalBTCAmount:0,liquidity_docAvailableToRedeem:0,liquidity_b0BproAmount:0,liquidity_interest:0,liquidity_x2DocAmount:0,liquidity_x2BproAmount:0,
-                blocksToSettlement:0
+                blocksToSettlement:0,blockHeight:0
         };
     }
 }
