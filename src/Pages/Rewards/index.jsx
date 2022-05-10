@@ -1,9 +1,10 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Row, Col } from 'antd';
 import RewardsStakingOptions from "../../Components/Cards/RewardsStakingOptionsCard";
 import YourAddressCard from '../../Components/Cards/YourAddressCard';
 import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import MocAmount from "../../Components/Cards/MocAmount";
+import ListOperations from "../../Components/Tables/ListOperations";
 
 export default function Rewards(props) {
     return (
@@ -27,6 +28,10 @@ export default function Rewards(props) {
                     />
                 </Col>
             </Row>
+            <div className="Card WalletOperations">
+                <div className="title"><h1>Last Operations</h1></div>
+                <ListOperations token={'MOC'}></ListOperations>
+            </div>
         </Fragment>
     )
 }
