@@ -10,6 +10,7 @@ import NotFound from '../Pages/NotFound';
 import Home from '../Pages/Home/index';
 import Metrics from '../Pages/Metrics';
 import { AuthenticateContext } from '../Context/Auth';
+import Rbtc from "../Pages/Rbtc";
 
 export default function Router() {
     const auth = useContext(AuthenticateContext);
@@ -31,6 +32,10 @@ export default function Router() {
                 {
                     path: 'rewards',
                     element: <Rewards Auth={auth} />
+                },
+                {
+                    path: 'getRBTC',
+                    element: <Rbtc Auth={auth} />
                 },
                 {
                     path: 'metrics',

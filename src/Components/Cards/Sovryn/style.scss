@@ -1,0 +1,58 @@
+.FastbtcContainer, .FastBTCards, .FastBTCCard, .FastCard {
+
+  height:  23.4em;
+  padding: 0 !important;
+
+  .title {
+    background: #000;
+    padding: 7px 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    min-height: 48px;
+    align-items: center;
+    //padding:0;
+    h1 {
+      font-family: Quicksand,sans-serif;
+      color: #fff;
+      //font-family: Source Sans Pro,sans-serif;
+      font-weight: 700;
+      line-height: 18px;
+      font-size: 14px;
+      margin-left: 6px;
+    }
+  }
+
+  .CardLogo {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .content-container {
+    padding: 13px;
+    ul {
+      margin-top: 15px;
+      padding-left: 15px;
+      li {
+        line-height: 19px;
+      }
+    }
+    a {
+      color: #4ec199;
+    }
+  }
+
+  .logo-img {
+    position: absolute;
+    opacity: .1;
+  }
+  .FastBTCLeftPanel {
+    margin-top: 66px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    //margin: auto;
+    text-align: left;
+  }
+
+
+}
