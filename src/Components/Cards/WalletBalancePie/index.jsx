@@ -101,7 +101,7 @@ function WalletBalancePie(props) {
     };
 
     return (
-        <div style={{ height: 250,width:250 }}>
+        <div style={{ height: 250}}>
             <ResponsiveContainer>
                 <PieChart>
                     <Pie

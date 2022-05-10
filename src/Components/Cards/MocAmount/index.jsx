@@ -16,7 +16,7 @@ function MocAmount() {
 
     return (
         <div className="ContainerMocAmountDatas">
-            <div className="Card RewardsBalanceAmount withPadding hasTitle">
+            <div className="Card RewardsBalanceAmount withPadding hasTitle padding-1-2">
                 <div className="title">
                     <h1>MoC Amount</h1>
                 </div>

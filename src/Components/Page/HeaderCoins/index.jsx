@@ -112,13 +112,13 @@ function HeaderCoins(props) {
             case 'riskpro':
                 return {day: dailyVariation['24hs'].bproPriceInUsd, current: dailyVariation['current'].bproPriceInUsd};
 
-            case 'riskprox': 
+            case 'riskprox':
                 return {day: dailyVariation['24hs'].bprox2PriceInUsd, current: dailyVariation['current'].bprox2PriceInUsd};
             default:
                 console.log('unknown token type...');
         }
     };
-        
+
     return (
         <>{ dailyVariation &&
             <div className={'mrl-25 div_coin'}>

@@ -155,3 +155,17 @@
 .recharts-tooltip-wrapper{
   z-index: 2;
 }
+
+.justify-content-initial{
+  justify-content: initial !important;
+}
+
+.WalletBalance-mb{
+  @media screen and (max-width:768px) {
+    margin-bottom: 15px;
+  }
+}
+
+.padding-1-2{
+  padding: 1.2em !important;
+}

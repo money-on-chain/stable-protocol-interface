@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Layout, Menu, Image, Drawer, Button } from 'antd';
-import { HomeFilled, MenuOutlined, CloseOutlined, PieChartFilled } from '@ant-design/icons';
+import { HomeFilled, MenuOutlined, CloseOutlined, PieChartFilled,InfoCircleFilled } from '@ant-design/icons';
 import logoImage from '../assets/icons/logo.svg';
 import LoginButton from '../Components/Auth/LoginButton/index';
 import React, { useContext, useState, useEffect } from 'react';
@@ -10,6 +10,7 @@ import { formatVisibleValue } from '../Lib/Formats';
 import HeaderCoins from "../Components/Page/HeaderCoins";
 const BigNumber = require('bignumber.js');
 const { Header, Content, Sider } = Layout;
+const { SubMenu } = Menu;
 
 export default function Admin() {
     const navigate = useNavigate();
@@ -100,6 +101,11 @@ export default function Admin() {
                         onClick={() => navigate('/metrics')}
                         icon={<PieChartFilled />}
                     />
+                    <SubMenu key="information" title="Profile" icon={<InfoCircleFilled />} theme={'light'}>
+                        <Menu.Item key="contract_repository">Contract Repository</Menu.Item>
+                        <Menu.Item key="webapp_repository">Webapp Repository</Menu.Item>
+                        <Menu.Item key="help_center">Help Center</Menu.Item>
+                    </SubMenu>
                 </Menu>
             </Sider>
             <Layout>

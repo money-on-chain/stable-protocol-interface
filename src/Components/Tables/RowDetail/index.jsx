@@ -54,8 +54,8 @@ function RowDetail(props) {
                 <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1"><span>{props.detail.interests}    </span></td>
                 <th className="ant-descriptions-item-label-th ant-descriptions-border-bottom" colSpan="1">TX Hash</th>
                 <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">
-                    <a className="ant-descriptions-a" href="https://explorer.testnet.rsk.co/tx/0x449d245b525d9268544ed54ce83dce7485ff0328c626bbdf7d616496689c13c8" target="_blank">
-                        <span>{props.detail.tx_hash}         </span>
+                    <a className="ant-descriptions-a" href={'https://explorer.testnet.rsk.co/tx/'+props.detail.tx_hash} target="_blank">
+                        <span>{props.detail.tx_hash_truncate}         </span>
                     </a>
                 </td>
             </tr>

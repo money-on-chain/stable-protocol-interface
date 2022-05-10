@@ -20,7 +20,7 @@ function WalletBalance(props) {
         <div className="WalletBalance mrc-15" style={{height: '100%'}}>
             <div className="mrb-15">Your Wallet Balance</div>
             <WalletBalancePie/>
-                <div className="TotalBalanceBottom">
+                <div className="TotalBalanceBottom justify-content-initial">
                     <div className="CopyableText ">
                         <span className="title">Address</span>
                         <div>

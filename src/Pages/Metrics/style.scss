@@ -36,6 +36,19 @@
         margin-left: 15px;
         margin-right: 15px;
         background: #b9b9b9;
+        @media only screen and (max-width: 1000px){
+          display: none;
+        }
+      }
+      .space{
+        margin-bottom: 25px;
+        display: inline-block;
+      }
+      .red{
+        color: #ed1c24;
+      }
+      @media only screen and (max-width: 1000px){
+        flex-flow: column !important;
       }
       .space{
         margin-bottom: 25px;
@@ -49,5 +62,70 @@
 
   @media only screen and (max-width: 1575px) and (min-width: 600px) {
     padding-left: 75px;
+  }
+  @media only screen and (max-width: 1000px){
+    flex-flow: column !important;
+  }
+}
+
+
+.SystemStatusSection{
+  width: 40%;
+  @media only screen and (max-width: 1000px){
+    width: initial;
+    margin-bottom: 15px;
+  }
+}
+
+.RBTCSection{
+  width: 60%;
+  @media only screen and (max-width: 1000px){
+    width: initial;
+  }
+}
+
+.MetricsCardsDOC{
+  width:20%;
+  @media only screen and (max-width: 1000px){
+    width: initial;
+    margin-bottom: 15px;
+  }
+}
+
+.MetricsCardsBPRO{
+  width:40%;
+  @media only screen and (max-width: 1000px){
+    width: initial;
+    margin-bottom: 15px;
+  }
+}
+
+.MetricsCardsBTCX{
+  width:40%;
+  @media only screen and (max-width: 1000px){
+    width: initial;
+  }
+}
+
+.MetricsCardsMOC{
+  width:20%;
+  @media only screen and (max-width: 1000px){
+    width: initial;
+    margin-bottom: 15px;
+  }
+}
+
+.MetricsCardsLiquidity{
+  width:40%;
+  @media only screen and (max-width: 1000px){
+    width: initial;
+    margin-bottom: 15px;
+  }
+}
+
+.MetricsCardsNextSettlement{
+  width:40%;
+  @media only screen and (max-width: 1000px){
+    width: initial;
   }
 }
