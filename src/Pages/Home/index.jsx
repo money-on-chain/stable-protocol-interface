@@ -94,10 +94,10 @@ function Home(props) {
             <h1 className="PageTitle">Home</h1>
             <h3 className="PageSubTitle">Keep calm and Hodl on</h3>
             <Row gutter={16}>
-                <Col xs={24} sm={24} md={9} xl={6} className={'WalletBalance-mb'}>
+                <Col flex="400px" className={'WalletBalance-mb'}>
                     <WalletBalance/>
                 </Col>
-                <Col xs={24} sm={24} md={15} xl={14}>
+                <Col flex="auto">
                     <div className={'container-b'} style={{height: '100%'}}>
                         <TokenSummaryCard
                             tokenName="stable"

@@ -2,6 +2,9 @@
 
 .RewardsBalanceAmount {
   margin-bottom: 14px;
+  @media screen and (max-width: 1199px) {
+    margin-top: 15px;
+  }
 }
 
 .ContainerMocAmountDatas{
