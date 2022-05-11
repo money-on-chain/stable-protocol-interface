@@ -13,13 +13,21 @@ body, html {
 .page-container {
   background: #fafafa;
   display: flex;
-  margin-right: 15px;
+  margin-right: auto;
   //width: calc(100% - 108px);
-  margin-left: 90px;
+  margin-left: auto;
   flex-flow: column;
   min-height: 100vh;
   padding-top: 70px;
   padding-bottom: 20px;
+  //min-width: 1400px;
+  min-width: 1400px;
+  max-width: 1400px;
+  @media (max-width: 1555px) {
+    min-width: initial;
+    margin-left: 90px;
+    margin-right: initial;
+  }
 }
 
 a {
@@ -401,7 +409,7 @@ input[type=number] {
 }
 
 .ant-menu-submenu{
-  margin-left: -9px;
+  margin-left: -14px;
 }
 
 .ant-menu-submenu-vertical{

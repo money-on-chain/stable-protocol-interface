@@ -17,11 +17,11 @@
   }
 
   .money-RBTC{
-  position:relative;
-  top:-145px;
-  font-weight:bold;
-  display:block;
-  text-align:center;
+    position:relative;
+    top:-145px;
+    font-weight:bold;
+    display:block;
+    text-align:center;
     font-size: 20px;
     color: #575756;
   }
@@ -161,9 +161,15 @@
 }
 
 .WalletBalance-mb{
-  @media screen and (max-width:768px) {
+  width: 400px;
+  @media screen and (max-width:860px) {
+    flex: 1 !important;
+    width: 100%;
     margin-bottom: 15px;
   }
+  //@media screen and (max-width:768px) {
+  //  margin-bottom: 15px;
+  //}
 }
 
 .padding-1-2{

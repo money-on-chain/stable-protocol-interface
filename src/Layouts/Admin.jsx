@@ -96,6 +96,11 @@ export default function Admin() {
                         onClick={() => navigate('/rewards')}
                         icon={<span className="icon-icon-moc"></span>}
                     />
+                    {/*<Menu.Item*/}
+                    {/*    key="getRBTC"*/}
+                    {/*    onClick={() => navigate('/getRBTC')}*/}
+                    {/*    icon={<span className="icon-icon-moc"></span>}*/}
+                    {/*/>*/}
                     <Menu.Item
                         key="metrics"
                         onClick={() => navigate('/metrics')}
