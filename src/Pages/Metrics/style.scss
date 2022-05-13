@@ -23,10 +23,10 @@
       }
       div {
         flex-grow: 1;
-        margin-right: 15px;
+        //margin-right: 15px;
         &:last-child {
           margin-right: 0;
-          margin-left: 15px;
+          //margin-left: 15px;
         }
       }
       .separator {
@@ -36,6 +36,7 @@
         margin-left: 15px;
         margin-right: 15px;
         background: #b9b9b9;
+        margin-top: 25px;
         @media only screen and (max-width: 1000px){
           display: none;
         }
@@ -120,5 +121,15 @@
   width:40%;
   @media only screen and (max-width: 1000px){
     width: initial;
+  }
+}
+
+
+.datas-opera{
+  span {
+    font-family: Montserrat,sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #707070;
   }
 }
