@@ -7,6 +7,7 @@ function NextSettlement() {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
     const [daysHours, setDaysHours] = useState(null);
+    const [crono, setCrono] = useState(2);
 
     const decimaltoHour = (dayBlockSpan, blocksToSettlement) => {
         const result = {};
@@ -29,19 +30,43 @@ function NextSettlement() {
         return result;
     };
 
-    useEffect(() => {
-        if (auth.userBalanceData) {
-            setDaysHours(decimaltoHour(auth.contractStatusData.dayBlockSpan, auth.contractStatusData.blocksToSettlement));
-        }
-    }, [auth]);
-
     const getDatas= getDatasMetrics(auth)
+
+    const [blocksToSettlement, setBlocksToSettlement] = useState(getDatas['blocksToSettlement']);
+    const [blockHeight, setBlockHeight] = useState(getDatas['blockHeight']);
+    const [settlementBlock, setSettlementBlock] = useState(Number(getDatas['blockHeight'])+ Number(getDatas['blocksToSettlement']));
+
+    useEffect(() => {
+        setTimeout(function() {
+            if (auth.contractStatusData) {
+                setDaysHours(decimaltoHour(auth.contractStatusData.dayBlockSpan, auth.contractStatusData.blocksToSettlement));
+                setCrono(30000)
+                setBlocksToSettlement(getDatasMetrics(auth)['blocksToSettlement'])
+                setBlockHeight(getDatasMetrics(auth)['blockHeight'])
+                setSettlementBlock( Number(getDatasMetrics(auth)['blockHeight']) + Number(getDatasMetrics(auth)['blocksToSettlement']) )
+            }
+        }, crono);
+    }, [auth,daysHours]);
+
+    useEffect(() => {
+        setBlocksToSettlement(getDatasMetrics(auth)['blocksToSettlement'])
+    }, [getDatas['blocksToSettlement']]);
+
+    useEffect(() => {
+        setBlockHeight(getDatasMetrics(auth)['blockHeight'])
+    }, [getDatas['blockHeight']]);
+
+    useEffect(() => {
+        setSettlementBlock( Number(getDatasMetrics(auth)['blockHeight']) + Number(getDatasMetrics(auth)['blocksToSettlement']) )
+    }, [ getDatas['blockHeight'],getDatas['blocksToSettlement'] ]);
+
 
     return (
         <div className="Card CardSystemStatus">
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 Next Settlement
             </h3>
+            {/*<h2>{position}</h2>*/}
 
             <div className="CardMetricContent">
                 <div>
@@ -50,14 +75,14 @@ function NextSettlement() {
                     <h3>Remaining days</h3>
                     {daysHours?.time}
                     <h3>Current indexed block</h3>
-                    {getDatas['blockHeight']}
+                    {blockHeight}
                 </div>
                 <div className="separator" />
                 <div>
                     <h3>Blocks to <br/> settlement</h3>
-                    {getDatas['blocksToSettlement']}
+                    {blocksToSettlement}
                     <h3>Settlement will <br/> happen on block</h3>
-                    { Number(getDatas['blockHeight'])+ Number(getDatas['blocksToSettlement']) }
+                    { settlementBlock }
                 </div>
             </div>
         </div>
