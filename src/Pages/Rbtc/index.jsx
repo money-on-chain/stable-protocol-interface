@@ -1,8 +1,7 @@
-import MintCard from '../../Components/Cards/MintCard';
-import AmountCard from '../../Components/Cards/AmountCard';
-import YourAddressCard from '../../Components/Cards/YourAddressCard';
-import { Row, Col, Switch } from 'antd';
-import React, { Fragment } from 'react';
+import RbtcToBtcGenerateModal from '../../Components/Modals/RbtcToBtcGenerateModal';
+import BtcToRbtc from '../../Components/Cards/BtcToRbtc';
+import { Row, Col } from 'antd';
+import React, { Fragment, useState } from 'react';
 import ListOperations from "../../Components/Tables/ListOperations";
 import Sovryn from "../../Components/Cards/Sovryn";
 
@@ -30,25 +29,37 @@ export default function Rbtc(props) {
         status: {txt:'Confirmed',percent:100},
     });
 
+    const [rbtcGenVisible, setRbtcGenVisible] = useState(false);
+
+    const closeLogoutModal = () => {
+        setRbtcGenVisible(false);
+    };
+
     return (
         <Fragment>
             <h1 className="PageTitle">FastBTC</h1>
             <h3 className="PageSubTitle">Sovryn's FastBTC integration</h3>
             <Row gutter={15}>
-                <Col xs={24} md={12} xl={5}>
+                <Col xs={24} md={12} xl={4}>
                     <Sovryn tokenName="stable" titleName="DoC"/>
                 </Col>
-                <Col xs={24} md={12} xl={4}>
-                    <YourAddressCard height="23.4em" tokenName="STABLE" currencyOptions={['RESERVE', 'STABLE']} />
+                <Col xs={24} md={12} xl={10}>
+                    <BtcToRbtc
+                        title="BTC to rBTC Peg In"
+                        description="Convert BTC from the Bitcoin network to rBTC Smart Bitcoins using the integrated FastBTC from Sovryn."
+                        btnText="Convert rBTC to BTC"
+                        btnAction={()=>{setRbtcGenVisible(true)}}
+                    />
+                    <RbtcToBtcGenerateModal
+                        visible={rbtcGenVisible}
+                        handleClose={closeLogoutModal}
+                    />
                 </Col>
-                <Col xs={24} xl={15}>
-                    <MintCard
-                        token={'STABLE'}
-                        currencyOptions={['RESERVE', 'STABLE']}
-                        StatusData={props.Auth.contractStatusData}
-                        UserBalanceData={props.Auth.userBalanceData}
-                        color="#00a651"
-                        AccountData={props.Auth.accountData}
+                <Col xs={24}  md={24} xl={10}>
+                    <BtcToRbtc
+                        title="BTC to rBTC Peg Out"
+                        description="Convert rBTC Smart Bitcoins to BTC using the integrated FastBTC from Sovryn."
+                        btnText="Convert rBTC to BTC"
                     />
                 </Col>
             </Row>

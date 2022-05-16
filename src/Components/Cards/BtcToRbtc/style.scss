@@ -1,0 +1,43 @@
+.BtoRCard {
+
+  height:  23.4em;
+  padding: 0 !important;
+
+  .m-b {
+    padding-top: 25px;
+    padding-bottom: 40px;
+  }
+
+  .title {
+    background: #08374F;
+    padding: 7px 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    min-height: 48px;
+    align-items: center;
+    //padding:0;
+    h1 {
+      font-family: Quicksand,sans-serif;
+      color: #fff;
+      //font-family: Source Sans Pro,sans-serif;
+      font-weight: 700;
+      line-height: 18px;
+      font-size: 14px;
+      margin-left: 6px;
+    }
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .logo-img {
+    width: 59px;
+    position: relative;
+  }
+
+  p {
+    display: block;
+    min-height: 8em;
+  }
+}
