@@ -2,6 +2,8 @@ import './style.scss'
 import React, { Fragment } from 'react';
 import { useContext } from 'react'
 import {AuthenticateContext} from "../../../Context/Auth";
+import {useTranslation} from "react-i18next";
+
 const BigNumber = require('bignumber.js');
 
 function MocAmount() {
@@ -14,11 +16,13 @@ function MocAmount() {
         }
     };
 
+    const [t, i18n]= useTranslation(["global",'moc'])
+
     return (
         <div className="ContainerMocAmountDatas">
             <div className="Card RewardsBalanceAmount withPadding hasTitle padding-1-2">
                 <div className="title">
-                    <h1>MoC Amount</h1>
+                    <h1>{t("global.RewardsBalance_MocAmount", { ns: 'global' })}</h1>
                 </div>
                 {/*<div >*/}
                 {/*    <span role="img" aria-label="info-circle" tabIndex="-1" className="anticon anticon-info-circle InfoIcon TooltipMoC">*/}
@@ -29,7 +33,7 @@ function MocAmount() {
                 {/*</div>*/}
                 <div className="LogoAndAmount">
                     <img className="MocLogo" srcSet={`${window.location.origin}/Moc/icon-moc.svg`}/>
-                    <div className="TotalAmountContainer"><h2>MoC Tokens</h2>
+                    <div className="TotalAmountContainer"><h2>{t("global.RewardsBalance_MocsTokens", { ns: 'global' })}</h2>
                         <div className="BalanceItemCard TotalAmount">
                             <h4>
                                 <div><span className="" >{set_moc_balance_usd()}</span></div>

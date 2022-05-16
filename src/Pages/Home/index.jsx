@@ -9,8 +9,11 @@ import MocAmount from "../../Components/Cards/MocAmount";
 import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import ListOperations from "../../Components/Tables/ListOperations";
 import data_json from "../../services/webapp_transactions_list.json";
+import {useTranslation} from "react-i18next";
 
 function Home(props) {
+
+    const [t, i18n]= useTranslation(["global",'moc'])
 
     const auth = useContext(AuthenticateContext);
     const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
@@ -91,8 +94,8 @@ function Home(props) {
 
     return (
         <Fragment>
-            <h1 className="PageTitle">Home</h1>
-            <h3 className="PageSubTitle">Keep calm and Hodl on</h3>
+            <h1 className="PageTitle">{t('MoC.home.title', { ns: 'moc' })}</h1>
+            <h3 className="PageSubTitle">{t("MoC.home.subtitle", { ns: 'moc' })}</h3>
             <Row gutter={16}>
                 <Col flex="400px" className={'WalletBalance-mb'}>
                     <WalletBalance/>
@@ -130,7 +133,6 @@ function Home(props) {
                 </Col>
             </Row>
             <div className="Card WalletOperations">
-                <div className="title"><h1>Last Operations</h1></div>
                 <ListOperations token={'all'}></ListOperations>
             </div>
         </Fragment>

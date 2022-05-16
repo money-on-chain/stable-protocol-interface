@@ -29,7 +29,6 @@ export default function Rewards(props) {
                 </Col>
             </Row>
             <div className="Card WalletOperations">
-                <div className="title"><h1>Last Operations</h1></div>
                 <ListOperations token={'MOC'}></ListOperations>
             </div>
         </Fragment>

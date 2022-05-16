@@ -1,0 +1,937 @@
+{
+  "MoC": {
+    "app": {
+      "name": "Money on Chain",
+      "code": "MoC"
+    },
+    "Tokens_STABLE_code": "DOC",
+    "Tokens_STABLE_name": "DoC",
+    "Tokens_RISKPRO_code": "BPRO",
+    "Tokens_RISKPRO_name": "BPro",
+    "Tokens_RISKPROX_code": "BTCX",
+    "Tokens_RISKPROX_name": "BTCx",
+    "Tokens_RESERVE_code": "RBTC",
+    "Tokens_RESERVE_name": "rBTC",
+    "Tokens_USD_code": "USD",
+    "Tokens_USD_name": "Dollar",
+    "Tokens_MOC_code": "MOC",
+    "Tokens_MOC_name": "MoC",
+    "Tokens_USDPrice_code": "USD",
+    "Tokens_USDPrice_name": "Dollar",
+
+    "MetamaskTutorial_connectWithMetamask_text": "Return to Money on Chain Tab. Click on Next on the Metamask Window",
+
+    "termsAndConditions": {
+      "warning": "WARNING",
+      "disclaimer": "Please go through our terms and conditions and Nationality restrictions prior to using the platform. By closing this message you automatically accept them. Money on Chain is a sophisticated protocol with proven robustness. Nevertheless it is still experimental software. Handle with care and at your own risk...",
+      "title": "Terms and Conditions",
+      "subtitle": "MONEY ON CHAIN",
+      "content": "Disclaimer\n\n You should not definitively rely upon the material contain in this Website or use it to form the definitive basis for any decision, contract, commitment or action whatsoever, with respect to any proposed transaction or otherwise. We have prepared the material contain in this Website and the analyses contained in it based, in part, on certain assumptions and information obtained by us from third-party sources. We and our affiliates and our and their respective officers, employees and agents expressly disclaim any and all liability which may be based on the material contain in this Website and any errors therein or omissions therefrom. We undertake no obligation or responsibility to update any of the information contained in the material contain in this Website. Past performance does not guarantee or predict future performance. The material contain in this Website do not constitute an offer to sell or the solicitation of an offer to buy any security, commodity or instrument or related derivative, nor do they constitute an offer or commitment to lend, syndicate or arrange a financing, underwrite or purchase or act as an agent or advisor or in any other capacity with respect to any transaction, or commit capital, or to participate in any trading strategies, and do not constitute legal, regulatory, accounting or tax advice to the recipient. We recommend that the recipient seek independent third party legal, regulatory, accounting and tax advice regarding the contents of this website. This website does not constitute and should not be considered as any form of financial opinion or recommendation by us or any of our affiliates. There is no guarantee that any of the premises, estimates, projections, results (in total or partially) or conclusions used or presented in this material will be effectively reached or will be verified in total or partially. Final results may differ from the projections and these differences may be significant for any reasons, such as, but not limited to market conditions. Before deciding to participate in any transaction, you shall take all measures that you deem necessary to ensure the due understanding of the transaction in all its aspects and make an independent assessment of its convenience and its objectives, particularly in relation to risks and benefits of entering in such transaction. You should also seek advice from specialized advisors (financial, tax, legal, among others) to make such assessment.\n\n\nPrivacy Policy\nUpdated version: October 9, 2019\n\nThis privacy policy (the “Privacy Policy”) sets out the different areas where user´s privacy is concerned and outlines how MOC INVESTMENT CORP. (“MOC”) uses personal information of users (“Users”) of the MOC´s website at https://moneyonchain.com/ (the “Website” or the “Site”). Furthermore, this Privacy Policy explains the way MOC processes, stores and protects user data and information (“User Information”).\nThe Site is organized primarily to provide Users with an Open Source Software (as defined in the Terms and Conditions of the Site). The Open Source Software include the transfer of digital tokens known as SmartBitcoins (rBTC) and other tokens.\nThe Website take a proactive approach to Users´ privacy and ensure the necessary steps are taken to protect the privacy of its Users.\nPlease read this carefully as this Privacy Policy is legally binding when you use the Site.\nAs used in this Privacy Policy, “we”, “us” or “our” refers to MOC. You can reach us with any request relating to this Privacy Policy via contact details provided below.\n\n1. DATA PROCESSING IN CONNECTION WITH THE SITE.\n\n1.1. Use of Cookies and Similar Technologies\nThe Site may use cookies. Cookies are small text files that are placed on your computer by websites that you visit. They are widely used in order to make websites work, or work more efficiently, as well as to provide information to the owners of the site. Cookies are typically stored on your computer’s hard drive. Information collected from cookies is used by us to evaluate the effectiveness of our Site and analyze trends. The information collected from cookies allows us to determine such things as which parts of the Site are most visited and difficulties our visitors may experience in accessing the Site. With this knowledge, we can improve the quality of your experience on the Site by recognizing and delivering more of the most desired features and information, as well as by resolving access difficulties.\nWe may use third party service providers, to assist us in better understanding the use of our Site. Our service providers will place cookies on the hard drive of your computer (or use similar technologies) and will receive information that we select that will educate us on such things as how visitors navigate around our Site. This information is aggregated to provide statistical data about our users’ browsing actions and patterns, and does not personally identify individuals. This information may include: computer or mobile device information, website usage information (such as page views, button clicks, input form changes, errors).\nOur service providers analyses this information and provides us with aggregate reports. The information and analysis provided by our service providers will be used to assist us in better understanding our visitors’ interests in our Site and how to better serve those interests. If you want to avoid using cookies altogether, you can disable cookies in your browser. However, disabling cookies might make it impossible for you to use certain features of the Site. Your use of the Site with a browser that is configure to accept cookies constitutes an acceptance of our and third-party cookies.\nUsers are advised that if they wish to deny the use and saving of cookies from this website on to their computers hard drive, they should take necessary steps within their web browsers security settings to block all cookies from this website. The Website uses tracking software to monitor its visitors to better understand how they use it.\n1.2. Email Marketing\nIf you subscribe or contact us through the Site or by email, we may occasionally communicate project news, updates, promotions and related information relating to MOC and the Digital Assets Service. If you want to opt out of receiving promotional and marketing emails in relation to which you might receive in accordance with this section, you can best opt out by clicking “unsubscribe” at the bottom of an email we sent you.\n1.3. Social media\nWe may use plugins from social networks such as GitHub, YouTube, Reddit, Twitter, Telegram, Medium on the Site. When you activate them (by clicking on them), the operators of the respective social networks may record that you are on the Site and may use this information. This processing of your personal data lays in the responsibility of these individual social media platforms and occurs according to their privacy policies. Please check with these individual social media platforms regarding their privacy policies. We are not responsible for data collected by these individual social media platforms.\n1.4. Your inquiries\nYou may contact us by e-mail to the following e-mail address: info@moneyonchain.com. We use the data that you provide in an email to us, which you may give voluntarily, only in order to answer your contact question or to reply to your email in the best possible manner.\n\n2. YOUR RIGHTS.\nYou have the following rights regarding your personal information:\na) to obtain free information about your personal data processed at any time and a copy of this information.\nb) to obtain from us, without undue delay, the rectification of inaccurate personal data concerning you.\nc) to obtain from us the erasure of personal data concerning you as soon as possible.\nd) in certain circumstances, to obtain from MOC restriction of processing your personal data.\ne) to object, on grounds relating to your particular situation, at any time, to the processing of personal data concerning you.\nf) to withdraw your consent to processing of your personal data at any time.\nFor purposes of exercising such right please contact us to the email address set forth above.\n\n3. INTERNATIONAL TRANSFERS.\nWe are entitled to transfer your personal data to third parties abroad for the purposes of the data processing. The data that we collect from you may be transferred to, and stored at, a destination outside the British Virgin Islands, including without limitation the United States of America or any other country that may not offer an adequate level of data protection. The transfer shall be made on the basis of a previous agreement with the third-party processor. Users hereby consent to the international transfer of data as provided above.\n\n4. DATA SECURITY.\nWe use appropriate technical and organizational security measures to protect your personal data. Our security measures are continuously being improved in line with technical developments.\nPlease note that any data transmission on the Internet (e.g. communication by e-mail) is generally not secure and we accept no liability for data transmitted to us via the Internet. Unfortunately, absolute protection is not technically possible. This information does not apply to the websites of third parties and the corresponding links given on the Site. We assume no responsibility and liability for these.\n\n5. DURATION OF DATA PROCESSING.\nWe will process your personal data for the period necessary to achieve the purpose of the processing, or as required by applicable laws. After the period the personal data will be deleted.\n\n6. AMENDMENTS TO THIS POLICY.\nWe may amend this Privacy Policy at any time by posting the amended version on the Site including the effective date of the amended version. The current version of the Privacy Policy, as published on the Site, is applicable.\n\n7. CONTACT.\nPlease contact us with questions, comments, or concerns regarding our Privacy Policy as well as with any requests at info@moneyonchain.com.\n\n\nTerms and Conditions of use\nUpdated version: October 9, 2019\n\nThe Money on Chain System and Software is an autonomous system of smart contracts on the RSK network and/or any other networks, that permits its users, among other things, enter into certain transaction involving digital assets. Such services are accessed by the users (the “Users”) through Money on Chain’s website at www.moneyonchain.com (which, for the avoidance of doubt, includes all other subdomains of the aforementioned site) and other related tools (the “Website” or the “Site”). The Site, and any other features, tools, materials, or other services accessed from time to time are referred to here as the “Open Source Software”. Note however, that while the Open Source Software is intended to maintain low volatility for the digital assets offered through the Site, the Open Source Software is an experimental prototype and its use involves a high degree of risk. There are numerous ways the Open Source Software could fail in an unexpected way, resulting in the total and absolute loss of all of your funds.\n\n1. INTRODUCTION.\n\nThese terms and conditions of use (“Terms”) set out the terms and conditions under which the Users can access to and use of Website and the Open Source Software.\n\nThrough the Website, Money On Chain (“MOC”) facilitates the Users the access to the Open Source Software. Each time you access the Website, or use the Open Source Software provided through the Website, you are deemed to have read, understood and accepted all of these Terms and, therefore, you agree to be bound by this Terms.\n\nThese Terms are to be read in conjunction with the Privacy Policy (including where applicable, any privacy policy statement in a country or product annex).\n\n2. USER´S ACCESS TO THE OPEN SOURCE SOFTWARE.\n\n2.1. In order to access the Website, and to further access and use the Open Source Software through the Website, each User must connect his/her wallet (the “Wallet”). User’s creation and use of the Wallet shall be subject to the terms and conditions and privacy policy established by the owner of the Wallet service. MOC shall not, in any circumstance, be liable for any damages suffered by the Users as a result of the access or use of the Wallet, which damages must be claimed by the Users to the owner of Wallet service.\n\nNotwithstanding the foregoing, Users shall complete any other registration requirements that may be established by MOC from time to time.\n\n2.2. Each time you access and use the Open Source Software, you represent and warrant:\n\na) that you have read, understood and accepted the Terms;\n\nb) that you are of the legal age of majority in your jurisdiction as is required to access and use the Site and the Open Source Software and enter into arrangements as provided by such Open Source Software, and that you are fully able and competent to enter into the terms, conditions, obligations, affirmations, representations and warranties set forth in these Terms and to abide by and comply with these Terms.\n\nc) If you are an authorised representative of a company, (i) that you have authority from that company to access the Website and form a binding agreement with us on behalf of that company; (ii) that you have the full power and authority to agree to these Terms, and to enter into any transactions or use any service, including the Open Source Software, available through the Website;\n\nd) you have not previously been suspended or removed from accessing the Website or the Open Source Software, whether on your behalf or otherwise;\n\ne) that you are the legal owner of the funds or assets you use within the Open Source Software and that the same funds or assets derive from a legitimate source;\n\nf) that using the Open Source Software does not constitute a breach of your home jurisdictions’ laws;\n\ng) that you are aware of the risks in using the Open Source Software available at the Site. These risks include the high volatility risk of SmartBitcoin and/or other cryptocurrencies itself, the fact that you may lose all of the funds in your account if the market moves against you;\n\nh) that you will not be involved or initiate any form of market manipulation, including spoofing orders or otherwise;\n\ni) that all information submitted by you through the Site or the Open Source Software is true, accurate and not incomplete or misleading and that the use of such information within the Open Source Software does not violate any third-party right nor any law or regulation.\n\nj) that any SmartBitcoin and/or other cryptocurrencies withdrawal address you provide is your own and that you have full control over this address;\n\nk) you are acquiring the right to access and use the Website and agreeing to these Terms for the purposes of a business and that, to the maximum extent permitted by law, any statutory consumer guarantees or legislation intended to protect non-business consumers in any jurisdiction does not apply to the supply of the Website, the Open Source Software or these Terms.\n\n2.3. The Website and the Open Source Software are global and by accessing and using them, you further represent that you are legally permitted to use the Open Source Software in your jurisdiction including owning cryptographic tokens of value, and interacting with the Site or the Open Source Software in any way. Persons or entities which are considered as citizen, resident or taxpayer in any jurisdiction that deems the cryptographic tokens offered through the Open Source Software as securities and/or requires registration with any securities agencies and/or in which the access or use of the Open Source Software is forbidden or restricted by law (especially but not limited to the United States of America, Afghanistan, Algeria, Bangladesh, Bolivia, China, Cuba, Ecuador, Egypt, the Islamic Republic of Iran, Indonesia, Macedonia, Morocco, Nepal, Pakistan, Qatar, Samoa, Saudi Arabia, Vanuatu, Vietnam, Zambia or any area subject to their control, if applicable), are prohibited from accessing and using the Open Source Software. You represent you are responsible for ensuring compliance with the laws of your jurisdiction and acknowledge that MOC or any of the Affiliates (as defined below) is not liable for your compliance with such laws. Finally, you represent and warrant that you will not use the Open Source Software for any illegal activity.\n\n2.4. When accessing and using the Open Source Software, you must:\n\na) not attempt to undermine the security or integrity of MOC’s computing systems or networks or, where the Open Source Software are hosted by a third party, that third party’s computing systems and networks;\n\nb) not use, or misuse, the Open Source Software in any way which may impair the functionality of such Open Source Software or Website, or other systems used to deliver the Open Source Software or impair the ability of any other user to use the Open Source Software or Website;\n\nc) not attempt to gain unauthorized access to the computer system on which the Website is hosted or to any materials other than those to which you have been given express permission to access;\n\nd) not transmit or input into the Website any files that may damage any other person’s computing devices or software; content that may be offensive; or material or data in violation of any law (including data or other material protected by copyright or trade secrets which you do not have the right to use);\n\ne) not attempt to modify, copy, adapt, reproduce, disassemble, decompile or reverse engineer any computer programs used to deliver the Services or to operate the Website except in accordance with any license under which the Website or the Open Source Software may be subject (including any open source license or otherwise).\n\n2.5. Use of the Open Source Software may be subject to limitations, including but not limited to transaction volumes and the number of redemptions or withdrawals (or the period in which such redemptions or withdrawals may be requested) permitted to be made against Open Source Software’ application programming interface. Any such limitations will be advised.\n\n2.6. We reserve the right at our own discretion to suspend or close the Open Source Software (either totally or in a part) and/or to prevent you to access and use the Website and/or such Open Source Software. You acknowledge that we may or may not be in a position to provide information to you about the reasons for such closure or suspension. In case of closure of the Website and/or the Open Source Software, to the extent possible, we will give you prior notice of such circumstance. In such circumstances, if your transactions are still open we will force close them and we will do our best effort to return to you any remaining SmartBitcoin’s and/or any other token balance, if any.\n\n2.7. It is your responsibility entirely to provide us with correct details of your Wallet and such any other wallets involved in any transaction within the Open Source Software. We accept no liability resulting in you not receiving the SmartBitcoin and/or any other token withdrawn due to you providing incorrect or out-of-date details. It is also your responsibility to ensure transactions sent to MOC are well-formatted and denominated in the correct currency. MOC excludes all liability for any incorrect transactions, including but not limited to SmartBitcoin and/or any other tokens sent to wrong addresses.\n\n2.8. It is our responsibility to maintain an orderly platform and as such we may at our own discretion halt transactions on the Website due to platform disruption or other relevant external events. We exclude all liability for any claimed losses or profits lost as a result of us halting transactions.\n\n2.9. Any SmartBitcoin, or other digital assets that you transfer using the Wallet for the purpose of any transaction within the Open Source Software will be transferred into the smart contract behind the platform on a title transfer, free from any encumbrance and will not be held by us or any third party in a custodial or sub-custodial basis. By entering into any transaction using the Open Source Software you accept that all trade executions are final and irreversible and that MOC reserves the right to liquidate any trades at any time regardless of the profit or loss position.\n\n2.10. Use of the Open Source Software or otherwise conducting transactions through the Website may be subject to fees, including handling fees, network transaction fees, costs and charges, and MOC’s fees, costs and charges. You agree to pay any such fees, costs and charges, and authorize us to apply any digital assets which are available in your Wallet in satisfaction thereof from time to time as those fees, costs and charges arise. Without prejudice to any other rights, powers or authorities we may have under these Terms, you hereby agree that any SmartBitcoin, or other digital assets transferred by using the Wallet will be applied in respect of any payment of any fees, costs, charges or other amounts for which you may be responsible in respect of any transaction entered into within the Open Source Software, in accordance with the terms and condition ruling each transaction which shall be disclosed before you confirm it.\n\n3. INTELLECTUAL PROPERTY.\n\n3.1. The Website and the Open Source Software contain information that is protected by applicable intellectual property and other laws or licenses (including open source license, as applicable). Except as expressly authorized by the terms of such license and/or by MOC, you agree not to copy, modify, rent, lease, loan, sell, distribute, perform, display or create derivative works based on the Open Source Software, in whole or in part.\n\n3.2. By accessing the Website and downloading material (including contained in any temporary cache), you acknowledge that you do not acquire any intellectual property rights or ownership rights and may not resell any of the products or Open Source Software appearing on the Website, nor to hotlink, frame or otherwise present any version of the Website to any other person or entity, without MOC’s prior consent.\n\n3.3. MOC reserves all proprietary rights regarding MOC’s name and trademark and you may not use such name or trademark without MOC’s prior consent. You may display on a computer screen or print extracts from the Website only for personal purpose and provided that you retain any copyright and other proprietary notices or any MOC trademarks or logos, as shown on the initial printout or download without alteration, addition or deletion. Except as expressly stated herein, you may not without MOC’s prior written permission alter, modify, reproduce, distribute or use in any other commercial context any materials from the Website.\n\n3.4. We reserve the right to remove or disable access to any content or other materials from the Website that violates or may infringe any person’s Intellectual Property Rights.\n\n4. THIRD-PARTY LINKS AND WEBSITES.\n\n4.1. The Website may contain links to third party websites (including all links related with the use of the Wallet within the Website) that are not affiliated or associated with MOC (although MOC branding, advertisements or links may appear on these websites) and MOC may send e-mail messages to you containing advertisements or promotions including links to third parties. MOC makes no representation as to the quality, suitability, functionality or legality of the material on third party websites that are linked to, or to any goods and services available from such websites. The material is only provided for your interest and convenience. MOC does not monitor or investigate such third party websites and you acknowledge and agree that MOC or any related entity shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any content, goods or services available on or through any such third-party site or resource.\n\n4.2. Under no circumstances are you to create a hyperlink to any of the pages on the Website, unless MOC provides you with its prior consent to do so. If you do create a link to any of the pages on the Website, you acknowledge that you are responsible for all direct or indirect consequences of the link, and you indemnify MOC for all loss, liability, costs or expense arising from or in connection with the link.\n\n5. SECURITY.\n\n5.1. You may not violate or attempt to violate the security of this Website, the Open Source Software or any of the products or services described or contained herein. We may investigate occurrences which may involve such violations and may involve, and co-operate with, governmental, regulatory or law enforcement authorities in investigation and prosecuting persons who have participated in such violations.\n\n5.2. You agree that it is your responsibility to install anti-virus software and related protections against viruses or other computer programming routines or engines that are intended to damage, destroy, disrupt or otherwise impair a computers functionality or operation which may be transferred to your computer via this Website.\n\n5.3. MOC may, at its sole discretion, offer additional security features as part of the Website, such as two-factor authentication (“2FA”). It is your responsibility to ensure and maintain continuous security and control over any device or account that gives access to the Website and the Open Source Software. Failure of any such security device or account may delay or restrict your access to the Website or the Open Source Software.\n\n6. INFORMATION AVAILABLE IN THE WEBSITE.\n\n6.1. The information, opinions and data on or provided through the Website or the Open Source Software may, in whole or in part, have been obtained from third party sources. Accordingly, we do not guarantee the accuracy, validity, timeliness or completeness of such information, opinions or data for any purpose.\n\n6.2. You must seek the advice of professional advisors regarding the evaluation of any specific information, opinion, advice or other content, and acknowledge that you have had the opportunity to take such advice before using the Website or the Open Source Software.\n\n7. COMPLIANCE WITH LAWS AND REGULATIONS.\n\n7.1. You agree and acknowledge that it is your responsibility to comply with all applicable laws and regulations relating to any Open Source Software or transactions you use through the Website, including without limitation the reporting of any transactions, and the calculation and payment of all applicable taxes within any jurisdiction relevant to your situation. If you have any doubts about whether or which laws and regulations apply to your circumstances, you should seek independent legal, accounting or taxation advice.\n\n7.2. MOC is not responsible for collecting, reporting, withholding or remitting any taxes arising from any transaction you conduct with MOC, but will comply with any reporting or withholding obligations that apply to it. For that purpose, each time you access the Website or conduct a transaction with us, any information or representation you have made as to your tax residency is deemed to have been repeated at that time, and we will rely upon it for such reporting purposes, if required.\n\n8. PROHIBITED USE.\n\nYou may not use the Open Source Software to engage in the following categories of activity (“Prohibited Uses“). The specific types of use listed below are representative, but not exhaustive. By opening using the Open Source Software provided here, you confirm that you will not use this Open Source Software to do any of the following\n\na) Unlawful Activity: Activity which would violate, or assist in violation of, any law, statute, ordinance, or regulation, sanctions programs administered in any relevant country, including but not limited to the U.S. Department of Treasury’s Office of Foreign Assets Control (“OFAC“), or which would involve proceeds of any unlawful activity; publish, distribute or disseminate any unlawful material or information\n\nb) Abuse Other Users: Interfere with another individual’s or entity’s access to or use of any Open Source Software; defame, abuse, extort, harass, stalk, threaten or otherwise violate or infringe the legal rights (such as, but not limited to, rights of privacy, publicity and intellectual property) of others; incite, threaten, facilitate, promote, or encourage hate, racial intolerance, or violent acts against others; harvest or otherwise collect information from the Site about others, including without limitation email addresses, without proper consent\n\nc) Fraud: Activity which operates to defraud MOC, the Open Source Software, other Users, or any other person; provide any false, inaccurate, or misleading information.\n\nd) Intellectual Property Infringement: Engage in transactions involving items that infringe or violate any copyright, trademark, right of publicity or privacy or any other proprietary right under the law; use of MOC’s intellectual property, name, or logo, including use of MOC trade or service marks, without express consent from MOC or in a manner that otherwise harms MOC; any action that implies an untrue endorsement by or affiliation with MOC.\n\n9. NOTICE TO USERS.\n\nThe following notices are duly given to Users and each person or entity accessing or using the Open Source Software shall be deemed to have been notified of the following:\n\na) Risk warning: trading digital assets carries a high level of risk, and is not suitable for everyone. Before deciding to buy or sell digital assets you should carefully consider your investment objectives, level of experience, and risk appetite. The possibility exists that you could sustain a loss of some or all of your investment and therefore you should not invest money that you cannot afford to lose. You should be aware of all the risks associated with digital assets, and seek advice from an independent financial adviser should you have any doubts. Furthermore, there may be risks that are not disclosed in this disclaimer and any other terms or conditions that apply to our Website or the Open Source Software. You must carefully consider your financial situation and tolerance for risk before engaging in any activity involving digital asset trading. Independent, professional financial and legal advice must be sought where necessary.\n\nb) Sophistication and Risk of Cryptographic Systems: By utilizing the Open Source Software or interacting with the Website in any way, you represent that you understand the inherent risks associated with cryptographic systems; and warrant that you have an understanding of the usage and intricacies of native cryptographic tokens, like Ether (ETH) and Bitcoin (BTC), smart contract based tokens, and blockchain-based software systems. None of MOC or its affiliates own or control any of the underlying software through which blockchain networks are formed. In general, the underlying software for blockchain networks tends to be open source such that anyone can use, copy, modify, and distribute it. By using the Open Source Software, you acknowledge and agree (i) that MOC or related entities are not responsible for operation of the underlying software and networks that there exists no guarantee of functionality, security, or availability of such software and networks; and (ii) that the underlying protocols are subject to sudden changes in operating rules (known as “Forks“), and that such Forks may materially affect the Open Source Software. It might be discretionarily decided not to support (or cease supporting) the Forked network entirely. You acknowledge and agree that MOC and its affiliates assume absolutely no responsibility whatsoever in respect of any underlying software protocols, whether Forked or not.\n\nc) Risk of Regulatory Actions in One or More Jurisdictions: The Open Source Software could be impacted by one or more regulatory inquiries or regulatory action, which could impede or limit the ability of MOC to continue to develop, or which could impede or limit your ability to access or use the Open Source Software or the blockchain network, including access to your funds. You agree that MOC or the Affiliates are not responsible for determining whether or which laws may apply to your use of the Open Source Software, including tax laws. You are solely responsible for reporting and paying any taxes arising from your use of the Open Source Software and you should seek professional advice regarding the applicable law or regulations.\n\nd) Risk of Weaknesses or Exploits in the Field of Cryptography: You acknowledge and understand that cryptography is a progressing field. Advances in code cracking or technical advances such as the development of quantum computers may present risks to cryptocurrencies and the Open Source Software, which could result in the theft or loss of your cryptographic tokens or property. To the extent possible, it is intended to update the protocol underlying the Open Source Software to account for any advances in cryptography and to incorporate additional security measures, but does not guarantee or otherwise represent full security of the system. By using the Open Source Software or accessing the Website, you acknowledge these inherent risks.\n\ne) Volatility of Cryptocurrency: You understand that Bitcon, SmartBitcoin and other blockchain technologies and associated currencies or tokens are highly volatile due to many factors including but not limited to adoption, speculation, technology and security risks. You also acknowledge that the cost of transacting on such technologies is variable and may increase at any time causing impact to any activities taking place on the blockchain network. You acknowledge these risks and represent that MOC or any related entity or person cannot be held liable for such fluctuations or increased costs.\n\nf) Application Security: You acknowledge that the Open Source Software is subject to flaws and acknowledge that you are solely responsible for evaluating any code provided by the Open Source Software. This warning and others later provided by MOC in no way evidence or represent an on-going duty to alert you to all of the potential risks of utilizing the Open Source Software.\n\ng) Website Accuracy: Although it is intended to provide accurate and timely information on the Site and other tools making up the Open Source Software, the Site or relevant tools may not always be entirely accurate, complete or current and may also include technical inaccuracies or typographical errors. In an effort to continue to provide you with as complete and accurate information as possible, information may be changed or updated from time to time without notice, including without limitation information regarding our policies. Accordingly, you should verify all information before relying on it, and all decisions based on information contained on the Site or relevant tools are your sole responsibility and MOC shall have no liability for such decisions. Links to third-party materials (including without limitation websites) may be provided as a convenience but are not controlled by any entity. You acknowledge and agree that we are not responsible for any aspect of the information, content, or services contained in any third-party materials or on any third party sites accessible or linked to the Site or available via other relevant tools.\n\nh) Technical Knowledge: Any use or interaction with the Open Source Software requires a comprehensive understanding of applied cryptography and computer science in order to appreciate inherent risks, including those listed above. You represent and warrant that you possess relevant knowledge and skills.\n\ni) No advice: any opinions, news, research, analyses, prices or other information contained on or through this Website is provided as general market commentary, and does not constitute investment or financial advice, nor should it be relied on for any investment decision. We will not accept liability for any loss or damage, including but without limitation to, any loss of profit, which may arise directly or indirectly from use of or reliance on such information. The contents of any communications from us may have been prepared by personnel of MOC and/or by other divisions or entities. The material does not purport to be, and is not intended to be a “research report”, “investment research” or “independent research” as may be defined in applicable laws or regulations worldwide. It is intended for your general information about market conditions and recent events only, and neither we nor any individual sender is soliciting any particular action or transaction based upon it. Such communications do not represent investment advice, and does not take into account any specific circumstances of any recipient. Any information provided by us or the individual sender should not form the primary basis for any decision that you may take in relation to the matters referred to therein. We have not taken any steps to verify the adequacy, accuracy, completeness or suitability of any information or written material provided to you. You are solely responsible for any investment or purchasing decisions, and should carefully review any information or written material that you receive. You should perform any due diligence that is necessary and appropriate in your own personal circumstances, including consultation with independent legal, tax, accountancy and other professional advisors.\n\nj) No representations: no representation or warranty is given as to the achievement or reasonableness of any plans, future projections or prospects and nothing on this Website should be relied upon as a promise or representation as to the future.\n\nk) Risks associated with internet-trading and distributed ledger networks: there are risks associated with utilizing an internet-based trading system, such as the Open Source Software, including, but not limited to, the failure of hardware, software, internet connections and distributed ledger networks. Communications over the Internet may be subject to interruption, transmission blackout, delayed transmission due to Internet traffic, or incorrect data transmission due to the public nature of the Internet. Please exercise caution, and confirm any relevant details/communications by other means if you have any doubt about the accuracy of this communication. As we do not control the reliability or availability of the internet or of any distributed ledger network, we cannot be responsible for communication failures, distortions or delays when trading digital assets via the Internet.\n\nl) No third-party affiliation or endorsements: References in the Website or through the Open Source Software to specific companies and platforms are for illustrative purposes only. Except as expressly described on the Website or otherwise notified in writing, the use of any company and/or platform names and trademarks does not imply an affiliation with, or endorsement by, any of those parties.\n\n10. DISCLAIMER.\n\nYOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE OPEN SOURCE SOFTWARE IS AT YOUR SOLE RISK. MOC AND ALL PERSONS, ENTITIES, AGENTS, AND VOLUNTEERS INVOLVED WITH THE CREATION OF THE WEBSITE AND THE OPEN SOURCE SOFTWARE (“AFFILIATES”) MAKE NO AND EXPRESSLY DISCLAIM ALL REPRESENTATIONS AND WARRANTIES, EXPRESS, IMPLIED OR STATUTORY; AND WITH RESPECT TO THE OPEN SOURCE SOFTWARE, MOC, THE AFFILIATES AND ALL RELATED ENTITIES AND AGENTS SPECIFICALLY DO NOT REPRESENT AND WARRANT AND EXPRESSLY DISCLAIM ANY REPRESENTATION OR WARRANTY, EXPRESS, IMPLIED OR STATUTORY, INCLUDING WITHOUT LIMITATION, ANY REPRESENTATIONS OR WARRANTIES OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, USAGE, SECURITY, SUITABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE, OR AS TO THE WORKMANSHIP OR TECHNICAL CODING THEREOF, OR THE ABSENCE OF ANY DEFECTS THEREIN, WHETHER LATENT OR PATENT. MOC, THE AFFILIATES OR ANY RELATED ENTITIES OR AGENTS DO NOT REPRESENT OR WARRANT THAT THE OPEN SOURCE SOFTWARE AND ANY RELATED INFORMATION ARE ACCURATE, COMPLETE, RELIABLE, CURRENT OR ERROR-FREE.\n\nTO THE FULLEST EXTENT PERMITTED BY LAW AND NOTWITHSTANDING ANY OTHER PROVISION OF THIS AGREEMENT OR ANY OTHER AGREEMENT CONTEMPLATED HEREIN OR APPLICABLE PROVISIONS OF LAW OR EQUITY OR OTHERWISE, THE PARTIES HERETO HEREBY AGREE TO ELIMINATE ANY AND ALL FIDUCIARY DUTIES MOC, THE AFFILIATES OR ANY RELATED ENTITIES AND AGENTS MAY HAVE TO THE USER, ITS AFFILIATES, OR THE END USERS OF THE OPEN SOURCE SOFTWARE, THE SITE OR ITS CONTENT, PROVIDED THAT SUCH EXCLUSION OR LIMITATION OF LIABILITY SHALL NOT EXTEND TO MISAPPROPRIATION OF ASSETS OR FUNDS OF THE USERS, ITS AFFILIATES, OR THE END USERS OF THE SERVICES, SITE OR CONTENT PROVIDED BY MOC OR ANY RELATED ENTITIES AND AGENTS OR OTHER ACTS OR OMISSIONS THAT CONSTITUTE A BAD FAITH VIOLATION OF THE IMPLIED CONTRACTUAL COVENANT OF GOOD FAITH AND FAIR DEALING.\n\n11. LIMITATION OF LIABILITY.\n\nYOU ACKNOWLEDGE AND AGREE THAT THE SITE AND THE OPEN SOURCE SOFTWARE ARE ON AN EXPERIMENTAL STAGE. YOU ACKNOWLEDGE AND AGREE THAT YOU ASSUME FULL RESPONSIBILITY FOR YOUR USE OF THE SITE AND SERVICE. YOU ACKNOWLEDGE AND AGREE THAT ANY INFORMATION YOU SEND OR RECEIVE DURING YOUR USE OF THE SITE AND SERVICE MAY NOT BE SECURE AND MAY BE INTERCEPTED OR LATER ACQUIRED BY UNAUTHORIZED PARTIES. YOU ACKNOWLEDGE AND AGREE THAT YOUR USE OF THE SITE AND SERVICE IS AT YOUR OWN RISK. RECOGNIZING SUCH, YOU UNDERSTAND AND AGREE THAT, TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, NEITHER MOC NOR ANY RELATED ENTITIES, SUPPLIERS OR LICENSORS WILL BE LIABLE TO YOU FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY OR OTHER DAMAGES OF ANY KIND, INCLUDING WITHOUT LIMITATION DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA OR OTHER TANGIBLE OR INTANGIBLE LOSSES OR ANY OTHER DAMAGES BASED ON CONTRACT, TORT, STRICT LIABILITY OR ANY OTHER THEORY (EVEN IF ANY OF MOC OR RELATED ENTITIES HAD BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES), RESULTING FROM THE SITE OR THE OPEN SOURCE SOFTWARE; THE USE OR THE INABILITY TO USE THE SITE OR THE OPEN SOURCE SOFTWARE; UNAUTHORIZED ACCESS TO OR ALTERATION OF YOUR TRANSMISSIONS OR DATA; STATEMENTS OR CONDUCT OF ANY THIRD PARTY ON THE SITE OR THE OPEN SOURCE SOFTWARE; ANY ACTIONS WE TAKE OR FAIL TO TAKE AS A RESULT OF COMMUNICATIONS YOU SEND TO US; HUMAN ERRORS; TECHNICAL MALFUNCTIONS; FAILURES, INCLUDING PUBLIC UTILITY OR TELEPHONE OUTAGES; OMISSIONS, INTERRUPTIONS, LATENCY, DELETIONS OR DEFECTS OF ANY DEVICE OR NETWORK, PROVIDERS, OR SOFTWARE (INCLUDING, BUT NOT LIMITED TO, THOSE THAT DO NOT PERMIT PARTICIPATION IN THE OPEN SOURCE SOFTWARE); ANY INJURY OR DAMAGE TO COMPUTER EQUIPMENT; INABILITY TO FULLY ACCESS THE SITE OR THE OPEN SOURCE SOFTWARE OR ANY OTHER WEBSITE; THEFT, TAMPERING, DESTRUCTION, OR UNAUTHORIZED ACCESS TO, IMAGES OR OTHER CONTENT OF ANY KIND; DATA THAT IS PROCESSED LATE OR INCORRECTLY OR IS INCOMPLETE OR LOST; TYPOGRAPHICAL, PRINTING OR OTHER ERRORS, OR ANY COMBINATION THEREOF; OR ANY OTHER MATTER RELATING TO THE SITE OR THE SOFTWARE.\n\n12. INDEMNITY.\n\nYOU AGREE TO RELEASE AND TO INDEMNIFY, DEFEND AND HOLD HARMLESS MOC, THE AFFILIATES AND ANY RELATED ENTITIES, AS WELL AS THE OFFICERS, DIRECTORS, EMPLOYEES, SHAREHOLDERS AND REPRESENTATIVES OF ANY OF THE FOREGOING ENTITIES, FROM AND AGAINST ANY AND ALL LOSSES, LIABILITIES, EXPENSES, DAMAGES, COSTS (INCLUDING ATTORNEYS’ FEES, FEES OR PENALTIES IMPOSED BY ANY REGULATORY AUTHORITY AND COURT COSTS) CLAIMS OR ACTIONS OF ANY KIND WHATSOEVER ARISING OR RESULTING FROM YOUR USE OF THE OPEN SOURCE SOFTWARE, YOUR VIOLATION OF THESE TERMS, YOUR VIOLATION OF ANY LAW, RULE, OR REGULATION, OR THE RIGHTS OF ANY THIRD PARTY, AND ANY OF YOUR ACTS OR OMISSIONS THAT IMPLICATE PUBLICITY RIGHTS, DEFAMATION OR INVASION OF PRIVACY. EACH OF MOC AND THE AFFILIATES RESERVE THE RIGHT, AT ITS OWN EXPENSE, TO ASSUME EXCLUSIVE DEFENSE AND CONTROL OF ANY MATTER OTHERWISE SUBJECT TO INDEMNIFICATION BY YOU AND, IN SUCH CASE, YOU AGREE TO COOPERATE WITH MOC AND/OR THE AFFILIATES IN THE DEFENSE OF SUCH MATTER.\n\n13. TERMINATION AND SUSPENSION.\n\nMOC may terminate or suspend all or part of the Open Source Software immediately, without prior notice or liability. Upon termination, your right to use the Open Source Software will immediately cease.\n\nThe following provisions of the Terms survive any termination of these Terms: INDEMNITY; DISCLAIMER; LIMITATION OF LIABILITY; PROPRIETARY RIGHTS; LINKS; TERMINATION; ARBITRATION.\n\n14. MODIFICATION OF TERMS OF USE.\n\nThese Terms may be discretionarily modified or replaced at any time, unless stated otherwise herein. The most current version of these Terms will be posted on the Site with the “Last Revised” date at the top of the Terms changed. Any changes or modifications will be effective immediately upon posting the revisions to the Site. You shall be responsible for reviewing and becoming familiar with any such modifications. You waive any right you may have to receive specific notice of such changes or modifications. Use of the Open Source Software by you after any modification to the Terms constitutes your acceptance of the Terms as modified. If you do not agree to the Terms in effect when you access or use the Service, you must stop using the Open Source Software.\n\n15. SEVERABILITY.\n\nIf any of these Terms are determined to be illegal, invalid or otherwise unenforceable, then to the extent and within the jurisdiction in which that term is illegal, invalid or unenforceable, it will be severed and deleted from these Terms and the remaining Terms will survive, remain in full force and effect and continue to be binding and enforceable.\n\n16. NO WAIVER.\n\nWhere applicable, MOC’s failure, delay or neglect in exercising any right, power, privilege, election or discretion under these Terms shall not operate as a waiver thereof.\n\n17. STATUTE OF LIMITATIONS.\n\nYou agree that regardless of any statute or law to the contrary, any claim or cause of action arising out of or related to the use of the Open Source Software or the Terms must be filed within one (1) year after such claim or cause of action arose or be forever barred.\n\n18. GOVERNING LAW.\n\nThese Terms are governed by the laws in force in British Virgin Island, without regard to the provisions of conflict of law.\n\n19. SUBMISSION TO ARBITRATION.\n\nAny dispute, controversy, difference or claim arising out of or relating to these Terms, including the existence, validity, interpretation, performance, breach or termination thereof or any dispute regarding non-contractual obligations arising out of or relating to these Terms will be referred to and finally resolved by arbitration under the Rules of Arbitration of the International Chamber of Commerce by three arbitrators appointed in accordance with said Rules. The arbitration proceedings shall be conducted in the English language and the seat of the arbitration shall be the British Virgin Islands. The arbitrators appointed in connection herewith shall be knowledgeable in the laws of the British Virgin Islands and crypto-economy matters. Such arbitrators must also be fluent in the English language. All submissions and awards in relation to arbitration under these Terms shall be made in English, and all arbitration proceedings and all pleadings shall be in English. Any award shall be final and not subject to appeal and the parties waive all rights to challenge any award of the arbitrators under this Section. Any award may be entered or presented by any of the parties for enforcement in any court of competent jurisdiction sitting in the British Virgin Islands, and the parties hereby consent to the jurisdiction of such court solely for purposes of enforcement of any award.\n\n20. LANGUAGE.\n\nIn the case of a discrepancy between the English version and any other language version in respect of these Terms, the Website or the Open Source Software, the English version prevails.\n\n21. ENTIRE AGREEMENT.\n\nExcept otherwise established by MOC, these Terms constitute the agreement between the parties and supersedes any prior agreement or document between MOC and Users, either in oral or writing. All other information provided on the Website or oral/written statements made are provided for guidance only and does not constitute a legal agreement between the parties.\n\nNotwithstanding the foregoing, these Terms are to be read in conjunction with (and subject to) any country or product annexes, where applicable, that may be published by MOC in the Website from time to time.\n\n22. QUESTIONS?\nIf you have any questions in relation to the above, please contact us at info@moneyonchain.com before continuing to access the Website or the Open Source Software.",
+      "continue": "Continue",
+      "nationality": {
+        "title": "Nationality restrictions",
+        "content": "The Website and the Open Source Software are global and by accessing and using them, you further represent that you are legally permitted to use the Open Source Software in your jurisdiction including owning cryptographic tokens of value, and interacting with the Site or the Open Source Software in any way. Persons or entities which are considered as citizen, resident or taxpayer in any jurisdiction that deems the cryptographic tokens offered through the Open Source Software as securities and/or requires registration with any securities agencies and/or in which the access or use of the Open Source Software is forbidden or restricted by law (especially but not limited to the United States of America, Afghanistan, Algeria, Bangladesh, Bolivia, China, Cuba, Ecuador, Egypt, the Islamic Republic of Iran, Indonesia, Macedonia, Morocco, Nepal, Pakistan, Qatar, Samoa, Saudi Arabia, Vanuatu, Vietnam, Zambia or any area subject to their control, if applicable), are prohibited from accessing and using the Open Source Software. You represent you are responsible for ensuring compliance with the laws of your jurisdiction and acknowledge that MOC or any of the Affiliates (as defined below) is not liable for your compliance with such laws. Finally, you represent and warrant that you will not use the Open Source Software for any illegal activity.",
+        "acceptCheckbox": "I accept the Nationality restrictions"
+      },
+      "acceptCheckbox": "I accept the Terms and Conditions"
+    },
+    "faqs": {
+      "subtitle": "Here are the most frequently asked questions",
+      "versions": {
+        "app-version": "App Version:",
+        "sc-version": "Smart Contract Version:"
+      },
+      "text": {
+        "partOne": "Hi you! If you have questions or at any point you are confused and through this page you didn't find the answer you're looking for just email us at ",
+        "partTwo": ". We want to help you and answer all your questions."
+      },
+      "questions": {
+        "1": {
+          "question": "What is DoC?",
+          "answer": "The dollar on chain, our first stable coin. It is pegged to the US dollar."
+        },
+        "2": {
+          "question": "How do peg to the US dollar is guaranteed?",
+          "answer": "The peg is guaranteed by the smart contract, the rules and incentives are aligned so DoCs can always be redeemed for the same amount of dollars in rBTC. For more detail check our technical white paper."
+        },
+        "3": {
+          "question": "How much it cost to mint or redeem a DoC?",
+          "answer": "You have to pay a fee of 0.1% to mint or redeem DoC, in the next version you can have a 50% discount on fees paying the fee with the MOC tokens."
+        },
+        "4": {
+          "question": "How much it cost to transfer DoC?",
+          "answer": "Its free, once DoCs are issued Money On Chain protocol do not charge for transfers."
+        },
+        "5": {
+          "question": "Can I store my DoC/BPro/MOC in my TREZOR or Ledger wallet?",
+          "answer": "Yes, you just have to connect your hardware wallet to Metamask o Nifty."
+        },
+        "6": {
+          "question": "What is a BPro?",
+          "answer": "A BPro is like a Smart Bitcoin on steroids, in fact its value came from the amount of bitcoins it represents on the Money On Chain smart contracts, the Bitcoins represented by a BPro are literally trapped inside the smart contract. The BPro is designed thinking about long term bitcoin holders, it pays a passive income in bitcoins and it has a little bit of free leverage, the free leverage means that when the price of bitcoin goes up it goes up a little bit more increasing the amount of bitcoin you hold, and when the price of bitcoin goes down it goes down a little bit more, however this downside can be diminished by the passive income. On top of this, MOC tokens will be given as a reward to BPro holders each month for providing collateral to the protocol."
+        },
+        "7": {
+          "question": "Are BPro completely risk free?",
+          "answer": "No. The incentives are aligned so when the price of bitcoin go significantly down more collateral is added to the system to prevent liquidation and the BPro holders to lose money, more over the system is designed to make the BTCx not the BPro to take most of the risk, however, in a black swan event the system could enter in liquidation and the BPro holders could lose their bitcoin."
+        },
+        "8": {
+          "question": "Are BPro being able to redeem at any time?",
+          "answer": "No, but typically you will be able to redeem your BPro for bitcoins against the smart contract. But there are some market conditions where the collateral cannot be taken out of the system. In this scenario you will be able to sell your BPro for bitcoin or DoC in the decentralized token exchange (TEX)."
+        },
+        "9": {
+          "question": "How much it costs to mint or redeem BPro?",
+          "answer": "You have to pay a fee of 0.1% to mint or redeem BPro, in the next version you can have a 50% discount on fees paying the fee with the MOC tokens."
+        },
+        "10": {
+          "question": "What is a BTCx?",
+          "answer": "Is a leveraged position on Bitcoin, so when the price of bitcoin goes up the price of BTCx goes up higher and when the price goes down it goes down lower. BTCx are a high risk product and you can lose 100% of your bitcoins in unfavorable market conditions."
+        },
+        "11": {
+          "question": "Can BTCx be redeemed at any time?",
+          "answer": "Yes BTCx can be redeemed at any time no matter of market conditions."
+        },
+        "12": {
+          "question": "Is BTCx a future contract?",
+          "answer": "BTCx act like a future contract, it expires every 30 days, but there are no order books to trade it to, you trade against the liquidity pool form by all the DoC in the system."
+        },
+        "13": {
+          "question": "Is BTCx fixed leveraged?",
+          "answer": "No, when the period starts the leverages is 2, but the leverage fluctuate with the price, you fix your leverage when you make your operation but the leverage for newcomers will depend on the current price and the start price of the contract.<br>IE: <ul><li>The price of bitcoin is 10k, current leverage is 2x. You buy 1 bitcoin of BTCx. One week later the price of bitcoin is 40k. You have 80k.</li></ul>"
+        },
+        "14": {
+          "question": "How the rate for the BTCx is calculated?",
+          "answer": "Short answer it depends on the amount of BTCx issued the higher the amount the higher the rate, for further detail check our technical white paper."
+        },
+        "15": {
+          "question": "How is rate paid by the BTCx?",
+          "answer": "The rate is paid in full until the settlement date and fixed at current rate, if you redeem your BTCx you get a proportional of that rate back, depending on market conditions it could be more or less of what you paid, check our technical whitepaper for further details."
+        }
+      }
+    },
+    "home": {
+      "title": "Home",
+      "subtitle": "Keep calm and Hodl on",
+      "more-button": {
+        "description": "Go to wallet",
+        "alt-description": "More"
+      }
+    },
+    "info-button": {
+      "moc-repository": "MOC Repository",
+      "help-center": "Help Center",
+      "help-center-subtitle": "Need answers? Find them here!",
+      "terms-and-conditions": "Terms and Conditions",
+      "terms-and-conditions-link": "https://moneyonchain.com/disclaimer/"
+    },
+    "menu-sidebar": {
+      "home": "Home",
+      "exchange": "Exchange",
+      "metrics": "Metrics",
+      "settlement": "Settlement",
+      "settings": "Settings",
+      "preferences": "Preferences",
+      "notifications": "Notifications",
+      "information": "Information",
+      "faqs": "Help Center",
+      "rewards": "MoC Tokens",
+      "language": "Language",
+      "RISKPROWallet":"BPro Token",
+      "RISKPROXWallet":"BTCx Position",
+      "STABLEWallet":"DoC Token",
+      "getRBTC":"Convert BTC to RBTC",
+      "wiki-url": "https://wiki.moneyonchain.com/",
+      "repository-url": "https://github.com/money-on-chain/main-RBTC-contract"
+    },
+    "menu-drawer": {
+      "home": "Home",
+      "exchange": "Exchange",
+      "metrics": "Metrics",
+      "settlement": "Settlement",
+      "settings": "Settings",
+      "preferences": "Preferences",
+      "notifications": "Notifications",
+      "information": "Information",
+      "faqs": "Help Center",
+      "rewards": "MoC Tokens",
+      "language": "Language",
+      "RISKPROWallet":"BPro",
+      "RISKPROXWallet":"BTCx",
+      "STABLEWallet":"DoC",
+      "getRBTC":"BTC to RBTC"
+    },
+    "drawer-allowance": {
+      "title": "Set Allowance",
+      "button": "set allowance",
+      "submit-button": "new allowance"
+    },
+    "wallets": {
+      "title": "Wallets",
+      "subtitle": "Your current active wallet holdings",
+      "receiverAddress": "Receiver address or domain",
+      "ownAddressLabel": "Your address",
+      "RISKPRO":{
+        "title":"BPro",
+        "subtitle":"Manage your BPros"
+      },
+      "RISKPROX":{
+        "title":"BTCx",
+        "subtitle":"Manage your BTCxs Position"
+      },
+      "STABLE":{
+        "title":"DoC",
+        "subtitle":"Manage your DoCs"
+      },
+      "MOC":{
+        "title":"MoC",
+        "subtitle":"Manage your MoCs"
+      }
+    },
+    "exchange": {
+      "title": "Exchange",
+      "subtitle": "Buy and Sell your currencies",
+      "buttons": {
+        "confirm": "confirm",
+        "clear": "clear"
+      },
+      "metamaskBalance": "Total wallet balance",
+      "spendableBalance": "Total spendable balance",
+      "totalAvailable": "Total available",
+      "saleWithDiscount": {
+        "title": "Sale with discount",
+        "available": "available"
+      },
+      "summary": {
+        "sourceTitle": "You are exchanging",
+        "targetTitle": "You are receiving",
+        "InterestRate": "Interest Rate",
+        "systemFeeTitle": "Fee",
+        "payWithMocTokenTitle": "Pay fee with MoC Token",
+        "payWithMocTokenTooltipText": "By paying in MoC Token you will get a great discount!",
+        "notEnoughMocTokenTitle": "You don't have enough MoC Token to pay this fee",
+        "notEnoughMocTokenTooltipText": "",
+        "systemFeeTooltipText": "This fee will be deduce from the transaction value transferred",
+        "inrateTitle": "Interest Rate",
+        "inrateTooltipText": "The displayed interest rate is absolute, depends on the remaining days until the settlement, and will be discounted from the amount bought.",
+        "freeDocRateTitle": "Free Redemption Rate",
+        "freeDocRateTooltipText": "Redeeming DoCs before settlement is charged with a fee, you can queue your redeem for next settlement to avoid the extra charged.",
+        "amountDisclaimer": "*Amounts may be different at transaction confirmation",
+        "isCreditInterest": "**Credit"
+      },
+      "allowance": {
+        "allowanceSendTitle": "Allowance",
+        "allowanceSendDescription": "Please approve tx in your wallet to use MOC Token in the platform",
+        "allowanceTxTitle": "Allowance",
+        "allowanceTxDescription": "Allowance sent! please await confirmation. You can explore the transaction hash. ",
+        "allowanceSendErrorTitle": "Allowance",
+        "allowanceSendErrorDescription": "Something went wrong on sending allowance transaction!"
+      }
+    },
+    "metrics": {
+      "STABLE":{
+        "title":"DoC",
+        "total":"Total in the system",
+        "availableRedeem":"Available to redeem",
+        "availableMint":"Available to Mint"
+      },
+      "RISKPRO":{
+        "title":"BPro",
+        "usd":"BPro USD",
+        "availableRedeem":"Available to redeem",
+        "availableMint":"Available to Mint",
+        "leverage":"Current Leverage",
+        "total":"Total in the system",
+        "bproDiscountPriceUsd":"Discount price"
+      },
+      "RISKPROX":{
+        "title":"BTCx",
+        "usd":"BTCx USD",
+        "availableMint":"Available to Mint",
+        "coverage":"Spot Coverage",
+        "leverage":"Leverage",
+        "total":"Total in the system"
+      },
+      "statusGreen":{
+        "title":"Fully Operational",
+        "subtitle":"The system is in optimum status"
+      },
+      "statusYellow":{
+        "title":"Partially Operational",
+        "subtitle":"BPro cannot be redeemed. DoC cannot be minted"
+      },
+      "statusOrange":{
+        "title":"Opportunity Mode",
+        "subtitle": "BPro at a discount price!"
+      },
+      "statusRed":{
+        "title": "Protected Mode",
+        "subtitle": "No operations allowed"
+      },
+      "statusPaused":{
+        "title": "Paused Mode",
+        "subtitle": "No operations allowed"
+      },
+      "statusSettlement":{
+        "title": "Settlement in progress",
+        "subtitle": "No operations allowed"
+      },
+      "statusNoPrice":{
+        "title": "No active price being received",
+        "subtitle": "No operations allowed"
+      },
+      "systemOperations":{
+        "title":"System Operations",
+        "mintSTABLE":"Mint DoC",
+        "redeemSTABLEOnSettlement":"Redeem DoC on Settlement",
+        "redeemSTABLEOutsideOfSettlement":"Redeem DoC",
+        "mintRISKPRO":"Mint BPro",
+        "redeemRISKPRO":"Redeem BPro",
+        "mintRISKPROX":"Mint BTCx",
+        "redeemRISKPROX":"Redeem BTCx"
+      },
+      "bucketsInTokens": {
+        "title":"Liquidity",
+        "total": "Total"
+      },
+      "infoRBTC":{
+        "title":"Total rBTC in the system",
+        "priceRBTC":"rBTC USD",
+        "interest":"rBTC in interest bag",
+        "EMA":"rBTC EMA 120",
+        "targetCoverage":"Target coverage"
+      },
+      "BtcInBucket0": {
+        "title": "Tokens in BitPro",
+        "totalBtc": "Total __tokenName__",
+        "totalDoc": "Total __tokenName__",
+        "totalBitPro": "Total __tokenName__",
+        "tooltip": {
+          "title": "Tokens in BitPro",
+          "subtitle": "- Total in Dollar on Chain: The amount of DoC giving free leverage to BPro.\n- Total rBTC tokens: the sum of the above expressed in BPro- Total BPro: Number of BPro issued by the system\n"
+        }
+      },
+      "BtcInBucket2": {
+        "title": "Tokens in BTCx",
+        "totalBtc": "Total __tokenName__",
+        "totalDoc": "Total __tokenName__",
+        "totalBitPro": "Total __tokenName__",
+        "tooltip": {
+          "title": "Tokens in BTCx",
+          "subtitle": "- Total in Dollar on Chain: Number of DoC being used as counter-party of BTCx operations\n- Total rBTC tokens: the sum of the above expressed in rBTC\n- Total BTCx: the amount of BTCx issued by the system"
+        }
+      },
+      "Settlement":{
+        "title":"Next Settlement",
+        "remainingDaysTitle": "Remaining days",
+        "remainingDays": "In __days__ days __hours__ hours",
+        "date": "Date",
+        "blocksToSettlement": "Blocks to settlement",
+        "blockSettlement": "Settlement will happen on block",
+        "lastUpdateHeight": "Current indexed block"
+      },
+      "Moc":{
+        "title":"MoC",
+        "price": "Current price"
+      }
+    },
+    "settlement": {
+      "title": "Settlement",
+      "subtitle": "Keeping the house in order since genesis block",
+      "redeemQueue": "__tokenName__ redeem queue",
+      "remainingDays": "In __days__ days __hours__ hours",
+      "remainingBlocks": "Remaining blocks",
+      "infoText": "These redemptions are going to be effective on the next settlement. If you want to redeem your DoC holding today, you should check in the box of the right the AVAILABLE TO REDEEM DOC tokens. If there that value is zero, that means that non DOC is available to be redeemed now."
+    },
+    "banner-settlement": {
+      "title": "Settlement in process!",
+      "description": "While the settlement is in process, it will not be able to make Doc redeem request or Mint/Redeem BTCx. Please wait.",
+      "btc-price": "__tokenName__ Price:",
+      "btcx-price": "__tokenName__ Price:",
+      "doc-redeem-count": "__tokenCode__ redeem request count:",
+      "accounts-to-redeem": "__tokenCode__ accounts to redeem:",
+      "go-to-faq": {
+        "question": "Do you still have doubts about this topic?",
+        "link": "Check Help Center!"
+      }
+    },
+    "banner-paused": {
+      "title": "Money on Chain's contract is paused",
+      "description": "While the contract is paused will not be able to make transactions",
+      "go-to-faq": {
+        "question": "Do you still have doubts about this topic?",
+        "link": "Check Help Center!"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Configure your personal preferences",
+      "burnoutAddressButton": "Set burnout address",
+      "beCareful": "Be careful",
+      "alertAddress": "Double check if it is the right address and continue.",
+      "alertMaxAmountExceeded": "The amount exceeds the maximum allowed",
+      "alertMaxAmountExceededLongDescription": "The amount exceeds the maximum allowed. You can change it or continue at your own risk by clicking on confirm"
+    },
+    "advanced": {
+      "title": "Advanced Options",
+      "subtitle": "MoC Smart Contract is a decentralized app, all administrative methods are public.",
+      "settlement": {
+        "title": "Settlement",
+        "description": "Will executed only if settlement time is met.",
+        "buttonText": "Run Settlement"
+      },
+      "payDailyInRate": {
+        "title": "Daily interest rate payment",
+        "description": "Will executed only if daily time is met.",
+        "buttonText": "Run Daily Rate Payment"
+      },
+      "payBitProHoldersInterest": {
+        "title": "Weekly __token__ holders interest payment",
+        "description": "Will executed only if weekly time is met.",
+        "buttonText": "Run weekly __tokenName__ Payment"
+      }
+    },
+    "onBoardingSteps": {
+      "buttons": {
+        "previous": "Previous",
+        "next": "Next",
+        "done": "Done"
+      },
+      "showNoMoreCheckbox": "Show no more",
+      "welcome": {
+        "title": "Welcome to Money on Chain",
+        "descStep1": "Money On Chain wants to solve the biggest need of the crypto world. It solves the volatility problem with a three-party system.",
+        "descStep2": "The undesirable volatility of rBTC will be stripped into two separate currencies, a derivative financial instrument and a decentralized token exchange open to all rBTC users."
+      },
+      "tokens": {
+        "title": "The different tokens",
+        "descStep1": "Depending on your risk averseness profile you’ll prefer any, or all, of our tokens",
+        "descStep2": "Let's introduce the different tokens briefly."
+      },
+      "docToken": {
+        "title": "DoC token",
+        "descStep1": "The Dollar on Chain, or __tokenNameHTML__ is the stablecoin with a 1:1 peg to the US Dollar with rBTC collateral. Recommended for avoiding volatility and saving. This is the ideal token if you are not willing to take risks."
+      },
+      "BProToken": {
+        "title": "BPro token",
+        "descStep1": "__tokenNameHTML__ is a HODl and Earn token that allows you to get a passive income in rBTC with free leverage. This means that when the rBTC price goes up, BPro token´s price rises even more. While hodling it you also receive rewards in MoC tokens. "
+      },
+      "Btc2X": {
+        "title": "BTCx Position",
+        "descStep1": "Designed for traders and risk seekers willing to make profit of rBTC price volatility, established between you and the Smart Contract. ",
+        "descStep2": ""
+      },
+      "gettingStarted": {
+        "title": "Getting Started",
+        "descStep1": "Go to __homeHTML__ section to have a global view of your wallets balance, latest transactions and your MoC balance.",
+        "homeInfo": "wallets balance, latest transactions",
+        "buy": "Buy"
+      },
+      "buySell": {
+        "title": "Mint and Redeem",
+        "descStep1": "You can mint and redeem in one click,  directly and easily, in each token section. "
+      },
+      "metrics": {
+        "title": "Platform Metrics",
+        "descStep1": "In Money on Chain you can __systemHealthHTML__, and to do so it provides a global dashboard with live indicators for the global coverage, the leverage, all the collateral in the system, and the settlement dates for the leveraged decentralized exchange",
+        "systemHealth": "check the health of the system at any moment"
+      },
+      "end": {
+        "title": "Ready? Let’s begin!",
+        "descStep1": "You can navigate through our Wiki section at moneyonchain.com if this is your first time around.",
+        "descStep2": "You can use  __metamaskHTML__ browser extension to operate Money On Chain. To download it from the Chrome Store, click the following button. ",
+        "disclaimer": "The platform is also compatible with Metamask, Liquality and other wallets. ",
+        "disclaimerMetamaskUrl": "https://metamask.io/",
+        "faqs": "Frequently Asked Questions",
+        "download": "download",
+        "link": "DOWNLOAD NIFTY EXTENSION",
+        "linkMetamask": "DOWNLOAD METAMASK EXTENSION"
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "subtitle": "Here you'll find all system relevant events.",
+      "viewAll": "View All",
+      "empty": "No new notifications",
+      "contractStates": {
+        "Liquidated": "liquidated",
+        "BproDiscount": "discount sale of BitPro",
+        "BelowCobj": "below target coverage",
+        "AboveCobj": "above target coverage"
+      },
+      "events": {
+        "SettlementRedeemStableToken": {
+          "title": "Settlement",
+          "desc": "Executed with __reserveToken__ at __reservePrice__ __fiatCode__"
+        },
+        "InrateDailyPay": {
+          "title": "Interest Rate Daily payment",
+          "desc": "Payed __reserveAmount__ __reserveToken__"
+        },
+        "StateTransition": {
+          "title": "Contract state transition",
+          "desc": "New state is: __newState__"
+        },
+        "RiskProHoldersInterestPay": {
+          "title": "Interests Weekly payment",
+          "desc": "Payed __reserveAmount__ __reserveToken__"
+        },
+        "BucketLiquidation": {
+          "title": "Bucket liquidation",
+          "desc": "Bucket __bucket__ was liquidated"
+        }
+      }
+    },
+    "notifications_onscreen": {
+      "web3": {
+        "not_connected": {
+          "message": "Not connected",
+          "description": "Please connect to nifty/metamask wallet"
+        },
+        "change": {
+          "message": "Account",
+          "description": "Changing account to __truncate_address__"
+        }
+      },
+      "userAccount": {
+        "signin": {
+          "message": "Connecting to wallet...",
+          "description": "Metamask/Nifty will ask to sign a message to prove the ownership of the account"
+        },
+        "connected": {
+          "message": "Connected to account!",
+          "description": "Using account: __truncate_address__"
+        }
+      }
+    },
+    "no-connection": {
+      "knowMore": "Get to know more about",
+      "platform": "Money on Chain platform",
+      "downloadExtension": "Download Extension",
+      "downloadExtensionUrl": "https://chrome.google.com/webstore/detail/nifty-wallet/jbdaocneiiinmjbjlgalhcelgbejmnid?hl=en",
+      "goToMetrics": "Go to Metrics & get general information about the system",
+      "tutorialBtnText": "I want to know more"
+    },
+    "modal-send": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "beCareful": "Be careful",
+      "alertAddress": "Double check if it is the right address and continue."
+    },
+    "modal-redeem": {
+      "title": "__tokenName__ redeem request",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "modal-cancel-redeem-request": {
+      "title": "Cancel __tokenName__ redeem request",
+      "confirm": "Submit",
+      "cancel": "Back"
+    },
+    "modal-exchange": {
+      "confirm-text": "Are you sure?",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "wallet": {
+      "totalBalance": "Total Protocol Balance",
+      "buy": "Mint / Redeem",
+      "send": "Send",
+      "bprox2": {
+        "buy": "Mint / Redeem"
+      }
+    },
+    "doc-wallet": {
+      "currency-card": {
+        "subtitle": "Available to mint"
+      }
+    },
+    "bpro-wallet": {
+      "currency-card": {
+        "subtitle": "Available to redeem"
+      }
+    },
+    "bprox2-wallet": {
+      "current-rate": "current interest rate (%)",
+      "info-text": "The BTCx is a leveraged decentralized long position on the price of BTC.",
+      "currency-card": {
+        "subtitle": "Available to mint"
+      }
+    },
+    "currencies": {
+      "title": "Currencies"
+    },
+    "nextSettlement": {
+      "title": "Next Settlement",
+      "toRedeem": "To redeem at exp",
+      "tooltip": {
+        "title": "Next Settlement title",
+        "text": "Tooltip text"
+      }
+    },
+    "general": {
+      "transactions": "Transactions",
+      "activeWallets": "Active Wallets",
+      "globalCoverage": {
+        "title": "Global Coverage",
+        "tooltip": "Coverage represents the amount of funds reserved to back __tokenCode__s minted amount."
+      },
+      "x2Coverage": {
+        "title": "BTCx Spot Coverage",
+        "tooltip": "L Buckets have fixed Coverage targets, 2 for X2. Spot coverage represents the amount of funds reserved in this bucket to hold that relation."
+      },
+      "x2Leverage": "BTCx Leverage",
+      "b0Leverage": "BPro Current Leverage",
+      "redeemDoc": "Redeem __tokenCode__ at expiration",
+      "redeemDocButton": "Add",
+      "redeemDocCancel": "Cancel __tokenCode__ Redeem at expiration",
+      "redeemDocCancelButton": "Remove",
+      "redeem": "Redeem",
+      "invalidValueDescription": "No value to display",
+      "invalidValuePlaceholder": "--",
+      "contractLiquidation": {
+        "title": "Contract Liquidation",
+        "desc": "This contract has been liquidated, the only operation available is redemption of __token__s.",
+        "buttonText": "Redeem my __token__s"
+      },
+      "priceVariation": {
+        "tooltip": {
+          "titleDaily": "Daily variation",
+          "titleFromSettlement": "Settlement Day",
+          "currentBlock": "Current block #",
+          "currentValue": "Current value",
+          "referenceBlock": "Reference block #",
+          "referenceValue": "Reference value"
+        }
+      },
+      "profitLoss": {
+        "tooltip": {
+          "title": "Profit/Loss",
+          "currentPrice": "Current Price",
+          "weightedBuyPrice": "Weighted Buy Price"
+        }
+      }
+    },
+    "rateGraphicCard": {
+      "title": "Percentage of base bucket paid (adjusted yearly)",
+      "yLabel": "% of base bucket",
+      "tooltipTitle": "Interest rate payments",
+      "tooltipComment": "The plotted line shows the proportion of the base bucket's total volume that was transferred as an interest payment each day.\n The number to the right is the expected return of holding Bitpro for a year assuming the system state doesn't change",
+      "yearlyInrate": "Last payment %",
+      "yearlyInrateComment": " (ajustado anual)"
+    },
+    "operations": {
+      "title": "Last Operations",
+      "tooltip": {
+        "text": "Pending: Transaction awaiting confirmation.\nConfirming: Transaction with at least one confirmation and less than 10.\nConfirmed: Transaction with more than 10 confirmations.\nOpen: Transaction confirmed, transaction successfully queued to processed on next stlement.\nSettled: Transaction executed on last settlement."
+      },
+      "empty": "No operations",
+      "explain": {
+        "RiskProMint": "You received in your platform",
+        "RiskProRedeem": "You received in your wallet",
+        "StableTokenMint": "You received in your platform",
+        "StableTokenRedeem": "You received  in your wallet by redeeming on settlement",
+        "FreeStableTokenRedeem": "You received in your wallet",
+        "RiskProxMint": "You received in your platform",
+        "RiskProxRedeem": "You received in your wallet",
+        "SettlementDeleveraging": "You received in your wallet by settlement deleveraging event",
+        "RedeemRequestAlter": "You queue to redeem on settlement",
+        "Transfer_positive": "You transfer to another account",
+        "Transfer_negative": "Another account transfer to you",
+        "BucketLiquidation": "was liquidated on bucket liquidation event"
+      },
+      "memo": {
+        "edit": "Edit your comment and press enter to save it"
+      },
+      "headers": {
+        "amountReserve": "This amount include platform commission + gas fee + interest if its applied"
+      },
+      "columns": {
+        "event": "Event",
+        "type": "Asset",
+        "amount": "Platform",
+        "totalBtc": "Wallet",
+        "platformFee": "Platform fee",
+        "rbtcCommission": "__app__ Fee",
+        "totalUsd": "USD",
+        "yieldUsd": "USD yield",
+        "yieldBtc": "BTC yield",
+        "rbtcInterests": "Interests __tokenCode__",
+        "date": "Date",
+        "status": "Status",
+        "leverage": "Leverage",
+        "mocAmount": "Amount",
+        "memo": "Comments"
+      },
+      "columns_detailed": {
+        "event": "Event",
+        "created": "Created",
+        "detail": "Detail",
+        "asset": "Asset",
+        "confirmation": "Confirmation",
+        "address": "Address",
+        "platform": "Platform",
+        "platform_fee": "Platform Fee",
+        "block": "Block Nº",
+        "wallet": "Wallet",
+        "interests": "Interests",
+        "tx": "TX Hash",
+        "leverage": "Leverage",
+        "gas": "Gas Fee",
+        "memo": "Comments",
+        "reserve_price": "Reserve Price",
+        "txRequest":"TX Request",
+        "txSent":"TX Sent",
+        "status":"Status",
+        "amount":"Amount",
+        "gasCost":"Gas Cost",
+        "transaction":"Transaction",
+        "mocPrice":"Moc Price"
+      },
+      "status": {
+        "open": "Open",
+        "settled": "Settled",
+        "confirming": "Confirming",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "failed": "Failed"
+      }
+    },
+    "backendErrors": {
+      "staleTransaction": "The transaction stayed in the mempool for too long."
+    },
+    "mocBalance": {
+      "title": "MOC BALANCE",
+      "tooltip": {
+        "title": "MoC rewards",
+        "subtitle": "Money On Chain protocol rewards BitPRO holders with MoC Tokens. Here you can see how many MoC tokens you had already earned."
+      },
+      "bProHoldIncentive": "For each BPro holded for a day you get "
+    },
+    "tokenInformationTooltip": "Get information about ",
+    "TokenInformationContent": {
+      "STABLE": {
+        "factSheet": "DoC Fact Sheet",
+        "title": "Dollar on Chain (DoC) is a stablecoin with a 1:1 peg to the US Dollar with rBTC collateral and its main features are:",
+        "characteristics": {
+          "left": [
+            "1:1 Peg to the US Dollar.",
+            "The peg is guaranteed by the smart contract and DoCs are redeemable for rBTC. "
+          ],
+          "right": [
+            "Can be transferred freely, at any time.",
+            "Supported by a variety of wallets."
+          ]
+        }
+      },
+      "RISKPRO": {
+        "factSheet": "BPro Fact Sheet",
+        "title": "The BPro token maintains the bitcoin´s volatility and adds the combination of receiving a passive income and free leverage. This is a token suitable for medium risk-propense hodlers and the perfect balance between profit and risk.",
+        "characteristics": {
+          "left": [
+            "Earns a passive income in rBTC.",
+            "Earns part of the MOC protocol fees.",
+            "Receives the benefits of MOC Liquidity Mining Program."
+          ],
+          "right": [
+            "When the price of bitcoin rises, it will go up a little bit more, so it will definitely surpass bitcoin in the next bull run.",
+            "BPro can be either exchanged or redeemed for rBTC against the smart contract. "
+          ]
+        }
+      },
+      "RISKPROX": {
+        "factSheet": "BTCx Fact Sheet",
+        "title": "The BTCx is a leveraged decentralized LONG position on the price of bitcoin with no counterparty risk. <br><br>If you did not understand the line above this token is not for you and you are very likely to lose your funds if you buy it without the proper trading knowledge. Please go to <a href=\"https://moneyonchain.com/btcx-long-leveraged-bitcoin/\" target=\"_blank\">https://moneyonchain.com/btcx-long-leveraged-bitcoin/</a> to learn more about it.  ",
+        "characteristics": {
+          "left": [
+            "If you did not understand the line above this token is not for you and you are very likely to lose your funds if you buy it without the proper trading knowledge. Please go to website to learn more about it.",
+            "The X specifies the leverage of the token.",
+            "Leverage can vary with the price of BTC but is fixed once you buy it.",
+            "Leverage is reseted to X every 30 days when the contract expires."
+          ],
+          "right": [
+            "The cost of leverage is fixed and paid when you start the position.",
+            "There is no margin call and your funds can be liquidated when the price of bitcoin goes down.",
+            "If you did not understand at least one line above this one, this token is not for you.  DO NOT SET THE POSITION UNLESS YOU ARE COMPLETELY SURE ABOUT WHAT YOU ARE DOING."
+          ]
+        }
+      },
+      "MOC": {
+        "factSheet": "MoC Fact Sheet",
+        "title": "In order to work as a decentralized protocol, Money On Chain has its own token to govern the platform. This token is called MoC (for Money On Chain) Token.",
+        "characteristics": {
+          "left": [
+            "Vote and Veto: MoC token holders have the power to vote and veto the platform updates, parameters changes, and new features proposed by the community.",
+            "Staking: MoC holders can stake their tokens and earn staking rewards."
+          ],
+          "right": [
+            "Discount: MoC holders have a discount when paying the fees for the use of the platform with MoC tokens. For instance, when minting or redeeming DoC, BPro and BTCx.",
+            "Earn fees: MoC holders receive part of the fees the users pay for using the platform."
+          ]
+        }
+      }
+    },
+    "amountItem": {
+      "bproMintingWarning": "BPro minting is limited for security reasons"
+    },
+    "rns": {
+      "register": "Register your domain name",
+      "address": "Address",
+      "noAddress": "Address not found"
+    },
+    "incentives": {
+      "mocRewarded": {
+        "title": "MOCs Rewarded",
+        "tooltip": {
+          "title":"MOCs Rewarded",
+          "text": "Each day you keep your BitPro we will reward you with MOCs. MoC Rewards box shows the MOCs we already assigned to your address due to the BitPro you had in the past. We calculate this on daily basis."
+        }
+      },
+      "mocToday": {
+        "title": "Earned MOCs Today",
+        "tooltip": {
+          "title":"Earned MOCs Today",
+          "text": "The earned MOCs today is an estimation of the MOCs the system will release to your address due to the BitPro you own and keep. It is an estimation because the calculation is done daily as a batch process, not online."
+        }
+      }
+    },
+    "loginModal": {
+      "title": "You are not logged in.",
+      "text": "In order to use this and many other functionalities you need to be logged in. To log in you need to sign with your wallet. The signing IS COMPLETELY FREE OF CHARGE and allows us to make your experience more secure.",
+      "signButton": "Click here to log in"
+    },
+    "login": "Connect",
+    "fastbtc":{
+      "title": "FastBTC",
+      "getRBTC": "Convert BTC to rBTC",
+      "getBTC": "Convert rBTC to BTC",
+      "subTitle": "Sovryn's FastBTC integration",
+      "history":{
+        "title":"FastBTC last operations",
+        "columns_headers": {
+          "id":"Id",
+          "step":"Step",
+          "type":"Operation type",
+          "dateAdded":"Date added",
+          "status":"Status",
+          "valueBtc":"Value",
+          "btcadr":"BTC address",
+          "web3adr":"RSK address",
+          "txHash":"Tx hash"
+        },
+        "columns":{
+          "valueBTC":"__value__ BTC",
+          "valueRBTC":"__value__ rBTC",
+          "step_1":"1/2",
+          "step_2":"2/2",
+          "type_deposit":"BTC deposit",
+          "type_transfer":"rBTC reception",
+          "status_pending":"Pending",
+          "status_confirmed":"Confirmed",
+          "dateAddedFormat":"YYYY-MM-DD HH:mm:SS"
+        },
+        "upperSummary":"If rBTC is not visible in your wallet after 90 mins open a <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>support ticket</a> at Sovryn",
+        "table":{
+          "triggerDesc": "Click sort by descend",
+          "triggerAsc": "Click sort by ascend"
+        },
+        "underMaintenance":{
+          "spinTip":"FastBTC service is temporarily unavailable",
+          "spinAlertTitle":"Sovryn's FastBTC is not available",
+          "spinAlertDescription":"Sovryn’s FastBTC is temporarily unavailable. Please, come back later."
+        }
+      },
+      "newsModal":{
+        "title":"FastBTC",
+        "line1":"You will need rBTC to mint DoC and BPro and pay gas fees on the RSK network.",
+        "line2":"You can now obtain rBTC in a simple and easy way through our FastBTC from Sovryn integration.",
+        "line3":{
+          "preIconText":"Go to ",
+          "postIconPreLinkText":" in the left menu of your screen or click",
+          "linkText":"here",
+          "postLinkText":"."
+        },
+        "line4":{
+          "preLinkText":"More information about Sovryn´s FastBTC ",
+          "linkText":"here",
+          "postLinkText":"."
+        },
+        "checkboxText":"Don't show again"
+      },
+      "topUpWalletModal":{
+        "title": "FastBTC",
+        "subtitle":"Deposit BTC to receive rBTC in your wallet",
+        "subtitle_pegout":"Please, review the conversion limits before proceeding with the rBTC to BTC conversion.",
+        "info": "You will need rBTC in your wallet to buy DOC and pay gas fees on RSK network",
+        "help": "Learn about rBTC on RSK",
+        "getBTCAddressButton": "Generate BTC Deposit Address",
+        "getBTCAddressButtonConnecting": "Connecting with Sovryn's FastBTC...",
+        "getBTCAddressButtonUnderMaintenance": "Sovryn's FastBTC service is currently under maintenance",
+        "footer": "Always generate the BTC deposit address, as the system might update it",
+        "header": "Double check that you are entering the correct BTC destination address.",
+        "header_processing": "The operation is being processed. If your transaction takes longer than 90 mins, <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>open a support ticket</a> at Sovryn.",
+        "header_complete": "Confirmed",
+        "destinationAddress": "Destination BTC Addresss",
+        "valueBTC": "__value__",
+        "valueRBTC": "__value__",
+        "transaction1DetailsTitle": "Step 1/2: BTC TRANSACTION",
+        "transaction2DetailsTitle": "Step 2/2: rBTC TRANSACTION",
+        "transactionInfo":{
+          "step": "STEP __step__: __txName__ TRANSACTION",
+          "status_pending": "Status __statusIndex__/2 pending",
+          "status_confirmed": "Status __statusIndex__/2 confirmed",
+          "valueDeposited": "Value deposited: __value__",
+          "toLabel":"To TX:",
+          "txHashLabel":"Tx hash:",
+          "fromLabel":"From TX:"
+        },
+        "limits":{
+          "header": "Conversion limits",
+          "min": "Min: __minValue__ BTC",
+          "max": "Max: __maxValue__ BTC"
+        },
+        "limits_pegout":{
+          "header": "Conversion limits",
+          "min": "Min: __minValue__ RBTC",
+          "max": "Max: __maxValue__ RBTC",
+          "fee": "Fee: __feeValue__"
+        },
+        "instructions":{
+          "header": "Instructions",
+          "items": [
+            "Do not deposit anything other than BTC.",
+            "Do not send more BTC than the MAX limit.",
+            "Allow up to 60 mins for the transaction to process.",
+            "If rBTC is not visible in your wallet after 60 mins open a <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>support ticket</a> at Sovryn."
+          ]
+        },
+        "instructions_pegout":{
+          "header": "Instructions",
+          "items": [
+            "Please check and confirm the address you are sending to is a BTC address.",
+            "Do not send anything other than rBTC.",
+            "Do not send more rBTC than the MAX limit.",
+            "Allow up to 90 mins for the transaction to precess.",
+            "If BTC is not visible in your destination wallet after 90 mins, open a <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>support ticket</a> at Sovryn."
+          ]
+        },
+        "txactions":{
+          "sendBTCTitle": "Send BTC to this address",
+          "copyableBTCAddressLabel": "Address"
+        },
+        "underMaintenance":{
+          "alertDescription": "Sovryn’s FastBTC is temporarily unavailable. Please, come back later."
+        }
+      },
+      "leftPannel":{
+        "header": "You will need rBTC in your wallet to:",
+        "items": [
+          "Mint DoC and BPro",
+          "Set BTCx positions",
+          "Pay gas fees on RSK network"
+        ],
+        "learnMore": "Learn more about rBTC"
+      }
+    },
+    "staking": "Staking",
+    "Staking_AnnualizedPerformanceTitle": "MoC Staking Annualized Performance"
+  }
+}

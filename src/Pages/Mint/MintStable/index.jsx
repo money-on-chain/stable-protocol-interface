@@ -4,6 +4,7 @@ import YourAddressCard from '../../../Components/Cards/YourAddressCard';
 import { Row, Col, Switch } from 'antd';
 import React, { Fragment } from 'react';
 import ListOperations from "../../../Components/Tables/ListOperations";
+import {useTranslation} from "react-i18next";
 
 export default function Mint(props) {
     const data_row_coins = [];
@@ -29,9 +30,11 @@ export default function Mint(props) {
         status: {txt:'Confirmed',percent:100},
     });
 
+    const [t, i18n]= useTranslation(["global",'moc'])
+
     return (
         <Fragment>
-            <h1 className="PageTitle">DoC</h1>
+            <h1 className="PageTitle">{t("MoC.wallets.STABLE.title", { ns: 'moc' })}</h1>
             <h3 className="PageSubTitle">Manage your DoCs</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
@@ -52,7 +55,6 @@ export default function Mint(props) {
                 </Col>
             </Row>
             <div className="Card WalletOperations">
-                <div className="title"><h1>Last Operations</h1></div>
                 <ListOperations token={'STABLE'}></ListOperations>
             </div>
         </Fragment>

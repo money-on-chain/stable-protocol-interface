@@ -3,6 +3,8 @@ import './style.scss'
 import { useContext, useState, Fragment } from 'react'
 import { AuthenticateContext } from '../../../Context/Auth'
 import LogoutModal from '../../../Components/Modals/LogoutModal'
+import Select from 'antd/lib/select';
+import {useTranslation} from "react-i18next";
 
 function LoginButton(props) {
 
@@ -12,6 +14,20 @@ function LoginButton(props) {
     const closeLogoutModal = () => {
         setLogoutVisible(false);
     };
+
+    const [t, i18n]= useTranslation(["global",'moc'])
+
+
+    const { Option } = Select;
+    const availableLang= ["en", "es"]
+
+    const [prefLanguage, setPrefLanguage] = useState("en");
+
+    const handleChangeLanguage= (event) => {
+        setPrefLanguage(event);
+        i18n.changeLanguage(event)
+    };
+
 
     return (
         <Fragment>
@@ -37,6 +53,17 @@ function LoginButton(props) {
                 visible={logoutVisible}
                 handleClose={closeLogoutModal}
             />
+            <Select className="customSelect"  value={prefLanguage}  onChange={handleChangeLanguage}>
+                <Option value="en">
+                    <div className="container_flag">EN</div>
+                </Option>
+
+                {availableLang.includes('es') && (
+                    <Option value="es">
+                        <div className="container_flag">ES</div>
+                    </Option>
+                )}
+            </Select>
         </Fragment>
     );
 }
