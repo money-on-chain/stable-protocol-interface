@@ -107,9 +107,9 @@ export default function Admin() {
                         icon={<PieChartFilled />}
                     />
                     <SubMenu key="information" title="Profile" icon={<InfoCircleFilled />} theme={'light'}>
-                        <Menu.Item key="contract_repository">Contract Repository</Menu.Item>
-                        <Menu.Item key="webapp_repository">Webapp Repository</Menu.Item>
-                        <Menu.Item key="help_center">Help Center</Menu.Item>
+                        <Menu.Item key="contract_repository" onClick={() => window.open('https://github.com/money-on-chain/main-RBTC-contract', '_self')}>Contract Repository</Menu.Item>
+                        <Menu.Item key="webapp_repository" onClick={() => window.open('https://github.com/money-on-chain/webapp-stable-ipfs', '_self')}>Webapp Repository</Menu.Item>
+                        <Menu.Item key="help_center" onClick={() => window.open('https://wiki.moneyonchain.com/', '_self')}>Help Center</Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>
