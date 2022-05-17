@@ -64,7 +64,6 @@ export default function Rbtc(props) {
                 </Col>
             </Row>
             <div className="Card WalletOperations">
-                <div className="title"><h1>Last Operations</h1></div>
                 <ListOperations token={'STABLE'}></ListOperations>
             </div>
         </Fragment>

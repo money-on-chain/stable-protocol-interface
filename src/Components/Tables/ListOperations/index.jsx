@@ -319,7 +319,7 @@ class ListOperations extends React.Component {
 
         return (
             <>
-
+                <div className="title"><h1>Last Operations</h1></div>
                 <Table
                     {...this.state}
                     pagination={{ position: [this.state.top, this.state.bottom], defaultCurrent:1,onChange:(current) =>  setCurrent(current),total:Object.keys(data_json.transactions).length }}
