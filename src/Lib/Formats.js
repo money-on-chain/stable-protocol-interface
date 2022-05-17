@@ -5,6 +5,11 @@ const NumberFormat = {
     decimals: 6
 };
 
+const valueVariation = {
+    contractDecimals: 20,
+    decimals: 2,
+};
+
 const formatMap = {
     RISKPROX: NumberFormat,
     RISKPRO: NumberFormat,
@@ -21,7 +26,7 @@ const formatMap = {
     RISKPROXInterest: NumberFormat,
     FreeDocInterest: NumberFormat,
     commissionRate: NumberFormat,
-    valueVariation: NumberFormat
+    valueVariation: valueVariation
 };
 
 const formatLocalMap = {
