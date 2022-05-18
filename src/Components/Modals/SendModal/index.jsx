@@ -1,17 +1,23 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-fallthrough */
 /* eslint-disable default-case */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import debounce from 'lodash.debounce';
+import web3 from 'web3';
 import { Row, Col, Modal, Button } from 'antd';
 import CoinSelect from "../../Form/CoinSelect";
 import InputAddress from "../../InputAddress";
 import InputWithCurrencySelector from "../../Form/InputWithCurrencySelector";
 import { getBalanceAndTransferMethodOfTokenToSend } from '../../../Config/currentcy';
 import { useTranslation } from "react-i18next";
+import addressHelper from '../../../Lib/addressHelper';
+import { toBigNumber } from "../../../Lib/numberHelper";
+import { formatVisibleValue } from "../../../Lib/Formats";
+import { AuthenticateContext } from "../../../Context/Auth";
+
 const BigNumber = require('bignumber.js');
 
 export default function SendModal(props) {
-  console.log('props', props);
   const { token = '', tokensToSend, userState } = props;
   const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
   const [address, setAddress] = useState('');
@@ -31,6 +37,8 @@ export default function SendModal(props) {
   const [inputIsValid, setInputIsValid] = useState(true);
 
   const [t, i18n]= useTranslation(["global",'moc'])
+  const helper = addressHelper(web3);
+  const auth = useContext(AuthenticateContext);
 
   const getDefaultState = () => {
     setVisible(false);
@@ -43,13 +51,6 @@ export default function SendModal(props) {
     setComment('');
     setInputIsValid(true);
   };
-
-  /* useEffect(() => {
-    let youReceive = props.currencyOptions.filter(
-      (x) => x !== currencyYouExchange
-    )[0];
-    setCurrencyYouReceive(youReceive);
-  }, [currencyYouExchange]); */
 
   const changeValueYouAddTotal = () => {
     switch (currencyYouReceive) {
@@ -98,6 +99,50 @@ export default function SendModal(props) {
     setInputIsValid(newValidity);
   };
 
+  const handleOk = debounce(() => {
+    const methodTransferTo = getMethodTransferTo();
+    const isCheckSumAddress = (address === undefined) ? false : helper.isValidAddressChecksum(address);
+    if (isCheckSumAddress) {
+      if (isAmountOverMaxAllowed(amountToSend, getMaxToSend(), tokenToSend)) {
+        showAlertAmountMessage(maxExceededRetries + 1);
+        if (maxExceededRetries > 0) {
+          doTransferAndHide(methodTransferTo, address);
+         }
+      } else {
+        doTransferAndHide(methodTransferTo, address);
+      }
+    } else {
+      showAlertMessageAddress();
+    }
+  }, 1000);
+
+  const isAmountOverMaxAllowed = (amount, maxAvailable, currencyCode) => {
+    const maxSourceAvailable = toBigNumber(maxAvailable);
+    const bdInputAmount = toBigNumber(amount);
+    if (bdInputAmount.isNaN()) return false;
+    if (maxSourceAvailable.isNaN()) return false;
+    return bdInputAmount.isGreaterThan(maxSourceAvailable);
+  };
+
+  const doTransferAndHide = (methodTransferTo, inputAddress) => {
+    methodTransferTo(comment, inputAddress, formatVisibleValue(amountToSend, tokenToSend, "en"));
+    setDefaultState();
+  };
+
+  const showAlertAmountMessage = retryNumber => {
+    setMaxExceeded(true);
+    setMaxExceededRetries(retryNumber);
+  };
+
+  const showAlertMessageAddress = () => {
+    setVisibleAlertInvalidAddress(true);
+  };
+
+  const getMethodTransferTo = () => {
+    const { methodTransferTo } = getBalanceAndTransferMethodOfTokenToSend(userState.userBalanceData, tokenToSend, auth);
+    return methodTransferTo;
+  }
+
   const maxtoSend = getMaxToSend();
 
   return (
@@ -140,8 +185,8 @@ export default function SendModal(props) {
           /> */}
           <Row style={{ marginTop: '2em' }}>
             <Col span={24} style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-              <Button onClick={handleCancel}>Cancel</Button>
-              <Button type="primary">Confirm</Button>
+              <Button onClick={() => handleCancel()}>Cancel</Button>
+              <Button type="primary" onClick={() => handleOk()}>Confirm</Button>
             </Col>
           </Row>
         </div>

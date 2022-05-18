@@ -20,7 +20,10 @@ import {
     userBalance
 } from './MultiCallFunctions.js';
 import { enable } from 'workbox-navigation-preload';
+import addressHelper from '../Lib/addressHelper';
+
 const BigNumber = require('bignumber.js');
+const helper = addressHelper(Web3);
 
 const AuthenticateContext = createContext({
     isLoggedIn: false,
@@ -41,6 +44,9 @@ const AuthenticateContext = createContext({
     stakingDeposit: async (mocs, address) => {},
     approveMoCToken: async (address) => {},
     getPendingWithdrawals: async (address) => {},
+    transferDocTo: async (to, amount) => {},
+    transferBproTo: async (to, amount) => {},
+    transferMocTo: async (to, amount) => {},
 });
 
 let checkLoginFirstTime = true;
@@ -527,7 +533,6 @@ const AuthenticateProvider = ({ children }) => {
     };
 
     const approveMoCToken = async (enabled, callback = () => { }) => {
-        console.log('.........');
         const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const newAllowance = enabled ? web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString()) : 0;
@@ -558,6 +563,39 @@ const AuthenticateProvider = ({ children }) => {
         return withdraws;
     };
 
+    const transferDocTo = async (to, amount, callback) => {
+        const docAddress = "0x489049c48151924c07F86aa1DC6Cc3Fea91ed963";
+        const toWithChecksum = helper.toWeb3CheckSumAddress(to);
+        const from = await getAccount();
+        const contractAmount = web3.utils.toWei(amount, 'ether');
+        const docToken = getContract(ERC20.abi, docAddress);
+        return docToken.methods
+          .transfer(toWithChecksum, contractAmount)
+          .send({ from, gasPrice: await getGasPrice() }, callback);
+      };
+
+    const transferBproTo = async (to, amount, callback) => {
+        const bproAddress = "0x5639809FAFfF9082fa5B9a8843D12695871f68bd";
+        const toWithChecksum = helper.toWeb3CheckSumAddress(to);
+        const from = await getAccount();
+        const contractAmount = web3.utils.toWei(amount, 'ether');
+        const bproToken = getContract(ERC20.abi, bproAddress);
+        return bproToken.methods
+        .transfer(toWithChecksum, contractAmount)
+        .send({ from, gasPrice: await getGasPrice() }, callback);
+    };
+
+    const transferMocTo = async (to, amount, callback) => {
+        const mocTokenAddress = "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635";
+        const toWithChecksum = helper.toWeb3CheckSumAddress(to);
+        const from = await module.getAccount();
+        const contractAmount = web3.utils.toWei(amount, 'ether');
+        const mocToken = getContract(ERC20.abi, mocTokenAddress);
+        return mocToken.methods
+          .transfer(toWithChecksum, contractAmount)
+          .send({ from, gasPrice: await getGasPrice() }, callback);
+      };
+
     return (
         <AuthenticateContext.Provider
             value={{
@@ -579,7 +617,10 @@ const AuthenticateProvider = ({ children }) => {
                 getLockedBalance,
                 stakingDeposit,
                 approveMoCToken,
-                getPendingWithdrawals
+                getPendingWithdrawals,
+                // transferDocTo,
+                // transferBproTo,
+                // transferMocTo
             }}
         >
             {children}

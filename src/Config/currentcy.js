@@ -1,21 +1,21 @@
-const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode) => {
+const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth) => {
   // if(!window.nodeManager) return {};
   console.log('userStateeeee', userState);
   switch (currencyCode) {
     case 'RISKPRO':
       return {
         amount: userState?.bproBalance,
-        // methodTransferTo: window.nodeManager.transferBproTo,
+        methodTransferTo: auth?.transferBproTo,
       };
     case 'STABLE':
       return {
         amount: userState?.docBalance,
-        // methodTransferTo: window.nodeManager.transferDocTo,
+        methodTransferTo: auth?.transferDocTo,
       };
     case 'MOC':
       return{
         amount:userState?.mocBalance,
-        // methodTransferTo: window.nodeManager.transferMocTo,
+        methodTransferTo: auth?.transferMocTo,
       }
     default:
       return {};
