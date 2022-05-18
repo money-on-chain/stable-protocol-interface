@@ -1,12 +1,37 @@
+const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode) => {
+  // if(!window.nodeManager) return {};
+  console.log('userStateeeee', userState);
+  switch (currencyCode) {
+    case 'RISKPRO':
+      return {
+        amount: userState?.bproBalance,
+        // methodTransferTo: window.nodeManager.transferBproTo,
+      };
+    case 'STABLE':
+      return {
+        amount: userState?.docBalance,
+        // methodTransferTo: window.nodeManager.transferDocTo,
+      };
+    case 'MOC':
+      return{
+        amount:userState?.mocBalance,
+        // methodTransferTo: window.nodeManager.transferMocTo,
+      }
+    default:
+      return {};
+  }
+};
+
 const currencies = [
-    { value: 'RESERVE',     image: `${window.location.origin}/Moc/icon-reserve.svg`,    label: 'RBTC' },
-    { value: 'STABLE',      image: `${window.location.origin}/Moc/icon-stable.svg`,     label: 'DOC' },
-    { value: 'RISKPRO',     image: `${window.location.origin}/Moc/icon-riskpro.svg`,    label: 'BPRO' },
-    { value: 'RISKPROX',    image: `${window.location.origin}/Moc/icon-riskprox.svg`,   label: 'BTCX' },
-    { value: 'MOC',         image: `${window.location.origin}/Moc/icon-moc.svg`,        label: 'MOC' },
-    { value: 'RBTC',         image: `${window.location.origin}/Moc/icon-moc.svg`,        label: 'RBTC' },
+  { value: 'RESERVE',     image: `${window.location.origin}/Moc/icon-reserve.svg`,    label: 'RBTC' },
+  { value: 'STABLE',      image: `${window.location.origin}/Moc/icon-stable.svg`,     label: 'DOC' },
+  { value: 'RISKPRO',     image: `${window.location.origin}/Moc/icon-riskpro.svg`,    label: 'BPRO' },
+  { value: 'RISKPROX',    image: `${window.location.origin}/Moc/icon-riskprox.svg`,   label: 'BTCX' },
+  { value: 'MOC',         image: `${window.location.origin}/Moc/icon-moc.svg`,        label: 'MOC' },
+  { value: 'RBTC',         image: `${window.location.origin}/Moc/icon-moc.svg`,        label: 'RBTC' },
 ];
 
 export {
-    currencies
+  getBalanceAndTransferMethodOfTokenToSend,
+  currencies
 }
