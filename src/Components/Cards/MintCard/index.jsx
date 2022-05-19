@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import CoinSelect from '../../Form/CoinSelect';
 import MintModal from '../../Modals/MintModal';
+import { useTranslation } from "react-i18next";
 
 export default function MintCard(props) {
     const { token = '', color = '' } = props;
@@ -84,7 +85,7 @@ export default function MintCard(props) {
                             parseFloat(newValueYouExchange) *
                             (parseFloat(
                                 props.StatusData['bprox2PriceInRbtc']
-                                ) *
+                            ) *
                                 parseFloat(reservePrice))
                         );
                         break;
@@ -116,14 +117,17 @@ export default function MintCard(props) {
     const onFeeChange = (checked) => {
     };
 
+    const [t, i18n] = useTranslation(["global", 'moc'])
+
     return (
-        <div className="Card MintCard" style={{ 
-            height: '23.4em'}}>
+        <div className="Card MintCard" style={{
+            height: '23.4em'
+        }}>
             <h3 className="CardTitle">Mint</h3>
             <Row className="MintSelectsContainer" gutter={15}>
                 <Col span={12}>
                     <CoinSelect
-                        label="You Exchange"
+                        label={t("global.MintOrRedeemToken_YouExchange", { ns: 'global' })}
                         onCurrencySelect={onChangeCurrencyYouExchange}
                         onInputValueChange={onValueYouExchangeChange}
                         value={currencyYouExchange}
@@ -151,7 +155,7 @@ export default function MintCard(props) {
                 </Col>
                 <Col span={12}>
                     <CoinSelect
-                        label="You Receive"
+                        label={t("global.MintOrRedeemToken_YouReceive", { ns: 'global' })}
                         inputValueInWei={valueYouReceive}
                         currencyOptions={props.currencyOptions}
                         value={currencyYouReceive}
@@ -166,11 +170,10 @@ export default function MintCard(props) {
                 <Col span={12}>
                     <div style={{ marginTop: 20 }}>
                         <div>
-                            1 RBTC = {bitcoinPrice} USD
+                            1 {t("MoC.Tokens_RESERVE_code", { ns: 'moc' })} = {bitcoinPrice} USD
                         </div>
                         <div className="TextLegend">
-                            * Amounts may be different at transaction
-                            confirmation
+                            {t("global.MintOrRedeemToken_AmountMayDiffer", { ns: 'global' })}
                         </div>
                     </div>
                 </Col>
@@ -185,12 +188,15 @@ export default function MintCard(props) {
                     <Row style={{ marginTop: 20 }} gutter={15}>
                         <Col span={12}>
                             <Button type="ghost" onClick={onClear}>
-                                Clear
+                                {t("global.MintOrRedeemToken_Clear", { ns: 'global' })}
                             </Button>
                         </Col>
                         <Col span={12}>
                             <Button type="primary" onClick={checkShowMintModal}>
-                                {isMint ? 'Mint' : 'Redeem'}
+                                {isMint
+                                    ? 'Mint'
+                                    : 'Redeem'
+                                }
                             </Button>
                         </Col>
                     </Row>
