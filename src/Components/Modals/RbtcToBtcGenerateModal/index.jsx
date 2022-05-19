@@ -40,7 +40,7 @@ export default function RbtcToBtcGenerateModal(props) {
             onCancel={handleClose}
             className="RbtcToBtcModal"
         >
-            <p className="main-p">Deposit BTC to receive rBTC in your wallet</p>
+            <p className="main-p">Please, review the conversion limits before proceeding with the rBTC to BTC conversion.</p>
             <div className='conversion-limits'>
                 <b>Conversion limits</b>
                 <p>Min: 0 BTC</p>

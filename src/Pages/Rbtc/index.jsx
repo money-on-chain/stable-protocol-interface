@@ -47,12 +47,7 @@ export default function Rbtc(props) {
                     <BtcToRbtc
                         title="BTC to rBTC Peg In"
                         description="Convert BTC from the Bitcoin network to rBTC Smart Bitcoins using the integrated FastBTC from Sovryn."
-                        btnText="Convert rBTC to BTC"
-                        btnAction={()=>{setRbtcGenVisible(true)}}
-                    />
-                    <RbtcToBtcGenerateModal
-                        visible={rbtcGenVisible}
-                        handleClose={closeLogoutModal}
+                        btnText="Convert BTC to rBTC"
                     />
                 </Col>
                 <Col xs={24}  md={24} xl={10}>
@@ -60,6 +55,11 @@ export default function Rbtc(props) {
                         title="BTC to rBTC Peg Out"
                         description="Convert rBTC Smart Bitcoins to BTC using the integrated FastBTC from Sovryn."
                         btnText="Convert rBTC to BTC"
+                        btnAction={()=>{setRbtcGenVisible(true)}}
+                    />
+                    <RbtcToBtcGenerateModal
+                        visible={rbtcGenVisible}
+                        handleClose={closeLogoutModal}
                     />
                 </Col>
             </Row>

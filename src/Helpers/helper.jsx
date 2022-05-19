@@ -1,5 +1,7 @@
 import web3 from "web3";
 import config from '../Config/constants';
+import Web3 from "web3";
+const BigNumber = require('bignumber.js');
 
 
 export function setNumber(number){
@@ -94,4 +96,60 @@ export function getDatasMetrics(auth){
                 globalCoverageClean:0
         };
     }
+}
+
+
+
+export function readJsonTable(data_j){
+    var set_event= "";
+    if(data_j.event.includes("Mint")){set_event='MINT'}
+    if(data_j.event.includes("Settlement")){set_event='SETTLEMENT'}
+    if(data_j.event.includes("Redeem")){set_event='REDEEM'}
+
+    const set_asset= data_j.tokenInvolved;
+    const set_status_txt= data_j.status;
+    const set_status_percent= data_j.confirmingPercent;
+
+    const wallet_detail= (data_j.userAmount!==undefined)? data_j.userAmount : '--'
+    const wallet_detail_usd= (wallet_detail * config.coin_usd).toFixed(2)
+    const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(2) : '--'
+    const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
+    const platform_fee= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(6) : ''
+    const platform_fee_usd= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? ((parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(2))*config.coin_usd).toFixed(2) : ''
+    const gasFee= (data_j.gasFeeRBTC!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(data_j.gasFeeRBTC)), 'Kwei').toFixed(6) : 0
+    const gasFeeUSD= (gasFee * config.coin_usd).toFixed(2)
+    const interest_detail= (data_j.USDInterests!==undefined)? parseFloat(Web3.utils.fromWei(Web3.utils.toWei(setNumber(data_j.USDInterests), 'Kwei')), 'Kwei').toFixed(6) : 0
+    const interest_detail_usd= (interest_detail * config.coin_usd).toFixed(2)
+    const truncate_address= data_j.address.substring(0, 6) + '...' + data_j.address.substring(data_j.address.length - 4, data_j.address.length);
+    const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
+
+    const lastUpdatedAt= data_j.lastUpdatedAt
+    const RBTCAmount= (data_j.RBTCAmount!==undefined)? `You received in your platform ${wallet_detail} RBTC` : '--'
+    const confirmationTime= data_j.confirmationTime
+    const address= data_j.address
+    const amount= (data_j.amount!==undefined)? paltform_detail + ' ( ' + paltform_detail_usd + ' USD )' : '--'
+    const platform_fee_value= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? `${platform_fee} RBTC ( ${platform_fee_usd} USD )`  : '--'
+    const blockNumber= (data_j.blockNumber!==undefined)? data_j.blockNumber : '--'
+    const wallet_value= (data_j.userAmount!==undefined)? `-${wallet_detail} RBTC ( ${wallet_detail_usd} USD )` : '--'
+    const interests= (data_j.USDInterests!==undefined)? `${interest_detail} RBTC ( ${interest_detail_usd} USD )` : '--'
+    const tx_hash_truncate= (data_j.transactionHash!==undefined)? truncate_txhash : '--'
+    const tx_hash= (data_j.transactionHash!==undefined)? data_j.transactionHash : '--'
+    const gas_fee= (data_j.gasFeeUSD!== undefined)? `${gasFee} RBTC` : '--'
+    const price= (data_j.reservePrice!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(data_j.reservePrice)), 'Kwei').toFixed(2) +' USD' : '--'
+    const wallet_value_main= (data_j.userAmount!==undefined)? `-${wallet_detail} RBTC`:'--'
+    const leverage= (data_j.leverage!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(data_j.leverage)), 'Kwei').toFixed(6) : '--'
+
+    return {set_event:set_event,set_asset:set_asset,set_status_txt:set_status_txt,set_status_percent:set_status_percent,
+        wallet_detail:wallet_detail,wallet_detail_usd:wallet_detail_usd,
+        paltform_detail_usd:paltform_detail_usd,paltform_detail:paltform_detail,
+        platform_fee:platform_fee,platform_fee_usd:platform_fee_usd,gasFee:gasFee,
+        gasFeeUSD:gasFeeUSD,interest_detail:interest_detail,interest_detail_usd:interest_detail_usd,
+        truncate_address:truncate_address,truncate_txhash:truncate_txhash,
+        lastUpdatedAt:lastUpdatedAt,RBTCAmount:RBTCAmount,confirmationTime:confirmationTime,
+        address:address,amount:amount,platform_fee_value:platform_fee_value,
+        blockNumber:blockNumber,wallet_value:wallet_value,interests:interests,
+        tx_hash_truncate:tx_hash_truncate,tx_hash:tx_hash,gas_fee:gas_fee,price:price,
+        wallet_value_main:wallet_value_main,leverage:leverage
+    }
+
 }
