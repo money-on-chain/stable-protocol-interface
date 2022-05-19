@@ -2,6 +2,7 @@
 
 .RewardsBalanceAmount {
   margin-bottom: 14px;
+  height: 100%;
   @media screen and (max-width: 1199px) {
     margin-top: 15px;
   }
@@ -10,6 +11,7 @@
 .ContainerMocAmountDatas{
   display: flex;
   flex-direction: column;
+  height: 100%;
   .Card.withPadding .title {
     padding: 0;
     h1 {
