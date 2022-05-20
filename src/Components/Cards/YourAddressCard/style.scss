@@ -1,0 +1,33 @@
+@import "../../../assets/css/general_styling";
+
+.SendTokenContainer {
+  width: 90%;
+  display: flex;
+  flex-flow: column;
+  overflow: hidden;
+  padding: 0;
+
+  .PriceVariation {
+    margin-bottom: 2em;
+  }
+
+  .SendToken {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    button{
+      margin-top: 1.4em;
+    }
+
+    .TitleBalance {
+      @include primary-text(0.8em, $secondary-color, 400);
+      text-transform: uppercase;
+    }
+    .ModalSendContainer {
+      > button {
+        width: 90px;
+        margin: 20px auto auto;
+      }
+    }
+  }
+}
