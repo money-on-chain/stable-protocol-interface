@@ -5,6 +5,7 @@ import { Row, Col, Switch } from 'antd';
 import React, { Fragment } from 'react';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import {useTranslation} from "react-i18next";
+import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedeemToken';
 
 export default function Mint(props) {
     const data_row_coins = [];
@@ -44,6 +45,10 @@ export default function Mint(props) {
                     <YourAddressCard height="23.4em" tokenToSend="STABLE" currencyOptions={['RESERVE', 'STABLE']} />
                 </Col>
                 <Col xs={24} xl={15}>
+                    {/*<MintOrRedeemToken
+                        token={'STABLE'}
+                        StatusData={props.Auth.contractStatusData}
+                    /> */}
                     <MintCard
                         token={'STABLE'}
                         currencyOptions={['RESERVE', 'STABLE']}

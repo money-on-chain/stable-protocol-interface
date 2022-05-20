@@ -42,7 +42,11 @@ const AuthenticateContext = createContext({
     getStackedBalance:  async (address) => {},
     getLockedBalance:  async (address) => {},
     stakingDeposit: async (mocs, address) => {},
+    unstake: async (mocs) => {},
+    getMoCAllowance: async (address) => {},
     approveMoCToken: async (address) => {},
+    withdraw: async (id) => {},
+    cancelWithdraw: async (id) => {},
     getPendingWithdrawals: async (address) => {},
     transferDocTo: async (to, amount) => {},
     transferBproTo: async (to, amount) => {},
@@ -231,7 +235,7 @@ const AuthenticateProvider = ({ children }) => {
             mocsettlement
         );
 
-        console.log(dataContractStatus);
+        console.log('auth dataContractStatus', dataContractStatus);
         setcontractStatusData(dataContractStatus);
 
         const user_address = account;
@@ -266,14 +270,24 @@ const AuthenticateProvider = ({ children }) => {
         }
     };
     const getGasPrice = async () => {
+        const percentage = 12;
+        let gasPrice;
         try {
             const web3 = new Web3(provider);
-            let gasPrice = await web3.eth.getGasPrice();
-            gasPrice = web3.utils.fromWei(gasPrice);
+            gasPrice = await web3.eth.getGasPrice();
+            // gasPrice = web3.utils.fromWei(gasPrice);
             return gasPrice;
         } catch (e) {
             console.log(e);
         }
+        gasPrice = new BigNumber(gasPrice);
+        if (!percentage) {
+            return gasPrice.toString();
+        }
+        return gasPrice
+            .multipliedBy(percentage * 0.01)
+            .plus(gasPrice)
+            .toString();
     };
 
     const getContract = (abi, contractAddress) => {
@@ -505,46 +519,81 @@ const AuthenticateProvider = ({ children }) => {
     };
 
     const getStackedBalance = async address => {
-        const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
+        const from = address || account;
+        const anAddress = "0x051F724b67bdB72fd059fBb9c62ca56a92500FF9";
         const moc = getContract(IStakingMachine.abi, anAddress);
-        let balance = await moc.methods.getBalance(anAddress).call();
+        let balance = await moc.methods.getBalance(from).call();
         return balance;
     };
 
     const getLockedBalance = async address => {
+        const from = address || account;
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const moc = getContract(IStakingMachine.abi, anAddress);
-        return moc.methods.getLockedBalance(anAddress).call();
+        let lockedBalance = await moc.methods.getLockedBalance(from).call();
+        return lockedBalance;
     };
 
     const stakingDeposit = async (mocs, address, callback) => {
+        const from = account;// await getAccount();
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const weiAmount = web3.utils.toWei(mocs, 'ether');
-        const moc = getContract(IStakingMachine.abi, anAddress);
-        const estimateGas = (
-            await moc.methods
-            .deposit(weiAmount, address)
-            .estimateGas({ anAddress })) * 2;
-        return moc.methods
-            .deposit(weiAmount, address)
-            .send({ anAddress, gas: estimateGas, gasLimit: estimateGas, gasPrice: await getGasPrice()},
-                callback
-            );
+        const stakingMachine = getContract(IStakingMachine.abi, anAddress);
+        const methodCall = stakingMachine.methods.deposit(weiAmount, address);
+        const gasLimit = 2 * (await methodCall.estimateGas({ from }));
+        methodCall.call({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit});
+        return methodCall.send({ from, gasPrice: await getGasPrice(), gaS: gasLimit, gasLimit: gasLimit}, callback);
+    };
+
+    const unstake = async (mocs, callback) => {
+        const from = account;
+        const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
+        const weiAmount = web3.utils.toWei(mocs, 'ether');
+        const stakingMachine = getContract(IStakingMachine.abi, anAddress);
+        const methodCall = stakingMachine.methods.withdraw(weiAmount);
+        const gasLimit = 2 * (await methodCall.estimateGas({ from }));
+        methodCall.call({ from, gasPrice: await getGasPrice(), gas:gasLimit, gasLimit: gasLimit});
+        return methodCall.send({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit }, callback);
+    };
+
+    const getMoCAllowance = async address => {
+        const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
+        const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
+        const from = address || account;
+        const moc = getContract(ERC20.abi, mocTokenAddress);
+        return moc.methods.allowance(from, anAddress).call();
     };
 
     const approveMoCToken = async (enabled, callback = () => { }) => {
+        const from = account;
+        console.log('from', from);
         const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const newAllowance = enabled ? web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString()) : 0;
         const moc = getContract(ERC20.abi, mocTokenAddress);
         console.log('newAllowance', newAllowance);
         return moc.methods.approve(anAddress, newAllowance)
-            .send({ mocTokenAddress, gasPrice: await getGasPrice()}, callback);
+            .send({ from, gasPrice: await getGasPrice()}, callback);
     };
 
-    const stakingCancelWithdraw = async (id, callback) => {
+    const withdraw = async (id, callback = () => { }) => {
         const from = account;
-        const moc = getContract(IDelayingMachine.abi, mocAddress);
+        const anAddress = "0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0";
+        const delayingMachine = getContract(IDelayingMachine.abi, anAddress);
+        const methodCall = delayingMachine.methods.withdraw(id);
+        const gasLimit = 2 * (await methodCall.estimateGas({ from }));
+        methodCall.call({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit });
+        return methodCall.send({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit }, callback);
+    };
+
+    const cancelWithdraw = async (id, callback) => {
+        const from = account;
+        const anAddress = "0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0";
+        const delayingMachine = getContract(IDelayingMachine.abi, anAddress);
+        const methodCall = delayingMachine.methods.cancel(id);
+        const gasLimit = 2 * (await methodCall.estimateGas({ from }));
+        methodCall.call({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit });
+        return methodCall.send({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit }, callback);
     };
 
     const getPendingWithdrawals = async address => {
@@ -616,7 +665,11 @@ const AuthenticateProvider = ({ children }) => {
                 getStackedBalance,
                 getLockedBalance,
                 stakingDeposit,
+                unstake,
+                getMoCAllowance,
                 approveMoCToken,
+                withdraw,
+                cancelWithdraw,
                 getPendingWithdrawals,
                 // transferDocTo,
                 // transferBproTo,
