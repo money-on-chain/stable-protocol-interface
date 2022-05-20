@@ -123,7 +123,7 @@ export default function MintCard(props) {
         <div className="Card MintCard" style={{
             height: '23.4em'
         }}>
-            <h3 className="CardTitle">Mint</h3>
+            <h3 className="CardTitle">{t("global.MintOrRedeemToken_Mint", { ns: 'global' })}</h3>
             <Row className="MintSelectsContainer" gutter={15}>
                 <Col span={12}>
                     <CoinSelect
@@ -194,8 +194,8 @@ export default function MintCard(props) {
                         <Col span={12}>
                             <Button type="primary" onClick={checkShowMintModal}>
                                 {isMint
-                                    ? 'Mint'
-                                    : 'Redeem'
+                                    ? t("global.MintOrRedeemToken_Mint", { ns: 'global' })
+                                    : t("global.MintOrRedeemToken_Redeem", { ns: 'global' })
                                 }
                             </Button>
                         </Col>
