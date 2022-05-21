@@ -1,14 +1,16 @@
 import {
   formatValueWithContractPrecision,
   formatValueToContract,
-  // precision,
-  // RBTCPrecision
+  precision,
+  RBTCPrecision
 } from './Formats';
 import { toBigNumber, minimum } from './numberHelper';
+import { getTransactionType } from './exchangeHelper';
 
 const BigNumber = require('bignumber.js');
 
 const convertAmount = (source, target, amount, convertToken) => {
+  console.log('amount', amount, 'source', source);
   if (amount === '') {
     return '';
   }
@@ -82,7 +84,40 @@ const enoughMOCBalance = (commissionValue, userState) => {
   const { mocBalance = '0' } = userState || {};
   return BigNumber(mocBalance).gte(commissionValue);
 }
+const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, valueYouExchange, mocState, userState, convertToken}) => {
+  const {
+    commissionRates = {}
+  } = mocState || {};
+  if(!convertToken) return {};
 
+  const vendor = {
+    address: "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076",
+    markup: "500000000000000"
+  };
+
+  const valueYouExchangeInRESERVE = convertToken(currencyYouExchange, "RESERVE", valueYouExchange);
+  const valueYouExchangeInMOC = convertToken("RESERVE", "MOC", valueYouExchangeInRESERVE);
+  const commissionRateForMOC = BigNumber(
+    commissionRates[getTransactionType(currencyYouExchange, currencyYouReceive, "MOC_COMMISSION")])
+    .plus(vendor.markup);
+  const commissionRateForRESERVE = BigNumber(
+    commissionRates[getTransactionType(currencyYouExchange, currencyYouReceive, "RESERVE_COMMISSION")])
+    .plus(vendor.markup);
+    console.log('commissionRateGorRESERVE', commissionRateForRESERVE);
+  const commissionValueIfPaidInMOC = commissionRateForMOC.times(valueYouExchangeInMOC).div(precision(RBTCPrecision));
+  const canPayInMOC = (canPayCommissionInMoc(commissionValueIfPaidInMOC, userState));
+
+  const commissionValueIfPaidInRESERVE = commissionRateForRESERVE.times(valueYouExchangeInRESERVE).div(precision(RBTCPrecision));
+  console.log('commissionValueIfPaidInRESERVE', commissionValueIfPaidInRESERVE);
+  const commissionYouPay = canPayInMOC ? commissionValueIfPaidInMOC : commissionValueIfPaidInRESERVE;
+
+  return {
+      commissionCurrency: canPayInMOC ? "MOC" : "RESERVE",
+      commissionRate: canPayInMOC ? commissionRateForMOC : commissionRateForRESERVE,
+      commissionYouPay: commissionYouPay,
+      enoughMOCBalance: enoughMOCBalance(commissionValueIfPaidInMOC, userState)
+  }
+}
 
 const getMaxMintableBalance = (currencyToMint, userState, mocState, convertToken) => {
   const usableReserveBalance = getUsableReserveBalance(
@@ -176,5 +211,6 @@ export {
   getMaxRedeemableBalance,
   amountIsTooSmall,
   getUsableReserveBalance,
-  canPayCommissionInMoc
+  canPayCommissionInMoc,
+  getCommissionRateAndCurrency,
 };

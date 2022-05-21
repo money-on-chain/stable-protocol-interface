@@ -1,0 +1,121 @@
+@import "../../../assets//css/general_styling";
+
+.ConfirmModalTransaction {
+  .ant-modal-body {
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 35px;
+    padding-top: 100px;
+    @media (max-width: 500px) {
+      padding-bottom: 24px;
+      padding-left: 24px;
+      padding-right: 24px;
+      padding-top: 60px;
+    }
+  }
+  h1 {
+    @include primary-text(1.2em, $grey, 400);
+    position: absolute;
+    top: 35px;
+    @media (max-width: 500px) {
+      top: 20px;
+    }
+  }
+  .Amount {
+    margin-bottom: 10px;
+    .Name {
+      @include primary-text(1.2em, black, 400);
+    }
+    .Value {
+      @include primary-text(1.2em, black, 600);
+      &.STABLE {
+        color: $color-moc-stable;
+        &.RRC20 {
+          color: $color-roc-stable;
+        }
+      }
+      &.RISKPROX {
+        color: $color-moc-riskprox;
+        &.RRC20 {
+          color: $color-roc-riskprox;
+        }
+      }
+      &.RISKPRO {
+        color: $color-moc-riskpro;
+        &.RRC20 {
+          color: $color-roc-riskpro;
+        }
+      }
+    }
+  }
+  .USDConversion {
+    display: flex;
+    justify-content: flex-end;
+    @include primary-text(1.2em, $low-grey, 400);
+    margin-top: -10px;
+    margin-bottom: 15px;
+  }
+  .MOCFee {
+    margin-bottom: 15px;
+    .Name, .Value {
+      @include primary-text(1em, $grey, 400);
+    }
+    .Disclaimer {
+      width: 250px;
+      display: block;
+      font-style: italic;
+      @include primary-text(0.8em, $medium-grey, 400);
+    }
+  }
+  .Comment {
+    > span {
+      @include primary-text(0.9em, $dark-grey, 400);
+      display: block;
+      margin-bottom: 5px;
+    }
+    input {
+      padding: 10px;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      background: $light-grey;
+      color: $dark-grey;
+      border-color: $low-grey;
+      border-radius: 0;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .HorizontalSeparator {
+    width: 100%;
+    border-top: 1px solid $low-grey;
+    margin: 20px 0;
+    opacity: .5;
+  }
+
+  .AmountsMayDiffer {
+    @include primary-text(1em, $low-grey, 400);
+    font-style: italic;
+  }
+  .MainActions {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    .ButtonPrimary, .ButtonSecondary {
+      width: 100px;
+    }
+    .ButtonPrimary {
+      margin-left: 30px;
+    }
+    @media (max-width: 500px) {
+      flex-direction: column;
+      align-items: center;
+      .ButtonSecondary, .ButtonPrimary {
+        width: 90%;
+        margin: 15px 0 0 0;
+      }
+    }
+  }
+}

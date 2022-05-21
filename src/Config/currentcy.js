@@ -1,6 +1,5 @@
 const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth) => {
-  // if(!window.nodeManager) return {};
-  console.log('userStateeeee', userState);
+  if(!userState) return {};
   switch (currencyCode) {
     case 'RISKPRO':
       return {

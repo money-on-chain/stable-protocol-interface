@@ -615,7 +615,7 @@ const AuthenticateProvider = ({ children }) => {
     const transferDocTo = async (to, amount, callback) => {
         const docAddress = "0x489049c48151924c07F86aa1DC6Cc3Fea91ed963";
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        const from = await getAccount();
+        const from = account;
         const contractAmount = web3.utils.toWei(amount, 'ether');
         const docToken = getContract(ERC20.abi, docAddress);
         return docToken.methods
@@ -626,7 +626,7 @@ const AuthenticateProvider = ({ children }) => {
     const transferBproTo = async (to, amount, callback) => {
         const bproAddress = "0x5639809FAFfF9082fa5B9a8843D12695871f68bd";
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        const from = await getAccount();
+        const from = account;
         const contractAmount = web3.utils.toWei(amount, 'ether');
         const bproToken = getContract(ERC20.abi, bproAddress);
         return bproToken.methods
@@ -671,9 +671,9 @@ const AuthenticateProvider = ({ children }) => {
                 withdraw,
                 cancelWithdraw,
                 getPendingWithdrawals,
-                // transferDocTo,
-                // transferBproTo,
-                // transferMocTo
+                transferDocTo,
+                transferBproTo,
+                transferMocTo
             }}
         >
             {children}

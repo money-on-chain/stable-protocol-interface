@@ -132,6 +132,7 @@ const formatValueVariation = (amount, language) => {
   };
 
 const formatValueToContract = (amount, currencyCode) => {
+    console.log('currencyCode', currencyCode);
     return new BigNumber(amount)
         .multipliedBy(precision(formatMap[currencyCode]))
         .toFixed(0);
@@ -145,7 +146,7 @@ const formatValueWithContractPrecision = (amount, currencyCode) => {
         .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN);
 };
 
-const convertAmount = (source, target, amount, convertToken) => {
+/* const convertAmount = (source, target, amount, convertToken) => {
     if (amount === '') {
         return '';
     }
@@ -157,7 +158,7 @@ const convertAmount = (source, target, amount, convertToken) => {
         target
     );
     return isNaN(convertedAmount) ? '' : convertedAmount.toString();
-};
+}; */
 
 const formatPerc = (value, language) =>
     Number.isNaN(value) ? '-' : parseFloat(Math.round(value * 100) / 100).toLocaleString(language, {minimumFractionDigits:2, maximumFractionDigits:2});
@@ -170,6 +171,8 @@ export {
     formatValueVariation,
     formatValueToContract,
     formatValueWithContractPrecision,
-    convertAmount,
+    // convertAmount,
     formatPerc,
+    RBTCPrecision,
+    precision,
 };
