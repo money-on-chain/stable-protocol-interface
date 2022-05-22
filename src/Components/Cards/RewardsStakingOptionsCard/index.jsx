@@ -156,6 +156,7 @@ export default function RewardsStakingOptions(props) {
                                     token={token}
                                     onInputValueChange={onValueStakingChange}
                                     inputValueInWei={stakingAmountInputValue}
+                                    currencyOptions={'MOC'}
                                 />
                             </Col>
                         </Row>

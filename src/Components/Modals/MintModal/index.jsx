@@ -4,7 +4,7 @@ import { AuthenticateContext } from '../../../Context/Auth';
 import './style.scss';
 import Web3 from 'web3';
 import { useState, useContext, useEffect } from 'react';
-import { Modal } from 'antd';
+import { Modal, notification } from 'antd';
 import Copy from "../../Page/Copy";
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
 import { LargeNumber } from '../../LargeNumber';
@@ -36,7 +36,7 @@ export default function MintModal(props) {
   } = props;
   const [loading, setLoading] = useState(false);
   const [showTransaction, setShowTransaction] = useState(false);
-  const [transaction, setTransaction] = useState(null);
+  const [transaction, setTransaction] = useState(false);
   const auth = useContext(AuthenticateContext);
   const tokenNameExchange = currencyYouExchange
     ? currenciesDetail.find((x) => x.value === currencyYouExchange).label
@@ -99,20 +99,27 @@ export default function MintModal(props) {
   };
 
   const getTransaction = async (hash) => {
-    let status = auth.getTransactionReceipt(hash);
-    if (status) {
+    await auth.getTransactionReceipt(hash, ()=> {
+      setTransaction(false);
+      console.log('pending get transaction receipt');
+    }).then(res => {
+      if (res)
+      setShowTransaction(true);
       setTransaction(true);
-    }
+    }).catch(e => {
+      setTransaction(false);
+      notification['error']({
+        message: t('global.RewardsError_Title'),
+        description: t('global.RewardsError_Message'),
+        duration: 10
+    });
+    });
   } ;
 
   const callback = (error, transactionHash) => {
     setLoading(false);
     setCurrentHash(transactionHash);
-    const transaction = auth.getTransactionReceipt(transactionHash);
-    if (transaction) {
-      setTransaction(transaction);
-    }
-    setShowTransaction(true);
+    getTransaction(transactionHash);
   };
 
   const styleExchange = tokenNameExchange === tokenName ? { color } : {};

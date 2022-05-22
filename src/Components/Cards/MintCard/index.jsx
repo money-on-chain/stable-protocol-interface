@@ -36,10 +36,12 @@ export default function MintCard(props) {
   }
   const mocState = props.StatusData;
   const userState = props.UserBalanceData
+  console.log('mocState', mocState);
   let mocStatePrices;
   if(mocState?.length) {
     [mocStatePrices] = mocStates;
   }
+  const reservePrice = mocState?.bitcoinPrice;
   const convertToken = convertHelper(
     _.pick(mocStatePrices, Object.keys(priceFields).concat(['reservePrecision']))
   );
@@ -254,8 +256,8 @@ export default function MintCard(props) {
             1 {t('MoC.Tokens_RESERVE_code', {ns: 'moc'})} ={' '}
             <LargeNumber
               className="ReservePrice"
-              amount={bitcoinPrice}
-              currencyCode="USD"
+              amount={reservePrice}
+              currencyCode={'USD'}
               includeCurrency
             />
           </span>
