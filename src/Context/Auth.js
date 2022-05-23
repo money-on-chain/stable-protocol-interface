@@ -51,6 +51,7 @@ const AuthenticateContext = createContext({
     transferDocTo: async (to, amount) => {},
     transferBproTo: async (to, amount) => {},
     transferMocTo: async (to, amount) => {},
+    calcMintInterestValues: async (amount) => {},
 });
 
 let checkLoginFirstTime = true;
@@ -643,7 +644,23 @@ const AuthenticateProvider = ({ children }) => {
         return mocToken.methods
           .transfer(toWithChecksum, contractAmount)
           .send({ from, gasPrice: await getGasPrice() }, callback);
-      };
+    };
+
+    const calcMintInterestValues = amount => {
+        const mocInrateAddress = "0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c";
+        const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
+        return mocInrate.calcMintInterestValues(strToBytes32(bucketX2), amount).call();
+    };
+
+    // TODO
+    /* const approveReserve = (address) => {
+        const weiAmount = web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString());
+        const reserveTokenAddress =
+        const reserveToken = getContract(ERC20.abi, reserveTokenAddress);
+        return getGasPrice().then(price => {
+            return 
+        })
+    }; */
 
     return (
         <AuthenticateContext.Provider
@@ -673,7 +690,8 @@ const AuthenticateProvider = ({ children }) => {
                 getPendingWithdrawals,
                 transferDocTo,
                 transferBproTo,
-                transferMocTo
+                transferMocTo,
+                calcMintInterestValues
             }}
         >
             {children}

@@ -187,7 +187,7 @@
         "MintOrRedeemToken_Clear": "Limpiar",
         "MintOrRedeemToken_Mint": "Mint",
         "MintOrRedeemToken_Redeem": "Redeem",
-        "MintOrRedeemToken_Fee": "Comisión (__feePercent__%): ",
+        "MintOrRedeemToken_Fee": "Comisión: ",
         "MintOrRedeemToken_Interest": "Tasa de Interés (__interestRate__%): ",
 
         "InputWithCurrencySelector_AddTotalAvailable": "Usar total disponible",

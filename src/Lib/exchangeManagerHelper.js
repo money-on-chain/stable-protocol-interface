@@ -81,20 +81,18 @@ const enoughMOCAllowance = (commissionValue, userState) => {
 }
 
 const enoughMOCBalance = (commissionValue, userState) => {
-  const { mocBalance = '0' } = userState || {};
+  const { mocBalance } = userState || {};
   return BigNumber(mocBalance).gte(commissionValue);
 }
 const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, valueYouExchange, mocState, userState, convertToken}) => {
   const {
     commissionRates = {}
   } = mocState || {};
-  if(!convertToken) return {};
-
+  if(!convertToken || !currencyYouReceive || !currencyYouExchange) return {};
   const vendor = {
     address: "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076",
     markup: "500000000000000"
   };
-
   const valueYouExchangeInRESERVE = convertToken(currencyYouExchange, "RESERVE", valueYouExchange);
   const valueYouExchangeInMOC = convertToken("RESERVE", "MOC", valueYouExchangeInRESERVE);
   const commissionRateForMOC = BigNumber(
@@ -103,12 +101,11 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
   const commissionRateForRESERVE = BigNumber(
     commissionRates[getTransactionType(currencyYouExchange, currencyYouReceive, "RESERVE_COMMISSION")])
     .plus(vendor.markup);
-    console.log('commissionRateGorRESERVE', commissionRateForRESERVE);
+    console.log('valueYouExchangeInMOC', valueYouExchangeInMOC);
   const commissionValueIfPaidInMOC = commissionRateForMOC.times(valueYouExchangeInMOC).div(precision(RBTCPrecision));
   const canPayInMOC = (canPayCommissionInMoc(commissionValueIfPaidInMOC, userState));
 
   const commissionValueIfPaidInRESERVE = commissionRateForRESERVE.times(valueYouExchangeInRESERVE).div(precision(RBTCPrecision));
-  console.log('commissionValueIfPaidInRESERVE', commissionValueIfPaidInRESERVE);
   const commissionYouPay = canPayInMOC ? commissionValueIfPaidInMOC : commissionValueIfPaidInRESERVE;
 
   return {

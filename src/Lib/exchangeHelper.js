@@ -195,8 +195,8 @@ const buyCurrencyMap = {
   }
 };
 
-const {appMode} = 'MoC' // o RRC20;
-const appModeString = `APP_MODE_${appMode}`;
+const appMode = 'MoC' // o RRC20;
+const appModeString = `APP_MODE_MoC`;
 
 const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>
   buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
@@ -231,11 +231,12 @@ const getDefaultSourceByTarget = currency =>
   Object.keys(buyCurrencyMap).find(it => Object.keys(buyCurrencyMap[it]).includes(currency));
 
 const getTransactionTypeId = (sourceCurrency, targetCurrency, commissionCurrency) => {
-  return buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].transactionTypeId;
+  return buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString]?.transactionTypeId;
 }
 
 const getTransactionType = (sourceCurrency, targetCurrency, commissionCurrency) => {
   let TransactionTypeIds = (appMode === "MoC") ? TransactionTypeIdsMoC : TransactionTypeIdsRRC20;
+  console.log('sourceCurrencys',sourceCurrency, 'targetCurrency', targetCurrency, 'commissionCurrency', commissionCurrency);
   return Object.keys(TransactionTypeIds).find(k => TransactionTypeIds[k] === buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString]?.transactionTypeId);
 }
 

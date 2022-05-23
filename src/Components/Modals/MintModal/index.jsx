@@ -32,7 +32,9 @@ export default function MintModal(props) {
     visible,
     onCancel,
     onConfirm,
-    convertToken
+    convertToken,
+    exchanging,
+    receiving,
   } = props;
   const [loading, setLoading] = useState(false);
   const [showTransaction, setShowTransaction] = useState(false);
@@ -139,8 +141,8 @@ export default function MintModal(props) {
           <span className="Name">{t('global.ConfirmTransactionModal_Exchanging')}</span>
           <span className="Value" style={styleExchange}>
             <LargeNumber
-              currencyCode={tokenNameExchange}
-              amount={props.valueYouExchange}
+              currencyCode={props.exchanging.currencyCode} // tokenNameExchange}
+              amount={props.exchanging.value} // props.valueYouExchange}
               includeCurrency
             />
           </span>
@@ -149,8 +151,8 @@ export default function MintModal(props) {
           <span className="Name">{t('global.ConfirmTransactionModal_Receiving')}</span>
           <span className="Value" style={styleReceive}>
             <LargeNumber
-                currencyCode={tokenNameReceive}
-                amount={props.valueYouReceive}
+                currencyCode={props.receiving.currencyCode} // {tokenNameReceive}
+                amount={props.receiving.value} // {props.valueYouReceive}
                 includeCurrency
               />
           </span>
@@ -164,10 +166,36 @@ export default function MintModal(props) {
           style={{ alignItems: 'start', marginBottom: 20 }}
         >
           <div className="Name">
-            <div className="Gray">Fee (0.05%)</div>
+            <div className="MOCFee">
+              <div className={`AlignedAndCentered Amount`}>
+                <span className="Name">{`${t('global.ConfirmTransactionModal_MOCFee')} (${fee.percentage}%)`}</span>
+                <span className={`Value ${appMode}`}>
+                  <LargeNumber
+                    currencyCode={fee.currencyCode}
+                    amount={fee.value}
+                    includeCurrency
+                  />
+                </span>
+              </div>
+            </div>
+            {interests &&
+              interests.interestValue &&
+              interests.interestValue.gt(0) && (
+                <div className="MOCFee">
+                  <div className={`AlignedAndCentered Amount`}>
+                    <span className="Name">{`${t('global.ConfirmTransactionModal_Interests')} (${interests.interestRate}%)`}</span>
+                    <span className={`Value ${appMode}`}>
+                      <LargeNumber
+                        currencyCode={'RESERVE' }
+                        amount={interests.interestValue}
+                        includeCurrency
+                      />
+                    </span>
+                  </div>
+                </div>
+          )}
             <div className="Legend">
-              This fee will be deduced from the transaction value
-              transferred
+            {t('global.ConfirmTransactionModal_MOCFee_Disclaimer')}
             </div>
           </div>
           {/*<span className="Value">0.00 MOC</span>*/}
@@ -178,7 +206,7 @@ export default function MintModal(props) {
 
       <div className="AlignedAndCentered">
         <i className="Gray">
-          Amounts may be different at transaction confirmation
+          {t('global.ConfirmTransactionModal_AmountMayDifferDisclaimer')}
         </i>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '1em'}}>
