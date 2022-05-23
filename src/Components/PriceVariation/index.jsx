@@ -19,8 +19,8 @@ export default function PriceVariation(props) {
     const sign = isPositive ? '+' : '-';
     const color = isPositive ? '#3fcb97' : '#f2316a';
     const formattedVar = formatValueVariation(priceVariation.current, 'en');
-    // const formattedPerc = formatPerc(2, 'en');
-    const variationText = `${sign}${formattedVar} (${''}%)`;
+    const formattedPerc = parseFloat(((priceVariation.day - priceVariation.current)/priceVariation.day)*100).toLocaleString('en', {minimumFractionDigits:2, maximumFractionDigits:2});
+    const variationText = `${sign}${formattedVar} (${formattedPerc}%)`;
     const tooltip = (
         <div className="PriceVariationTooltip">
           <p>{/*isDailyVariation ? 'Daily variation' : 'Settlement Day' */}</p>

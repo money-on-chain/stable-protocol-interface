@@ -187,7 +187,7 @@
         "MintOrRedeemToken_Clear": "Clear",
         "MintOrRedeemToken_Mint": "Mint",
         "MintOrRedeemToken_Redeem": "Redeem",
-        "MintOrRedeemToken_Fee": "Fee (__feePercent__%): ",
+        "MintOrRedeemToken_Fee": "Fee: ",
         "MintOrRedeemToken_Interest": "Interest rate (__interestRate__%): ",
 
         "InputWithCurrencySelector_AddTotalAvailable": "Add total available",

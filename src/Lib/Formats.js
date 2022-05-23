@@ -1,27 +1,82 @@
 const BigNumber = require('bignumber.js');
 
-const NumberFormat = {
+const REWARDPrecision = {
     contractDecimals: 18,
     decimals: 6
 };
 
+const valueVariation = {
+    contractDecimals: 20,
+    decimals: 2,
+};
+
+const mocPrecision = {
+    contractDecimals: 18,
+    decimals: 2,
+};
+
+const RBTCPrecision = {
+    contractDecimals: 18,
+    decimals: 6,
+};
+
+const USDPrecision = {
+    contractDecimals: 18,
+    decimals: 2,
+}
+
+const PriceUSDPrecision = {
+    contractDecimals: 18,
+    decimals: 2,
+}
+
+const COVPrecision = {
+    contractDecimals: 18,
+    decimals: 4,
+}
+
+const percentagePrecision = {
+    contractDecimals: 6,
+    decimals: 0,
+}
+
+const visiblePercentage = {
+    contractDecimals: 0,
+    decimals: 6,
+}
+
+const RISKPROXInterest = {
+    contractDecimals: 18,
+    decimals: 6,
+}
+
+const FreeDocInterest = {
+    contractDecimals: 18,
+    decimals: 2,
+}
+
+const commissionRate = {
+    contractDecimals: 18,
+    decimals: 1,
+}
+
 const formatMap = {
-    RISKPROX: NumberFormat,
-    RISKPRO: NumberFormat,
-    STABLE: NumberFormat,
-    USD: NumberFormat,
-    USDPrice: NumberFormat,
-    RESERVE: NumberFormat,
-    MOC: NumberFormat,
-    REWARD: NumberFormat,
-    COV: NumberFormat,
-    LEV: NumberFormat,
-    percentage: NumberFormat,
-    visiblePercentage: NumberFormat,
-    RISKPROXInterest: NumberFormat,
-    FreeDocInterest: NumberFormat,
-    commissionRate: NumberFormat,
-    valueVariation: NumberFormat
+    RISKPROX: RBTCPrecision,
+    RISKPRO: RBTCPrecision,
+    STABLE: USDPrecision,
+    USD: USDPrecision,
+    USDPrice: PriceUSDPrecision,
+    RESERVE: RBTCPrecision,
+    MOC: mocPrecision,
+    REWARD: REWARDPrecision,
+    COV: COVPrecision,
+    LEV: COVPrecision,
+    percentage: percentagePrecision,
+    visiblePercentage: visiblePercentage,
+    RISKPROXInterest: RISKPROXInterest,
+    FreeDocInterest: FreeDocInterest,
+    commissionRate: commissionRate,
+    valueVariation: valueVariation
 };
 
 const formatLocalMap = {
@@ -90,7 +145,7 @@ const formatValueWithContractPrecision = (amount, currencyCode) => {
         .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN);
 };
 
-const convertAmount = (source, target, amount, convertToken) => {
+/* const convertAmount = (source, target, amount, convertToken) => {
     if (amount === '') {
         return '';
     }
@@ -102,7 +157,7 @@ const convertAmount = (source, target, amount, convertToken) => {
         target
     );
     return isNaN(convertedAmount) ? '' : convertedAmount.toString();
-};
+}; */
 
 const formatPerc = (value, language) =>
     Number.isNaN(value) ? '-' : parseFloat(Math.round(value * 100) / 100).toLocaleString(language, {minimumFractionDigits:2, maximumFractionDigits:2});
@@ -115,6 +170,8 @@ export {
     formatValueVariation,
     formatValueToContract,
     formatValueWithContractPrecision,
-    convertAmount,
+    // convertAmount,
     formatPerc,
+    RBTCPrecision,
+    precision,
 };

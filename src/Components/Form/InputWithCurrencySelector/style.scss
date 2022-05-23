@@ -1,0 +1,51 @@
+@import '../../../assets/css/general_styling';
+.text-align-right{
+    text-align: right;
+}
+.InputWithCurrencySelector {
+    h3 {
+        @include primary-text(1em, $medium-grey, 400);
+    }
+    .MainContainer {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        .valueInput {
+            width: inherit;
+            border: none;
+            border-bottom: 1px solid #e1e1e1;
+            height: 48px;
+            padding: 8px;
+            background: #f7f7f7;
+            @include primary-text(20px, $black, 400);
+            &:hover,
+            &:focus {
+                @include input-style($primary-color);
+            }
+            &.formError {
+                border-bottom-color: #ff4d4f;
+            }
+        }
+        .SelectCurrency {
+            width: 45%;
+            max-width: 120px;
+            .ant-select-selector {
+                background-color: #f7f7f7;
+                border: none;
+                border-bottom: 1px solid #d9d9d9;
+            }
+            @media (max-width: 500px) {
+                width: 50%;
+            }
+        }
+    }
+    .setValueToMaxLink {
+        cursor: pointer;
+        color: $primary-color;
+    }
+
+    .AlignedAndCentered {
+        display: flex;
+        justify-content: space-between;
+    }
+}
