@@ -8,15 +8,16 @@ import { Row, Col, Button } from 'antd';
 import './style.scss';
 import { Select, Input } from 'antd';
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
+import { useTranslation } from "react-i18next";
 const BigNumber = require('bignumber.js');
 const { Option } = Select;
 
 export default function CoinSelect(props) {
     const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
-    const { inputValueInWei = '0.0001', onInputValueChange = () => {} } = props;
+    const { inputValueInWei = '0.0001', onInputValueChange = () => { } } = props;
     const {
         currencyOptions = [],
-        onCurrencySelect = () => {},
+        onCurrencySelect = () => { },
         disabled = false
     } = props;
     const optionsFiltered = currenciesDetail.filter((it) =>
@@ -74,6 +75,8 @@ export default function CoinSelect(props) {
     const addTotalAvailable = () => {
         onInputValueChange(parseFloat(maxAmount()));
     };
+
+    const [t, i18n] = useTranslation(["global", 'moc'])
 
     return (
         <div className="CoinSelect">
@@ -136,7 +139,7 @@ export default function CoinSelect(props) {
                             className="FormLabel Selectable"
                             onClick={addTotalAvailable}
                         >
-                            Add total available
+                            {t('global.InputWithCurrencySelector_AddTotalAvailable', { ns: 'global' })}
                         </a>
                     )}
                 </Col>

@@ -17,7 +17,7 @@ const token = "MOC";
 const withdrawalStatus = {
     pending: "PENDING",
     available: "AVAILABLE"
-  };
+};
 
 const getColumns = renderActionsFunction => [
     {
@@ -35,18 +35,18 @@ const getColumns = renderActionsFunction => [
         render: expiration => moment(parseInt(expiration) * 1000).format("L LT")
     },
     {
-      title: "STATUS",
-      dataIndex: "status",
-      key: "status",
-      render: status =>
-        status === withdrawalStatus.available
-          ? "Ready to Withdraw"
-          : "Processing unstake"
+        title: "STATUS",
+        dataIndex: "status",
+        key: "status",
+        render: status =>
+            status === withdrawalStatus.available
+                ? "Ready to Withdraw"
+                : "Processing unstake"
     },
     {
-      title: "OPERATIONS",
-      key: "operations",
-      render: renderActionsFunction
+        title: "OPERATIONS",
+        key: "operations",
+        render: renderActionsFunction
     }
 ]
 
@@ -93,7 +93,7 @@ export default function RewardsStakingOptions(props) {
                 const status = new Date(parseInt(withdrawal.expiration) * 1000) > new Date()
                     ? withdrawalStatus.pending
                     : withdrawalStatus.available;
-            
+
                 return {
                     ...withdrawal,
                     status
@@ -103,11 +103,11 @@ export default function RewardsStakingOptions(props) {
         let readyToWithdrawAmount = "0";
 
         pendingWithdrawalsFormatted.forEach(({ status, amount }) => {
-        if (status === withdrawalStatus.pending) {
-            pendingExpirationAmount = BigNumber.sum(pendingExpirationAmount, amount).toFixed(0);
-        } else {
-            readyToWithdrawAmount = BigNumber.sum(readyToWithdrawAmount, amount).toFixed(0);
-        }
+            if (status === withdrawalStatus.pending) {
+                pendingExpirationAmount = BigNumber.sum(pendingExpirationAmount, amount).toFixed(0);
+            } else {
+                readyToWithdrawAmount = BigNumber.sum(readyToWithdrawAmount, amount).toFixed(0);
+            }
         });
         setLockedBalance(_lockedBalance);
         setStakedBalance(_stakedBalance);
@@ -123,7 +123,7 @@ export default function RewardsStakingOptions(props) {
     const renderStaking = () => {
         var btnDisable = false;
         if (!props.UserBalanceData) {
-        btnDisable = true;
+            btnDisable = true;
         }
         return (
             <div className="StakingTabContent">
@@ -184,7 +184,7 @@ export default function RewardsStakingOptions(props) {
     const renderUnstaking = () => {
         var btnDisable = false;
         if (!props.UserBalanceData) {
-        btnDisable = true;
+            btnDisable = true;
         }
         return (
             <div className="StakingTabContent">
@@ -237,8 +237,8 @@ export default function RewardsStakingOptions(props) {
                                 type="primary"
                                 className="StakingBtn"
                                 onClick={() => {
-                                  setModalAmount(unstakingAmountInputValue);
-                                  setModalMode("unstaking");
+                                    setModalAmount(unstakingAmountInputValue);
+                                    setModalMode("unstaking");
                                 }}
                             >Unstake</Button>
                         </Row>
@@ -258,34 +258,34 @@ export default function RewardsStakingOptions(props) {
                     rowKey="id"
                 />
                 <Row className="WithdrawTabFooter">
-                  <Col xs={24} md={8}>
-                    <div className="WithdrawCTALabel">
-                      <span className="grey">{t("global.StakingOptions_PendingExpiration")}</span>
-                      <div className="bolder">
-                        <LargeNumber
-                            className="amount"
-                            amount={totalPendingExpiration}
-                            currencyCode="REWARD"
-                        />{" "}
-                        MoCs
-                      </div>
-                    </div>
-                  </Col>
-                  <Col xs={24} md={16}>
-                    <Row>
-                      <Col xs={12} md={10}>
-                        <span className="grey">{t("global.StakingOptions_AvailableToWithdraw")}</span>
-                        <div className="bolder">
-                          <LargeNumber
-                            className="amount"
-                            amount={totalAvailableToWithdraw}
-                            currencyCode="REWARD"
-                          />{" "}
-                          MoCs
+                    <Col xs={24} md={8}>
+                        <div className="WithdrawCTALabel">
+                            <span className="grey">{t("global.StakingOptions_PendingExpiration")}</span>
+                            <div className="bolder">
+                                <LargeNumber
+                                    className="amount"
+                                    amount={totalPendingExpiration}
+                                    currencyCode="REWARD"
+                                />{" "}
+                                MoCs
+                            </div>
                         </div>
-                      </Col>
-                    </Row>
-                  </Col>
+                    </Col>
+                    <Col xs={24} md={16}>
+                        <Row>
+                            <Col xs={12} md={10}>
+                                <span className="grey">{t("global.StakingOptions_AvailableToWithdraw")}</span>
+                                <div className="bolder">
+                                    <LargeNumber
+                                        className="amount"
+                                        amount={totalAvailableToWithdraw}
+                                        currencyCode="REWARD"
+                                    />{" "}
+                                    MoCs
+                                </div>
+                            </Col>
+                        </Row>
+                    </Col>
                 </Row>
             </>
         )
@@ -307,43 +307,43 @@ export default function RewardsStakingOptions(props) {
                 </Col>
                 <Col xs={1}/>
                 <Col xs={11}>
-                <Button
-                    type="primary"
-                    disabled={
-                    record.status === withdrawalStatus.pending || blockedWithdrawals.includes(record.id)
-                    }
-                    onClick={() => {
-                    setWithdrawalId(record.id);
-                    setModalAmount(record.amount);
-                    setModalMode("withdraw");
-                    }}
-                >{t("global.StakingOptions_Withdraw")}</Button>
+                    <Button
+                        type="primary"
+                        disabled={
+                            record.status === withdrawalStatus.pending || blockedWithdrawals.includes(record.id)
+                        }
+                        onClick={() => {
+                            setWithdrawalId(record.id);
+                            setModalAmount(record.amount);
+                            setModalMode("withdraw");
+                        }}
+                    >{t("global.StakingOptions_Withdraw")}</Button>
                 </Col>
             </Row>
         </>
     );
     const resetBalancesAndValues = () => {
-    setStakingBalances();
-    setUnstakingAmountInputValue("0");
-    setStakingAmountInputValue("0");
-    setUntouchCount(prev => prev + 1);
-  };
+        setStakingBalances();
+        setUnstakingAmountInputValue("0");
+        setStakingAmountInputValue("0");
+        setUntouchCount(prev => prev + 1);
+    };
 
     const onStakingModalConfirm = (operationStatus, txHash) => {
         const operationInfo = {
-          operationStatus,
-          txHash
+            operationStatus,
+            txHash
         };
-    
+
         setOperationModalInfo(operationInfo);
         setIsOperationModalVisible(true);
         resetBalancesAndValues();
-      };
+    };
 
     return (
         <div className="Card RewardsStakingOptions">
             <h3 className="CardTitle">{t("global.RewardsOptions_Title")}</h3>
-            <Tabs  
+            <Tabs
                 activeKey={selectedTab}
                 onChange={n => setSelectedTab(n)}
             >
