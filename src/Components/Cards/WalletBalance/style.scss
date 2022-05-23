@@ -46,7 +46,7 @@
       font-weight: 700;
     }
 
-    .ModalSendContainer button {
+    button {
       width: 105px;
     }
 
@@ -156,9 +156,6 @@
   z-index: 2;
 }
 
-.justify-content-initial{
-  justify-content: initial !important;
-}
 
 .WalletBalance-mb{
   width: 400px;

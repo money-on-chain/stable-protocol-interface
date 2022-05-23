@@ -140,3 +140,114 @@
         }
     }
 }
+
+
+.ModalUpTopContainer{
+
+    .ant-form-item {
+        margin-bottom: 10px;
+    }
+
+    .InputAddressLabel {
+        font-size: 12px !important;
+        font-weight: bold !important;
+        color: #888888 !important;
+    }
+    .InputAddressContainer{
+        margin-top: 16px;
+        input {
+            width: 100%;
+            margin: 0;
+            padding-left: 10px;
+            /*font-family: 'Montserrat', sans-serif;
+            font-size: 1em;
+            font-weight: 400;
+            color: #707070;
+            border: none;
+            border-bottom: 1px solid #e1e1e1;
+            height: 48px;
+            padding: 8px;
+            background: #f7f7f7;*/
+        }
+    }
+    .ant-form-item {
+        margin-bottom: 10px;
+    }
+    input {
+        border-radius: 8px !important;
+        background: #fff !important;
+        font-size: 16px !important;
+        color: #888888 !important;
+        font-weight: 400 !important;
+        height: 40px !important;
+        border: 1px solid #949494;
+    }
+
+
+
+    /******step 2******/
+    //.ant-form-item-control-input-content {
+    //    border-radius: 8px;
+    //    .InputWithCurrencySelector{
+    //        .MainContainer {
+    //            display: flex;
+    //            align-items: center;
+    //            width: 100%;
+    //        }
+    //    }
+    //}
+
+
+    /******end step 2******/
+}
+
+
+
+.inputAmount{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    input {
+        border-radius: 8px ;
+        background: #fff ;
+        font-size: 16px ;
+        color: #888888 ;
+        font-weight: 400 ;
+        height: 40px ;
+        border: 1px solid #949494;
+        width: 80%;
+        border-right: none;
+        border-top-right-radius:0px;
+        border-bottom-right-radius: 0px;
+        padding-left: 10px;
+    }
+
+    div{
+        border-radius: 8px ;
+        border: 1px solid #949494;
+        line-height: 2.125;
+        width: 20%;
+        border-left: none;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        span{
+            font-weight: bold;
+            color: lightgray;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+        img{
+            margin-bottom: 4px;
+        }
+    }
+
+}
+
+//.InputWithCurrencySelector{
+//    .MainContainer {
+//        display: flex;
+//        align-items: center;
+//        width: 100%;
+//    }
+//}

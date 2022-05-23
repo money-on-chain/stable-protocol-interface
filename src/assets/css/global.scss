@@ -198,6 +198,9 @@ input[type=number] {
 
 .AlignedAndCentered {
   margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .Bold {
   font-weight: bold;

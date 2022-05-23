@@ -40,7 +40,7 @@ export default function Mint(props) {
                     <AmountCard tokenName="riskpro" titleName="BPro" />
                 </Col>
                 <Col xs={24} md={12} xl={4}>
-                    <YourAddressCard height="23.4em" tokenName="RISKPRO" currencyOptions={['RESERVE', 'RISKPRO']} />
+                    <YourAddressCard height="23.4em" tokenToSend="RISKPRO" currencyOptions={['RESERVE', 'RISKPRO']} />
                 </Col>
                 <Col xs={24} xl={15}>
                     <MintCard

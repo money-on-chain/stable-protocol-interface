@@ -153,3 +153,11 @@ export function readJsonTable(data_j){
     }
 
 }
+
+export const toNumberFormat = (value, decimals = 0) => {
+    if (isNaN(Number(value))) value = 0;
+    return Number(value).toLocaleString(navigator.language, {
+        maximumFractionDigits: decimals,
+        minimumFractionDigits: decimals,
+    });
+}
