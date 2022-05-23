@@ -131,22 +131,22 @@ export default function RewardsStakingOptions(props) {
                     <Col xs={20}>
                         <Row className="RewardsOptionsOverview">
                             <div>
-                                Available to Stake
+                                {t('global.RewardsOptions_AvailableToStake', { ns: 'global' })}
                                 <h3 className="amount">
-                                    <LargeNumber amount={mocBalance} currencyCode="REWARD" /> MOC
+                                    <LargeNumber amount={mocBalance} currencyCode="REWARD" /> {t('MoC.Tokens_MOC_code', { ns: 'moc' })}
                                 </h3>
                             </div>
                             <div style={{ textAlign: 'right' }}>
-                                Staked
+                                {t('global.RewardsOptions_Staked', { ns: 'global' })}
                                 <h3 className="amount">
-                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> MOC
+                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t('MoC.Tokens_MOC_code', { ns: 'moc' })}
                                 </h3>
                             </div>
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
                                 <CoinSelect
-                                    label="MoC Tokens I want to stake"
+                                    label={t('global.RewardsOptions_AmountToStakePlaceholder', { ns: 'global' })}
                                     value={'MOC'}
                                     AccountData={props.AccountData}
                                     UserBalanceData={props.UserBalanceData}
@@ -158,9 +158,8 @@ export default function RewardsStakingOptions(props) {
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
-                                <span>Staking MoC Tokens receive rewards from the MoC Staking Rewards Program.
-                                    You will be able to unstake at any time with a release delay of 30 days (no rewards received during this period).
-                                    After this period you will be able to "Withdraw".
+                                <span>
+                                    {t('global.RewardsOptions_AmountToStakeNote', { ns: 'global' })}
                                 </span>
                             </Col>
                         </Row>
@@ -189,16 +188,16 @@ export default function RewardsStakingOptions(props) {
                     <Col xs={20}>
                         <Row className="RewardsOptionsOverview">
                             <div>
-                                Available to Unstake
+                                {t('global.RewardsOptions_AvailableToUnstake', { ns: 'global' })}
                                 <h3 className="amount">
-                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> MOC
+                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t('MoC.Tokens_MOC_code', { ns: 'moc' })}
                                 </h3>
                             </div>
                             {parseFloat(lockedBalance) > 0 && (
                                 <div>
-                                    Locked by voting
+                                    {t('global.RewardsOptions_Locked', { ns: 'global' })}
                                     <h3 className="amount">
-                                        <LargeNumber amount={lockedBalance} currencyCode="REWARD" /> MOC
+                                        <LargeNumber amount={lockedBalance} currencyCode="REWARD" /> {t('MoC.Tokens_MOC_code', { ns: 'moc' })}
                                     </h3>
                                 </div>
                             )}
@@ -206,7 +205,7 @@ export default function RewardsStakingOptions(props) {
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
                                 <CoinSelect
-                                    label="MoC Tokens I want to unstake"
+                                    label={t('global.RewardsOptions_AmountToUnstakePlaceholder', { ns: 'global' })}
                                     value={token}
                                     AccountData={props.AccountData}
                                     onInputValueChange={() => setUnstakingAmountInputValue(stackedBalance)}
@@ -217,8 +216,8 @@ export default function RewardsStakingOptions(props) {
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
                                 <span>
-                                    Unstaking will take 30 days. During this period no MoC Rewards will be received.
-                                    <a onClick={() => setSelectedTab("2")}>Go to Withdraw</a> either to restake your MoC tokens anytime or to withdraw after 30 days period.
+                                    {t('global.RewardsOptions_UnstakingNote.first', { ns: 'global' })}
+                                    <a onClick={() => setSelectedTab("2")}>{t('global.RewardsOptions_UnstakingNote.link', { ns: 'global' })}</a> {t('global.RewardsOptions_UnstakingNote.second', { ns: 'global' })}
                                 </span>
                             </Col>
                         </Row>
@@ -250,7 +249,7 @@ export default function RewardsStakingOptions(props) {
                 <Row className="WithdrawTabFooter">
                     <Col xs={24} md={8}>
                         <div className="WithdrawCTALabel">
-                            <span className="grey">Processing unstake</span>
+                            <span className="grey">{t('global.StakingOptions_PendingExpiration', { ns: 'global' })}</span>
                             <div className="bolder">
                                 <LargeNumber
                                     className="amount"
@@ -264,7 +263,7 @@ export default function RewardsStakingOptions(props) {
                     <Col xs={24} md={16}>
                         <Row>
                             <Col xs={12} md={10}>
-                                <span className="grey">Ready to Withdraw</span>
+                                <span className="grey">{t('global.StakingOptions_AvailableToWithdraw', { ns: 'global' })}</span>
                                 <div className="bolder">
                                     <LargeNumber
                                         className="amount"
