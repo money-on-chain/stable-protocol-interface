@@ -9,10 +9,13 @@ import data_json from '../../../services/webapp_transactions_list';
 import Moment from 'react-moment';
 import { useState } from 'react'
 import Web3 from 'web3';
-import {setNumber} from '../../../Helpers/helper'
+import {readJsonTable, setNumber} from '../../../Helpers/helper'
 import config from '../../../Config/constants';
 import Copy from "../../Page/Copy";
-
+import {adjustPrecision,formatLocalMap} from "../../../Lib/Formats";
+import Tooltip from 'antd/lib/tooltip';
+import NumericLabel from 'react-pretty-numbers';
+import DollarOutlined from '@ant-design/icons/DollarOutlined';
 
 const columns = [
     {
@@ -49,6 +52,7 @@ const expandable = { expandedRowRender: record => <p>{record.description}</p> };
 const title = () => 'Here is title';
 const showHeader = true;
 const pagination = { position: 'bottom' };
+const BigNumber = require('bignumber.js');
 
 class ListOperations extends React.Component {
 
@@ -195,60 +199,40 @@ class ListOperations extends React.Component {
 
             /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
             data = [];
+
             json_end.map((data_j, index)=>{
-                var set_event= "";
-                if(data_j.event.includes("Mint")){set_event='MINT'}
-                if(data_j.event.includes("Settlement")){set_event='SETTLEMENT'}
-                if(data_j.event.includes("Redeem")){set_event='REDEEM'}
+                const datas_response= readJsonTable(data_j)
 
-                var set_asset= data_j.tokenInvolved;
-                var set_status_txt= data_j.status;
-                var set_status_percent= data_j.confirmingPercent;
-
-                // const wallet_detail= (data_j.userAmount!==undefined)? parseFloat(Web3.utils.fromWei(Web3.utils.toWei(setNumber(data_j.userAmount), 'Kwei')), 'Kwei').toFixed(6) : '--'
-                const wallet_detail= (data_j.userAmount!==undefined)? data_j.userAmount : '--'
-                const wallet_detail_usd= (wallet_detail * config.coin_usd).toFixed(2)
-                const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(2) : '--'
-                const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
-                const interest_detail= (data_j.USDInterests!==undefined)? parseFloat(Web3.utils.fromWei(Web3.utils.toWei(setNumber(data_j.USDInterests), 'Kwei')), 'Kwei').toFixed(6) : 0
-                const interest_detail_usd= (interest_detail * config.coin_usd).toFixed(2)
-                const gasFeeUSD_detail= (data_j.gasFeeUSD!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(data_j.gasFeeUSD), 'ether')).toFixed(6) : 0
-                const gasFeeUSD_detail_usd= (gasFeeUSD_detail * config.coin_usd).toFixed(2)
-                const truncate_address= data_j.address.substring(0, 6) + '...' + data_j.address.substring(data_j.address.length - 4, data_j.address.length);
-                const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
-
-
-                if( wallet_detail!='--' && wallet_detail!=11){
-                    const detail = {event:set_event
-                        ,created:<span><Moment format="YYYY-MM-DD HH:MM:SS">{data_j.lastUpdatedAt}</Moment></span>
-                        ,details: (data_j.RBTCAmount!==undefined)? `You received in your platform ${wallet_detail} RBTC` : '--'
-                        ,asset:set_asset
-                        ,confirmation:<span><Moment format="YYYY-MM-DD HH:MM:SS">{data_j.confirmationTime}</Moment></span>
-                        ,address:<Copy textToShow={truncate_address} textToCopy={data_j.address}/>
-                        ,platform: (data_j.amount!==undefined)? paltform_detail + ' ( ' + paltform_detail_usd + ' USD )' : '--'
-                        ,platform_fee: ''
-                        ,block: (data_j.blockNumber!==undefined)? data_j.blockNumber : '--'
-                        ,wallet: (data_j.userAmount!==undefined)? `-${wallet_detail} RBTC ( ${wallet_detail_usd} USD )` : '--'
-                        ,interests: (data_j.USDInterests!==undefined)? `${interest_detail} RBTC ( ${interest_detail_usd} USD )` : '--'
-                        ,tx_hash_truncate: (data_j.transactionHash!==undefined)? truncate_txhash : '--'
-                        ,tx_hash: (data_j.transactionHash!==undefined)? data_j.transactionHash : '--'
-                        ,leverage:'--'
-                        ,gas_fee:(data_j.gasFeeUSD!== undefined)? `${gasFeeUSD_detail} RBTC ( ${gasFeeUSD_detail_usd} USD )` : '--'
-                        ,price:(data_j.reservePric!== undefined)? setNumber(data_j.reservePrice) +' USD' : '--'
+                if( datas_response['wallet_detail']!='--' && datas_response['wallet_detail']!=11){
+                    const detail = {event:datas_response['set_event']
+                        ,created:<span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['lastUpdatedAt']}</Moment></span>
+                        ,details:datas_response['RBTCAmount']
+                        ,asset:datas_response['set_asset']
+                        ,confirmation:<span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
+                        ,address:<Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']}/>
+                        ,platform:datas_response['amount']
+                        ,platform_fee: datas_response['platform_fee_value']
+                        ,block: datas_response['blockNumber']
+                        ,wallet: datas_response['wallet_value']
+                        ,interests: datas_response['interests']
+                        ,tx_hash_truncate: datas_response['tx_hash_truncate']
+                        ,tx_hash: datas_response['tx_hash']
+                        ,leverage:datas_response['leverage']
+                        ,gas_fee:datas_response['gas_fee']
+                        ,price:datas_response['price']
                         ,comments:'--'
                     };
-
 
                     data_row_coins2.push({
                         key: data_j._id,
                         info: '',
-                        event: set_event,
-                        asset: set_asset,
-                        platform: '+ '+paltform_detail,
+                        event: datas_response['set_event'],
+                        asset: datas_response['set_asset'],
+                        platform: `+ ${datas_response['paltform_detail']}`,
                         // wallet: (data_j.RBTCAmount!==undefined)? `${wallet_detail} RBTC`:'--',
-                        wallet: (data_j.userAmount!==undefined)? `-${wallet_detail} RBTC`:'--',
-                        date: data_j.lastUpdatedAt,
-                        status: {txt:set_status_txt,percent:set_status_percent},
+                        wallet: datas_response['wallet_value_main'],
+                        date: datas_response['lastUpdatedAt'],
+                        status: {txt:datas_response['set_status_txt'],percent:datas_response['set_status_percent']},
                         detail: detail,
                     });
                 }
@@ -280,8 +264,8 @@ class ListOperations extends React.Component {
                         key: element.key,
                         info: '',
                         event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
-                        asset: <img className="uk-preserve-width uk-border-circle"
-                                    src={window.location.origin + `/Moc/` + asset[0].image} alt="avatar" width={32}/>,
+                        asset: <img className="uk-preserve-width uk-border-circle" src={window.location.origin + `/Moc/` + asset[0].image} alt="avatar" width={32}/>,
+                        // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                         platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                         wallet: <span className="display-inline ">{element.wallet} </span>,
                         date: <span><Moment format="YYYY-MM-DD HH:MM">{element.date}</Moment></span>,
@@ -292,9 +276,6 @@ class ListOperations extends React.Component {
                 }
             })
             /*******************************end extraer datos del json con el json seteado por limit y skip***********************************/
-            console.log('data-------------------***********');
-            console.log(data);
-            console.log('data-------------------***********');
         }
 
 
