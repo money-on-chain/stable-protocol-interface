@@ -31,14 +31,14 @@ export default function MintCard(props) {
   const { bitcoinPrice = 0 } = props.StatusData ? props.StatusData : {};
   const priceFields = getPriceFields();
   const mocStates = {
-      fields: {
-          ...priceFields,
-          reservePrecision: 1,
-          priceVariation: 1,
-          commissionRates: 1,
-          lastUpdateHeight: 1,
-          isDailyVariation: 1
-      }
+    fields: {
+      ...priceFields,
+      reservePrecision: 1,
+      priceVariation: 1,
+      commissionRates: 1,
+      lastUpdateHeight: 1,
+      isDailyVariation: 1
+    }
   }
   const mocState = props.StatusData;
   const userState = props.UserBalanceData
@@ -48,7 +48,7 @@ export default function MintCard(props) {
   }
   const reservePrice = mocState?.bitcoinPrice;
   const convertToken = convertHelper(
-    _.pick(mocStatePrices, Object.keys(priceFields).concat(['reservePrecision']))
+      _.pick(mocStatePrices, Object.keys(priceFields).concat(['reservePrecision']))
   );
 
   const [currencyYouExchange, setCurrencyYouExchange] = useState('RESERVE');
@@ -107,22 +107,22 @@ export default function MintCard(props) {
 
   const calcInterests = async newValueYouExchange => {
     let interestRate = '0',
-      interestValue = BigNumber('0');
+        interestValue = BigNumber('0');
     if (isMint && currencyYouReceive === 'RISKPROX') {
       interestValue = await auth.calcMintInterestValues(
-        BigNumber(newValueYouExchange)
-          .toFixed(0)
-          .toString()
+          BigNumber(newValueYouExchange)
+              .toFixed(0)
+              .toString()
       );
       interestValue = new BigNumber(interestValue);
       //interestValue = new BigNumber(0.01).multipliedBy(interestValue).plus(interestValue);
 
       interestRate = formatValueToContract(
-        new BigNumber(interestValue)
-          .multipliedBy(100)
-          .div(newValueYouExchange)
-          .toFixed(),
-        'USD'
+          new BigNumber(interestValue)
+              .multipliedBy(100)
+              .div(newValueYouExchange)
+              .toFixed(),
+          'USD'
       );
 
       interestRate = formatVisibleValue(interestRate, 'commissionRate', 'en');
@@ -140,7 +140,7 @@ export default function MintCard(props) {
     setLoadingSwitch(false);
     setSwitchChecked(true);
   };
-    
+
   const setFailSwitch = () => {
     setLoadingSwitch(false);
     setSwitchChecked(false);
@@ -155,13 +155,13 @@ export default function MintCard(props) {
     const key = `open${Date.now()}`;
     const onClick = `${window.explorerUrl}/tx/${txHash}`;
     const btn = (
-      <Button
-        type="primary"
-        size="small"
-        onClick={() => window.open(`${window.explorerUrl}/tx/${txHash}`)}
-      >
-        Explorer TX
-      </Button>
+        <Button
+            type="primary"
+            size="small"
+            onClick={() => window.open(`${window.explorerUrl}/tx/${txHash}`)}
+        >
+          Explorer TX
+        </Button>
     );
     notification['warning']({
       message: t('MoC.exchange.allowance.allowanceTxTitle', {ns: 'moc'}),
@@ -186,64 +186,64 @@ export default function MintCard(props) {
     switch (currencyYouReceive) {
       case 'STABLE':
         setValueYouReceive(
-          parseFloat(newValueYouExchange) * parseFloat(reservePrice)
+            parseFloat(newValueYouExchange) * parseFloat(reservePrice)
         );
         setValueYouReceiveUSD(
-          parseFloat(newValueYouExchange) * parseFloat(reservePrice)
+            parseFloat(newValueYouExchange) * parseFloat(reservePrice)
         );
         break;
       case 'RESERVE':
         switch (currencyYouExchange) {
           case 'STABLE':
             setValueYouReceive(
-              parseFloat(newValueYouExchange) /
-              parseFloat(reservePrice)
+                parseFloat(newValueYouExchange) /
+                parseFloat(reservePrice)
             );
             setValueYouReceiveUSD(parseFloat(newValueYouExchange));
             break;
           case 'RISKPRO':
             setValueYouReceive(
-              (newValueYouExchange *
-                bitcoinPrice) /
-              reservePrice
+                (newValueYouExchange *
+                    bitcoinPrice) /
+                reservePrice
             );
             setValueYouReceiveUSD(
-              parseFloat(newValueYouExchange) *
-              parseFloat(bitcoinPrice)
+                parseFloat(newValueYouExchange) *
+                parseFloat(bitcoinPrice)
             );
             break;
           case 'RISKPROX':
             setValueYouReceive(newValueYouExchange);
             setValueYouReceiveUSD(
-              parseFloat(newValueYouExchange) *
-              (parseFloat(
-                props.StatusData['bprox2PriceInRbtc']
-                ) *
-              parseFloat(reservePrice))
+                parseFloat(newValueYouExchange) *
+                (parseFloat(
+                    props.StatusData['bprox2PriceInRbtc']
+                    ) *
+                    parseFloat(reservePrice))
             );
             break;
-          }
-          break;
+        }
+        break;
       case 'RISKPRO':
         setValueYouReceive(
-          (newValueYouExchange * reservePrice) /
-          props.StatusData['bproPriceInUsd']
+            (newValueYouExchange * reservePrice) /
+            props.StatusData['bproPriceInUsd']
         );
         setValueYouReceiveUSD(
-          parseFloat(newValueYouExchange) *
-          parseFloat(props.StatusData['bproPriceInUsd'])
+            parseFloat(newValueYouExchange) *
+            parseFloat(props.StatusData['bproPriceInUsd'])
         );
         break;
       case 'RISKPROX':
-          setValueYouReceive(newValueYouExchange);
-          setValueYouReceiveUSD(
+        setValueYouReceive(newValueYouExchange);
+        setValueYouReceiveUSD(
             parseFloat(newValueYouExchange) *
             (parseFloat(props.StatusData['bprox2PriceInRbtc']) *
-              parseFloat(reservePrice))
-          );
-          break;
+                parseFloat(reservePrice))
+        );
+        break;
     }
-      setValueYouExchange(newValueYouExchange);
+    setValueYouExchange(newValueYouExchange);
   };
 
   const setAllowance = async allowanceEnabled => {
@@ -253,75 +253,75 @@ export default function MintCard(props) {
     }).then(res => {
       setDoneSwitch(allowanceEnabled);
     })
-    .catch(e => {
-      console.error(e);
-      setFailSwitch();
-    });
+        .catch(e => {
+          console.error(e);
+          setFailSwitch();
+        });
     msgAllowanceSend();
   };
 
   //renders
   const renderExchangeInputs = () => {
     return (
-      <div className="ExchangeInputs AlignedAndCentered">
-        <div className="YouExchange">
-          <CoinSelect
-            label={t('global.MintOrRedeemToken_YouExchange')}
-            onCurrencySelect={onChangeCurrencyYouExchange}
-            onInputValueChange={onValueYouExchangeChange}
-            value={currencyYouExchange}
-            inputValueInWei={valueYouExchange}
-            currencyOptions={props.currencyOptions}
-            AccountData={props.AccountData}
-            UserBalanceData={props.UserBalanceData}
-            token={token}
-          />
+        <div className="ExchangeInputs AlignedAndCentered">
+          <div className="YouExchange">
+            <CoinSelect
+                label={t('global.MintOrRedeemToken_YouExchange')}
+                onCurrencySelect={onChangeCurrencyYouExchange}
+                onInputValueChange={onValueYouExchangeChange}
+                value={currencyYouExchange}
+                inputValueInWei={valueYouExchange}
+                currencyOptions={props.currencyOptions}
+                AccountData={props.AccountData}
+                UserBalanceData={props.UserBalanceData}
+                token={token}
+            />
           </div>
           <ArrowRightOutlined />
           <div className="YouReceive">
-          <CoinSelect
-            label={t('global.MintOrRedeemToken_YouReceive')}
-            inputValueInWei={valueYouReceive}
-            currencyOptions={props.currencyOptions}
-            value={currencyYouReceive}
-            token={token}
-            UserBalanceData={props.UserBalanceData}
-            AccountData={props.AccountData}
-            disabled
-          />
+            <CoinSelect
+                label={t('global.MintOrRedeemToken_YouReceive')}
+                inputValueInWei={valueYouReceive}
+                currencyOptions={props.currencyOptions}
+                value={currencyYouReceive}
+                token={token}
+                UserBalanceData={props.UserBalanceData}
+                AccountData={props.AccountData}
+                disabled
+            />
+          </div>
         </div>
-      </div>
     );
   };
 
   const renderFooter = () => {
     return (
-      <div className="MintOrRedeemTokenFooter AlignedAndCentered">
-        <div className="ReserveInUSD"> 
+        <div className="MintOrRedeemTokenFooter AlignedAndCentered">
+          <div className="ReserveInUSD">
           <span className="Conversion">
             1 {t('MoC.Tokens_RESERVE_code', {ns: 'moc'})} ={' '}
             <LargeNumber
-              className="ReservePrice"
-              amount={reservePrice}
-              currencyCode={'USD'}
-              includeCurrency
+                className="ReservePrice"
+                amount={reservePrice}
+                currencyCode={'USD'}
+                includeCurrency
             />
           </span>
-          <span className="Disclaimer">{t('global.MintOrRedeemToken_AmountMayDiffer')}</span>
-          {/*<div className="TextLegend">{t('global.MintOrRedeemToken_AmountMayDiffer')}</div>*/}
+            <span className="Disclaimer">{t('global.MintOrRedeemToken_AmountMayDiffer')}</span>
+            {/*<div className="TextLegend">{t('global.MintOrRedeemToken_AmountMayDiffer')}</div>*/}
+          </div>
+          <div className="MainActions AlignedAndCentered" style={{ width: '22%'}}>
+            <Button type="ghost" onClick={onClear}>
+              {t('global.MintOrRedeemToken_Clear')}
+            </Button>
+            <Button
+                type="primary"
+                onClick={checkShowMintModal}
+            >
+              {isMint ? t('global.MintOrRedeemToken_Mint') : t('global.MintOrRedeemToken_Redeem')}
+            </Button>
+          </div>
         </div>
-        <div className="MainActions AlignedAndCentered" style={{ width: '22%'}}>
-          <Button type="ghost" onClick={onClear}>
-            {t('global.MintOrRedeemToken_Clear')}
-          </Button>
-          <Button
-            type="primary"
-            onClick={checkShowMintModal}
-          >
-            {isMint ? t('global.MintOrRedeemToken_Mint') : t('global.MintOrRedeemToken_Redeem')}
-          </Button>
-        </div>
-      </div>
     );
   };
 
@@ -343,9 +343,9 @@ export default function MintCard(props) {
 
 
     const commissionRateVisible = formatVisibleValue(
-      commissionRate * 100,
-      'commissionRate',
-      'en'
+        commissionRate * 100,
+        'commissionRate',
+        'en'
     );
     return {
       percentage: commissionRateVisible,
@@ -382,19 +382,19 @@ export default function MintCard(props) {
   const totals = totalsWithCommissionAndInterests();
 
   const contentFee = type => (
-    <div className="TooltipContent">
-      <h4>{t(`MoC.exchange.summary.${type}Title`, {ns: 'moc'})}</h4>
-      <p>{t(`MoC.exchange.summary.${type}TooltipText`, {ns: 'moc'})}</p>
-    </div>
+      <div className="TooltipContent">
+        <h4>{t(`MoC.exchange.summary.${type}Title`, {ns: 'moc'})}</h4>
+        <p>{t(`MoC.exchange.summary.${type}TooltipText`, {ns: 'moc'})}</p>
+      </div>
   );
   const allowanceReserveModalClose = async () => {
     setShowModalAllowanceReserve(false);
   };
   const onConfirmTransactionFinish = async () => {
     const exchangeMethod = getExchangeMethod(
-      currencyYouExchange,
-      currencyYouReceive,
-      `${commission.currencyCode}_COMMISSION`
+        currencyYouExchange,
+        currencyYouReceive,
+        `${commission.currencyCode}_COMMISSION`
     );
     const userAmount = formatValueWithContractPrecision(valueYouExchange, 'RESERVE');
 
@@ -444,65 +444,65 @@ export default function MintCard(props) {
   };
   const renderComissionCurrencySwitch = () => {
     const { enoughMOCBalance } =  commission;
-  
+
     if (commissionSwitch !== commission.currencyCode) {
       setCommissionSwitch(commission.currencyCode);
       setLoadingSwitch(false);
     }
 
     let tooltip = enoughMOCBalance
-      ? contentFee('payWithMocToken')
-      : contentFee('notEnoughMocToken');
-  
+        ? contentFee('payWithMocToken')
+        : contentFee('notEnoughMocToken');
+
     return (
-      <div className="CommissionCurrencySwitch">
-        <p>{t('global.MintOrRedeemToken_Fee')} ({commission.percentage}%)</p>
-        <LargeNumber
-          includeCurrency
-          amount={commission.value}
-          currencyCode={commission.currencyCode}
-        />
-        <Popover content={tooltip} placement="top">
-          <div className="PayWithMocToken">
-            <Switch
-              disabled={!enoughMOCBalance}
-              checked={switchChecked} //commission.currencyCode === 'MOC'}
-              onChange={setAllowance}
-              loading={loadingSwitch}
-            />
-          </div>
-        </Popover>
-      </div>
+        <div className="CommissionCurrencySwitch">
+          <p>{t('global.MintOrRedeemToken_Fee')} ({commission.percentage}%)</p>
+          <LargeNumber
+              includeCurrency
+              amount={commission.value}
+              currencyCode={commission.currencyCode}
+          />
+          <Popover content={tooltip} placement="top">
+            <div className="PayWithMocToken">
+              <Switch
+                  disabled={!enoughMOCBalance}
+                  checked={switchChecked} //commission.currencyCode === 'MOC'}
+                  onChange={setAllowance}
+                  loading={loadingSwitch}
+              />
+            </div>
+          </Popover>
+        </div>
     );
   };
   const renderAllowanceReserveModalConfirm = () => {
     return (
-      <>
-        <h1 className="ReserveAllowanceModal_Title">
-          {t('global.ReserveAllowanceModal_SetAllowance')}
-        </h1>
-        <div className="ReserveAllowanceModal_Content">
-          <p>{t('global.ReserveAllowanceModal_AllowanceDescription')}</p>
-          <Button
-            className="ButtonPrimary"
-            lowerCase
-            // TODO onClick={setAllowanceReserve}
-          >{t('global.ReserveAllowanceModal_Authorize')}</Button>
-        </div>
-      </>
+        <>
+          <h1 className="ReserveAllowanceModal_Title">
+            {t('global.ReserveAllowanceModal_SetAllowance')}
+          </h1>
+          <div className="ReserveAllowanceModal_Content">
+            <p>{t('global.ReserveAllowanceModal_AllowanceDescription')}</p>
+            <Button
+                className="ButtonPrimary"
+                lowerCase
+                // TODO onClick={setAllowanceReserve}
+            >{t('global.ReserveAllowanceModal_Authorize')}</Button>
+          </div>
+        </>
     );
   };
   const renderAllowanceReserveModalLoading = () => {
     return (
-      <>
-        <h1 className="ReserveAllowanceModal_Title">
-          {t('global.ReserveAllowanceModal_SetAllowance')}
-        </h1>
-        <div className="ReserveAllowanceModal_Content AllowanceLoading">
-          <Spin indicator={<LoadingOutlined />} />
-          <p>{t('global.ReserveAllowanceModal_ProccessingAllowance')}</p>
-        </div>
-      </>
+        <>
+          <h1 className="ReserveAllowanceModal_Title">
+            {t('global.ReserveAllowanceModal_SetAllowance')}
+          </h1>
+          <div className="ReserveAllowanceModal_Content AllowanceLoading">
+            <Spin indicator={<LoadingOutlined />} />
+            <p>{t('global.ReserveAllowanceModal_ProccessingAllowance')}</p>
+          </div>
+        </>
     );
   };
   const renderAllowanceReserveModal = () => {
@@ -514,61 +514,61 @@ export default function MintCard(props) {
     }
 
     return (
-      <Modal
-        className="ReserveAllowanceModal"
-        visible={ShowModalAllowanceReserve}
-        onCancel={allowanceReserveModalClose}
-        footer={null}
-      >
-        {renderContent}
-      </Modal>
+        <Modal
+            className="ReserveAllowanceModal"
+            visible={ShowModalAllowanceReserve}
+            onCancel={allowanceReserveModalClose}
+            footer={null}
+        >
+          {renderContent}
+        </Modal>
     );
   };
   const renderInterests = () => (
-    <div className="CommissionCurrencySwitch">
-      <p>{t('global.MintOrRedeemToken_Interest', { interestRate: interests.interestRate })}</p>
-      <LargeNumber includeCurrency amount={interests.interestValue} currencyCode={'RESERVE'} />
-    </div>
+      <div className="CommissionCurrencySwitch">
+        <p>{t('global.MintOrRedeemToken_Interest', { interestRate: interests.interestRate })}</p>
+        <LargeNumber includeCurrency amount={interests.interestValue} currencyCode={'RESERVE'} />
+      </div>
   );
 
   return (
-    <div className="Card MintCard MintOrRedeemToken" style={{ 
-      height: '23.4em'}}>
-      <h3 className="CardTitle">{isMint ? t('global.MintOrRedeemToken_Mint') : t('global.MintOrRedeemToken_Redeem')}</h3>
-      {renderExchangeInputs()}
-      {renderComissionCurrencySwitch()}
-      {interests &&
+      <div className="Card MintCard MintOrRedeemToken" style={{
+        height: '23.4em'}}>
+        <h3 className="CardTitle">{isMint ? t('global.MintOrRedeemToken_Mint') : t('global.MintOrRedeemToken_Redeem')}</h3>
+        {renderExchangeInputs()}
+        {renderComissionCurrencySwitch()}
+        {interests &&
         interests.interestValue &&
         interests.interestValue.gt(0) &&
         renderInterests()}
-      {renderFooter()}
-      {renderAllowanceReserveModal()}
-      <MintModal
-        visible={showMintModal}
-        handleClose={closeMintModal}
-        handleComplete={closeMintModal}
-        color={color}
-        currencyYouExchange={currencyYouExchange}
-        currencyYouReceive={currencyYouReceive}
-        fee={commission}
-        interests={interests}
-        valueYouExchange={valueYouExchange}
-        valueYouReceive={valueYouReceive}
-        valueYouReceiveUSD={valueYouReceiveUSD}
-        token={token}
-        onCancel={closeConfirmationModal}
-        setTolerance={setTolerance}
-        actionIsMint={isMint}
-        tolerance={tolerance}
-        exchanging={{
-          value: totals.totalYouExchange,
-          currencyCode: currencyYouExchange
-        }}
-        receiving={{
-          value: totals.totalYouReceive,
-          currencyCode: currencyYouReceive
-        }}
-      />
-    </div>
+        {renderFooter()}
+        {renderAllowanceReserveModal()}
+        <MintModal
+            visible={showMintModal}
+            handleClose={closeMintModal}
+            handleComplete={closeMintModal}
+            color={color}
+            currencyYouExchange={currencyYouExchange}
+            currencyYouReceive={currencyYouReceive}
+            fee={commission}
+            interests={interests}
+            valueYouExchange={valueYouExchange}
+            valueYouReceive={valueYouReceive}
+            valueYouReceiveUSD={valueYouReceiveUSD}
+            token={token}
+            onCancel={closeConfirmationModal}
+            setTolerance={setTolerance}
+            actionIsMint={isMint}
+            tolerance={tolerance}
+            exchanging={{
+              value: totals.totalYouExchange,
+              currencyCode: currencyYouExchange
+            }}
+            receiving={{
+              value: totals.totalYouReceive,
+              currencyCode: currencyYouReceive
+            }}
+        />
+      </div>
   );
 }

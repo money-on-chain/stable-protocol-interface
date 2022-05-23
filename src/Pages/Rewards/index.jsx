@@ -19,7 +19,7 @@ export default function Rewards(props) {
                     </div>
                 </Col>
                 <Col xs={24} md={12} xl={4}>
-                    <YourAddressCard 
+                    <YourAddressCard
                         height="32.4em"
                         tokenToSend="MOC"
                         iconWallet={`${window.location.origin}/Moc/icon-moc.svg`}
