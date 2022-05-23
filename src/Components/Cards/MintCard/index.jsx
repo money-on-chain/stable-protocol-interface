@@ -42,7 +42,6 @@ export default function MintCard(props) {
   }
   const mocState = props.StatusData;
   const userState = props.UserBalanceData
-  console.log('mocState', mocState);
   let mocStatePrices;
   if(mocState?.length) {
     [mocStatePrices] = mocStates;
@@ -250,10 +249,8 @@ export default function MintCard(props) {
   const setAllowance = async allowanceEnabled => {
     setLoadingSwitch(true);
     await auth.approveMoCToken(allowanceEnabled, (error, _txHash) => {
-      console.log('pending approve moc token');
       msgAllowanceTx(_txHash);
     }).then(res => {
-      console.log('res', res);
       setDoneSwitch(allowanceEnabled);
     })
     .catch(e => {

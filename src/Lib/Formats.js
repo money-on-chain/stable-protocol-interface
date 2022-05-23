@@ -132,7 +132,6 @@ const formatValueVariation = (amount, language) => {
   };
 
 const formatValueToContract = (amount, currencyCode) => {
-    console.log('currencyCode', currencyCode);
     return new BigNumber(amount)
         .multipliedBy(precision(formatMap[currencyCode]))
         .toFixed(0);

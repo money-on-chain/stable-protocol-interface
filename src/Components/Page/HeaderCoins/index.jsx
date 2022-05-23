@@ -116,7 +116,6 @@ function HeaderCoins(props) {
       case 'riskprox':
         return {day: dailyVariation['24hs'].bprox2PriceInUsd, current: dailyVariation['current'].bprox2PriceInUsd};
       default:
-        console.log('unknown token type...');
     }
   };
 

@@ -236,7 +236,6 @@ const getTransactionTypeId = (sourceCurrency, targetCurrency, commissionCurrency
 
 const getTransactionType = (sourceCurrency, targetCurrency, commissionCurrency) => {
   let TransactionTypeIds = (appMode === "MoC") ? TransactionTypeIdsMoC : TransactionTypeIdsRRC20;
-  console.log('sourceCurrencys',sourceCurrency, 'targetCurrency', targetCurrency, 'commissionCurrency', commissionCurrency);
   return Object.keys(TransactionTypeIds).find(k => TransactionTypeIds[k] === buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString]?.transactionTypeId);
 }
 

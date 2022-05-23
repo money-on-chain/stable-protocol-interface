@@ -103,7 +103,6 @@ export default function MintModal(props) {
   const getTransaction = async (hash) => {
     await auth.getTransactionReceipt(hash, ()=> {
       setTransaction(false);
-      console.log('pending get transaction receipt');
     }).then(res => {
       if (res)
       setShowTransaction(true);

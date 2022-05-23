@@ -17,8 +17,6 @@ export default function StakingOptionsModal(props) {
    const [t, i18n]= useTranslation(["global",'moc'])
 
     useEffect(() => {
-        
-        console.log('auth.UserBalanceData?.mocAllowance ', auth.UserBalanceData?.mocAllowance );
         // if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
     }, []);
 
@@ -30,7 +28,6 @@ export default function StakingOptionsModal(props) {
         setStep(1);
         // setStep(2); // sacar
         await auth.approveMoCToken(true, (error) => {
-            console.log('pending approve moc token');
         }).then(res => {
                 setStep(2);
                 return null;
@@ -51,19 +48,15 @@ export default function StakingOptionsModal(props) {
             if (error) {
                 return error;
             }
-            console.log('pending');
             const status = 'pending';
             onConfirm(status, txHash);
         })
         .then(res => {
-            console.log('res', res);
             const status = res.status ? 'success' : 'error';
             onConfirm(status, res.transactionHash);
             return null;
         })
         .catch(e => {
-            console.log('e', e);
-            console.error(e);
             notification['error']({
                 message: t('global.RewardsError_Title'),
                 description: t('global.RewardsError_Message'),

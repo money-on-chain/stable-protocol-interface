@@ -154,7 +154,6 @@ export default function nodeManagerBase ({ web3, contracts, partialExecutionStep
     const from = getAccount();
     const contractAmount = web3.utils.toWei(docAmount, 'ether');
     const estimateGas = (await contractFunctions.redeemFreeDoc(contractAmount, vendor.address).estimateGas({ from })) * 2;
-    console.log('Estimated', estimateGas);
     return contractFunctions
       .redeemFreeDoc(contractAmount, vendor.address)
       .send({ from, gas: estimateGas, gasLimit: estimateGas, gasPrice: await gasPrice() }, callback);

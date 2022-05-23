@@ -7,7 +7,6 @@ const { Option } = Select;
 
 export default function SelectCurrency(props) {
   const { value, onChange, currencyOptions, disabled } = props;
-  console.log('crreuncies', currencies);
   const options = currencies.map(it => ({
     value: it.value,
     image: it.image,
@@ -15,9 +14,6 @@ export default function SelectCurrency(props) {
   }));
   const option = options.find(it => it.value === value);
   const optionsFiltered = options.filter(it => currencyOptions.includes(it.value));
-  console.log('options', options);
-  console.log('currencyOptions', currencyOptions);
-  console.log('optionFilreded', optionsFiltered);
 
   return (
     <div className={`SelectCurrency ${disabled ? 'disabled' : ''}`}>

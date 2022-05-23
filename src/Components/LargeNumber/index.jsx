@@ -3,7 +3,6 @@ import NumericLabel from 'react-pretty-numbers';
 import { adjustPrecision, formatLocalMap } from '../../Lib/Formats';
 
 const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams, className }) => {
-  console.log('curencyCode', currencyCode)
 
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);

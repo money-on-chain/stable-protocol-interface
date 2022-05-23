@@ -500,8 +500,7 @@ const MintOrRedeemToken = ({ token, ...props }) => {
   const currencyYouReceive = getCurrencyYouReceive(actionIsMint, token);
   const commission = calcCommission();
   const totals = totalsWithCommissionAndInterests();
-  console.log('reeeeeveing', {value: totals.totalYouExchange, currencyCode: currencyYouReceive});
-
+  
   /* View */
 
   const renderExchangeInputs = () => {

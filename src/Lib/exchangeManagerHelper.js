@@ -10,7 +10,6 @@ import { getTransactionType } from './exchangeHelper';
 const BigNumber = require('bignumber.js');
 
 const convertAmount = (source, target, amount, convertToken) => {
-  console.log('amount', amount, 'source', source);
   if (amount === '') {
     return '';
   }
@@ -101,7 +100,6 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
   const commissionRateForRESERVE = BigNumber(
     commissionRates[getTransactionType(currencyYouExchange, currencyYouReceive, "RESERVE_COMMISSION")])
     .plus(vendor.markup);
-    console.log('valueYouExchangeInMOC', valueYouExchangeInMOC);
   const commissionValueIfPaidInMOC = commissionRateForMOC.times(valueYouExchangeInMOC).div(precision(RBTCPrecision));
   const canPayInMOC = (canPayCommissionInMoc(commissionValueIfPaidInMOC, userState));
 
