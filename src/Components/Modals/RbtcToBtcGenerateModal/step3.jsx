@@ -3,11 +3,13 @@ import { Button } from 'antd';
 import WarningOutlined from '@ant-design/icons/WarningOutlined';
 import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import { AuthenticateContext } from '../../../Context/Auth';
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useContext, useEffect, useState} from "react";
 import {weiToNumberFormat} from '../../../Helpers/math-helpers'
 import rLogin from "../../../Lib/rLogin";
 import Web3 from "web3";
 import FastBtcBridge from "../../../Contracts/MoC/abi/FastBtcBridge.json";
+import { toContract } from '../../../Lib/numberHelper';
+import { useHistory } from "react-router-dom"
 const BigNumber = require('bignumber.js');
 
 
@@ -19,10 +21,18 @@ export default function Step3(props) {
     const [amountReceiving, setAmountReceiving] = useState('0');
     const [amountToSendInWei, setAmountToSendInWei] = useState('0');
     const [feesPaid, setFeesPaid] = useState('0');
-    const  handleSubmit=(step) => {
-        setCurrentStep(step)
-    }
+    const [headerState, setHeaderState] = useState('Double check that you are entering the correct BTC destination address.');
+    const [headerIcon, setHeaderIcon] = useState('icon-atention.svg');
+    const [isVisible, setIsVisible] = useState(true)
+    const [completed, setCompleted] = useState(false);
+    const [buttonCompleted, setButtonCompleted] = useState('Confirm');
 
+
+    const auth = useContext(AuthenticateContext);
+    const { accountData } = auth;
+    console.log('accountData.Owner');
+    console.log(accountData.Owner);
+    console.log('accountData.Owner');
 
     let checkLoginFirstTime = true;
     const [account, setAccount] = useState(null);
@@ -42,7 +52,7 @@ export default function Step3(props) {
     },checkLoginFirstTime);
 
     useEffect(() => {
-        currentFeeData();
+        // currentFeeData();
     }, [web3]);
 
     const connect = () =>
@@ -88,12 +98,74 @@ export default function Step3(props) {
     };
 
 
+    const sendTransaction = async () => {
+        const fastBtcBridgeAddress = '0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A';
+        console.log('sendTransaction: Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
+        if(web3!=null){
+            setHeaderState('Pending')
+            const fastBtcBridge = new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
+
+            const fastBtcTransferToBtc= () => {
+                return new Promise((resolve, reject) => {
+                    setHeaderIcon('icon-processing.svg')
+                    setIsVisible(false)
+                    setHeaderState('Pending')
+                    fastBtcBridge.methods.transferToBtc(accountData.Owner.toLowerCase()).send(
+                        [props.rbtcAddress],
+                        {
+                            from: accountData.Owner.toLowerCase(),
+                            value: toContract(web3.utils.toWei(`${parseFloat(props.rbtcAmount)}`, 'ether')),
+                            gas: 300000
+                        }).then(response => {
+                        web3.eth.getTransactionReceipt(response.transactionHash)
+                            .then(responseBTC => {
+                                setHeaderState('Mined')
+                                setHeaderIcon('icon-confirmed.svg');
+                                setCompleted(true);
+                                setIsVisible(true)
+                                setButtonCompleted('Close')
+                            })
+                            .catch(error => {
+                                //setIsPending(false);
+                                setHeaderState('Failed');
+                                setCompleted(true);
+                                setIsVisible(true)
+                                setButtonCompleted('Close')
+                                console.log("fail", error);
+                            });
+                        resolve(response);
+                    })
+                        .catch(error => {
+                            setHeaderState('Failed');
+                            setCompleted(true);
+                            setIsVisible(true)
+                            setButtonCompleted('Close')
+                            reject(error);
+                        });;
+                });
+            };
+
+            fastBtcTransferToBtc().then(result => {});
+        }
+    };
+    const {visible = false, handleClose = () => {}} = props;
+
+
+    const handleSubmit=() => {
+        if( completed==false ){
+            sendTransaction()
+        }
+        if( completed==true ){
+            handleClose()
+        }
+    }
+
     return (
         <Fragment>
             <div className="alert-message-modal">
                 <div className="alert-message">
-                    <WarningOutlined />
-                    <p>Double check that you are entering the correct BTC destination address.</p>
+                    {(headerState=='Pending' || headerState=='Mined' || headerState=='Failed') && <Fragment><p style={{'display':'flex','width':'100%'}}><img style={{'flexGrow':'0'}} className={'rotate'} src={`${window.location.origin+'/'+headerIcon }`} alt="" /><span style={{'flexGrow':'1','textAlign':'center','marginTop':'5px','marginLeft':'-45px'}}><b>{headerState}</b></span></p></Fragment>}
+                    {(headerState!='Pending' && headerState!='Mined' && headerState!='Failed') && <p style={{'display':'flex','width':'100%'}}><img style={{'flexGrow':'0'}} src={`${window.location.origin+'/'+headerIcon }`} alt="332" /><span style={{'flexGrow':'1','marginLeft':'10px'}}>{headerState}</span></p>}
                 </div>
             </div>
 
@@ -124,92 +196,11 @@ export default function Step3(props) {
                 <div className="Amount">{feesPaid} BTC</div>
             </div>
 
-            <div className="GenerateBTC">
-                <Button type="primary" onClick={()=>handleSubmit(2)}>
-                    <b>Confirm</b>
+            <div className="GenerateBTC"  style={{ display: isVisible ? "block" : "none" }}>
+                <Button type="primary" onClick={()=>handleSubmit()}>
+                    <b>{buttonCompleted}</b>
                 </Button>
             </div>
-
-
-
-            {/*<input type="number" placeholder="Enter rBTC amount to send"/>*/}
-
-
-            {/*<form className="ant-form ant-form-horizontal">*/}
-            {/*    <div className="ant-row ant-form-item ant-form-item-has-success">*/}
-            {/*        <div className="ant-col ant-form-item-control">*/}
-            {/*            <div className="ant-form-item-control-input">*/}
-            {/*                <div className="ant-form-item-control-input-content">*/}
-            {/*                    <div className="MainContainer">*/}
-            {/*                        <input type="number" placeholder="Enter rBTC amount to send" className="valueInput " value="0.000000"/>*/}
-            {/*                        <div className="SelectCurrency disabled">*/}
-            {/*                            <div className="ant-select ant-select-lg ant-select-single ant-select-show-arrow ant-select-disabled">*/}
-            {/*                                <div className="ant-select-selector">*/}
-            {/*                                    <span className="ant-select-selection-search">*/}
-            {/*                                        <input disabled="" autoComplete="off" type="search" className="ant-select-selection-search-input"*/}
-            {/*                                               role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-owns="rc_select_5_list" aria-autocomplete="list"*/}
-            {/*                                               aria-controls="rc_select_5_list" aria-activedescendant="rc_select_5_list_0" readOnly="" unselectable="on"*/}
-            {/*                                               value="" id="rc_select_5"      />*/}
-            {/*                                    </span>*/}
-            {/*                                    <span className="ant-select-selection-item">*/}
-            {/*                                        <div className="currencyOption"><img className="currencyImage" src="/moc/icon-reserve.svg" alt="RBTC"/>RBTC</div>*/}
-            {/*                                    </span>*/}
-            {/*                                </div>*/}
-            {/*                                <span className="ant-select-arrow" unselectable="on" aria-hidden="true"    >*/}
-            {/*                                    <span role="img" aria-label="down" className="anticon anticon-down ant-select-suffix">*/}
-            {/*                                        <svg viewBox="64 64 896 896" focusable="false" className="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true">*/}
-            {/*                                            <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z">*/}
-
-            {/*                                            </path>*/}
-            {/*                                        </svg>*/}
-            {/*                                    </span>*/}
-            {/*                                </span>*/}
-            {/*                            </div>*/}
-            {/*                        </div>*/}
-            {/*                        </div>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</form>*/}
-
-
-
-
-            {/*<div className="MainContainer">*/}
-            {/*    <input type="number" placeholder="Enter rBTC amount to send" className="valueInput " value="0.000000"/>*/}
-            {/*    <div className="SelectCurrency disabled">*/}
-            {/*        <div className="ant-select ant-select-lg ant-select-single ant-select-show-arrow ant-select-disabled">*/}
-            {/*            <div className="ant-select-selector">*/}
-            {/*                <span className="ant-select-selection-search">*/}
-            {/*                    <input disabled="" autoComplete="off" type="search" className="ant-select-selection-search-input"*/}
-            {/*                           role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-owns="rc_select_5_list"*/}
-            {/*                           aria-autocomplete="list" aria-controls="rc_select_5_list" aria-activedescendant="rc_select_5_list_0" readOnly="" unselectable="on" value=""*/}
-            {/*                           id="rc_select_5"/>*/}
-            {/*                </span>*/}
-            {/*                <span className="ant-select-selection-item">*/}
-            {/*                    <div className="currencyOption">*/}
-            {/*                        <img className="currencyImage" src="/moc/icon-reserve.svg" alt="RBTC"/>RBTC*/}
-            {/*                    </div>*/}
-            {/*                </span>*/}
-            {/*            </div>*/}
-            {/*            <span className="ant-select-arrow" unselectable="on" aria-hidden="true">*/}
-            {/*                <span role="img" aria-label="down" className="anticon anticon-down ant-select-suffix">*/}
-            {/*                    <svg viewBox="64 64 896 896" focusable="false" className="" data-icon="down" width="1em"*/}
-            {/*                         height="1em" fill="currentColor" aria-hidden="true">*/}
-            {/*                        <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z">*/}
-
-            {/*                        </path>*/}
-            {/*                    </svg>*/}
-            {/*                </span>*/}
-            {/*            </span>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
-
-
-
         </Fragment>
 
     );

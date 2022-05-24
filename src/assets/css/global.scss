@@ -422,3 +422,19 @@ input[type=number] {
 .mt-0{
 margin-top: 0px;
 }
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+.rotate {
+  animation: rotation 2s infinite linear;
+}
+.error{
+  color: red;
+  font-size: 12px;
+}

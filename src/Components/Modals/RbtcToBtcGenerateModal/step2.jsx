@@ -13,23 +13,48 @@ function Step2(props) {
     // const {visible = false, handleClose = () => {}} = props;
 
     const [currentStep, setCurrentStep]= useState(2);
-    const [rbtcAmount, setRbtcAmount]= useState(0.0000014);
-    const [rbtcAddress, setrbtcAddress]= useState('mpqWMKpeMRvjM2PPYZVLit1HX5FNoWH8mW');
+    const [rbtcAmount, setRbtcAmount]= useState("");
+    const [rbtcAddress, setrbtcAddress]= useState('');
+
+    const [errorRbtcAmount, setErrorRbtcAmount]= useState(true);
+    const [errorRbtcAddress, setErrorRbtcAddress]= useState(true);
 
     const handleSubmit = event => {
         event.preventDefault();
         // 👇️ value of input field
-        console.log('handleClick 👉️', rbtcAmount);
-        setCurrentStep(3)
+        if (rbtcAmount.trim().length != 0) {
+            setErrorRbtcAmount(false)
+        }
+        if(rbtcAddress.trim().length != 0) {
+            setErrorRbtcAddress(false)
+        }
+
+            if( errorRbtcAmount == false && errorRbtcAddress == false){
+                setCurrentStep(3)
+            }
+
     };
+    const {visible = false, handleClose = () => {}} = props;
 
     const handleChange = event => {
         setRbtcAmount(event.target.value);
+        if (rbtcAmount.trim().length != 0) {
+            setErrorRbtcAmount(false)
+        }
+        if(rbtcAddress.trim().length != 0) {
+            setErrorRbtcAddress(false)
+        }
         console.log('value is:', rbtcAmount);
     };
 
     const handleChangeAddress = event => {
         setrbtcAddress(event.target.value);
+        if(rbtcAddress.trim().length != 0) {
+            setErrorRbtcAddress(false)
+        }
+        if (rbtcAmount.trim().length != 0) {
+            setErrorRbtcAmount(false)
+        }
         console.log('value is:', rbtcAddress);
     };
 
@@ -41,7 +66,7 @@ function Step2(props) {
                     return <Fragment>
                         <div className="alert-message-modal">
                             <div className="alert-message">
-                                <WarningOutlined />
+                                <img src={`${window.location.origin+'/icon-atention.svg'}`} alt="" />
                                 <p>Double check that you are entering the correct BTC destination address.</p>
                             </div>
                         </div>
@@ -55,6 +80,7 @@ function Step2(props) {
                                             <div className="ant-form-item-control-input">
                                                 <div className="ant-form-item-control-input-content">
                                                     <input placeholder="Destination BTC Addresss" className="" type="text" onChange={handleChangeAddress} value={rbtcAddress}/>
+                                                    {errorRbtcAddress && <Fragment><br/><p className={'error'}>This field is required</p></Fragment>}
                                                 </div>
                                             </div>
                                         </div>
@@ -77,6 +103,7 @@ function Step2(props) {
                                 <span>RBTC </span>
                             </div>
                         </div>
+                        {errorRbtcAmount && <Fragment><p className={'error'}>This field is required</p></Fragment>}
 
 
                         <div className="BalanceSelectorContainer">
@@ -141,7 +168,7 @@ function Step2(props) {
                     </Fragment>
                 case 3:
                     return <Fragment>
-                        <Step3 rbtcAmount={rbtcAmount} rbtcAddress={rbtcAddress}></Step3>
+                        <Step3 handleClose={handleClose} rbtcAmount={rbtcAmount} rbtcAddress={rbtcAddress}></Step3>
                     </Fragment>
             }
         })()}
