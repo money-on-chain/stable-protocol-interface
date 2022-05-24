@@ -105,9 +105,7 @@ export default function RbtcToBtcGenerateModal(props) {
 
     const [currentStep, setCurrentStep]= useState(1);
     const  handleSubmit=(step) => {
-        if( step==2 ){
-            setCurrentStep(2)
-        }
+        setCurrentStep(step)
     }
 
 
@@ -139,7 +137,7 @@ export default function RbtcToBtcGenerateModal(props) {
         <Modal
             visible={visible}
             title={titleModal}
-            footer={!hasTokenQr && footerModal}
+            footer={!hasTokenQr}
             width={550}
             onCancel={handleClose}
             className="RbtcToBtcModal"
@@ -190,7 +188,7 @@ export default function RbtcToBtcGenerateModal(props) {
                 </Fragment>)
             }
             {currentStep==2 &&
-                <Step2></Step2>
+                <Step2 min={toNumberFormat(limits.min / btcInSatoshis, 8)} max={toNumberFormat(limits.max / btcInSatoshis, 3)} fee={renderFee}></Step2>
             }
         </Modal>
     );
