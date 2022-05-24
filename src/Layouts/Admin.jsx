@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Layout, Menu, Image, Drawer, Button } from 'antd';
-import { HomeFilled, MenuOutlined, CloseOutlined, PieChartFilled,InfoCircleFilled } from '@ant-design/icons';
+import { HomeFilled, MenuOutlined, CloseOutlined, PieChartFilled, InfoCircleFilled } from '@ant-design/icons';
 import logoImage from '../assets/icons/logo.svg';
 import LoginButton from '../Components/Auth/LoginButton/index';
 import React, { useContext, useState, useEffect } from 'react';
@@ -8,6 +8,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthenticateContext } from '../Context/Auth';
 import { formatVisibleValue } from '../Lib/Formats';
 import HeaderCoins from "../Components/Page/HeaderCoins";
+import { useTranslation } from "react-i18next";
 const BigNumber = require('bignumber.js');
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -19,10 +20,10 @@ export default function Admin() {
     const [drawerVisible, setDrawerVisible] = useState(false);
     const loginButtonSettings = accountData.Wallet
         ? {
-              title: accountData.truncatedAddress,
-              subtitle: new BigNumber(accountData.Balance).toFixed(4) + ' RBTC',
-              status: 'Active'
-          }
+            title: accountData.truncatedAddress,
+            subtitle: new BigNumber(accountData.Balance).toFixed(4) + ' RBTC',
+            status: 'Active'
+        }
         : { title: 'Connect' };
     const [selectedMenu, setSelectedMenu] = useState('');
 
@@ -52,14 +53,16 @@ export default function Admin() {
         setDrawerVisible(!drawerVisible);
     };
 
+    const [t, i18n] = useTranslation(["global", 'moc'])
+
     return (
         <Layout>
             <Sider
                 className="Sidebar"
                 breakpoint="lg"
                 collapsed={true}
-                onBreakpoint={(broken) => {}}
-                onCollapse={(collapsed, type) => {}}
+                onBreakpoint={(broken) => { }}
+                onCollapse={(collapsed, type) => { }}
                 style={{
                     overflow: 'auto',
                     height: '100vh',
@@ -109,7 +112,7 @@ export default function Admin() {
                     <SubMenu key="information" title="Profile" icon={<InfoCircleFilled />} theme={'light'}>
                         <Menu.Item key="contract_repository" onClick={() => window.open('https://github.com/money-on-chain/main-RBTC-contract', '_self')}>Contract Repository</Menu.Item>
                         <Menu.Item key="webapp_repository" onClick={() => window.open('https://github.com/money-on-chain/webapp-stable-ipfs', '_self')}>Webapp Repository</Menu.Item>
-                        <Menu.Item key="help_center" onClick={() => window.open('https://wiki.moneyonchain.com/', '_self')}>Help Center</Menu.Item>
+                        <Menu.Item key="help_center" onClick={() => window.open('https://wiki.moneyonchain.com/', '_self')}>{t('MoC.menu-sidebar.faqs', { ns: 'moc' })}</Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>

@@ -14,10 +14,8 @@ import {useTranslation} from "react-i18next";
 function Home(props) {
 
   const [t, i18n]= useTranslation(["global",'moc'])
-
   const auth = useContext(AuthenticateContext);
   const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
-
 
   const data_row_coins2= [];
 
