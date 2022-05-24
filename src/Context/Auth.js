@@ -649,7 +649,7 @@ const AuthenticateProvider = ({ children }) => {
     const calcMintInterestValues = amount => {
         const mocInrateAddress = "0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c";
         const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
-        return mocInrate.calcMintInterestValues(strToBytes32(bucketX2), amount).call();
+            mocInrate.methods.calcMintInterestValues(strToBytes32(bucketX2), amount).call();
     };
 
     // TODO
