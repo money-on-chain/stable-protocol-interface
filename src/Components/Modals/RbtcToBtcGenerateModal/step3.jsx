@@ -16,9 +16,9 @@ export default function Step3(props) {
     // const {visible = false, handleClose = () => {}} = props;
 
     const [currentStep, setCurrentStep]= useState(1);
-    const [amountReceiving, setAmountReceiving] = useState('9');
+    const [amountReceiving, setAmountReceiving] = useState('0');
     const [amountToSendInWei, setAmountToSendInWei] = useState('0');
-    const [feesPaid, setFeesPaid] = useState('9');
+    const [feesPaid, setFeesPaid] = useState('0');
     const  handleSubmit=(step) => {
         setCurrentStep(step)
     }

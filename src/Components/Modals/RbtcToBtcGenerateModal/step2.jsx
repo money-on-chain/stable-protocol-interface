@@ -132,12 +132,12 @@ function Step2(props) {
                             </div>
                         </div>
 
-                        {/*<div className="GenerateBTC">*/}
+                        <div className="GenerateBTC">
                             {/*<Button type="primary" onClick={handleSubmit()}>*/}
-                        {/*    <Button type="primary" onClick={(event) => handleSubmit(event)}>*/}
-                        {/*        <b>Continue</b>*/}
-                        {/*    </Button>*/}
-                        {/*</div>*/}
+                            <Button type="primary" onClick={(event) => handleSubmit(event)}>
+                                <b>Continue</b>
+                            </Button>
+                        </div>
                     </Fragment>
                 case 3:
                     return <Fragment>
