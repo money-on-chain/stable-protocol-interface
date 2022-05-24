@@ -9,15 +9,15 @@ import MocAmount from "../../Components/Cards/MocAmount";
 import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import ListOperations from "../../Components/Tables/ListOperations";
 import data_json from "../../services/webapp_transactions_list.json";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 function Home(props) {
 
-  const [t, i18n]= useTranslation(["global",'moc'])
+  const [t, i18n] = useTranslation(["global", 'moc']);
   const auth = useContext(AuthenticateContext);
   const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
 
-  const data_row_coins2= [];
+  const data_row_coins2 = [];
 
 
   /*
@@ -68,28 +68,28 @@ function Home(props) {
   //         });
   //     }
   // });
-/*
-  data_row_coins2.push({
-      key: 0,
-      info: '',
-      event: 'DOC',
-      asset: 'DOC',
-      platform: '+ 0.00',
-      wallet: '-0.000032',
-      date: '2022-04-18 18:23',
-      status: {txt:'Confirmed',percent:100},
-  });
-  data_row_coins2.push({
-      key: 1,
-      info: '',
-      event: 'MINT',
-      asset: 'BTC',
-      platform: '+ 0.00',
-      wallet: '-0.000032',
-      date: '2022-04-18 18:23',
-      status: {txt:'Confirmed',percent:100},
-  });
-*/
+  /*
+    data_row_coins2.push({
+        key: 0,
+        info: '',
+        event: 'DOC',
+        asset: 'DOC',
+        platform: '+ 0.00',
+        wallet: '-0.000032',
+        date: '2022-04-18 18:23',
+        status: {txt:'Confirmed',percent:100},
+    });
+    data_row_coins2.push({
+        key: 1,
+        info: '',
+        event: 'MINT',
+        asset: 'BTC',
+        platform: '+ 0.00',
+        wallet: '-0.000032',
+        date: '2022-04-18 18:23',
+        status: {txt:'Confirmed',percent:100},
+    });
+  */
 
   return (
     <Fragment>
@@ -97,10 +97,10 @@ function Home(props) {
       <h3 className="PageSubTitle">{t("MoC.home.subtitle", { ns: 'moc' })}</h3>
       <Row gutter={16}>
         <Col flex="400px" className={'WalletBalance-mb'}>
-          <WalletBalance/>
+          <WalletBalance />
         </Col>
         <Col flex="auto">
-          <div className={'container-b'} style={{height: '100%'}}>
+          <div className={'container-b'} style={{ height: '100%' }}>
             <TokenSummaryCard
               tokenName="stable"
               color="#00a651"

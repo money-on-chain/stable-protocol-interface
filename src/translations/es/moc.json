@@ -118,6 +118,8 @@
     },
     "info-button": {
       "moc-repository": "Repositorio de MOC",
+      "contract-repository": "Repositorio de contratos",
+      "webapp-repository": "Repositorio Webapp",
       "help-center": "Centro de ayuda",
       "help-center-subtitle": "¿Necesitas respuestas? Encuéntralos aquí!",
       "terms-and-conditions": "Términos y Condiciones",
