@@ -19,7 +19,6 @@ export default function Step3(props) {
 
     const [currentStep, setCurrentStep]= useState(1);
     const [amountReceiving, setAmountReceiving] = useState('0');
-    const [amountToSendInWei, setAmountToSendInWei] = useState('0');
     const [feesPaid, setFeesPaid] = useState('0');
     const [headerState, setHeaderState] = useState('Double check that you are entering the correct BTC destination address.');
     const [headerIcon, setHeaderIcon] = useState('icon-atention.svg');
@@ -52,7 +51,7 @@ export default function Step3(props) {
     },checkLoginFirstTime);
 
     useEffect(() => {
-        // currentFeeData();
+        currentFeeData();
     }, [web3]);
 
     const connect = () =>
@@ -75,13 +74,15 @@ export default function Step3(props) {
     const currentFeeData = async () => {
         const fastBtcBridgeAddress = '0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A';
         console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
+        console.log(Web3.utils.toWei(props.rbtcAmount, 'ether'))
+        console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         if(web3!=null){
             const fastBtcBridge = new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
             const calculateCurrentFee = () => {
                 return new Promise((resolve, reject) => {
-                    fastBtcBridge.methods.calculateCurrentFeeWei(props.rbtcAmount)
+                    fastBtcBridge.methods.calculateCurrentFeeWei(Web3.utils.toWei(props.rbtcAmount, 'ether'))
                         .call().then(async feesPaid => {
-                        const receivedAmount = new BigNumber(amountToSendInWei)
+                        const receivedAmount = new BigNumber(Web3.utils.toWei(props.rbtcAmount, 'ether'))
                             .minus(feesPaid)
                             .toString();
                         setFeesPaid(weiToNumberFormat(feesPaid, 8));
@@ -183,7 +184,7 @@ export default function Step3(props) {
 
             <div className="AmountSummary">
                 <div className="Detail">Exchanging</div>
-                <div className="Amount strong">{props.rbtcAmount} rBTC</div>
+                <div className="Amount strong">{props.rbtcAmount*1} rBTC</div>
             </div>
 
             <div className="AmountSummary">
