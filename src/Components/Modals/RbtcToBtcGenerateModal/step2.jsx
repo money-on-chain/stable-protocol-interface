@@ -36,8 +36,16 @@ function Step2(props) {
     };
     const {visible = false, handleClose = () => {}} = props;
 
-    const handleChange = event => {
+    const handleChangeAmount= event => {
         setRbtcAmount(event.target.value);
+        if( (event.target.value).length < 7  || (event.target.value).length > 7){
+            const multiple= 1.000000
+            console.log((event.target.value * multiple).toFixed(6))
+            setRbtcAmount((event.target.value * multiple).toFixed(6));
+            event.target.value = (event.target.value * multiple).toFixed(6);
+            setErrorRbtcAmount(false)
+        }
+
         if (rbtcAmount.trim().length != 0) {
             setErrorRbtcAmount(false)
         }
@@ -97,7 +105,7 @@ function Step2(props) {
                         </div>
 
                         <div className={'inputAmount'}>
-                            <input type="number" onChange={handleChange} placeholder="Enter rBTC amount to send" className="valueInput" value={rbtcAmount}/>
+                            <input type="number" onBlur={handleChangeAmount} onMouseLeave={handleChangeAmount} placeholder="Enter rBTC amount to send" className="valueInput"/>
                             <div>
                                 <img src={window.location.origin + '/Moc/icon-reserve.svg'} alt={'sdssd'} width={30}/>
                                 <span>RBTC </span>
