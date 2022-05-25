@@ -169,7 +169,7 @@ export default function RbtcToBtcGenerateModal(props) {
                 <li>Do not send anything other than rBTC.</li>
                 <li>Do not send more rBTC than the MAX limit.</li>
                 <li>Allow up to 90 mins for the transaction to precess.</li>
-                <li>If BTC is not visible in your destination wallet after 90 mins, open a<a href='https://sovryn.freshdesk.com/support/tickets/new'><strong>support ticket</strong></a> at Sovryn.</li>
+                <li>If BTC is not visible in your destination wallet after 90 mins, open a<a href='https://sovryn.freshdesk.com/support/tickets/new'><strong> support ticket</strong></a> at Sovryn.</li>
             </ul>
 
             {!hasTokenQr && (<div className="GenerateBTC">
