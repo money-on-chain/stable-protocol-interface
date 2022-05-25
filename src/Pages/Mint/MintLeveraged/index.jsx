@@ -11,7 +11,6 @@ import { useTranslation } from "react-i18next";
 
 export default function Mint(props) {
     const [daysHours, setDaysHours] = useState(null);
-    const [t, i18n] = useTranslation(["global", 'moc'])
 
     const decimaltoHour = (dayBlockSpan, blocksToSettlement) => {
         const result = {};
@@ -59,6 +58,8 @@ export default function Mint(props) {
         date: '2022-04-18 18:23',
         status: { txt: 'Confirmed', percent: 100 },
     });
+
+    const [t, i18n] = useTranslation(["global", 'moc'])
 
     return (
         <Fragment>
