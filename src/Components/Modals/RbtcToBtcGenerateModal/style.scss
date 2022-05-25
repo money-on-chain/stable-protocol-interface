@@ -190,11 +190,6 @@
         height: 40px !important;
         border: 1px solid #949494 !important;
     }
-
-
-
-    /******step 2******/
-    /******end step 2******/
 }
 
 
@@ -224,6 +219,9 @@
         border: 1px solid #949494;
         line-height: 2.125;
         width: 20%;
+        @media screen and (max-width:900px) {
+            width: 45%;
+        }
         border-left: none;
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
@@ -240,44 +238,44 @@
 
 }
 
+.BalanceSelectorContainer {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    .ant-radio-group {
+        span {
+            font-size: 12px !important;
+            font-family: "Montserrat", sans-serif !important;
+            color: #7B7B7B !important;
+        }
 
-    .BalanceSelectorContainer {
-        margin-top: 10px;
         display: flex;
-        flex-direction: column;
-        .ant-radio-group {
-            span {
-                font-size: 12px !important;
-                font-family: "Montserrat", sans-serif !important;
-                color: #7B7B7B !important;
-            }
-
-            display: flex;
-            .ant-radio-button-wrapper {
-                flex-grow: 1;
-                height: 20px;
-                line-height: 18px;
-                border: solid 1px #888888 !important;
-                border-left-width: 0 !important;
-            }
-            .ant-radio-button-wrapper-fc {
-                border-left: 1px solid #888888;
-                border-radius: 15px 0 0 15px;
-                border-left-width: 1px !important;
-            }
-
-            .ant-radio-button-wrapper-lc {
-                border-right: 1px solid #888888 !important;
-                border-radius: 0 8px 8px 0;
-            }
+        .ant-radio-button-wrapper {
+            flex-grow: 1;
+            height: 20px;
+            line-height: 18px;
+            border: solid 1px #888888 !important;
+            border-left-width: 0 !important;
         }
-        .AlignedAndCentered {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .ant-radio-button-wrapper-fc {
+            border-left: 1px solid #888888;
+            border-radius: 15px 0 0 15px;
+            border-left-width: 1px !important;
         }
 
+        .ant-radio-button-wrapper-lc {
+            border-right: 1px solid #888888 !important;
+            border-radius: 0 8px 8px 0;
+        }
     }
+    .AlignedAndCentered {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+}
+
 .setValueToMax {
     color: #888888 !important;
     font-family: Roboto;
@@ -324,13 +322,3 @@
         }
     }
 }
-
-
-
-//.InputWithCurrencySelector{
-//    .MainContainer {
-//        display: flex;
-//        align-items: center;
-//        width: 100%;
-//    }
-//}
