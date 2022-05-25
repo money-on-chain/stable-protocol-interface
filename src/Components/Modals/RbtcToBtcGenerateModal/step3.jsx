@@ -1,24 +1,16 @@
-import { Modal } from 'antd';
 import { Button } from 'antd';
-import WarningOutlined from '@ant-design/icons/WarningOutlined';
-import CopyOutlined from '@ant-design/icons/CopyOutlined';
-import { AuthenticateContext } from '../../../Context/Auth';
 import React, {Fragment, useContext, useEffect, useState} from "react";
 import {weiToNumberFormat} from '../../../Helpers/math-helpers'
-import rLogin from "../../../Lib/rLogin";
 import Web3 from "web3";
 import FastBtcBridge from "../../../Contracts/MoC/abi/FastBtcBridge.json";
 import { toContract } from '../../../Lib/numberHelper';
-import { useHistory } from "react-router-dom"
 import Copy from "../../Page/Copy";
 const BigNumber = require('bignumber.js');
 
 
 export default function Step3(props) {
 
-    // const {visible = false, handleClose = () => {}} = props;
-
-    const [currentStep, setCurrentStep]= useState(1);
+    const {visible = false, handleClose = () => {}} = props;
     const [amountReceiving, setAmountReceiving] = useState('0');
     const [feesPaid, setFeesPaid] = useState('0');
     const [headerState, setHeaderState] = useState('Double check that you are entering the correct BTC destination address.');
@@ -28,50 +20,28 @@ export default function Step3(props) {
     const [buttonCompleted, setButtonCompleted] = useState('Confirm');
     const [labelTxid, setlabelTxid] = useState('');
 
-
-    const auth = useContext(AuthenticateContext);
+    const {auth}= props;
+    const {web3}= auth;
     const { accountData } = auth;
     console.log('accountData.Owner');
     console.log(accountData.Owner);
     console.log('accountData.Owner');
-
-    let checkLoginFirstTime = true;
     const [account, setAccount] = useState(null);
-    const [web3, setweb3] = useState(null);
-    const [provider, setProvider] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     console.log('account ini------------------------')
     console.log(account)
     console.log('account ini------------------------')
     useEffect(() => {
-        if (checkLoginFirstTime) {
-            if (rLogin.cachedProvider) {
-                connect();
-            }
-        }
-    },checkLoginFirstTime);
+        connect();
+    },[auth]);
 
     useEffect(() => {
         currentFeeData();
     }, [web3]);
 
-    const connect = () =>
-        rLogin.connect().then((rLoginResponse) => {
-            const { provider, disconnect } = rLoginResponse;
-            setProvider(provider);
-
-            //const web3 = new Web3(provider);
-            setweb3(new Web3(provider));
-            window.rLoginDisconnect = disconnect;
-            checkLoginFirstTime = false;
-
-            // request user's account
-            provider.request({ method: 'eth_accounts' }).then(([account]) => {
-                setAccount(account);
-                setIsLoggedIn(true);
-            });
-    });
+    const connect = () =>  {
+        setAccount(auth.account);
+    };
 
     const currentFeeData = async () => {
         const fastBtcBridgeAddress = '0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A';
@@ -154,8 +124,6 @@ export default function Step3(props) {
             fastBtcTransferToBtc().then(result => {});
         }
     };
-    const {visible = false, handleClose = () => {}} = props;
-
 
     const handleSubmit=() => {
         if( completed==false ){

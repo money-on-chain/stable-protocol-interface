@@ -30,6 +30,7 @@ const AuthenticateContext = createContext({
     account: null,
     userBalanceData: null,
     contractStatusData: null,
+    web3: null,
     connect: () => {},
     DoCMint: async (amount) => {},
     DoCReedem: async (amount) => {},
@@ -349,7 +350,7 @@ const AuthenticateProvider = ({ children }) => {
     const DoCMint = async (amount, callback) => {
         const web3 = new Web3(provider);
         const moc = getContract(MocAbi.abi, mocAddress);
-        
+
         const amountWei = web3.utils.toWei(amount);
         const totalAmount = await getTotalAmount(
             amountWei,
@@ -658,7 +659,7 @@ const AuthenticateProvider = ({ children }) => {
         const reserveTokenAddress =
         const reserveToken = getContract(ERC20.abi, reserveTokenAddress);
         return getGasPrice().then(price => {
-            return 
+            return
         })
     }; */
 
@@ -670,6 +671,7 @@ const AuthenticateProvider = ({ children }) => {
                 userBalanceData,
                 contractStatusData,
                 isLoggedIn,
+                web3,
                 connect,
                 disconnect,
                 DoCMint,

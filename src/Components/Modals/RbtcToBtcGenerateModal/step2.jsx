@@ -10,6 +10,8 @@ function Step2(props) {
     // const {visible = false, handleClose = () => {}} = props;
 
     const amountInput = useRef();
+    const {auth}= props;
+    const {web3}= auth;
 
     const [currentStep, setCurrentStep]= useState(2);
     const [rbtcAmount, setRbtcAmount]= useState("");
@@ -180,7 +182,7 @@ function Step2(props) {
                         </Fragment>
                     case 3:
                         return <Fragment>
-                            <Step3 handleClose={handleClose} rbtcAmount={rbtcAmount} rbtcAddress={rbtcAddress}></Step3>
+                            <Step3 auth={auth} handleClose={handleClose} rbtcAmount={rbtcAmount} rbtcAddress={rbtcAddress}></Step3>
                         </Fragment>
                 }
             })()}
