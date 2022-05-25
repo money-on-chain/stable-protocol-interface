@@ -10,6 +10,7 @@ import Web3 from "web3";
 import FastBtcBridge from "../../../Contracts/MoC/abi/FastBtcBridge.json";
 import { toContract } from '../../../Lib/numberHelper';
 import { useHistory } from "react-router-dom"
+import Copy from "../../Page/Copy";
 const BigNumber = require('bignumber.js');
 
 
@@ -25,6 +26,7 @@ export default function Step3(props) {
     const [isVisible, setIsVisible] = useState(true)
     const [completed, setCompleted] = useState(false);
     const [buttonCompleted, setButtonCompleted] = useState('Confirm');
+    const [labelTxid, setlabelTxid] = useState('');
 
 
     const auth = useContext(AuthenticateContext);
@@ -125,6 +127,7 @@ export default function Step3(props) {
                                 setCompleted(true);
                                 setIsVisible(true)
                                 setButtonCompleted('Close')
+                                setlabelTxid(responseBTC['transactionHash']);
                             })
                             .catch(error => {
                                 //setIsPending(false);
@@ -132,6 +135,7 @@ export default function Step3(props) {
                                 setCompleted(true);
                                 setIsVisible(true)
                                 setButtonCompleted('Close')
+                                setlabelTxid(error['transactionHash']);
                                 console.log("fail", error);
                             });
                         resolve(response);
@@ -141,6 +145,7 @@ export default function Step3(props) {
                             setCompleted(true);
                             setIsVisible(true)
                             setButtonCompleted('Close')
+                            setlabelTxid(error['transactionHash']);
                             reject(error);
                         });;
                 });
@@ -196,6 +201,15 @@ export default function Step3(props) {
                 <div className="Detail">Fee</div>
                 <div className="Amount">{feesPaid} BTC</div>
             </div>
+
+            {labelTxid &&
+            <div className="AmountSummary">
+                <div className="Detail">Tx ID</div>
+                <div className="Amount">
+                    <Copy textToShow={labelTxid?.slice(0, 5)+'...'+ labelTxid?.slice(-4)} textToCopy={labelTxid} />
+                </div>
+            </div>
+            }
 
             <div className="GenerateBTC"  style={{ display: isVisible ? "block" : "none" }}>
                 <Button type="primary" onClick={()=>handleSubmit()}>
