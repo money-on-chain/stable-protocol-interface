@@ -71,7 +71,7 @@ export default function Step3(props) {
     };
 
 
-    const sendTransaction = async () => {
+    const sendTransaction= async () => {
         const fastBtcBridgeAddress = '0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A';
         console.log('sendTransaction: Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         if(web3!=null){
@@ -83,10 +83,10 @@ export default function Step3(props) {
                     setHeaderIcon('icon-processing.svg')
                     setIsVisible(false)
                     setHeaderState('Pending')
-                    fastBtcBridge.methods.transferToBtc(accountData.Owner.toLowerCase()).send(
+                    fastBtcBridge.methods.transferToBtc(accountData.Owner).send(
                         [props.rbtcAddress],
                         {
-                            from: accountData.Owner.toLowerCase(),
+                            from: accountData.Owner,
                             value: toContract(web3.utils.toWei(`${parseFloat(props.rbtcAmount)}`, 'ether')),
                             gas: 300000
                         }).then(response => {
