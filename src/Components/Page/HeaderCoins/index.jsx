@@ -3,9 +3,8 @@ import './style.scss';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import PriceVariation from '../../PriceVariation';
-import { priceVariation24hs } from '../../../Context/Api';
-
-const BigNumber = require('bignumber.js');
+import {LargeNumber} from "../../LargeNumber";
+import web3 from "web3";
 
 function HeaderCoins(props) {
   const auth = useContext(AuthenticateContext);
@@ -78,23 +77,27 @@ function HeaderCoins(props) {
       switch (props.tokenName) {
         case 'stable':
           if (auth.contractStatusData['bitcoinPrice'] != 0) {
-            return (auth.contractStatusData['bitcoinPrice'] / 1000).toFixed(4);
+            // return (auth.contractStatusData['bitcoinPrice'] / 1000).toFixed(4);
+            console.log("web3.utils.toWei(auth.contractStatusData['bitcoinPrice']")
+            console.log(web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether'))
+            console.log("web3.utils.toWei(auth.contractStatusData['bitcoinPrice']")
+            return (web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether'));
           } else {
             return 0;
           }
         case 'riskpro':
           if (auth.contractStatusData['bproPriceInUsd'] != 0) {
-            return (auth.contractStatusData['bproPriceInUsd'] / 1000).toFixed(4);
+            return (web3.utils.toWei(auth.contractStatusData['bproPriceInUsd'], 'ether'));
           } else {
             return 0;
           }
 
         case 'riskprox':
           if (auth.userBalanceData['bprox2Balance'] != 0) {
-            return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4) / 1000;
+            return (web3.utils.toWei(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance'], 'ether'));
           } else {
             if (auth.contractStatusData['bitcoinPrice'] != 0) {
-              return new BigNumber(auth.contractStatusData['bitcoinPrice']).toFixed(4) / 1000;
+              return (web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether'));
             } else {
               return 0;
             }
@@ -119,12 +122,17 @@ function HeaderCoins(props) {
     }
   };
 
+  const [currencyCode, setCurrencyCode]=  useState('USDPrice');
+
   return (
     <>{ dailyVariation &&
       <div className={'mrl-25 div_coin'}>
         <img src={window.location.origin + '/' + image} alt="arrow" height={38}/>
         <div className={'div_values'}>
-          <span className="value_usd">{getBalanceUSD()} USD</span>
+          <span className="value_usd">
+            <LargeNumber amount={getBalanceUSD()} {...{ currencyCode }} />
+            <span className={'div_values-coin'}>USD</span>
+          </span>
           <PriceVariation priceVariation={getPriceVariation()} blockHeight={dailyVariation['24hs'].blockHeight} />
         </div>
       </div>}
