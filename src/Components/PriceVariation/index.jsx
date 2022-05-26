@@ -2,6 +2,7 @@ import './style.scss';
 import React from 'react';
 import { Tooltip } from 'antd';
 import { formatVisibleValue, formatValueVariation, formatPerc } from '../../Lib/Formats';
+import i18n from "i18next";
 
 export default function PriceVariation(props) {
    // if (!props.priceVariation) return null;
@@ -18,8 +19,8 @@ export default function PriceVariation(props) {
     const arrow = `${window.location.origin}/Moc/${isPositive ? 'icon-arrow-up2' : 'icon-arrow-down2'}.svg`;
     const sign = isPositive ? '+' : '-';
     const color = isPositive ? '#3fcb97' : '#f2316a';
-    const formattedVar = formatValueVariation(priceVariation.current, 'en');
-    const formattedPerc = parseFloat(((priceVariation.day - priceVariation.current)/priceVariation.day)*100).toLocaleString('en', {minimumFractionDigits:2, maximumFractionDigits:2});
+    const formattedVar = formatValueVariation(priceVariation.current, i18n.languages[0]);
+    const formattedPerc = parseFloat(((priceVariation.day - priceVariation.current)/priceVariation.day)*100).toLocaleString(i18n.languages[0], {minimumFractionDigits:2, maximumFractionDigits:2});
     const variationText = `${sign}${formattedVar} (${formattedPerc}%)`;
     const tooltip = (
         <div className="PriceVariationTooltip">
