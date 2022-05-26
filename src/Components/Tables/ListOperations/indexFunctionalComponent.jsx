@@ -87,10 +87,7 @@ export default function ListOperations(props) {
             title: '',
             dataIndex: 'info',
         },
-        {
-            title: 're',
-            dataIndex: 'df',
-        },
+
         {
             title: 'event',
             dataIndex: 'event',
@@ -304,6 +301,7 @@ export default function ListOperations(props) {
             <Table
                 pagination={{ position: [top, bottom], defaultCurrent: 1, onChange: (current) => setCurrent(current), total: Object.keys(data_json.transactions).length }}
                 columns={tableColumns}
+                expandedRowRender={record => <p>{record.description}</p>}
                 dataSource={hasData ? data : null}
                 scroll={scroll}
             />
