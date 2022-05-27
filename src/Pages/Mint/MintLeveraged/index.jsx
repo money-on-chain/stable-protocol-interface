@@ -3,14 +3,17 @@ import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
 import { Row, Col, Tooltip } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, useContext } from 'react';
 import TokenSummaryCard from '../../../Components/Cards/TokenSummaryCard';
 import moment from 'moment';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
+import { AuthenticateContext } from '../../../Context/Auth';
+import './style.scss'
 
 export default function Mint(props) {
     const [daysHours, setDaysHours] = useState(null);
+    const auth = useContext(AuthenticateContext);
 
     const decimaltoHour = (dayBlockSpan, blocksToSettlement) => {
         const result = {};
@@ -33,7 +36,7 @@ export default function Mint(props) {
     };
 
     useEffect(() => {
-        setDaysHours(decimaltoHour(props.Auth.contractStatusData.dayBlockSpan, props.Auth.contractStatusData.blocksToSettlement));
+        setDaysHours(decimaltoHour(auth.contractStatusData.dayBlockSpan, auth.contractStatusData.blocksToSettlement));
     }, []);
 
     const data_row_coins = [];
@@ -79,8 +82,8 @@ export default function Mint(props) {
                                     <div className="CaptionDateSettlement">{daysHours?.date}</div>
                                     <div>
                                         <span className="SettlementTitle">{t('MoC.settlement.remainingBlocks', { ns: 'moc' })}: </span>
-                                        {props.Auth.contractStatusData?.blocksToSettlement}
-                                        <Tooltip placement="top" title={props.Auth.contractStatusData?.blockHeight}>
+                                        {auth.contractStatusData?.blocksToSettlement}
+                                        <Tooltip placement="top" title={auth.contractStatusData?.blockHeight}>
                                             <InfoCircleOutlined className="Icon" />
                                         </Tooltip>
                                     </div>
@@ -104,9 +107,9 @@ export default function Mint(props) {
                 <Col xs={24} xl={14}>
                     <MintCard
                         token={'RISKPROX'}
-                        AccountData={props.Auth.accountData}
-                        UserBalanceData={props.Auth.userBalanceData}
-                        StatusData={props.Auth.contractStatusData}
+                        AccountData={auth.accountData}
+                        UserBalanceData={auth.userBalanceData}
+                        StatusData={auth.contractStatusData}
                         currencyOptions={['RESERVE', 'RISKPROX']}
                         color="#ed1c24"
                     />

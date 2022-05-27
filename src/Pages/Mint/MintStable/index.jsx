@@ -2,13 +2,15 @@ import MintCard from '../../../Components/Cards/MintCard';
 import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
 import { Row, Col, Switch } from 'antd';
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import {useTranslation} from "react-i18next";
-import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedeemToken';
+import { AuthenticateContext } from '../../../Context/Auth';
+import './style.scss'
 
 export default function Mint(props) {
     const data_row_coins = [];
+    const auth = useContext(AuthenticateContext);
 
     data_row_coins.push({
         key: 0,
@@ -45,17 +47,13 @@ export default function Mint(props) {
                     <YourAddressCard height="23.4em" tokenToSend="STABLE" currencyOptions={['RESERVE', 'STABLE']} />
                 </Col>
                 <Col xs={24} xl={15}>
-                    {/*<MintOrRedeemToken
-                        token={'STABLE'}
-                        StatusData={props.Auth.contractStatusData}
-                    /> */}
                     <MintCard
                         token={'STABLE'}
                         currencyOptions={['RESERVE', 'STABLE']}
-                        StatusData={props.Auth.contractStatusData}
-                        UserBalanceData={props.Auth.userBalanceData}
                         color="#00a651"
-                        AccountData={props.Auth.accountData}
+                        AccountData={auth.accountData}
+                        UserBalanceData={auth.userBalanceData}
+                        StatusData={auth.contractStatusData}
                     />
                 </Col>
             </Row>
