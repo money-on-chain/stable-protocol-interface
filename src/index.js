@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './assets/css/global.scss';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
@@ -8,7 +9,6 @@ import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom';
 import Router from './Router';
 import { AuthenticateProvider } from './Context/Auth';
-import './assets/css/global.scss';
 import {I18nextProvider} from "react-i18next";
 import i18next from "i18next";
 import global_es from "./translations/es/global.json"
@@ -37,7 +37,9 @@ ReactDOM.render(
         <I18nextProvider i18n={i18next}>
             <AuthenticateProvider>
                 <HashRouter>
-                    <Router />
+                    <React.Suspense fallback={ <span>Loading...</span> }>
+                        <Router />
+                    </React.Suspense>
                 </HashRouter>
             </AuthenticateProvider>
         </I18nextProvider>

@@ -7,6 +7,8 @@ import CoinSelect from '../../Form/CoinSelect';
 import StakingOptionsModal from '../../Modals/StakingOptionsModal';
 import { AuthenticateContext } from '../../../Context/Auth';
 import BigNumber from "bignumber.js";
+import OperationStatusModal from '../../Modals/OperationStatusModal/OperationStatusModal';
+import { useTranslation } from "react-i18next";
 import './style.scss';
 
 const { TabPane } = Tabs;
@@ -15,36 +17,36 @@ const token = "MOC";
 const withdrawalStatus = {
     pending: "PENDING",
     available: "AVAILABLE"
-  };
+};
 
-const getColumns = renderActionsFunction => [
+const getColumns = (renderActionsFunction, t) => [
     {
-        title: "AMOUNT",
+        title: t('global.RewardsOptions_Withdraw_Amount', { ns: 'global' }),
         dataIndex: "amount",
         key: "amount",
         render: amount => (
-            <><LargeNumber className="" amount={amount} currencyCode="MOC" /> MOC</>
+            <><LargeNumber className="WithdrawalAmount" amount={amount} currencyCode="MOC" /> MOC</>
         )
     },
     {
-        title: "EXPIRATION",
+        title: t('global.RewardsOptions_Withdraw_Expiration', { ns: 'global' }),
         dataIndex: "expiration",
         key: "expiration",
         render: expiration => moment(parseInt(expiration) * 1000).format("L LT")
     },
     {
-      title: "STATUS",
-      dataIndex: "status",
-      key: "status",
-      render: status =>
-        status === withdrawalStatus.available
-          ? "Ready to Withdraw"
-          : "Processing unstake"
+        title: t('global.RewardsOptions_Withdraw_Status', { ns: 'global' }),
+        dataIndex: "status",
+        key: "status",
+        render: status =>
+            status === withdrawalStatus.available
+                ? t('global.StakingOptions_AvailableToWithdraw', { ns: 'global' })
+                : t('global.StakingOptions_PendingExpiration', { ns: 'global' })
     },
     {
-      title: "OPERATIONS",
-      key: "operations",
-      render: renderActionsFunction
+        title: "OPERATIONS",
+        key: "operations",
+        render: renderActionsFunction
     }
 ]
 
@@ -64,8 +66,12 @@ export default function RewardsStakingOptions(props) {
     const [blockedWithdrawals, setBlockedWithdrawals] = useState([]);
     const [totalPendingExpiration, setTotalPendingExpiration] = useState("0");
     const [totalAvailableToWithdraw, setTotalAvailableToWithdraw] = useState("0");
+    const [operationModalInfo, setOperationModalInfo] = useState({});
+    const [isOperationModalVisible, setIsOperationModalVisible] = useState(false);
+    const [cleanInputCount, setUntouchCount] = useState(0);
 
     const [withdrawalId, setWithdrawalId] = useState("0");
+    const [t, i18n] = useTranslation(["global", 'moc'])
 
     useEffect(() => {
         setStakingBalances();
@@ -73,25 +79,21 @@ export default function RewardsStakingOptions(props) {
 
     const setStakingBalances = async () => {
         let [_stakedBalance, _lockedBalance, _pendingWithdrawals] = ["0", "0", []];
-        if (props.UserBalanceData) {
-            setMocBalance(props.UserBalanceData?.mocBalance);
-            
+        if (props.UserBalanceData) {
+            setMocBalance(props.UserBalanceData.mocBalance);
             [_stakedBalance, _lockedBalance, _pendingWithdrawals] = await Promise.all([
                 auth.getStackedBalance(),
                 auth.getLockedBalance(),
                 auth.getPendingWithdrawals()
             ]);
         }
-        console.log('_stackedBalance', _stakedBalance);
-        console.log('lockedBalance', _lockedBalance);
-        console.log('_pending', _pendingWithdrawals);
         const pendingWithdrawalsFormatted = _pendingWithdrawals
             .filter(withdrawal => withdrawal.expiration)
             .map(withdrawal => {
                 const status = new Date(parseInt(withdrawal.expiration) * 1000) > new Date()
                     ? withdrawalStatus.pending
                     : withdrawalStatus.available;
-            
+
                 return {
                     ...withdrawal,
                     status
@@ -101,11 +103,11 @@ export default function RewardsStakingOptions(props) {
         let readyToWithdrawAmount = "0";
 
         pendingWithdrawalsFormatted.forEach(({ status, amount }) => {
-        if (status === withdrawalStatus.pending) {
-            pendingExpirationAmount = BigNumber.sum(pendingExpirationAmount, amount).toFixed(0);
-        } else {
-            readyToWithdrawAmount = BigNumber.sum(readyToWithdrawAmount, amount).toFixed(0);
-        }
+            if (status === withdrawalStatus.pending) {
+                pendingExpirationAmount = BigNumber.sum(pendingExpirationAmount, amount).toFixed(0);
+            } else {
+                readyToWithdrawAmount = BigNumber.sum(readyToWithdrawAmount, amount).toFixed(0);
+            }
         });
         setLockedBalance(_lockedBalance);
         setStakedBalance(_stakedBalance);
@@ -119,6 +121,10 @@ export default function RewardsStakingOptions(props) {
     };
 
     const renderStaking = () => {
+        var btnDisable = false;
+        if (!props.UserBalanceData) {
+            btnDisable = true;
+        }
         return (
             <div className="StakingTabContent">
                 <Row>
@@ -128,46 +134,48 @@ export default function RewardsStakingOptions(props) {
                     <Col xs={20}>
                         <Row className="RewardsOptionsOverview">
                             <div>
-                                Available to Stake
+                                {t("global.RewardsOptions_AvailableToStake", { ns: 'global' })}
                                 <h3 className="amount">
-                                    <LargeNumber amount={mocBalance} currencyCode="REWARD"/> MOC
+                                    <LargeNumber amount={mocBalance} currencyCode="REWARD" /> {t("MoC.Tokens_MOC_code", { ns: 'moc' })}
                                 </h3>
                             </div>
-                            <div style={{textAlign: 'right' }}>
-                                Staked
+                            <div style={{ textAlign: 'right' }}>
+                                {t("global.RewardsOptions_Staked", { ns: 'global' })}
                                 <h3 className="amount">
-                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> MOC
+                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t("MoC.Tokens_MOC_code", { ns: 'moc' })}
                                 </h3>
                             </div>
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
                                 <CoinSelect
-                                    label="MoC Tokens I want to stake"
+                                    label={t('global.RewardsOptions_AmountToStakePlaceholder', { ns: 'global' })}
                                     value={'MOC'}
                                     AccountData={props.AccountData}
                                     UserBalanceData={props.UserBalanceData}
                                     token={token}
                                     onInputValueChange={onValueStakingChange}
                                     inputValueInWei={stakingAmountInputValue}
+                                    currencyOptions={'MOC'}
                                 />
                             </Col>
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
-                                <span>Staking MoC Tokens receive rewards from the MoC Staking Rewards Program.
-                                    You will be able to unstake at any time with a release delay of 30 days (no rewards received during this period).
-                                    After this period you will be able to "Withdraw".
+                                <span>
+                                    {t('global.RewardsOptions_AmountToStakeNote', { ns: 'global' })}
                                 </span>
                             </Col>
                         </Row>
                         <Row>
                             <Button
+                                disabled={btnDisable}
                                 type="primary"
                                 className="StakingBtn"
                                 onClick={() => {
                                     setModalAmount(stakingAmountInputValue);
-                                    setModalMode("staking");}}
+                                    setModalMode("staking");
+                                }}
                             >Stake</Button>
                         </Row>
                     </Col>
@@ -176,6 +184,10 @@ export default function RewardsStakingOptions(props) {
     };
 
     const renderUnstaking = () => {
+        var btnDisable = false;
+        if (!props.UserBalanceData) {
+            btnDisable = true;
+        }
         return (
             <div className="StakingTabContent">
                 <Row>
@@ -185,16 +197,16 @@ export default function RewardsStakingOptions(props) {
                     <Col xs={20}>
                         <Row className="RewardsOptionsOverview">
                             <div>
-                                Available to Unstake
+                                {t('global.RewardsOptions_AvailableToUnstake', { ns: 'global' })}
                                 <h3 className="amount">
-                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD"/> MOC
+                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t('MoC.Tokens_MOC_code', { ns: 'moc' })}
                                 </h3>
                             </div>
                             {parseFloat(lockedBalance) > 0 && (
                                 <div>
-                                    Locked by voting
+                                    {t('global.RewardsOptions_Locked', { ns: 'global' })}
                                     <h3 className="amount">
-                                        <LargeNumber amount={lockedBalance} currencyCode="REWARD" /> MOC
+                                        <LargeNumber amount={lockedBalance} currencyCode="REWARD" /> {t('MoC.Tokens_MOC_code', { ns: 'moc' })}
                                     </h3>
                                 </div>
                             )}
@@ -202,7 +214,7 @@ export default function RewardsStakingOptions(props) {
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
                                 <CoinSelect
-                                    label="MoC Tokens I want to unstake"
+                                    label={t('global.RewardsOptions_AmountToUnstakePlaceholder', { ns: 'global' })}
                                     value={token}
                                     AccountData={props.AccountData}
                                     onInputValueChange={() => setUnstakingAmountInputValue(stackedBalance)}
@@ -213,18 +225,19 @@ export default function RewardsStakingOptions(props) {
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
                                 <span>
-                                Unstaking will take 30 days. During this period no MoC Rewards will be received.
-                                <a onClick={() => setSelectedTab("2")}>Go to Withdraw</a> either to restake your MoC tokens anytime or to withdraw after 30 days period.
+                                    {t('global.RewardsOptions_UnstakingNote.first', { ns: 'global' })}
+                                    <a onClick={() => setSelectedTab("2")}>{t('global.RewardsOptions_UnstakingNote.link', { ns: 'global' })}</a> {t('global.RewardsOptions_UnstakingNote.second', { ns: 'global' })}
                                 </span>
                             </Col>
                         </Row>
                         <Row>
                             <Button
+                                disabled={btnDisable}
                                 type="primary"
                                 className="StakingBtn"
                                 onClick={() => {
-                                  setModalAmount(unstakingAmountInputValue);
-                                  setModalMode("unstaking");
+                                    setModalAmount(unstakingAmountInputValue);
+                                    setModalMode("unstaking");
                                 }}
                             >Unstake</Button>
                         </Row>
@@ -238,40 +251,40 @@ export default function RewardsStakingOptions(props) {
         return (
             <>
                 <Table
-                    columns={getColumns(renderWithdrawTableActions)}
+                    columns={getColumns(renderWithdrawTableActions, t)}
                     pagination={{ pageSize: 4 }}
                     dataSource={pendingWithdrawals}
                     rowKey="id"
                 />
                 <Row className="WithdrawTabFooter">
-                  <Col xs={24} md={8}>
-                    <div className="WithdrawCTALabel">
-                      <span className="grey">Processing unstake</span>
-                      <div className="bolder">
-                        <LargeNumber
-                            className="amount"
-                            amount={totalPendingExpiration}
-                            currencyCode="REWARD"
-                        />{" "}
-                        MoCs
-                      </div>
-                    </div>
-                  </Col>
-                  <Col xs={24} md={16}>
-                    <Row>
-                      <Col xs={12} md={10}>
-                        <span className="grey">Ready to Withdraw</span>
-                        <div className="bolder">
-                          <LargeNumber
-                            className="amount"
-                            amount={totalAvailableToWithdraw}
-                            currencyCode="REWARD"
-                          />{" "}
-                          MoCs
+                    <Col xs={24} md={8}>
+                        <div className="WithdrawCTALabel">
+                            <span className="grey">{t('global.StakingOptions_PendingExpiration', { ns: 'global' })}</span>
+                            <div className="bolder">
+                                <LargeNumber
+                                    className="amount"
+                                    amount={totalPendingExpiration}
+                                    currencyCode="REWARD"
+                                />{" "}
+                                MoCs
+                            </div>
                         </div>
-                      </Col>
-                    </Row>
-                  </Col>
+                    </Col>
+                    <Col xs={24} md={16}>
+                        <Row>
+                            <Col xs={12} md={10}>
+                                <span className="grey">{t('global.StakingOptions_AvailableToWithdraw', { ns: 'global' })}</span>
+                                <div className="bolder">
+                                    <LargeNumber
+                                        className="amount"
+                                        amount={totalAvailableToWithdraw}
+                                        currencyCode="REWARD"
+                                    />{" "}
+                                    MoCs
+                                </div>
+                            </Col>
+                        </Row>
+                    </Col>
                 </Row>
             </>
         )
@@ -289,41 +302,47 @@ export default function RewardsStakingOptions(props) {
                             setModalAmount(record.amount);
                             setModalMode("restake");
                         }}
-                    >Restake</Button>
+                    >{t("global.StakingOptions_Restake")}</Button>
                 </Col>
-                <Col xs={1}/>
+                <Col xs={1} />
                 <Col xs={11}>
-                <Button
-                    type="primary"
-                    disabled={
-                    record.status === withdrawalStatus.pending || blockedWithdrawals.includes(record.id)
-                    }
-                    onClick={() => {
-                    setWithdrawalId(record.id);
-                    setModalAmount(record.amount);
-                    setModalMode("withdraw");
-                    }}
-                >Withdraw</Button>
+                    <Button
+                        type="primary"
+                        disabled={
+                            record.status === withdrawalStatus.pending || blockedWithdrawals.includes(record.id)
+                        }
+                        onClick={() => {
+                            setWithdrawalId(record.id);
+                            setModalAmount(record.amount);
+                            setModalMode("withdraw");
+                        }}
+                    >{t("global.StakingOptions_Withdraw")}</Button>
                 </Col>
             </Row>
         </>
     );
+    const resetBalancesAndValues = () => {
+        setStakingBalances();
+        setUnstakingAmountInputValue("0");
+        setStakingAmountInputValue("0");
+        setUntouchCount(prev => prev + 1);
+    };
 
     const onStakingModalConfirm = (operationStatus, txHash) => {
         const operationInfo = {
-          operationStatus,
-          txHash
+            operationStatus,
+            txHash
         };
-    
-        // setOperationModalInfo(operationInfo);
-        // setIsOperationModalVisible(true);
-        // resetBalancesAndValues();
-      };
+
+        setOperationModalInfo(operationInfo);
+        setIsOperationModalVisible(true);
+        resetBalancesAndValues();
+    };
 
     return (
         <div className="Card RewardsStakingOptions">
-            <h3 className="CardTitle">MoC Staking Rewards</h3>
-            <Tabs  
+            <h3 className="CardTitle">{t("global.RewardsOptions_Title")}</h3>
+            <Tabs
                 activeKey={selectedTab}
                 onChange={n => setSelectedTab(n)}
             >
@@ -345,6 +364,12 @@ export default function RewardsStakingOptions(props) {
                 amount={modalAmount}
                 onConfirm={onStakingModalConfirm}
                 setBlockedWithdrawals={setBlockedWithdrawals}
+            />
+            <OperationStatusModal
+                visible={isOperationModalVisible}
+                onCancel={() => setIsOperationModalVisible(false)}
+                operationStatus={operationModalInfo.operationStatus}
+                txHash={operationModalInfo.txHash}
             />
         </div>
     );

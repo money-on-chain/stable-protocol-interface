@@ -1,12 +1,15 @@
 import RbtcToBtcGenerateModal from '../../Components/Modals/RbtcToBtcGenerateModal';
 import BtcToRbtc from '../../Components/Cards/BtcToRbtc';
 import { Row, Col } from 'antd';
-import React, { Fragment, useState } from 'react';
+import React, {Fragment, useState, useContext} from 'react';
 import ListOperations from "../../Components/Tables/ListOperations";
 import Sovryn from "../../Components/Cards/Sovryn";
+import { AuthenticateContext } from '../../Context/Auth';
+import './style.scss'
 
 export default function Rbtc(props) {
     const data_row_coins = [];
+    const auth = useContext(AuthenticateContext);
 
     data_row_coins.push({
         key: 0,

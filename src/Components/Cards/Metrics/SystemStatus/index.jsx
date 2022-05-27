@@ -1,10 +1,11 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 // import {CheckOutlined, CheckCircleFilled} from '@ant-design/icons';
 import { CheckCircleFilled, CheckOutlined, CloseOutlined, CloseCircleFilled } from "@ant-design/icons";
-import {AuthenticateContext} from "../../../../Context/Auth";
-import {getDatasMetrics} from '../../../../Helpers/helper'
+import { AuthenticateContext } from "../../../../Context/Auth";
+import { getDatasMetrics } from '../../../../Helpers/helper'
 import { formatValueToContract } from '../../../../Lib/Formats';
 import SystemOperations from "./operations";
+import { useTranslation } from "react-i18next";
 
 const BigNumber = require('bignumber.js');
 const iconCheckColor = '#09c199';
@@ -14,7 +15,8 @@ function SystemStatus() {
 
     const auth = useContext(AuthenticateContext);
 
-    const getDatas= getDatasMetrics(auth)
+    const getDatas = getDatasMetrics(auth)
+    const [t, i18n] = useTranslation(["global", 'moc'])
 
 
     // coverage === getDatas['globalCoverageClean']
@@ -26,7 +28,7 @@ function SystemStatus() {
     const configStatusGreen = {
         className: '#00a651',
         title: 'Fully Operational',
-        subtitle:"The system is in optimum status",
+        subtitle: "The system is in optimum status",
         operationsAvailable: [
             "mintSTABLE",
             "redeemSTABLEOnSettlement",
@@ -41,7 +43,7 @@ function SystemStatus() {
     const configStatusYellow = {
         className: '#E9BF4A',
         title: 'Partially Operational',
-        subtitle:"BPro cannot be redeemed. DoC cannot be minted",
+        subtitle: "BPro cannot be redeemed. DoC cannot be minted",
         operationsAvailable: [
             "redeemSTABLEOnSettlement",
             "mintRISKPRO",
@@ -88,18 +90,24 @@ function SystemStatus() {
     }
 
 
-    const getConfigByCoverage = ( coverage, paused, blocksToSettlement, price_active ) => {
+    const getConfigByCoverage = (coverage, paused, blocksToSettlement, price_active) => {
 
-        if (!price_active) {console.log("11111111111111111111111")
-            return configStatusNoPrice;}
+        if (!price_active) {
+            console.log("11111111111111111111111")
+            return configStatusNoPrice;
+        }
 
-        if (paused) {console.log("22222222222222222222")
-            return configStatusPaused;}
+        if (paused) {
+            console.log("22222222222222222222")
+            return configStatusPaused;
+        }
 
-        if (blocksToSettlement<1) {console.log("33333333333333333")
+        if (blocksToSettlement < 1) {
+            console.log("33333333333333333")
             console.log(blocksToSettlement)
             console.log("33333333333333333")
-            return configStatusSettlement;}
+            return configStatusSettlement;
+        }
 
         const coverageIsGreaterOrEqualThan = (numberInEther) => new BigNumber(coverage).gte(formatValueToContract(numberInEther, "COV"));
 
@@ -108,25 +116,28 @@ function SystemStatus() {
             console.log(coverageIsGreaterOrEqualThan(4))
             console.log("444444444444444")
             return configStatusGreen;
-        } else if (coverageIsGreaterOrEqualThan(2)) {console.log("555555555555555555")
+        } else if (coverageIsGreaterOrEqualThan(2)) {
+            console.log("555555555555555555")
             return configStatusYellow;
-        } else if (coverageIsGreaterOrEqualThan(1.5)) {console.log("66666666666666666666")
+        } else if (coverageIsGreaterOrEqualThan(1.5)) {
+            console.log("66666666666666666666")
             return configStatusOrange;
-        } else {console.log("777777777777777777777")
+        } else {
+            console.log("777777777777777777777")
             return configStatusRed;
         }
     }
 
 
-    const customTitle= (title) => {
-        if ( title!==undefined ){
+    const customTitle = (title) => {
+        if (title !== undefined) {
             return title.replace(' ', '<br/>')
         }
     }
 
 
-    const price_active= true
-    const {className, operationsAvailable,title,subtitle} = getConfigByCoverage(getDatas['globalCoverageClean'], getDatas['paused'], getDatas['blocksToSettlement'], price_active);
+    const price_active = true
+    const { className, operationsAvailable, title, subtitle } = getConfigByCoverage(getDatas['globalCoverageClean'], getDatas['paused'], getDatas['blocksToSettlement'], price_active);
     console.log('className***************************************');
     console.log(className);
     console.log(getDatas['globalCoverageClean']);
@@ -144,21 +155,21 @@ function SystemStatus() {
     return (
         <div className="Card CardSystemStatus">
             <h3 className="CardTitle">System Status</h3>
-            <div className="CardMetricContent" style={{marginTop: 0, justifyItems: 'center'}}>
+            <div className="CardMetricContent" style={{ marginTop: 0, justifyItems: 'center' }}>
                 <div>
-                    <div className="CardMetricContent" style={{alignItems: 'center', justifyItems: 'center', marginTop: 0}}>
-                        <CheckCircleFilled style={{marginLeft: 5, fontSize: 30, color: className}} />
+                    <div className="CardMetricContent" style={{ alignItems: 'center', justifyItems: 'center', marginTop: 0 }}>
+                        <CheckCircleFilled style={{ marginLeft: 5, fontSize: 30, color: className }} />
                         {/*<div style={{color: className, fontWeight: 500, marginLeft: 10}}>Fully <br/> Operational</div>*/}
-                        <div style={{color: className, fontWeight: 500, marginLeft: 10}} dangerouslySetInnerHTML={{ __html: customTitle(title) }}></div>
+                        <div style={{ color: className, fontWeight: 500, marginLeft: 10 }} dangerouslySetInnerHTML={{ __html: customTitle(title) }}></div>
                     </div>
-                    <h5 style={{marginLeft: 35}}>{subtitle}</h5>
+                    <h5 style={{ marginLeft: 35 }}>{subtitle}</h5>
                 </div>
                 <div>
-                    <h3>Global Coverage</h3>
-                    <span style={{color: className}}>{getDatas['globalCoverage']} </span>
+                    <h3>{t('global.Metrics_globalCoverage', { ns: 'global' })}</h3>
+                    <span style={{ color: className }}>{getDatas['globalCoverage']} </span>
                 </div>
             </div>
-            <h3 className="CardTitle" style={{marginTop: 50}}>System Operations</h3>
+            <h3 className="CardTitle" style={{ marginTop: 50 }}>{t('MoC.metrics.systemOperations.title', { ns: 'moc' })}</h3>
             {/*<div className="CardMetricContent" style={{marginTop: 10}}>*/}
             {/*    <div>*/}
             {/*        <h3><CheckOutlined style={{color: iconCheckColor}} /> Mint DoC</h3>*/}
@@ -172,7 +183,7 @@ function SystemStatus() {
             {/*        <h3><CheckOutlined style={{color: iconCheckColor}} /> Redeem BTCx</h3>*/}
             {/*    </div>*/}
             {/*</div>*/}
-            <div className="CardMetricContent" style={{marginTop: 10}}>
+            <div className="CardMetricContent" style={{ marginTop: 10 }}>
                 <SystemOperations statusClassName={className} operationsAvailable={operationsAvailable} />
             </div>
         </div>

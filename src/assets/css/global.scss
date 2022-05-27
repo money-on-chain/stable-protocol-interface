@@ -198,6 +198,9 @@ input[type=number] {
 
 .AlignedAndCentered {
   margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .Bold {
   font-weight: bold;
@@ -414,4 +417,24 @@ input[type=number] {
 
 .ant-menu-submenu-vertical{
   width: 100%;
+}
+
+.mt-0{
+margin-top: 0px;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+.rotate {
+  animation: rotation 2s infinite linear;
+}
+.error{
+  color: red;
+  font-size: 12px;
 }

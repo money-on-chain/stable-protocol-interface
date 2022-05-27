@@ -140,3 +140,185 @@
         }
     }
 }
+
+
+.ModalUpTopContainer{
+    .InputAddressLabel{
+        .rbtc_address{
+            color: #707070;
+            font-family: "Montserrat", sans-serif;
+            font-size: 12px;
+            font-weight: initial;
+        }
+    }
+
+    .ant-form-item {
+        margin-bottom: 10px;
+    }
+
+    .InputAddressLabel {
+        font-size: 12px !important;
+        font-weight: bold !important;
+        color: #888888 !important;
+    }
+    .InputAddressContainer{
+        margin-top: 16px;
+        input {
+            width: 100%;
+            margin: 0;
+            padding-left: 10px;
+            /*font-family: 'Montserrat', sans-serif;
+            font-size: 1em;
+            font-weight: 400;
+            color: #707070;
+            border: none;
+            border-bottom: 1px solid #e1e1e1;
+            height: 48px;
+            padding: 8px;
+            background: #f7f7f7;*/
+        }
+    }
+    .ant-form-item {
+        margin-bottom: 10px;
+    }
+    input {
+        border-radius: 8px !important;
+        background: #fff !important;
+        font-size: 16px !important;
+        color: #888888 !important;
+        font-weight: 400 !important;
+        height: 40px !important;
+        border: 1px solid #949494 !important;
+    }
+}
+
+
+
+.inputAmount{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    input {
+        border-radius: 8px ;
+        background: #fff ;
+        font-size: 16px ;
+        color: #888888 ;
+        font-weight: 400 ;
+        height: 40px ;
+        border: 1px solid #949494;
+        width: 80%;
+        border-right: none;
+        border-top-right-radius:0px;
+        border-bottom-right-radius: 0px;
+        padding-left: 10px;
+    }
+
+    div{
+        border-radius: 8px ;
+        border: 1px solid #949494;
+        line-height: 2.125;
+        width: 20%;
+        @media screen and (max-width:900px) {
+            width: 45%;
+        }
+        border-left: none;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        span{
+            font-weight: bold;
+            color: lightgray;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+        img{
+            margin-bottom: 4px;
+        }
+    }
+
+}
+
+.BalanceSelectorContainer {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    .ant-radio-group {
+        span {
+            font-size: 12px !important;
+            font-family: "Montserrat", sans-serif !important;
+            color: #7B7B7B !important;
+        }
+
+        display: flex;
+        .ant-radio-button-wrapper {
+            flex-grow: 1;
+            height: 20px;
+            line-height: 18px;
+            border: solid 1px #888888 !important;
+            border-left-width: 0 !important;
+        }
+        .ant-radio-button-wrapper-fc {
+            border-left: 1px solid #888888;
+            border-radius: 15px 0 0 15px;
+            border-left-width: 1px !important;
+        }
+
+        .ant-radio-button-wrapper-lc {
+            border-right: 1px solid #888888 !important;
+            border-radius: 0 8px 8px 0;
+        }
+    }
+    .AlignedAndCentered {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+}
+
+.setValueToMax {
+    color: #888888 !important;
+    font-family: Roboto;
+    font-size: 12px;
+}
+
+
+.AmountSummary {
+    display: flex;
+    flex-direction: row;
+    .Detail {
+        flex-grow: 1;
+        color: #888888;
+        font-family: "Montserrat", sans-serif;
+        font-size: 12px;
+    }
+    .strong {
+        font-weight: bold;
+    }
+}
+
+
+.alert-message-modal {
+    .alert-message {
+        display: flex;
+        flex-direction: row;
+        border-radius: 8px;
+        background: #08374F;
+        padding: 4px 10px;
+        align-items: center;
+        text-align: left;
+        p {
+            color: #fff;
+            padding-left: 12px;
+            font-weight: normal;
+            font-size: 14px;
+            text-align: left;
+            line-height: 16px;
+            margin-bottom: unset;
+        }
+        .anticon {
+            color: white;
+            font-size: 24px;
+        }
+    }
+}

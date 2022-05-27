@@ -122,8 +122,8 @@
         "RewardsOptions_AmountToStakeNote": "Los MoCs en staking reciben recompensas del Programa de Recompensas de MOC. Puedes sacar los MoC de staking (unstake) en cualquier momento con una ventana de liberación de 30 días (no se reciben recompensas durante este periodo). Pasado este período puedes hacer \"Withdraw\" y retirarlos.",
         "RewardsOptions_AvailableToUnstake": "Disponible para unstake",
         "RewardsOptions_Locked": "Bloqueado para votar",
-        "RewarsOptions_AmountToUnstake": "Cantidad para unstake",
-        "RewarsOptions_AmountToUnstakePlaceholder": "MoCs para unstake",
+        "RewardsOptions_AmountToUnstake": "Cantidad para unstake",
+        "RewardsOptions_AmountToUnstakePlaceholder": "MoCs para unstake",
         "RewardsOptions_UnstakingNote": {
             "first": "El unstaking toma 30 días. Durante ese período no recibirás recompensas del programa MoC Rewards",
             "link": "Ir a Withdraw",
@@ -187,7 +187,9 @@
         "MintOrRedeemToken_Clear": "Limpiar",
         "MintOrRedeemToken_Mint": "Mint",
         "MintOrRedeemToken_Redeem": "Redeem",
-        "MintOrRedeemToken_Fee": "Comisión (__feePercent__%): ",
+
+        "MintOrRedeemToken_Fee": "Comisión: ",
+
         "MintOrRedeemToken_Interest": "Tasa de Interés (__interestRate__%): ",
 
         "InputWithCurrencySelector_AddTotalAvailable": "Usar total disponible",

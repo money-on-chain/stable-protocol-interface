@@ -5,6 +5,7 @@ import { LargeNumber } from '../../LargeNumber';
 import { AuthenticateContext } from '../../../Context/Auth';
 import Web3 from 'web3';
 import './style.scss';
+import {useTranslation} from "react-i18next";
 
 export default function StakingOptionsModal(props) {
     const auth = useContext(AuthenticateContext);
@@ -13,19 +14,21 @@ export default function StakingOptionsModal(props) {
     const [step, setStep] = useState(0);
 
    const amountInEth = Web3.utils.fromWei(amount);
+   const [t, i18n]= useTranslation(["global",'moc'])
 
     useEffect(() => {
-        if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
+        // if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
     }, []);
 
     if (!mode) return null;
 
+
+    //methods
     const setAllowance = async () => {
         setStep(1);
-        setStep(2); // sacar
-        /* const approveMoCToken  = await auth.approveMoCToken(true);
-        approveMoCToken.then(res => {
-                console.log('res', res);
+        // setStep(2); // sacar
+        await auth.approveMoCToken(true, (error) => {
+        }).then(res => {
                 setStep(2);
                 return null;
             })
@@ -36,7 +39,7 @@ export default function StakingOptionsModal(props) {
                     description: "Something went wrong! Transaction rejected!",
                     duration: 10
                 });
-            }); */
+            });
     };
 
     const depositMoCs = async () => {
@@ -54,19 +57,17 @@ export default function StakingOptionsModal(props) {
             return null;
         })
         .catch(e => {
-            console.error(e);
             notification['error']({
-                message: "Operations",
-                description: "Something went wrong! Transaction rejected!",
+                message: t('global.RewardsError_Title'),
+                description: t('global.RewardsError_Message'),
                 duration: 10
             });
         })
     };
 
-    /* const restakeMoCs = async () => {
+    const restakeMoCs = async () => {
         onClose();
-        await window.nodeManager.staking
-            .cancelWithdraw(withdrawalId, (error, txHash) => {
+        await auth.cancelWithdraw(withdrawalId, (error, txHash) => {
                 if (error) return error;
 
                 const status = 'pending';
@@ -87,22 +88,69 @@ export default function StakingOptionsModal(props) {
                     duration: 10
                 });
             });
-    }; */
+    };
 
+    const unstakeMoCs = async () => {
+        onClose();
+        await auth.unstake(amountInEth, (error, txHash) => {
+                if (error) return error;
+
+                const status = 'pending';
+                onConfirm(status, txHash);
+            })
+            .then(res => {
+                const status = res.status ? 'success' : 'error';
+                onConfirm(status, res.transactionHash);
+                return null;
+            })
+            .catch(e => {
+                console.error(e);
+                notification['error']({
+                    message: t('global.RewardsError_Title'),
+                    description: t('global.RewardsError_Message'),
+                    duration: 10
+                });
+            });
+    };
+    const withdrawMoCs = () => {
+        onClose();
+        auth.withdraw(withdrawalId, (error, txHash) => {
+                if (error) return error;
+
+                const status = 'pending';
+                onConfirm(status, txHash);
+                setBlockedWithdrawals(prev => [...prev, withdrawalId]);
+            })
+            .then(res => {
+                const status = res.status ? 'success' : 'error';
+                onConfirm(status, res.transactionHash);
+                setBlockedWithdrawals(prev => prev.filter(val => val !== withdrawMoCs));
+                return null;
+            })
+            .catch(e => {
+                console.error(e);
+                notification['error']({
+                    message: t('global.RewardsError_Title'),
+                    description: t('global.RewardsError_Message'),
+                    duration: 10
+                });
+            });
+    };
+
+    // renders
     const renderStaking = () => {
         const steps = {
             '0': () => {
                 return (
                     <>
-                        <h1 className="StakingOptionsModal_Title">Set Allowance</h1>
+                        <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_SetAllowance')}</h1>
                         <div className="StakingOptionsModal_Content">
-                            <p>Before continuing with the staking you must set the allowance so that the staking system can access the tokens.
-                                This has to be done only once and it doesn't lock any tokens from your wallet.
+                            <p>{t('global.StakingOptionsModal_AllowanceDescription')}
                             </p>
                             <Button
                                 type="primary"
                                 onClick={() => setAllowance()}
-                            >Authorize
+                            >{t('global.StakingOptionsModal_Authorize')}
                             </Button>
                         </div>
                     </>
@@ -111,10 +159,10 @@ export default function StakingOptionsModal(props) {
             '1': () => {
                 return (
                     <>
-                        <h1 className="StakingOptionsModal_Title">Set Allowance</h1>
+                        <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_SetAllowance')}</h1>
                         <div className="StakingOptionsModal_Content AllowanceLoading">
                             <Spin indicator={<LoadingOutlined />} />
-                            <p>Processing Allowance, please wait.</p>
+                            <p>{t('global.StakingOptionsModal_ProccessingAllowance')}</p>
                         </div>
                     </>
                 )
@@ -122,27 +170,25 @@ export default function StakingOptionsModal(props) {
             '2': () => {
                 return (
                     <>
-                        <h1 className="StakingOptionsModal_Title">Stake</h1>
+                        <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_Title')}</h1>
                         <div className="StakingOptionsModal_Content">
                             <div className="InfoContainer">
-                                <span className="title">Amount to Stake</span>
+                                <span className="title">{t('global.StakingOptionsModal_AmountToStake')}</span>
                                 <span className="value amount">
                                     <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                                    <span>MOC</span>
+                                    <span>{t('MoC.Tokens_MOC_code', {ns: 'moc'})}</span>
                                 </span>
                             </div>
-                            <p>Staked MoCs will receive rewards from the MoC Staking Rewards Program.
-                                You can unstake your MoC's whenever you want, the withdraw process will take 30 days
-                            </p>
+                            <p>{t('global.StakingOptionsModal_StakingDescription')}</p>
                             <div className="ActionButtonsRow">
                                 <Button
                                     type="default"
                                     onClick={onClose}
-                                >Cancel</Button>
+                                >{t('global.StakingOptionsModal_Cancel')}</Button>
                                 <Button
                                     type="primary"
                                     onClick={depositMoCs}
-                                >Confirm</Button>
+                                >{t('global.StakingOptionsModal_Comfirm')}</Button>
                             </div>
                         </div>
                     </>
@@ -156,25 +202,25 @@ export default function StakingOptionsModal(props) {
     const renderUnstaking = () => {
         return (
             <>
-                <h1 className="StakingOptionsModal_Title">Unstake</h1>
+                <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_UnstakeTitle')}</h1>
                 <div className="StakingOptionsModal_Content">
                     <div className="InfoContainer">
-                        <span className="title">Amount to Unstake</span>
+                        <span className="title">{t('global.StakingOptionsModal_AmountToUnstake')}</span>
                         <span className="value amount">
                             <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                            <span>MOC</span>
+                            <span>{t('MoC.Tokens_MOC_code', {ns: 'moc'})}</span>
                         </span>
                     </div>
-                    <p>You will be able to withdraw your MoC Tokens to your wallet in 30 days. You can restake them anytime in this period.</p>
+                    <p>{t('global.StakingOptionsModal_UnstakingDescription')}</p>
                     <div className="ActionButtonsRow">
                         <Button
                             type="default"
                             onClick={onClose}
-                        >Cancel</Button>
+                        >{t('global.StakingOptionsModal_Cancel')}</Button>
                         <Button
                             type="primary"
-                            // onClick={unstakeMoCs}
-                        >Confirm</Button>
+                            onClick={unstakeMoCs}
+                        >{t('global.StakingOptionsModal_Comfirm')}</Button>
                     </div>
                 </div>
             </>
@@ -184,25 +230,25 @@ export default function StakingOptionsModal(props) {
     const renderWithdraw = () => {
         return (
             <>
-                <h1 className="StakingOptionsModal_Title">Withdraw</h1>
+                <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_WithdrawTitle')}</h1>
                 <div className="StakingOptionsModal_Content">
                     <div className="InfoContainer">
-                        <span className="title">Amount to Withdraw</span>
+                        <span className="title">{t('global.StakingOptionsModal_AmountToWithdraw')}</span>
                         <span className="value amount">
                             <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                            <span>MOC</span>
+                            <span>{t('MoC.Tokens_MOC_code', {ns: 'moc'})}</span>
                         </span>
                     </div>
-                    <p>After withdrawal your MoCs tokens will be available in your wallet</p>
+                    <p>{t('global.StakingOptionsModal_WithdrawDescription')}</p>
                     <div className="ActionButtonsRow">
                         <Button
                             type="default"
                             onClick={onClose}
-                        >Cancel</Button>
+                        >{t('global.StakingOptionsModal_Cancel')}</Button>
                         <Button
                             type="primary"
-                            // onClick={withdrawMoCs}
-                        >Confirm</Button>
+                            onClick={withdrawMoCs}
+                        >{t('global.StakingOptionsModal_Comfirm')}</Button>
                     </div>
                 </div>
             </>
@@ -212,27 +258,25 @@ export default function StakingOptionsModal(props) {
     const renderRestaking = () => {
         return (
             <>
-                <h1 className="StakingOptionsModal_Title">Restake</h1>
+                <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_RestakeTitle')}</h1>
                 <div className="StakingOptionsModal_Content">
                     <div className="InfoContainer">
-                        <span className="title">Amount to Restake</span>
+                        <span className="title">{t('global.StakingOptionsModal_AmountToRestake')}</span>
                         <span className="value amount">
                             <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                            <span>MOC</span>
+                            <span>{t('MoC.Tokens_MOC_code', {ns: 'moc'})}</span>
                         </span>
                     </div>
-                    <p>After confirming, this amount of MoC Tokens will be removed from the processing queue and staked again.
-                        They will immediately start receiving MoC Staking Rewards.
-                    </p>
+                    <p>{t('global.StakingOptionsModal_RestakeDescription')}</p>
                     <div className="ActionButtonsRow">
                         <Button
                             type="default"
                             onClick={onClose}
-                        >Cancel</Button>
+                        >{t('global.StakingOptionsModal_Cancel')}</Button>
                         <Button
                             type="primary"
-                            // onClick={restakeMoCs}
-                        >Confirm</Button>
+                            onClick={restakeMoCs}
+                        >{t('global.StakingOptionsModal_Comfirm')}</Button>
                     </div>
                 </div>
             </>
