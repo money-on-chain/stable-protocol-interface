@@ -1,15 +1,17 @@
 import TokenSummaryCard from '../../Components/Cards/TokenSummaryCard';
 import './style.scss';
+
 import React, { Fragment } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../Context/Auth';
 import WalletBalance from '../../Components/Cards/WalletBalance';
-import { Row, Col } from 'antd';
+import { Row, Col, Alert } from 'antd';
 import MocAmount from "../../Components/Cards/MocAmount";
 import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import ListOperations from "../../Components/Tables/ListOperations";
 import data_json from "../../services/webapp_transactions_list.json";
 import {useTranslation} from "react-i18next";
+
 
 function Home(props) {
 
@@ -17,9 +19,9 @@ function Home(props) {
 
     const auth = useContext(AuthenticateContext);
     const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
-
-
     const data_row_coins2= [];
+
+
 
 
     /*
@@ -93,7 +95,14 @@ function Home(props) {
     });*/
 
     return (
+
         <Fragment>
+            <Alert
+                message="Wallet not connected!"
+                description="Please, connect your wallet using the “connect” button on the top right section of the platform."
+                type="error"
+                showIcon
+            />
             <h1 className="PageTitle">{t('MoC.home.title', { ns: 'moc' })}</h1>
             <h3 className="PageSubTitle">{t("MoC.home.subtitle", { ns: 'moc' })}</h3>
             <Row gutter={16}>
