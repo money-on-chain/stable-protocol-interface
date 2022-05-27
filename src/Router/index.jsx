@@ -1,41 +1,46 @@
+import React from 'react';
 import { useContext } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
-import Rewards from '../Pages/Rewards';
 import Admin from '../Layouts/Admin';
-import MintStable from '../Pages/Mint/MintStable';
-import MintLeveraged from '../Pages/Mint/MintLeveraged';
-import MintPro from '../Pages/Mint/MintPro';
 import NotFound from '../Pages/NotFound';
-import Home from '../Pages/Home/index';
-import Metrics from '../Pages/Metrics';
-import { AuthenticateContext } from '../Context/Auth';
-import Rbtc from "../Pages/Rbtc";
+const Home = React.lazy(() => import('../Pages/Home/index'));
+const MintPro = React.lazy(() => import('../Pages/Mint/MintPro'));
+const MintStable = React.lazy(() => import('../Pages/Mint/MintStable'));
+const MintLeveraged = React.lazy(() => import('../Pages/Mint/MintLeveraged'));
+const Rewards = React.lazy(() => import('../Pages/Rewards'));
+const Rbtc = React.lazy(() => import('../Pages/Rbtc'));
+const Metrics = React.lazy(() => import('../Pages/Metrics'));
 
 export default function Router() {
-    const auth = useContext(AuthenticateContext);
     return useRoutes([
         {
             path: '/',
             element: <Admin />,
             children: [
-                { path: '/', element: <Home /> },
-                { path: 'wallet/pro', element: <MintPro Auth={auth} /> },
+                {
+                    path: '/',
+                    element: <Home />
+                },
+                {
+                    path: 'wallet/pro',
+                    element: <MintPro />
+                },
                 {
                     path: 'wallet/stable',
-                    element: <MintStable Auth={auth} />
+                    element: <MintStable />
                 },
                 {
                     path: 'wallet/leveraged',
-                    element: <MintLeveraged Auth={auth} />
+                    element: <MintLeveraged />
                 },
                 {
                     path: 'rewards',
-                    element: <Rewards Auth={auth} />
+                    element: <Rewards />
                 },
                 {
                     path: 'getRBTC',
-                    element: <Rbtc Auth={auth} />
+                    element: <Rbtc />
                 },
                 {
                     path: 'metrics',
