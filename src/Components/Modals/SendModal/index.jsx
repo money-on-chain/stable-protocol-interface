@@ -36,7 +36,7 @@ export default function SendModal(props) {
   const [comment, setComment] = useState('');
   const [inputIsValid, setInputIsValid] = useState(true);
 
-  const [t, i18n]= useTranslation(["global",'moc'])
+  const [t, i18n] = useTranslation(["global", 'moc']);
   const helper = addressHelper(web3);
   const auth = useContext(AuthenticateContext);
 
@@ -107,7 +107,7 @@ export default function SendModal(props) {
         showAlertAmountMessage(maxExceededRetries + 1);
         if (maxExceededRetries > 0) {
           doTransferAndHide(methodTransferTo, address);
-         }
+        }
       } else {
         doTransferAndHide(methodTransferTo, address);
       }
@@ -147,7 +147,7 @@ export default function SendModal(props) {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>Send</Button>
+      <Button type="primary" onClick={showModal}>{t('MoC.wallet.send', { ns: 'moc' })}</Button>
       <Modal
         title="Send"
         visible={visible}

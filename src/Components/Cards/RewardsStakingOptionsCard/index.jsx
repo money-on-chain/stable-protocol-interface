@@ -19,9 +19,9 @@ const withdrawalStatus = {
     available: "AVAILABLE"
 };
 
-const getColumns = renderActionsFunction => [
+const getColumns = (renderActionsFunction, t) => [
     {
-        title: "AMOUNT",
+        title: t('global.RewardsOptions_Withdraw_Amount', { ns: 'global' }),
         dataIndex: "amount",
         key: "amount",
         render: amount => (
@@ -29,19 +29,19 @@ const getColumns = renderActionsFunction => [
         )
     },
     {
-        title: "EXPIRATION",
+        title: t('global.RewardsOptions_Withdraw_Expiration', { ns: 'global' }),
         dataIndex: "expiration",
         key: "expiration",
         render: expiration => moment(parseInt(expiration) * 1000).format("L LT")
     },
     {
-        title: "STATUS",
+        title: t('global.RewardsOptions_Withdraw_Status', { ns: 'global' }),
         dataIndex: "status",
         key: "status",
         render: status =>
             status === withdrawalStatus.available
-                ? "Ready to Withdraw"
-                : "Processing unstake"
+                ? t('global.StakingOptions_AvailableToWithdraw', { ns: 'global' })
+                : t('global.StakingOptions_PendingExpiration', { ns: 'global' })
     },
     {
         title: "OPERATIONS",
@@ -251,7 +251,7 @@ export default function RewardsStakingOptions(props) {
         return (
             <>
                 <Table
-                    columns={getColumns(renderWithdrawTableActions)}
+                    columns={getColumns(renderWithdrawTableActions, t)}
                     pagination={{ pageSize: 4 }}
                     dataSource={pendingWithdrawals}
                     rowKey="id"
