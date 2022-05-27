@@ -2,13 +2,16 @@ import MintCard from '../../../Components/Cards/MintCard';
 import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
 import { Row, Col, Switch } from 'antd';
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
+import { AuthenticateContext } from '../../../Context/Auth';
+import './style.scss'
 
 export default function Mint(props) {
     const data_row_coins = [];
-    const [t, i18n] = useTranslation(["global", 'moc'])
+    const [t, i18n] = useTranslation(["global", 'moc']);
+    const auth = useContext(AuthenticateContext);
 
     data_row_coins.push({
         key: 0,
@@ -45,9 +48,9 @@ export default function Mint(props) {
                 <Col xs={24} xl={15}>
                     <MintCard
                         token={'RISKPRO'}
-                        AccountData={props.Auth.accountData}
-                        UserBalanceData={props.Auth.userBalanceData}
-                        StatusData={props.Auth.contractStatusData}
+                        AccountData={auth.accountData}
+                        UserBalanceData={auth.userBalanceData}
+                        StatusData={auth.contractStatusData}
                         currencyOptions={['RESERVE', 'RISKPRO']}
                         color="#ef8a13"
                     />
