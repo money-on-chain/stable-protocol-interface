@@ -6,14 +6,17 @@ import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import MocAmount from "../../Components/Cards/MocAmount";
 import ListOperations from "../../Components/Tables/ListOperations";
 import { AuthenticateContext } from '../../Context/Auth';
+import { useTranslation } from "react-i18next";
 import './style.scss'
 
 export default function Rewards(props) {
     const auth = useContext(AuthenticateContext);
+    const [t, i18n] = useTranslation(["global", 'moc']);
+
     return (
         <Fragment>
-            <h1 className="PageTitle">MoC</h1>
-            <h3 className="PageSubTitle">Manage your BPros</h3>
+            <h1 className="PageTitle">{t('MoC.wallets.MOC.title', { ns: 'moc' })}</h1>
+            <h3 className="PageSubTitle">{t('MoC.wallets.MOC.subtitle', { ns: 'moc' })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <div className="ContainerMocAmountDatas">
@@ -26,7 +29,7 @@ export default function Rewards(props) {
                         height="32.4em"
                         tokenToSend="MOC"
                         iconWallet={`${window.location.origin}/Moc/icon-moc.svg`}
-                        // currencyOptions={['RESERVE', 'MOC']}
+                    // currencyOptions={['RESERVE', 'MOC']}
                     />
                 </Col>
                 <Col xs={24} md={24} xl={15}>
