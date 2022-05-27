@@ -6,6 +6,7 @@ import ListOperations from "../../Components/Tables/ListOperations";
 import Sovryn from "../../Components/Cards/Sovryn";
 import { AuthenticateContext } from '../../Context/Auth';
 import { useTranslation } from "react-i18next";
+import './style.scss'
 
 export default function Rbtc(props) {
     const data_row_coins = [];

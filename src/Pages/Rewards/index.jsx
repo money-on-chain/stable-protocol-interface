@@ -7,6 +7,7 @@ import MocAmount from "../../Components/Cards/MocAmount";
 import ListOperations from "../../Components/Tables/ListOperations";
 import { AuthenticateContext } from '../../Context/Auth';
 import { useTranslation } from "react-i18next";
+import './style.scss'
 
 export default function Rewards(props) {
     const auth = useContext(AuthenticateContext);
