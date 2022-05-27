@@ -1,4 +1,3 @@
-import '../assets/css/global.scss';
 import { Outlet } from 'react-router-dom';
 import { Layout, Menu, Image, Drawer, Button } from 'antd';
 import { HomeFilled, MenuOutlined, CloseOutlined, PieChartFilled, InfoCircleFilled } from '@ant-design/icons';
