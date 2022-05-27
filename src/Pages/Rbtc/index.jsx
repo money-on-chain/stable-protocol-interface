@@ -5,6 +5,7 @@ import React, {Fragment, useState, useContext} from 'react';
 import ListOperations from "../../Components/Tables/ListOperations";
 import Sovryn from "../../Components/Cards/Sovryn";
 import { AuthenticateContext } from '../../Context/Auth';
+import './style.scss'
 
 export default function Rbtc(props) {
     const data_row_coins = [];

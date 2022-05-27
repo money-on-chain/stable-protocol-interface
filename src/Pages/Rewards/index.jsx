@@ -6,6 +6,7 @@ import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import MocAmount from "../../Components/Cards/MocAmount";
 import ListOperations from "../../Components/Tables/ListOperations";
 import { AuthenticateContext } from '../../Context/Auth';
+import './style.scss'
 
 export default function Rewards(props) {
     const auth = useContext(AuthenticateContext);
