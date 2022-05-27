@@ -25,7 +25,7 @@ export default function SendModal(props) {
   /* const [currencyYouExchange, setCurrencyYouExchange] = useState(
     props.currencyOptions[0]
   ); */
-    
+
   const [addTotalSend, setAddTotalSend] = useState('0.0000');
   const [visible, setVisible] = useState(false);
   const [amountToSend, setAmountToSend] = useState(0);
@@ -160,7 +160,7 @@ export default function SendModal(props) {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             className="separation"
-          />  
+          />
           <InputWithCurrencySelector
             validate
             title={t("global.ModalSend_EnterTheAmount")}
@@ -173,7 +173,7 @@ export default function SendModal(props) {
             showMaxValueAllowed
             onValidationStatusChange={onInputValidityChange}
             className="separation"
-          />  
+          />
           {/* <CoinSelect
             label="MoC Tokens I want to stake"
             value={currencyYouReceive}

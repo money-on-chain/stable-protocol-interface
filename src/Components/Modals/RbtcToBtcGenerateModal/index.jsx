@@ -14,20 +14,17 @@ import Step2 from "./step2";
 
 export default function RbtcToBtcGenerateModal(props) {
 
-    let checkLoginFirstTime = true;
-    const [provider, setProvider] = useState(null);
+    // let checkLoginFirstTime = true;
     const [account, setAccount] = useState(null);
-    const [web3, setweb3] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [limits, setLimits] = useState(null);
+    const auth = useContext(AuthenticateContext);
+    const {web3} = auth
 
     useEffect(() => {
-        if (checkLoginFirstTime) {
-            if (rLogin.cachedProvider) {
-                connect();
-            }
-        }
-    },checkLoginFirstTime);
+        // if (checkLoginFirstTime) {
+            connect();
+        // }
+    },[auth]);
 
     useEffect(() => {
         if (account) {
@@ -35,51 +32,40 @@ export default function RbtcToBtcGenerateModal(props) {
         }
     }, [account]);
 
-    const connect = () =>
-        rLogin.connect().then((rLoginResponse) => {
-            const { provider, disconnect } = rLoginResponse;
-            setProvider(provider);
-
-            //const web3 = new Web3(provider);
-            setweb3(new Web3(provider));
-            window.rLoginDisconnect = disconnect;
-            checkLoginFirstTime = false;
-
-            // request user's account
-            provider.request({ method: 'eth_accounts' }).then(([account]) => {
-                setAccount(account);
-                setIsLoggedIn(true);
-            });
-        });
+    const connect = () =>  {
+        setAccount(auth.account);
+    };
 
     const loadBalanceData = async () => {
         const fastBtcBridgeAddress = '0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A';
         console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
-        const fastBtcBridge= new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
-        const fastBtcBridgeGetFees = () => {
-            return new Promise((resolve, reject) => {
-                fastBtcBridge.methods.currentFeeStructureIndex()
-                    .call().then(async feeIndex => {
-                    const minTransfer = await fastBtcBridge.methods.minTransferSatoshi().call();
-                    const maxTransfer = await fastBtcBridge.methods.maxTransferSatoshi().call();
-                    fastBtcBridge.methods.feeStructures(feeIndex)
-                        .call().then(result => resolve(setLimits({
-                        min: minTransfer, max: maxTransfer, baseFee: result.baseFeeSatoshi, dynamicFee: result.dynamicFee
-                    })))
-                        .catch(error => {
-                            console.log(error);
-                            reject(error);
-                        });
-                }).catch(error => {
-                    console.log(error);
-                    reject(error);
+        if(web3!=null){
+            const fastBtcBridge= new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
+            const fastBtcBridgeGetFees = () => {
+                return new Promise((resolve, reject) => {
+                    fastBtcBridge.methods.currentFeeStructureIndex()
+                        .call().then(async feeIndex => {
+                        const minTransfer = await fastBtcBridge.methods.minTransferSatoshi().call();
+                        const maxTransfer = await fastBtcBridge.methods.maxTransferSatoshi().call();
+                        fastBtcBridge.methods.feeStructures(feeIndex)
+                            .call().then(result => resolve(setLimits({
+                            min: minTransfer, max: maxTransfer, baseFee: result.baseFeeSatoshi, dynamicFee: result.dynamicFee
+                        })))
+                            .catch(error => {
+                                console.log(error);
+                                reject(error);
+                            });
+                    }).catch(error => {
+                        console.log(error);
+                        reject(error);
+                    });
                 });
-            });
-        };
+            };
 
-        fastBtcBridgeGetFees().then(result => {
-            console.log("execute");
-        });
+            fastBtcBridgeGetFees().then(result => {
+                console.log("execute");
+            });
+        }
     };
 
     const renderFee = useMemo(() => {
@@ -105,13 +91,20 @@ export default function RbtcToBtcGenerateModal(props) {
 
     const [currentStep, setCurrentStep]= useState(1);
     const  handleSubmit=(step) => {
-        setCurrentStep(step)
+        setCurrentStep(2)
+    }
+
+    const resetFields=() =>{
+        setCurrentStep(1)
     }
 
 
     const {title='rBTC to BTC',alertText='Always generate the BTC deposit address, as the system might update it'} = props
     const [hasTokenQr, setHasTokenQr] = useState(false);
-    const auth = useContext(AuthenticateContext);
+    console.log("auth------------------------------qqqqqqqqqqqqqqqqqqqqqqqqqq");
+    console.log(auth);
+    console.log(auth.account);
+    console.log("auth------------------------------qqqqqqqqqqqqqqqqqqqqqqqqqq");
     const { accountData = {} } = auth;
     const {visible = false, handleClose = () => {}} = props;
     const titleModal = (
@@ -141,6 +134,7 @@ export default function RbtcToBtcGenerateModal(props) {
             width={550}
             onCancel={handleClose}
             className="RbtcToBtcModal"
+            afterClose={() => resetFields()}
         >
             {currentStep==1 && (
                 <Fragment>
@@ -164,7 +158,7 @@ export default function RbtcToBtcGenerateModal(props) {
                 <li>Do not send anything other than rBTC.</li>
                 <li>Do not send more rBTC than the MAX limit.</li>
                 <li>Allow up to 90 mins for the transaction to precess.</li>
-                <li>If BTC is not visible in your destination wallet after 90 mins, open a<a href='https://sovryn.freshdesk.com/support/tickets/new'><strong>support ticket</strong></a> at Sovryn.</li>
+                <li>If BTC is not visible in your destination wallet after 90 mins, open a<a href='https://sovryn.freshdesk.com/support/tickets/new'><strong> support ticket</strong></a> at Sovryn.</li>
             </ul>
 
             {!hasTokenQr && (<div className="GenerateBTC">
@@ -188,7 +182,7 @@ export default function RbtcToBtcGenerateModal(props) {
                 </Fragment>)
             }
             {currentStep==2 &&
-                <Step2 min={toNumberFormat(limits.min / btcInSatoshis, 8)} max={toNumberFormat(limits.max / btcInSatoshis, 3)} fee={renderFee}></Step2>
+                <Step2 auth={auth} handleClose={handleClose} min={toNumberFormat(limits.min / btcInSatoshis, 8)} max={toNumberFormat(limits.max / btcInSatoshis, 3)} fee={renderFee}></Step2>
             }
         </Modal>
     );

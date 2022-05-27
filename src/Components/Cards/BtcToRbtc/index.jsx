@@ -13,6 +13,8 @@ export default function BtcToRbtc(props) {
         btnText = 'Convert rBTC to BTC'
     } = props;
 
+    const {accountData}= useContext(AuthenticateContext);
+
     return (
         <div className="Card BtoRCard">
             <Row>
@@ -34,9 +36,10 @@ export default function BtcToRbtc(props) {
                 </Col>
                 <Col xs={13}>
                     <p>{description}</p>
+                    {accountData.Wallet &&
                     <Button type="primary" onClick={btnAction}>
                         <b>{btnText}</b>
-                    </Button>
+                    </Button>}
                 </Col>
                 <Col xs={3}/>
             </Row>
