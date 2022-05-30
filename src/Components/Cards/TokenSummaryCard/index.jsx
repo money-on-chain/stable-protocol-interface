@@ -81,7 +81,7 @@ export default function TokenSummaryCard(props) {
                         span={16}
                         style={{
                             ...styleCentered,
-                            justifyContent: 'flex-end',
+                            justifyContent: 'flex-start',
                             textAlign: 'right'
                         }}
                     >
