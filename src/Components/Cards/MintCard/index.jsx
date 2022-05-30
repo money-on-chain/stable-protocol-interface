@@ -456,7 +456,8 @@ export default function MintCard(props) {
 
     return (
         <div className="CommissionCurrencySwitch">
-          <p>{t('global.MintOrRedeemToken_Fee')} ({commission.percentage}%)</p>
+          {/*<p>{t('global.MintOrRedeemToken_Fee')} ({feePercent:commission.percentage}%)</p>*/}
+          <p>{t("global.MintOrRedeemToken_Fee", {ns: 'global', feePercent:commission.percentage })}</p>
           <LargeNumber
               includeCurrency
               amount={commission.value}

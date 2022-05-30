@@ -188,14 +188,14 @@
         "MintOrRedeemToken_Mint": "Mint",
         "MintOrRedeemToken_Redeem": "Redeem",
 
-        "MintOrRedeemToken_Fee": "Comisión: ",
+        "MintOrRedeemToken_Fee": "Comisión ({{feePercent}}%): ",
 
         "MintOrRedeemToken_Interest": "Tasa de Interés (__interestRate__%): ",
 
         "InputWithCurrencySelector_AddTotalAvailable": "Usar total disponible",
         "InputWithCurrencySelector_AddAvailable": "Balance disponible",
 
-        "TokenSummary_Amount": "Total __tokenName__",
+        "TokenSummary_Amount": "Total {{tokenName}}",
 
         "ModalSend_EnterTheAmount": "Ingresa el valor",
         "ModalSend_pegout_EnterTheAmount": "Ingresa el valor de rBTC a enviar",
