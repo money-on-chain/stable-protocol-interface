@@ -187,14 +187,14 @@
         "MintOrRedeemToken_Clear": "Clear",
         "MintOrRedeemToken_Mint": "Mint",
         "MintOrRedeemToken_Redeem": "Redeem",
-        "MintOrRedeemToken_Fee": "Fee: ",
+        "MintOrRedeemToken_Fee": "Fee ({{feePercent}}%): ",
         "MintOrRedeemToken_Interest": "Interest rate (__interestRate__%): ",
 
         "InputWithCurrencySelector_AddTotalAvailable": "Add total available",
         "InputWithCurrencySelector_AddAvailable": "Available balance",
         "InputWithCurrencySelector_ConvertBTCtoRBTC": "Convert BTC to RBTC",
 
-        "TokenSummary_Amount": "__tokenName__ Amount",
+        "TokenSummary_Amount": "{{tokenName}} Amount",
 
         "ModalSend_EnterTheAmount": "Enter the amount",
         "ModalSend_pegout_EnterTheAmount": "Enter rBTC amount to send",
