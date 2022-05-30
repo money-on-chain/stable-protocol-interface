@@ -51,14 +51,14 @@ export default function Rbtc(props) {
                 <Col xs={24} md={12} xl={10}>
                     <BtcToRbtc
                         title="BTC to rBTC Peg In"
-                        description="Convert BTC from the Bitcoin network to rBTC Smart Bitcoins using the integrated FastBTC from Sovryn."
+                        description={t('MoC.fastbtc.getRBTC_description', { ns: 'moc' })}
                         btnText={t('MoC.fastbtc.getRBTC', { ns: 'moc' })}
                     />
                 </Col>
                 <Col xs={24} md={24} xl={10}>
                     <BtcToRbtc
                         title="BTC to rBTC Peg Out"
-                        description="Convert rBTC Smart Bitcoins to BTC using the integrated FastBTC from Sovryn."
+                        description={t('MoC.fastbtc.getBTC_description', { ns: 'moc' })}
                         btnText={t('MoC.fastbtc.getBTC', { ns: 'moc' })}
                         btnAction={() => { setRbtcGenVisible(true) }}
                     />
