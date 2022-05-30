@@ -125,6 +125,9 @@ export default function RewardsStakingOptions(props) {
         if (!props.UserBalanceData) {
             btnDisable = true;
         }
+        if(stakingAmountInputValue>0){
+            btnDisable = false;
+        }
         return (
             <div className="StakingTabContent">
                 <Row>

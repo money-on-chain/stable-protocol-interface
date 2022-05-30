@@ -96,8 +96,10 @@ export default function CoinSelect(props) {
                         step="any"
                         style={{ width: '100%' }}
                         disabled={disabled}
-                        onChange={(event) =>
-                            handleValueChange(event.target.value)
+                        onChange={(event) => {
+                            if(event.target.value > props.AccountData.Balance || event.target.value<0) return false;
+                                handleValueChange(event.target.value);
+                            }
                         }
                     />
                 </Col>
