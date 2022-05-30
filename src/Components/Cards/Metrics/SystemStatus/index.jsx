@@ -26,7 +26,8 @@ function SystemStatus() {
     // const {className, operationsAvailable} = getConfigByCoverage(coverage, paused, blocksToSettlement, price_active);
 
     const configStatusGreen = {
-        className: '#00a651',
+        // className: '#00a651',
+        className: 'statusGreen',
         title: 'Fully Operational',
         subtitle: "The system is in optimum status",
         operationsAvailable: [
@@ -41,7 +42,8 @@ function SystemStatus() {
     }
 
     const configStatusYellow = {
-        className: '#E9BF4A',
+        // className: '#E9BF4A',
+        className: 'statusYellow',
         title: 'Partially Operational',
         subtitle: "BPro cannot be redeemed. DoC cannot be minted",
         operationsAvailable: [
@@ -53,7 +55,8 @@ function SystemStatus() {
     }
 
     const configStatusOrange = {
-        className: '#ef8a13',
+        // className: '#ef8a13',
+        className: 'statusOrange',
         title: 'Opportunity Mode',
         subtitle: "BPro at a discount price!",
         operationsAvailable: [
@@ -64,7 +67,8 @@ function SystemStatus() {
     }
 
     const configStatusRed = {
-        className: '#ed1c24',
+        // className: '#ed1c24',
+        className: 'statusRed',
         title: "Protected Mode",
         subtitle: "No operations allowed",
         operationsAvailable: [
@@ -75,17 +79,20 @@ function SystemStatus() {
 
 
     const configStatusPaused = {
-        className: '#ed1c24',
+        // className: '#ed1c24',
+        className: 'statusPaused',
         operationsAvailable: []
     }
 
     const configStatusSettlement = {
-        className: '#ed1c24',
+        // className: '#ed1c24',
+        className: 'statusSettlement',
         operationsAvailable: []
     }
 
     const configStatusNoPrice = {
-        className: '#ed1c24',
+        // className: '#ed1c24',
+        className: 'statusNoPrice',
         operationsAvailable: []
     }
 
@@ -104,26 +111,19 @@ function SystemStatus() {
 
         if (blocksToSettlement < 1) {
             console.log("33333333333333333")
-            console.log(blocksToSettlement)
-            console.log("33333333333333333")
             return configStatusSettlement;
         }
 
         const coverageIsGreaterOrEqualThan = (numberInEther) => new BigNumber(coverage).gte(formatValueToContract(numberInEther, "COV"));
 
         if (coverageIsGreaterOrEqualThan(4)) {
-            console.log("444444444444444")
             console.log(coverageIsGreaterOrEqualThan(4))
-            console.log("444444444444444")
             return configStatusGreen;
         } else if (coverageIsGreaterOrEqualThan(2)) {
-            console.log("555555555555555555")
             return configStatusYellow;
         } else if (coverageIsGreaterOrEqualThan(1.5)) {
-            console.log("66666666666666666666")
             return configStatusOrange;
         } else {
-            console.log("777777777777777777777")
             return configStatusRed;
         }
     }
@@ -138,19 +138,6 @@ function SystemStatus() {
 
     const price_active = true
     const { className, operationsAvailable, title, subtitle } = getConfigByCoverage(getDatas['globalCoverageClean'], getDatas['paused'], getDatas['blocksToSettlement'], price_active);
-    console.log('className***************************************');
-    console.log(className);
-    console.log(getDatas['globalCoverageClean']);
-    console.log(getDatas['paused']);
-    console.log(getDatas['blocksToSettlement']);
-    console.log("stateStatus");
-    // console.log(stateStatus);
-    // console.log(!!stateStatus);
-    console.log("stateStatus");
-    console.log(price_active);
-    console.log(operationsAvailable);
-    console.log(title);
-    console.log('className***************************************');
 
     return (
         <div className="Card CardSystemStatus">
@@ -158,11 +145,10 @@ function SystemStatus() {
             <div className="CardMetricContent" style={{ marginTop: 0, justifyItems: 'center' }}>
                 <div>
                     <div className="CardMetricContent" style={{ alignItems: 'center', justifyItems: 'center', marginTop: 0 }}>
-                        <CheckCircleFilled style={{ marginLeft: 5, fontSize: 30, color: className }} />
-                        {/*<div style={{color: className, fontWeight: 500, marginLeft: 10}}>Fully <br/> Operational</div>*/}
-                        <div style={{ color: className, fontWeight: 500, marginLeft: 10 }} dangerouslySetInnerHTML={{ __html: customTitle(title) }}></div>
+                        <CheckCircleFilled style={{ marginLeft: 5, fontSize: 30 }} className={className}/>
+                        <div className={className}  style={{fontWeight: 500, marginLeft: 10 }} dangerouslySetInnerHTML={{ __html: customTitle(t("MoC.metrics.".concat(className.concat('.title')),{ns: 'moc'})) }}></div>
                     </div>
-                    <h5 style={{ marginLeft: 35 }}>{subtitle}</h5>
+                    <h5 style={{ marginLeft: 35 }}> {t("MoC.metrics.".concat(className.concat('.subtitle')),{ns: 'moc'}) } </h5>
                 </div>
                 <div>
                     <h3>{t('global.Metrics_globalCoverage', { ns: 'global' })}</h3>

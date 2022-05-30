@@ -13,9 +13,12 @@ import './style.scss';
 
 
 function Home(props) {
-
+  const BigNumber = require('bignumber.js');
   const [t, i18n] = useTranslation(["global", 'moc']);
   const auth = useContext(AuthenticateContext);
+  console.log('auth.userBalanceData*****************************************')
+  console.log(auth.userBalanceData)
+  console.log('auth.userBalanceData*****************************************')
   const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
 
   const data_row_coins2 = [];
@@ -113,21 +116,21 @@ function Home(props) {
               tokenName="stable"
               color="#00a651"
               page="/wallet/stable"
-              balance={docBalance}
+              balance={new BigNumber(docBalance).toFixed(2)}
               labelCoin={'RBTC'}
             />
             <TokenSummaryCard
               tokenName="riskpro"
               color="#ef8a13"
               page="/wallet/pro"
-              balance={bproBalance}
+              balance={new BigNumber(bproBalance).toFixed(6)}
               labelCoin={'RBTC'}
             />
             <TokenSummaryCard
               tokenName="riskprox"
               color="#ed1c24"
               page="/wallet/leveraged"
-              balance={bprox2Balance}
+              balance={new BigNumber(bprox2Balance).toFixed(6)}
               labelCoin={'RBTC'}
             />
           </div>
