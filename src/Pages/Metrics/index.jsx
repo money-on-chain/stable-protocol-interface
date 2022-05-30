@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import SystemStatus from '../../Components/Cards/Metrics/SystemStatus'
 import RBTC from '../../Components/Cards/Metrics/RBTC'
 import MOC from '../../Components/Cards/Metrics/MOC'
@@ -9,10 +9,12 @@ import Liquidity from '../../Components/Cards/Metrics/Liquidity'
 import NextSettlement from '../../Components/Cards/Metrics/NextSettlement'
 import { Row, Col, Tooltip } from 'antd';
 import { useTranslation } from "react-i18next";
+import { AuthenticateContext } from '../../Context/Auth';
 import './style.scss'
 
 function Metrics(props) {
     const [t, i18n] = useTranslation(["global", 'moc']);
+    const auth = useContext(AuthenticateContext);
 
     return (
         <Fragment>
