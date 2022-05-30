@@ -35,7 +35,7 @@ export default function TokenSummaryCard(props) {
                     return ((auth.contractStatusData['bproPriceInUsd']*auth.userBalanceData['bproBalance'])/auth.contractStatusData.bitcoinPrice).toFixed(6)
                     // return auth.userBalanceData['bproBalance'];
                 case 'riskprox':
-                    return auth.userBalanceData['bprox2Balance'];
+                    return new BigNumber(auth.userBalanceData['bprox2Balance']).toFixed(6);
             }
         }
     };
@@ -43,11 +43,11 @@ export default function TokenSummaryCard(props) {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return auth.userBalanceData['docBalance'];
+                    return new BigNumber(auth.userBalanceData['docBalance']).toFixed(2)
                 case 'riskpro':
                     return new BigNumber(auth.contractStatusData['bproPriceInUsd']*auth.userBalanceData['bproBalance']).toFixed(2);
                 case 'riskprox':
-                    return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4);
+                    return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2);
             }
         }
     };
