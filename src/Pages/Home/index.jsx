@@ -1,5 +1,4 @@
 import TokenSummaryCard from '../../Components/Cards/TokenSummaryCard';
-import './style.scss';
 
 import React, { Fragment, useEffect } from 'react';
 import { useContext } from 'react';
@@ -11,7 +10,7 @@ import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import ListOperations from "../../Components/Tables/ListOperations";
 import data_json from "../../services/webapp_transactions_list.json";
 import {useTranslation} from "react-i18next";
-
+import './style.scss';
 
 function Home(props) {
 
