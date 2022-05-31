@@ -241,7 +241,7 @@ export default function ListOperations(props) {
                     description: <RowDetail detail={element.detail} />,
                 });
             }
-        })     
+        })
         /*******************************end extraer datos del json con el json seteado por limit y skip***********************************/
     }
 
