@@ -58,9 +58,9 @@ export default function Sovryn(props) {
                     alt="" />
                     <div className="FastBTCLeftPanel"><b>{t('MoC.fastbtc.leftPannel.header', { ns: 'moc' })}</b>
                         <ul>
-                            <li className="instruction-item">Mint DoC and BPro</li>
-                            <li className="instruction-item">Set BTCx positions</li>
-                            <li className="instruction-item">Pay gas fees on RSK network</li>
+                            <li className="instruction-item">{t('MoC.fastbtc.leftPannel.items.0', { ns: 'moc' })}</li>
+                            <li className="instruction-item">{t('MoC.fastbtc.leftPannel.items.1', { ns: 'moc' })}</li>
+                            <li className="instruction-item">{t('MoC.fastbtc.leftPannel.items.2', { ns: 'moc' })}</li>
                         </ul>
                         <a href="https://www.rsk.co/rbtc/" target="_blank" rel="noopener noreferrer">&gt; {t('MoC.fastbtc.leftPannel.learnMore', { ns: 'moc' })}</a></div>
                 </div>

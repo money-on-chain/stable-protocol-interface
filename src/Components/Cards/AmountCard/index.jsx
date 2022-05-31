@@ -3,11 +3,13 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
+import { useTranslation } from "react-i18next";
 const BigNumber = require('bignumber.js');
 
 export default function AmountCard(props) {
+    const [t, i18n] = useTranslation(["global", 'moc']);
     const {
-        tokenName = '', 
+        tokenName = '',
         color = '',
         titleName = ''} = props;
 
@@ -36,21 +38,24 @@ export default function AmountCard(props) {
             }
         }
     };
+
+    const pre_label= t(`MoC.Tokens_${tokenName.toUpperCase()}_name`, { ns: 'moc' })
+
     return (
         <div className="Card CardAmount">
             <Row>
                 <Col span={22}>
-                    <h3 className="CardTitle">{titleName} Amount</h3>
+                    <h3 className="CardTitle">{t("global.TokenSummary_Amount", {ns: 'global', tokenName: pre_label })}</h3>
                 </Col>
                 <Col span={2}>
-                    <Tooltip placement="top" title={`Get information about ${titleName}`}>
+                    <Tooltip placement="top" title={`${t('MoC.tokenInformationTooltip', {ns: 'moc'})} ${pre_label}`} >
                         <InfoCircleOutlined className="Icon"/>
                     </Tooltip>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <img 
+                    <img
                         width={56}
                         src={window.location.origin + `/Moc/icon-${tokenName}.svg`}
                         alt="icon-wallet"
@@ -64,6 +69,6 @@ export default function AmountCard(props) {
 
             </Row>
         </div>
-        
+
     )
 }

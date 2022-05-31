@@ -1,5 +1,11 @@
 import TokenSummaryCard from '../../Components/Cards/TokenSummaryCard';
+<<<<<<< HEAD
+import './style.scss';
+
+import React, { Fragment, useEffect } from 'react';
+=======
 import React, { Fragment } from 'react';
+>>>>>>> e99200c002137cdc5ef71f44351adc8bec1812d1
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../Context/Auth';
 import WalletBalance from '../../Components/Cards/WalletBalance';
@@ -8,14 +14,108 @@ import MocAmount from "../../Components/Cards/MocAmount";
 import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import ListOperations from "../../Components/Tables/ListOperations";
 import data_json from "../../services/webapp_transactions_list.json";
-import { useTranslation } from "react-i18next";
-import './style.scss';
+import {useTranslation} from "react-i18next";
 
 
 function Home(props) {
+<<<<<<< HEAD
 
+    const [t, i18n]= useTranslation(["global",'moc'])
+
+    const auth = useContext(AuthenticateContext);
+    const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
+    const data_row_coins2= [];
+
+
+
+
+
+    /*
+    * del json:
+    *
+    * event        =======      event,                pero sacar ultimo substring ("event": "FreeStableTokenRedeem")
+    * asset             ====    tokenInvolved
+    * date           =====      lastUpdatedAt         transformar a date   ("lastUpdatedAt": "2021-12-03T20:36:22.232Z")
+    * status        ======      confirmingPercent= numero     status= para texto
+    *
+    * */
+
+    /*
+    * para su detalle:
+    *
+    * event        =======      event,                pero sacar ultimo substring ("event": "FreeStableTokenRedeem")
+    * tokenInvolved   ====    asset
+    * platform fee      ==      gasFeeUSD               parece hay que tranformar
+    * interests      ==      USDInterests
+    *  gas fee      ======      gasFeeUSD               parece hay que tranformar
+    * block N       ======      blockNumber
+    * tx hash       =====       transactionHash         parece hay que tranformar
+    * reserve Price  ======      reservePrice
+    * */
+
+    return (
+
+        <Fragment>
+            {!auth.isLoggedIn && <Alert
+
+                message={t('global.NoConnection_alertTitle')}
+                description={t('global.NoConnection_alertPleaseConnect')}
+                type="error"
+                showIcon
+                className="AlertNoConnection"
+            />}
+
+
+            <h1 className="PageTitle">{t('MoC.home.title', { ns: 'moc' })}</h1>
+            <h3 className="PageSubTitle">{t("MoC.home.subtitle", { ns: 'moc' })}</h3>
+            <Row gutter={16}>
+                <Col flex="400px" className={'WalletBalance-mb'}>
+                    <WalletBalance/>
+                </Col>
+                <Col flex="auto">
+                    <div className={'container-b'} style={{height: '100%'}}>
+                        <TokenSummaryCard
+                            tokenName="stable"
+                            color="#00a651"
+                            page="/wallet/stable"
+                            balance={docBalance}
+                            labelCoin={'RBTC'}
+                        />
+                        <TokenSummaryCard
+                            tokenName="riskpro"
+                            color="#ef8a13"
+                            page="/wallet/pro"
+                            balance={bproBalance}
+                            labelCoin={'RBTC'}
+                        />
+                        <TokenSummaryCard
+                            tokenName="riskprox"
+                            color="#ed1c24"
+                            page="/wallet/leveraged"
+                            balance={bprox2Balance}
+                            labelCoin={'RBTC'}
+                        />
+                    </div>
+                </Col>
+                <Col xs={24} sm={24} md={24} xl={4}>
+                    <div className="ContainerMocAmountDatas">
+                        <MocAmount />
+                        <MocLiquidity />
+                    </div>
+                </Col>
+            </Row>
+            <div className="Card WalletOperations">
+                <ListOperations token={'all'}></ListOperations>
+            </div>
+        </Fragment>
+    );
+=======
+  const BigNumber = require('bignumber.js');
   const [t, i18n] = useTranslation(["global", 'moc']);
   const auth = useContext(AuthenticateContext);
+  console.log('auth.userBalanceData*****************************************')
+  console.log(auth.userBalanceData)
+  console.log('auth.userBalanceData*****************************************')
   const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
 
   const data_row_coins2 = [];
@@ -113,21 +213,21 @@ function Home(props) {
               tokenName="stable"
               color="#00a651"
               page="/wallet/stable"
-              balance={docBalance}
+              balance={new BigNumber(docBalance).toFixed(2)}
               labelCoin={'RBTC'}
             />
             <TokenSummaryCard
               tokenName="riskpro"
               color="#ef8a13"
               page="/wallet/pro"
-              balance={bproBalance}
+              balance={new BigNumber(bproBalance).toFixed(6)}
               labelCoin={'RBTC'}
             />
             <TokenSummaryCard
               tokenName="riskprox"
               color="#ed1c24"
               page="/wallet/leveraged"
-              balance={bprox2Balance}
+              balance={new BigNumber(bprox2Balance).toFixed(6)}
               labelCoin={'RBTC'}
             />
           </div>
@@ -144,6 +244,7 @@ function Home(props) {
       </div>
     </Fragment>
   );
+>>>>>>> e99200c002137cdc5ef71f44351adc8bec1812d1
 }
 
 export default Home;
