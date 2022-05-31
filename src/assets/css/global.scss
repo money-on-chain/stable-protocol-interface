@@ -424,7 +424,7 @@ input[type=number] {
 }
 
 .mt-0{
-margin-top: 0px;
+  margin-top: 0px;
 }
 
 @keyframes rotation {
@@ -480,4 +480,13 @@ margin-top: 0px;
 
 .statusNoPrice{
   color: #ed1c24;
+}
+
+.arrow-center-values{
+  @media only screen  and (max-width: 600px) {
+    width: 100%;
+  }
+  img{
+    margin-right: 10px;
+  }
 }

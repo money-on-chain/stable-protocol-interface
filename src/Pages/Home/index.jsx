@@ -1,5 +1,6 @@
 import TokenSummaryCard from '../../Components/Cards/TokenSummaryCard';
 
+
 import React, { Fragment, useEffect } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../Context/Auth';
@@ -11,6 +12,7 @@ import ListOperations from "../../Components/Tables/ListOperations";
 import data_json from "../../services/webapp_transactions_list.json";
 import {useTranslation} from "react-i18next";
 import './style.scss';
+import web3 from "web3";
 
 function Home(props) {
 
@@ -72,22 +74,25 @@ function Home(props) {
                             tokenName="stable"
                             color="#00a651"
                             page="/wallet/stable"
-                            balance={docBalance}
+                            balance={web3.utils.toWei(docBalance, 'ether')}
                             labelCoin={'RBTC'}
+                            currencyCode={'STABLE'}
                         />
                         <TokenSummaryCard
                             tokenName="riskpro"
                             color="#ef8a13"
                             page="/wallet/pro"
-                            balance={bproBalance}
+                            balance={web3.utils.toWei(bproBalance, 'ether')}
                             labelCoin={'RBTC'}
+                            currencyCode={'RISKPRO'}
                         />
                         <TokenSummaryCard
                             tokenName="riskprox"
                             color="#ed1c24"
                             page="/wallet/leveraged"
-                            balance={bprox2Balance}
+                            balance={web3.utils.toWei(bprox2Balance, 'ether')}
                             labelCoin={'RBTC'}
+                            currencyCode={'RISKPROX'}
                         />
                     </div>
                 </Col>

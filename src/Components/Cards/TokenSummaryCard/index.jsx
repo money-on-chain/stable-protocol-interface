@@ -1,11 +1,12 @@
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { Row, Col } from 'antd';
-import React from 'react';
+import React, {useState} from 'react';
 import { useContext } from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
+import {LargeNumber} from "../../LargeNumber";
 const BigNumber = require('bignumber.js');
 
 const styleCentered = {
@@ -22,6 +23,7 @@ export default function TokenSummaryCard(props) {
         page = '',
         balance = '0',
         labelCoin = '',
+        currencyCode=''
     } = props;
 
     const auth = useContext(AuthenticateContext);
@@ -33,7 +35,7 @@ export default function TokenSummaryCard(props) {
                     return (auth.userBalanceData['docBalance']/auth.contractStatusData.bitcoinPrice).toFixed(6);
                 case 'riskpro':
                     return ((auth.contractStatusData['bproPriceInUsd']*auth.userBalanceData['bproBalance'])/auth.contractStatusData.bitcoinPrice).toFixed(6)
-                    // return auth.userBalanceData['bproBalance'];
+                // return auth.userBalanceData['bproBalance'];
                 case 'riskprox':
                     return new BigNumber(auth.userBalanceData['bprox2Balance']).toFixed(6);
             }
@@ -54,13 +56,13 @@ export default function TokenSummaryCard(props) {
     return (
         <Row className="Card TokenSummaryCard">
             <Col
-                span={8}
+                span={7}
                 style={{
                     ...styleCentered,
                     textAlign: 'right'
                 }}
             >
-                <Row className="ArrowHomeIndicators" style={{ width: '100%' }}>
+                <Row className="ArrowHomeIndicators arrow-center-values">
                     <Col
                         span={8}
                         style={{
@@ -81,12 +83,12 @@ export default function TokenSummaryCard(props) {
                         span={16}
                         style={{
                             ...styleCentered,
-                            justifyContent: 'flex-start',
+                            justifyContent: 'flex-end',
                             textAlign: 'right'
                         }}
                     >
                         <span className="Number" style={{ color }}>
-                            {balance}
+                            <LargeNumber className="WithdrawalAmount__" amount={balance} currencyCode={currencyCode} />
                         </span>
                     </Col>
                 </Row>
@@ -113,7 +115,7 @@ export default function TokenSummaryCard(props) {
                 </div>
             </Col>
             <Col
-                span={2}
+                span={3}
                 style={{
                     ...styleCentered,
                     justifyContent: 'flex-end'
