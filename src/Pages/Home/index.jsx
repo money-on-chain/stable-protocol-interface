@@ -10,6 +10,7 @@ import ListOperations from "../../Components/Tables/ListOperations";
 import data_json from "../../services/webapp_transactions_list.json";
 import { useTranslation } from "react-i18next";
 import './style.scss';
+import web3 from "web3";
 
 
 function Home(props) {
@@ -17,7 +18,7 @@ function Home(props) {
   const [t, i18n] = useTranslation(["global", 'moc']);
   const auth = useContext(AuthenticateContext);
   console.log('auth.userBalanceData*****************************************')
-  console.log(auth.userBalanceData)
+  console.log(auth)
   console.log('auth.userBalanceData*****************************************')
   const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
 
@@ -116,22 +117,25 @@ function Home(props) {
               tokenName="stable"
               color="#00a651"
               page="/wallet/stable"
-              balance={new BigNumber(docBalance).toFixed(2)}
+              balance={web3.utils.toWei(docBalance, 'ether')}
               labelCoin={'RBTC'}
+              currencyCode={'STABLE'}
             />
             <TokenSummaryCard
               tokenName="riskpro"
               color="#ef8a13"
               page="/wallet/pro"
-              balance={new BigNumber(bproBalance).toFixed(6)}
+              balance={web3.utils.toWei(bproBalance, 'ether')}
               labelCoin={'RBTC'}
+              currencyCode={'RISKPRO'}
             />
             <TokenSummaryCard
               tokenName="riskprox"
               color="#ed1c24"
               page="/wallet/leveraged"
-              balance={new BigNumber(bprox2Balance).toFixed(6)}
+              balance={web3.utils.toWei(bprox2Balance, 'ether')}
               labelCoin={'RBTC'}
+              currencyCode={'RISKPROX'}
             />
           </div>
         </Col>
