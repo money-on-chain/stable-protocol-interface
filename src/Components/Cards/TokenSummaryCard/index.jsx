@@ -35,7 +35,7 @@ export default function TokenSummaryCard(props) {
                     return (auth.userBalanceData['docBalance']/auth.contractStatusData.bitcoinPrice).toFixed(6);
                 case 'riskpro':
                     return ((auth.contractStatusData['bproPriceInUsd']*auth.userBalanceData['bproBalance'])/auth.contractStatusData.bitcoinPrice).toFixed(6)
-                    // return auth.userBalanceData['bproBalance'];
+                // return auth.userBalanceData['bproBalance'];
                 case 'riskprox':
                     return new BigNumber(auth.userBalanceData['bprox2Balance']).toFixed(6);
             }

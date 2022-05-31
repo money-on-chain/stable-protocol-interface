@@ -26,7 +26,11 @@ body, html {
   @media (max-width: 1555px) {
     min-width: initial;
     margin-left: 90px;
+    margin-right: 10px;
+  }
+  @media (max-width: 600px) {
     margin-right: initial;
+    margin-top: 44px;
   }
 }
 
@@ -420,7 +424,7 @@ input[type=number] {
 }
 
 .mt-0{
-margin-top: 0px;
+  margin-top: 0px;
 }
 
 @keyframes rotation {
