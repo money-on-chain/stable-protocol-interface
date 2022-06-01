@@ -3,7 +3,8 @@ import React, { Fragment } from 'react';
 import { useContext } from 'react'
 import { AuthenticateContext } from "../../../Context/Auth";
 import CountUp from 'react-countup';
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import data_json from '../../../services/liquidity_mining.json';
 import { setNumber } from '../../../Helpers/helper'
 import { Link } from "react-router-dom";
@@ -31,6 +32,9 @@ function MocLiquidity(props) {
         <div className="Card RewardsBalanceLiquidity withPadding hasTitle">
             <div className="title">
                 <h1>{t("global.RewardsBalance_MocLiquidityMining", { ns: 'global' })}</h1>
+                <Tooltip placement="topRight" title={t("global.RewardsBalance_MoreInfo", { ns: 'global' })} >
+                    <InfoCircleOutlined className="Icon" />
+                </Tooltip>
                 {/*<span role="img" aria-label="info-circle" className="anticon anticon-info-circle">*/}
                 {/*    <svg viewBox="64 64 896 896" focusable="false" className="" data-icon="info-circle" width="1em" height="1em"*/}
                 {/*fill="currentColor" aria-hidden="true"><path*/}

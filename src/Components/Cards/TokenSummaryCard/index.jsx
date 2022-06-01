@@ -1,12 +1,14 @@
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Row, Col } from 'antd';
-import React, {useState} from 'react';
+import { Row, Col, Tooltip } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
 import { useContext } from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
-import {LargeNumber} from "../../LargeNumber";
+import { LargeNumber } from "../../LargeNumber";
+import { relativeTimeRounding } from 'moment';
 const BigNumber = require('bignumber.js');
 
 const styleCentered = {
@@ -23,7 +25,7 @@ export default function TokenSummaryCard(props) {
         page = '',
         balance = '0',
         labelCoin = '',
-        currencyCode=''
+        currencyCode = ''
     } = props;
 
     const auth = useContext(AuthenticateContext);
@@ -32,9 +34,9 @@ export default function TokenSummaryCard(props) {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return (auth.userBalanceData['docBalance']/auth.contractStatusData.bitcoinPrice).toFixed(6);
+                    return (auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(6);
                 case 'riskpro':
-                    return ((auth.contractStatusData['bproPriceInUsd']*auth.userBalanceData['bproBalance'])/auth.contractStatusData.bitcoinPrice).toFixed(6)
+                    return ((auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']) / auth.contractStatusData.bitcoinPrice).toFixed(6)
                 // return auth.userBalanceData['bproBalance'];
                 case 'riskprox':
                     return new BigNumber(auth.userBalanceData['bprox2Balance']).toFixed(6);
@@ -47,7 +49,7 @@ export default function TokenSummaryCard(props) {
                 case 'stable':
                     return new BigNumber(auth.userBalanceData['docBalance']).toFixed(2)
                 case 'riskpro':
-                    return new BigNumber(auth.contractStatusData['bproPriceInUsd']*auth.userBalanceData['bproBalance']).toFixed(2);
+                    return new BigNumber(auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']).toFixed(2);
                 case 'riskprox':
                     return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2);
             }
@@ -126,8 +128,14 @@ export default function TokenSummaryCard(props) {
                     type="primary"
                     shape="circle"
                     onClick={() => navigate(page)}
-                    icon={<ArrowRightOutlined />}
+                    icon={<ArrowRightOutlined
+                    />}
                 />
+                {/*<div style={{ position: 'relative' }} >
+                    <Tooltip placement="topRight" title={`uwu`} style={{ position: 'absolute', marginTop: 20, marginRight: 10 }}>
+                        <InfoCircleOutlined className="Icon" />
+                    </Tooltip>
+                    </div>*/}
             </Col>
         </Row>
     );
