@@ -18,9 +18,7 @@
     "Tokens_MOC_name": "MoC",
     "Tokens_USDPrice_code": "USD",
     "Tokens_USDPrice_name": "Dollar",
-
     "MetamaskTutorial_connectWithMetamask_text": "Return to Money on Chain Tab. Click on Next on the Metamask Window",
-
     "termsAndConditions": {
       "warning": "WARNING",
       "disclaimer": "Please go through our terms and conditions and Nationality restrictions prior to using the platform. By closing this message you automatically accept them. Money on Chain is a sophisticated protocol with proven robustness. Nevertheless it is still experimental software. Handle with care and at your own risk...",
@@ -137,10 +135,10 @@
       "faqs": "Help Center",
       "rewards": "MoC Tokens",
       "language": "Language",
-      "RISKPROWallet":"BPro Token",
-      "RISKPROXWallet":"BTCx Position",
-      "STABLEWallet":"DoC Token",
-      "getRBTC":"Convert BTC to RBTC",
+      "RISKPROWallet": "BPro Token",
+      "RISKPROXWallet": "BTCx Position",
+      "STABLEWallet": "DoC Token",
+      "getRBTC": "Convert BTC to RBTC",
       "wiki-url": "https://wiki.moneyonchain.com/",
       "repository-url": "https://github.com/money-on-chain/main-RBTC-contract"
     },
@@ -156,10 +154,10 @@
       "faqs": "Help Center",
       "rewards": "MoC Tokens",
       "language": "Language",
-      "RISKPROWallet":"BPro",
-      "RISKPROXWallet":"BTCx",
-      "STABLEWallet":"DoC",
-      "getRBTC":"BTC to RBTC"
+      "RISKPROWallet": "BPro",
+      "RISKPROXWallet": "BTCx",
+      "STABLEWallet": "DoC",
+      "getRBTC": "BTC to RBTC"
     },
     "drawer-allowance": {
       "title": "Set Allowance",
@@ -171,21 +169,21 @@
       "subtitle": "Your current active wallet holdings",
       "receiverAddress": "Receiver address or domain",
       "ownAddressLabel": "Your address",
-      "RISKPRO":{
-        "title":"BPro",
-        "subtitle":"Manage your BPros"
+      "RISKPRO": {
+        "title": "BPro",
+        "subtitle": "Manage your BPros"
       },
-      "RISKPROX":{
-        "title":"BTCx",
-        "subtitle":"Manage your BTCxs Position"
+      "RISKPROX": {
+        "title": "BTCx",
+        "subtitle": "Manage your BTCxs Position"
       },
-      "STABLE":{
-        "title":"DoC",
-        "subtitle":"Manage your DoCs"
+      "STABLE": {
+        "title": "DoC",
+        "subtitle": "Manage your DoCs"
       },
-      "MOC":{
-        "title":"MoC",
-        "subtitle":"Manage your MoCs"
+      "MOC": {
+        "title": "MoC",
+        "subtitle": "Manage your MoCs"
       }
     },
     "exchange": {
@@ -229,77 +227,77 @@
       }
     },
     "metrics": {
-      "STABLE":{
-        "title":"DoC",
-        "total":"Total in the system",
-        "availableRedeem":"Available to redeem",
-        "availableMint":"Available to Mint"
+      "STABLE": {
+        "title": "DoC",
+        "total": "Total in the system",
+        "availableRedeem": "Available to redeem",
+        "availableMint": "Available to Mint"
       },
-      "RISKPRO":{
-        "title":"BPro",
-        "usd":"BPro USD",
-        "availableRedeem":"Available to redeem",
-        "availableMint":"Available to Mint",
-        "leverage":"Current Leverage",
-        "total":"Total in the system",
-        "bproDiscountPriceUsd":"Discount price"
+      "RISKPRO": {
+        "title": "BPro",
+        "usd": "BPro USD",
+        "availableRedeem": "Available to redeem",
+        "availableMint": "Available to Mint",
+        "leverage": "Current Leverage",
+        "total": "Total in the system",
+        "bproDiscountPriceUsd": "Discount price"
       },
-      "RISKPROX":{
-        "title":"BTCx",
-        "usd":"BTCx USD",
-        "availableMint":"Available to Mint",
-        "coverage":"Spot Coverage",
-        "leverage":"Leverage",
-        "total":"Total in the system"
+      "RISKPROX": {
+        "title": "BTCx",
+        "usd": "BTCx USD",
+        "availableMint": "Available to Mint",
+        "coverage": "Spot Coverage",
+        "leverage": "Leverage",
+        "total": "Total in the system"
       },
-      "statusGreen":{
-        "title":"Fully Operational",
-        "subtitle":"The system is in optimum status"
+      "statusGreen": {
+        "title": "Fully Operational",
+        "subtitle": "The system is in optimum status"
       },
-      "statusYellow":{
-        "title":"Partially Operational",
-        "subtitle":"BPro cannot be redeemed. DoC cannot be minted"
+      "statusYellow": {
+        "title": "Partially Operational",
+        "subtitle": "BPro cannot be redeemed. DoC cannot be minted"
       },
-      "statusOrange":{
-        "title":"Opportunity Mode",
+      "statusOrange": {
+        "title": "Opportunity Mode",
         "subtitle": "BPro at a discount price!"
       },
-      "statusRed":{
+      "statusRed": {
         "title": "Protected Mode",
         "subtitle": "No operations allowed"
       },
-      "statusPaused":{
+      "statusPaused": {
         "title": "Paused Mode",
         "subtitle": "No operations allowed"
       },
-      "statusSettlement":{
+      "statusSettlement": {
         "title": "Settlement in progress",
         "subtitle": "No operations allowed"
       },
-      "statusNoPrice":{
+      "statusNoPrice": {
         "title": "No active price being received",
         "subtitle": "No operations allowed"
       },
-      "systemOperations":{
-        "title":"System Operations",
-        "mintSTABLE":"Mint DoC",
-        "redeemSTABLEOnSettlement":"Redeem DoC on Settlement",
-        "redeemSTABLEOutsideOfSettlement":"Redeem DoC",
-        "mintRISKPRO":"Mint BPro",
-        "redeemRISKPRO":"Redeem BPro",
-        "mintRISKPROX":"Mint BTCx",
-        "redeemRISKPROX":"Redeem BTCx"
+      "systemOperations": {
+        "title": "System Operations",
+        "mintSTABLE": "Mint DoC",
+        "redeemSTABLEOnSettlement": "Redeem DoC on Settlement",
+        "redeemSTABLEOutsideOfSettlement": "Redeem DoC",
+        "mintRISKPRO": "Mint BPro",
+        "redeemRISKPRO": "Redeem BPro",
+        "mintRISKPROX": "Mint BTCx",
+        "redeemRISKPROX": "Redeem BTCx"
       },
       "bucketsInTokens": {
-        "title":"Liquidity",
+        "title": "Liquidity",
         "total": "Total"
       },
-      "infoRBTC":{
-        "title":"Total rBTC in the system",
-        "priceRBTC":"rBTC USD",
-        "interest":"rBTC in interest bag",
-        "EMA":"rBTC EMA 120",
-        "targetCoverage":"Target coverage"
+      "infoRBTC": {
+        "title": "Total rBTC in the system",
+        "priceRBTC": "rBTC USD",
+        "interest": "rBTC in interest bag",
+        "EMA": "rBTC EMA 120",
+        "targetCoverage": "Target coverage"
       },
       "BtcInBucket0": {
         "title": "Tokens in BitPro",
@@ -321,8 +319,8 @@
           "subtitle": "- Total in Dollar on Chain: Number of DoC being used as counter-party of BTCx operations\n- Total rBTC tokens: the sum of the above expressed in rBTC\n- Total BTCx: the amount of BTCx issued by the system"
         }
       },
-      "Settlement":{
-        "title":"Next Settlement",
+      "Settlement": {
+        "title": "Next Settlement",
         "remainingDaysTitle": "Remaining days",
         "remainingDays": "In __days__ days __hours__ hours",
         "date": "Date",
@@ -330,8 +328,8 @@
         "blockSettlement": "Settlement will happen on block",
         "lastUpdateHeight": "Current indexed block"
       },
-      "Moc":{
-        "title":"MoC",
+      "Moc": {
+        "title": "MoC",
         "price": "Current price"
       }
     },
@@ -680,13 +678,13 @@
         "gas": "Gas Fee",
         "memo": "Comments",
         "reserve_price": "Reserve Price",
-        "txRequest":"TX Request",
-        "txSent":"TX Sent",
-        "status":"Status",
-        "amount":"Amount",
-        "gasCost":"Gas Cost",
-        "transaction":"Transaction",
-        "mocPrice":"Moc Price"
+        "txRequest": "TX Request",
+        "txSent": "TX Sent",
+        "status": "Status",
+        "amount": "Amount",
+        "gasCost": "Gas Cost",
+        "transaction": "Transaction",
+        "mocPrice": "Moc Price"
       },
       "status": {
         "open": "Open",
@@ -783,14 +781,14 @@
       "mocRewarded": {
         "title": "MOCs Rewarded",
         "tooltip": {
-          "title":"MOCs Rewarded",
+          "title": "MOCs Rewarded",
           "text": "Each day you keep your BitPro we will reward you with MOCs. MoC Rewards box shows the MOCs we already assigned to your address due to the BitPro you had in the past. We calculate this on daily basis."
         }
       },
       "mocToday": {
         "title": "Earned MOCs Today",
         "tooltip": {
-          "title":"Earned MOCs Today",
+          "title": "Earned MOCs Today",
           "text": "The earned MOCs today is an estimation of the MOCs the system will release to your address due to the BitPro you own and keep. It is an estimation because the calculation is done daily as a batch process, not online."
         }
       }
@@ -801,67 +799,69 @@
       "signButton": "Click here to log in"
     },
     "login": "Connect",
-    "fastbtc":{
+    "fastbtc": {
       "title": "FastBTC",
       "getRBTC": "Convert BTC to rBTC",
+      "getRBTC_description": "Convert BTC from the Bitcoin network to rBTC Smart Bitcoins using the integrated FastBTC from Sovryn.",
       "getBTC": "Convert rBTC to BTC",
+      "getBTC_description": "Convert rBTC Smart Bitcoins to BTC using the integrated FastBTC from Sovryn.",
       "subTitle": "Sovryn's FastBTC integration",
-      "history":{
-        "title":"FastBTC last operations",
+      "history": {
+        "title": "FastBTC last operations",
         "columns_headers": {
-          "id":"Id",
-          "step":"Step",
-          "type":"Operation type",
-          "dateAdded":"Date added",
-          "status":"Status",
-          "valueBtc":"Value",
-          "btcadr":"BTC address",
-          "web3adr":"RSK address",
-          "txHash":"Tx hash"
+          "id": "Id",
+          "step": "Step",
+          "type": "Operation type",
+          "dateAdded": "Date added",
+          "status": "Status",
+          "valueBtc": "Value",
+          "btcadr": "BTC address",
+          "web3adr": "RSK address",
+          "txHash": "Tx hash"
         },
-        "columns":{
-          "valueBTC":"__value__ BTC",
-          "valueRBTC":"__value__ rBTC",
-          "step_1":"1/2",
-          "step_2":"2/2",
-          "type_deposit":"BTC deposit",
-          "type_transfer":"rBTC reception",
-          "status_pending":"Pending",
-          "status_confirmed":"Confirmed",
-          "dateAddedFormat":"YYYY-MM-DD HH:mm:SS"
+        "columns": {
+          "valueBTC": "__value__ BTC",
+          "valueRBTC": "__value__ rBTC",
+          "step_1": "1/2",
+          "step_2": "2/2",
+          "type_deposit": "BTC deposit",
+          "type_transfer": "rBTC reception",
+          "status_pending": "Pending",
+          "status_confirmed": "Confirmed",
+          "dateAddedFormat": "YYYY-MM-DD HH:mm:SS"
         },
-        "upperSummary":"If rBTC is not visible in your wallet after 90 mins open a <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>support ticket</a> at Sovryn",
-        "table":{
+        "upperSummary": "If rBTC is not visible in your wallet after 90 mins open a <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>support ticket</a> at Sovryn",
+        "table": {
           "triggerDesc": "Click sort by descend",
           "triggerAsc": "Click sort by ascend"
         },
-        "underMaintenance":{
-          "spinTip":"FastBTC service is temporarily unavailable",
-          "spinAlertTitle":"Sovryn's FastBTC is not available",
-          "spinAlertDescription":"Sovryn’s FastBTC is temporarily unavailable. Please, come back later."
+        "underMaintenance": {
+          "spinTip": "FastBTC service is temporarily unavailable",
+          "spinAlertTitle": "Sovryn's FastBTC is not available",
+          "spinAlertDescription": "Sovryn’s FastBTC is temporarily unavailable. Please, come back later."
         }
       },
-      "newsModal":{
-        "title":"FastBTC",
-        "line1":"You will need rBTC to mint DoC and BPro and pay gas fees on the RSK network.",
-        "line2":"You can now obtain rBTC in a simple and easy way through our FastBTC from Sovryn integration.",
-        "line3":{
-          "preIconText":"Go to ",
-          "postIconPreLinkText":" in the left menu of your screen or click",
-          "linkText":"here",
-          "postLinkText":"."
-        },
-        "line4":{
-          "preLinkText":"More information about Sovryn´s FastBTC ",
-          "linkText":"here",
-          "postLinkText":"."
-        },
-        "checkboxText":"Don't show again"
-      },
-      "topUpWalletModal":{
+      "newsModal": {
         "title": "FastBTC",
-        "subtitle":"Deposit BTC to receive rBTC in your wallet",
-        "subtitle_pegout":"Please, review the conversion limits before proceeding with the rBTC to BTC conversion.",
+        "line1": "You will need rBTC to mint DoC and BPro and pay gas fees on the RSK network.",
+        "line2": "You can now obtain rBTC in a simple and easy way through our FastBTC from Sovryn integration.",
+        "line3": {
+          "preIconText": "Go to ",
+          "postIconPreLinkText": " in the left menu of your screen or click",
+          "linkText": "here",
+          "postLinkText": "."
+        },
+        "line4": {
+          "preLinkText": "More information about Sovryn´s FastBTC ",
+          "linkText": "here",
+          "postLinkText": "."
+        },
+        "checkboxText": "Don't show again"
+      },
+      "topUpWalletModal": {
+        "title": "FastBTC",
+        "subtitle": "Deposit BTC to receive rBTC in your wallet",
+        "subtitle_pegout": "Please, review the conversion limits before proceeding with the rBTC to BTC conversion.",
         "info": "You will need rBTC in your wallet to buy DOC and pay gas fees on RSK network",
         "help": "Learn about rBTC on RSK",
         "getBTCAddressButton": "Generate BTC Deposit Address",
@@ -876,27 +876,27 @@
         "valueRBTC": "__value__",
         "transaction1DetailsTitle": "Step 1/2: BTC TRANSACTION",
         "transaction2DetailsTitle": "Step 2/2: rBTC TRANSACTION",
-        "transactionInfo":{
+        "transactionInfo": {
           "step": "STEP __step__: __txName__ TRANSACTION",
           "status_pending": "Status __statusIndex__/2 pending",
           "status_confirmed": "Status __statusIndex__/2 confirmed",
           "valueDeposited": "Value deposited: __value__",
-          "toLabel":"To TX:",
-          "txHashLabel":"Tx hash:",
-          "fromLabel":"From TX:"
+          "toLabel": "To TX:",
+          "txHashLabel": "Tx hash:",
+          "fromLabel": "From TX:"
         },
-        "limits":{
+        "limits": {
           "header": "Conversion limits",
           "min": "Min: __minValue__ BTC",
           "max": "Max: __maxValue__ BTC"
         },
-        "limits_pegout":{
+        "limits_pegout": {
           "header": "Conversion limits",
           "min": "Min: __minValue__ RBTC",
           "max": "Max: __maxValue__ RBTC",
           "fee": "Fee: __feeValue__"
         },
-        "instructions":{
+        "instructions": {
           "header": "Instructions",
           "items": [
             "Do not deposit anything other than BTC.",
@@ -905,7 +905,7 @@
             "If rBTC is not visible in your wallet after 60 mins open a <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>support ticket</a> at Sovryn."
           ]
         },
-        "instructions_pegout":{
+        "instructions_pegout": {
           "header": "Instructions",
           "items": [
             "Please check and confirm the address you are sending to is a BTC address.",
@@ -915,15 +915,15 @@
             "If BTC is not visible in your destination wallet after 90 mins, open a <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>support ticket</a> at Sovryn."
           ]
         },
-        "txactions":{
+        "txactions": {
           "sendBTCTitle": "Send BTC to this address",
           "copyableBTCAddressLabel": "Address"
         },
-        "underMaintenance":{
+        "underMaintenance": {
           "alertDescription": "Sovryn’s FastBTC is temporarily unavailable. Please, come back later."
         }
       },
-      "leftPannel":{
+      "leftPannel": {
         "header": "You will need rBTC in your wallet to:",
         "items": [
           "Mint DoC and BPro",

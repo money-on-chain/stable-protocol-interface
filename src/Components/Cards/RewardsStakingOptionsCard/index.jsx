@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Row, Col, Tabs, Button, Table } from 'antd';
+import {Row, Col, Tabs, Button, Table, Alert} from 'antd';
 import moment from "moment";
 import PerformanceChart from '../../../Components/PerformanceChart';
 import { LargeNumber } from '../../LargeNumber';
@@ -54,7 +54,7 @@ export default function RewardsStakingOptions(props) {
 
     const auth = useContext(AuthenticateContext);
     // falta los SETS
-    const [stakingAmountInputValue, setStakingAmountInputValue] = useState("0");
+    const [stakingAmountInputValue, setStakingAmountInputValue] = useState("0.00");
     const [unstakingAmountInputValue, setUnstakingAmountInputValue] = useState("0");
     const [modalMode, setModalMode] = useState(null);
     const [stackedBalance, setStakedBalance] = useState("0");
@@ -125,11 +125,15 @@ export default function RewardsStakingOptions(props) {
         if (!props.UserBalanceData) {
             btnDisable = true;
         }
+        if(stakingAmountInputValue>0){
+            btnDisable = false;
+        }
         return (
             <div className="StakingTabContent">
                 <Row>
                     <Col xs={4}>
-                        <PerformanceChart />
+                        {auth.isLoggedIn &&
+                        <PerformanceChart />}
                     </Col>
                     <Col xs={20}>
                         <Row className="RewardsOptionsOverview">
@@ -192,7 +196,8 @@ export default function RewardsStakingOptions(props) {
             <div className="StakingTabContent">
                 <Row>
                     <Col xs={4}>
-                        <PerformanceChart />
+                        {auth.isLoggedIn &&
+                        <PerformanceChart />}
                     </Col>
                     <Col xs={20}>
                         <Row className="RewardsOptionsOverview">

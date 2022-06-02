@@ -4,6 +4,7 @@
   flex-direction: row;
   align-items: center;
   justify-items: center;
+  margin-right: 10px;
   &:hover {
     cursor: pointer;
   }
@@ -84,3 +85,6 @@
   color: #000 !important;
 }
 
+.customSelect{
+  border-left: 1px solid white;
+}

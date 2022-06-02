@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import 'antd/dist/antd.css';
 import './style.scss';
 import { Table, Progress, Result } from 'antd';
@@ -9,7 +9,7 @@ import data_json from '../../../services/webapp_transactions_list';
 import Moment from 'react-moment';
 import { useState } from 'react'
 import Web3 from 'web3';
-import { readJsonTable, setNumber } from '../../../Helpers/helper'
+import { readJsonTable, setNumber, myParseDate } from '../../../Helpers/helper'
 import config from '../../../Config/constants';
 import Copy from "../../Page/Copy";
 import { adjustPrecision, formatLocalMap } from "../../../Lib/Formats";
@@ -17,10 +17,12 @@ import Tooltip from 'antd/lib/tooltip';
 import NumericLabel from 'react-pretty-numbers';
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { useTranslation } from "react-i18next";
+import date from '../../../Config/date';
+import {AuthenticateContext} from "../../../Context/Auth";
 
 export default function ListOperations(props) {
     const { token } = props;
-
+    const [current, setCurrent] = useState(1);
     const [bordered, setBordered] = useState(false);
     const [loading, setLoading] = useState(false);
     const [pagination, setPagination] = useState({ position: 'bottom' });
@@ -43,6 +45,7 @@ export default function ListOperations(props) {
     const BigNumber = require('bignumber.js');
 
     const [t, i18n] = useTranslation(["global", 'moc']);
+    const auth = useContext(AuthenticateContext);
 
 
     /*const handleToggle = prop => enable => {
@@ -135,80 +138,47 @@ export default function ListOperations(props) {
     // };
 
     var data = [];
-    var set_current = 1;
-    const setCurrent = (current) => {
-        set_current = current
-        // console.log("current: ",current);
-        // console.log("set_current: ",set_current);
-        // getDatasTable(set_current)
-        data_row(set_current)
+    const setPage = (page) => {
+        setCurrent(page);
+        data_row(page);
     };
 
     const data_row_coins2 = [];
-    var set_index = 0
     var json_end = []
     const data_row = (set_current) => {
+        /*******************************sort descending by date lastUpdatedAt***********************************/
+        data_json.transactions.sort((a, b)=>{
+            return myParseDate(b.lastUpdatedAt) - myParseDate(a.lastUpdatedAt)
+        });
+        /*******************************end sort descending by date lastUpdatedAt***********************************/
 
-        /*******************************primero filtra por el tipo (token)***********************************/
-        if (token != 'all') {
-            var pre_datas = []
-            data_json.transactions.map((data_j) => {
-                if (data_j.tokenInvolved == token) {
-                    pre_datas.push(data_j)
-                }
-            });
-        } else {
-            var pre_datas = []
-            data_json.transactions.map((data_j) => {
-                pre_datas.push(data_j)
-            });
-        }
-        /*******************************end primero filtra por el tipo (token)***********************************/
-
-
-        //data=[]
+        /*******************************filter by type (token)***********************************/
+        var pre_datas = [];
+        pre_datas = data_json.transactions.filter(data_j => {
+            return (token !== 'all')? data_j.tokenInvolved === token : true;
+        });
+        /*******************************end filter by type (token)***********************************/
         while (data.length > 0) {
             data.pop();
         }
-        // console.log("1212");
-        // console.log(set_current);
-        // console.log("1212");
-
-
-        /*******************************setear el json para manejar limit y skip***********************************/
+        /*******************************set json group according to limits***********************************/
         const limit = 10;
-        if (set_current == 1) {
-            console.log("===========================11111111111111111111111111");
-            console.log(set_current - 1);
-            console.log((set_current + limit) - 1);
-            // console.log(data);
-            console.log("===========================11111111111111111111111111");
-            json_end = pre_datas.slice(set_current - 1, (set_current + limit) - 1);
-        }
-
-        if (set_current > 1) {
-            json_end = pre_datas.slice((set_current * 10) - 10, (set_current * 10));
-            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>11111111111111111111111111");
-            console.log((set_current * 10) - 10);
-            console.log((set_current * 10));
-            // console.log(data);
-            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>11111111111111111111111111");
-        }
-        /*******************************end setear el json para manejar limit y skip***********************************/
+        json_end = pre_datas.slice((set_current * limit) - limit, (set_current * limit));
+        /*******************************end set json group according to limits***********************************/
 
         /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
         data = [];
 
-        json_end.map((data_j, index) => {
+        json_end.forEach((data_j) => {
             const datas_response = readJsonTable(data_j)
 
-            if (datas_response['wallet_detail'] != '--' && datas_response['wallet_detail'] != 11) {
+            if (datas_response['wallet_detail'] !== '--' && datas_response['wallet_detail'] !== 11) {
                 const detail = {
                     event: datas_response['set_event']
-                    , created: <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['lastUpdatedAt']}</Moment></span>
+                    , created: <span><Moment format={(i18n.language==="en")? date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
                     , details: datas_response['RBTCAmount']
                     , asset: datas_response['set_asset']
-                    , confirmation: <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
+                    , confirmation: (true)?<span><Moment format={(i18n.language==="en")? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
                     , address: <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} />
                     , platform: datas_response['amount']
                     , platform_fee: datas_response['platform_fee_value']
@@ -237,7 +207,6 @@ export default function ListOperations(props) {
                 });
             }
         });
-
         data_row_coins2.forEach((element, index) => {
             const asset = [];
             if (element.wallet != '--' && element.wallet != 11) {
@@ -268,7 +237,7 @@ export default function ListOperations(props) {
                     // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                     platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                     wallet: <span className="display-inline ">{element.wallet} </span>,
-                    date: <span><Moment format="YYYY-MM-DD HH:MM">{element.date}</Moment></span>,
+                    date: <span><Moment format={(i18n.language==="en")? date.DATE_EN : date.DATE_ES}>{element.date}</Moment></span>,
                     status: <div style={{ width: '100%' }}><Progress percent={element.status.percent} /><br /><span
                         className="color-confirmed conf_title">{element.status.txt}</span></div>,
                     description: <RowDetail detail={element.detail} />,
@@ -278,7 +247,7 @@ export default function ListOperations(props) {
         /*******************************end extraer datos del json con el json seteado por limit y skip***********************************/
     }
 
-    data_row(1)
+    data_row(current)
 
     //const { xScroll, yScroll, ...state } = this.state;
 
@@ -319,9 +288,9 @@ export default function ListOperations(props) {
             <div className="title"><h1>{t('MoC.operations.title', { ns: 'moc' })}</h1></div>
             <Table
                 {...state}
-                pagination={{ position: [top, bottom], defaultCurrent: 1, onChange: (current) => setCurrent(current), total: Object.keys(data_json.transactions).length }}
+                pagination={{ position: [top, bottom], defaultCurrent: 1, onChange: (page) => setPage(page), total: Object.keys(data_json.transactions).length }}
                 columns={tableColumns}
-                dataSource={hasData ? data : null}
+                dataSource={hasData ? (auth.isLoggedIn ==true)?data : null : null}
                 scroll={scroll}
             />
         </>

@@ -28,9 +28,6 @@ export default function Step3(props) {
     console.log('accountData.Owner');
     const [account, setAccount] = useState(null);
 
-    console.log('account ini------------------------')
-    console.log(account)
-    console.log('account ini------------------------')
     useEffect(() => {
         connect();
     },[auth]);
@@ -83,7 +80,7 @@ export default function Step3(props) {
                     setHeaderIcon('icon-processing.svg')
                     setIsVisible(false)
                     setHeaderState('Pending')
-                    fastBtcBridge.methods.transferToBtc(accountData.Owner).send(
+                    fastBtcBridge.methods.transferToBtc(props.rbtcAddress).send(
                         [props.rbtcAddress],
                         {
                             from: accountData.Owner,

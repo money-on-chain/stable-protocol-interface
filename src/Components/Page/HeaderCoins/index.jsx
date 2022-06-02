@@ -5,6 +5,7 @@ import { AuthenticateContext } from '../../../Context/Auth';
 import PriceVariation from '../../PriceVariation';
 import {LargeNumber} from "../../LargeNumber";
 import web3 from "web3";
+import {Alert} from "antd";
 
 function HeaderCoins(props) {
   const auth = useContext(AuthenticateContext);
@@ -13,7 +14,7 @@ function HeaderCoins(props) {
 
   useEffect(() => {
     // priceVariation24hs().then(data => setDailyVariation(data['24hs']));
-    console.log({
+    /* console.log({
       "current": {
         "_id": "625031dc240b5f9601c09764",
         "blockHeight": 2738557,
@@ -40,7 +41,7 @@ function HeaderCoins(props) {
         "createdAt": "2022-04-07T12:58:18.000Z",
         "reservePrecision": "1000000000000000000"
       }
-    })
+    }) */
     setDailyVariation({
       "current": {
         "_id": "625031dc240b5f9601c09764",
@@ -58,7 +59,7 @@ function HeaderCoins(props) {
       "24hs": {
         "_id": "624edff7240b5f96017dc0df",
         "blockHeight": 2735684,
-        "bitcoinPrice": "43602800000000000000000",
+        "bitcoinPrice": "30602800000000000000000",
         "bproDiscountPrice": "630478399400189611",
         "bproPriceInRbtc": "630478399400189611",
         "bproPriceInUsd": "27490623553366587570510",
@@ -78,9 +79,6 @@ function HeaderCoins(props) {
         case 'stable':
           if (auth.contractStatusData['bitcoinPrice'] != 0) {
             // return (auth.contractStatusData['bitcoinPrice'] / 1000).toFixed(4);
-            console.log("web3.utils.toWei(auth.contractStatusData['bitcoinPrice']")
-            console.log(web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether'))
-            console.log("web3.utils.toWei(auth.contractStatusData['bitcoinPrice']")
             return (web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether'));
           } else {
             return 0;
@@ -130,7 +128,8 @@ function HeaderCoins(props) {
         <img src={window.location.origin + '/' + image} alt="arrow" height={38}/>
         <div className={'div_values'}>
           <span className="value_usd">
-            <LargeNumber amount={getBalanceUSD()} {...{ currencyCode }} />
+            {auth.isLoggedIn && <LargeNumber amount={getBalanceUSD()} {...{ currencyCode }} />}
+            {!auth.isLoggedIn && <span>0</span>}
             <span className={'div_values-coin'}>USD</span>
           </span>
           <PriceVariation priceVariation={getPriceVariation()} blockHeight={dailyVariation['24hs'].blockHeight} />

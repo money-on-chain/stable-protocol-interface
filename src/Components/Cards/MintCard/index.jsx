@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-import { Row, Col, Switch, Popover, notification, Modal, Spin } from 'antd';
+import {Row, Col, Switch, Popover, notification, Modal, Spin, Alert} from 'antd';
 import './style.scss';
 import React, { useEffect, useState, useContext } from 'react';
 import _ from 'lodash/core';
@@ -53,8 +53,8 @@ export default function MintCard(props) {
 
   const [currencyYouExchange, setCurrencyYouExchange] = useState('RESERVE');
   // const [currencyYouReceive, setCurrencyYouReceive] = useState('');
-  const [valueYouExchange, setValueYouExchange] = useState('0.0000');
-  const [valueYouReceive, setValueYouReceive] = useState('0');
+  const [valueYouExchange, setValueYouExchange] = useState('0.000000');
+  const [valueYouReceive, setValueYouReceive] = useState('0.00');
   const [valueYouReceiveUSD, setValueYouReceiveUSD] = useState('0.0000');
   const [showMintModal, setShowMintModal] = useState(false);
   // const [isMint, setIsMint] = useState(true);
@@ -108,13 +108,26 @@ export default function MintCard(props) {
   const calcInterests = async newValueYouExchange => {
     let interestRate = '0',
         interestValue = BigNumber('0');
+    if (isMint && currencyYouReceive === 'RISKPRO') {
+      if(!auth.isLoggedIn){
+        setValueYouReceive('0.000000')
+      }
+    }
     if (isMint && currencyYouReceive === 'RISKPROX') {
-      interestValue = await auth.calcMintInterestValues(
-          BigNumber(newValueYouExchange)
-              .toFixed(0)
-              .toString()
-      );
-      interestValue = new BigNumber(interestValue);
+      if(!auth.isLoggedIn){
+        setValueYouReceive('0.000000')
+      }
+      if (auth.isLoggedIn) {
+        interestValue = await auth.calcMintInterestValues(
+            BigNumber(newValueYouExchange)
+                .toFixed(0)
+                .toString()
+        );
+        interestValue = new BigNumber(interestValue);
+      }else{
+        interestValue = 0
+      }
+
       //interestValue = new BigNumber(0.01).multipliedBy(interestValue).plus(interestValue);
 
       interestRate = formatValueToContract(
@@ -300,12 +313,13 @@ export default function MintCard(props) {
           <div className="ReserveInUSD">
           <span className="Conversion">
             1 {t('MoC.Tokens_RESERVE_code', {ns: 'moc'})} ={' '}
-            <LargeNumber
+            {auth.isLoggedIn && <LargeNumber
                 className="ReservePrice"
                 amount={reservePrice}
                 currencyCode={'USD'}
                 includeCurrency
-            />
+            />}
+            {!auth.isLoggedIn && <span>31,103.20 USD</span>}
           </span>
             <span className="Disclaimer">{t('global.MintOrRedeemToken_AmountMayDiffer')}</span>
             {/*<div className="TextLegend">{t('global.MintOrRedeemToken_AmountMayDiffer')}</div>*/}
@@ -456,12 +470,15 @@ export default function MintCard(props) {
 
     return (
         <div className="CommissionCurrencySwitch">
-          <p>{t('global.MintOrRedeemToken_Fee')} ({commission.percentage}%)</p>
+          <p>{t("global.MintOrRedeemToken_Fee", {ns: 'global', feePercent:(commission.percentage!==undefined)?commission.percentage:'0.15' })}</p>
+          {auth.isLoggedIn &&
           <LargeNumber
               includeCurrency
               amount={commission.value}
               currencyCode={commission.currencyCode}
           />
+          }
+          {!auth.isLoggedIn && <span>0.000000 RBTC</span>}
           <Popover content={tooltip} placement="top">
             <div className="PayWithMocToken">
               <Switch
