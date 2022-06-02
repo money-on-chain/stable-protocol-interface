@@ -103,10 +103,6 @@ export default function RbtcToBtcGenerateModal(props) {
 
     const { title = 'rBTC to BTC', alertText = 'Always generate the BTC deposit address, as the system might update it' } = props
     const [hasTokenQr, setHasTokenQr] = useState(false);
-    console.log("auth------------------------------qqqqqqqqqqqqqqqqqqqqqqqqqq");
-    console.log(auth);
-    console.log(auth.account);
-    console.log("auth------------------------------qqqqqqqqqqqqqqqqqqqqqqqqqq");
     const { accountData = {} } = auth;
     const { visible = false, handleClose = () => { } } = props;
     const titleModal = (

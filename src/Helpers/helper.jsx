@@ -161,3 +161,13 @@ export const toNumberFormat = (value, decimals = 0) => {
         minimumFractionDigits: decimals,
     });
 }
+
+export const set_doc_usd= (auth) =>{
+    if (auth.userBalanceData) {
+        const doc_usd= new BigNumber(auth.userBalanceData['docBalance'])
+        const doc= (auth.userBalanceData['docBalance']/auth.contractStatusData.bitcoinPrice).toFixed(6);
+        return {'normal':doc,'usd':doc_usd}
+    }else{
+        return {'normal':(0).toFixed(6),'usd':(0).toFixed(2)}
+    }
+};

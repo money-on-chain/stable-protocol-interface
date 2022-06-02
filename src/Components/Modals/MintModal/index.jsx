@@ -167,13 +167,15 @@ export default function MintModal(props) {
           <div className="Name">
             <div className="MOCFee">
               <div className={`AlignedAndCentered Amount`}>
-                <span className="Name">{`${t('global.ConfirmTransactionModal_MOCFee')} (${fee.percentage}%)`}</span>
+                <span className="Name">{`${t('global.ConfirmTransactionModal_MOCFee')} (${(fee.percentage!==undefined)? fee.percentage: 0.15}%)`}</span>
                 <span className={`Value ${appMode}`}>
+                  {auth.isLoggedIn &&
                   <LargeNumber
                     currencyCode={fee.currencyCode}
                     amount={fee.value}
                     includeCurrency
-                  />
+                  />}
+                  {!auth.isLoggedIn && <span>0.000000 RBTC</span>}
                 </span>
               </div>
             </div>
@@ -240,9 +242,10 @@ export default function MintModal(props) {
             </Button>
             <Button
               type="primary"
+              disabled={!auth.isLoggedIn}
               onClick={() => handleOk()}
             >Confirm</Button>
-        </>}  
+        </>}
       </div>
     </Modal>
   );

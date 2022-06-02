@@ -1,6 +1,6 @@
 import RbtcToBtcGenerateModal from '../../Components/Modals/RbtcToBtcGenerateModal';
 import BtcToRbtc from '../../Components/Cards/BtcToRbtc';
-import { Row, Col } from 'antd';
+import {Row, Col, Alert} from 'antd';
 import React, { Fragment, useState, useContext } from 'react';
 import ListOperations from "../../Components/Tables/ListOperations";
 import Sovryn from "../../Components/Cards/Sovryn";
@@ -42,35 +42,40 @@ export default function Rbtc(props) {
 
     return (
         <Fragment>
-            <h1 className="PageTitle">{t('MoC.fastbtc.title', { ns: 'moc' })}</h1>
-            <h3 className="PageSubTitle">{t('MoC.fastbtc.subTitle', { ns: 'moc' })}</h3>
-            <Row gutter={15}>
-                <Col xs={24} md={12} xl={4}>
-                    <Sovryn tokenName="stable" titleName="DoC" />
-                </Col>
-                <Col xs={24} md={12} xl={10}>
-                    <BtcToRbtc
-                        title="BTC to rBTC Peg In"
-                        description={t('MoC.fastbtc.getRBTC_description', { ns: 'moc' })}
-                        btnText={t('MoC.fastbtc.getRBTC', { ns: 'moc' })}
-                    />
-                </Col>
-                <Col xs={24} md={24} xl={10}>
-                    <BtcToRbtc
-                        title="BTC to rBTC Peg Out"
-                        description={t('MoC.fastbtc.getBTC_description', { ns: 'moc' })}
-                        btnText={t('MoC.fastbtc.getBTC', { ns: 'moc' })}
-                        btnAction={() => { setRbtcGenVisible(true) }}
-                    />
-                    <RbtcToBtcGenerateModal
-                        visible={rbtcGenVisible}
-                        handleClose={closeLogoutModal}
-                    />
-                </Col>
-            </Row>
-            <div className="Card WalletOperations">
-                <ListOperations token={'STABLE'}></ListOperations>
-            </div>
+
+            {!auth.isLoggedIn &&
+            <p>Not connected! </p>
+            }
+
+            {auth.isLoggedIn && <><h1 className="PageTitle">{t('MoC.fastbtc.title', { ns: 'moc' })}</h1>
+                <h3 className="PageSubTitle">{t('MoC.fastbtc.subTitle', { ns: 'moc' })}</h3>
+                <Row gutter={15}>
+                    <Col xs={24} md={12} xl={4}>
+                        <Sovryn tokenName="stable" titleName="DoC" />
+                    </Col>
+                    <Col xs={24} md={12} xl={10}>
+                        <BtcToRbtc
+                            title="BTC to rBTC Peg In"
+                            description={t('MoC.fastbtc.getRBTC_description', { ns: 'moc' })}
+                            btnText={t('MoC.fastbtc.getRBTC', { ns: 'moc' })}
+                        />
+                    </Col>
+                    <Col xs={24} md={24} xl={10}>
+                        <BtcToRbtc
+                            title="BTC to rBTC Peg Out"
+                            description={t('MoC.fastbtc.getBTC_description', { ns: 'moc' })}
+                            btnText={t('MoC.fastbtc.getBTC', { ns: 'moc' })}
+                            btnAction={() => { setRbtcGenVisible(true) }}
+                        />
+                        <RbtcToBtcGenerateModal
+                            visible={rbtcGenVisible}
+                            handleClose={closeLogoutModal}
+                        />
+                    </Col>
+                </Row>
+                <div className="Card WalletOperations">
+                    <ListOperations token={'STABLE'}></ListOperations>
+                </div></>}
         </Fragment>
     );
 }

@@ -28,9 +28,6 @@ export default function Step3(props) {
     console.log('accountData.Owner');
     const [account, setAccount] = useState(null);
 
-    console.log('account ini------------------------')
-    console.log(account)
-    console.log('account ini------------------------')
     useEffect(() => {
         connect();
     },[auth]);

@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { useContext } from 'react'
 import { AuthenticateContext } from "../../../Context/Auth";
 import CountUp from 'react-countup';
-import { Button } from 'antd';
+import {Alert, Button} from 'antd';
 import data_json from '../../../services/liquidity_mining.json';
 import { setNumber } from '../../../Helpers/helper'
 import { Link } from "react-router-dom";
@@ -22,7 +22,11 @@ function MocLiquidity(props) {
 
     const setreadyClaim = () => {
         // return  parseFloat(Web3.utils.fromWei(data_json.moc_balance, 'ether')).toFixed(4)
-        return Number(new BigNumber(setNumber(data_json.moc_balance) / 10000000000000000000000)).toFixed(9)
+        if ( auth.isLoggedIn ){
+            return Number(new BigNumber(setNumber(data_json.moc_balance) / 10000000000000000000000)).toFixed(9)
+        }else{
+            return (0).toFixed(6)
+        }
     }
 
     const [t, i18n] = useTranslation(["global", 'moc'])
@@ -67,13 +71,14 @@ function MocLiquidity(props) {
                         {/*    )}*/}
                         {/*</CountUp>*/}
 
-                        <CountUp className='countup'
-                            start={875.039}
-                            end={160527000.012}
-                            duration={5}
-                            onEnd={({ pauseResume, reset, start, update }) => start()}
-                        />
-                    </h3>
+                        {auth.isLoggedIn && <CountUp className='countup'
+                                                     start={875.039}
+                                                     end={160527000.012}
+                                                     duration={5}
+                                                     onEnd={({ pauseResume, reset, start, update }) => start()}
+                        />}
+                        {!auth.isLoggedIn && <span>0.000000</span>}
+                        </h3>
                     <p>MOC</p>
                 </div>
             </div>
@@ -89,7 +94,7 @@ function MocLiquidity(props) {
                         </button>
                     </Link>
 
-                    : <Button style={{ marginTop: '3.5em' }} type="primary">{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>}
+                    : <Button style={{ marginTop: '3.5em' }} type="primary" disabled={!auth.isLoggedIn}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>}
             </div>
         </div>
     )

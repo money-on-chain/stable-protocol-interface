@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import 'antd/dist/antd.css';
 import './style.scss';
 import { Table, Progress, Result } from 'antd';
@@ -18,6 +18,7 @@ import NumericLabel from 'react-pretty-numbers';
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
+import {AuthenticateContext} from "../../../Context/Auth";
 
 export default function ListOperations(props) {
     const { token } = props;
@@ -44,6 +45,8 @@ export default function ListOperations(props) {
     const BigNumber = require('bignumber.js');
 
     const [t, i18n] = useTranslation(["global", 'moc']);
+
+    const auth = useContext(AuthenticateContext);
 
 
     /*const handleToggle = prop => enable => {
@@ -139,9 +142,6 @@ export default function ListOperations(props) {
     var set_current = 1;
     const setCurrent = (current) => {
         set_current = current
-        // console.log("current: ",current);
-        // console.log("set_current: ",set_current);
-        // getDatasTable(set_current)
         data_row(set_current)
     };
 
@@ -171,29 +171,16 @@ export default function ListOperations(props) {
         while (data.length > 0) {
             data.pop();
         }
-        // console.log("1212");
-        // console.log(set_current);
-        // console.log("1212");
 
 
         /*******************************setear el json para manejar limit y skip***********************************/
         const limit = 10;
         if (set_current == 1) {
-            console.log("===========================11111111111111111111111111");
-            console.log(set_current - 1);
-            console.log((set_current + limit) - 1);
-            // console.log(data);
-            console.log("===========================11111111111111111111111111");
             json_end = pre_datas.slice(set_current - 1, (set_current + limit) - 1);
         }
 
         if (set_current > 1) {
             json_end = pre_datas.slice((set_current * 10) - 10, (set_current * 10));
-            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>11111111111111111111111111");
-            console.log((set_current * 10) - 10);
-            console.log((set_current * 10));
-            // console.log(data);
-            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>11111111111111111111111111");
         }
         /*******************************end setear el json para manejar limit y skip***********************************/
 
@@ -322,7 +309,7 @@ export default function ListOperations(props) {
                 {...state}
                 pagination={{ position: [top, bottom], defaultCurrent: 1, onChange: (current) => setCurrent(current), total: Object.keys(data_json.transactions).length }}
                 columns={tableColumns}
-                dataSource={hasData ? data : null}
+                dataSource={hasData ? (auth.isLoggedIn ==true)?data : null : null}
                 scroll={scroll}
             />
         </>

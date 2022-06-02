@@ -39,6 +39,8 @@ export default function TokenSummaryCard(props) {
                 case 'riskprox':
                     return new BigNumber(auth.userBalanceData['bprox2Balance']).toFixed(6);
             }
+        }else{
+            return (0).toFixed(6)
         }
     };
     const getBalanceUSD = () => {
@@ -51,6 +53,8 @@ export default function TokenSummaryCard(props) {
                 case 'riskprox':
                     return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2);
             }
+        }else{
+            return (0).toFixed(2)
         }
     };
     return (
@@ -71,7 +75,7 @@ export default function TokenSummaryCard(props) {
                         }}
                     >
                         <img
-                            width={45}
+                            height={45}
                             src={
                                 window.location.origin +
                                 `/Moc/icon-${tokenName}.svg`

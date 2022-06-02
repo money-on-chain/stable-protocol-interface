@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import { Row, Col } from 'antd';
+import {Row, Col, Alert} from 'antd';
 import RewardsStakingOptions from "../../Components/Cards/RewardsStakingOptionsCard";
 import YourAddressCard from '../../Components/Cards/YourAddressCard';
 import MocLiquidity from "../../Components/Cards/MocLiquidity";
@@ -15,6 +15,13 @@ export default function Rewards(props) {
 
     return (
         <Fragment>
+            {!auth.isLoggedIn && <Alert
+                message={t('global.NoConnection_alertTitle')}
+                description={t('global.NoConnection_alertPleaseConnect')}
+                type="error"
+                showIcon
+                className="AlertNoConnection"
+            />}
             <h1 className="PageTitle">{t('MoC.wallets.MOC.title', { ns: 'moc' })}</h1>
             <h3 className="PageSubTitle">{t('MoC.wallets.MOC.subtitle', { ns: 'moc' })}</h3>
             <Row gutter={15}>

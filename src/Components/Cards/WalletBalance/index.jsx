@@ -19,6 +19,7 @@ function WalletBalance(props) {
         <div className="WalletBalance mrc-15" style={{ height: '100%' }}>
             <div className="mrb-15">{t("global.TotalBalanceCard_totalBalance", { ns: 'global' })}</div>
             <WalletBalancePie />
+            {auth.isLoggedIn &&
             <div className="TotalBalanceBottom justify-content-initial">
                 <div className="CopyableText ">
                     <span className="title">Address</span>
@@ -29,7 +30,7 @@ function WalletBalance(props) {
                 <div>
                     <SendModal userState={auth} tokensToSend={['RISKPRO', 'STABLE']} />
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }

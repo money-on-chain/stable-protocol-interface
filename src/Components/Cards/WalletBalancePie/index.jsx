@@ -1,10 +1,10 @@
-import { useContext,useState } from 'react'
+import {useContext, useEffect, useState} from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip} from 'recharts';
 import {AuthenticateContext} from "../../../Context/Auth";
 
 
 const BigNumber = require('bignumber.js');
-const COLORS = ['#00a651', '#ef8a13','#00C49F','#808080' ];
+// const COLORS = ['#00a651', '#ef8a13','#00C49F','#808080' ];
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -22,11 +22,17 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 function WalletBalancePie(props) {
-
-// export default class WalletBalancePie extends PureComponent {
+    const [colors, setColors] = useState(['#ccc']);
     // static demoUrl = 'https://codesandbox.io/s/pie-chart-with-padding-angle-7ux0o';
     const auth = useContext(AuthenticateContext);
     const { accountData } = useContext(AuthenticateContext);
+
+    useEffect(() => {
+        if(auth.isLoggedIn){
+            setColors(['#00a651', '#ef8a13','#00C49F','#808080' ])
+        }
+    }, [auth]);
+
 
     const set_moc_balance_usd = () =>{
         if (auth.userBalanceData && accountData.Balance) {
@@ -72,6 +78,8 @@ function WalletBalancePie(props) {
             const btc_usd= set_btc_usd()['usd']
             const moc_balance_usd= set_moc_balance_usd()['usd']
             return (Number(rbtc_main_usd)+Number(doc_usd)+Number(bpro_usd)+Number(btc_usd) +Number(moc_balance_usd)).toFixed(2)
+        }else{
+            return (0).toFixed(2)
         }
     };
 
@@ -83,7 +91,10 @@ function WalletBalancePie(props) {
              const btc= set_btc_usd()['normal']
              const moc_balance= set_moc_balance_usd()['normal']
             return (Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) + Number(moc_balance)).toFixed(6)
+        }else{
+            return (0).toFixed(6)
         }
+
     };
 
     const getPie = () => {
@@ -97,6 +108,9 @@ function WalletBalancePie(props) {
             ];
 
             return data;
+        }
+        else{
+            return [{ name: 'Group A', value: 100, set1: 'No Funds', set2: '', class: 'RBTC_MAIN'}]
         }
     };
 
@@ -115,7 +129,7 @@ function WalletBalancePie(props) {
                         {getPie() !== undefined &&
 
                         getPie().map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}/>
+                            <Cell key={`cell-${index}`} fill={colors[index % colors.length]}/>
                         ))
 
                         }

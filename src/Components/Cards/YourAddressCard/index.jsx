@@ -1,5 +1,5 @@
 import { Row, Col, Button } from 'antd';
-import React, { useState } from 'react';
+import React, {Fragment, useState} from 'react';
 import { useContext } from 'react'
 import {AuthenticateContext} from "../../../Context/Auth";
 import SendModal from '../../Modals/SendModal';
@@ -28,11 +28,12 @@ export default function YourAddressCard(props) {
             </div>
             <Row style={{ display: 'flex', justifyContent: 'center'}} className="SendBtn">
                 <Col>
+                    {auth.isLoggedIn && <Fragment>
                     <SendModal
                         {...{ tokensToSend: [tokenToSend], iconWallet}}
                         currencyOptions={props.currencyOptions}
                         userState={auth}
-                    />
+                    /></Fragment>}
                 </Col>
             </Row>
         </div>
