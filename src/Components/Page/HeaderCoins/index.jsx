@@ -59,7 +59,7 @@ function HeaderCoins(props) {
       "24hs": {
         "_id": "624edff7240b5f96017dc0df",
         "blockHeight": 2735684,
-        "bitcoinPrice": "43602800000000000000000",
+        "bitcoinPrice": "30602800000000000000000",
         "bproDiscountPrice": "630478399400189611",
         "bproPriceInRbtc": "630478399400189611",
         "bproPriceInUsd": "27490623553366587570510",
