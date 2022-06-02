@@ -75,18 +75,12 @@ export default function Step3(props) {
             setHeaderState('Pending')
             const fastBtcBridge = new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
 
-            console.log('sendTransactionsendTransaction')
-            console.log(accountData.Owner)
-            console.log(props.rbtcAddress)
-            console.log(props.rbtcAmount)
-
-            console.log('sendTransactionsendTransaction')
             const fastBtcTransferToBtc= () => {
                 return new Promise((resolve, reject) => {
                     setHeaderIcon('icon-processing.svg')
                     setIsVisible(false)
                     setHeaderState('Pending')
-                    fastBtcBridge.methods.transferToBtc(accountData.Owner).send(
+                    fastBtcBridge.methods.transferToBtc(props.rbtcAddress).send(
                         [props.rbtcAddress],
                         {
                             from: accountData.Owner,
