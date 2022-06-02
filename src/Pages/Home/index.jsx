@@ -65,7 +65,7 @@ function Home(props) {
             <h1 className="PageTitle">{t('MoC.home.title', { ns: 'moc' })}</h1>
             <h3 className="PageSubTitle">{t("MoC.home.subtitle", { ns: 'moc' })}</h3>
             <Row gutter={16}>
-                <Col flex="400px" className={'WalletBalance-mb'}>
+                <Col flex="300px" className={'WalletBalance-mb'}>
                     <WalletBalance/>
                 </Col>
                 <Col flex="auto">
@@ -96,7 +96,7 @@ function Home(props) {
                         />
                     </div>
                 </Col>
-                <Col xs={24} sm={24} md={24} xl={4}>
+                <Col xs={24} sm={24} md={24} xl={5}>
                     <div className="ContainerMocAmountDatas">
                         <MocAmount />
                         <MocLiquidity />
