@@ -12,7 +12,7 @@ export default function AmountCard(props) {
     const {
         tokenName = '',
         color = '',
-        titleName = ''} = props;
+        titleName = '' } = props;
 
     const auth = useContext(AuthenticateContext);
     const getBalance = () => {
@@ -52,7 +52,7 @@ export default function AmountCard(props) {
         }
     };
 
-    const pre_label= t(`MoC.Tokens_${tokenName.toUpperCase()}_name`, { ns: 'moc' })
+    const pre_label = t(`MoC.Tokens_${tokenName.toUpperCase()}_name`, { ns: 'moc' })
 
     return (
         <Fragment>
@@ -61,11 +61,11 @@ export default function AmountCard(props) {
         <div className="Card CardAmount">
             <Row>
                 <Col span={22}>
-                    <h3 className="CardTitle">{t("global.TokenSummary_Amount", {ns: 'global', tokenName: pre_label })}</h3>
+                    <h3 className="CardTitle">{t("global.TokenSummary_Amount", { ns: 'global', tokenName: pre_label })}</h3>
                 </Col>
                 <Col span={2}>
-                    <Tooltip placement="top" title={`${t('MoC.tokenInformationTooltip', {ns: 'moc'})} ${pre_label}`} >
-                        <InfoCircleOutlined className="Icon"/>
+                    <Tooltip placement="topRight" title={`${t('MoC.tokenInformationTooltip', { ns: 'moc' })} ${pre_label}`} >
+                        <InfoCircleOutlined className="Icon" />
                     </Tooltip>
                 </Col>
             </Row>

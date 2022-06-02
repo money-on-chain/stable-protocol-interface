@@ -171,3 +171,8 @@ export const set_doc_usd= (auth) =>{
         return {'normal':(0).toFixed(6),'usd':(0).toFixed(2)}
     }
 };
+
+export const myParseDate = date_string => {
+    let [y,M,d,h,m,s] = date_string.split(/[- :T]/);
+    return new Date(y,parseInt(M)-1,d,h,parseInt(m),s.replace('Z',''));
+}

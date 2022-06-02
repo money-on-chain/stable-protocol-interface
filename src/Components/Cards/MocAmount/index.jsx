@@ -1,8 +1,10 @@
 import './style.scss'
 import React, { Fragment } from 'react';
 import { useContext } from 'react'
-import {AuthenticateContext} from "../../../Context/Auth";
-import {useTranslation} from "react-i18next";
+import { AuthenticateContext } from "../../../Context/Auth";
+import { useTranslation } from "react-i18next";
+import { Tooltip } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 
 const BigNumber = require('bignumber.js');
 
@@ -18,13 +20,18 @@ function MocAmount() {
         }
     };
 
-    const [t, i18n]= useTranslation(["global",'moc'])
+    const [t, i18n] = useTranslation(["global", 'moc'])
 
     return (
         <div className="ContainerMocAmountDatas">
             <div className="Card RewardsBalanceAmount withPadding hasTitle padding-1-2">
                 <div className="title">
                     <h1>{t("global.RewardsBalance_MocAmount", { ns: 'global' })}</h1>
+                    <div>
+                        <Tooltip placement="topRight" title={`${t("MoC.tokenInformationTooltip", { ns: 'moc' })} ${t("MoC.Tokens_MOC_name", { ns: 'moc' })}`} >
+                            <InfoCircleOutlined className="Icon" />
+                        </Tooltip>
+                    </div>
                 </div>
                 {/*<div >*/}
                 {/*    <span role="img" aria-label="info-circle" tabIndex="-1" className="anticon anticon-info-circle InfoIcon TooltipMoC">*/}
@@ -34,7 +41,7 @@ function MocAmount() {
                 {/*    d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"></path></svg></span>*/}
                 {/*</div>*/}
                 <div className="LogoAndAmount">
-                    <img className="MocLogo" srcSet={`${window.location.origin}/Moc/icon-moc.svg`}/>
+                    <img className="MocLogo" srcSet={`${window.location.origin}/Moc/icon-moc.svg`} />
                     <div className="TotalAmountContainer"><h2>{t("global.RewardsBalance_MocsTokens", { ns: 'global' })}</h2>
                         <div className="BalanceItemCard TotalAmount">
                             <h4>
@@ -50,8 +57,3 @@ function MocAmount() {
 
 
 export default MocAmount
-
-
-
-
-

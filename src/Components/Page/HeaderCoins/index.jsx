@@ -14,7 +14,7 @@ function HeaderCoins(props) {
 
   useEffect(() => {
     // priceVariation24hs().then(data => setDailyVariation(data['24hs']));
-    console.log({
+    /* console.log({
       "current": {
         "_id": "625031dc240b5f9601c09764",
         "blockHeight": 2738557,
@@ -41,7 +41,7 @@ function HeaderCoins(props) {
         "createdAt": "2022-04-07T12:58:18.000Z",
         "reservePrecision": "1000000000000000000"
       }
-    })
+    }) */
     setDailyVariation({
       "current": {
         "_id": "625031dc240b5f9601c09764",
