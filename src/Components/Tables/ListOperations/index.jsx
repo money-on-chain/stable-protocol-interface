@@ -145,15 +145,15 @@ export default function ListOperations(props) {
     var json_end = []
     const data_row = (set_current) => {
         /*******************************sort descending by date lastUpdatedAt***********************************/
-        data_json.transactions.sort((a, b)=>{
+        data_json.transactions.sort((a, b) => {
             return myParseDate(b.lastUpdatedAt) - myParseDate(a.lastUpdatedAt)
         });
         /*******************************end sort descending by date lastUpdatedAt***********************************/
-        
+
         /*******************************filter by type (token)***********************************/
-        var pre_datas = [];        
+        var pre_datas = [];
         pre_datas = data_json.transactions.filter(data_j => {
-            return (token !== 'all')? data_j.tokenInvolved === token : true;
+            return (token !== 'all') ? data_j.tokenInvolved === token : true;
         });
         /*******************************end filter by type (token)***********************************/
         while (data.length > 0) {
@@ -285,7 +285,7 @@ export default function ListOperations(props) {
         <>
             <div className="title">
                 <h1>{t('MoC.operations.title', { ns: 'moc' })}</h1>
-                <Tooltip placement="topRight" title={t("MoC.operations.tooltip.text", { ns: 'moc' })} >
+                <Tooltip placement="topRight" title={t("MoC.operations.tooltip.text", { ns: 'moc' })} className='Tooltip'>
                     <InfoCircleOutlined className="Icon" />
                 </Tooltip>
             </div>

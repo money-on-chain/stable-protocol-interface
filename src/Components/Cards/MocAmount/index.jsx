@@ -26,7 +26,7 @@ function MocAmount() {
                 <div className="title">
                     <h1>{t("global.RewardsBalance_MocAmount", { ns: 'global' })}</h1>
                     <div>
-                        <Tooltip placement="topRight" title={`${t("MoC.tokenInformationTooltip", { ns: 'moc' })} ${t("MoC.Tokens_MOC_name", { ns: 'moc' })}`} >
+                        <Tooltip placement="top" title={`${t("MoC.tokenInformationTooltip", { ns: 'moc' })} ${t("MoC.Tokens_MOC_name", { ns: 'moc' })}`} className='Tooltip' >
                             <InfoCircleOutlined className="Icon" />
                         </Tooltip>
                     </div>
