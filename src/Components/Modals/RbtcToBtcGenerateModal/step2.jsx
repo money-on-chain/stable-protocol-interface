@@ -41,7 +41,6 @@ function Step2(props) {
         setRbtcAmount(event.target.value);
         if( (event.target.value).length < 7  || (event.target.value).length > 7){
             const multiple= 1.000000
-            console.log((event.target.value * multiple).toFixed(6))
             setRbtcAmount((event.target.value * multiple).toFixed(6));
             event.target.value = (event.target.value * multiple).toFixed(6);
             setErrorRbtcAmount(false)
@@ -53,7 +52,7 @@ function Step2(props) {
         if(rbtcAddress.trim().length != 0) {
             setErrorRbtcAddress(false)
         }
-        console.log('value is:', rbtcAmount);
+
     };
 
     const handleChangeAddress = event => {
@@ -64,7 +63,7 @@ function Step2(props) {
         if (rbtcAmount.trim().length != 0) {
             setErrorRbtcAmount(false)
         }
-        console.log('value is:', rbtcAddress);
+
     };
 
     const {accountData}= useContext(AuthenticateContext);

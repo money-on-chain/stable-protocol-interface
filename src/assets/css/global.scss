@@ -26,7 +26,11 @@ body, html {
   @media (max-width: 1555px) {
     min-width: initial;
     margin-left: 90px;
+    margin-right: 10px;
+  }
+  @media (max-width: 600px) {
     margin-right: initial;
+    margin-top: 44px;
   }
 }
 
@@ -424,7 +428,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .mt-0{
-margin-top: 0px;
+  margin-top: 0px;
 }
 
 @keyframes rotation {
@@ -441,4 +445,52 @@ margin-top: 0px;
 .error{
   color: red;
   font-size: 12px;
+}
+
+.statusGreen{
+  color: #00a651;
+}
+
+
+.statusYellow{
+  color: #E9BF4A;
+}
+
+
+.statusYellow{
+  color: #E9BF4A;
+}
+
+
+.statusOrange{
+  color: #ef8a13;
+}
+
+
+.statusRed{
+  color: #ed1c24;
+}
+
+
+.statusPaused{
+  color: #ed1c24;
+}
+
+
+.statusSettlement{
+  color: #ed1c24;
+}
+
+
+.statusNoPrice{
+  color: #ed1c24;
+}
+
+.arrow-center-values{
+  @media only screen  and (max-width: 600px) {
+    width: 100%;
+  }
+  img{
+    margin-right: 10px;
+  }
 }

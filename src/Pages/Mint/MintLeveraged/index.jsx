@@ -1,7 +1,7 @@
 import MintCard from '../../../Components/Cards/MintCard';
 import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
-import { Row, Col, Tooltip } from 'antd';
+import {Row, Col, Tooltip, Alert} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, Fragment, useContext } from 'react';
 import TokenSummaryCard from '../../../Components/Cards/TokenSummaryCard';
@@ -36,8 +36,10 @@ export default function Mint(props) {
     };
 
     useEffect(() => {
-        setDaysHours(decimaltoHour(auth.contractStatusData.dayBlockSpan, auth.contractStatusData.blocksToSettlement));
-    }, []);
+            if (auth.contractStatusData) {
+                setDaysHours(decimaltoHour(auth.contractStatusData.dayBlockSpan, auth.contractStatusData.blocksToSettlement));
+            }
+    }, [auth]);
 
     const data_row_coins = [];
 
@@ -79,8 +81,9 @@ export default function Mint(props) {
                 <Col xs={24} md={12} xl={5}>
                     <Row>
                         <Col span={24}>
-                            <div className="Card MintCard CardSettlement">
+                            <div className="Card MintCard CardSettlement"  style={{minHeight:'144px'}}>
                                 <h3 className="CardTitle">{t('global.riskproxWallet_NextSettlement', { ns: 'global' })}</h3>
+                                {auth.isLoggedIn &&
                                 <Row>
                                     <h2>In {daysHours?.time}</h2>
                                     <div className="CaptionDateSettlement">{daysHours?.date}</div>
@@ -91,7 +94,7 @@ export default function Mint(props) {
                                             <InfoCircleOutlined className="Icon" />
                                         </Tooltip>
                                     </div>
-                                </Row>
+                                </Row>}
                             </div>
                         </Col>
                         <Col span={24} style={{ marginTop: '1em' }}>

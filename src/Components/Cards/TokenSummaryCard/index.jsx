@@ -1,11 +1,14 @@
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Row, Col } from 'antd';
-import React from 'react';
+import { Row, Col, Tooltip } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
 import { useContext } from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
+import { LargeNumber } from "../../LargeNumber";
+import { relativeTimeRounding } from 'moment';
 const BigNumber = require('bignumber.js');
 
 const styleCentered = {
@@ -22,6 +25,7 @@ export default function TokenSummaryCard(props) {
         page = '',
         balance = '0',
         labelCoin = '',
+        currencyCode = ''
     } = props;
 
     const auth = useContext(AuthenticateContext);
@@ -30,37 +34,41 @@ export default function TokenSummaryCard(props) {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return (auth.userBalanceData['docBalance']/auth.contractStatusData.bitcoinPrice).toFixed(6);
+                    return (auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(6);
                 case 'riskpro':
-                    return ((auth.contractStatusData['bproPriceInUsd']*auth.userBalanceData['bproBalance'])/auth.contractStatusData.bitcoinPrice).toFixed(6)
-                    // return auth.userBalanceData['bproBalance'];
+                    return ((auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']) / auth.contractStatusData.bitcoinPrice).toFixed(6)
+                // return auth.userBalanceData['bproBalance'];
                 case 'riskprox':
-                    return auth.userBalanceData['bprox2Balance'];
+                    return new BigNumber(auth.userBalanceData['bprox2Balance']).toFixed(6);
             }
+        }else{
+            return (0).toFixed(6)
         }
     };
     const getBalanceUSD = () => {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return auth.userBalanceData['docBalance'];
+                    return new BigNumber(auth.userBalanceData['docBalance']).toFixed(2)
                 case 'riskpro':
-                    return new BigNumber(auth.contractStatusData['bproPriceInUsd']*auth.userBalanceData['bproBalance']).toFixed(2);
+                    return new BigNumber(auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']).toFixed(2);
                 case 'riskprox':
-                    return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4);
+                    return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2);
             }
+        }else{
+            return (0).toFixed(2)
         }
     };
     return (
         <Row className="Card TokenSummaryCard">
             <Col
-                span={8}
+                span={7}
                 style={{
                     ...styleCentered,
                     textAlign: 'right'
                 }}
             >
-                <Row className="ArrowHomeIndicators" style={{ width: '100%' }}>
+                <Row className="ArrowHomeIndicators arrow-center-values">
                     <Col
                         span={8}
                         style={{
@@ -69,7 +77,7 @@ export default function TokenSummaryCard(props) {
                         }}
                     >
                         <img
-                            width={45}
+                            height={45}
                             src={
                                 window.location.origin +
                                 `/Moc/icon-${tokenName}.svg`
@@ -86,7 +94,7 @@ export default function TokenSummaryCard(props) {
                         }}
                     >
                         <span className="Number" style={{ color }}>
-                            {balance}
+                            <LargeNumber className="WithdrawalAmount__" amount={balance} currencyCode={currencyCode} />
                         </span>
                     </Col>
                 </Row>
@@ -113,7 +121,7 @@ export default function TokenSummaryCard(props) {
                 </div>
             </Col>
             <Col
-                span={2}
+                span={3}
                 style={{
                     ...styleCentered,
                     justifyContent: 'flex-end'
@@ -124,8 +132,14 @@ export default function TokenSummaryCard(props) {
                     type="primary"
                     shape="circle"
                     onClick={() => navigate(page)}
-                    icon={<ArrowRightOutlined />}
+                    icon={<ArrowRightOutlined
+                    />}
                 />
+                {/*<div style={{ position: 'relative' }} >
+                    <Tooltip placement="topRight" title={`uwu`} style={{ position: 'absolute', marginTop: 20, marginRight: 10 }}>
+                        <InfoCircleOutlined className="Icon" />
+                    </Tooltip>
+                    </div>*/}
             </Col>
         </Row>
     );

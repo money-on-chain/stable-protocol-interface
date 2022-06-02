@@ -325,9 +325,7 @@ const contractStatus = async (
     d_moc_state['bitcoinPrice'] = new BigNumber(
         web3.utils.fromWei(listReturnData[0])
     ).toFixed(0);
-    console.log('moccccccccccccccc----------------------');
-    console.log(listReturnData);
-    console.log('moccccccccccccccc---');
+
     d_moc_state['mocPrice'] = listReturnData[1];
     d_moc_state['bproAvailableToRedeem'] = listReturnData[2];
     d_moc_state['bprox2AvailableToMint'] = listReturnData[3];
@@ -455,9 +453,7 @@ const userBalance = async (
     );
 
     const user_balance = {};
-    console.log('0000000000000000000000000000000000000000');
-    console.log(multicallResult);
-    console.log('0000000000000000000000000000000000000000');
+
     user_balance['blockHeight'] = multicallResult[0];
     user_balance['mocBalance'] = listReturnData[0];
     user_balance['mocAllowance'] = new BigNumber(
