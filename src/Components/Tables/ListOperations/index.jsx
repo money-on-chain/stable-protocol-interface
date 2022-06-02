@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import 'antd/dist/antd.css';
 import './style.scss';
-import { Table, Progress, Tooltip } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
+import { Table, Progress, Result, Tooltip } from 'antd';
 import RowDetail from "../RowDetail";
 import classnames from 'classnames';
 import api from '../../../services/api';
@@ -18,6 +17,8 @@ import NumericLabel from 'react-pretty-numbers';
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
+import { AuthenticateContext } from "../../../Context/Auth";
+import { InfoCircleOutlined } from '@ant-design/icons';
 
 export default function ListOperations(props) {
     const { token } = props;
@@ -44,6 +45,7 @@ export default function ListOperations(props) {
     const BigNumber = require('bignumber.js');
 
     const [t, i18n] = useTranslation(["global", 'moc']);
+    const auth = useContext(AuthenticateContext);
 
 
     /*const handleToggle = prop => enable => {
@@ -178,7 +180,7 @@ export default function ListOperations(props) {
                     , asset: datas_response['set_asset']
                     , confirmation: (true) ? <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
                     , address: <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} />
-                    , platform: datas_response['amount']
+                    , platform: `+${datas_response['amount']}`
                     , platform_fee: datas_response['platform_fee_value']
                     , block: datas_response['blockNumber']
                     , wallet: datas_response['wallet_value']
@@ -293,7 +295,7 @@ export default function ListOperations(props) {
                 {...state}
                 pagination={{ position: [top, bottom], defaultCurrent: 1, onChange: (page) => setPage(page), total: Object.keys(data_json.transactions).length }}
                 columns={tableColumns}
-                dataSource={hasData ? data : null}
+                dataSource={hasData ? (auth.isLoggedIn == true) ? data : null : null}
                 scroll={scroll}
             />
         </>

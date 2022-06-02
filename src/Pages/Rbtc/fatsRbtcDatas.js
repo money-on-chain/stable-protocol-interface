@@ -22,12 +22,6 @@ const FastRbtcProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [limits, setLimits] = useState(null);
 
-
-    console.log('accountaccount----------------------------------');
-    console.log(account);
-    console.log(isLoggedIn);
-    console.log('accountaccount----------------------------------');
-
     useEffect(() => {
         if (checkLoginFirstTime) {
             if (rLogin.cachedProvider) {
@@ -37,7 +31,6 @@ const FastRbtcProvider = ({ children }) => {
     },checkLoginFirstTime);
 
     useEffect(() => {
-        console.log('useEffect----------------------------------useEffect');
         if (account) {
             // loadAccountData();
             loadData();
@@ -90,8 +83,6 @@ const FastRbtcProvider = ({ children }) => {
             console.log("execute");
         });
     };
-
-        console.log('fastBtc----------------------------------');
 
 
     const getLimits = async () => {

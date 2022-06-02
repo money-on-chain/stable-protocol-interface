@@ -1,9 +1,10 @@
-import { Row, Col, Tooltip } from 'antd';
+import {Row, Col, Tooltip, Alert} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { useTranslation } from "react-i18next";
+import {set_doc_usd} from "../../../Helpers/helper";
 const BigNumber = require('bignumber.js');
 
 export default function AmountCard(props) {
@@ -24,24 +25,39 @@ export default function AmountCard(props) {
                 case 'riskprox':
                     return auth.userBalanceData['bprox2Balance'];
             }
+        }else{
+            switch (tokenName) {
+                case 'stable':
+                    return (0).toFixed(2)
+                case 'riskpro':
+                    return (0).toFixed(6)
+                case 'riskprox':
+                    return (0).toFixed(6)
+            }
         }
     };
     const getBalanceUSD = () => {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return Math.round(auth.userBalanceData['docBalance']).toFixed(2);
+                    return Number(auth.userBalanceData['docBalance']).toFixed(2);
                 case 'riskpro':
                     return auth.contractStatusData["bproPriceInUsd"];
                 case 'riskprox':
                     return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4);
             }
         }
+        else{
+            return (0).toFixed(2)
+        }
     };
 
     const pre_label = t(`MoC.Tokens_${tokenName.toUpperCase()}_name`, { ns: 'moc' })
 
     return (
+        <Fragment>
+
+
         <div className="Card CardAmount">
             <Row>
                 <Col span={22}>
@@ -64,11 +80,11 @@ export default function AmountCard(props) {
             </Row>
             <Row className="tokenAndBalance">
                 <div className="priceContainer">{getBalance()}</div>
-                <div className="balanceItem">0,71847 RBTC</div> {/* tomar el valor reald de rbtc */}
+                <div className="balanceItem">{set_doc_usd(auth)['normal']} RBTC</div> {/* tomar el valor reald de rbtc */}
                 <div className="balanceItem">{getBalanceUSD()} USD</div>
 
             </Row>
         </div>
-
+    </Fragment>
     )
 }

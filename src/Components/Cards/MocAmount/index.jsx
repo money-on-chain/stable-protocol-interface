@@ -12,9 +12,11 @@ function MocAmount() {
 
     const auth = useContext(AuthenticateContext);
 
-    const set_moc_balance_usd = () => {
-        if (auth.userBalanceData) {
-            return Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0] / 10000).toFixed(2)
+    const set_moc_balance_usd = () =>{
+        if ( auth.userBalanceData ) {
+            return Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000).toFixed(2)
+        }else{
+            return (0).toFixed(2)
         }
     };
 
@@ -55,8 +57,3 @@ function MocAmount() {
 
 
 export default MocAmount
-
-
-
-
-

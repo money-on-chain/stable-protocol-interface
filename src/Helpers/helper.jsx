@@ -107,12 +107,34 @@ export function readJsonTable(data_j){
     if(data_j.event.includes("Redeem")){set_event='REDEEM'}
 
     const set_asset= data_j.tokenInvolved;
+
+    let fixed=2
+    if( set_asset!='STABLE' && set_asset!='USD'){
+        fixed= 6
+    }
+
+    let asset=''
+    switch (set_asset) {
+        case 'STABLE':
+            asset = 'DOC';
+            break;
+        case 'RISKPRO':
+            asset = 'BPRO'
+            break;
+        case 'RISKPROX':
+            asset = 'BTCX'
+            break;
+        default:
+            asset = 'DOC'
+            break;
+    }
+
     const set_status_txt= data_j.status;
     const set_status_percent= data_j.confirmingPercent;
 
-    const wallet_detail= (data_j.userAmount!==undefined)? data_j.userAmount : '--'
+    const wallet_detail= (data_j.userAmount!==undefined)? parseFloat(data_j.userAmount).toFixed(6)  : '--'
     const wallet_detail_usd= (wallet_detail * config.coin_usd).toFixed(2)
-    const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(2) : '--'
+    const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(fixed) : '--'
     const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
     const platform_fee= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(6) : ''
     const platform_fee_usd= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? ((parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(2))*config.coin_usd).toFixed(2) : ''
@@ -127,7 +149,7 @@ export function readJsonTable(data_j){
     const RBTCAmount= (data_j.RBTCAmount!==undefined)? `You received in your platform ${wallet_detail} RBTC` : '--'
     const confirmationTime= data_j.confirmationTime
     const address= data_j.address
-    const amount= (data_j.amount!==undefined)? paltform_detail + ' ( ' + paltform_detail_usd + ' USD )' : '--'
+    const amount= (data_j.amount!==undefined)? paltform_detail +' '+asset+' ( ' + paltform_detail_usd + ' USD )' : '--'
     const platform_fee_value= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? `${platform_fee} RBTC ( ${platform_fee_usd} USD )`  : '--'
     const blockNumber= (data_j.blockNumber!==undefined)? data_j.blockNumber : '--'
     const wallet_value= (data_j.userAmount!==undefined)? `-${wallet_detail} RBTC ( ${wallet_detail_usd} USD )` : '--'
@@ -161,6 +183,16 @@ export const toNumberFormat = (value, decimals = 0) => {
         minimumFractionDigits: decimals,
     });
 }
+
+export const set_doc_usd= (auth) =>{
+    if (auth.userBalanceData) {
+        const doc_usd= new BigNumber(auth.userBalanceData['docBalance'])
+        const doc= (auth.userBalanceData['docBalance']/auth.contractStatusData.bitcoinPrice).toFixed(6);
+        return {'normal':doc,'usd':doc_usd}
+    }else{
+        return {'normal':(0).toFixed(6),'usd':(0).toFixed(2)}
+    }
+};
 
 export const myParseDate = date_string => {
     let [y,M,d,h,m,s] = date_string.split(/[- :T]/);

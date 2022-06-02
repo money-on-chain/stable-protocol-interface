@@ -1,7 +1,7 @@
 import MintCard from '../../../Components/Cards/MintCard';
 import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
-import { Row, Col, Switch } from 'antd';
+import {Row, Col, Switch, Alert} from 'antd';
 import React, { Fragment, useContext } from 'react';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
@@ -37,6 +37,13 @@ export default function Mint(props) {
 
     return (
         <Fragment>
+            {!auth.isLoggedIn && <Alert
+                message={t('global.NoConnection_alertTitle')}
+                description={t('global.NoConnection_alertPleaseConnect')}
+                type="error"
+                showIcon
+                className="AlertNoConnection"
+            />}
             <h1 className="PageTitle">{t("MoC.wallets.STABLE.title", { ns: 'moc' })}</h1>
             <h3 className="PageSubTitle">{t("MoC.wallets.STABLE.subtitle", { ns: 'moc' })}</h3>
             <Row gutter={15}>

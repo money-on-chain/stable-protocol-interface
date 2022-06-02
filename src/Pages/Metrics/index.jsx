@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import SystemStatus from '../../Components/Cards/Metrics/SystemStatus'
 import RBTC from '../../Components/Cards/Metrics/RBTC'
 import MOC from '../../Components/Cards/Metrics/MOC'
@@ -7,7 +7,7 @@ import DOC from '../../Components/Cards/Metrics/DOC'
 import BPRO from '../../Components/Cards/Metrics/BPRO'
 import Liquidity from '../../Components/Cards/Metrics/Liquidity'
 import NextSettlement from '../../Components/Cards/Metrics/NextSettlement'
-import { Row, Col, Tooltip } from 'antd';
+import {Row, Col, Tooltip, Alert} from 'antd';
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../Context/Auth';
 import './style.scss'
@@ -18,6 +18,13 @@ function Metrics(props) {
 
     return (
         <Fragment>
+            {!auth.isLoggedIn && <Alert
+                message={t('global.NoConnection_alertTitle')}
+                description={t('global.NoConnection_alertPleaseConnect')}
+                type="error"
+                showIcon
+                className="AlertNoConnection"
+            />}
             <h1 className="PageTitle">{t('global.Metrics_title', { ns: 'global' })}</h1>
             <h3 className="PageSubTitle">{t('global.Metrics_subtitle', { ns: 'global' })}</h3>
             <Row gutter={15} className="MetricsCardsContainer">
