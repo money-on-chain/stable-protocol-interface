@@ -180,7 +180,7 @@ export default function ListOperations(props) {
                     , asset: datas_response['set_asset']
                     , confirmation: (true)?<span><Moment format={(i18n.language==="en")? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
                     , address: <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} />
-                    , platform: datas_response['amount']
+                    , platform: `+${datas_response['amount']}`
                     , platform_fee: datas_response['platform_fee_value']
                     , block: datas_response['blockNumber']
                     , wallet: datas_response['wallet_value']
