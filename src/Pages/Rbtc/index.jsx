@@ -1,4 +1,5 @@
 import RbtcToBtcGenerateModal from '../../Components/Modals/RbtcToBtcGenerateModal';
+import BtcToRbtcGenerateModal from '../../Components/Modals/BtctoRbtcGenerateModal';
 import BtcToRbtc from '../../Components/Cards/BtcToRbtc';
 import { Row, Col } from 'antd';
 import React, {Fragment, useState, useContext} from 'react';
@@ -33,6 +34,7 @@ export default function Rbtc(props) {
     });
 
     const [rbtcGenVisible, setRbtcGenVisible] = useState(false);
+    const [btcGenVisible, setBtcGenVisible] = useState(false);
 
     const closeLogoutModal = () => {
         setRbtcGenVisible(false);
@@ -51,6 +53,11 @@ export default function Rbtc(props) {
                         title="BTC to rBTC Peg In"
                         description="Convert BTC from the Bitcoin network to rBTC Smart Bitcoins using the integrated FastBTC from Sovryn."
                         btnText="Convert BTC to rBTC"
+                        btnAction={() => {setBtcGenVisible(true)}}
+                    />
+                    <BtcToRbtcGenerateModal
+                        visible={btcGenVisible}
+                        handleClose={() => setBtcGenVisible(false)}
                     />
                 </Col>
                 <Col xs={24}  md={24} xl={10}>

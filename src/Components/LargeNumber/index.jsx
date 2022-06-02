@@ -2,9 +2,11 @@ import { Tooltip } from 'antd';
 import NumericLabel from 'react-pretty-numbers';
 import { adjustPrecision, formatLocalMap } from '../../Lib/Formats';
 import i18n from 'i18next';
+import {useTranslation} from "react-i18next";
 
 const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams, className }) => {
 
+  const [t, i18n]= useTranslation(["global",'moc'])
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);
     const params = Object.assign(
@@ -26,15 +28,15 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
       <Tooltip title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
         <div className={className}>
           <NumericLabel {... {params }}>{value.toString()}</NumericLabel>
-          {includeCurrency && currencyCode}
+          {includeCurrency && ` ${t(`MoC.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}
         </div>
       </Tooltip>
     );
   }
 
   return (
-    <Tooltip title="--">
-      --
+    <Tooltip title={t('general.invalidValueDescription')}>
+      {t('general.invalidValuePlaceholder')}
     </Tooltip>
   )
 };

@@ -19,18 +19,24 @@
   .money-RBTC{
     position:relative;
     top:-145px;
-    font-weight:bold;
     display:block;
     text-align:center;
-    font-size: 20px;
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-size: 24px;
+    font-weight: 600;
     color: #575756;
   }
   .money-USD{
     position:relative;
     top:-145px;
-    font-size: 16px;
     display:block;
     text-align:center;
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #878787;
   }
 
   .TotalBalanceBottom {

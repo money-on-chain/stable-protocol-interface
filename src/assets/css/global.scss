@@ -97,7 +97,11 @@ input::-webkit-inner-spin-button {
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+  // -moz-appearance: textfield;
+  // -webkit-appearance: none;
+}
+input[type=number]::-webkit-inner-spin-button {
+  opacity: 1
 }
 
 .CoinSelect {
@@ -121,7 +125,7 @@ input[type=number] {
       line-height: 48px;
     }
     .ant-select-arrow {
-      color: #00a651;
+      color: #00a651!important;
     }
   }
 }

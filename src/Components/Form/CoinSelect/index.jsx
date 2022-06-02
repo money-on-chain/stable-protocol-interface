@@ -86,7 +86,7 @@ export default function CoinSelect(props) {
                     xs={{ span: 14 }}
                     sm={{ span: 14 }}
                     md={{ span: 16 }}
-                    lg={{ span: 18 }}
+                    lg={{ span: 16 }}
                 >
                     <Input
                         type="number"
@@ -105,7 +105,7 @@ export default function CoinSelect(props) {
                     xs={{ span: 10 }}
                     sm={{ span: 10 }}
                     md={{ span: 8 }}
-                    lg={{ span: 6 }}
+                    lg={{ span: 8 }}
                 >
                     <div className={`SelectCurrency ${disabledSelect || disabled ? 'disabled' : ''}`}>
                         <Select

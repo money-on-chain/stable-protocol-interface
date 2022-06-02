@@ -70,7 +70,11 @@ export default function Mint(props) {
             <h3 className="PageSubTitle">{t('MoC.wallets.RISKPROX.subtitle', { ns: 'moc' })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
-                    <AmountCard tokenName="riskprox" titleName="BTCx" />
+                    <AmountCard
+                        tokenName="RISKPROX"
+                        titleName="BTCx"
+                        StatusData={auth.contractStatusData}
+                    />
                 </Col>
                 <Col xs={24} md={12} xl={5}>
                     <Row>

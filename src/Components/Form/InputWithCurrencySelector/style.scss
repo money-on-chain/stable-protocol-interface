@@ -1,6 +1,9 @@
 @import '../../../assets/css/general_styling';
 .text-align-right{
     text-align: right;
+    span {
+        margin-right: 0.1em!important;
+    }
 }
 .InputWithCurrencySelector {
     h3 {
