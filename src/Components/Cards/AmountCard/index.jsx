@@ -110,7 +110,6 @@ export default function AmountCard(props) {
             <Row className="tokenAndBalance">
                 <div className="priceContainer">
                     <LargeNumber amount={getBalance()} currencyCode={tokenName} />
-                <div className="balanceItem">{set_doc_usd(auth)['normal']} RBTC</div> {/* tomar el valor reald de rbtc */}
                     <div className="WalletCurrencyPrice">
                         <BalanceItem
                             amount={convertTo('RESERVE')}
