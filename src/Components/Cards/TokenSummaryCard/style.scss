@@ -1,0 +1,25 @@
+@import '../../../assets/css/config_styling.scss';
+
+.FactSheetLine {
+  width: 180px;
+  margin-left: -24px;
+  border: 1.5px solid #5aa699;
+}
+.FactSheet {
+  color: #5aa699;
+  font-size: 1.3em;
+}
+
+.FactSheetTitle {
+  @include primary-text(0.95em, $secondary-color, 500);
+  margin-bottom: 0.5em;
+  a {
+    color: #1890ff;
+  }
+}
+
+.Characteristic {
+  margin-top: 1em;
+  list-style: circle;
+  @include primary-text(0.95em, $secondary-color, 400);
+}

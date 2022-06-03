@@ -3,8 +3,16 @@
 .RewardsBalanceAmount {
   margin-bottom: 14px;
   height: 100%;
+  position: relative;
   @media screen and (max-width: 1199px) {
     margin-top: 15px;
+  }
+  .Tooltip{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #707070;
+    cursor: pointer;
   }
 }
 

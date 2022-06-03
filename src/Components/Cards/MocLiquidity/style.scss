@@ -4,6 +4,7 @@
   justify-content: space-between;
   flex-direction: column;
   flex: 1;
+  position: relative;
   h2 {
     font-size: 1em;
   }
@@ -33,6 +34,13 @@
     border-radius: 50%;
     color: #fff;
     margin: 25px auto auto;
+  }
+  .Tooltip{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #707070;
+    cursor: pointer;
   }
 }
 .Card.withPadding {

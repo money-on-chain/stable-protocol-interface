@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import 'antd/dist/antd.css';
 import './style.scss';
-import { Table, Progress, Result } from 'antd';
+import { Table, Progress, Result, Tooltip } from 'antd';
 import RowDetail from "../RowDetail";
 import classnames from 'classnames';
 import api from '../../../services/api';
@@ -13,12 +13,12 @@ import { readJsonTable, setNumber, myParseDate } from '../../../Helpers/helper'
 import config from '../../../Config/constants';
 import Copy from "../../Page/Copy";
 import { adjustPrecision, formatLocalMap } from "../../../Lib/Formats";
-import Tooltip from 'antd/lib/tooltip';
 import NumericLabel from 'react-pretty-numbers';
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
-import {AuthenticateContext} from "../../../Context/Auth";
+import { AuthenticateContext } from "../../../Context/Auth";
+import { InfoCircleOutlined } from '@ant-design/icons';
 
 export default function ListOperations(props) {
     const { token } = props;
@@ -147,7 +147,7 @@ export default function ListOperations(props) {
     var json_end = []
     const data_row = (set_current) => {
         /*******************************sort descending by date lastUpdatedAt***********************************/
-        data_json.transactions.sort((a, b)=>{
+        data_json.transactions.sort((a, b) => {
             return myParseDate(b.lastUpdatedAt) - myParseDate(a.lastUpdatedAt)
         });
         /*******************************end sort descending by date lastUpdatedAt***********************************/
@@ -155,7 +155,7 @@ export default function ListOperations(props) {
         /*******************************filter by type (token)***********************************/
         var pre_datas = [];
         pre_datas = data_json.transactions.filter(data_j => {
-            return (token !== 'all')? data_j.tokenInvolved === token : true;
+            return (token !== 'all') ? data_j.tokenInvolved === token : true;
         });
         /*******************************end filter by type (token)***********************************/
         while (data.length > 0) {
@@ -175,12 +175,12 @@ export default function ListOperations(props) {
             if (datas_response['wallet_detail'] !== '--' && datas_response['wallet_detail'] !== 11) {
                 const detail = {
                     event: datas_response['set_event']
-                    , created: <span><Moment format={(i18n.language==="en")? date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
+                    , created: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
                     , details: datas_response['RBTCAmount']
                     , asset: datas_response['set_asset']
-                    , confirmation: (true)?<span><Moment format={(i18n.language==="en")? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
+                    , confirmation: (true) ? <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
                     , address: <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} />
-                    , platform: datas_response['amount']
+                    , platform: `+${datas_response['amount']}`
                     , platform_fee: datas_response['platform_fee_value']
                     , block: datas_response['blockNumber']
                     , wallet: datas_response['wallet_value']
@@ -237,7 +237,7 @@ export default function ListOperations(props) {
                     // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                     platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                     wallet: <span className="display-inline ">{element.wallet} </span>,
-                    date: <span><Moment format={(i18n.language==="en")? date.DATE_EN : date.DATE_ES}>{element.date}</Moment></span>,
+                    date: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{element.date}</Moment></span>,
                     status: <div style={{ width: '100%' }}><Progress percent={element.status.percent} /><br /><span
                         className="color-confirmed conf_title">{element.status.txt}</span></div>,
                     description: <RowDetail detail={element.detail} />,
@@ -285,12 +285,17 @@ export default function ListOperations(props) {
 
     return (
         <>
-            <div className="title"><h1>{t('MoC.operations.title', { ns: 'moc' })}</h1></div>
+            <div className="title">
+                <h1>{t('MoC.operations.title', { ns: 'moc' })}</h1>
+                <Tooltip placement="topRight" title={t("MoC.operations.tooltip.text", { ns: 'moc' })} className='Tooltip'>
+                    <InfoCircleOutlined className="Icon" />
+                </Tooltip>
+            </div>
             <Table
                 {...state}
                 pagination={{ position: [top, bottom], defaultCurrent: 1, onChange: (page) => setPage(page), total: Object.keys(data_json.transactions).length }}
                 columns={tableColumns}
-                dataSource={hasData ? (auth.isLoggedIn ==true)?data : null : null}
+                dataSource={hasData ? (auth.isLoggedIn == true) ? data : null : null}
                 scroll={scroll}
             />
         </>
