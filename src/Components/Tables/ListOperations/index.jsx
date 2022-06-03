@@ -19,6 +19,7 @@ import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
+import {InfoCircleOutlined} from "@ant-design/icons";
 
 export default function ListOperations(props) {
     const { token } = props;
@@ -285,7 +286,12 @@ export default function ListOperations(props) {
 
     return (
         <>
-            <div className="title"><h1>{t('MoC.operations.title', { ns: 'moc' })}</h1></div>
+            <div className="title">
+                <h1>{t('MoC.operations.title', { ns: 'moc' })}</h1>
+                <Tooltip placement="topRight" title={`${t('MoC.operations.tooltip.text', { ns: 'moc' })}`} >
+                    <InfoCircleOutlined className="Icon" />
+                </Tooltip>
+            </div>
             <Table
                 {...state}
                 pagination={{ position: [top, bottom], defaultCurrent: 1, onChange: (page) => setPage(page), total: Object.keys(data_json.transactions).length }}
