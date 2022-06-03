@@ -1,4 +1,5 @@
 import RbtcToBtcGenerateModal from '../../Components/Modals/RbtcToBtcGenerateModal';
+import BtcToRbtcGenerateModal from '../../Components/Modals/BtctoRbtcGenerateModal';
 import BtcToRbtc from '../../Components/Cards/BtcToRbtc';
 import {Row, Col, Alert} from 'antd';
 import React, { Fragment, useState, useContext } from 'react';
@@ -35,6 +36,7 @@ export default function Rbtc(props) {
     });
 
     const [rbtcGenVisible, setRbtcGenVisible] = useState(false);
+    const [btcGenVisible, setBtcGenVisible] = useState(false);
 
     const closeLogoutModal = () => {
         setRbtcGenVisible(false);
@@ -58,6 +60,11 @@ export default function Rbtc(props) {
                             title="BTC to rBTC Peg In"
                             description={t('MoC.fastbtc.getRBTC_description', { ns: 'moc' })}
                             btnText={t('MoC.fastbtc.getRBTC', { ns: 'moc' })}
+                        btnAction={() => {setBtcGenVisible(true)}}
+                    />
+                    <BtcToRbtcGenerateModal
+                        visible={btcGenVisible}
+                        handleClose={() => setBtcGenVisible(false)}
                         />
                     </Col>
                     <Col xs={24} md={24} xl={10}>

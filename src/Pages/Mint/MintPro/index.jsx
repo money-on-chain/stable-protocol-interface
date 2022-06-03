@@ -47,7 +47,11 @@ export default function Mint(props) {
             <h3 className="PageSubTitle">{t('MoC.wallets.RISKPRO.subtitle', { ns: 'moc' })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
-                    <AmountCard tokenName="riskpro" titleName="BPro" />
+                    <AmountCard
+                        tokenName="RISKPRO"
+                        titleName="BPro"
+                        StatusData={auth.contractStatusData}
+                    />
                 </Col>
                 <Col xs={24} md={12} xl={4}>
                     <YourAddressCard height="23.4em" tokenToSend="RISKPRO" currencyOptions={['RESERVE', 'RISKPRO']} />

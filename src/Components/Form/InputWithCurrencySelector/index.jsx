@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import { Form, Tooltip } from 'antd';
+import { Form, Tooltip, Radio } from 'antd';
 import { DebounceInput } from 'react-debounce-input';
 import SelectCurrency from '../../SelectCurrency';
 import { LargeNumber } from '../../LargeNumber';
@@ -13,6 +13,7 @@ import {
 } from '../../../Lib/Formats';
 import './style.scss';
 import { useTranslation } from "react-i18next";
+import BigNumber from "bignumber.js";
 
 export default function InputWithCurrencySelector(props) {
   const {
@@ -29,13 +30,17 @@ export default function InputWithCurrencySelector(props) {
     title,
     className,
     cleanInputCount,
-    showConvertBTC_RBTC_Link
+    showConvertBTC_RBTC_Link,
+    placeholder = '',
+    showSelectPercent = false,
+    onValueChange = () => {}
   } = props;
 
   const [t, i18n]= useTranslation(["global",'moc'])
 
   const [inputValidation, setInputValidation] = useState({ validateStatus: 'success' });
   const [dirty, setDirty] = useState(false);
+  const [percent, setPercent] = useState(0);
 
   useEffect(() => {
     setDirty(false);
@@ -61,6 +66,7 @@ export default function InputWithCurrencySelector(props) {
   const handleValueChange = newValueInEther => {
     const newValueInWei = formatValueToContract(newValueInEther, currencySelected);
     handleValueChangeInWei(newValueInWei);
+    onValueChange(newValueInEther);
   };
 
   const handleValueChangeInWei = newValueInWei => {
@@ -124,6 +130,11 @@ const validateValue = (value, maxValueAllowedInWei) => {
   return result;
 };
 
+  const handlePercentChange = e => {
+    setPercent(e.target.value);
+    handleValueChangeInWei(new BigNumber(maxValueAllowedInWei).multipliedBy(parseFloat(e.target.value)).dividedBy(100).toString());
+  };
+
   return (
     <div className={`InputWithCurrencySelector ${className || ''}`}>
       <h3>{title}</h3>
@@ -135,13 +146,14 @@ const validateValue = (value, maxValueAllowedInWei) => {
           <div className='MainContainer'>
             <Tooltip title={formatValueWithContractPrecision(inputValueInWei, currencySelected)}>
               <DebounceInput
-                type="number"
+                placeholder={placeholder}
                 value={formatVisibleValue(inputValueInWei, currencySelected, 'en')}
                 debounceTimeout={1000}
                 onChange={event => handleValueChange(event.target.value)}
                 className={`valueInput ${
                     inputValidation.validateStatus === 'error' ? 'formError' : ''
                 }`}
+                type={"number"}
               />
             </Tooltip>
             <SelectCurrency
@@ -153,7 +165,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
           </div>
         </Form.Item>
       </Form>
-      {showMaxValueAllowed && (
+      {showMaxValueAllowed && !showSelectPercent && (
         <div className="AlignedAndCentered">
           <span className="setValueToMaxLink" onClick={setValueToMax}>
             {t('global.InputWithCurrencySelector_AddTotalAvailable')}
@@ -171,6 +183,36 @@ const validateValue = (value, maxValueAllowedInWei) => {
           </div>
         </div>
       )}
+      {
+        showSelectPercent && (
+          <div className="BalanceSelectorContainer">
+            <Radio.Group value={percent} onChange={handlePercentChange}>
+              <Radio.Button value={10}>10%</Radio.Button>
+              <Radio.Button value={25}>25%</Radio.Button>
+              <Radio.Button value={50}>50%</Radio.Button>
+              <Radio.Button value={75}>75%</Radio.Button>
+              <Radio.Button value={100}>100%</Radio.Button>
+            </Radio.Group>
+            <div className="AlignedAndCentered">
+              <span className="setValueToMax" onClick={setValueToMax}>
+                {t('global.InputWithCurrencySelector_AddAvailable')}
+              </span>
+              <div className="text-align-right">
+                <LargeNumber
+                  currencyCode={currencySelected}
+                  amount={maxValueAllowedInWei}
+                  includeCurrency
+                />
+                {/* showConvertBTC_RBTC_Link && (
+                  <button onClick={() => FlowRouter.go('getRBTC') }
+                    className="link-like-btn">{t(`global.InputWithCurrencySelector_ConvertBTCtoRBTC`)}
+                  </button>
+                )*/}
+              </div>
+            </div>
+          </div>
+        )
+      }
     </div>
   )
 };

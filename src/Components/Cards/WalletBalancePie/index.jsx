@@ -1,10 +1,12 @@
 import {useContext, useEffect, useState} from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip} from 'recharts';
 import {AuthenticateContext} from "../../../Context/Auth";
+import { adjustPrecision, formatLocalMap } from '../../../Lib/Formats';
+import {useTranslation} from "react-i18next";
 
 
 const BigNumber = require('bignumber.js');
-// const COLORS = ['#00a651', '#ef8a13','#00C49F','#808080' ];
+// const COLORS = ['#00a651', '#ef8a13','#68cdc6','#808080' ];
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -22,6 +24,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 function WalletBalancePie(props) {
+    const [t, i18n]= useTranslation(["global",'moc'])
     const [colors, setColors] = useState(['#ccc']);
     // static demoUrl = 'https://codesandbox.io/s/pie-chart-with-padding-angle-7ux0o';
     const auth = useContext(AuthenticateContext);
@@ -29,7 +32,7 @@ function WalletBalancePie(props) {
 
     useEffect(() => {
         if(auth.isLoggedIn){
-            setColors(['#00a651', '#ef8a13','#00C49F','#808080' ])
+            setColors(['#00a651', '#ef8a13','#68cdc6','#808080' ])
         }
     }, [auth]);
 
@@ -120,7 +123,7 @@ function WalletBalancePie(props) {
                 <PieChart>
                     <Pie
                         data={getPie()}
-                        innerRadius={115}
+                        innerRadius={113}
                         outerRadius={120}
                         fill="#8884d8"
                         paddingAngle={1}
