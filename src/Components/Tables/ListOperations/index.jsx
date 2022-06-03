@@ -17,8 +17,8 @@ import NumericLabel from 'react-pretty-numbers';
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
-import { AuthenticateContext } from "../../../Context/Auth";
-import { InfoCircleOutlined } from '@ant-design/icons';
+import {AuthenticateContext} from "../../../Context/Auth";
+import {InfoCircleOutlined} from "@ant-design/icons";
 
 export default function ListOperations(props) {
     const { token } = props;
