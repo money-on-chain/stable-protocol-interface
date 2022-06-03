@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
+import {LargeNumber} from "../../LargeNumber";
 
 export default function ListOperations(props) {
     const { token } = props;
@@ -46,6 +47,7 @@ export default function ListOperations(props) {
 
     const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);
+    const [currencyCode, setCurrencyCode]=  useState('MOC');
 
 
     /*const handleToggle = prop => enable => {
@@ -199,6 +201,7 @@ export default function ListOperations(props) {
                     event: datas_response['set_event'],
                     asset: datas_response['set_asset'],
                     platform: `+ ${datas_response['paltform_detail']}`,
+                    // platform: (data_j.amount!==undefined)? <LargeNumber amount={datas_response['paltform_detail']} {...{ currencyCode }} /> : '--',
                     // wallet: (data_j.RBTCAmount!==undefined)? `${wallet_detail} RBTC`:'--',
                     wallet: datas_response['wallet_value_main'],
                     date: datas_response['lastUpdatedAt'],
