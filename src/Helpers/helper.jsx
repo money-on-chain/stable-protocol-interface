@@ -1,6 +1,7 @@
 import web3 from "web3";
 import config from '../Config/constants';
 import Web3 from "web3";
+import {DetailedLargeNumber} from "../Components/LargeNumber";
 const BigNumber = require('bignumber.js');
 
 
@@ -135,6 +136,40 @@ export function readJsonTable(data_j){
     const wallet_detail= (data_j.userAmount!==undefined)? parseFloat(data_j.userAmount).toFixed(6)  : '--'
     const wallet_detail_usd= (wallet_detail * config.coin_usd).toFixed(2)
     const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(fixed) : '--'
+    // const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.toWei(data_j.amount, 'mwei')).toFixed(fixed) : '--'
+    // const paltform_detail=
+        /*DetailedLargeNumber({
+        amount: data_j.amount,
+        currencyCode: 'MOC',
+        includeCurrency: true,
+        isPositive: true,
+        showSign: true,
+        amountUSD: data_j.USDAmount ? data_j.USDAmount : 0,
+        showUSD: true
+    })*/
+
+        console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
+        console.log(data_j.amount)
+        console.log(Web3.utils.toWei(data_j.amount, 'mwei'))
+        console.log(data_j.tokenInvolved)
+        console.log(data_j.isPositive)
+        console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
+
+    // const paltform_detail= DetailedLargeNumber({
+    //     amount : 799973321917036534061,
+    //     currencyCode : 'RBTC',
+    //     includeCurrency : true,
+    //     showSign : true,
+    //     isPositive : data_j.isPositive
+    // })
+
+    // console.log('paltform_detail------------------------')
+    // console.log(paltform_detail)
+    // console.log('paltform_detail------------------------')
+
+    // const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(fixed) : '--'
+    // const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(new BigNumber("799973321917036534061"), 'ether')).toFixed(fixed) : '--'
+
     const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
     const platform_fee= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(6) : ''
     const platform_fee_usd= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? ((parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(2))*config.coin_usd).toFixed(2) : ''
