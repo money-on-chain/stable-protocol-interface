@@ -37,7 +37,7 @@ function MocLiquidity(props) {
         <div className="Card RewardsBalanceLiquidity withPadding hasTitle">
             <div className="title">
                 <h1>{t("global.RewardsBalance_MocLiquidityMining", { ns: 'global' })}</h1>
-                <Tooltip placement="topRight" title={t("global.RewardsBalance_MoreInfo", { ns: 'global' })} >
+                <Tooltip placement="topRight" title={t("global.RewardsBalance_MoreInfo", { ns: 'global' })} className='Tooltip'>
                     <InfoCircleOutlined className="Icon" />
                 </Tooltip>
             </div>

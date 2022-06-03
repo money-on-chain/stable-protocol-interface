@@ -53,6 +53,7 @@ const AuthenticateContext = createContext({
     transferBproTo: async (to, amount) => {},
     transferMocTo: async (to, amount) => {},
     calcMintInterestValues: async (amount) => {},
+    approveReserve: async (address) => {},
 });
 
 let checkLoginFirstTime = true;
@@ -241,6 +242,7 @@ const AuthenticateProvider = ({ children }) => {
         setcontractStatusData(dataContractStatus);
 
         const user_address = account;
+        console.log('user_adresssssssss', account);
 
         // Example user balance
         const user_balance = await userBalance(
@@ -653,19 +655,20 @@ const AuthenticateProvider = ({ children }) => {
             mocInrate.methods.calcMintInterestValues(strToBytes32(bucketX2), amount).call();
     };
 
-    // TODO
-    /* const approveReserve = (address) => {
+    
+    const approveReserve = (address) => {
         const weiAmount = web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString());
-        const reserveTokenAddress =
+        const reserveTokenAddress = account;
         const reserveToken = getContract(ERC20.abi, reserveTokenAddress);
+        const moc = getContract(MocAbi.abi, mocAddress);
         return getGasPrice().then(price => {
-            return
+            return reserveToken.methods.approve(moc.options.address, weiAmount).send({ from: account, gasPrice: price});
         })
-    }; */
+    };
 
     return (
         <AuthenticateContext.Provider
-            value={{
+            value={{    
                 account,
                 accountData,
                 userBalanceData,
@@ -693,7 +696,8 @@ const AuthenticateProvider = ({ children }) => {
                 transferDocTo,
                 transferBproTo,
                 transferMocTo,
-                calcMintInterestValues
+                calcMintInterestValues,
+                approveReserve
             }}
         >
             {children}

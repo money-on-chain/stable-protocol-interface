@@ -1,5 +1,5 @@
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Row, Col, Tooltip } from 'antd';
+import { Row, Col, Tooltip, Modal } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { useContext } from 'react';
@@ -9,6 +9,9 @@ import { AuthenticateContext } from '../../../Context/Auth';
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
 import { LargeNumber } from "../../LargeNumber";
 import { relativeTimeRounding } from 'moment';
+import { useTranslation } from "react-i18next";
+import './style.scss';
+
 const BigNumber = require('bignumber.js');
 
 const styleCentered = {
@@ -29,6 +32,7 @@ export default function TokenSummaryCard(props) {
     } = props;
 
     const auth = useContext(AuthenticateContext);
+    const [t, i18n] = useTranslation(["global", 'moc'])
 
     const getBalance = () => {
         if (auth.userBalanceData) {
@@ -59,8 +63,70 @@ export default function TokenSummaryCard(props) {
             return (0).toFixed(2)
         }
     };
+
+    /* Start Component ModalTookenInformation */
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const TokenInformationContent = ({ token }) => (
+        <Row>
+            <Col span={24}>
+                <hr className='FactSheetLine' />
+                <p className='FactSheet'>{`${t(`MoC.TokenInformationContent.${token}.factSheet`, { ns: 'moc' })}`}</p>
+                <h4 className='FactSheetTitle' dangerouslySetInnerHTML={{ __html: t(`MoC.TokenInformationContent.${token}.title`, { ns: 'moc', returnObjectTrees: false }) }} />
+            </Col>
+            <Col xs={24} sm={24} md={12}>
+                <ul>
+                    {
+                        /*console.log('**************', t(`MoC.TokenInformationContent.${token}.characteristics.left`, { ns: 'moc', returnObjects: true }))*/
+                        t(`MoC.TokenInformationContent.${token}.characteristics.left`, { ns: 'moc', returnObjects: true }).map(eachcharacteristic => (
+                            <li className='Characteristic'>{eachcharacteristic}</li>
+                        ))
+                    }
+                </ul>
+            </Col>
+            <Col xs={24} sm={24} md={12}>
+                <ul>
+                    {
+                        t(`MoC.TokenInformationContent.${token}.characteristics.right`, { ns: 'moc', returnObjects: true }).map(eachcharacteristic => (
+                            <li className='Characteristic'>{eachcharacteristic}</li>
+                        ))
+                    }
+                </ul>
+            </Col>
+        </Row>
+    )
+
+    const renderModalTooltip = () => {
+        const showModal = () => {
+            setIsModalVisible(true);
+        };
+        const handleCancel = () => {
+            setIsModalVisible(false);
+        };
+
+        return (
+            <div>
+                <Tooltip placement="topRight" title={`${t('MoC.tokenInformationTooltip', { ns: 'moc' })} ${t(`MoC.Tokens_${currencyCode}_name`, { ns: 'moc' })}`} className='TokenSummaryTooltip'>
+                    <InfoCircleOutlined className="Icon" onClick={showModal} />
+                </Tooltip>
+                <Modal
+                    visible={isModalVisible}
+                    onCancel={handleCancel}
+                    footer={null} width='70%'
+                    bodyStyle={{ paddingTop: 35, paddingLeft: 50, paddingRight: 50 }}
+                >
+                    <TokenInformationContent token={currencyCode} />
+                </Modal>
+            </div >
+        )
+    }
+
+    /*End Component ModalTookenInformation */
+
     return (
         <Row className="Card TokenSummaryCard">
+            {renderModalTooltip()}
             <Col
                 span={7}
                 style={{
@@ -135,11 +201,6 @@ export default function TokenSummaryCard(props) {
                     icon={<ArrowRightOutlined
                     />}
                 />
-                {/*<div style={{ position: 'relative' }} >
-                    <Tooltip placement="topRight" title={`uwu`} style={{ position: 'absolute', marginTop: 20, marginRight: 10 }}>
-                        <InfoCircleOutlined className="Icon" />
-                    </Tooltip>
-                    </div>*/}
             </Col>
         </Row>
     );

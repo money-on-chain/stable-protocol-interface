@@ -5,11 +5,12 @@ BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
 
 export default function ConvertHelper() {
   const auth = useContext(AuthenticateContext);
+  if (!auth) return null;
   const { contractStatusData } = auth;
   const convertDocToUsd = amount => amount;
   const convertBproToRbtc = amount => amount.times(contractStatusData.bproPriceInRbtc).div(contractStatusData.reservePrecision);
   const convertBproToUsd = amount => amount.times(contractStatusData.bproPriceInUsd).div(contractStatusData.reservePrecision);
-  const convertDocToRbtc = amount => amount.div(contractStatusData.bitcoinPrice).times(contractStatusData.reservePrecision);
+  const convertDocToRbtc = amount => amount.div(contractStatusData?.bitcoinPrice).times(contractStatusData?.reservePrecision);
   const convertRbtcToUsd = amount => amount.times(contractStatusData.bitcoinPrice).div(contractStatusData.reservePrecision);
   const convertRbtcToBpro = amount => amount.div(contractStatusData.bproPriceInRbtc).times(contractStatusData.reservePrecision);
   const convertRbtcToDoc = amount => convertRbtcToUsd(amount);
