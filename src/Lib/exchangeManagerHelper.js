@@ -28,6 +28,9 @@ const amountIsTooSmall = target => {
   return minorValue.gt(toBigNumber(target));
 };
 
+const calcCommissionValue = (rbtcBalance, commissionRate) =>
+  rbtcBalance * (commissionRate / precision(RBTCPrecision));
+
 const getUsableReserveBalance = (
   currencyToMint,
   userState,
@@ -39,13 +42,21 @@ const getUsableReserveBalance = (
     spendableBalance = 0,
     potentialBprox2MaxInterest = 0,
   } = userState || {};
+  const commission = getCommissionRateForMintingTotalAvailable(currencyToMint, mocState, userState, convertToken);
   const gasEstimation = gasMintingEstimation(
     currencyToMint,
     userState
   );
 
+  const reserveCommisionValue = calcCommissionValue(rbtcBalance, commission.commissionRate);
   const spendableBalanceBn = toBigNumber(rbtcBalance);
   const mintingGasEstimation = gasEstimation !== undefined ? gasEstimation : 0;
+  let available = spendableBalanceBn.minus(reserveCommisionValue).minus(mintingGasEstimation);
+  if (currencyToMint === 'RISKPROX') {
+   available
+      .minus(potentialBprox2MaxInterest);
+  }
+  return BigNumber.maximum(0, available);
 };
 
 const gasMintingEstimation = (
@@ -69,6 +80,18 @@ const gasMintingEstimation = (
       return undefined;
   }
 };
+
+const getCommissionRateForMintingTotalAvailable = (tokenToMint, mocState, userState, convertToken) => {
+  const {spendableBalance = '0', rbtcBalance = '0'} = userState || {};
+  return getCommissionRateAndCurrency({
+    currencyYouExchange: "RESERVE",
+    currencyYouReceive: tokenToMint,
+    valueYouExchange: rbtcBalance,
+    mocState,
+    userState,
+    convertToken
+  });
+}
 
 const canPayCommissionInMoc = (commissionValue, userState) => {
   return (enoughMOCBalance(commissionValue, userState) && enoughMOCAllowance(commissionValue, userState));

@@ -8,7 +8,11 @@ import { Button } from 'antd';
 import CoinSelect from '../../Form/CoinSelect';
 import MintModal from '../../Modals/MintModal';
 //new
-import { getCommissionRateAndCurrency } from '../../../Lib/exchangeManagerHelper';
+import {
+  getCommissionRateAndCurrency,
+  getMaxMintableBalance,
+  convertAmount,
+  getMaxRedeemableBalance } from '../../../Lib/exchangeManagerHelper';
 import { formatVisibleValue } from '../../../Lib/Formats';
 import {ArrowRightOutlined, LoadingOutlined} from '@ant-design/icons';
 import convertHelper from '../../../Lib/convertHelper';
@@ -25,7 +29,8 @@ import InputWithCurrencySelector from '../../Form/InputWithCurrencySelector';
 export default function MintCard(props) {
   const { token = '', color = '' } = props;
   const auth = useContext(AuthenticateContext);
-  const { accountData = {} } = auth;
+  // const { accountData = {} } = auth;
+  const userAccountIsLoggedIn = props.StatusData;
 
   const { mocAllowance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
   const { bitcoinPrice = 0 } = props.StatusData ? props.StatusData : {};
@@ -53,7 +58,7 @@ export default function MintCard(props) {
 
   const [currencyYouExchange, setCurrencyYouExchange] = useState('RESERVE');
   // const [currencyYouReceive, setCurrencyYouReceive] = useState('');
-  const [valueYouExchange, setValueYouExchange] = useState('0.000000');
+  const [valueYouExchange, setValueYouExchange] = useState('0');
   const [valueYouReceive, setValueYouReceive] = useState('0.00');
   const [valueYouReceiveUSD, setValueYouReceiveUSD] = useState('0.0000');
   const [showMintModal, setShowMintModal] = useState(false);
@@ -66,14 +71,12 @@ export default function MintCard(props) {
   const [confirmingTransaction, setConfirmingTransaction] = useState(false);
   const [interests, setInterests] = useState({ interestRate: '0', interestValue: BigNumber('0') });
   const [tolerance, setTolerance] = useState('0.1');
+  const [youExchangeIsValid, onYouExchangeValidityChange] = useState(false);
+  const [youReceiveIsValid, onYouReceiveValidityChange] = useState(false);
   const [t, i18n]= useTranslation(["global","moc"])
   const isMint = currencyYouExchange === 'RESERVE'
   let userTolerance = '';
   let userComment = '';
-
-  const onChangeCurrencyYouExchange = (newCurrencyYouExchange) => {
-    setCurrencyYouExchange(newCurrencyYouExchange);
-  };
 
   useEffect(() => {
     if (convertToken) {
@@ -94,8 +97,8 @@ export default function MintCard(props) {
   const checkShowMintModal = () => {
     setShowMintModal(true);
   };
-  const getCurrencyYouReceive = (actionIsMint, tokenToMintOrRedeem) => {
-    return actionIsMint ? tokenToMintOrRedeem : 'RESERVE';
+  const getCurrencyYouReceive = (isMint, tokenToMintOrRedeem) => {
+    return isMint ? tokenToMintOrRedeem : 'RESERVE';
   };
 
   const closeMintModal = () => {
@@ -143,10 +146,14 @@ export default function MintCard(props) {
     return { interestRate, interestValue };
   };
 
+  const onChangeCurrencyYouExchange = (newCurrencyYouExchange) => {
+    setCurrencyYouExchange(newCurrencyYouExchange);
+  };
+
   const onClear = () => {
-    setCurrencyYouExchange(props.currencyOptions[0]);
-    setValueYouExchange('0.0000');
-    setValueYouReceive('0.0000');
+    setCurrencyYouExchange(props.token);
+    setValueYouExchange('0');
+    setValueYouReceive('0');
   };
 
   const setDoneSwitch = allowanceEnabled => {
@@ -193,69 +200,27 @@ export default function MintCard(props) {
     });
   };
 
-  const onValueYouExchangeChange = (newValueYouExchange) => {
-    if (!bitcoinPrice) return {};
-    const reservePrice = bitcoinPrice;
-    switch (currencyYouReceive) {
-      case 'STABLE':
-        setValueYouReceive(
-            parseFloat(newValueYouExchange) * parseFloat(reservePrice)
-        );
-        setValueYouReceiveUSD(
-            parseFloat(newValueYouExchange) * parseFloat(reservePrice)
-        );
-        break;
-      case 'RESERVE':
-        switch (currencyYouExchange) {
-          case 'STABLE':
-            setValueYouReceive(
-                parseFloat(newValueYouExchange) /
-                parseFloat(reservePrice)
-            );
-            setValueYouReceiveUSD(parseFloat(newValueYouExchange));
-            break;
-          case 'RISKPRO':
-            setValueYouReceive(
-                (newValueYouExchange *
-                    bitcoinPrice) /
-                reservePrice
-            );
-            setValueYouReceiveUSD(
-                parseFloat(newValueYouExchange) *
-                parseFloat(bitcoinPrice)
-            );
-            break;
-          case 'RISKPROX':
-            setValueYouReceive(newValueYouExchange);
-            setValueYouReceiveUSD(
-                parseFloat(newValueYouExchange) *
-                (parseFloat(
-                    props.StatusData['bprox2PriceInRbtc']
-                    ) *
-                    parseFloat(reservePrice))
-            );
-            break;
-        }
-        break;
-      case 'RISKPRO':
-        setValueYouReceive(
-            (newValueYouExchange * reservePrice) /
-            props.StatusData['bproPriceInUsd']
-        );
-        setValueYouReceiveUSD(
-            parseFloat(newValueYouExchange) *
-            parseFloat(props.StatusData['bproPriceInUsd'])
-        );
-        break;
-      case 'RISKPROX':
-        setValueYouReceive(newValueYouExchange);
-        setValueYouReceiveUSD(
-            parseFloat(newValueYouExchange) *
-            (parseFloat(props.StatusData['bprox2PriceInRbtc']) *
-                parseFloat(reservePrice))
-        );
-        break;
+  const onValueYouExchangeChange = newValueYouExchange => {
+    if (mocState) {
+      setValueYouExchange(newValueYouExchange);
+      const newValueYouReceiveInWei = convertAmount(
+        currencyYouExchange,
+        currencyYouReceive,
+        newValueYouExchange,
+        convertToken
+      );
+      setValueYouReceive(newValueYouReceiveInWei);
     }
+  };
+
+  const onValueYouReceiveChange = newValueYouReceive => {
+    setValueYouReceive(newValueYouReceive);
+    const newValueYouExchange = convertAmount(
+      currencyYouReceive,
+      currencyYouExchange,
+      newValueYouReceive,
+      convertToken
+    );
     setValueYouExchange(newValueYouExchange);
   };
 
@@ -273,34 +238,59 @@ export default function MintCard(props) {
     msgAllowanceSend();
   };
 
+  const getMaxValues = () => {
+    if (mocState) {
+      let maxValueYouExchange, maxValueYouReceive;
+      if (isMint) {
+        maxValueYouReceive = getMaxMintableBalance(
+          token,
+          userState,
+          mocState,
+          convertToken
+        ).value.toString();
+        maxValueYouExchange = convertAmount(token, 'RESERVE', maxValueYouReceive, convertToken);
+      } else {
+        //action is redeem
+        maxValueYouExchange = getMaxRedeemableBalance(token, userState, mocState).value.toString();
+        maxValueYouReceive = convertAmount(token, 'RESERVE', maxValueYouExchange, convertToken);
+      }
+      return { youExchange: maxValueYouExchange, youReceive: maxValueYouReceive };
+    }
+  };
+
   //renders
   const renderExchangeInputs = () => {
     return (
         <div className="ExchangeInputs AlignedAndCentered">
           <div className="YouExchange">
-            <CoinSelect
-                label={t('global.MintOrRedeemToken_YouExchange')}
-                onCurrencySelect={onChangeCurrencyYouExchange}
-                onInputValueChange={onValueYouExchangeChange}
-                value={currencyYouExchange}
-                inputValueInWei={valueYouExchange}
-                currencyOptions={props.currencyOptions}
-                AccountData={props.AccountData}
-                UserBalanceData={props.UserBalanceData}
-                token={token}
+            <InputWithCurrencySelector
+              title={t('global.MintOrRedeemToken_YouExchange')}
+              currencySelected={currencyYouExchange}
+              onCurrencySelect={onChangeCurrencyYouExchange}
+              inputValueInWei={valueYouExchange}
+              onInputValueChange={onValueYouExchangeChange}
+              currencyOptions={[props.token, 'RESERVE']}
+              onValidationStatusChange={onYouExchangeValidityChange}
+              maxValueAllowedInWei={getMaxValues()?.youExchange}
+              showMaxValueAllowed
+              validate={userAccountIsLoggedIn}
+              showConvertBTC_RBTC_Link={false}
             />
           </div>
           <ArrowRightOutlined />
           <div className="YouReceive">
-            <CoinSelect
-                label={t('global.MintOrRedeemToken_YouReceive')}
-                inputValueInWei={valueYouReceive}
-                currencyOptions={props.currencyOptions}
-                value={currencyYouReceive}
-                token={token}
-                UserBalanceData={props.UserBalanceData}
-                AccountData={props.AccountData}
-                disabled
+            <InputWithCurrencySelector
+              title={t('global.MintOrRedeemToken_YouReceive')}
+              validate={userAccountIsLoggedIn}
+              currencyOptions={[props.token, 'RESERVE']}
+              onValidationStatusChange={onYouReceiveValidityChange}
+              currencySelected={currencyYouReceive}
+              disableCurrencySelector
+              inputValueInWei={valueYouReceive}
+              maxValueAllowedInWei={getMaxValues()?.youReceive}
+              showMaxValueAllowed
+              onInputValueChange={onValueYouReceiveChange}
+              showConvertBTC_RBTC_Link={false}
             />
           </div>
         </div>
@@ -331,6 +321,7 @@ export default function MintCard(props) {
             <Button
                 type="primary"
                 onClick={checkShowMintModal}
+                disabled={!youExchangeIsValid || !youReceiveIsValid}
             >
               {isMint ? t('global.MintOrRedeemToken_Mint') : t('global.MintOrRedeemToken_Redeem')}
             </Button>
@@ -430,15 +421,14 @@ export default function MintCard(props) {
     onConfirmTransactionFinish();
   };
 
-  //TODO
-  /* const setAllowanceReserve = () => {
+  const setAllowanceReserve = () => {
     setModalAllowanceReserveMode('Waiting');
-    const result = window.nodeManager.approveReserve(window.address, (a, _txHash) => {
+    const result = auth.approveReserve(null, (a, _txHash) => {
       msgAllowanceTx(_txHash);
     });
     result.then(() => setDoneAllowanceReserve()).catch(() => setFailAllowanceReserve());
     msgAllowanceReserveSend();
-  }; */
+  };
   const msgAllowanceReserveSend = () => {
     notification['warning']({
       message: t('global.ReserveAllowanceModal_allowanceSendTitle'),
@@ -483,7 +473,7 @@ export default function MintCard(props) {
             <div className="PayWithMocToken">
               <Switch
                   disabled={!enoughMOCBalance}
-                  checked={switchChecked} //commission.currencyCode === 'MOC'}
+                  checked={commission.currencyCode === 'MOC'}
                   onChange={setAllowance}
                   loading={loadingSwitch}
               />
@@ -503,7 +493,7 @@ export default function MintCard(props) {
             <Button
                 className="ButtonPrimary"
                 lowerCase
-                // TODO onClick={setAllowanceReserve}
+                onClick={setAllowanceReserve}
             >{t('global.ReserveAllowanceModal_Authorize')}</Button>
           </div>
         </>
@@ -547,6 +537,38 @@ export default function MintCard(props) {
         <LargeNumber includeCurrency amount={interests.interestValue} currencyCode={'RESERVE'} />
       </div>
   );
+  const renderConfirmTransactionModal = () => {
+    let defaultSliderValue = 0.1;
+    if (isMint && currencyYouReceive === 'RISKPROX') { defaultSliderValue = 0.25; }
+    return (
+      <MintModal
+        visible={showMintModal}
+        handleClose={closeMintModal}
+        handleComplete={closeMintModal}
+        color={color}
+        currencyYouExchange={currencyYouExchange}
+        currencyYouReceive={currencyYouReceive}
+        fee={commission}
+        interests={interests}
+        valueYouExchange={valueYouExchange}
+        valueYouReceive={valueYouReceive}
+        valueYouReceiveUSD={valueYouReceiveUSD}
+        token={token}
+        onCancel={closeConfirmationModal}
+        setTolerance={setTolerance}
+        actionIsMint={isMint}
+        tolerance={tolerance}
+        exchanging={{
+          value: totals.totalYouExchange,
+          currencyCode: currencyYouExchange
+        }}
+        receiving={{
+          value: totals.totalYouReceive,
+          currencyCode: currencyYouReceive
+        }}
+      />
+    );
+  };
 
   return (
       <div className="Card MintCard MintOrRedeemToken" style={{
@@ -559,33 +581,9 @@ export default function MintCard(props) {
         interests.interestValue.gt(0) &&
         renderInterests()}
         {renderFooter()}
+        {renderConfirmTransactionModal()}
         {renderAllowanceReserveModal()}
-        <MintModal
-            visible={showMintModal}
-            handleClose={closeMintModal}
-            handleComplete={closeMintModal}
-            color={color}
-            currencyYouExchange={currencyYouExchange}
-            currencyYouReceive={currencyYouReceive}
-            fee={commission}
-            interests={interests}
-            valueYouExchange={valueYouExchange}
-            valueYouReceive={valueYouReceive}
-            valueYouReceiveUSD={valueYouReceiveUSD}
-            token={token}
-            onCancel={closeConfirmationModal}
-            setTolerance={setTolerance}
-            actionIsMint={isMint}
-            tolerance={tolerance}
-            exchanging={{
-              value: totals.totalYouExchange,
-              currencyCode: currencyYouExchange
-            }}
-            receiving={{
-              value: totals.totalYouReceive,
-              currencyCode: currencyYouReceive
-            }}
-        />
+        
       </div>
   );
 }

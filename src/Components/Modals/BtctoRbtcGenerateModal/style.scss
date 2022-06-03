@@ -1,0 +1,250 @@
+@import "../../../assets/css/general_styling";
+.top-up-wallet-modal-container{
+    display: flex;
+    align-items: center;
+    margin:10px 20px 10px 50px;
+}
+
+.ModalHeaderTitle {
+    display: flex;
+    column-gap: 20px;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    padding-right: 40px;
+    > div.title {
+        flex-grow: 1;
+    }
+    h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+    }
+    .CardLogo {
+        display: flex;
+        flex-direction: row;
+
+        h1 {
+            margin-left: 6px;
+            font-size: 10px;
+            font-weight: bold;
+            line-height: 13px;
+        }
+    }
+}
+
+.ModalTopUpContainer {
+    .ant-modal-body {
+        padding: 16px;
+        @media screen and (min-width:450px) {
+                padding: 32px;
+        }
+    }
+    .ant-modal-header {
+        padding: 7px;
+    }
+    .ant-modal-close-x {
+        height: 40px;
+        line-height: 40px;
+    }
+    .ModalTopUpTitle {
+        .subtitle {
+            font-size: 12px;
+            font-family: "Montserrat", sans-serif;
+        }
+    }
+    .ModalTopUpContent {
+        display: flex;
+        flex-direction: column;
+        @media screen and (max-width:600px) {
+            flex-direction: column;
+        }
+        .TxLimits{
+            width: 100%;
+            @media screen and (max-width:600px) {
+                width: 100%;
+            }
+        }
+        ul {
+            list-style-type: '•';
+            padding: 0;
+            margin: 0;
+            padding-left: 4px;
+        }
+        li {
+            padding-left: 4px;
+        }
+        b, li {
+            font-family: "Montserrat", sans-serif;
+            font-size: 12px;
+        }
+        a {
+            color: #4EC199;
+            font-weight: bold;
+        }
+        .section-title {
+            display: block;
+            margin-top: 14px;
+        }
+        .ButtonPrimary {
+            background: #4EC199;
+            font-size: 14px;
+            font-weight: bold;
+            height: auto;
+            box-shadow: none;
+            text-transform: none;
+            border-radius: 8px;
+            width: 100% !important;
+            max-width: 139px !important;
+            padding: 0 2px !important;
+            margin: 15px auto 0 !important;
+        }
+
+        .BlueSection {
+            padding: 9px;
+            border-radius: 8px;
+            background: #08374F;
+            b {
+                color: #fff;
+                font-family: "Montserrat", sans-serif;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+              li {
+                  color: #fff;
+                  padding-left: 0;
+              }
+            }
+        }
+        .TxActions{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: auto;
+            text-align: center;
+            width: 100%;
+            .MainActions {
+                width: 100%;
+                button {
+                    // width: 90%;
+                    margin: 15px 0 0 0;
+                    @media screen and (max-width:600px) {
+                        width: 100%;
+                    }
+                    @media screen and (max-width:350px) {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+
+        .under-maintenance-alert{
+            margin-left:1em;
+            display: flex;
+            align-self: center;
+        }
+    }
+
+    .open-modal-button{
+        width: max-content;
+    }
+
+    .ModalTopUpTitle{
+        text-align: center;
+        h1 {
+            @include primary-text(1.2em, $grey, 400);
+        }
+    }
+
+    .ant-modal-content{
+        border: solid black 2px;
+    }
+
+    .ant-modal-footer{
+        text-align: center;
+        @media screen and (min-width:450px) {
+                padding: 32px;
+        }
+    }
+
+    .ant-modal-header{
+        background-color: black;
+        color: white;
+        border-bottom: 0px;
+        border-radius: 0px;
+    }
+
+    .ant-modal-title{
+        text-align: center;
+        color: white;
+    }
+
+    .ant-modal-body{
+        padding-top: 10px;
+    }
+
+    .modal-header{
+        position: relative;
+    }
+
+    .sov-logo{
+        float: left;
+        text-align: left;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+
+    .ant-modal-close{
+        color:white;
+    }
+
+    .AddressQrCode {
+        display: flex;
+        flex-direction: row;
+        column-gap: 15px;
+        justify-items: center;
+        align-items: center;
+        margin-top: 12px;
+        .tw-text-lg {
+            flex-grow: 1;
+        }
+        .AddressTitle {
+            font-size: 14px;
+            display: block;
+            text-align: left;
+        }
+        .CopyableText {
+            margin: 0;
+        }
+        canvas {
+            border: solid 2px #000;
+            border-radius: 8px;
+            padding: 5px;
+        }
+    }
+}
+
+.AlertWarning {
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
+    background: #08374F;
+    padding: 4px 10px;
+
+    img {
+
+    }
+
+    div {
+        color: #fff;
+        padding-left: 12px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: normal;
+        font-size: 14px;
+        text-align: left;
+    }
+}
