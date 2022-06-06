@@ -8,6 +8,8 @@ import Sovryn from "../../Components/Cards/Sovryn";
 import { AuthenticateContext } from '../../Context/Auth';
 import { useTranslation } from "react-i18next";
 import './style.scss'
+import FastBtcPegOut from "../../Components/Tables/FastBtcPegOut";
+import Tabe from "../../Components/Tables/FastBtcPegOut/tabe";
 
 export default function Rbtc(props) {
     const data_row_coins = [];
@@ -80,8 +82,17 @@ export default function Rbtc(props) {
                         />
                     </Col>
                 </Row>
-                <div className="Card WalletOperations">
-                    <ListOperations token={'STABLE'}></ListOperations>
+                <div className="Card FastBTCHistory">
+                    <div className="title">
+                        <h1>FastBTC last operations</h1>
+                    </div>
+                    <span className="upper-summary">
+                        If rBTC is not visible in your wallet after 90 mins open a
+                        <a href="https://sovryn.freshdesk.com/support/tickets/new" target="_blank"> support ticket </a>
+                        at Sovryn
+                    </span>
+                    {/*<FastBtcPegOut></FastBtcPegOut>*/}
+                    <Tabe></Tabe>
                 </div></>}
         </Fragment>
     );
