@@ -1,0 +1,43 @@
+.FastBTCHistory {
+  .title {
+    padding: 0;
+    margin-bottom: 0;
+
+    h1 {
+      font-family: Source Sans Pro, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #000;
+    }
+  }
+  .ant-tabs-tab, .ant-tabs-tab-active, .ant-tabs-tab-btn{
+    color: #09c199;
+  }
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+    color: #09c199;
+  }
+  .ant-tabs-tab:hover {
+    color: #09c199;
+  }
+  .ant-tabs-ink-bar {
+    background: #09c199;
+  }
+}
+
+
+.table-in{
+  width: auto !important;
+
+  th{
+    padding: 8px 16px !important;
+    border-right: 1px solid #f0f0f0 !important;
+  }
+
+  td{
+    padding: 8px 16px;
+  }
+}
+
+.div-table-in{
+  border: 1px solid #f0f0f0;
+}
