@@ -1,22 +1,23 @@
-import {Row, Col, Tooltip, Alert} from 'antd';
+import { Row, Col, Tooltip, Alert } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import _ from 'lodash/core';
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { LargeNumber } from '../../LargeNumber';
-import {useTranslation} from "react-i18next";
-import {set_doc_usd} from "../../../Helpers/helper";
+import { useTranslation } from "react-i18next";
+import { set_doc_usd } from "../../../Helpers/helper";
 import convertHelper from '../../../Lib/convertHelper';
 import { getPriceFields } from '../../../Lib/price';
 import BalanceItem from '../../BalanceItem/BalanceItem';
+import InformationModal from '../../Modals/InformationModal';
 import './style.scss';
 const BigNumber = require('bignumber.js');
 
 export default function AmountCard(props) {
-    const [t, i18n]= useTranslation(["global",'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);
-    if(!auth) return null;
+    if (!auth) return null;
     const {
         tokenName = '',
         color = '',
@@ -25,18 +26,18 @@ export default function AmountCard(props) {
     const priceFields = getPriceFields();
     const mocStates = {
         fields: {
-        ...priceFields,
-        reservePrecision: 1,
-        priceVariation: 1,
-        commissionRates: 1,
-        lastUpdateHeight: 1,
-        isDailyVariation: 1
+            ...priceFields,
+            reservePrecision: 1,
+            priceVariation: 1,
+            commissionRates: 1,
+            lastUpdateHeight: 1,
+            isDailyVariation: 1
         }
     }
     const mocState = props.StatusData;
     let mocStatePrices;
-    if(mocState?.length) {
-      [mocStatePrices] = mocStates;
+    if (mocState?.length) {
+        [mocStatePrices] = mocStates;
     }
     const convertToken = convertHelper(
         _.pick(mocStatePrices, Object.keys(priceFields).concat(['reservePrecision']))
@@ -52,7 +53,7 @@ export default function AmountCard(props) {
                 case 'RISKPROX':
                     return auth.userBalanceData['bprox2Balance'];
             }
-        }else{
+        } else {
             switch (tokenName) {
                 case 'stable':
                     return (0).toFixed(2)
@@ -74,7 +75,7 @@ export default function AmountCard(props) {
                     return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4);
             }
         }
-        else{
+        else {
             return (0).toFixed(2)
         }
     };
@@ -85,43 +86,39 @@ export default function AmountCard(props) {
 
     return (
         <Fragment>
-
-
-        <div className="Card CardAmount">
-            <Row>
-                <Col span={22}>
-                    <h3 className="CardTitle">{t("global.TokenSummary_Amount", { ns: 'global', tokenName: pre_label })}</h3>
-                </Col>
-                <Col span={2}>
-                    <Tooltip placement="topRight" title={`${t('MoC.tokenInformationTooltip', { ns: 'moc' })} ${pre_label}`} >
-                        <InfoCircleOutlined className="Icon" />
-                    </Tooltip>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <img
-                        width={56}
-                        src={window.location.origin + `/Moc/icon-${tokenName}.svg`}
-                        alt="icon-wallet"
-                    />
-                </Col>
-            </Row>
-            <Row className="tokenAndBalance">
-                <div className="priceContainer">
-                    <LargeNumber amount={getBalance()} currencyCode={tokenName} />
-                    <div className="WalletCurrencyPrice">
-                        <BalanceItem
-                            amount={convertTo('RESERVE')}
-                            currencyCode="RESERVE"/>
-                        <BalanceItem
-                            amount={convertTo('USD')}
-                            currencyCode="USD"/>
+            <div className="Card CardAmount">
+                <Row>
+                    <Col span={22}>
+                        <h3 className="CardTitle">{t("global.TokenSummary_Amount", { ns: 'global', tokenName: pre_label })}</h3>
+                    </Col>
+                    <Col span={2}>
+                        <InformationModal currencyCode={tokenName} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <img
+                            width={56}
+                            src={window.location.origin + `/Moc/icon-${tokenName}.svg`}
+                            alt="icon-wallet"
+                        />
+                    </Col>
+                </Row>
+                <Row className="tokenAndBalance">
+                    <div className="priceContainer">
+                        <LargeNumber amount={getBalance()} currencyCode={tokenName} />
+                        <div className="WalletCurrencyPrice">
+                            <BalanceItem
+                                amount={convertTo('RESERVE')}
+                                currencyCode="RESERVE" />
+                            <BalanceItem
+                                amount={convertTo('USD')}
+                                currencyCode="USD" />
                         </div>
-                </div>
+                    </div>
 
-            </Row>
-        </div>
-    </Fragment>
+                </Row>
+            </div>
+        </Fragment>
     )
 }

@@ -45,9 +45,11 @@ function MocLiquidity(props) {
                 <div className="IncentivesItem">
                     <h3>
                         {/*<div><span className="" >{setreadyClaim()}</span></div>*/}
-                        <LargeNumber amount={data_json.moc_balance} currencyCode="REWARD" />
+                        {auth.isLoggedIn && <LargeNumber amount={data_json.moc_balance} currencyCode="REWARD" />}
+                        {!auth.isLoggedIn && <span>0.000000 </span>}
                     </h3>
-                    <p>MOC</p></div>
+                    <p>MOC</p>
+                </div>
             </div>
             <div className="Metric"><h2>{t("global.RewardsBalance_EarnedToday", { ns: 'global' })}</h2>
                 <div className="IncentivesItem">
