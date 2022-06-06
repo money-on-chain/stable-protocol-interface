@@ -5,6 +5,7 @@ import { AuthenticateContext } from "../../../Context/Auth";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
+import InformationModal from '../../Modals/InformationModal';
 
 const BigNumber = require('bignumber.js');
 
@@ -12,10 +13,10 @@ function MocAmount() {
 
     const auth = useContext(AuthenticateContext);
 
-    const set_moc_balance_usd = () =>{
-        if ( auth.userBalanceData ) {
-            return Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000).toFixed(2)
-        }else{
+    const set_moc_balance_usd = () => {
+        if (auth.userBalanceData) {
+            return Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0] / 10000).toFixed(2)
+        } else {
             return (0).toFixed(2)
         }
     };
@@ -27,11 +28,7 @@ function MocAmount() {
             <div className="Card RewardsBalanceAmount withPadding hasTitle padding-1-2">
                 <div className="title">
                     <h1>{t("global.RewardsBalance_MocAmount", { ns: 'global' })}</h1>
-                    <div>
-                        <Tooltip placement="top" title={`${t("MoC.tokenInformationTooltip", { ns: 'moc' })} ${t("MoC.Tokens_MOC_name", { ns: 'moc' })}`} className='Tooltip' >
-                            <InfoCircleOutlined className="Icon" />
-                        </Tooltip>
-                    </div>
+                    <InformationModal currencyCode={'MOC'} />
                 </div>
                 {/*<div >*/}
                 {/*    <span role="img" aria-label="info-circle" tabIndex="-1" className="anticon anticon-info-circle InfoIcon TooltipMoC">*/}
