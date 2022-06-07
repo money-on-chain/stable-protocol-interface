@@ -11,10 +11,7 @@ import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import Copy from "../../Page/Copy";
 import RowDetailPegOut from "./RowDetailPegOut";
-<<<<<<< HEAD
-=======
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
->>>>>>> dev
 
 export default function FastBtcPegOut(props) {
 
@@ -230,8 +227,6 @@ export default function FastBtcPegOut(props) {
         <>
             <Table
                 {...state}
-<<<<<<< HEAD
-=======
                 expandable={{
                     expandedRowRender: record => (
                         <p style={{ margin: 0 }}>{record.description}</p>
@@ -243,7 +238,6 @@ export default function FastBtcPegOut(props) {
                             <DownCircleOutlined onClick={e => onExpand(record, e)} />
                         )
                 }}
->>>>>>> dev
                 pagination={{ position: [top, bottom], defaultCurrent: 1, onChange: (page) => setPage(page), total: Object.keys(data_json.pegout_requests).length }}
                 columns={tableColumns}
                 dataSource={hasData ? (auth.isLoggedIn == true) ? data : null : null}
