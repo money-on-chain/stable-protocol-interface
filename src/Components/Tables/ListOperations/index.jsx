@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
+import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import {LargeNumber} from "../../LargeNumber";
 
 export default function ListOperations(props) {
@@ -296,6 +297,17 @@ export default function ListOperations(props) {
             </div>
             <Table
                 {...state}
+                expandable={{
+                    expandedRowRender: record => (
+                        <p style={{ margin: 0 }}>{record.description}</p>
+                    ),
+                    expandIcon: ({ expanded, onExpand, record }) =>
+                        expanded ? (
+                            <UpCircleOutlined onClick={e => onExpand(record, e)} />
+                        ) : (
+                            <DownCircleOutlined onClick={e => onExpand(record, e)} />
+                        )
+                }}
                 pagination={{ position: [top, bottom], defaultCurrent: 1, onChange: (page) => setPage(page), total: Object.keys(data_json.transactions).length }}
                 columns={tableColumns}
                 dataSource={hasData ? (auth.isLoggedIn == true) ? data : null : null}
