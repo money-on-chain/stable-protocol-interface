@@ -130,6 +130,60 @@ export function readJsonTable(data_j){
             break;
     }
 
+    let asset_detail=''
+    let asset_detail_fixed= 6
+    switch (asset) {
+        case 'BPRO':
+            if(data_j.event.includes("Redeem")){
+                asset_detail= 'RBTC'
+            }
+            if(data_j.event.includes("Settlement")){
+                asset_detail= 'BPRO'
+            }
+            if(data_j.event.includes("Mint")){
+                asset_detail= 'BPRO'
+            }
+            if(data_j.event.includes("Transfer")){
+                asset_detail= 'BPRO'
+            }
+
+            break;
+        case 'BTCX':
+            if(data_j.event.includes("Redeem")){
+                asset_detail= 'RBTC'
+            }
+            if(data_j.event.includes("Settlement")){
+                asset_detail= 'RBTC'
+            }
+            if(data_j.event.includes("Mint")){
+                asset_detail= 'BTCX'
+            }
+            if(data_j.event.includes("Transfer")){
+                asset_detail= 'BTCX'
+            }
+            break;
+        case 'DOC':
+            if(data_j.event.includes("Redeem")){
+                asset_detail= 'RBTC'
+            }
+            if(data_j.event.includes("Settlement")){
+                asset_detail= 'DOC'
+                asset_detail_fixed= 2
+            }
+            if(data_j.event.includes("Mint")){
+                asset_detail= 'DOC'
+                asset_detail_fixed= 2
+            }
+            if(data_j.event.includes("Transfer")){
+                asset_detail= 'DOC'
+                asset_detail_fixed= 2
+            }
+            break;
+        default:
+            asset_detail= 'DOC'
+            break;
+    }
+
     const set_status_txt= data_j.status;
     const set_status_percent= data_j.confirmingPercent;
 
@@ -181,7 +235,7 @@ export function readJsonTable(data_j){
     const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
 
     const lastUpdatedAt= data_j.lastUpdatedAt
-    const RBTCAmount= (data_j.RBTCAmount!==undefined)? `You received in your platform ${wallet_detail} RBTC` : '--'
+    const RBTCAmount= (data_j.RBTCAmount!==undefined)? `You received in your platform ${new BigNumber(wallet_detail).toFixed(asset_detail_fixed)} ${asset_detail}` : '--'
     const confirmationTime= data_j.confirmationTime
     const address= data_j.address
     const amount= (data_j.amount!==undefined)? paltform_detail +' '+asset+' ( ' + paltform_detail_usd + ' USD )' : '--'
