@@ -6,10 +6,13 @@ import CountUp from 'react-countup';
 import {Alert, Button, Tooltip} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import data_json from '../../../services/liquidity_mining.json';
+import data_json_claim from '../../../services/claims.json';
 import { setNumber } from '../../../Helpers/helper'
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
+import Web3 from "web3";
+import web3 from "web3";
 
 const BigNumber = require('bignumber.js');
 
@@ -44,8 +47,7 @@ function MocLiquidity(props) {
             <div className="Metric"><h2>{t("global.RewardsBalance_Amount", { ns: 'global' })}</h2>
                 <div className="IncentivesItem">
                     <h3>
-                        {/*<div><span className="" >{setreadyClaim()}</span></div>*/}
-                        {auth.isLoggedIn && <LargeNumber amount={data_json.moc_balance} currencyCode="REWARD" />}
+                        {auth.isLoggedIn && <LargeNumber amount={data_json_claim[0].mocs} currencyCode="REWARD" />}
                         {!auth.isLoggedIn && <span>0.000000 </span>}
                     </h3>
                     <p>MOC</p>
@@ -53,33 +55,17 @@ function MocLiquidity(props) {
             </div>
             <div className="Metric"><h2>{t("global.RewardsBalance_EarnedToday", { ns: 'global' })}</h2>
                 <div className="IncentivesItem">
-                    {/*<h3><span>1,748.001503</span></h3><p>MOC</p>*/}
                     <h3>
-                        {/*<CountUp*/}
-                        {/*    start={875.039}*/}
-                        {/*    end={160527.012}*/}
-                        {/*    duration={2.75}*/}
-                        {/*    separator=" "*/}
-                        {/*    decimals={4}*/}
-                        {/*    decimal=","*/}
-                        {/*    prefix=""*/}
-                        {/*    suffix=" left"*/}
-                        {/*    onEnd={({ pauseResume, reset, start, update }) => start()}*/}
-                        {/*>*/}
-                        {/*    {({ countUpRef, start }) => (*/}
-                        {/*        <div>*/}
-                        {/*            <span ref={countUpRef} />*/}
-                        {/*            <button onClick={start}>Start</button>*/}
-                        {/*        </div>*/}
-                        {/*    )}*/}
-                        {/*</CountUp>*/}
-
-                        {auth.isLoggedIn && <CountUp className='countup'
-                                                     start={875.039}
-                                                     end={160527000.012}
-                                                     duration={5}
-                                                     onEnd={({ pauseResume, reset, start, update }) => start()}
-                        />}
+                        <CountUp
+                            end={Number(Web3.utils.fromWei(data_json.moc_balance, 'kether')).toFixed(6)}
+                            start={(Number(Web3.utils.fromWei(data_json.moc_balance, 'kether')).toFixed(6))-1}
+                            useEasing={false}
+                            decimals={6}
+                            separator={i18n.languages[0] === 'es' ? '.' : ','}
+                            decimal={i18n.languages[0] === 'es' ? ',' : '.'}
+                            onEnd={({ pauseResume, reset, start, update }) => start()}
+                            duration={20000}
+                        />
                         {!auth.isLoggedIn && <span>0.000000</span>}
                         </h3>
                     <p>MOC</p>
