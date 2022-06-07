@@ -24,7 +24,7 @@ function MocAmount() {
     const [t, i18n] = useTranslation(["global", 'moc'])
 
     return (
-        <div className="ContainerMocAmountDatas">
+        <div className="ContainerMocAmountDatas height-auto">
             <div className="Card RewardsBalanceAmount withPadding hasTitle padding-1-2">
                 <div className="title">
                     <h1>{t("global.RewardsBalance_MocAmount", { ns: 'global' })}</h1>
