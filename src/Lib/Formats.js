@@ -79,6 +79,11 @@ const formatMap = {
     valueVariation: valueVariation
 };
 
+const formatLocalMap2 = {
+    es: 'es-AR',
+    en: 'en-US'
+};
+
 const formatLocalMap = {
     es: {
         decimalSeparator: ',',
@@ -174,4 +179,5 @@ export {
     formatPerc,
     RBTCPrecision,
     precision,
+    formatLocalMap2,
 };
