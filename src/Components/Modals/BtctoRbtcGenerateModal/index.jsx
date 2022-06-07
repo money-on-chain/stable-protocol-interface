@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   Modal,
   Alert,
@@ -12,6 +12,8 @@ import QRCode from 'react-qr-code';
 import Copy from '../../Page/Copy';
 import { BTCButton } from './components/BTCButton';
 import FastBtcSocketWrapper from '../../../Lib/FastBtcSocketWrapper';
+import { getBtcAddress } from '../../../Lib/fastBTC/fastBTCMethods';
+import { AuthenticateContext } from '../../../Context/Auth';
 
 export default function BtcToRbtcGenerateModal(props) {
   // const [socket, setSocket] = useState(null);
@@ -19,16 +21,19 @@ export default function BtcToRbtcGenerateModal(props) {
     const socket = new FastBtcSocketWrapper();
     console.log('socket11', socket);
   }, []); */
-  const {visible = false, handleClose = () => {}} = props;
+  const {visible = false, handleClose = () => {}, accountData} = props;
   const [t, i18n]= useTranslation(["global",'moc'])
   const [stateFBtc, setStateFBtc] = useState(initialState);
   const [headerIcon, setHeaderIcon] = useState('icon-atention.svg');
   const [underMaintenance, setUnderMaintenance] = useState(false);
-  const [limits, setLimits] = useState(null);
-  const [step, setStep] = useState(null);
-  const [txId, setTxId] = useState(null);
-  const [depositTx, setDepositTx] = useState(null);
-  const [transferTx, setTransferTx] = useState(null);
+  // const [limits, setLimits] = useState(null);
+  // const [step, setStep] = useState(Step.MAIN);
+  // const [txId, setTxId] = useState(null);
+  // const [depositTx, setDepositTx] = useState(null);
+  // const [transferTx, setTransferTx] = useState(null);
+
+  const auth = useContext(AuthenticateContext);
+  const [address, setAddress] = useState(accountData?.Owner);
   
   const cleanupState = () => {
     setStateFBtc(initialState);
@@ -45,11 +50,15 @@ export default function BtcToRbtcGenerateModal(props) {
       if (socket) {
         //Get tx limits
         socket.emit('txAmount', limits => {
-          setLimits(limits);
+          // setLimits(limits);
+          setStateFBtc(prevState => ({
+            ...prevState,
+            limits
+          }));
         });
       }
     },
-    [step]
+    [stateFBtc.step]
   );
 
   useEffect(
@@ -60,16 +69,28 @@ export default function BtcToRbtcGenerateModal(props) {
         const updateStateBTCtx = tx => {
           console.log('-----DETECTED DEPOSIT TX from ModalTopUp ------');
           console.log(tx);
-          setStep(Step.TRANSACTION);
+          /* setStep(Step.TRANSACTION);
           setTxId(TxId.DEPOSIT);
-          setDepositTx(tx);
+          setDepositTx(tx);*/
+          setStateFBtc(prevState => ({
+            ...prevState,
+            step: Step.TRANSACTION,
+            txId: TxId.DEPOSIT,
+            depositTx: tx
+          }));
         };
         const updateStateRBTCtx = tx => {
           console.log('-----DETECTED TRANSFER TX from ModalTopUp ------');
           console.log(tx);
-          setStep(Step.TRANSACTION);
+          /* setStep(Step.TRANSACTION);
           setTxId(TxId.TRANSFER);
-          setTransferTx(tx);
+          setTransferTx(tx);*/
+          setStateFBtc(prevState => ({
+            ...prevState,
+            step: Step.TRANSACTION,
+            txId: TxId.TRANSFER,
+            transferTx: tx
+          }));
         };
         socket.on('depositTx', updateStateBTCtx);
         socket.on('transferTx', updateStateRBTCtx);
@@ -128,7 +149,7 @@ export default function BtcToRbtcGenerateModal(props) {
         onCancel={handleClose}
         width={550}
         footer={
-          (step === Step.MAIN) && (
+          (stateFBtc.step === Step.MAIN) && (
             <ModalFooter />
           )
         }
@@ -136,7 +157,7 @@ export default function BtcToRbtcGenerateModal(props) {
         wrapClassName="ModalTopUpContainer"
       >
         <div className="ModalTopUpBody">
-          {step === Step.MAIN || step === Step.WALLET ? (
+          {stateFBtc.step === Step.MAIN || stateFBtc.step === Step.WALLET ? (
             <div className="">
               <div className="ModalTopUpTitle">
                 <p className="subtitle">{t('MoC.fastbtc.topUpWalletModal.subtitle', {ns: 'moc'})}</p>
@@ -147,10 +168,10 @@ export default function BtcToRbtcGenerateModal(props) {
                     <b>{t('MoC.fastbtc.topUpWalletModal.limits.header', { ns: 'moc' })}</b>
                     <ul>
                       <li>
-                        Min: {parseFloat(limits?.min.toFixed(4))} BTC
+                        Min: {parseFloat(stateFBtc.limits?.min.toFixed(4))} BTC
                       </li>
                       <li>
-                        Max: {parseFloat(limits?.max.toFixed(4))} BTC
+                        Max: {parseFloat(stateFBtc.limits?.max.toFixed(4))} BTC
                       </li>
                     </ul>
                   </div>
@@ -171,24 +192,30 @@ export default function BtcToRbtcGenerateModal(props) {
                     className="under-maintenance-alert"
                   />
                 ) : (
-                  <div className="TxActions">
-                    {step === Step.WALLET && stateFBtc.deposit.address !== '' ? (
-                      AddressQrCode(stateFBtc.deposit.address)
-                    ) : (
-                      ''
-                    )}
-
-                    <div className="MainActions">
-                      {step === Step.MAIN && (
-                        <BTCButton
-                          underMaintenance={underMaintenance}
-                          onClick={() => {
-                            setStep(Step.WALLET);
-                          }}
-                        />
+                  <>
+                    {/* <MainScreen
+                      state={stateFBtc}
+                      setState={setStateFBtc}
+                      address={address}
+                      underMaintenance={underMaintenance}
+                    /> */}
+                    <div className="TxActions">
+                      {stateFBtc.step === Step.WALLET && stateFBtc.deposit.address === '' ? (
+                        AddressQrCode(stateFBtc.deposit.address)
+                      ) : (
+                        ''
                       )}
-                    </div>
-                  </div>
+
+                      <div className="MainActions">
+                        {stateFBtc.step === Step.MAIN && (
+                          <BTCButton
+                            underMaintenance={underMaintenance}
+                            onClick={() => {
+                              // setStep(Step.WALLET);
+                            } } />
+                        )}
+                      </div>
+                    </div></>
                 )}
               </div>
             </div>
@@ -200,3 +227,4 @@ export default function BtcToRbtcGenerateModal(props) {
     </div>
   )
 }
+
