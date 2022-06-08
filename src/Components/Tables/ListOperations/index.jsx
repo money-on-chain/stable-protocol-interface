@@ -173,7 +173,7 @@ export default function ListOperations(props) {
         data = [];
 
         json_end.forEach((data_j) => {
-            const datas_response = readJsonTable(data_j)
+            const datas_response = readJsonTable(data_j,t,i18n)
 
             if (datas_response['wallet_detail'] !== '--' && datas_response['wallet_detail'] !== 11) {
                 const detail = {

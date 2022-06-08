@@ -86,15 +86,13 @@ const USDValueLargeNumber = ({amountUSD, showUSD, numericLabelParams}) => {
 
 }
 
-const DetailedLargeNumber = ({ amount, currencyCode, includeCurrency, isPositive, showSign, showUSD, amountUSD, numericLabelParams, infoDescription, showFlat  }) => {
-    // Number(null) === 0
-    const [t, i18n]= useTranslation(["global",'moc'])
+const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive, showSign, showUSD, amountUSD, numericLabelParams, infoDescription, showFlat,t, i18n  }) => {
 
     if (currencyCode == 'RBTC') {
         var displayCurrencyCode = 'RBTC';
         currencyCode = 'RESERVE';
     } else {
-        var displayCurrencyCode = t(`Tokens_${currencyCode}_code`);
+        var displayCurrencyCode = t(`MoC.Tokens_${currencyCode}_code`, { ns: 'moc' });
     }
 
     if (amount !== null && amount !== '' && !Number.isNaN(Number(amount))) {
