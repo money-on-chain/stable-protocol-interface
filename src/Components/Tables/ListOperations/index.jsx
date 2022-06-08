@@ -12,7 +12,7 @@ import Web3 from 'web3';
 import { readJsonTable, setNumber, myParseDate } from '../../../Helpers/helper'
 import config from '../../../Config/constants';
 import Copy from "../../Page/Copy";
-import { adjustPrecision, formatLocalMap } from "../../../Lib/Formats";
+import {adjustPrecision, formatLocalMap, formatVisibleValue} from "../../../Lib/Formats";
 import NumericLabel from 'react-pretty-numbers';
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { useTranslation } from "react-i18next";
@@ -182,8 +182,8 @@ export default function ListOperations(props) {
                     , details: datas_response['RBTCAmount']
                     , asset: datas_response['set_asset']
                     , confirmation: (true) ? <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
-                    , address: <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} />
-                    , platform: `+${datas_response['amount']}`
+                    , address: (datas_response['address']!='--')? <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} /> : '--'
+                    , platform: datas_response['amount']
                     , platform_fee: datas_response['platform_fee_value']
                     , block: datas_response['blockNumber']
                     , wallet: datas_response['wallet_value']
@@ -191,7 +191,7 @@ export default function ListOperations(props) {
                     , tx_hash_truncate: datas_response['tx_hash_truncate']
                     , tx_hash: datas_response['tx_hash']
                     , leverage: datas_response['leverage']
-                    , gas_fee: `${datas_response['gas_fee']} ( ${datas_response['gasFeeUSD']})`
+                    , gas_fee: datas_response['gas_fee']
                     , price: datas_response['price']
                     , comments: '--'
                 };
@@ -201,7 +201,13 @@ export default function ListOperations(props) {
                     info: '',
                     event: datas_response['set_event'],
                     asset: datas_response['set_asset'],
-                    platform: `+ ${datas_response['paltform_detail']}`,
+                    // platform: `+ ${datas_response['paltform_detail']}`,
+                    // platform: formatVisibleValue(
+                    //     datas_response['paltform_detail'],
+                    //     'STABLE',
+                    //     'es'
+                    // ),
+                    platform: datas_response['paltform_detail'],
                     // platform: (data_j.amount!==undefined)? <LargeNumber amount={datas_response['paltform_detail']} {...{ currencyCode }} /> : '--',
                     // wallet: (data_j.RBTCAmount!==undefined)? `${wallet_detail} RBTC`:'--',
                     wallet: datas_response['wallet_value_main'],
@@ -239,7 +245,7 @@ export default function ListOperations(props) {
                     event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
                     asset: <img className="uk-preserve-width uk-border-circle" src={window.location.origin + `/Moc/` + asset[0].image} alt="avatar" width={32} />,
                     // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
-                    platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
+                    platform: <span className="display-inline CurrencyTx">{element.platform}</span>,
                     wallet: <span className="display-inline ">{element.wallet} </span>,
                     date: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{element.date}</Moment></span>,
                     status: <div style={{ width: '100%' }}><Progress percent={element.status.percent} /><br /><span
