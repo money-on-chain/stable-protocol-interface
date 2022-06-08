@@ -50,6 +50,11 @@
 }
 .Card.withPadding {
   padding: 1.6em;
+  height: 135px;
+  //width: 248px;
+  //@media (max-width: 600px) {
+  //  width: 248px;
+  //}
 }
 
 
@@ -78,4 +83,9 @@
   .Metric {
     margin-top: 10px;
   }
+}
+
+
+.test{
+  flex: auto;
 }

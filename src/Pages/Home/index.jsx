@@ -66,10 +66,12 @@ function Home(props) {
             <h1 className="PageTitle">{t('MoC.home.title', { ns: 'moc' })}</h1>
             <h3 className="PageSubTitle">{t("MoC.home.subtitle", { ns: 'moc' })}</h3>
             <Row gutter={16}>
-                <Col flex="300px" className={'WalletBalance-mb'}>
+                {/*<Col flex="300px" className={'WalletBalance-mb'}>*/}
+                <div  className={'sec-1'}>
                     <WalletBalance/>
-                </Col>
-                <Col flex="auto">
+                </div>
+                {/*<Col flex="auto">*/}
+                <div  className={'sec-2'}>
                     <div className={'container-b'} style={{height: '100%'}}>
                         <TokenSummaryCard
                             tokenName="stable"
@@ -96,13 +98,14 @@ function Home(props) {
                             currencyCode={'RISKPROX'}
                         />
                     </div>
-                </Col>
-                <Col xs={24} sm={24} md={24} xl={5}>
+                </div>
+                <div className={'sec-3'}>
+                {/*<Col flex="248px">*/}
                     <div className="ContainerMocAmountDatas">
                         <MocAmount />
                         <MocLiquidity />
                     </div>
-                </Col>
+                </div>
             </Row>
             <div className="Card WalletOperations">
                 <ListOperations token={'all'}></ListOperations>
