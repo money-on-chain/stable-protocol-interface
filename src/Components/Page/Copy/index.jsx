@@ -14,14 +14,15 @@ export default function Copy(props) {
     };
 
     return (
-        <h4 onClick={onClick} style={{ display: fastBTC && 'flex'}}>
+        <span onClick={onClick} style={{ display: fastBTC && 'flex','fontSize':'12px'}}>
             <img
                 width={17}
-                src={window.location.origin + '/Moc/copy.svg'}
+                height={17}
+                src={window.location.origin + '/Moc/copy2.png'}
                 alt=""
                 style={{marginRight: 10}}
             />
             {textToShow}
-        </h4>
+        </span>
     );
 }
