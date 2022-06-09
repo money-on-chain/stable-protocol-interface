@@ -191,7 +191,7 @@ export default function ListOperations(props) {
                     , tx_hash_truncate: datas_response['tx_hash_truncate']
                     , tx_hash: datas_response['tx_hash']
                     , leverage: datas_response['leverage']
-                    , gas_fee: datas_response['gas_fee']
+                    , gas_fee: `${datas_response['gas_fee']} ( ${datas_response['gasFeeUSD']})`
                     , price: datas_response['price']
                     , comments: '--'
                 };
