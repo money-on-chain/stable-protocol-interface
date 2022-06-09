@@ -67,6 +67,7 @@ export default function Rbtc(props) {
                     <BtcToRbtcGenerateModal
                         visible={btcGenVisible}
                         handleClose={() => setBtcGenVisible(false)}
+                        accountData={auth.accountData}
                         />
                     </Col>
                     <Col xs={24} md={24} xl={10}>

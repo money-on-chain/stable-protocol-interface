@@ -7,7 +7,7 @@ import DollarOutlined from '@ant-design/icons/DollarOutlined';
 
 const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams, className }) => {
 
-  const [t, i18n]= useTranslation(["global",'moc'])
+  const [t, i18n]= useTranslation(["global",'moc']);
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);
     const params = Object.assign(

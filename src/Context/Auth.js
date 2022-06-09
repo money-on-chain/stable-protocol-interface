@@ -21,6 +21,7 @@ import {
 } from './MultiCallFunctions.js';
 import { enable } from 'workbox-navigation-preload';
 import addressHelper from '../Lib/addressHelper';
+import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
 
 const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
@@ -99,6 +100,9 @@ const AuthenticateProvider = ({ children }) => {
         truncatedAddress: ''
     });
     // const [transactionReceipt, setTransactionReceipt] = useState(null);
+
+    // Fast BTC socket
+    const socket = new FastBtcSocketWrapper();
 
     useEffect(() => {
         if (checkLoginFirstTime) {
@@ -666,6 +670,8 @@ const AuthenticateProvider = ({ children }) => {
         })
     };
 
+    
+
     return (
         <AuthenticateContext.Provider
             value={{    
@@ -697,7 +703,8 @@ const AuthenticateProvider = ({ children }) => {
                 transferBproTo,
                 transferMocTo,
                 calcMintInterestValues,
-                approveReserve
+                approveReserve,
+                socket
             }}
         >
             {children}

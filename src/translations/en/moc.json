@@ -878,17 +878,17 @@
         "transaction2DetailsTitle": "Step 2/2: rBTC TRANSACTION",
         "transactionInfo": {
           "step": "STEP __step__: __txName__ TRANSACTION",
-          "status_pending": "Status __statusIndex__/2 pending",
-          "status_confirmed": "Status __statusIndex__/2 confirmed",
-          "valueDeposited": "Value deposited: __value__",
+          "status_pending": "Status {{statusIndex}}/2 pending",
+          "status_confirmed": "Status {{statusIndex}}/2 confirmed",
+          "valueDeposited": "Value deposited: {{value}}",
           "toLabel": "To TX:",
           "txHashLabel": "Tx hash:",
           "fromLabel": "From TX:"
         },
         "limits": {
           "header": "Conversion limits",
-          "min": "Min: __minValue__ BTC",
-          "max": "Max: __maxValue__ BTC"
+          "min": "Min: {{minValue}} BTC",
+          "max": "Max: {{maxValue}} BTC"
         },
         "limits_pegout": {
           "header": "Conversion limits",
