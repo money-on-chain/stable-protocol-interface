@@ -2,6 +2,7 @@ import web3 from "web3";
 import config from '../Config/constants';
 import Web3 from "web3";
 import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber";
+import moment from 'moment';
 const BigNumber = require('bignumber.js');
 
 export function setNumber(number){
@@ -204,7 +205,10 @@ export function readJsonTable(data_j,t, i18n){
     const truncate_address= (data_j.otherAddress)? data_j.otherAddress.substring(0, 6) + '...' + data_j.otherAddress.substring(data_j.otherAddress.length - 4, data_j.otherAddress.length) : '--'
     const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
 
-    const lastUpdatedAt= data_j.lastUpdatedAt
+    // const lastUpdatedAt= data_j.lastUpdatedAt
+    const lastUpdatedAt= data_j.createdAt
+        ? moment(data_j.createdAt).format('YYYY-MM-DD HH:mm:ss')
+        : '--'
     const RBTCAmount= getExplainByEvent({
         event: data_j.event,
         amount: DetailedLargeNumber({
@@ -246,8 +250,6 @@ export function readJsonTable(data_j,t, i18n){
              : data_j.mocCommissionValue,
          currencyCode: new BigNumber(data_j.rbtcCommission).gt(0) ? 'RESERVE' : 'MOC',
          includeCurrency: true,
-         isPositive: true,
-         showSign: true,
          amountUSD: data_j.USDCommission ? data_j.USDCommission : 0,
          showUSD: true,
          t: t,

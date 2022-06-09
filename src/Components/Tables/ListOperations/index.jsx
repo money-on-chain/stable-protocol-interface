@@ -247,7 +247,7 @@ export default function ListOperations(props) {
                     // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                     platform: <span className="display-inline CurrencyTx">{element.platform}</span>,
                     wallet: <span className="display-inline ">{element.wallet} </span>,
-                    date: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{element.date}</Moment></span>,
+                    date: <span>{element.date}</span>,
                     status: <div style={{ width: '100%' }}><Progress percent={element.status.percent} /><br /><span
                         className="color-confirmed conf_title">{element.status.txt}</span></div>,
                     description: <RowDetail detail={element.detail} />,
