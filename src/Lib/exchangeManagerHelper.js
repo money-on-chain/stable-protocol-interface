@@ -10,6 +10,7 @@ import { getTransactionType } from './exchangeHelper';
 const BigNumber = require('bignumber.js');
 
 const convertAmount = (source, target, amount, convertToken) => {
+  console.log(source, target, amount);
   if (amount === '') {
     return '';
   }
@@ -20,6 +21,7 @@ const convertAmount = (source, target, amount, convertToken) => {
     convertToken(source, target, formatValueToContract(amount, source)),
     target
   );
+  console.log('convertedAmount', convertedAmount);
   return isNaN(convertedAmount) ? '' : convertedAmount.toString();
 };
 

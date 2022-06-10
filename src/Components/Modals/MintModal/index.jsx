@@ -1,5 +1,6 @@
+/* eslint-disable default-case */
 /* eslint-disable react/jsx-no-target-blank */
-import { Button, Input } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { AuthenticateContext } from '../../../Context/Auth';
 import './style.scss';
 import Web3 from 'web3';
@@ -8,6 +9,7 @@ import { Modal, notification } from 'antd';
 import Copy from "../../Page/Copy";
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
 import { LargeNumber } from '../../LargeNumber';
+import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";
 import { convertAmount } from '../../../Lib/exchangeManagerHelper';
 const BigNumber = require('bignumber.js');
@@ -49,7 +51,7 @@ export default function MintModal(props) {
   const tokenName = currencyYouReceive
     ? currenciesDetail.find((x) => x.value === token).label
     : '';
-
+  console.log('tokenNameExchange', tokenNameExchange);
   const [currentHash, setCurrentHash] = useState(null);
   const [comment, setComment] = useState('');
   const [t, i18n]= useTranslation(["global",'moc'])
@@ -139,21 +141,33 @@ export default function MintModal(props) {
         <div className="AlignedAndCentered Amount">
           <span className="Name">{t('global.ConfirmTransactionModal_Exchanging')}</span>
           <span className="Value" style={styleExchange}>
-            <LargeNumber
-              currencyCode={props.exchanging.currencyCode} // tokenNameExchange}
-              amount={props.exchanging.value} // props.valueYouExchange}
-              includeCurrency
-            />
+            <Tooltip title={Number(props.valueYouExchange)?.toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                minimumFractionDigits: 10,
+                maximumFractionDigits: 10
+            })}>
+              <div>
+                {Number(props.valueYouExchange).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                  minimumFractionDigits: tokenNameExchange === 'DOC' ? 2 : 6,
+                  maximumFractionDigits: tokenNameExchange === 'DOC' ? 2 : 6
+                })} {t(`MoC.Tokens_${tokenNameExchange === 'DOC' ? 'STABLE' : tokenNameExchange === 'RBTC' ? 'RESERVE' : tokenNameExchange}_code`, {ns: 'moc' })}
+              </div>
+          </Tooltip>
           </span>
         </div>
         <div className="AlignedAndCentered Amount">
           <span className="Name">{t('global.ConfirmTransactionModal_Receiving')}</span>
           <span className="Value" style={styleReceive}>
-            <LargeNumber
-                currencyCode={props.receiving.currencyCode} // {tokenNameReceive}
-                amount={props.receiving.value} // {props.valueYouReceive}
-                includeCurrency
-              />
+            <Tooltip title={Number(props.valueYouReceive)?.toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                minimumFractionDigits: 10,
+                maximumFractionDigits: 10
+            })}>
+              <div>
+                {Number(props.valueYouReceive).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                  minimumFractionDigits: tokenNameReceive === 'DOC' ? 2 : 6,
+                  maximumFractionDigits: tokenNameReceive === 'DOC' ? 2 : 6
+                })} {t(`MoC.Tokens_${tokenNameReceive === 'DOC' ? 'STABLE' : tokenNameReceive === 'RBTC' ? 'RESERVE' : tokenNameReceive}_code`, {ns: 'moc' })}
+              </div>
+          </Tooltip>
           </span>
         </div>
         <div className="USDConversion">
@@ -167,12 +181,12 @@ export default function MintModal(props) {
           <div className="Name">
             <div className="MOCFee">
               <div className={`AlignedAndCentered Amount`}>
-                <span className="Name">{`${t('global.ConfirmTransactionModal_MOCFee')} (${(fee.percentage!==undefined)? fee.percentage: 0.15}%)`}</span>
+                <span className="Name">{`${t('global.ConfirmTransactionModal_MOCFee')} (${(fee?.percentage!==undefined)? fee.percentage: 0.15}%)`}</span>
                 <span className={`Value ${appMode}`}>
                   {auth.isLoggedIn &&
                   <LargeNumber
-                    currencyCode={fee.currencyCode}
-                    amount={fee.value}
+                    currencyCode={fee?.currencyCode}
+                    amount={fee?.value}
                     includeCurrency
                   />}
                   {!auth.isLoggedIn && <span>0.000000 RBTC</span>}
@@ -180,11 +194,11 @@ export default function MintModal(props) {
               </div>
             </div>
             {interests &&
-              interests.interestValue &&
-              interests.interestValue.gt(0) && (
+              interests?.interestValue &&
+              interests?.interestValue.gt(0) && (
                 <div className="MOCFee">
                   <div className={`AlignedAndCentered Amount`}>
-                    <span className="Name">{`${t('global.ConfirmTransactionModal_Interests')} (${interests.interestRate}%)`}</span>
+                    <span className="Name">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>
                     <span className={`Value ${appMode}`}>
                       <LargeNumber
                         currencyCode={'RESERVE' }
