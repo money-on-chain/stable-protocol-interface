@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip} from 'recharts';
 import {AuthenticateContext} from "../../../Context/Auth";
-import { adjustPrecision, formatLocalMap } from '../../../Lib/Formats';
+import { adjustPrecision, formatLocalMap, formatLocalMap2 } from '../../../Lib/Formats';
 import {useTranslation} from "react-i18next";
 
 
@@ -53,7 +53,7 @@ function WalletBalancePie(props) {
     };
     const set_doc_usd= () =>{
         if (auth.userBalanceData && accountData.Balance) {
-            const doc_usd= new BigNumber(auth.userBalanceData['docBalance'])
+            const doc_usd= new BigNumber(auth.userBalanceData['docBalance']);
             const doc= (auth.userBalanceData['docBalance']/auth.contractStatusData.bitcoinPrice).toFixed(6);
             return {'normal':doc,'usd':doc_usd}
         }
@@ -80,7 +80,11 @@ function WalletBalancePie(props) {
             const bpro_usd= set_bpro_usd()['usd']
             const btc_usd= set_btc_usd()['usd']
             const moc_balance_usd= set_moc_balance_usd()['usd']
-            return (Number(rbtc_main_usd)+Number(doc_usd)+Number(bpro_usd)+Number(btc_usd) +Number(moc_balance_usd)).toFixed(2)
+            return (Number(rbtc_main_usd)+Number(doc_usd)+Number(bpro_usd)+Number(btc_usd)+Number(moc_balance_usd)).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              }
+            );
         }else{
             return (0).toFixed(2)
         }
@@ -93,7 +97,10 @@ function WalletBalancePie(props) {
              const bpro= set_bpro_usd()['normal']
              const btc= set_btc_usd()['normal']
              const moc_balance= set_moc_balance_usd()['normal']
-            return (Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) + Number(moc_balance)).toFixed(6)
+             return (Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) + Number(moc_balance)).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                minimumFractionDigits: 6,
+                maximumFractionDigits: 6
+              });
         }else{
             return (0).toFixed(6)
         }
@@ -103,10 +110,42 @@ function WalletBalancePie(props) {
     const getPie = () => {
         if (auth.userBalanceData && accountData.Balance) {
             const data = [
-                { name: 'Group A', value: Number((set_doc_usd()['usd']/auth.contractStatusData.bitcoinPrice).toFixed(6)), set1: (set_doc_usd()['usd']/auth.contractStatusData.bitcoinPrice).toFixed(6)+' RBTC', set2: set_doc_usd()['usd'] +' DOC', class: 'STABLE' },
-                { name: 'Group B', value: Number(((set_bpro_usd()['usd'])/auth.contractStatusData.bitcoinPrice).toFixed(6)), set1: ((set_bpro_usd()['usd'])/auth.contractStatusData.bitcoinPrice).toFixed(6) +' RBTC', set2: auth.userBalanceData.bproBalance +' BPRO', class: 'RISKPRO' },
-                { name: 'Group C', value: (set_moc_balance_usd()['usd']/auth.contractStatusData.bitcoinPrice), set1: (set_moc_balance_usd()['usd']/auth.contractStatusData.bitcoinPrice).toFixed(4)+' RBTC', set2: set_moc_balance_usd()['usd']+' MOC', class: 'RISKPROX' },
-                { name: 'Group d', value: Number(new BigNumber(accountData.Balance)), set1: Number(new BigNumber(accountData.Balance)).toFixed(4)+' RBTC', set2: Number(new BigNumber(accountData.Balance)).toFixed(4)+' RBTC', class: 'RBTC_MAIN' }
+                {
+                    name: 'Group A',
+                    value: Number((set_doc_usd()['usd']/auth.contractStatusData.bitcoinPrice).toFixed(6)),
+                    set1: (set_doc_usd()['usd']/auth.contractStatusData.bitcoinPrice).toFixed(6)+' RBTC',
+                    set2: (set_doc_usd()['usd']).toFormat(2, formatLocalMap[i18n.languages[0]]) +' DOC',
+                    class: 'STABLE'
+                },
+                {
+                    name: 'Group B', 
+                    alue: Number(((set_bpro_usd()['usd'])/auth.contractStatusData.bitcoinPrice).toFixed(6)),
+                    set1: ((set_bpro_usd()['usd'])/auth.contractStatusData.bitcoinPrice).toFixed(6) +' RBTC',
+                    set2: auth.userBalanceData.bproBalance +' BPRO', class: 'RISKPRO'
+                },
+                {
+                    name: 'Group C',
+                    value: (set_moc_balance_usd()['usd']/auth.contractStatusData.bitcoinPrice),
+                    set1: (set_moc_balance_usd()['usd']/auth.contractStatusData.bitcoinPrice).toFixed(4)+' RBTC',
+                    set2: (set_moc_balance_usd()['usd']).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                      }) +' MOC',
+                    class: 'RISKPROX'
+                },
+                {
+                    name: 'Group d',
+                    value: Number(new BigNumber(accountData.Balance)),
+                    set1: (Number(new BigNumber(accountData.Balance))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                        minimumFractionDigits: 6,
+                        maximumFractionDigits: 6
+                      })+' RBTC',
+                    set2: (Number(new BigNumber(accountData.Balance))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                        minimumFractionDigits: 6,
+                        maximumFractionDigits: 6
+                      })+' RBTC',
+                    class: 'RBTC_MAIN'
+                }
 
             ];
 
