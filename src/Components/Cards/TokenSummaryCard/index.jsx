@@ -64,7 +64,7 @@ export default function TokenSummaryCard(props) {
     };
 
     return (
-        <Row className="Card TokenSummaryCard">
+        <Row className="Card TokenSummaryCard" style={{'height':'135px'}}>
             <InformationModal currencyCode={currencyCode} />
             <Col
                 span={7}

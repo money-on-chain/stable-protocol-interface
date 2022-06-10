@@ -4,7 +4,7 @@
   margin-bottom: 14px;
   height: 100%;
   position: relative;
-  @media screen and (max-width: 1199px) {
+  @media screen and (max-width: 900px) {
     margin-top: 15px;
   }
   .Tooltip{
@@ -102,3 +102,44 @@
 .height-auto{
   height:auto
 }
+
+.ant-col-xl-4{
+  //padding-right: 0 !important;
+}
+
+.sec-1{
+  width:22%;
+  padding-left: 8px;
+  padding-right: 8px;
+  @media screen and (max-width: 1175px) {
+    width:100%;
+  }
+  @media screen and (min-width: 1176px) and (max-width: 1230px){
+    width:29%;
+  }
+}
+
+.sec-2{
+  width:59%;
+  padding-left: 8px;
+  padding-right: 8px;
+  @media screen and (max-width: 1175px) {
+    width:100%;
+    margin-top: 10px;
+  }
+  @media screen and (min-width: 1176px) and (max-width: 1430px){
+    width:52%;
+  }
+}
+
+.sec-3{
+  width:19%;
+  padding-left: 8px;
+  padding-right: 8px;
+  @media screen and (max-width: 1175px) {
+    width:100%;
+  }
+}
+
+
+

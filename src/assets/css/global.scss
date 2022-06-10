@@ -86,6 +86,7 @@ a {
     margin: 0;
     padding: 0;
   }
+  //height: 135px;
 }
 
 .recharts-responsive-container, .recharts-wrapper {
@@ -220,6 +221,9 @@ a {
 }
 .mrb-15{
   margin-bottom: 15px;
+}
+.mrb-25{
+  margin-bottom: 25px;
 }
 .container-b{
   flex-grow: 1;
@@ -481,4 +485,8 @@ a {
 
 .status-confirmed{
   color: #478210;
+}
+
+.color-707070{
+  color: #707070;
 }

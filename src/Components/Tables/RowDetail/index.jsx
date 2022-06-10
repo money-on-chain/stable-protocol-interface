@@ -32,7 +32,7 @@ function RowDetail(props) {
                     <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">{props.detail.asset}    </td>
                     <th className="ant-descriptions-item-label-th ant-descriptions-border-bottom" colSpan="1">{t('MoC.operations.columns_detailed.confirmation', { ns: 'moc' })}</th>
                     <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">{props.detail.confirmation}   </td>
-                    <th className="ant-descriptions-item-label-th ant-descriptions-border-bottom" colSpan="1">{t('MoC.operations.columns_detailed.confirmation', { ns: 'moc' })}</th>
+                    <th className="ant-descriptions-item-label-th ant-descriptions-border-bottom" colSpan="1">{t('MoC.operations.columns_detailed.address', { ns: 'moc' })}</th>
                     <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">{props.detail.address}  </td>
                 </tr>
                 <tr className="ant-descriptions-row">

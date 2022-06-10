@@ -17,7 +17,7 @@ function WalletBalance(props) {
 
     return (
         <div className="WalletBalance mrc-15" style={{ height: '100%' }}>
-            <div className="mrb-15">{t("global.TotalBalanceCard_totalBalance", { ns: 'global' })}</div>
+            <div className="mrb-25 color-707070">{t("global.TotalBalanceCard_totalBalance", { ns: 'global' })}</div>
             <WalletBalancePie />
             {auth.isLoggedIn &&
             <div className="TotalBalanceBottom justify-content-initial">

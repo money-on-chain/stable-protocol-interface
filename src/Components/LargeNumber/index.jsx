@@ -89,15 +89,13 @@ const USDValueLargeNumber = ({amountUSD, showUSD, numericLabelParams}) => {
 
 }
 
-const DetailedLargeNumber = ({ amount, currencyCode, includeCurrency, isPositive, showSign, showUSD, amountUSD, numericLabelParams, infoDescription, showFlat  }) => {
-    // Number(null) === 0
-    const [t, i18n]= useTranslation(["global",'moc'])
+const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive, showSign, showUSD, amountUSD, numericLabelParams, infoDescription, showFlat,t, i18n  }) => {
 
     if (currencyCode == 'RBTC') {
         var displayCurrencyCode = 'RBTC';
         currencyCode = 'RESERVE';
     } else {
-        var displayCurrencyCode = t(`Tokens_${currencyCode}_code`);
+        var displayCurrencyCode = t(`MoC.Tokens_${currencyCode}_code`, { ns: 'moc' });
     }
 
     if (amount !== null && amount !== '' && !Number.isNaN(Number(amount))) {
@@ -152,8 +150,8 @@ const DetailedLargeNumber = ({ amount, currencyCode, includeCurrency, isPositive
     }
 
     return (
-        <Tooltip title={t('general.invalidValueDescription')}>
-            {t(`general.invalidValuePlaceholder`, {ns: 'moc' })}
+        <Tooltip title={t('MoC.general.invalidValueDescription', {ns: 'moc' })}>
+            {t(`MoC.general.invalidValuePlaceholder`, {ns: 'moc' })}
         </Tooltip>
     );
 };
@@ -166,5 +164,71 @@ DetailedLargeNumber.defaultProps = {
     infoDescription: ''
 }
 
-export { LargeNumber, DetailedLargeNumber };
+const getExplainByEvent = ({ event, amount, amount_rbtc, status, token_involved, t, i18n }) => {
+    if (status != 'confirmed') {
+        return '--';
+    }
+
+    const map = {
+        RiskProMint: (
+            <div class="">
+                {t('MoC.operations.explain.RiskProMint', { ns: 'moc' })} {amount}
+            </div>
+        ),
+        RiskProRedeem: (
+            <div class="">
+                {t('MoC.operations.explain.RiskProRedeem', { ns: 'moc' })} {amount_rbtc}
+            </div>
+        ),
+        StableTokenMint: (
+            <div class="">
+                {t('MoC.operations.explain.StableTokenMint', { ns: 'moc' })} {amount}
+            </div>
+        ),
+        StableTokenRedeem: (
+            <span class="">
+                {t('MoC.operations.explain.StableTokenRedeem', { ns: 'moc' })} {amount_rbtc}
+            </span>
+        ),
+        FreeStableTokenRedeem: (
+            <span class="">
+                {t('MoC.operations.explain.FreeStableTokenRedeem', { ns: 'moc' })} {amount_rbtc}
+            </span>
+        ),
+        RiskProxMint: (
+            <span class="">
+                {t('MoC.operations.explain.RiskProxMint', { ns: 'moc' })} {amount}
+            </span>
+        ),
+        RiskProxRedeem: (
+            <span class="">
+                {t('MoC.operations.explain.RiskProxRedeem', { ns: 'moc' })} {amount_rbtc}
+            </span>
+        ),
+        SettlementDeleveraging: (
+            <span class="">
+                {t('MoC.operations.explain.SettlementDeleveraging', { ns: 'moc' })} {amount_rbtc}
+            </span>
+        ),
+        RedeemRequestAlter: (
+            <span class="">
+                {t('MoC.operations.explain.RedeemRequestAlter', { ns: 'moc' })} {amount}
+            </span>
+        ),
+        Transfer: (
+            <span class="">
+                {t('MoC.operations.explain.Transfer_positive', { ns: 'moc' })} {amount}
+            </span>
+        ),
+        BucketLiquidation: (
+            <span class="">
+                {t('MoC.operations.explain.BucketLiquidation', { ns: 'moc' })} {amount}
+            </span>
+        )
+    };
+
+    return map[event];
+};
+
+export { LargeNumber, DetailedLargeNumber, getExplainByEvent };
 

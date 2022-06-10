@@ -1,9 +1,9 @@
 import web3 from "web3";
 import config from '../Config/constants';
 import Web3 from "web3";
-import {DetailedLargeNumber} from "../Components/LargeNumber";
+import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber";
+import moment from 'moment';
 const BigNumber = require('bignumber.js');
-
 
 export function setNumber(number){
     if(number.indexOf(".")!==-1){
@@ -15,15 +15,10 @@ export function setNumber(number){
     }
 }
 
-
 export function getDatasMetrics(auth){
     const coin_usd= config.coin_usd
     if (auth.userBalanceData) {
         if (auth.userBalanceData) {
-            console.log('auth*********************************************');
-            console.log(auth.userBalanceData);
-            console.log(auth.contractStatusData);
-            console.log('auth*********************************************');
             const globalCoverage= Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
             const globalCoverageClean= Number(auth.contractStatusData['globalCoverage']).toFixed(4)
 
@@ -101,7 +96,7 @@ export function getDatasMetrics(auth){
 
 
 
-export function readJsonTable(data_j){
+export function readJsonTable(data_j,t, i18n){
     var set_event= "";
     if(data_j.event.includes("Mint")){set_event='MINT'}
     if(data_j.event.includes("Settlement")){set_event='SETTLEMENT'}
@@ -189,41 +184,17 @@ export function readJsonTable(data_j){
 
     const wallet_detail= (data_j.userAmount!==undefined)? parseFloat(data_j.userAmount).toFixed(6)  : '--'
     const wallet_detail_usd= (wallet_detail * config.coin_usd).toFixed(2)
-    const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(fixed) : '--'
-    // const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.toWei(data_j.amount, 'mwei')).toFixed(fixed) : '--'
-    // const paltform_detail=
-        /*DetailedLargeNumber({
+    const paltform_detail= DetailedLargeNumber({
         amount: data_j.amount,
-        currencyCode: 'MOC',
+        currencyCode: data_j.tokenInvolved,
         includeCurrency: true,
-        isPositive: true,
+        isPositive: data_j.isPositive,
         showSign: true,
         amountUSD: data_j.USDAmount ? data_j.USDAmount : 0,
-        showUSD: true
-    })*/
-
-        console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
-        console.log(data_j.amount)
-        console.log(Web3.utils.toWei(data_j.amount, 'mwei'))
-        console.log(data_j.tokenInvolved)
-        console.log(data_j.isPositive)
-        console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq')
-
-    // const paltform_detail= DetailedLargeNumber({
-    //     amount : 799973321917036534061,
-    //     currencyCode : 'RBTC',
-    //     includeCurrency : true,
-    //     showSign : true,
-    //     isPositive : data_j.isPositive
-    // })
-
-    // console.log('paltform_detail------------------------')
-    // console.log(paltform_detail)
-    // console.log('paltform_detail------------------------')
-
-    // const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(fixed) : '--'
-    // const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(new BigNumber("799973321917036534061"), 'ether')).toFixed(fixed) : '--'
-
+        showUSD: false,
+        t: t,
+        i18n:i18n
+    })
     const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
     const platform_fee= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(6) : ''
     const platform_fee_usd= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? ((parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(2))*config.coin_usd).toFixed(2) : ''
@@ -231,24 +202,124 @@ export function readJsonTable(data_j){
     const gasFeeUSD= `${(gasFee * config.coin_usd).toFixed(2)} USD`
     const interest_detail= (data_j.USDInterests!==undefined)? parseFloat(Web3.utils.fromWei(Web3.utils.toWei(setNumber(data_j.USDInterests), 'Kwei')), 'Kwei').toFixed(6) : 0
     const interest_detail_usd= (interest_detail * config.coin_usd).toFixed(2)
-    const truncate_address= data_j.address.substring(0, 6) + '...' + data_j.address.substring(data_j.address.length - 4, data_j.address.length);
+    const truncate_address= (data_j.otherAddress)? data_j.otherAddress.substring(0, 6) + '...' + data_j.otherAddress.substring(data_j.otherAddress.length - 4, data_j.otherAddress.length) : '--'
     const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
 
-    const lastUpdatedAt= data_j.lastUpdatedAt
-    const RBTCAmount= (data_j.RBTCAmount!==undefined)? `You received in your platform ${new BigNumber(wallet_detail).toFixed(asset_detail_fixed)} ${asset_detail}` : '--'
+    // const lastUpdatedAt= data_j.lastUpdatedAt
+    const lastUpdatedAt= data_j.createdAt
+        ? moment(data_j.createdAt).format('YYYY-MM-DD HH:mm:ss')
+        : '--'
+    const RBTCAmount= getExplainByEvent({
+        event: data_j.event,
+        amount: DetailedLargeNumber({
+            amount: data_j.amount,
+            currencyCode: data_j.tokenInvolved,
+            includeCurrency: true,
+            t: t,
+            i18n:i18n
+        }),
+        amount_rbtc: DetailedLargeNumber({
+            amount: data_j.RBTCTotal ? data_j.RBTCTotal : data_j.RBTCAmount,
+            currencyCode: 'RESERVE',
+            includeCurrency: true,
+            t: t,
+            i18n:i18n
+        }),
+        status: data_j.status,
+        token_involved: t(`MoC.Tokens_${data_j.tokenInvolved}_code`, { ns: 'moc' }),
+        t: t,
+        i18n:i18n
+    })
     const confirmationTime= data_j.confirmationTime
-    const address= data_j.address
-    const amount= (data_j.amount!==undefined)? paltform_detail +' '+asset+' ( ' + paltform_detail_usd + ' USD )' : '--'
-    const platform_fee_value= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? `${platform_fee} RBTC ( ${platform_fee_usd} USD )`  : '--'
+    const address= data_j.otherAddress ? data_j.otherAddress : '--'
+    const amount=  DetailedLargeNumber({
+        amount: data_j.amount,
+        currencyCode: data_j.tokenInvolved,
+        includeCurrency: true,
+        isPositive: data_j.isPositive,
+        showSign: true,
+        amountUSD: data_j.USDAmount ? data_j.USDAmount : 0,
+        showUSD: true,
+        t: t,
+        i18n:i18n
+    })
+
+    const platform_fee_value= DetailedLargeNumber({
+         amount: new BigNumber(data_j.rbtcCommission).gt(0)
+             ? data_j.rbtcCommission
+             : data_j.mocCommissionValue,
+         currencyCode: new BigNumber(data_j.rbtcCommission).gt(0) ? 'RESERVE' : 'MOC',
+         includeCurrency: true,
+         amountUSD: data_j.USDCommission ? data_j.USDCommission : 0,
+         showUSD: true,
+         t: t,
+         i18n:i18n
+    })
+
     const blockNumber= (data_j.blockNumber!==undefined)? data_j.blockNumber : '--'
-    const wallet_value= (data_j.userAmount!==undefined)? `-${wallet_detail} RBTC ( ${wallet_detail_usd} USD )` : '--'
-    const interests= (data_j.USDInterests!==undefined)? `${interest_detail} RBTC ( ${interest_detail_usd} USD )` : '--'
+    const wallet_value= DetailedLargeNumber({
+        amount: data_j.RBTCTotal ? data_j.RBTCTotal : data_j.RBTCAmount,
+        currencyCode: 'RESERVE',
+        includeCurrency: true,
+        isPositive: !data_j.isPositive,
+        showSign: true,
+        amountUSD: data_j.USDTotal ? data_j.USDTotal : 0,
+        showUSD: true,
+        t: t,
+        i18n:i18n
+    })
+
+    const interests= DetailedLargeNumber({
+        amount: data_j.rbtcInterests,
+        currencyCode: 'RESERVE',
+        includeCurrency: true,
+        amountUSD: data_j.USDInterests ? data_j.USDInterests : 0,
+        showUSD: true,
+        isPositive: data_j.event == 'RiskProxRedeem' ? false : true,
+        showSign: data_j.event == 'RiskProxRedeem' ? true : undefined,
+        infoDescription: data_j.event == 'RiskProxRedeem' ? 'Credit interest' : undefined,
+        t: t,
+        i18n:i18n
+    })
     const tx_hash_truncate= (data_j.transactionHash!==undefined)? truncate_txhash : '--'
     const tx_hash= (data_j.transactionHash!==undefined)? data_j.transactionHash : '--'
-    const gas_fee= (data_j.gasFeeUSD!== undefined)? `${gasFee} RBTC` : '--'
-    const price= (data_j.reservePrice!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(data_j.reservePrice)), 'Kwei').toFixed(2) +' USD' : '--'
-    const wallet_value_main= (data_j.userAmount!==undefined)? `-${wallet_detail} RBTC`:'--'
-    const leverage= (data_j.leverage!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(data_j.leverage)), 'Kwei').toFixed(6) : '--'
+
+    const gas_fee= DetailedLargeNumber({
+        amount: data_j.gasFeeRBTC,
+        currencyCode: 'RBTC',
+        includeCurrency: true,
+        amountUSD: data_j.gasFeeUSD ? data_j.gasFeeUSD : 0,
+        showUSD: true,
+        t: t,
+        i18n:i18n
+    })
+
+    const price= DetailedLargeNumber({
+        amount: data_j.reservePrice,
+        currencyCode: 'USD',
+        includeCurrency: true,
+        t: t,
+        i18n:i18n
+    })
+
+    const wallet_value_main= DetailedLargeNumber({
+        amount: data_j.RBTCTotal ? data_j.RBTCTotal : data_j.RBTCAmount,
+        currencyCode: 'RESERVE',
+        includeCurrency: true,
+        isPositive: !data_j.isPositive,
+        showSign: true,
+        amountUSD: data_j.USDTotal ? data_j.USDTotal : 0,
+        showUSD: false,
+        t: t,
+        i18n:i18n
+    })
+
+    const leverage=  DetailedLargeNumber({
+            amount: data_j.leverage,
+            currencyCode: data_j.tokenInvolved,
+        t: t,
+        i18n:i18n
+        })
 
     return {set_event:set_event,set_asset:set_asset,set_status_txt:set_status_txt,set_status_percent:set_status_percent,
         wallet_detail:wallet_detail,wallet_detail_usd:wallet_detail_usd,
@@ -308,95 +379,10 @@ export function readJsonTableFastBtcPegOut(data_j){
     const rskAddress= (data_j.rskAddress!==undefined)? data_j.rskAddress : '--'
     const rskAddressCut= (data_j.rskAddress!==undefined)? data_j.rskAddress?.slice(0, 5)+'...'+ data_j.rskAddress?.slice(-4) : '--'
 
-    console.log('hash_idhash_idhash_idhash_id')
-    console.log(hash_id)
-    console.log('hash_idhash_idhash_idhash_id')
-
     return {
         hashId:hash_id,status:status, btcAmount:btcAmount,btcFee:btcFee,timestamp:timestamp,
         btcAddress:btcAddress,date:date,hash_id_cut:hash_id_cut,btcAddressCut:btcAddressCut,transactionHash:transactionHash,
         transactionHashCut:transactionHashCut,blockNumber:blockNumber,rskAddress:rskAddress,rskAddressCut:rskAddressCut
     }
-
-
-/*
-
-
-
-
-
-    var set_event= "";
-    if(data_j.event.includes("Mint")){set_event='MINT'}
-    if(data_j.event.includes("Settlement")){set_event='SETTLEMENT'}
-    if(data_j.event.includes("Redeem")){set_event='REDEEM'}
-
-    const set_asset= data_j.tokenInvolved;
-
-    let fixed=2
-    if( set_asset!='STABLE' && set_asset!='USD'){
-        fixed= 6
-    }
-
-    let asset=''
-    switch (set_asset) {
-        case 'STABLE':
-            asset = 'DOC';
-            break;
-        case 'RISKPRO':
-            asset = 'BPRO'
-            break;
-        case 'RISKPROX':
-            asset = 'BTCX'
-            break;
-        default:
-            asset = 'DOC'
-            break;
-    }
-
-    const set_status_txt= data_j.status;
-    const set_status_percent= data_j.confirmingPercent;
-
-    const wallet_detail= (data_j.userAmount!==undefined)? parseFloat(data_j.userAmount).toFixed(6)  : '--'
-    const wallet_detail_usd= (wallet_detail * config.coin_usd).toFixed(2)
-    const paltform_detail= (data_j.amount!==undefined)? parseFloat(Web3.utils.fromWei(data_j.amount, 'ether')).toFixed(fixed) : '--'
-
-    const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
-    const platform_fee= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(6) : ''
-    const platform_fee_usd= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? ((parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(2))*config.coin_usd).toFixed(2) : ''
-    const gasFee= (data_j.gasFeeRBTC!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(data_j.gasFeeRBTC)), 'Kwei').toFixed(6) : 0
-    const gasFeeUSD= (gasFee * config.coin_usd).toFixed(2)
-    const interest_detail= (data_j.USDInterests!==undefined)? parseFloat(Web3.utils.fromWei(Web3.utils.toWei(setNumber(data_j.USDInterests), 'Kwei')), 'Kwei').toFixed(6) : 0
-    const interest_detail_usd= (interest_detail * config.coin_usd).toFixed(2)
-    const truncate_address= data_j.address.substring(0, 6) + '...' + data_j.address.substring(data_j.address.length - 4, data_j.address.length);
-    const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
-
-    const lastUpdatedAt= data_j.lastUpdatedAt
-    const RBTCAmount= (data_j.RBTCAmount!==undefined)? `You received in your platform ${wallet_detail} RBTC` : '--'
-    const confirmationTime= data_j.confirmationTime
-    const address= data_j.address
-    const amount= (data_j.amount!==undefined)? paltform_detail +' '+asset+' ( ' + paltform_detail_usd + ' USD )' : '--'
-    const platform_fee_value= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? `${platform_fee} RBTC ( ${platform_fee_usd} USD )`  : '--'
-    const blockNumber= (data_j.blockNumber!==undefined)? data_j.blockNumber : '--'
-    const wallet_value= (data_j.userAmount!==undefined)? `-${wallet_detail} RBTC ( ${wallet_detail_usd} USD )` : '--'
-    const interests= (data_j.USDInterests!==undefined)? `${interest_detail} RBTC ( ${interest_detail_usd} USD )` : '--'
-    const tx_hash_truncate= (data_j.transactionHash!==undefined)? truncate_txhash : '--'
-    const tx_hash= (data_j.transactionHash!==undefined)? data_j.transactionHash : '--'
-    const gas_fee= (data_j.gasFeeUSD!== undefined)? `${gasFee} RBTC` : '--'
-    const price= (data_j.reservePrice!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(data_j.reservePrice)), 'Kwei').toFixed(2) +' USD' : '--'
-    const wallet_value_main= (data_j.userAmount!==undefined)? `-${wallet_detail} RBTC`:'--'
-    const leverage= (data_j.leverage!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(data_j.leverage)), 'Kwei').toFixed(6) : '--'
-
-    return {set_event:set_event,set_asset:set_asset,set_status_txt:set_status_txt,set_status_percent:set_status_percent,
-        wallet_detail:wallet_detail,wallet_detail_usd:wallet_detail_usd,
-        paltform_detail_usd:paltform_detail_usd,paltform_detail:paltform_detail,
-        platform_fee:platform_fee,platform_fee_usd:platform_fee_usd,gasFee:gasFee,
-        gasFeeUSD:gasFeeUSD,interest_detail:interest_detail,interest_detail_usd:interest_detail_usd,
-        truncate_address:truncate_address,truncate_txhash:truncate_txhash,
-        lastUpdatedAt:lastUpdatedAt,RBTCAmount:RBTCAmount,confirmationTime:confirmationTime,
-        address:address,amount:amount,platform_fee_value:platform_fee_value,
-        blockNumber:blockNumber,wallet_value:wallet_value,interests:interests,
-        tx_hash_truncate:tx_hash_truncate,tx_hash:tx_hash,gas_fee:gas_fee,price:price,
-        wallet_value_main:wallet_value_main,leverage:leverage
-    }*/
 
 }

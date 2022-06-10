@@ -163,7 +163,7 @@ function WalletBalancePie(props) {
                     <Pie
                         data={getPie()}
                         innerRadius={113}
-                        outerRadius={120}
+                        outerRadius={119}
                         fill="#8884d8"
                         paddingAngle={1}
                         dataKey="value"

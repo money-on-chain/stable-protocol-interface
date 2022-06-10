@@ -43,6 +43,10 @@ export default function Admin() {
         } else if (location.pathname === '/metrics') {
             selectedMenuKey = 'metrics';
         }
+        else if (location.pathname === '/getRBTC') {
+            selectedMenuKey = 'getRBTC';
+        }
+
         setSelectedMenu(selectedMenuKey);
     };
 
@@ -54,7 +58,7 @@ export default function Admin() {
         setDrawerVisible(!drawerVisible);
     };
 
-    const [t, i18n] = useTranslation(["global", 'moc'])
+    const [t, i18n] = useTranslation(["global", 'moc']);
 
     return (
         <Layout>
@@ -79,37 +83,44 @@ export default function Admin() {
                         key="home"
                         onClick={() => navigate('/')}
                         icon={<HomeFilled />}
-                    />
+                    >{t('MoC.menu-sidebar.home', { ns: 'moc' })}
+                    </Menu.Item>
                     <Menu.Item
                         key="mint-stable"
                         onClick={() => navigate('/wallet/stable')}
                         icon={<span className="icon-icon-stable"></span>}
-                    />
+                    >{t('MoC.menu-sidebar.STABLEWallet', { ns: 'moc' })}
+                    </Menu.Item>
                     <Menu.Item
                         key="mint-pro"
                         onClick={() => navigate('/wallet/pro')}
                         icon={<span className="icon-icon-riskpro"></span>}
-                    />
+                    >{t('MoC.menu-sidebar.RISKPROWallet', { ns: 'moc' })}
+                    </Menu.Item>
                     <Menu.Item
                         key="mint-leveraged"
                         onClick={() => navigate('/wallet/leveraged')}
                         icon={<span className="icon-icon-riskprox"></span>}
-                    />
+                    >{t('MoC.menu-sidebar.RISKPROXWallet', { ns: 'moc' })}
+                    </Menu.Item>
                     <Menu.Item
                         key="rewards"
                         onClick={() => navigate('/rewards')}
                         icon={<span className="icon-icon-moc"></span>}
-                    />
+                    >{t('MoC.menu-sidebar.rewards', { ns: 'moc' })}
+                    </Menu.Item>
                     <Menu.Item
                         key="getRBTC"
                         onClick={() => navigate('/getRBTC')}
                         icon={<span className="icon-icon-btc"></span>}
-                    />
+                    >{t('MoC.menu-sidebar.getRBTC', { ns: 'moc' })}
+                    </Menu.Item>
                     <Menu.Item
                         key="metrics"
                         onClick={() => navigate('/metrics')}
                         icon={<PieChartFilled />}
-                    />
+                    >{t('MoC.menu-sidebar.metrics', { ns: 'moc' })}
+                    </Menu.Item>
                     <SubMenu key="information" title="Profile" icon={<InfoCircleFilled />} theme={'light'}>
                         <Menu.Item key="contract_repository" onClick={() => window.open('https://github.com/money-on-chain/main-RBTC-contract', '_self')}>{t('MoC.info-button.contract-repository', { ns: 'moc' })}</Menu.Item>
                         <Menu.Item key="webapp_repository" onClick={() => window.open('https://github.com/money-on-chain/webapp-stable-ipfs', '_self')}>{t('MoC.info-button.webapp-repository', { ns: 'moc' })}</Menu.Item>
