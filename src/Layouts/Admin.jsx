@@ -43,6 +43,10 @@ export default function Admin() {
         } else if (location.pathname === '/metrics') {
             selectedMenuKey = 'metrics';
         }
+        else if (location.pathname === '/getRBTC') {
+            selectedMenuKey = 'getRBTC';
+        }
+
         setSelectedMenu(selectedMenuKey);
     };
 
