@@ -1,26 +1,21 @@
-import React, { useContext } from 'react';
+import React, {useContext, useEffect} from 'react';
 import 'antd/dist/antd.css';
 import './style.scss';
 import { Table, Progress, Result, Tooltip } from 'antd';
 import RowDetail from "../RowDetail";
 import classnames from 'classnames';
 import api from '../../../services/api';
-import data_json from '../../../services/webapp_transactions_list';
 import Moment from 'react-moment';
 import { useState } from 'react'
-import Web3 from 'web3';
-import { readJsonTable, setNumber, myParseDate } from '../../../Helpers/helper'
+import {readJsonTable, setNumber, myParseDate, getDatasMetrics} from '../../../Helpers/helper'
 import config from '../../../Config/constants';
 import Copy from "../../Page/Copy";
-import {adjustPrecision, formatLocalMap, formatVisibleValue} from "../../../Lib/Formats";
-import NumericLabel from 'react-pretty-numbers';
-import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
-import {LargeNumber} from "../../LargeNumber";
+
 
 export default function ListOperations(props) {
     const { token } = props;
@@ -33,63 +28,40 @@ export default function ListOperations(props) {
 
     const [title, setTitle] = useState(undefined);
     const [showHeader, setShowHeader] = useState(true);
-    //const [scroll, setScroll] = useState(undefined);
     const [hasData, setHasData] = useState(true);
     const [tableLayout, setTableLayout] = useState(undefined);
     const [top, setTop] = useState('none');
     const [bottom, setBottom] = useState('bottomRight');
-
-
-
-    //const [ellipsis, setEllipsis] = useState()
     const [yScroll, setYScroll] = useState(undefined);
     const [xScroll, setXScroll] = useState(undefined);
-    const BigNumber = require('bignumber.js');
 
     const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);
     const [currencyCode, setCurrencyCode]=  useState('MOC');
+    const [dataJson, setDataJson]=  useState([]);
+    const [callTable, setCallTable]=  useState(false);
+    const [totalTable, setTotalTable]=  useState(0);
+    const [currentHash, setCurrentHash] = useState(true);
+    const [timer, setTimer] = useState(100);
 
-
-    /*const handleToggle = prop => enable => {
-      this.setState({ [prop]: enable });
-    };*/
-
-    const handleSizeChange = e => {
-        setSize(e.target.value);
+    const transactionsList= (skip,call_table) => {
+        api('get', 'webapp/transactions/list/', {address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10)})
+            .then(response => {
+                setDataJson(response);
+                setTotalTable(response.total)
+                if(call_table){
+                    setCallTable(call_table)
+                }
+            })
+            .catch((response) => {
+                console.log(response);
+                if(call_table){
+                    setCallTable(call_table)
+                }
+            });
     };
 
-    const handleTableLayoutChange = e => {
-        setTableLayout(e.target.value);
-    };
 
-    const handleExpandChange = enable => {
-        setExpandable(enable ? expandable : undefined);
-    };
-
-    /*const handleEllipsisChange = enable => {
-      setEllipsis(enable);
-    };*/
-
-    const handleTitleChange = enable => {
-        setTitle(enable ? title : undefined);
-    };
-
-    const handleHeaderChange = enable => {
-        setShowHeader(enable ? showHeader : false);
-    };
-
-    const handleYScrollChange = enable => {
-        setYScroll(enable);
-    };
-
-    const handleXScrollChange = e => {
-        setXScroll(e.target.value);
-    };
-
-    const handleDataChange = hasData => {
-        setHasData(hasData);
-    };
 
     const columns = [
         {
@@ -123,50 +95,47 @@ export default function ListOperations(props) {
         },
     ];
 
-    // const detail = {event:'MINT',created:'2022-04-18 18:23:00'
-    //     ,details:'You received in your platform 0.00 DOC'
-    //     ,asset:'DOC'
-    //     ,confirmation:'2022-04-18 18:30:00'
-    //     ,address:'--'
-    //     ,platform:'+0.00DOC ( 0.00 USD )'
-    //     ,platform_fee:'0.00 MOC ( 0.00 USD )'
-    //     ,block:'2767182'
-    //     ,wallet:'0.000032 RBTC ( 1.29 USD )'
-    //     ,interests:'--'
-    //     ,tx_hash:'0x449d..9c13c8'
-    //     ,leverage:'--'
-    //     ,gas_fee:'0.000032 RBTC ( 1.29 USD )'
-    //     ,price:'40,823.54 USD'
-    //     ,comments:'--'
-    // };
+    useEffect(() => {
+        if (currentHash) {
+            const interval = setInterval(() => {
+                console.log('run')
+                transactionsList(current)
+                setTimer(30000)
+            }, timer);
+            return () => clearInterval(interval);
+        }
+    });
 
     var data = [];
-    const setPage = (page) => {
+
+    const onChange = (page) => {
         setCurrent(page);
         data_row(page);
+        transactionsList(page,true)
     };
 
     const data_row_coins2 = [];
     var json_end = []
     const data_row = (set_current) => {
         /*******************************sort descending by date lastUpdatedAt***********************************/
-        data_json.transactions.sort((a, b) => {
-            return myParseDate(b.lastUpdatedAt) - myParseDate(a.lastUpdatedAt)
-        });
+        if(dataJson.transactions!==undefined){
+            dataJson.transactions.sort((a, b) => {
+                return myParseDate(b.lastUpdatedAt) - myParseDate(a.lastUpdatedAt)
+            });
+        }
         /*******************************end sort descending by date lastUpdatedAt***********************************/
 
         /*******************************filter by type (token)***********************************/
         var pre_datas = [];
-        pre_datas = data_json.transactions.filter(data_j => {
-            return (token !== 'all') ? data_j.tokenInvolved === token : true;
-        });
-        /*******************************end filter by type (token)***********************************/
-        while (data.length > 0) {
-            data.pop();
+        if(dataJson.transactions!==undefined){
+            pre_datas= dataJson.transactions.filter(data_j => {
+                return (token !== 'all') ? data_j.tokenInvolved === token : true;
+            });
         }
+        /*******************************end filter by type (token)***********************************/
+
         /*******************************set json group according to limits***********************************/
-        const limit = 10;
-        json_end = pre_datas.slice((set_current * limit) - limit, (set_current * limit));
+        json_end = pre_datas
         /*******************************end set json group according to limits***********************************/
 
         /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
@@ -175,7 +144,7 @@ export default function ListOperations(props) {
         json_end.forEach((data_j) => {
             const datas_response = readJsonTable(data_j,t,i18n)
 
-            if (datas_response['wallet_detail'] !== '--' && datas_response['wallet_detail'] !== 11) {
+            // if (datas_response['wallet_detail'] !== '--' && datas_response['wallet_detail'] !== 11) {
                 const detail = {
                     event: datas_response['set_event']
                     , created: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
@@ -191,7 +160,7 @@ export default function ListOperations(props) {
                     , tx_hash_truncate: datas_response['tx_hash_truncate']
                     , tx_hash: datas_response['tx_hash']
                     , leverage: datas_response['leverage']
-                    , gas_fee: `${datas_response['gas_fee']} ( ${datas_response['gasFeeUSD']})`
+                    , gas_fee: datas_response['gas_fee']
                     , price: datas_response['price']
                     , comments: '--'
                 };
@@ -215,11 +184,11 @@ export default function ListOperations(props) {
                     status: { txt: datas_response['set_status_txt'], percent: datas_response['set_status_percent'] },
                     detail: detail,
                 });
-            }
+            // }
         });
         data_row_coins2.forEach((element, index) => {
             const asset = [];
-            if (element.wallet != '--' && element.wallet != 11) {
+            // if (element.wallet != '--' && element.wallet != 11) {
                 switch (element.asset) {
                     case 'STABLE':
                         asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
@@ -242,7 +211,8 @@ export default function ListOperations(props) {
                 data.push({
                     key: element.key,
                     info: '',
-                    event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
+                    // event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
+                    event: <span className={classnames('event-action', asset[0].color)}>{element.key}</span>,
                     asset: <img className="uk-preserve-width uk-border-circle" src={window.location.origin + `/Moc/` + asset[0].image} alt="avatar" width={32} />,
                     // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                     platform: <span className="display-inline CurrencyTx">{element.platform}</span>,
@@ -252,7 +222,7 @@ export default function ListOperations(props) {
                         className="color-confirmed conf_title">{element.status.txt}</span></div>,
                     description: <RowDetail detail={element.detail} />,
                 });
-            }
+            // }
         })
         /*******************************end extraer datos del json con el json seteado por limit y skip***********************************/
     }
@@ -314,7 +284,7 @@ export default function ListOperations(props) {
                             <DownCircleOutlined onClick={e => onExpand(record, e)} />
                         )
                 }}
-                pagination={{ position: [top, bottom], defaultCurrent: 1, onChange: (page) => setPage(page), total: Object.keys(data_json.transactions).length }}
+                pagination={{pageSize:20, position: [top, bottom], defaultCurrent: 1, onChange:onChange , total: totalTable }}
                 columns={tableColumns}
                 dataSource={hasData ? (auth.isLoggedIn == true) ? data : null : null}
                 scroll={scroll}
