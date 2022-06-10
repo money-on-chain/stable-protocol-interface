@@ -145,9 +145,12 @@ const formatValueToContract = (amount, currencyCode) => {
 const formatValueWithContractPrecision = (amount, currencyCode) => {
     BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
     const fd = formatMap[currencyCode];
-    return BigNumber(amount)
-        .div(precision(fd))
-        .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN);
+    if (fd) {
+        return BigNumber(amount)
+            .div(precision(fd))
+            .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN);
+    }
+    return null;
 };
 
 /* const convertAmount = (source, target, amount, convertToken) => {

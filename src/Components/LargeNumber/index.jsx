@@ -4,6 +4,7 @@ import { adjustPrecision, formatLocalMap } from '../../Lib/Formats';
 import i18n from 'i18next';
 import {useTranslation} from "react-i18next";
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
+import { formatLocalMap2 } from '../../Lib/Formats';
 
 const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams, className }) => {
 
@@ -25,10 +26,12 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
       numericLabelParams
     );
 
+    {/* <Tooltip title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}> 
+    <NumericLabel {... {params }}>{value.toString()}</NumericLabel>*/}
     return (
-      <Tooltip title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
+      <Tooltip title={Number(amount)?.toLocaleString(formatLocalMap2[i18n.languages[0]])}>
         <div className={className}>
-          <NumericLabel {... {params }}>{value.toString()}</NumericLabel>
+          <NumericLabel {... {params }}>{amount?.toString()}</NumericLabel>
           {includeCurrency && ` ${t(`MoC.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}
         </div>
       </Tooltip>
@@ -36,8 +39,8 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
   }
 
   return (
-    <Tooltip title={t('general.invalidValueDescription')}>
-      {t('general.invalidValuePlaceholder')}
+    <Tooltip title={t('MoC.general.invalidValueDescription', {ns: 'moc'})}>
+      {t('MoC.general.invalidValuePlaceholder', {ns: 'moc'})}
     </Tooltip>
   )
 };
