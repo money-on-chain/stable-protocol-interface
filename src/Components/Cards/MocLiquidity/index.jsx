@@ -1,6 +1,6 @@
 import './style.scss'
 import React, { Fragment } from 'react';
-import { useContext } from 'react'
+import { useContext,useState } from 'react'
 import { AuthenticateContext } from "../../../Context/Auth";
 import CountUp from 'react-countup';
 import {Alert, Button, Tooltip} from 'antd';
@@ -35,6 +35,20 @@ function MocLiquidity(props) {
     }
 
     const [t, i18n] = useTranslation(["global", 'moc'])
+
+    // const [modalOpen, setModalOpen] = useState(false);
+    // const [operationStatus, setOperationStatus] = useState("pending");
+    // const [txHash, setTxHash] = useState("0x00000");
+    // const { claimRewards } = window.nodeManager.staking;
+    // const claim =()=>{
+    //     claimRewards(window.address,incentiveState[0].agent_address,incentiveState[0].fee,  (a, _txHash) => {setModalOpen(true);setTxHash(_txHash);})
+    //         .then( () => setOperationStatus("success"))
+    //         .catch(() => setOperationStatus("error"))
+    // }
+
+    const claim =()=>{
+        console.log('cccccccc')
+    }
 
     return (
         <div className="Card RewardsBalanceLiquidity withPadding hasTitle">
@@ -84,7 +98,7 @@ function MocLiquidity(props) {
                         </button>
                     </Link>
 
-                    : <Button style={{ marginTop: '3.5em' }} type="primary" disabled={!auth.isLoggedIn}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>}
+                    : <Button style={{ marginTop: '3.5em' }} type="primary" disabled={!auth.isLoggedIn} onClick={claim}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>}
             </div>
         </div>
     )

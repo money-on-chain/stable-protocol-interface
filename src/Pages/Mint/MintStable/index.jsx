@@ -7,6 +7,7 @@ import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../Context/Auth';
 import './style.scss'
+import '../../Home/style.scss'
 
 export default function Mint(props) {
     const data_row_coins = [];
