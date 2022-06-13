@@ -46,6 +46,8 @@ function MocLiquidity(props) {
     const [incentiveState, setIncentiveState] = useState(null);
     const [incentiveStateData, setIincentiveStateData] = useState([]);
 
+    const { accountData } = auth;
+
     const agent= () => {
         api('get', `${config.api_moneyonchain}`+'agent', {})
             .then(response => {
@@ -56,30 +58,26 @@ function MocLiquidity(props) {
             });
     };
 
-    // useEffect(() => {
-    //     setCallAgent(true)
-    //     agent()
-    //     setIincentiveStateData({active:true, agent_address: incentiveState.agent_address, fee: incentiveState.gas_cost});
-    //     console.log('ooooooooooooooooooooooooooooooooo')
-    // },[callAgent]);
-
-    console.log('agentagent0000000000000000000000000000000000000000')
-    console.log(incentiveState)
-
-    console.log('agentagent0000000000000000000000000000000000000000')
+    useEffect(() => {
+        setCallAgent(true)
+        agent()
+        // setIincentiveStateData({active:true, agent_address: incentiveState.agent_address, fee: incentiveState.gas_cost});
+    },[callAgent]);
 
     const [modalOpen, setModalOpen] = useState(false);
     const [operationStatus, setOperationStatus] = useState("pending");
     const [txHash, setTxHash] = useState("0x00000");
+    const claimRewards = async (from, incentiveDestination, incentiveValue, callback = () => { }) => {
+        console.log('claimRewards')
+        // return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: window.web3.eth.getGasPrice() }, callback);
+        return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: 3000 }, callback);
+    };
     // const { claimRewards } = window.nodeManager.staking;
-    // const claim =()=>{
-    //     claimRewards(window.address,incentiveState[0].agent_address,incentiveState[0].fee,  (a, _txHash) => {setModalOpen(true);setTxHash(_txHash);})
-    //         .then( () => setOperationStatus("success"))
-    //         .catch(() => setOperationStatus("error"))
-    // }
 
     const claim =()=>{
-        console.log('cccccccc')
+         claimRewards(accountData.Owner,incentiveState.agent_address,  incentiveState.gas_cost)
+            .then( () => setOperationStatus("success"))
+            .catch(() => setOperationStatus("error"))
     }
 
     return (
