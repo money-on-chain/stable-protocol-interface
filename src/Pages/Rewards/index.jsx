@@ -36,6 +36,7 @@ export default function Rewards(props) {
                         height="32.4em"
                         tokenToSend="MOC"
                         iconWallet={`${window.location.origin}/Moc/icon-moc.svg`}
+                        view={'moc'}
                     // currencyOptions={['RESERVE', 'MOC']}
                     />
                 </Col>

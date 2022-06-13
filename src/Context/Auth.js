@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import rLogin from '../Lib/rLogin';
 import Web3 from 'web3';
+import _ from 'lodash/core';
 import btcContractProvider from '../Contracts/MoC/abi/btcContractProvider';
 import MocAbi from '../Contracts/MoC/abi/Contract.json';
 import MoCInrate from '../Contracts/MoC/abi/MoCInRateContract.json';
@@ -22,6 +23,8 @@ import {
 import { enable } from 'workbox-navigation-preload';
 import addressHelper from '../Lib/addressHelper';
 import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
+import convertHelper from '../Lib/convertHelper';
+import { getPriceFields } from '../Lib/price';
 
 const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
@@ -670,48 +673,57 @@ const AuthenticateProvider = ({ children }) => {
             return reserveToken.methods.approve(moc.options.address, weiAmount).send({ from: account, gasPrice: price});
         })
     };
-
+    /* const priceFields = getPriceFields();
+    const convertToken = convertHelper(_.pick(contractStatusData, Object.keys(priceFields).concat(['reservePrecision']))); */
     const convertToken = (from, to, amount) => {
+        console.log('bitcoinprice', contractStatusData?.bitcoinPrice);
+        console.log('convertToken', from, to, amount);
+        const reservePrecision = contractStatusData?.reservePrecision;
+        // const reservePrecision = 1;
+        console.log('reservePrecision', reservePrecision);
         const convertDocToUsd = amount => amount;
-        const convertBproToRbtc = amount => amount.times(contractStatusData.bproPriceInRbtc).div(contractStatusData.reservePrecision);
-        const convertBproToUsd = amount => amount.times(contractStatusData.bproPriceInUsd).div(contractStatusData.reservePrecision);
-        const convertDocToRbtc = amount => amount.div(contractStatusData?.bitcoinPrice).times(contractStatusData?.reservePrecision);
-        const convertRbtcToUsd = amount => amount.times(contractStatusData.bitcoinPrice).div(contractStatusData.reservePrecision);
-        const convertRbtcToBpro = amount => amount.div(contractStatusData.bproPriceInRbtc).times(contractStatusData.reservePrecision);
+        const convertBproToRbtc = amount => (amount * contractStatusData.bproPriceInRbtc) / reservePrecision;// .times(contractStatusData.bproPriceInRbtc).div(reservePrecision);
+        const convertBproToUsd = amount => (amount * contractStatusData.bproPriceInUsd) / reservePrecision; // .times(contractStatusData.bproPriceInUsd).div(reservePrecision);
+        const convertDocToRbtc = amount => (amount / contractStatusData?.bitcoinPrice) * reservePrecision; // .div(contractStatusData?.bitcoinPrice).times(reservePrecision);
+        const convertRbtcToUsd = amount => (amount * contractStatusData?.bitcoinPrice) / reservePrecision; //.times(contractStatusData?.bitcoinPrice).div(reservePrecision);
+        const convertRbtcToBpro = amount => (amount / contractStatusData.bproPriceInRbtc) * reservePrecision; // .div(contractStatusData.bproPriceInRbtc).times(reservePrecision);
         const convertRbtcToDoc = amount => convertRbtcToUsd(amount);
-        const convertRbtcToBprox2 = amount => amount.div(contractStatusData.bprox2PriceInRbtc).times(contractStatusData.reservePrecision);
-        const convertBprox2ToRbtc = amount => amount.times(contractStatusData.bprox2PriceInRbtc).div(contractStatusData.reservePrecision);
-        const convertBproToBprox2 = amount => amount.div(contractStatusData.bprox2PriceInBpro).times(contractStatusData.reservePrecision);
-        const convertBprox2ToBpro = amount => amount.times(contractStatusData.bprox2PriceInBpro).div(contractStatusData.reservePrecision);
+        const convertRbtcToBprox2 = amount => (amount / contractStatusData.bprox2PriceInRbtc) * reservePrecision;  // .div(contractStatusData.bprox2PriceInRbtc).times(reservePrecision);
+        const convertBprox2ToRbtc = amount => (amount * contractStatusData.bprox2PriceInRbtc) /reservePrecision; // .times(contractStatusData.bprox2PriceInRbtc).div(reservePrecision);
+        const convertBproToBprox2 = amount => (amount / contractStatusData.bprox2PriceInBpro) * reservePrecision; // .div(contractStatusData.bprox2PriceInBpro).times(reservePrecision);
+        const convertBprox2ToBpro = amount => (amount * contractStatusData.bprox2PriceInBpro) / reservePrecision; // .times(contractStatusData.bprox2PriceInBpro).div(reservePrecision);
         const convertBprox2ToUsd = amount =>
             amount // RESERVE
-            .times(contractStatusData.bprox2PriceInRbtc) // RESERVE * RESERVE
-            .div(contractStatusData.reservePrecision) // RESERVE
-            .times(contractStatusData.bitcoinPrice) // RESERVE * USD
-            .div(contractStatusData.reservePrecision); // USD
+            * contractStatusData.bprox2PriceInRbtc // .times(contractStatusData.bprox2PriceInRbtc) // RESERVE * RESERVE
+            // .div(reservePrecision) // RESERVE
+            / reservePrecision
+            // .times(contractStatusData.bitcoinPrice) // RESERVE * USD
+            * contractStatusData.bitcoinPrice
+           // .div(reservePrecision); // USD
+           / reservePrecision;
 
         const convertMoCTokenToRbtc = amount => convertDocToRbtc(convertMoCTokenToUsd(amount));
-        const convertMoCTokenToUsd = amount => amount.times(contractStatusData.mocPrice).div(contractStatusData.reservePrecision);
-        const convertRbtcToMoCToken = amount => convertRbtcToDoc(amount).div(contractStatusData.mocPrice).times(contractStatusData.reservePrecision);
+        const convertMoCTokenToUsd = amount => amount.times(contractStatusData.mocPrice).div(reservePrecision);
+        const convertRbtcToMoCToken = amount => convertRbtcToDoc(amount) / (contractStatusData?.mocPrice * reservePrecision); //.div(contractStatusData?.mocPrice).times(reservePrecision);
 
         const convertMap = {
             STABLE: { USD: convertDocToUsd, RESERVE: convertDocToRbtc },
             RISKPRO: { USD: convertBproToUsd, RESERVE: convertBproToRbtc, RISKPROX: convertBproToBprox2 },
             RISKPROX: {
-            RESERVE: convertBprox2ToRbtc,
-            RISKPRO: convertBprox2ToBpro,
-            USD: convertBprox2ToUsd
+                RESERVE: convertBprox2ToRbtc,
+                RISKPRO: convertBprox2ToBpro,
+                USD: convertBprox2ToUsd
             },
             MOC: {
-            RESERVE: convertMoCTokenToRbtc,
-            USD: convertMoCTokenToUsd
+                RESERVE: convertMoCTokenToRbtc,
+                USD: convertMoCTokenToUsd
             },
             RESERVE: {
-            USD: convertRbtcToUsd,
-            RISKPRO: convertRbtcToBpro,
-            STABLE: convertRbtcToDoc,
-            RISKPROX: convertRbtcToBprox2,
-            MOC: convertRbtcToMoCToken
+                USD: convertRbtcToUsd,
+                RISKPRO: convertRbtcToBpro,
+                STABLE: convertRbtcToDoc,
+                RISKPROX: convertRbtcToBprox2,
+                MOC: convertRbtcToMoCToken
             }
         };
 

@@ -18,7 +18,7 @@ const { Option } = Select;
 
 export default function CoinSelect(props) {
     const auth = useContext(AuthenticateContext);
-    const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
+    const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = auth.UserBalanceData ? auth.UserBalanceData : {};
     const { inputValueInWei = '0.0001', onInputValueChange = () => { }, validate, className, title } = props;
     const {
         currencyOptions = [],
@@ -44,13 +44,13 @@ export default function CoinSelect(props) {
         if (validate && dirty) {
             // setInputValidation(validateValue(inputValueInWei, maxValueAllowedInWei));
           }
-        /* if (
-            inputValueInWei !=
+        if (
+            inputValueInWei !==
             document.getElementById('inputValue' + props.value).value.toString()
         ) {
             document.getElementById('inputValue' + props.value).value =
                 new BigNumber(inputValueInWei).toFixed(4).toString();
-        } */
+        }
         if (props.value === 'MOC') {
             setDisabledSelect(true);
         }
@@ -62,7 +62,7 @@ export default function CoinSelect(props) {
     const maxAmount = () => {
         switch (tokenName) {
             case 'RBTC':
-                return new BigNumber(props.AccountData.Balance).toFixed(6);
+                return new BigNumber(auth.accountData?.Balance).toFixed(6);
             case 'DOC':
                 if(auth.isLoggedIn){
                     return docBalance;
@@ -92,14 +92,15 @@ export default function CoinSelect(props) {
         }
     };
     const handleValueChange = (newValueInEther) => {
-        if (
-            props.AccountData.Balance < newValueInEther &&
+        console.log(auth.accountData);
+        /* if (
+            auth.accountData.Balance < newValueInEther &&
             props.value === 'RESERVE'
         ) {
-            newValueInEther = props.AccountData.Balance;
+            newValueInEther = auth.accountData?.Balance;
             document.getElementById('inputValue' + props.value).value =
                 new BigNumber(newValueInEther).toFixed(4).toString();
-        }
+        }*/
         onInputValueChange(newValueInEther);
     };
 
@@ -122,21 +123,19 @@ export default function CoinSelect(props) {
                     lg={{ span: 16 }}
                 >
                     <div className="MainContainer">
-                        <Tooltip title={formatValueWithContractPrecision(inputValueInWei, [props.value])}>
-                            <DebounceInput
-                                placeholder={''}
+                        <Tooltip> {/* title={formatValueWithContractPrecision(inputValueInWei, [props.value])}> */}
+                            <Input
+                                type="number"
+                                id={`inputValue${props.value}`}
                                 value={inputValueInWei}
-                                debounceTimeout={1000}
-                                onChange={(event) => {
-                                    if(event.target.value > props.AccountData.Balance || event.target.value<0) return false;
-                                        handleValueChange(event.target.value);
-                                    }
-                                }
-                                className={`valueInput ${
-                                    inputValidation.validateStatus === 'error' ? 'formError' : ''
-                                }`}
-                                type={"number"}
-                            />
+                                max={auth.accountData?.Balance}
+                                step="any"
+                                style={{ width: '100%' }}
+                                disabled={disabled}
+                                onChange={(event) =>
+                                    handleValueChange(event.target.value)
+                            }
+                        />
                         </Tooltip>
                     </div>
                     </Col>

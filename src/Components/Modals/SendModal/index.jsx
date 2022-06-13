@@ -18,7 +18,7 @@ import { AuthenticateContext } from "../../../Context/Auth";
 const BigNumber = require('bignumber.js');
 
 export default function SendModal(props) {
-  const { token = '', tokensToSend, userState } = props;
+  const { token = '', tokensToSend, userState, view } = props;
   const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
   const [address, setAddress] = useState('');
   const [currencyYouReceive, setCurrencyYouReceive] = useState('');
@@ -147,7 +147,12 @@ export default function SendModal(props) {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>{t('MoC.wallet.send', { ns: 'moc' })}</Button>
+      <Button
+        type="primary"
+        onClick={showModal}
+        style={{ width: 90, fontFamily: 'Montserrat,sans-serif', fontSize: '1em', fontWeight: view === 'moc' ? 700 : 500 }}
+      >{t('MoC.wallet.send', { ns: 'moc' })}
+      </Button>
       <Modal
         title="Send"
         visible={visible}

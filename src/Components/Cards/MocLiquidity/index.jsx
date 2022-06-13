@@ -84,7 +84,7 @@ function MocLiquidity(props) {
                         </button>
                     </Link>
 
-                    : <Button style={{ marginTop: '3.5em' }} type="primary" disabled={!auth.isLoggedIn}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>}
+                    : <Button style={{ marginTop: '3.5em', fontWeight: 700 }} type="primary" disabled={!auth.isLoggedIn}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>}
             </div>
         </div>
     )

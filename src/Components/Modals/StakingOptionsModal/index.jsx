@@ -19,7 +19,7 @@ export default function StakingOptionsModal(props) {
     useEffect(() => {
         // if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
     }, []);
-
+    console.log('mode', mode);
     if (!mode) return null;
 
 

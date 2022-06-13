@@ -80,8 +80,8 @@ const formatMap = {
 };
 
 const formatLocalMap2 = {
-    es: 'es-AR',
-    en: 'en-US'
+    es: 'es',
+    en: 'en'
 };
 
 const formatLocalMap = {
@@ -113,6 +113,10 @@ const formatValue = (amount, currencyCode, format, decimals) => {
 };
 
 const formatValueFromMap = (amount, mapEntry, format, decimals) => {
+    console.log(amount, mapEntry, format, decimals);
+    console.log('formatValueFromMap', BigNumber(amount)
+    .div(precision(mapEntry))
+    .toFormat(decimals || mapEntry.decimals, BigNumber.ROUND_DOWN, format));
     return BigNumber(amount)
         .div(precision(mapEntry))
         .toFormat(decimals || mapEntry.decimals, BigNumber.ROUND_DOWN, format);
@@ -120,6 +124,7 @@ const formatValueFromMap = (amount, mapEntry, format, decimals) => {
 
 const formatVisibleValue = (amount, currencyCode, language, decimals) => {
     if (amount === null || amount === undefined || !currencyCode) return '-';
+    console.log('formatVisibleValue', amount, currencyCode, language, decimals);
     const num = formatValue(
         amount,
         currencyCode,
@@ -137,14 +142,27 @@ const formatValueVariation = (amount, language) => {
   };
 
 const formatValueToContract = (amount, currencyCode) => {
-    return new BigNumber(amount)
+    console.log(amount, currencyCode, formatMap[currencyCode]);
+    console.log('formatValueToContract', new BigNumber(amount)
+    .multipliedBy(precision(formatMap[currencyCode]))
+    .toFixed(0));
+    return new BigNumber(amount).multipliedBy(precision(formatMap[currencyCode])).toFixed(0);
+    /* if (currencyCode === 'RESERVE') {
+        return new BigNumber(amount)
         .multipliedBy(precision(formatMap[currencyCode]))
         .toFixed(0);
+    } else {
+        return amount;
+    } */
+    // return amount;
 };
 
 const formatValueWithContractPrecision = (amount, currencyCode) => {
     BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
     const fd = formatMap[currencyCode];
+    console.log('amount', amount, 'bignumber', BigNumber(amount)
+    .div(precision(fd))
+    .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN));
     if (fd) {
         return BigNumber(amount)
             .div(precision(fd))

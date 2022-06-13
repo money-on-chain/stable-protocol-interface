@@ -6,6 +6,7 @@ import React, { Fragment, useContext } from 'react';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../Context/Auth';
+import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedeemToken';
 import './style.scss'
 
 export default function Mint(props) {
@@ -53,17 +54,23 @@ export default function Mint(props) {
                         StatusData={auth.contractStatusData}
                     />
                 </Col>
-                <Col xs={24} md={12} xl={4}>
+                <Col xs={24} md={12} xl={5}>
                     <YourAddressCard height="23.4em" tokenToSend="RISKPRO" currencyOptions={['RESERVE', 'RISKPRO']} />
                 </Col>
-                <Col xs={24} xl={15}>
-                    <MintCard
+                <Col xs={24} xl={14}>
+                    {/* <MintCard
                         token={'RISKPRO'}
                         AccountData={auth.accountData}
                         UserBalanceData={auth.userBalanceData}
                         StatusData={auth.contractStatusData}
                         currencyOptions={['RESERVE', 'RISKPRO']}
                         color="#ef8a13"
+                    /> */}
+                    <MintOrRedeemToken
+                        token={'RISKPRO'}
+                        AccountData={auth.accountData}
+                        userState={auth.userBalanceData}
+                        mocState={auth.contractStatusData}
                     />
                 </Col>
             </Row>

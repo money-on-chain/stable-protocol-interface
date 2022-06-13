@@ -22,7 +22,14 @@ const convertAmount = (source, target, amount, convertToken) => {
     target
   );
   console.log('convertedAmount', convertedAmount);
-  return isNaN(convertedAmount) ? '' : convertedAmount.toString();
+  const replacedDot = convertedAmount.replace(/\./g, '');
+  console.log('replacedDot', replacedDot.replace(/\./g, ''))
+  const replacedComma = replacedDot.replace(/,/g, '');
+  console.log('replacedComma', replacedComma)
+  console.log(isNaN(replacedComma))
+  return isNaN(replacedComma) ? '' : replacedComma.toString();
+  // console.log(isNaN(convertAmount));
+  // return isNaN(convertedAmount) ? '' : convertedAmount.toString();
 };
 
 const amountIsTooSmall = target => {
