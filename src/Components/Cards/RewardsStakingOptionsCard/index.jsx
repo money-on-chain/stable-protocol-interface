@@ -169,7 +169,7 @@ export default function RewardsStakingOptions(props) {
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
-                                <CoinSelect
+                                {/* <CoinSelect
                                     label={t('global.RewardsOptions_AmountToStakePlaceholder', { ns: 'global' })}
                                     value={'MOC'}
                                     AccountData={props.AccountData}
@@ -178,8 +178,8 @@ export default function RewardsStakingOptions(props) {
                                     onInputValueChange={onStakingInputValueChange}
                                     inputValueInWei={stakingAmountInputValue}
                                     currencyOptions={'MOC'}
-                                />
-                                {/* <InputWithCurrencySelector
+                                /> */}
+                                <InputWithCurrencySelector
                                     cleanInputCount={cleanInputCount}
                                     title={t("global.RewardsOptions_AmountToStakePlaceholder")}
                                     currencySelected={'MOC'}
@@ -195,7 +195,7 @@ export default function RewardsStakingOptions(props) {
                                     maxValueAllowedInWei={mocBalance}
                                     showMaxValueAllowed
                                     validate={auth}
-                                /> */}
+                                />
                             </Col>
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
