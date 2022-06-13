@@ -252,13 +252,30 @@ export default function RewardsStakingOptions(props) {
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
-                                <CoinSelect
+                                <InputWithCurrencySelector
+                                    cleanInputCount={cleanInputCount}
+                                    title={t("global.RewardsOptions_AmountToUnstakePlaceholder")}
+                                    currencySelected={'MOC'}
+                                    onCurrencySelect={() => {
+                                    }}
+                                    // onCurrencySelect={onChangeCurrencyYouExchange}
+                                    inputValueInWei={unstakingAmountInputValue}
+                                    onInputValueChange={() => setUnstakingAmountInputValue(stackedBalance)}
+                                    currencyOptions={['MOC']}
+                                    // onValidationStatusChange={onYouExchangeValidityChange}
+                                    onValidationStatusChange={() => {
+                                    }}
+                                    maxValueAllowedInWei={stackedBalance}
+                                    showMaxValueAllowed
+                                    validate={auth}
+                                />
+                                {/* <CoinSelect
                                     label={t('global.RewardsOptions_AmountToUnstakePlaceholder', { ns: 'global' })}
                                     value={token}
                                     AccountData={props.AccountData}
                                     onInputValueChange={() => setUnstakingAmountInputValue(stackedBalance)}
                                     inputValueInWei={unstakingAmountInputValue}
-                                />
+                                />*/ }
                             </Col>
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
