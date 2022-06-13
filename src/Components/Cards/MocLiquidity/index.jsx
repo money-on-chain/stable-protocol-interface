@@ -1,5 +1,5 @@
 import './style.scss'
-import React, { Fragment } from 'react';
+import React, {Fragment, useEffect} from 'react';
 import { useContext,useState } from 'react'
 import { AuthenticateContext } from "../../../Context/Auth";
 import CountUp from 'react-countup';
@@ -13,6 +13,11 @@ import { useTranslation } from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
 import Web3 from "web3";
 import web3 from "web3";
+import api from "../../../services/api";
+import config from "../../../Config/constants";
+import Copy from "../../Page/Copy";
+import Moment from "react-moment";
+import date from "../../../Config/date";
 
 const BigNumber = require('bignumber.js');
 
@@ -36,9 +41,36 @@ function MocLiquidity(props) {
 
     const [t, i18n] = useTranslation(["global", 'moc'])
 
-    // const [modalOpen, setModalOpen] = useState(false);
-    // const [operationStatus, setOperationStatus] = useState("pending");
-    // const [txHash, setTxHash] = useState("0x00000");
+
+    const [callAgent, setCallAgent] = useState(false);
+    const [incentiveState, setIncentiveState] = useState(null);
+    const [incentiveStateData, setIincentiveStateData] = useState([]);
+
+    const agent= () => {
+        api('get', `${config.api_moneyonchain}`+'agent', {})
+            .then(response => {
+                setIncentiveState(response);
+            })
+            .catch((response) => {
+                console.log(response);
+            });
+    };
+
+    // useEffect(() => {
+    //     setCallAgent(true)
+    //     agent()
+    //     setIincentiveStateData({active:true, agent_address: incentiveState.agent_address, fee: incentiveState.gas_cost});
+    //     console.log('ooooooooooooooooooooooooooooooooo')
+    // },[callAgent]);
+
+    console.log('agentagent0000000000000000000000000000000000000000')
+    console.log(incentiveState)
+
+    console.log('agentagent0000000000000000000000000000000000000000')
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const [operationStatus, setOperationStatus] = useState("pending");
+    const [txHash, setTxHash] = useState("0x00000");
     // const { claimRewards } = window.nodeManager.staking;
     // const claim =()=>{
     //     claimRewards(window.address,incentiveState[0].agent_address,incentiveState[0].fee,  (a, _txHash) => {setModalOpen(true);setTxHash(_txHash);})

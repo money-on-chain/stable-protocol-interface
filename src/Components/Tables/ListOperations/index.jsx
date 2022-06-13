@@ -45,7 +45,7 @@ export default function ListOperations(props) {
     const [timer, setTimer] = useState(100);
 
     const transactionsList= (skip,call_table) => {
-        api('get', 'webapp/transactions/list/', {address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10)})
+        api('get', `${config.api_moctest}`+'webapp/transactions/list/', {address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10)})
             .then(response => {
                 setDataJson(response);
                 setTotalTable(response.total)
@@ -211,8 +211,7 @@ export default function ListOperations(props) {
                 data.push({
                     key: element.key,
                     info: '',
-                    // event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
-                    event: <span className={classnames('event-action', asset[0].color)}>{element.key}</span>,
+                    event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
                     asset: <img className="uk-preserve-width uk-border-circle" src={window.location.origin + `/Moc/` + asset[0].image} alt="avatar" width={32} />,
                     // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                     platform: <span className="display-inline CurrencyTx">{element.platform}</span>,

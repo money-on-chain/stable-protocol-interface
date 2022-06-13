@@ -45,7 +45,7 @@ export default function FastBtcPegOut(props) {
 
 
     const getFastbtcPegout= (skip,call_table) => {
-        api('get', 'webapp/fastbtc/pegout', {address: config.address })
+        api('get', `${config.api_moctest}`+'webapp/fastbtc/pegout', {address: config.address })
             .then(response => {
                 setDataJson(response);
                 setTotalTable(response.total)
