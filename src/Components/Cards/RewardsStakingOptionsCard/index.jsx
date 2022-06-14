@@ -10,6 +10,7 @@ import BigNumber from "bignumber.js";
 import OperationStatusModal from '../../Modals/OperationStatusModal/OperationStatusModal';
 import { useTranslation } from "react-i18next";
 import './style.scss';
+import InputWithCurrencySelector from '../../Form/InputWithCurrencySelector';
 
 const { TabPane } = Tabs;
 const token = "MOC";
@@ -117,8 +118,24 @@ export default function RewardsStakingOptions(props) {
     };
 
     const onValueStakingChange = (newValueStakingChange) => {
+        console.log('newValueStakingChange',newValueStakingChange);
         setStakingAmountInputValue(newValueStakingChange);
     };
+
+    const onStakingInputValueChange = value => {
+        console.log('newValueStakingChange',value);
+        setStakingAmountInputValue(value);
+      };
+
+    const clickButtonStake = (amountInputValue) => {
+        console.log(amountInputValue);
+        if (amountInputValue > 0) {
+          // setModalAmount(amountInputValue);
+          setModalMode("staking");
+        } else {
+          alert("Please fill amount you want to stake");
+        }
+      };
 
     const renderStaking = () => {
         var btnDisable = false;
@@ -152,15 +169,32 @@ export default function RewardsStakingOptions(props) {
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
-                                <CoinSelect
+                                {/* <CoinSelect
                                     label={t('global.RewardsOptions_AmountToStakePlaceholder', { ns: 'global' })}
                                     value={'MOC'}
                                     AccountData={props.AccountData}
                                     UserBalanceData={props.UserBalanceData}
                                     token={token}
-                                    onInputValueChange={onValueStakingChange}
+                                    onInputValueChange={onStakingInputValueChange}
                                     inputValueInWei={stakingAmountInputValue}
                                     currencyOptions={'MOC'}
+                                /> */}
+                                <InputWithCurrencySelector
+                                    cleanInputCount={cleanInputCount}
+                                    title={t("global.RewardsOptions_AmountToStakePlaceholder")}
+                                    currencySelected={'MOC'}
+                                    onCurrencySelect={() => {
+                                    }}
+                                    // onCurrencySelect={onChangeCurrencyYouExchange}
+                                    inputValueInWei={stakingAmountInputValue}
+                                    onInputValueChange={onStakingInputValueChange}
+                                    currencyOptions={['MOC']}
+                                    // onValidationStatusChange={onYouExchangeValidityChange}
+                                    onValidationStatusChange={() => {
+                                    }}
+                                    maxValueAllowedInWei={mocBalance}
+                                    showMaxValueAllowed
+                                    validate={auth}
                                 />
                             </Col>
                         </Row>
@@ -171,15 +205,15 @@ export default function RewardsStakingOptions(props) {
                                 </span>
                             </Col>
                         </Row>
-                        <Row>
+                        <Row style={{ marginTop: '2.1em' }}>
                             <Button
                                 disabled={btnDisable}
                                 type="primary"
                                 className="StakingBtn"
+                                style={{ fontWeight: 700 }}
                                 onClick={() => {
-                                    setModalAmount(stakingAmountInputValue);
-                                    setModalMode("staking");
-                                }}
+                                    clickButtonStake(stakingAmountInputValue);
+                                  }}
                             >Stake</Button>
                         </Row>
                     </Col>
@@ -218,13 +252,30 @@ export default function RewardsStakingOptions(props) {
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
                             <Col xs={24}>
-                                <CoinSelect
+                                <InputWithCurrencySelector
+                                    cleanInputCount={cleanInputCount}
+                                    title={t("global.RewardsOptions_AmountToUnstakePlaceholder")}
+                                    currencySelected={'MOC'}
+                                    onCurrencySelect={() => {
+                                    }}
+                                    // onCurrencySelect={onChangeCurrencyYouExchange}
+                                    inputValueInWei={unstakingAmountInputValue}
+                                    onInputValueChange={() => setUnstakingAmountInputValue(stackedBalance)}
+                                    currencyOptions={['MOC']}
+                                    // onValidationStatusChange={onYouExchangeValidityChange}
+                                    onValidationStatusChange={() => {
+                                    }}
+                                    maxValueAllowedInWei={stackedBalance}
+                                    showMaxValueAllowed
+                                    validate={auth}
+                                />
+                                {/* <CoinSelect
                                     label={t('global.RewardsOptions_AmountToUnstakePlaceholder', { ns: 'global' })}
                                     value={token}
                                     AccountData={props.AccountData}
                                     onInputValueChange={() => setUnstakingAmountInputValue(stackedBalance)}
                                     inputValueInWei={unstakingAmountInputValue}
-                                />
+                                />*/ }
                             </Col>
                         </Row>
                         <Row style={{ marginTop: '1em' }}>
@@ -235,11 +286,12 @@ export default function RewardsStakingOptions(props) {
                                 </span>
                             </Col>
                         </Row>
-                        <Row>
+                        <Row style={{ marginTop: '3.7em' }}>
                             <Button
                                 disabled={btnDisable}
                                 type="primary"
                                 className="StakingBtn"
+                                style={{ fontWeight: 700 }}
                                 onClick={() => {
                                     setModalAmount(unstakingAmountInputValue);
                                     setModalMode("unstaking");

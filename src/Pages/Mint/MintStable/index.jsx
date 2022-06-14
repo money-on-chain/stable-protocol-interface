@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../Context/Auth';
 import './style.scss'
 import '../../Home/style.scss'
+import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedeemToken';
 
 export default function Mint(props) {
     const data_row_coins = [];
@@ -52,17 +53,23 @@ export default function Mint(props) {
                     <AmountCard tokenName="STABLE" titleName="DoC"
                         StatusData={auth.contractStatusData} />
                 </Col>
-                <Col xs={24} md={12} xl={4}>
+                <Col xs={24} md={12} xl={5}>
                     <YourAddressCard height="23.4em" tokenToSend="STABLE" currencyOptions={['RESERVE', 'STABLE']} />
                 </Col>
-                <Col xs={24} xl={15}>
-                    <MintCard
+                <Col xs={24} xl={14}>
+                    {/* <MintCard
                         token={'STABLE'}
                         currencyOptions={['RESERVE', 'STABLE']}
                         color="#00a651"
                         AccountData={auth.accountData}
                         UserBalanceData={auth.userBalanceData}
                         StatusData={auth.contractStatusData}
+                    /> */}
+                    <MintOrRedeemToken
+                        token={'STABLE'}
+                        AccountData={auth.accountData}
+                        userState={auth.userBalanceData}
+                        mocState={auth.contractStatusData}
                     />
                 </Col>
             </Row>

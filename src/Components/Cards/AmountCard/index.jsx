@@ -24,23 +24,6 @@ export default function AmountCard(props) {
         tokenName = '',
         color = '',
         titleName = '' } = props;
-
-    const priceFields = getPriceFields();
-    const mocStates = {
-        fields: {
-            ...priceFields,
-            reservePrecision: 1,
-            priceVariation: 1,
-            commissionRates: 1,
-            lastUpdateHeight: 1,
-            isDailyVariation: 1
-        }
-    }
-    const mocState = props.StatusData;
-    let mocStatePrices;
-    if (mocState?.length) {
-        [mocStatePrices] = mocStates;
-    }
     // const convertToken = convertHelper(_.pick(mocStatePrices, Object.keys(priceFields).concat(['reservePrecision'])));
 
     const getBalance = () => {
@@ -64,7 +47,6 @@ export default function AmountCard(props) {
             }
         }
     };
-    console.log(getBalance());
     const getBalanceUSD = () => {
         if (auth.userBalanceData) {
             switch (tokenName) {

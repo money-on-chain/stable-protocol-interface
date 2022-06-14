@@ -9,7 +9,8 @@ import { amountIsTooSmall } from '../../../Lib/exchangeManagerHelper';
 import {
   formatValueToContract,
   formatVisibleValue,
-  formatValueWithContractPrecision
+  formatValueWithContractPrecision,
+  formatLocalMap2
 } from '../../../Lib/Formats';
 import './style.scss';
 import { useTranslation } from "react-i18next";
@@ -46,9 +47,10 @@ export default function InputWithCurrencySelector(props) {
     setDirty(false);
     setInputValidation({ validateStatus: 'success' });
   }, [cleanInputCount]);
-
   useEffect(
     () => {
+
+      console.log('validate & dirty', validate, dirty);
       if (validate && dirty) {
         setInputValidation(validateValue(inputValueInWei, maxValueAllowedInWei));
       }
@@ -64,6 +66,7 @@ export default function InputWithCurrencySelector(props) {
   );
 
   const handleValueChange = newValueInEther => {
+    console.log('handleValueChange', newValueInEther, currencySelected);
     const newValueInWei = formatValueToContract(newValueInEther, currencySelected);
     handleValueChangeInWei(newValueInWei);
     onValueChange(newValueInEther);
@@ -106,7 +109,7 @@ const testConditions = (conditionsAndMessages, value) => {
 const validateValue = (value, maxValueAllowedInWei) => {
   const validNumberRegex = /^$|^\d+\.?(\d+)?$/;
   const valueIsInvalidNumber = value => {
-      const valueInEther = formatVisibleValue(value, currencySelected, 'en');
+      const valueInEther = formatVisibleValue(value, currencySelected, formatLocalMap2[i18n.languages[0]]);
       return !validNumberRegex.test(valueInEther);
   };
   const valueIsBiggerThanMaxValueAllowed = value =>
@@ -127,6 +130,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
       ],
       value
   );
+  console.log('result', result);
   return result;
 };
 
@@ -147,7 +151,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
             <Tooltip title={formatValueWithContractPrecision(inputValueInWei, currencySelected)}>
               <DebounceInput
                 placeholder={placeholder}
-                value={formatVisibleValue(inputValueInWei, currencySelected, 'en')}
+                value={formatVisibleValue(inputValueInWei, currencySelected, formatLocalMap2[i18n.languages[0]])}
                 debounceTimeout={1000}
                 onChange={event => handleValueChange(event.target.value)}
                 className={`valueInput ${

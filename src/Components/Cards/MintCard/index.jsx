@@ -162,20 +162,20 @@ export default function MintCard(props) {
 
     const commission = calcCommission(); */
 
-    const contentFee = type => (
+   /*  const contentFee = type => (
       <div className="TooltipContent">
         <h4>{t(`MoC.exchange.summary.${type}Title`, {ns: 'moc'})}</h4>
         <p>{t(`MoC.exchange.summary.${type}TooltipText`, {ns: 'moc'})}</p>
       </div>
-  );
+  );*/
 
-    const renderComissionCurrencySwitch = () => {
+    /* const renderComissionCurrencySwitch = () => {
       const { enoughMOCBalance } =  false //commission;
   
-      /* if (commissionSwitch !== commission.currencyCode) {
+      if (commissionSwitch !== commission.currencyCode) {
         setCommissionSwitch(commission.currencyCode);
         setLoadingSwitch(false);
-      } */
+      }
   
       let tooltip = enoughMOCBalance
           ? contentFee('payWithMocToken')
@@ -203,9 +203,8 @@ export default function MintCard(props) {
             </Popover>
           </div>
       );
-    };
-
-    const renderFooter = () => {
+    };*/
+    /* const renderFooter = () => {
       return (
           <div className="MintOrRedeemTokenFooter AlignedAndCentered">
             <div className="ReserveInUSD">
@@ -217,7 +216,7 @@ export default function MintCard(props) {
               }) } USD
             </span>
               <span className="Disclaimer">{t('global.MintOrRedeemToken_AmountMayDiffer')}</span>
-              {/*<div className="TextLegend">{t('global.MintOrRedeemToken_AmountMayDiffer')}</div>*/}
+              <div className="TextLegend">{t('global.MintOrRedeemToken_AmountMayDiffer')}</div>
             </div>
             <div className="MainActions AlignedAndCentered" style={{ width: '22%'}}>
               <Button type="ghost" onClick={onClear}>
@@ -233,7 +232,7 @@ export default function MintCard(props) {
             </div>
           </div>
       );
-    };
+    }; */
 
     return (
         <div className="Card MintCard MintOrRedeemToken"  style={{height: '23.4em'}}>
@@ -247,9 +246,9 @@ export default function MintCard(props) {
                         onInputValueChange={onValueYouExchangeChange}
                         value={currencyYouExchange}
                         inputValueInWei={valueYouExchange}
-                        currencyOptions={props.currencyOptions}
-                        AccountData={props.AccountData}
-                        UserBalanceData={props.UserBalanceData}
+                        currencyOptions={[token, 'RESERVE']}
+                        // AccountData={auth.AccountData}
+                        // UserBalanceData={auth.UserBalanceData}
                         token={token}
                     />
                     {/* <div
@@ -273,17 +272,14 @@ export default function MintCard(props) {
                         title={t('global.MintOrRedeemToken_YouReceive')}
                         // label="You Receive"
                         inputValueInWei={valueYouReceive}
-                        currencyOptions={props.currencyOptions}
+                        currencyOptions={[token, 'RESERVE']}
                         value={currencyYouReceive}
                         token={token}
-                        UserBalanceData={props.UserBalanceData}
-                        AccountData={props.AccountData}
-                        disabled
                     />
                 </Col>
             </Row>
-            {renderComissionCurrencySwitch()}
-            {renderFooter()}
+            {/*renderComissionCurrencySwitch()*/}
+            {/* renderFooter()*/}
             {/* <Row>
                 <Col span={12}>
                     <div style={{ marginTop: 20 }}>
