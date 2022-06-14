@@ -23,6 +23,7 @@ const BigNumber = require('bignumber.js');
 
 function MocLiquidity(props) {
     const auth = useContext(AuthenticateContext);
+    const {web3} = auth;
 
     const set_moc_balance_usd = () => {
         if (auth.userBalanceData) {
@@ -70,7 +71,7 @@ function MocLiquidity(props) {
     const claimRewards = async (from, incentiveDestination, incentiveValue, callback = () => { }) => {
         console.log('claimRewards')
         // return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: window.web3.eth.getGasPrice() }, callback);
-        return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: 3000 }, callback);
+        return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: await web3.eth.getGasPrice() }, callback);
     };
     // const { claimRewards } = window.nodeManager.staking;
 

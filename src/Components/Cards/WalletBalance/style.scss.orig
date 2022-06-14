@@ -112,7 +112,6 @@
   width: 100%;
   row-gap: 15px;
 
-<<<<<<< HEAD
   @media only screen and (max-width: 450px) and (min-width: 100px)  {
     width: fit-content;
     margin-left: 0px;
@@ -120,11 +119,7 @@
 
   @media only screen and (max-width: 1575px) and (min-width: 600px)  {
     width: fit-content;
-    // margin-left: 75px;
-=======
-  @media only screen and (max-width: 1575px) and (min-width: 600px) {
     padding-left: 75px;
->>>>>>> develop
   }
 }
 

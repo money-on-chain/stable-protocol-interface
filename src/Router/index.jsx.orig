@@ -29,13 +29,10 @@ export default function Router() {
                     element: <MintLeveraged Auth={auth} />
                 },
                 {
-<<<<<<< HEAD
                     path: 'rewards',
                     element: <Rewards Auth={auth} />
-=======
                     path: 'metrics',
                     element: <Metrics />
->>>>>>> develop
                 },
                 { path: '404', element: <NotFound /> },
                 { path: '*', element: <Navigate to="/404" /> }
