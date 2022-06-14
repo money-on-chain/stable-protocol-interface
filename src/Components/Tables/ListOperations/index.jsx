@@ -45,7 +45,11 @@ export default function ListOperations(props) {
     const [timer, setTimer] = useState(100);
 
     const transactionsList= (skip,call_table) => {
-        api('get', `${config.api_moctest}`+'webapp/transactions/list/', {address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10)})
+        console.log('token')
+        console.log(token)
+        console.log('token')
+        const datas= (token!='all')?{address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10)}
+        api('get', `${config.api_moctest}`+'webapp/transactions/list/', datas)
             .then(response => {
                 setDataJson(response);
                 setTotalTable(response.total)
