@@ -64,6 +64,7 @@ function MocLiquidity(props) {
     const [modalOpen, setModalOpen] = useState(false);
     const [operationStatus, setOperationStatus] = useState("pending");
     const [txHash, setTxHash] = useState("0x00000");
+
     const claimRewards = async (from, incentiveDestination, incentiveValue, callback = () => { }) => {
         return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: await web3.eth.getGasPrice() }, callback);
     };
