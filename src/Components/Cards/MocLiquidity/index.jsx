@@ -71,7 +71,7 @@ function MocLiquidity(props) {
     const claimRewards = async (from, incentiveDestination, incentiveValue, callback = () => { }) => {
         console.log('claimRewards')
         // return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: window.web3.eth.getGasPrice() }, callback);
-        return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: 3000 }, callback);
+        return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: await web3.eth.getGasPrice() }, callback);
     };
     // const { claimRewards } = window.nodeManager.staking;
 
