@@ -267,7 +267,7 @@ export default function ListOperations(props) {
         <>
             <div className="title">
                 <h1>{t('MoC.operations.title', { ns: 'moc' })}</h1>
-                <Tooltip placement="topRight" title={t("MoC.operations.tooltip.text", { ns: 'moc' })} className='Tooltip'>
+                <Tooltip color={'#404040'} placement="topLeft" title={t("MoC.operations.tooltip.text", { ns: 'moc' })} className='Tooltip'>
                     <InfoCircleOutlined className="Icon" />
                 </Tooltip>
             </div>
