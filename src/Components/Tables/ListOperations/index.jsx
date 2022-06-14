@@ -45,7 +45,8 @@ export default function ListOperations(props) {
     const [timer, setTimer] = useState(100);
 
     const transactionsList= (skip,call_table) => {
-        api('get', `${config.api_moctest}`+'webapp/transactions/list/', {address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10)})
+        const datas= (token!='all')?{address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10)}
+        api('get', `${config.api_moctest}`+'webapp/transactions/list/', datas)
             .then(response => {
                 setDataJson(response);
                 setTotalTable(response.total)
@@ -266,7 +267,7 @@ export default function ListOperations(props) {
         <>
             <div className="title">
                 <h1>{t('MoC.operations.title', { ns: 'moc' })}</h1>
-                <Tooltip placement="topRight" title={t("MoC.operations.tooltip.text", { ns: 'moc' })} className='Tooltip'>
+                <Tooltip color={'#404040'} placement="topLeft" title={t("MoC.operations.tooltip.text", { ns: 'moc' })} className='Tooltip'>
                     <InfoCircleOutlined className="Icon" />
                 </Tooltip>
             </div>

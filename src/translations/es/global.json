@@ -213,6 +213,7 @@
         "RewardsClaimButton_Modal_TxStatus_success": "Finalizado",
         "RewardsClaimButton_Modal_TxStatus_failed": "Error",
         "RewardsClaimButton_Modal_TxStatus_pending": "Pendiente",
+        "RewardsClaimButton_Modal_TxStatus_error": "Error",
 
         "Metrics_title": "Métricas",
         "Metrics_subtitle": "Información actual del sistema",

@@ -12,12 +12,9 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
 import Web3 from "web3";
-import web3 from "web3";
 import api from "../../../services/api";
 import config from "../../../Config/constants";
-import Copy from "../../Page/Copy";
-import Moment from "react-moment";
-import date from "../../../Config/date";
+import OperationStatusModal from "../../Modals/OperationStatusModal/OperationStatusModal";
 
 const BigNumber = require('bignumber.js');
 
@@ -62,21 +59,18 @@ function MocLiquidity(props) {
     useEffect(() => {
         setCallAgent(true)
         agent()
-        // setIincentiveStateData({active:true, agent_address: incentiveState.agent_address, fee: incentiveState.gas_cost});
     },[callAgent]);
 
     const [modalOpen, setModalOpen] = useState(false);
     const [operationStatus, setOperationStatus] = useState("pending");
     const [txHash, setTxHash] = useState("0x00000");
+
     const claimRewards = async (from, incentiveDestination, incentiveValue, callback = () => { }) => {
-        console.log('claimRewards')
-        // return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: window.web3.eth.getGasPrice() }, callback);
         return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: await web3.eth.getGasPrice() }, callback);
     };
-    // const { claimRewards } = window.nodeManager.staking;
 
     const claim =()=>{
-         claimRewards(accountData.Owner,incentiveState.agent_address,  incentiveState.gas_cost)
+        claimRewards(accountData.Owner,incentiveState.agent_address,  incentiveState.gas_cost,  (a, _txHash) => {setModalOpen(true);setTxHash(_txHash);})
             .then( () => setOperationStatus("success"))
             .catch(() => setOperationStatus("error"))
     }
@@ -129,7 +123,15 @@ function MocLiquidity(props) {
                         </button>
                     </Link>
 
-                    : <Button style={{ marginTop: '3.5em' }} type="primary" disabled={!auth.isLoggedIn} onClick={claim}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>}
+                    : <Button style={{ marginTop: '3.5em' }} type="primary" disabled={!auth.isLoggedIn} onClick={claim}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>
+                }
+                <OperationStatusModal
+                    className="ClaimStatusModal"
+                    visible={modalOpen}
+                    onCancel={() => setModalOpen(false)}
+                    operationStatus={operationStatus}
+                    txHash={txHash}
+                />
             </div>
         </div>
     )
