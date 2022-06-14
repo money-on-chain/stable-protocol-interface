@@ -148,6 +148,9 @@ export default function BtcToRbtcGenerateModal(props) {
                           maxValue: parseFloat(stateFBtc.limits.max.toFixed(4))
                         })}
                       </li>
+                      <li>
+                        <p>Fee: 5k satoshis + 0.2%</p>
+                      </li>
                     </ul>
                   </div>
                   <b className="section-title">{t('MoC.fastbtc.topUpWalletModal.instructions.header', {ns: 'moc'})}</b>

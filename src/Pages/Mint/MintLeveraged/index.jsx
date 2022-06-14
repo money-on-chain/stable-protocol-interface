@@ -9,6 +9,7 @@ import moment from 'moment';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../Context/Auth';
+import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedeemToken';
 import './style.scss'
 
 export default function Mint(props) {
@@ -112,13 +113,19 @@ export default function Mint(props) {
                     </Row>
                 </Col>
                 <Col xs={24} xl={14}>
-                    <MintCard
+                    {/* <MintCard
                         token={'RISKPROX'}
                         AccountData={auth.accountData}
                         UserBalanceData={auth.userBalanceData}
                         StatusData={auth.contractStatusData}
                         currencyOptions={['RESERVE', 'RISKPROX']}
                         color="#ed1c24"
+                    /> */}
+                    <MintOrRedeemToken
+                        token={'RISKPROX'}
+                        AccountData={auth.accountData}
+                        userState={auth.userBalanceData}
+                        mocState={auth.contractStatusData}
                     />
                 </Col>
             </Row>
