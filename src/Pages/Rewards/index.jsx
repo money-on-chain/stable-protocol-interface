@@ -34,7 +34,7 @@ export default function Rewards(props) {
                 </Col>
                 <Col xs={24} md={12} xl={4}>
                     <YourAddressCard
-                        height="32.4em"
+                        height="100%"
                         tokenToSend="MOC"
                         iconWallet={`${window.location.origin}/Moc/icon-moc.svg`}
                         view={'moc'}
