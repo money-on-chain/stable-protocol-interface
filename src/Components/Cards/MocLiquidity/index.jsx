@@ -23,6 +23,7 @@ const BigNumber = require('bignumber.js');
 
 function MocLiquidity(props) {
     const auth = useContext(AuthenticateContext);
+    const {web3} = auth;
 
     const set_moc_balance_usd = () => {
         if (auth.userBalanceData) {
