@@ -3,6 +3,7 @@ import config from '../Config/constants';
 import Web3 from "web3";
 import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber";
 import moment from 'moment';
+import {formatLocalMap2} from "../Lib/Formats";
 const BigNumber = require('bignumber.js');
 
 export function setNumber(number){
@@ -385,4 +386,11 @@ export function readJsonTableFastBtcPegOut(data_j){
         transactionHashCut:transactionHashCut,blockNumber:blockNumber,rskAddress:rskAddress,rskAddressCut:rskAddressCut
     }
 
+}
+
+export function setToLocaleString(value,fixed,i18n){
+    return (Number(value)).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+        minimumFractionDigits: fixed,
+        maximumFractionDigits: fixed
+    });
 }

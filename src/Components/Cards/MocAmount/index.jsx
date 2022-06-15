@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Tooltip } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import InformationModal from '../../Modals/InformationModal';
+import BalanceItemCard from "../BalanceItemCard/BalanceItemCard";
 
 const BigNumber = require('bignumber.js');
 
@@ -15,12 +16,11 @@ function MocAmount() {
 
     const set_moc_balance_usd = () => {
         if (auth.userBalanceData) {
-            return Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0] / 10000).toFixed(2)
+            return auth.userBalanceData['mocBalance']
         } else {
             return (0).toFixed(2)
         }
     };
-
     const [t, i18n] = useTranslation(["global", 'moc'])
 
     return (
@@ -42,7 +42,7 @@ function MocAmount() {
                     <div className="TotalAmountContainer"><h2>{t("global.RewardsBalance_MocsTokens", { ns: 'global' })}</h2>
                         <div className="BalanceItemCard TotalAmount">
                             <h4>
-                                <div><span className="" >{set_moc_balance_usd()}</span></div>
+                                <BalanceItemCard theme="TotalAmount" amount={set_moc_balance_usd()} currencyCode="MOC" />
                             </h4>
                         </div>
                     </div>

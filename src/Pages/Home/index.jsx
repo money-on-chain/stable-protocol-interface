@@ -14,6 +14,7 @@ import {useTranslation} from "react-i18next";
 import './style.scss';
 import web3 from "web3";
 import {InfoCircleOutlined} from "@ant-design/icons";
+import {getDatasMetrics} from "../../Helpers/helper";
 
 function Home(props) {
 
@@ -22,6 +23,8 @@ function Home(props) {
     const auth = useContext(AuthenticateContext);
     const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
     const data_row_coins2= [];
+
+    const b=getDatasMetrics(auth)
 
 
 

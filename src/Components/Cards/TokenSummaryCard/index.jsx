@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
 import { LargeNumber } from "../../LargeNumber";
-import { relativeTimeRounding } from 'moment';
 import { useTranslation } from "react-i18next";
 import InformationModal from '../../Modals/InformationModal';
+import {setToLocaleString} from "../../../Helpers/helper";
 
 const BigNumber = require('bignumber.js');
 
@@ -37,12 +37,11 @@ export default function TokenSummaryCard(props) {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return (auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(6);
+                    return setToLocaleString((auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(6),6,i18n)
                 case 'riskpro':
-                    return ((auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']) / auth.contractStatusData.bitcoinPrice).toFixed(6)
-                // return auth.userBalanceData['bproBalance'];
+                    return setToLocaleString(((auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']) / auth.contractStatusData.bitcoinPrice).toFixed(6),6,i18n)
                 case 'riskprox':
-                    return new BigNumber(auth.userBalanceData['bprox2Balance']).toFixed(6);
+                    return setToLocaleString(new BigNumber(auth.userBalanceData['bprox2Balance']).toFixed(6),6,i18n)
             }
         } else {
             return (0).toFixed(6)
@@ -52,16 +51,22 @@ export default function TokenSummaryCard(props) {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return new BigNumber(auth.userBalanceData['docBalance']).toFixed(2)
+                    // return new BigNumber(auth.userBalanceData['docBalance']).toFixed(2)
+                    return setToLocaleString(new BigNumber(auth.userBalanceData['docBalance']).toFixed(2),2,i18n)
                 case 'riskpro':
-                    return new BigNumber(auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']).toFixed(2);
+                    // return new BigNumber(auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']).toFixed(2);
+                    return setToLocaleString(new BigNumber(auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']).toFixed(2),2,i18n)
                 case 'riskprox':
-                    return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2);
+                    // return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2);
+                    return setToLocaleString(new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2),2,i18n)
             }
         } else {
             return (0).toFixed(2)
         }
     };
+
+    const { convertToken } = auth;
+    const convertTo = convertToCurrency => convertToken(tokenName, convertToCurrency, 900114098986076075281);
 
     return (
         <Row className="Card TokenSummaryCard" style={{'height':'135px'}}>
