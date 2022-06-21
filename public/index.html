@@ -25,9 +25,63 @@
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+
+    <script src="https://unpkg.com/@rsksmart/rlogin@1.3.3/dist/index.js"></script>
+    <script src="https://unpkg.com/@rsksmart/rlogin-dcent-provider@1.0.2-beta.5/dist/bundle.js"></script>
+    <script src="https://unpkg.com/@rsksmart/rlogin-dpath@1.0.3/dist/bundle.js"></script>
+    <script src="https://unpkg.com/@rsksmart/rlogin-ledger-provider@1.0.2/dist/bundle.js"></script>
+    <script src="https://unpkg.com/@rsksmart/rlogin-trezor-provider@1.0.2/dist/bundle.js"></script>
+
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+      const rpcUrls = {
+            30: 'https://public-node.rsk.co',
+            31: 'https://public-node.testnet.rsk.co'
+        };
+
+        const chainId = 31;
+        var selectedNetwork = {};
+        selectedNetwork[parseInt(chainId)] = rpcUrls[parseInt(chainId)];
+
+        const supportedChains = Object.keys(rpcUrls).map(Number);
+
+        const rLogin = new window.RLogin.default({
+            cacheProvider: true,
+            providerOptions: {
+                'custom-ledger': {
+                    ...rLoginLedgerProvider.ledgerProviderOptions,
+                    options: {
+                      rpcUrl: rpcUrls[parseInt(chainId, 10)],
+                      chainId: parseInt(chainId, 10)
+                    }
+                },
+                'custom-dcent': {
+                  ...rLoginDCentProvider.dcentProviderOptions,
+                  options: {
+                    rpcUrl: rpcUrls[parseInt(chainId)],
+                    chainId: parseInt(chainId),
+                    debug: true
+                  }
+                },
+                'custom-trezor': {
+                    ...rLoginTrezorProvider.trezorProviderOptions,
+                    options: {
+                      rpcUrl: rpcUrls[parseInt(chainId, 10)],
+                      chainId: parseInt(chainId, 10),
+                      manifestEmail: 'info@moneyonchain.com',
+                      manifestAppUrl: 'https://moneyonchain.com/'
+                    }
+                }
+            },
+            rpcUrls: selectedNetwork,
+            supportedChains
+        });
+
+        window.rLogin = rLogin;
+    </script>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.

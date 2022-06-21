@@ -1,4 +1,4 @@
-import RLogin  from '@rsksmart/rlogin';
+//import RLogin  from '@rsksmart/rlogin';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { trezorProviderOptions } from '@rsksmart/rlogin-trezor-provider';
 import { ledgerProviderOptions } from '@rsksmart/rlogin-ledger-provider';
@@ -15,7 +15,9 @@ selectedNetwork[parseInt(chainId)] = rpcUrls[parseInt(chainId)];
 
 const supportedChains = Object.keys(rpcUrls).map(Number);
 
-const rLogin = new RLogin({
+console.log(window.RLogin);
+
+const rLogin = new window.RLogin({
     cacheProvider: true,
     providerOptions: {
         walletconnect: {
