@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 //import rLogin from '../Lib/rLogin';
+import getRLogin from '../Lib/rLogin';
 import Web3 from 'web3';
 import _ from 'lodash/core';
 import btcContractProvider from '../Contracts/MoC/abi/btcContractProvider';
@@ -110,8 +111,7 @@ const AuthenticateProvider = ({ children }) => {
 
     useEffect(() => {
         if (checkLoginFirstTime) {
-            console.log("NNN");
-            console.log(window.rLogin);
+            window.rLogin = getRLogin();
 
             if (window.rLogin.cachedProvider) {
                 connect();
