@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-//import rLogin from '../Lib/rLogin';
 import getRLogin from '../Lib/rLogin';
 import Web3 from 'web3';
 import _ from 'lodash/core';
@@ -62,7 +61,6 @@ const AuthenticateContext = createContext({
     convertToken: async (from, to, amount) => {},
 });
 
-let checkLoginFirstTime = true;
 const vendorAddress = '0xdda74880d638451e6d2c8d3fc19987526a7af730';
 let mocStateAddress = '';
 const mocAddress = '0x01AD6f8E884ed4DDC089fA3efC075E9ba45C9039';
@@ -110,13 +108,12 @@ const AuthenticateProvider = ({ children }) => {
     const socket = new FastBtcSocketWrapper();
 
     useEffect(() => {
-        if (checkLoginFirstTime) {
+        if (!window.rLogin) {
             window.rLogin = getRLogin();
 
             if (window.rLogin.cachedProvider) {
                 connect();
             }
-            checkLoginFirstTime = false;
         }
     });
 

@@ -1,8 +1,3 @@
-//import RLogin  from '@rsksmart/rlogin';
-//import WalletConnectProvider from '@walletconnect/web3-provider';
-//import { trezorProviderOptions } from '@rsksmart/rlogin-trezor-provider';
-//import { ledgerProviderOptions } from '@rsksmart/rlogin-ledger-provider';
-//import { dcentProviderOptions } from '@rsksmart/rlogin-dcent-provider';
 
 const getRLogin = () => {
 
@@ -20,6 +15,12 @@ const getRLogin = () => {
     const rLogin = new window.RLogin.default({
         cacheProvider: true,
         providerOptions: {
+            walletconnect: {
+                package: window.WalletConnectProvider.default,
+                options: {
+                    rpc: rpcUrls
+                }
+            },
             'custom-ledger': {
                 ...window.rLoginLedgerProvider.ledgerProviderOptions,
                 options: {
@@ -51,7 +52,5 @@ const getRLogin = () => {
 
     return rLogin;
 }
-
-
 
 export default getRLogin;
