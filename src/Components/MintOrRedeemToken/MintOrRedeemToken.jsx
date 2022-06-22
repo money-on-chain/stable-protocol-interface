@@ -42,15 +42,16 @@ import MintModal from '../Modals/MintModal';
 import {useTranslation} from "react-i18next";
 import { AuthenticateContext } from '../../Context/Auth';
 import CoinSelect from '../Form/CoinSelect';
+import Web3 from "web3";
 
 
 const MintOrRedeemToken = (props) => {
-  /* Context props */
+    /* Context props */
   const { token, mocState, userState } =
-    props;
+        props;
   let reservePrice;
   if (mocState && mocState.bitcoinPrice) {
-    reservePrice = mocState.bitcoinPrice;
+      reservePrice = mocState.bitcoinPrice;
   }
   const auth = useContext(AuthenticateContext);
   const [t, i18n]= useTranslation(["global",'moc'])
@@ -74,7 +75,7 @@ const MintOrRedeemToken = (props) => {
   const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] =
     useState('Confirm');
 
-  // const { bitcoinPrice = 0 } = props.StatusData ? props.StatusData : {};
+    // const { bitcoinPrice = 0 } = props.StatusData ? props.StatusData : {};
 
   let userComment = '';
   const userAccountIsLoggedIn = mocState;
@@ -84,7 +85,8 @@ const MintOrRedeemToken = (props) => {
     if (auth.convertToken) {
       onValueYouExchangeChange(valueYouReceive);
     }
-  },[currencyYouExchange]); 
+  },[currencyYouExchange]);
+
   useEffect(() => {
     const awaitInterests = async (newValueYouExchange) => {
       const interests = await calcInterests(newValueYouExchange);
@@ -101,10 +103,8 @@ const MintOrRedeemToken = (props) => {
   };
 
   const onValueYouExchangeChange = (newValueYouExchange) => {
-    console.log('newValueYouExchange', newValueYouExchange);
     if (auth) {
       setValueYouExchange(newValueYouExchange);
-      console.log('onvalue', currencyYouExchange, currencyYouReceive, newValueYouExchange);
       const newValueYouReceiveInWei = convertAmount(
         currencyYouExchange,
         currencyYouReceive,
@@ -112,9 +112,15 @@ const MintOrRedeemToken = (props) => {
         auth.convertToken
       );
       console.log('newValueYouReceiveInWei', newValueYouReceiveInWei);
-      setValueYouReceive(newValueYouReceiveInWei);
+      if(currencyYouReceive=='RESERVE'){
+          setValueYouReceive(Web3.utils.fromWei((Web3.utils.fromWei((newValueYouReceiveInWei), 'tether')), 'mwei'));
+      }
+      else{
+          setValueYouReceive(newValueYouReceiveInWei);
+      }
     }
   };
+
   const onValueYouReceiveChange = newValueYouReceive => {
     if(auth){
       setValueYouReceive(newValueYouReceive);
@@ -125,16 +131,45 @@ const MintOrRedeemToken = (props) => {
         auth.convertToken
       );
       console.log('newValueYouExchange', newValueYouExchange);
-      setValueYouExchange(newValueYouExchange);
+      // setValueYouExchange(newValueYouExchange);
+      if(currencyYouExchange=='RESERVE'){
+         setValueYouExchange(Web3.utils.fromWei((Web3.utils.fromWei((newValueYouExchange), 'tether')), 'mwei'));
+      }
+      else{
+         setValueYouExchange(newValueYouExchange);
+      }
     };
   }
+
  const onChangeCurrencyYouExchange = (newCurrencyYouExchange) => {
     setCurrencyYouExchange(newCurrencyYouExchange);
   };
 
+  const getBalance = () => {
+        if (auth.userBalanceData) {
+            switch (token) {
+                case 'STABLE':
+                    return auth.userBalanceData['docBalance'];
+                case 'RISKPRO':
+                    return auth.userBalanceData['bproBalance'];
+                case 'RISKPROX':
+                    return auth.userBalanceData['bprox2Balance'];
+            }
+        } else {
+            switch (token) {
+                case 'stable':
+                    return (0).toFixed(2)
+                case 'riskpro':
+                    return (0).toFixed(6)
+                case 'riskprox':
+                    return (0).toFixed(6)
+            }
+        }
+    };
+
   const getMaxValues = () => {
     if (auth) {
-      let maxValueYouExchange, maxValueYouReceive;
+      let maxValueYouExchange, maxValueYouReceive, maxValueYouExchange_view;
       if (actionIsMint) {
         maxValueYouReceive = getMaxMintableBalance(
           token,
@@ -142,13 +177,21 @@ const MintOrRedeemToken = (props) => {
           mocState,
           auth.convertToken
         ).value.toString();
-        maxValueYouExchange = convertAmount(token, 'RESERVE', maxValueYouReceive, auth.convertToken);
+          maxValueYouExchange = convertAmount(token, 'RESERVE', maxValueYouReceive, auth.convertToken);
+          maxValueYouExchange_view = Number(getBalance()).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+            minimumFractionDigits: token === 'STABLE' ? 2 : 6,
+            maximumFractionDigits: token === 'STABLE' ? 2 : 6
+          })
       } else {
         //action is redeem
-        maxValueYouExchange = getMaxRedeemableBalance(token, userState, mocState).value.toString();
-        maxValueYouReceive = convertAmount(token, 'RESERVE', maxValueYouExchange, auth.convertToken);
-      }
-      return { youExchange: maxValueYouExchange, youReceive: maxValueYouReceive };
+            maxValueYouExchange = getMaxRedeemableBalance(token, userState, mocState).value.toString();
+            maxValueYouExchange_view = Number(getBalance()).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                    minimumFractionDigits: token === 'STABLE' ? 2 : 6,
+                    maximumFractionDigits: token === 'STABLE' ? 2 : 6
+            })
+            maxValueYouReceive = convertAmount(token, 'RESERVE', maxValueYouExchange, auth.convertToken);
+        }
+        return { youExchange: maxValueYouExchange_view, youReceive: Web3.utils.fromWei(maxValueYouReceive, 'ether') };
     }
   };
 
@@ -160,6 +203,7 @@ const MintOrRedeemToken = (props) => {
   const openConfirmationModal = () => {
     setConfirmingTransaction(true);
   };
+
   const closeConfirmationModal = () => {
     setConfirmingTransaction(false);
   };
@@ -216,6 +260,7 @@ const MintOrRedeemToken = (props) => {
     }
     return { interestRate, interestValue };
   };
+
   const onConfirmTransaction = async (comment) => {
     userComment = comment;
 
@@ -423,20 +468,19 @@ const MintOrRedeemToken = (props) => {
     return { totalYouExchange, totalYouReceive };
   };
 
-  /* Variables */
+    /* Variables */
 
   const currencyYouReceive = getCurrencyYouReceive(actionIsMint, token);
   const commission = calcCommission();
   const totals = totalsWithCommissionAndInterests();
-  
-  /* View */
+    /* View */
 
   const renderExchangeInputs = () => {
     return (
       <div className="ExchangeInputs AlignedAndCentered">
         <div className="YouExchange">
          <InputWithCurrencySelector
-            title={t('global.MintOrRedeemToken_YouExchange')}
+            title={t('global.MintOrRedeemToken_YouExchange', {ns: 'global'})}
             currencySelected={currencyYouExchange}
             onCurrencySelect={onChangeCurrencyYouExchange}
             inputValueInWei={valueYouExchange}
@@ -447,8 +491,8 @@ const MintOrRedeemToken = (props) => {
             showMaxValueAllowed
             validate={userAccountIsLoggedIn}
             showConvertBTC_RBTC_Link={false}
-          /> 
-         {/*  <CoinSelect 
+         />
+       {/*  <CoinSelect
             label="You Exchange"
             onCurrencySelect={onChangeCurrencyYouExchange}
             onInputValueChange={onValueYouExchangeChange}
@@ -463,7 +507,7 @@ const MintOrRedeemToken = (props) => {
         <ArrowRightOutlined />
         <div className="YouReceive">
          <InputWithCurrencySelector
-            title={t('global.MintOrRedeemToken_YouReceive')}
+            title={t('global.MintOrRedeemToken_YouReceive', {ns: 'global'})}
             validate={userAccountIsLoggedIn}
             currencyOptions={[token, 'RESERVE']}
             onValidationStatusChange={onYouReceiveValidityChange}
@@ -474,7 +518,7 @@ const MintOrRedeemToken = (props) => {
             showMaxValueAllowed
             onInputValueChange={onValueYouReceiveChange}
             showConvertBTC_RBTC_Link={false}
-          /> 
+         />
           {/*} <CoinSelect
             label="You Receive"
             inputValueInWei={valueYouReceive}
@@ -489,18 +533,17 @@ const MintOrRedeemToken = (props) => {
       </div>
     );
   };
+
+  const [currencyCode, setCurrencyCode]=  useState('USDPrice');
   const renderFooter = () => {
     return (
       <div className="MintOrRedeemTokenFooter AlignedAndCentered">
         <div className="ReserveInUSD">
           <span className={`Conversion ${window.appMode}`}>
             1 {t('MoC.Tokens_RESERVE_code', {ns: 'moc'})} ={' '}
-            <LargeNumber
-              className="ReservePrice"
-              amount={reservePrice}
-              currencyCode="USD"
-              includeCurrency
-            />
+                {auth.isLoggedIn && <>&nbsp;<LargeNumber amount={Web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether')} {...{ currencyCode }} />
+                  <span>&nbsp;USD</span></>
+              }
           </span>
           <span className="Disclaimer">
             {t('global.MintOrRedeemToken_AmountMayDiffer')}
@@ -531,6 +574,7 @@ const MintOrRedeemToken = (props) => {
       </div>
     );
   };
+
   const renderConfirmTransactionModal = () => {
     return (
       <MintModal
@@ -579,11 +623,13 @@ const MintOrRedeemToken = (props) => {
             feePercent: commission.percentage
           })}
         </p>
-        <LargeNumber
-          includeCurrency
-          amount={commission.value}
-          currencyCode={commission.currencyCode}
-        />
+        {!isNaN(commission.value) &&
+            <span>{commission.value} 333</span> &&
+            <LargeNumber
+                includeCurrency
+                amount={commission.value}
+                currencyCode={commission.currencyCode}
+            />}
         <Popover content={tooltip} placement="top">
           <div className="PayWithMocToken">
             <Switch
