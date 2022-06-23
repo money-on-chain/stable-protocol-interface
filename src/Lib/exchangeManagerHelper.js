@@ -9,7 +9,7 @@ import { getTransactionType } from './exchangeHelper';
 
 const BigNumber = require('bignumber.js');
 
-const convertAmount = (source, target, amount, convertToken) => {
+const convertAmount2222 = (source, target, amount, convertToken) => {
   console.log(source, target, amount);
   if (amount === '') {
     return '';
@@ -17,9 +17,16 @@ const convertAmount = (source, target, amount, convertToken) => {
   // if (TAPi18n.getLanguage() === 'es') {
   //   amount = amount.toLocaleString(TAPi18n.getLanguage());
   // }
+  // const convertedAmount = formatValueWithContractPrecision(
+  //   convertToken(source, target, formatValueToContract(amount, source)),
+  //   target
+  // );
+  console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww11111111111111111111111111')
+  console.log(convertToken(source, target, formatValueToContract(amount, source)))
+  console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww11111111111111111111111111')
   const convertedAmount = formatValueWithContractPrecision(
-    convertToken(source, target, formatValueToContract(amount, source)),
-    target
+      convertToken(source, target, formatValueToContract(amount, source)),
+      target
   );
   console.log('convertedAmount', convertedAmount);
   const replacedDot = convertedAmount.replace(/\./g, '');
@@ -30,6 +37,26 @@ const convertAmount = (source, target, amount, convertToken) => {
   return isNaN(replacedComma) ? '' : replacedComma.toString();
   // console.log(isNaN(convertAmount));
   // return isNaN(convertedAmount) ? '' : convertedAmount.toString();
+  // return isNaN(convertedAmount) ? '' : convertedAmount.toString();
+};
+
+const convertAmount = (source, target, amount, convertToken) => {
+  console.log('1.... ',source,'2.... ', target,'3.... ', amount);
+  if (amount === '') {
+    return '';
+  }
+  // if (TAPi18n.getLanguage() === 'es') {
+  //   amount = amount.toLocaleString(TAPi18n.getLanguage());
+  // }
+  const convertedAmount = formatValueWithContractPrecision(
+      convertToken(source, target, formatValueToContract(amount, source)),
+      target
+  );
+
+  console.log('convertAmount*****************************')
+  console.log(convertedAmount)
+  console.log('convertAmount*****************************')
+  return isNaN(convertedAmount) ? '' : convertedAmount.toString();
 };
 
 const amountIsTooSmall = target => {
@@ -137,7 +164,11 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
 
   const commissionValueIfPaidInRESERVE = commissionRateForRESERVE.times(valueYouExchangeInRESERVE).div(precision(RBTCPrecision));
   const commissionYouPay = canPayInMOC ? commissionValueIfPaidInMOC : commissionValueIfPaidInRESERVE;
-
+  console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvcccccccccccc')
+  console.log(canPayInMOC)
+  console.log(commissionRateForMOC )
+  console.log(commissionRateForRESERVE)
+  console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvccccccccccccc')
   return {
       commissionCurrency: canPayInMOC ? "MOC" : "RESERVE",
       commissionRate: canPayInMOC ? commissionRateForMOC : commissionRateForRESERVE,

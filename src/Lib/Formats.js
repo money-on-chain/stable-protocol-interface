@@ -159,9 +159,13 @@ const formatValueToContract = (amount, currencyCode) => {
 const formatValueWithContractPrecision = (amount, currencyCode) => {
     BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
     const fd = formatMap[currencyCode];
-    console.log('amount', amount, 'bignumber', BigNumber(amount)
+    console.log('amount::', amount, 'bignumber::', BigNumber(amount)
     .div(precision(fd))
     .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN));
+    console.log('fd.contractDecimals, BigNumber.ROUND_DOWN) ',fd.contractDecimals, BigNumber.ROUND_DOWN)
+    console.log('amount', amount, 'bignumber', BigNumber(amount))
+    console.log('respppppppppppppppppamount1111', BigNumber(amount).div(precision(fd)).toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN));
+    console.log('amount::', amount, 'bignumber::', BigNumber(amount))
     if (fd) {
         return BigNumber(amount)
             .div(precision(fd))

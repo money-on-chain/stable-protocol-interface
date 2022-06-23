@@ -102,24 +102,22 @@ const MintOrRedeemToken = (props) => {
     return actionIsMint ? tokenToMintOrRedeem : 'RESERVE';
   };
 
-  const onValueYouExchangeChange = (newValueYouExchange) => {
-    if (auth) {
-      setValueYouExchange(newValueYouExchange);
-      const newValueYouReceiveInWei = convertAmount(
-        currencyYouExchange,
-        currencyYouReceive,
-        newValueYouExchange,
-        auth.convertToken
-      );
-      console.log('newValueYouReceiveInWei', newValueYouReceiveInWei);
-      if(currencyYouReceive=='RESERVE'){
-          setValueYouReceive(Web3.utils.fromWei((Web3.utils.fromWei((newValueYouReceiveInWei), 'tether')), 'mwei'));
-      }
-      else{
-          setValueYouReceive(newValueYouReceiveInWei);
-      }
-    }
-  };
+    const onValueYouExchangeChange = newValueYouExchange => {
+        console.log('newValueYouExchange', newValueYouExchange);
+        console.log('ttttttttttttttttttttttttttttttttttttttt')
+        console.log(currencyYouExchange)
+        console.log(currencyYouReceive)
+        console.log(newValueYouExchange)
+        console.log('ttttttttttttttttttttttttttttttttttttttt')
+        setValueYouExchange(newValueYouExchange);
+        const newValueYouReceiveInWei = convertAmount(
+            currencyYouExchange,
+            currencyYouReceive,
+            newValueYouExchange,
+            auth.convertToken
+        );
+        setValueYouReceive(newValueYouReceiveInWei);
+    };
 
   const onValueYouReceiveChange = newValueYouReceive => {
     if(auth){
@@ -132,12 +130,12 @@ const MintOrRedeemToken = (props) => {
       );
       console.log('newValueYouExchange', newValueYouExchange);
       // setValueYouExchange(newValueYouExchange);
-      if(currencyYouExchange=='RESERVE'){
-         setValueYouExchange(Web3.utils.fromWei((Web3.utils.fromWei((newValueYouExchange), 'tether')), 'mwei'));
-      }
-      else{
+      // if(currencyYouExchange=='RESERVE'){
+      //    setValueYouExchange(Web3.utils.fromWei((Web3.utils.fromWei((newValueYouExchange), 'tether')), 'mwei'));
+      // }
+      // else{
          setValueYouExchange(newValueYouExchange);
-      }
+      // }
     };
   }
 
@@ -224,6 +222,10 @@ const MintOrRedeemToken = (props) => {
       userState,
       convertToken
     });
+
+      console.log('commissionRate333333333333333333333')
+      console.log(commissionRate)
+      console.log('commissionRate333333333333333333333')
 
     const commissionRateVisible = formatVisibleValue(
       commissionRate * 100,
@@ -520,7 +522,7 @@ const MintOrRedeemToken = (props) => {
             showConvertBTC_RBTC_Link={false}
          />
           {/*} <CoinSelect
-            label="You Receive"
+            label="You Receive"fformat
             inputValueInWei={valueYouReceive}
             currencyOptions={[token, 'RESERVE']}
             value={currencyYouReceive}

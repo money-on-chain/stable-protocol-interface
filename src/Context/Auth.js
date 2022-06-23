@@ -663,7 +663,7 @@ const AuthenticateProvider = ({ children }) => {
             mocInrate.methods.calcMintInterestValues(strToBytes32(bucketX2), amount).call();
     };
 
-    
+
     const approveReserve = (address) => {
         const weiAmount = web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString());
         const reserveTokenAddress = account;
@@ -676,35 +676,80 @@ const AuthenticateProvider = ({ children }) => {
     /* const priceFields = getPriceFields();
     const convertToken = convertHelper(_.pick(contractStatusData, Object.keys(priceFields).concat(['reservePrecision']))); */
     const convertToken = (from, to, amount) => {
-        console.log('bitcoinprice', contractStatusData?.bitcoinPrice);
-        console.log('convertToken', from, to, amount);
+        // console.log('bitcoinprice------nnnn', contractStatusData?.bitcoinPrice);
+        // console.log('convertToken', from, to, amount);
         const reservePrecision = contractStatusData?.reservePrecision;
         // const reservePrecision = 1;
-        console.log('reservePrecision', reservePrecision);
+        // console.log('reservePrecision-----sssss', reservePrecision);
         const convertDocToUsd = amount => amount;
-        const convertBproToRbtc = amount => (amount * contractStatusData.bproPriceInRbtc) / reservePrecision;// .times(contractStatusData.bproPriceInRbtc).div(reservePrecision);
-        const convertBproToUsd = amount => (amount * contractStatusData.bproPriceInUsd) / reservePrecision; // .times(contractStatusData.bproPriceInUsd).div(reservePrecision);
-        const convertDocToRbtc = amount => (amount / contractStatusData?.bitcoinPrice) * reservePrecision; // .div(contractStatusData?.bitcoinPrice).times(reservePrecision);
-        const convertRbtcToUsd = amount => (amount * contractStatusData?.bitcoinPrice) / reservePrecision; //.times(contractStatusData?.bitcoinPrice).div(reservePrecision);
-        const convertRbtcToBpro = amount => (amount / contractStatusData.bproPriceInRbtc) * reservePrecision; // .div(contractStatusData.bproPriceInRbtc).times(reservePrecision);
+        // const convertBproToRbtc = amount => (amount * contractStatusData.bproPriceInRbtc) / reservePrecision;// .times(contractStatusData.bproPriceInRbtc).div(reservePrecision);
+        // const convertBproToUsd = amount => (amount * contractStatusData.bproPriceInUsd) / reservePrecision; // .times(contractStatusData.bproPriceInUsd).div(reservePrecision);
+        // const convertDocToRbtc = amount => (amount / contractStatusData?.bitcoinPrice) * reservePrecision; // .div(contractStatusData?.bitcoinPrice).times(reservePrecision);
+        // const convertRbtcToUsd = amount => (amount * contractStatusData?.bitcoinPrice) / reservePrecision; //.times(contractStatusData?.bitcoinPrice).div(reservePrecision);
+        // const convertRbtcToBpro = amount => (amount / contractStatusData.bproPriceInRbtc) * reservePrecision; // .div(contractStatusData.bproPriceInRbtc).times(reservePrecision);
+        // const convertRbtcToDoc = amount => convertRbtcToUsd(amount);
+        // const convertRbtcToBprox2 = amount => (amount / contractStatusData.bprox2PriceInRbtc) * reservePrecision;  // .div(contractStatusData.bprox2PriceInRbtc).times(reservePrecision);
+        // const convertBprox2ToRbtc = amount => (amount * contractStatusData.bprox2PriceInRbtc) /reservePrecision; // .times(contractStatusData.bprox2PriceInRbtc).div(reservePrecision);
+        // const convertBproToBprox2 = amount => (amount / contractStatusData.bprox2PriceInBpro) * reservePrecision; // .div(contractStatusData.bprox2PriceInBpro).times(reservePrecision);
+        // const convertBprox2ToBpro = amount => (amount * contractStatusData.bprox2PriceInBpro) / reservePrecision; // .times(contractStatusData.bprox2PriceInBpro).div(reservePrecision);
+
+
+        const convertBproToRbtc = amount => amount.times(contractStatusData?.bproPriceInRbtc).div(reservePrecision);
+        const convertBproToUsd = amount => amount.times(contractStatusData?.bproPriceInUsd).div(reservePrecision);
+        const convertDocToRbtc = amount => amount.div(new BigNumber(contractStatusData?.bitcoinPrice)).times(reservePrecision);
+        const convertRbtcToUsd = amount => amount.times(contractStatusData?.bitcoinPrice).div(reservePrecision);
+        const convertRbtcToBpro = amount => amount.div(contractStatusData?.bproPriceInRbtc).times(reservePrecision);
         const convertRbtcToDoc = amount => convertRbtcToUsd(amount);
-        const convertRbtcToBprox2 = amount => (amount / contractStatusData.bprox2PriceInRbtc) * reservePrecision;  // .div(contractStatusData.bprox2PriceInRbtc).times(reservePrecision);
-        const convertBprox2ToRbtc = amount => (amount * contractStatusData.bprox2PriceInRbtc) /reservePrecision; // .times(contractStatusData.bprox2PriceInRbtc).div(reservePrecision);
-        const convertBproToBprox2 = amount => (amount / contractStatusData.bprox2PriceInBpro) * reservePrecision; // .div(contractStatusData.bprox2PriceInBpro).times(reservePrecision);
-        const convertBprox2ToBpro = amount => (amount * contractStatusData.bprox2PriceInBpro) / reservePrecision; // .times(contractStatusData.bprox2PriceInBpro).div(reservePrecision);
+        const convertRbtcToBprox2 = amount => amount.div(contractStatusData?.bprox2PriceInRbtc).times(reservePrecision);
+        const convertBprox2ToRbtc = amount => amount.times(contractStatusData?.bprox2PriceInRbtc).div(reservePrecision);
+        const convertBproToBprox2 = amount => amount.div(contractStatusData?.bprox2PriceInBpro).times(reservePrecision);
+        const convertBprox2ToBpro = amount => amount.times(contractStatusData?.bprox2PriceInBpro).div(reservePrecision);
+
         const convertBprox2ToUsd = amount =>
             amount // RESERVE
-            * contractStatusData.bprox2PriceInRbtc // .times(contractStatusData.bprox2PriceInRbtc) // RESERVE * RESERVE
-            // .div(reservePrecision) // RESERVE
-            / reservePrecision
-            // .times(contractStatusData.bitcoinPrice) // RESERVE * USD
-            * contractStatusData.bitcoinPrice
-           // .div(reservePrecision); // USD
-           / reservePrecision;
+                .times(contractStatusData.bprox2PriceInRbtc) // RESERVE * RESERVE
+                .div(reservePrecision) // RESERVE
+                .times(contractStatusData.bitcoinPrice) // RESERVE * USD
+                .div(reservePrecision); // USD
 
         const convertMoCTokenToRbtc = amount => convertDocToRbtc(convertMoCTokenToUsd(amount));
         const convertMoCTokenToUsd = amount => amount.times(contractStatusData.mocPrice).div(reservePrecision);
-        const convertRbtcToMoCToken = amount => convertRbtcToDoc(amount) / (contractStatusData?.mocPrice * reservePrecision); //.div(contractStatusData?.mocPrice).times(reservePrecision);
+        const convertRbtcToMoCToken = amount => convertRbtcToDoc(amount).div(contractStatusData.mocPrice).times(reservePrecision);
+
+        // console.log('dddddddddddddddddddddddddddddddddddddddddddddddddd')
+        // console.log(convertBproToRbtc)
+        // console.log(convertBproToUsd)
+        // console.log(convertDocToRbtc)
+        // console.log(convertRbtcToUsd)
+        // console.log(convertRbtcToBpro)
+        // console.log(convertRbtcToDoc)
+        // console.log(convertRbtcToBprox2)
+        // console.log(convertBprox2ToRbtc)
+        // console.log(convertBproToBprox2)
+        // console.log(convertBprox2ToBpro)
+        // console.log('ddddddddddddddddddddddddddddddddddddddddddddddddd')
+
+        // const convertBprox2ToUsd = amount =>
+        //     amount // RESERVE
+        //     * contractStatusData.bprox2PriceInRbtc // .times(contractStatusData.bprox2PriceInRbtc) // RESERVE * RESERVE
+        //     // .div(reservePrecision) // RESERVE
+        //     / reservePrecision
+        //     // .times(contractStatusData.bitcoinPrice) // RESERVE * USD
+        //     * contractStatusData.bitcoinPrice
+        //    // .div(reservePrecision); // USD
+        //    / reservePrecision;
+
+        // const convertMoCTokenToRbtc = amount => convertDocToRbtc(convertMoCTokenToUsd(amount));
+        // const convertMoCTokenToUsd = amount => amount.times(contractStatusData.mocPrice).div(reservePrecision);
+        // const convertRbtcToMoCToken = amount => convertRbtcToDoc(amount) / (contractStatusData?.mocPrice * reservePrecision); //.div(contractStatusData?.mocPrice).times(reservePrecision);
+
+        // console.log('fromfromfrom:')
+        // console.log(from)
+        // console.log('fromfromfrom:')
+
+        // console.log('tototot:')
+        // console.log(to)
+        // console.log('tototot:')
 
         const convertMap = {
             STABLE: { USD: convertDocToUsd, RESERVE: convertDocToRbtc },
@@ -727,14 +772,21 @@ const AuthenticateProvider = ({ children }) => {
             }
         };
 
+        // console.log('amountamountamountamount:')
+        // console.log(amount)
+        // console.log(convertBprox2ToUsd)
+        // console.log(reservePrecision)
+        // console.log(convertMap[from][to](new BigNumber(amount)))
+        // console.log('amountamountamountamount:')
+
         return from === to ? new BigNumber(amount) : convertMap[from][to](new BigNumber(amount));
     };
 
-    
+
 
     return (
         <AuthenticateContext.Provider
-            value={{    
+            value={{
                 account,
                 accountData,
                 userBalanceData,
