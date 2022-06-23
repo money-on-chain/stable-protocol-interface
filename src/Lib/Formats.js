@@ -124,7 +124,6 @@ const formatValueFromMap = (amount, mapEntry, format, decimals) => {
 
 const formatVisibleValue = (amount, currencyCode, language, decimals) => {
     if (amount === null || amount === undefined || !currencyCode) return '-';
-    console.log('formatVisibleValue', amount, currencyCode, language, decimals);
     const num = formatValue(
         amount,
         currencyCode,
