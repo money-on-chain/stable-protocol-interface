@@ -41,8 +41,6 @@ import MintModal from '../Modals/MintModal';
 // import Switch from '../../atoms/Switch/Switch';
 import {useTranslation} from "react-i18next";
 import { AuthenticateContext } from '../../Context/Auth';
-import CoinSelect from '../Form/CoinSelect';
-import Web3 from "web3";
 
 
 const MintOrRedeemToken = (props) => {
@@ -54,6 +52,7 @@ const MintOrRedeemToken = (props) => {
       reservePrice = mocState.bitcoinPrice;
   }
   const auth = useContext(AuthenticateContext);
+  const {web3} = auth;
   const [t, i18n]= useTranslation(["global",'moc'])
 
   /* State variable */
@@ -78,66 +77,57 @@ const MintOrRedeemToken = (props) => {
     // const { bitcoinPrice = 0 } = props.StatusData ? props.StatusData : {};
 
   let userComment = '';
+  let convertToken = token;
   const userAccountIsLoggedIn = mocState;
 
   /* Effects */
-  useEffect(() => {
-    if (auth.convertToken) {
-      onValueYouExchangeChange(valueYouReceive);
-    }
-  },[currencyYouExchange]);
-
-  useEffect(() => {
-    const awaitInterests = async (newValueYouExchange) => {
-      const interests = await calcInterests(newValueYouExchange);
-      setInterests(interests);
-    };
-    if (auth.convertToken) {
-      awaitInterests(valueYouExchange);
-    }
-  }, [valueYouExchange]);
+  useEffect(
+    () => {
+      if (convertToken) {
+        onValueYouExchangeChange(valueYouReceive);
+      }
+    },
+    [currencyYouExchange]
+  );
+  useEffect(
+    () => {
+      const awaitInterests = async newValueYouExchange => {
+        const interests = await calcInterests(newValueYouExchange);
+        setInterests(interests);
+      };
+      if (convertToken) {
+        awaitInterests(valueYouExchange);
+      }
+    },
+    [valueYouExchange]
+  );
 
   /* Methods */
   const getCurrencyYouReceive = (actionIsMint, tokenToMintOrRedeem) => {
     return actionIsMint ? tokenToMintOrRedeem : 'RESERVE';
   };
 
-    const onValueYouExchangeChange = newValueYouExchange => {
-        console.log('newValueYouExchange', newValueYouExchange);
-        console.log('ttttttttttttttttttttttttttttttttttttttt')
-        console.log(currencyYouExchange)
-        console.log(currencyYouReceive)
-        console.log(newValueYouExchange)
-        console.log('ttttttttttttttttttttttttttttttttttttttt')
-        setValueYouExchange(newValueYouExchange);
-        const newValueYouReceiveInWei = convertAmount(
-            currencyYouExchange,
-            currencyYouReceive,
-            newValueYouExchange,
-            auth.convertToken
-        );
-        setValueYouReceive(newValueYouReceiveInWei);
-    };
+  const onValueYouExchangeChange = newValueYouExchange => {
+    setValueYouExchange(newValueYouExchange);
+    const newValueYouReceiveInWei = convertAmount(
+      currencyYouExchange,
+      currencyYouReceive,
+      newValueYouExchange,
+      auth.convertToken
+    );
+    setValueYouReceive(newValueYouReceiveInWei);
+  };
 
   const onValueYouReceiveChange = newValueYouReceive => {
-    if(auth){
-      setValueYouReceive(newValueYouReceive);
-      const newValueYouExchange = convertAmount(
-        currencyYouReceive,
-        currencyYouExchange,
-        newValueYouReceive,
-        auth.convertToken
-      );
-      console.log('newValueYouExchange', newValueYouExchange);
-      // setValueYouExchange(newValueYouExchange);
-      // if(currencyYouExchange=='RESERVE'){
-      //    setValueYouExchange(Web3.utils.fromWei((Web3.utils.fromWei((newValueYouExchange), 'tether')), 'mwei'));
-      // }
-      // else{
-         setValueYouExchange(newValueYouExchange);
-      // }
-    };
-  }
+    setValueYouReceive(newValueYouReceive);
+    const newValueYouExchange = convertAmount(
+      currencyYouReceive,
+      currencyYouExchange,
+      newValueYouReceive,
+      auth.convertToken
+    );
+    setValueYouExchange(newValueYouExchange);
+  };
 
  const onChangeCurrencyYouExchange = (newCurrencyYouExchange) => {
     setCurrencyYouExchange(newCurrencyYouExchange);
@@ -189,7 +179,7 @@ const MintOrRedeemToken = (props) => {
             })
             maxValueYouReceive = convertAmount(token, 'RESERVE', maxValueYouExchange, auth.convertToken);
         }
-        return { youExchange: maxValueYouExchange_view, youReceive: Web3.utils.fromWei(maxValueYouReceive, 'ether') };
+        return { youExchange: maxValueYouExchange_view, youReceive: maxValueYouReceive };
     }
   };
 
@@ -494,17 +484,6 @@ const MintOrRedeemToken = (props) => {
             validate={userAccountIsLoggedIn}
             showConvertBTC_RBTC_Link={false}
          />
-       {/*  <CoinSelect
-            label="You Exchange"
-            onCurrencySelect={onChangeCurrencyYouExchange}
-            onInputValueChange={onValueYouExchangeChange}
-            value={currencyYouExchange}
-            inputValueInWei={valueYouExchange}
-            currencyOptions={[token, 'RESERVE']}
-            // AccountData={auth.AccountData}
-            // UserBalanceData={auth.UserBalanceData}
-            token={token}
-          />*/}
         </div>
         <ArrowRightOutlined />
         <div className="YouReceive">
@@ -521,16 +500,6 @@ const MintOrRedeemToken = (props) => {
             onInputValueChange={onValueYouReceiveChange}
             showConvertBTC_RBTC_Link={false}
          />
-          {/*} <CoinSelect
-            label="You Receive"fformat
-            inputValueInWei={valueYouReceive}
-            currencyOptions={[token, 'RESERVE']}
-            value={currencyYouReceive}
-            token={token}
-            // UserBalanceData={auth.UserBalanceData}
-            // AccountData={auth.AccountData}
-            // disabled
-          />*/}
         </div>
       </div>
     );
@@ -543,7 +512,7 @@ const MintOrRedeemToken = (props) => {
         <div className="ReserveInUSD">
           <span className={`Conversion ${window.appMode}`}>
             1 {t('MoC.Tokens_RESERVE_code', {ns: 'moc'})} ={' '}
-                {auth.isLoggedIn && <>&nbsp;<LargeNumber amount={Web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether')} {...{ currencyCode }} />
+                {auth.isLoggedIn && <>&nbsp;<LargeNumber amount={web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether')} {...{ currencyCode }} />
                   <span>&nbsp;USD</span></>
               }
           </span>

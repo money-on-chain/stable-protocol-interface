@@ -111,16 +111,11 @@ const formatValue = (amount, currencyCode, format, decimals) => {
     const fd = formatMap[currencyCode];
     return formatValueFromMap(amount, fd, format, decimals);
 };
-
 const formatValueFromMap = (amount, mapEntry, format, decimals) => {
-    console.log(amount, mapEntry, format, decimals);
-    console.log('formatValueFromMap', BigNumber(amount)
-    .div(precision(mapEntry))
-    .toFormat(decimals || mapEntry.decimals, BigNumber.ROUND_DOWN, format));
     return BigNumber(amount)
-        .div(precision(mapEntry))
-        .toFormat(decimals || mapEntry.decimals, BigNumber.ROUND_DOWN, format);
-};
+    .div(precision(mapEntry))
+    .toFormat(decimals || mapEntry.decimals, BigNumber.ROUND_DOWN, format);
+}
 
 const formatVisibleValue = (amount, currencyCode, language, decimals) => {
     if (amount === null || amount === undefined || !currencyCode) return '-';
@@ -141,38 +136,16 @@ const formatValueVariation = (amount, language) => {
   };
 
 const formatValueToContract = (amount, currencyCode) => {
-    console.log(amount, currencyCode, formatMap[currencyCode]);
-    console.log('formatValueToContract', new BigNumber(amount)
-    .multipliedBy(precision(formatMap[currencyCode]))
-    .toFixed(0));
     return new BigNumber(amount).multipliedBy(precision(formatMap[currencyCode])).toFixed(0);
-    /* if (currencyCode === 'RESERVE') {
-        return new BigNumber(amount)
-        .multipliedBy(precision(formatMap[currencyCode]))
-        .toFixed(0);
-    } else {
-        return amount;
-    } */
-    // return amount;
-};
+}
 
 const formatValueWithContractPrecision = (amount, currencyCode) => {
-    BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
+    BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN});
     const fd = formatMap[currencyCode];
-    console.log('amount::', amount, 'bignumber::', BigNumber(amount)
-    .div(precision(fd))
-    .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN));
-    console.log('fd.contractDecimals, BigNumber.ROUND_DOWN) ',fd.contractDecimals, BigNumber.ROUND_DOWN)
-    console.log('amount', amount, 'bignumber', BigNumber(amount))
-    console.log('respppppppppppppppppamount1111', BigNumber(amount).div(precision(fd)).toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN));
-    console.log('amount::', amount, 'bignumber::', BigNumber(amount))
-    if (fd) {
-        return BigNumber(amount)
-            .div(precision(fd))
-            .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN);
-    }
-    return null;
-};
+    return BigNumber(amount)
+      .div(precision(fd))
+      .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN);
+  };
 
 /* const convertAmount = (source, target, amount, convertToken) => {
     if (amount === '') {

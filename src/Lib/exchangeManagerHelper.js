@@ -41,7 +41,6 @@ const convertAmount2222 = (source, target, amount, convertToken) => {
 };
 
 const convertAmount = (source, target, amount, convertToken) => {
-  console.log('1.... ',source,'2.... ', target,'3.... ', amount);
   if (amount === '') {
     return '';
   }
@@ -49,14 +48,10 @@ const convertAmount = (source, target, amount, convertToken) => {
   //   amount = amount.toLocaleString(TAPi18n.getLanguage());
   // }
   const convertedAmount = formatValueWithContractPrecision(
-      convertToken(source, target, formatValueToContract(amount, source)),
-      target
+    convertToken(source, target, formatValueToContract(amount, source)),
+    target
   );
-
-  console.log('convertAmount*****************************')
-  console.log(convertedAmount)
-  console.log('convertAmount*****************************')
-  return isNaN(convertedAmount) ? '' : convertedAmount.toString();
+  return convertedAmount === "NaN" ? '' : convertedAmount.toString();
 };
 
 const amountIsTooSmall = target => {
