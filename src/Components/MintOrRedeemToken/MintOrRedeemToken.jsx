@@ -44,16 +44,17 @@ import { AuthenticateContext } from '../../Context/Auth';
 
 
 const MintOrRedeemToken = (props) => {
-    /* Context props */
-  const { token, mocState, userState } =
-        props;
+  const [t, i18n]= useTranslation(["global",'moc'])
+  const auth = useContext(AuthenticateContext);
+  const {web3} = auth;
+
+  /* Context props */
+  const { token, mocState, userState } = props;
+
   let reservePrice;
   if (mocState && mocState.bitcoinPrice) {
       reservePrice = mocState.bitcoinPrice;
   }
-  const auth = useContext(AuthenticateContext);
-  const {web3} = auth;
-  const [t, i18n]= useTranslation(["global",'moc'])
 
   /* State variable */
   const [currencyYouExchange, setCurrencyYouExchange] = useState('RESERVE');
@@ -62,28 +63,21 @@ const MintOrRedeemToken = (props) => {
   const [youExchangeIsValid, onYouExchangeValidityChange] = useState(false);
   const [youReceiveIsValid, onYouReceiveValidityChange] = useState(false);
   const [confirmingTransaction, setConfirmingTransaction] = useState(false);
-  const [interests, setInterests] = useState({
-    interestRate: '0',
-    interestValue: BigNumber('0')
-  });
+  const [interests, setInterests] = useState({ interestRate: '0', interestValue: BigNumber('0') });
   const actionIsMint = currencyYouExchange === 'RESERVE';
   const [loadingSwitch, setLoadingSwitch] = useState(false);
   const [commissionSwitch, setCommissionSwitch] = useState('RESERVE');
-  const [ShowModalAllowanceReserve, setShowModalAllowanceReserve] =
-    useState(false);
-  const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] =
-    useState('Confirm');
-
-    // const { bitcoinPrice = 0 } = props.StatusData ? props.StatusData : {};
+  const [ShowModalAllowanceReserve, setShowModalAllowanceReserve] = useState(false);
+  const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] = useState('Confirm');
+  const [tolerance, setTolerance] = useState('0.1');
 
   let userComment = '';
-  let convertToken = token;
   const userAccountIsLoggedIn = mocState;
 
   /* Effects */
   useEffect(
     () => {
-      if (convertToken) {
+      if (auth.convertToken) {
         onValueYouExchangeChange(valueYouReceive);
       }
     },
@@ -95,7 +89,7 @@ const MintOrRedeemToken = (props) => {
         const interests = await calcInterests(newValueYouExchange);
         setInterests(interests);
       };
-      if (convertToken) {
+      if (auth.convertToken) {
         awaitInterests(valueYouExchange);
       }
     },
@@ -129,58 +123,26 @@ const MintOrRedeemToken = (props) => {
     setValueYouExchange(newValueYouExchange);
   };
 
- const onChangeCurrencyYouExchange = (newCurrencyYouExchange) => {
+  const onChangeCurrencyYouExchange = (newCurrencyYouExchange) => {
     setCurrencyYouExchange(newCurrencyYouExchange);
   };
 
-  const getBalance = () => {
-        if (auth.userBalanceData) {
-            switch (token) {
-                case 'STABLE':
-                    return auth.userBalanceData['docBalance'];
-                case 'RISKPRO':
-                    return auth.userBalanceData['bproBalance'];
-                case 'RISKPROX':
-                    return auth.userBalanceData['bprox2Balance'];
-            }
-        } else {
-            switch (token) {
-                case 'stable':
-                    return (0).toFixed(2)
-                case 'riskpro':
-                    return (0).toFixed(6)
-                case 'riskprox':
-                    return (0).toFixed(6)
-            }
-        }
-    };
-
   const getMaxValues = () => {
-    if (auth) {
-      let maxValueYouExchange, maxValueYouReceive, maxValueYouExchange_view;
-      if (actionIsMint) {
-        maxValueYouReceive = getMaxMintableBalance(
-          token,
-          userState,
-          mocState,
-          auth.convertToken
-        ).value.toString();
-          maxValueYouExchange = convertAmount(token, 'RESERVE', maxValueYouReceive, auth.convertToken);
-          maxValueYouExchange_view = Number(getBalance()).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-            minimumFractionDigits: token === 'STABLE' ? 2 : 6,
-            maximumFractionDigits: token === 'STABLE' ? 2 : 6
-          })
-      } else {
-        //action is redeem
-            maxValueYouExchange = getMaxRedeemableBalance(token, userState, mocState).value.toString();
-            maxValueYouExchange_view = Number(getBalance()).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                    minimumFractionDigits: token === 'STABLE' ? 2 : 6,
-                    maximumFractionDigits: token === 'STABLE' ? 2 : 6
-            })
-            maxValueYouReceive = convertAmount(token, 'RESERVE', maxValueYouExchange, auth.convertToken);
-        }
-        return { youExchange: maxValueYouExchange_view, youReceive: maxValueYouReceive };
+    let maxValueYouExchange, maxValueYouReceive;
+    if (actionIsMint) {
+      maxValueYouReceive = getMaxMintableBalance(
+        token,
+        userState,
+        mocState,
+        auth.convertToken
+      ).value.toString();
+      maxValueYouExchange = convertAmount(token, 'RESERVE', maxValueYouReceive, auth.convertToken);
+    } else {
+      //action is redeem
+      maxValueYouExchange = getMaxRedeemableBalance(token, userState, mocState).value.toString();
+      maxValueYouReceive = convertAmount(token, 'RESERVE', maxValueYouExchange, auth.convertToken);
     }
+    return { youExchange: maxValueYouExchange, youReceive: maxValueYouReceive };
   };
 
  const clear = () => {
@@ -198,7 +160,6 @@ const MintOrRedeemToken = (props) => {
 
   const calcCommission = () => {
     if (!auth.convertToken || !mocState) return {};
-    const convertToken = auth.convertToken;
     const {
       commissionCurrency,
       commissionRate,
@@ -210,12 +171,8 @@ const MintOrRedeemToken = (props) => {
       currencyYouExchange,
       mocState,
       userState,
-      convertToken
+      convertToken: auth.convertToken
     });
-
-      console.log('commissionRate333333333333333333333')
-      console.log(commissionRate)
-      console.log('commissionRate333333333333333333333')
 
     const commissionRateVisible = formatVisibleValue(
       commissionRate * 100,
@@ -230,7 +187,7 @@ const MintOrRedeemToken = (props) => {
     };
   };
 
-  const calcInterests = async (newValueYouExchange) => {
+  const calcInterests = async newValueYouExchange => {
     let interestRate = '0',
       interestValue = BigNumber('0');
     if (actionIsMint && currencyYouReceive === 'RISKPROX') {
@@ -241,13 +198,15 @@ const MintOrRedeemToken = (props) => {
       );
       interestValue = new BigNumber(interestValue);
       //interestValue = new BigNumber(0.01).multipliedBy(interestValue).plus(interestValue);
+
       interestRate = formatValueToContract(
-          new BigNumber(interestValue)
-            .multipliedBy(100)
-            .div(newValueYouExchange)
-            .toFixed(),
+        new BigNumber(interestValue)
+          .multipliedBy(100)
+          .div(newValueYouExchange)
+          .toFixed(),
         'USD'
       );
+
       interestRate = formatVisibleValue(interestRate, 'commissionRate', formatLocalMap2[i18n.languages[0]]);
     }
     return { interestRate, interestValue };
@@ -444,6 +403,15 @@ const MintOrRedeemToken = (props) => {
   const totalsWithCommissionAndInterests = () => {
     let totalYouExchange = BigNumber(valueYouExchange);
     let totalYouReceive = BigNumber(valueYouReceive);
+
+    // Mint BTCX slippage (user tolerance)
+    // take in care user tolerance
+    //if (actionIsMint && currencyYouReceive === 'RISKPROX') {
+    if (actionIsMint) {
+      const userToleranceAmount = new BigNumber(tolerance).multipliedBy(totalYouExchange).div(100).toFixed();
+      totalYouExchange = totalYouExchange.plus(userToleranceAmount);
+    }
+
     const commission = calcCommission();
     if (actionIsMint) {
       if (commission.currencyCode === 'RESERVE') {

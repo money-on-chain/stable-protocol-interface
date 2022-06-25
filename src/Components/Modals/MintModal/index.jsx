@@ -51,7 +51,6 @@ export default function MintModal(props) {
   const tokenName = currencyYouReceive
     ? currenciesDetail.find((x) => x.value === token).label
     : '';
-  console.log('tokenNameExchange', tokenNameExchange);
   const [currentHash, setCurrentHash] = useState(null);
   const [comment, setComment] = useState('');
   const [t, i18n]= useTranslation(["global",'moc'])

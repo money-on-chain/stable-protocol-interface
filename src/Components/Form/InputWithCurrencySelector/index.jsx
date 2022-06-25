@@ -49,7 +49,6 @@ export default function InputWithCurrencySelector(props) {
   }, [cleanInputCount]);
   useEffect(
     () => {
-      console.log('validate & dirty', validate, dirty);
       if (validate && dirty) {
         setInputValidation(validateValue(inputValueInWei, maxValueAllowedInWei));
       }
@@ -65,7 +64,6 @@ export default function InputWithCurrencySelector(props) {
   );
 
   const handleValueChange = newValueInEther => {
-    console.log('handleValueChange', newValueInEther, currencySelected);
     const newValueInWei = formatValueToContract(newValueInEther, currencySelected);
     handleValueChangeInWei(newValueInWei);
     onValueChange(newValueInEther);
@@ -129,7 +127,6 @@ const validateValue = (value, maxValueAllowedInWei) => {
       ],
       value
   );
-  console.log('result', result);
   return result;
 };
 
@@ -174,19 +171,11 @@ const validateValue = (value, maxValueAllowedInWei) => {
             {t('global.InputWithCurrencySelector_AddTotalAvailable')}
           </span>
           <div className="text-align-right">
-             {currencySelected=='STABLE' &&
-                 <span>{maxValueAllowedInWei} DOC</span>
-             }
-              {currencySelected!='STABLE' &&
-                 <LargeNumber
-                 currencyCode={currencySelected}
-                 amount={maxValueAllowedInWei}
-                 includeCurrency
-              />}
-            {/* showConvertBTC_RBTC_Link && (
-              <button onClick={() => FlowRouter.go('getRBTC') }
-                className="link-like-btn">Convert BTC to RBTC</button>
-            )*/}
+            <LargeNumber
+                currencyCode={currencySelected}
+                amount={maxValueAllowedInWei}
+                includeCurrency
+            />
           </div>
         </div>
       )}
@@ -210,11 +199,6 @@ const validateValue = (value, maxValueAllowedInWei) => {
                   amount={maxValueAllowedInWei}
                   includeCurrency
                 />
-                {/* showConvertBTC_RBTC_Link && (
-                  <button onClick={() => FlowRouter.go('getRBTC') }
-                    className="link-like-btn">{t(`global.InputWithCurrencySelector_ConvertBTCtoRBTC`)}
-                  </button>
-                )*/}
               </div>
             </div>
           </div>

@@ -20,14 +20,13 @@ import {
     contractStatus,
     userBalance
 } from './MultiCallFunctions.js';
-import { enable } from 'workbox-navigation-preload';
 import addressHelper from '../Lib/addressHelper';
 import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
-import convertHelper from '../Lib/convertHelper';
-import { getPriceFields } from '../Lib/price';
 
 const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
+
+BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
 
 const AuthenticateContext = createContext({
     isLoggedIn: false,
@@ -168,7 +167,6 @@ const AuthenticateProvider = ({ children }) => {
             GasPrice: await getGasPrice(),
             truncatedAddress: truncate_address
         };
-        console.log('accountData', accountData);
         setAccountData(accountData);
     };
     const loadBalanceData = async () => {
@@ -245,12 +243,10 @@ const AuthenticateProvider = ({ children }) => {
             mocinrate,
             mocsettlement
         );
-
-        console.log('auth dataContractStatus', dataContractStatus);
+        
         setcontractStatusData(dataContractStatus);
 
         const user_address = account;
-        console.log('user_adresssssssss', account);
 
         // Example user balance
         const user_balance = await userBalance(
@@ -265,7 +261,6 @@ const AuthenticateProvider = ({ children }) => {
         );
 
         setUserBalanceData(user_balance);
-        console.log(user_balance);
     };
 
     const getAccount = async () => {

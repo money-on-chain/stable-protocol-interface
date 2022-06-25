@@ -91,10 +91,7 @@ export default function AmountCard(props) {
                     <div className="priceContainer">
                         <Tooltip title={Number(getBalance())?.toLocaleString(formatLocalMap2[i18n.languages[0]])}>
                             <div>
-                                {Number(getBalance()).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                                    minimumFractionDigits: tokenName === 'STABLE' ? 2 : 6,
-                                    maximumFractionDigits: tokenName === 'STABLE' ? 2 : 6
-                                })}
+                            <LargeNumber {...{ amount: getBalance(), currencyCode: tokenName }} />
                             </div>
                         </Tooltip>
                         <div className="WalletCurrencyPrice">
