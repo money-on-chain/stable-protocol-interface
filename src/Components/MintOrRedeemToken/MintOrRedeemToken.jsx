@@ -72,6 +72,7 @@ const MintOrRedeemToken = (props) => {
   const [tolerance, setTolerance] = useState('0.1');
 
   let userComment = '';
+  let userTolerance = '';
   const userAccountIsLoggedIn = mocState;
 
   /* Effects */
@@ -212,15 +213,14 @@ const MintOrRedeemToken = (props) => {
     return { interestRate, interestValue };
   };
 
-  const onConfirmTransaction = async (comment) => {
-    userComment = comment;
+  const onConfirmTransaction = async data => {
+    userComment = data.comment;
+    userTolerance = data.tolerance;
 
-    const { appMode } = 'Moc' //o RRC20;
+    const { appMode } = window;
     // In rrc20 mode show allowance when need it
     if (appMode === 'RRC20') {
-      const userAllowance = await window.nodeManager.getReserveAllowance(
-        window.address
-      );
+      const userAllowance = await window.nodeManager.getReserveAllowance(window.address);
       if (valueYouExchange > userAllowance) {
         allowanceReserveModalShow(true);
         return;
@@ -235,10 +235,16 @@ const MintOrRedeemToken = (props) => {
       currencyYouReceive,
       `${commission.currencyCode}_COMMISSION`
     );
-    exchangeMethod(
-      userComment,
-      formatValueWithContractPrecision(valueYouExchange, 'RESERVE')
+    const userAmount = formatValueWithContractPrecision(valueYouExchange, 'RESERVE');
+    const userToleranceAmount = formatValueToContract(
+      new BigNumber(userTolerance)
+          .multipliedBy(userAmount)
+          .div(100)
+          .toFixed(),
+      'RESERVE'
     );
+
+    exchangeMethod(userAmount, userToleranceAmount);
     setConfirmingTransaction(false);
   };
 
@@ -515,6 +521,8 @@ const MintOrRedeemToken = (props) => {
   };
 
   const renderConfirmTransactionModal = () => {
+    let defaultSliderValue = 0.1;
+    if (actionIsMint && currencyYouReceive === 'RISKPROX') { defaultSliderValue = 0.25; }
     return (
       <MintModal
         visible={confirmingTransaction}
@@ -531,6 +539,10 @@ const MintOrRedeemToken = (props) => {
         onCancel={closeConfirmationModal}
         onConfirm={onConfirmTransaction}
         convertToken={auth.convertToken}
+        tolerance={tolerance}
+        setTolerance={setTolerance}
+        actionIsMint={actionIsMint}
+        defaultSliderValue={defaultSliderValue}
       />
     );
   };

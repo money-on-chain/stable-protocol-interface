@@ -3,31 +3,26 @@
 import { Button, Tooltip } from 'antd';
 import { AuthenticateContext } from '../../../Context/Auth';
 import './style.scss';
-import Web3 from 'web3';
 import { useState, useContext, useEffect } from 'react';
 import { Modal, notification } from 'antd';
+
+import { convertAmount } from '../../../Lib/exchangeManagerHelper';
+
 import Copy from "../../Page/Copy";
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
 import { LargeNumber } from '../../LargeNumber';
 import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";
-import { convertAmount } from '../../../Lib/exchangeManagerHelper';
-const BigNumber = require('bignumber.js');
+import BigNumber from 'bignumber.js';
 export default function MintModal(props) {
-  /* Disabled confirm button when not connected */
-  const { address } = true; //window;
-  var btnDisable = false;
   const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
-  if (!address || !isLoggedIn) {
-    btnDisable = true;
-  }
   const {
+    exchanging,
+    receiving,
     title = '',
     handleClose = () => {},
     handleComplete = () => {},
     color,
-    currencyYouExchange,
-    currencyYouReceive,
     token,
     fee,
     interests,
@@ -35,24 +30,31 @@ export default function MintModal(props) {
     onCancel,
     onConfirm,
     convertToken,
-    exchanging,
-    receiving,
+    actionIsMint,
+    tolerance,
+    setTolerance
   } = props;
+
+  /* Disabled confirm button when not connected */
+  const { address } = true; //window;
+  var btnDisable = false;
+  if (!address || !isLoggedIn) {
+    btnDisable = true;
+  }
   const [loading, setLoading] = useState(false);
   const [showTransaction, setShowTransaction] = useState(false);
   const [transaction, setTransaction] = useState(false);
   const auth = useContext(AuthenticateContext);
-  const tokenNameExchange = currencyYouExchange
-    ? currenciesDetail.find((x) => x.value === currencyYouExchange).label
+  const tokenNameExchange = exchanging.currencyCode
+    ? currenciesDetail.find((x) => x.value === exchanging.currencyCode).label
     : '';
-  const tokenNameReceive = currencyYouReceive
-    ? currenciesDetail.find((x) => x.value === currencyYouReceive).label
+  const tokenNameReceive = receiving.currencyCode
+    ? currenciesDetail.find((x) => x.value === receiving.currencyCode).label
     : '';
-  const tokenName = currencyYouReceive
-    ? currenciesDetail.find((x) => x.value === token).label
-    : '';
+  
   const [currentHash, setCurrentHash] = useState(null);
   const [comment, setComment] = useState('');
+  const [showError, setShowError] = useState(false);
   const [t, i18n]= useTranslation(["global",'moc'])
   const { appMode } = 'Moc';
 
@@ -70,35 +72,62 @@ export default function MintModal(props) {
     },
     [visible]
   );
-  const handleOk = async () => {
-    setLoading(true);
-    switch (currencyYouReceive) {
-      case 'STABLE':
-        await auth.DoCMint(props.valueYouExchange, callback);
-        break;
-      case 'RISKPRO':
-        await auth.BPROMint(props.valueYouExchange, callback);
-        break;
-      case 'RISKPROX':
-        await auth.Bprox2Mint(props.valueYouExchange, callback);
-        break;
-      case 'RESERVE':
-        await redeem();
-        break;
-    }
+
+  const receivingInUSD = convertAmount(
+    receiving.currencyCode,
+    'USD',
+    receiving.value,
+    convertToken
+  );
+  /* View */
+  const renderAmount = (name, amountAndCurrencyCode, classElement) => {
+    return (
+      <div className={`AlignedAndCentered Amount ${classElement}`}>
+        <span className="Name">{name}</span>
+        <span className={`Value ${amountAndCurrencyCode.currencyCode} ${appMode}`}>
+          <LargeNumber
+            currencyCode={amountAndCurrencyCode.currencyCode}
+            amount={amountAndCurrencyCode.value}
+            includeCurrency
+          />
+        </span>
+      </div>
+    );
   };
-  const redeem = async () => {
-      switch (currencyYouExchange) {
-          case 'STABLE':
-              await auth.DoCReedem(props.valueYouExchange, callback);
-              break;
-          case 'RISKPRO':
-              await auth.BPROReedem(props.valueYouExchange, callback);
-              break;
-          case 'RISKPROX':
-                  await auth.Bprox2Redeem(props.valueYouExchange, callback);
-                  break;
-      }
+
+  const confirmButton = async ({comment, tolerance}) => {
+
+    // Check if there are enough spendable balance to pay
+    // take in care amount to pay gas fee
+    let uTolerance = 0;
+    if (actionIsMint) {
+      uTolerance = tolerance;
+    }
+    /*const { minimumUserBalanceToOperate } = Meteor.settings.public;
+    const userSpendable = await window.nodeManager.getSpendableBalance(window.address);
+
+    let minimumBalance = new BigNumber(minimumUserBalanceToOperate);
+    let uTolerance = 0;
+    if (actionIsMint) {
+        minimumBalance = minimumBalance.plus(new BigNumber(exchanging.value));
+        uTolerance = tolerance;
+    }
+
+    // You have not enough balance abort
+    if (minimumBalance.gt(new BigNumber(userSpendable))) {
+        setShowError(true);
+        return;
+    }*/
+    onConfirm({ comment, tolerance: uTolerance });
+
+  };
+
+  const renderError = () => {
+    return (
+    <div className="noEnoughBalance">
+      {t('global.ConfirmTransactionModal_Error_not_enough')}
+    </div>
+    )
   };
 
   const getTransaction = async (hash) => {
@@ -118,14 +147,31 @@ export default function MintModal(props) {
     });
   } ;
 
+  const changeTolerance = (newTolerance) => {
+    setTolerance(newTolerance);
+    setShowError(false);
+  };
+
+  const cancelButton = () => {
+    setShowError(false);
+    onCancel();
+  };
+
+  const markStyle = {
+    style: {
+      color: '#707070',
+      fontSize: 10
+    }
+  };
+
   const callback = (error, transactionHash) => {
     setLoading(false);
     setCurrentHash(transactionHash);
     getTransaction(transactionHash);
   };
 
-  const styleExchange = tokenNameExchange === tokenName ? { color } : {};
-  const styleReceive = tokenNameReceive === tokenName ? { color } : {};
+  const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
+  const styleReceive = tokenNameReceive === receiving.currencyCode ? { color } : {};
 
   return (
     <Modal
@@ -133,44 +179,15 @@ export default function MintModal(props) {
       confirmLoading={loading}
       className="ConfirmModalTransaction"
       footer={null}
-      onCancel={onCancel}
+      onCancel={cancelButton}
     >
       <div className="TabularContent">
         <h1>{t('global.ConfirmTransactionModal_Title')}</h1>
-        <div className="AlignedAndCentered Amount">
-          <span className="Name">{t('global.ConfirmTransactionModal_Exchanging')}</span>
-          <span className="Value" style={styleExchange}>
-            <Tooltip title={Number(props.valueYouExchange)?.toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                minimumFractionDigits: 10,
-                maximumFractionDigits: 10
-            })}>
-              <div>
-                {Number(props.valueYouExchange).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                  minimumFractionDigits: tokenNameExchange === 'DOC' ? 2 : 6,
-                  maximumFractionDigits: tokenNameExchange === 'DOC' ? 2 : 6
-                })} {t(`MoC.Tokens_${tokenNameExchange === 'DOC' ? 'STABLE' : tokenNameExchange === 'RBTC' ? 'RESERVE' : tokenNameExchange}_code`, {ns: 'moc' })}
-              </div>
-          </Tooltip>
-          </span>
-        </div>
-        <div className="AlignedAndCentered Amount">
-          <span className="Name">{t('global.ConfirmTransactionModal_Receiving')}</span>
-          <span className="Value" style={styleReceive}>
-            <Tooltip title={Number(props.valueYouReceive)?.toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                minimumFractionDigits: 10,
-                maximumFractionDigits: 10
-            })}>
-              <div>
-                {Number(props.valueYouReceive).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                  minimumFractionDigits: tokenNameReceive === 'DOC' ? 2 : 6,
-                  maximumFractionDigits: tokenNameReceive === 'DOC' ? 2 : 6
-                })} {t(`MoC.Tokens_${tokenNameReceive === 'DOC' ? 'STABLE' : tokenNameReceive === 'RBTC' ? 'RESERVE' : tokenNameReceive}_code`, {ns: 'moc' })}
-              </div>
-          </Tooltip>
-          </span>
-        </div>
+        {renderAmount(t('global.ConfirmTransactionModal_Exchanging'), exchanging, 'AmountExchanging')}
+        {showError && renderError()}
+        {renderAmount(t('global.ConfirmTransactionModal_Receiving'), receiving, 'AmountReceiving')}
         <div className="USDConversion">
-          <LargeNumber currencyCode={'USD'} amount={props.valueYouReceiveUSD} includeCurrency />
+          <LargeNumber currencyCode={'USD'} amount={receivingInUSD} includeCurrency />
         </div>
 
         <div
@@ -249,14 +266,14 @@ export default function MintModal(props) {
           </div>
           : <>
             <Button
-              onClick={() => handleClose()}
+              onClick={() => cancelButton()}
             >
               Cancel
             </Button>
             <Button
               type="primary"
               disabled={!auth.isLoggedIn}
-              onClick={() => handleOk()}
+              onClick={() => confirmButton({ comment, tolerance })}
             >Confirm</Button>
         </>}
       </div>

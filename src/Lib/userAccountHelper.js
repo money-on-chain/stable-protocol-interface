@@ -1,10 +1,9 @@
 import notification from 'antd/lib/notification';
 import { login } from '../../client/helpers/loginHelper';
-import { Log } from 'meteor/logging';
 import { t } from './i18nHelper';
 import { getWeb3ByRLoginResponse } from '../../../imports/api/helpers/getWeb3';
-import NodeManagerFactory from '../../../imports/api/helpers/nodeManagerFactory';
-import NodeManagerDecorator from '../../../imports/client/helpers/nodeManagerDecorator';
+import NodeManagerFactory from './nodeManagerFactory';
+import NodeManagerDecorator from './nodeManagerDecorator';
 const BigNumber = require('bignumber.js');
 
 const enableUserAccount = async nodeManager => {
