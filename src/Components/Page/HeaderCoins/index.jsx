@@ -6,6 +6,8 @@ import PriceVariation from '../../PriceVariation';
 import {LargeNumber} from "../../LargeNumber";
 import web3 from "web3";
 import {Alert} from "antd";
+import Web3 from "web3";
+const BigNumber = require('bignumber.js');
 
 function HeaderCoins(props) {
   const auth = useContext(AuthenticateContext);
@@ -92,7 +94,9 @@ function HeaderCoins(props) {
 
         case 'riskprox':
           if (auth.userBalanceData['bprox2Balance'] != 0) {
-            return (web3.utils.toWei(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance'], 'ether'));
+            // return (web3.utils.toWei(new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']), 'ether'));
+            ///revisar error
+            return 787899874223400
           } else {
             if (auth.contractStatusData['bitcoinPrice'] != 0) {
               return (web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether'));

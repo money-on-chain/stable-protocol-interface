@@ -4,6 +4,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { AuthenticateContext } from '../../../../Context/Auth';
 import { getDatasMetrics } from '../../../../Helpers/helper';
 import { useTranslation } from "react-i18next";
+import { LargeNumber } from '../../../LargeNumber';
 
 const COLORS = ['#ef8a13', '#00a651'];
 
@@ -77,7 +78,7 @@ function RBTC() {
                 <div className="separator" style={{ height: 220 }} />
                 <div style={{ marginLeft: 30 }}>
                     <h3>{t('MoC.metrics.infoRBTC.priceRBTC', { ns: 'moc' })}</h3>
-                    {getRiskprox['rbtc_usd']} USD
+                    <LargeNumber {...{ amount: getRiskprox['rbtc_usd'], currencyCode: 'RESERVE', includeCurrency: true }} />
                     <h3>{t('MoC.metrics.infoRBTC.interest', { ns: 'moc' })}</h3>
                     {getRiskprox['interest']} RBTC
                     <h3>{t('MoC.metrics.infoRBTC.EMA', { ns: 'moc' })}</h3>

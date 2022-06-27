@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthenticateContext } from '../../../../Context/Auth';
 import { getDatasMetrics } from '../../../../Helpers/helper';
 import { useTranslation } from "react-i18next";
+import { LargeNumber } from '../../../LargeNumber';
 
 function BTCX() {
     const auth = useContext(AuthenticateContext);
@@ -24,7 +25,9 @@ function BTCX() {
             <div className="CardMetricContent">
                 <div>
                     <h3>{t('MoC.metrics.RISKPROX.usd', { ns: 'moc' })}</h3>
-                    <span className={'space'}>{getBtcx['btcx_usd']}</span>
+                    <span>
+                    <LargeNumber {...{ amount: getBtcx['btcx_usd'], currencyCode: 'RISKPROX', includeCurrency: true }} />
+                    </span>
                     <h3>{t('MoC.metrics.RISKPROX.total', { ns: 'moc' })}</h3>
                     <span className={'red space'}>{getBtcx['interest']}</span>
                     <h3>{t('MoC.metrics.RISKPROX.availableMint', { ns: 'moc' })}</h3>

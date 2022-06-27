@@ -1,5 +1,26 @@
 const BigNumber = require('bignumber.js');
 
+const formatLocalMap = {
+    es: {
+        decimalSeparator: ',',
+        groupSeparator: '.'
+    },
+    en: {
+        decimalSeparator: '.',
+        groupSeparator: ','
+    }
+};
+
+const formatLocalMap2 = {
+    es: 'es',
+    en: 'en'
+};
+
+// default format
+BigNumber.config({
+    FORMAT: formatLocalMap.en
+});
+
 const REWARDPrecision = {
     contractDecimals: 18,
     decimals: 6
@@ -7,58 +28,58 @@ const REWARDPrecision = {
 
 const valueVariation = {
     contractDecimals: 20,
-    decimals: 2,
+    decimals: 2
 };
 
 const mocPrecision = {
     contractDecimals: 18,
-    decimals: 2,
+    decimals: 2
 };
 
 const RBTCPrecision = {
     contractDecimals: 18,
-    decimals: 6,
+    decimals: 6
 };
 
 const USDPrecision = {
     contractDecimals: 18,
-    decimals: 2,
-}
+    decimals: 2
+};
 
 const PriceUSDPrecision = {
     contractDecimals: 18,
-    decimals: 2,
-}
+    decimals: 2
+};
 
 const COVPrecision = {
     contractDecimals: 18,
-    decimals: 4,
-}
+    decimals: 4
+};
 
 const percentagePrecision = {
     contractDecimals: 6,
-    decimals: 0,
-}
+    decimals: 0
+};
 
 const visiblePercentage = {
     contractDecimals: 0,
-    decimals: 6,
-}
+    decimals: 6
+};
 
 const RISKPROXInterest = {
     contractDecimals: 18,
-    decimals: 6,
-}
+    decimals: 6
+};
 
 const FreeDocInterest = {
     contractDecimals: 18,
-    decimals: 2,
-}
+    decimals: 2
+};
 
 const commissionRate = {
     contractDecimals: 18,
-    decimals: 1,
-}
+    decimals: 1
+};
 
 const formatMap = {
     RISKPROX: RBTCPrecision,
@@ -79,52 +100,32 @@ const formatMap = {
     valueVariation: valueVariation
 };
 
-const formatLocalMap2 = {
-    es: 'es',
-    en: 'en'
-};
-
-const formatLocalMap = {
-    es: {
-        decimalSeparator: ',',
-        groupSeparator: '.'
-    },
-    en: {
-        decimalSeparator: '.',
-        groupSeparator: ','
-    }
-};
-
 const precision = ({ contractDecimals }) =>
     new BigNumber(10).exponentiatedBy(contractDecimals);
 
-const adjustPrecision = (amount, currencyCode) => {
-    const fd = formatMap[currencyCode];
-    return fd
-        ?   {
-                value: new BigNumber(amount).div(precision(fd)),
-                decimals: fd.decimals
-            }
-        :   { value: new BigNumber(amount), decimals: 2};
-};
 const formatValue = (amount, currencyCode, format, decimals) => {
     const fd = formatMap[currencyCode];
     return formatValueFromMap(amount, fd, format, decimals);
 };
 
 const formatValueFromMap = (amount, mapEntry, format, decimals) => {
-    console.log(amount, mapEntry, format, decimals);
-    console.log('formatValueFromMap', BigNumber(amount)
-    .div(precision(mapEntry))
-    .toFormat(decimals || mapEntry.decimals, BigNumber.ROUND_DOWN, format));
     return BigNumber(amount)
         .div(precision(mapEntry))
         .toFormat(decimals || mapEntry.decimals, BigNumber.ROUND_DOWN, format);
 };
 
+const adjustPrecision = (amount, currencyCode) => {
+    const fd = formatMap[currencyCode];
+    return fd
+        ? {
+              value: new BigNumber(amount).div(precision(fd)),
+              decimals: fd.decimals
+          }
+        : { value: new BigNumber(amount), decimals: 2 };
+};
+
 const formatVisibleValue = (amount, currencyCode, language, decimals) => {
-    if (amount === null || amount === undefined || !currencyCode) return '-';
-    console.log('formatVisibleValue', amount, currencyCode, language, decimals);
+    if (amount === null || amount === undefined) return '-';
     const num = formatValue(
         amount,
         currencyCode,
@@ -139,66 +140,45 @@ const formatValueVariation = (amount, language) => {
     const fd = formatMap['valueVariation'];
     const num = formatValueFromMap(amount, fd, formatLocalMap[language]);
     return num;
-  };
-
-const formatValueToContract = (amount, currencyCode) => {
-    console.log(amount, currencyCode, formatMap[currencyCode]);
-    console.log('formatValueToContract', new BigNumber(amount)
-    .multipliedBy(precision(formatMap[currencyCode]))
-    .toFixed(0));
-    return new BigNumber(amount).multipliedBy(precision(formatMap[currencyCode])).toFixed(0);
-    /* if (currencyCode === 'RESERVE') {
-        return new BigNumber(amount)
-        .multipliedBy(precision(formatMap[currencyCode]))
-        .toFixed(0);
-    } else {
-        return amount;
-    } */
-    // return amount;
 };
+
+const formatDecimalRatioAsPercent = (amount) =>
+    Number.isNaN(amount) ? 0 : amount * 100;
 
 const formatValueWithContractPrecision = (amount, currencyCode) => {
     BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
     const fd = formatMap[currencyCode];
-    console.log('amount', amount, 'bignumber', BigNumber(amount)
-    .div(precision(fd))
-    .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN));
-    if (fd) {
-        return BigNumber(amount)
-            .div(precision(fd))
-            .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN);
-    }
-    return null;
+    return BigNumber(amount)
+        .div(precision(fd))
+        .toFormat(fd.contractDecimals, BigNumber.ROUND_DOWN);
 };
 
-/* const convertAmount = (source, target, amount, convertToken) => {
-    if (amount === '') {
-        return '';
-    }
-    // if (TAPi18n.getLanguage() === 'es') {
-    //   amount = amount.toLocaleString(TAPi18n.getLanguage());
-    // }
-    const convertedAmount = formatValueWithContractPrecision(
-        convertToken(source, target, formatValueToContract(amount, source)),
-        target
-    );
-    return isNaN(convertedAmount) ? '' : convertedAmount.toString();
-}; */
-
+const formatValueToContract = (amount, currencyCode) => {
+    return new BigNumber(amount)
+        .multipliedBy(precision(formatMap[currencyCode]))
+        .toFixed(0);
+};
 const formatPerc = (value, language) =>
-    Number.isNaN(value) ? '-' : parseFloat(Math.round(value * 100) / 100).toLocaleString(language, {minimumFractionDigits:2, maximumFractionDigits:2});
-
+    Number.isNaN(value)
+        ? '-'
+        : parseFloat(Math.round(value * 100) / 100).toLocaleString(language, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+          });
 
 export {
-    formatLocalMap,
-    adjustPrecision,
+    formatValue,
     formatVisibleValue,
     formatValueVariation,
     formatValueToContract,
     formatValueWithContractPrecision,
-    // convertAmount,
     formatPerc,
+    formatDecimalRatioAsPercent,
+    adjustPrecision,
     RBTCPrecision,
+    USDPrecision,
+    COVPrecision,
     precision,
-    formatLocalMap2,
+    formatLocalMap,
+    formatLocalMap2
 };
