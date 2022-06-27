@@ -34,7 +34,7 @@ export default async function nodeManagerMoc({
         getAccount: base.getAccount
     });
 
-    const { vendor } = {
+    const  vendor  = {
       address: "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076",
       markup: "500000000000000"
     };

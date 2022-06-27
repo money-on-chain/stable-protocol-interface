@@ -168,13 +168,13 @@ export default async function nodeManagerBase ({ web3, contracts, partialExecuti
     return contractFunctions.redeemDoc(contractAmount).send({ from, gas: estimateGas, gasLimit: estimateGas, gasPrice: await gasPrice() }, callback);
   };
 
-  module.redeemFreeDoc = async (docAmount, callback) => {
+  module.redeemFreeDoc = async (docAmount, tolerance, callback) => {
     const from = await module.getAccount();
     const contractAmount = web3.utils.toWei(docAmount, 'ether');
     console.info({ message: `Calling redeem free Doc, account: ${from}, amount: ${contractAmount}.` });
     const estimateGas = (await contractFunctions.redeemFreeDoc(contractAmount, vendor.address).estimateGas({ from })) * 2;
     let params = { from, gas: estimateGas, gasLimit: estimateGas, gasPrice: await gasPrice() };
-    console.log('redeemFreeDoc', params, contractAmount);
+    console.log('redeemFreeDoc', params, contractAmount, callback);
     return contractFunctions
       .redeemFreeDoc(contractAmount, vendor.address)
       .send(params, callback);

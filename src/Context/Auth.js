@@ -23,6 +23,7 @@ import {
 import addressHelper from '../Lib/addressHelper';
 import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
 import createNodeManager from '../Lib/nodeManagerFactory';
+import nodeManagerDecorator from '../Lib/nodeManagerDecorator';
 
 const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
@@ -279,7 +280,7 @@ const AuthenticateProvider = ({ children }) => {
 
         window.appMode = 'MoC';
 
-        window.nodeManager = await createNodeManager({
+        window.nodeManager = await nodeManagerDecorator( await createNodeManager({
             appMode: window.appMode,
             web3: web3,
             contracts,
@@ -290,7 +291,7 @@ const AuthenticateProvider = ({ children }) => {
                 liquidation: 20
             },
             gasPrice: getGasPrice
-        });
+        }));
 
         setUserBalanceData(user_balance);
     };
