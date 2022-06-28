@@ -74,7 +74,10 @@ function HeaderCoins(props) {
 
 
   const getBalanceUSD = () => {
-    if (auth.userBalanceData) {
+    if (auth.userBalanceData && auth.contractStatusData) {
+      console.log("DEBUG>>>");
+      console.log(auth.userBalanceData);
+      console.log(auth.contractStatusData);
       switch (props.tokenName) {
         case 'stable':
           if (auth.contractStatusData['bitcoinPrice'] != 0) {

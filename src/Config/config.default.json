@@ -1,0 +1,8 @@
+{
+  "environment": "mocTestnetAlpha",
+  "vendor": "0xdda74880d638451e6d2c8d3fc19987526a7af730",
+  "api_url": "http://localhost:9002/api/v1/",
+  "api_admin_url": "http://localhost:9002/api/admin/v1/",
+  "api_moctest": "https://api-moctest.coinfabrik.com/api/v1/",
+  "api_moneyonchain": "https://moc-incentives-alpha.moneyonchain.com/"
+}

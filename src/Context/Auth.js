@@ -16,15 +16,18 @@ import ERC20 from '../Contracts/MoC/abi/RC20Contract';
 import IStakingMachine from '../Contracts/MoC/abi/IStakingMachine.json';
 import IDelayingMachine from '../Contracts/MoC/abi/IDelayingMachine.json';
 import {
-    connectorAddresses,
-    contractStatus,
-    userBalance
+    connectorAddresses
 } from './MultiCallFunctions.js';
 import { enable } from 'workbox-navigation-preload';
 import addressHelper from '../Lib/addressHelper';
 import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
 import convertHelper from '../Lib/convertHelper';
 import { getPriceFields } from '../Lib/price';
+import {config, environment} from '../Config/config';
+
+import { readContracts } from '../Lib/integration/contracts';
+import { contractStatus, userBalance } from '../Lib/integration/multicall';
+
 
 const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
@@ -35,6 +38,7 @@ const AuthenticateContext = createContext({
     userBalanceData: null,
     contractStatusData: null,
     web3: null,
+    contracts: null,
     connect: () => {},
     DoCMint: async (amount) => {},
     DoCReedem: async (amount) => {},
@@ -88,7 +92,7 @@ const TransactionTypeIdsMoC = {
     REDEEM_BTCX_FEES_MOC: 12
 };
 const AuthenticateProvider = ({ children }) => {
-    const [contractStatusData, setcontractStatusData] = useState(null);
+    const [contractStatusData, setContractStatusData] = useState(null);
     const [provider, setProvider] = useState(null);
     const [web3, setweb3] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -119,8 +123,8 @@ const AuthenticateProvider = ({ children }) => {
 
     useEffect(() => {
         if (account) {
+            initContractsConnection();
             loadAccountData();
-            loadBalanceData();
         }
     }, [account]);
 
@@ -138,6 +142,7 @@ const AuthenticateProvider = ({ children }) => {
                 setAccount(account);
                 setIsLoggedIn(true);
             });
+
         });
 
     const disconnect = async () => {
@@ -155,6 +160,34 @@ const AuthenticateProvider = ({ children }) => {
         await window.rLoginDisconnect();
     };
 
+    const initContractsConnection = async () => {
+      window.contractsInterfaces = await readContracts(web3, environment);
+      await loadContractsStatusAndUserBalance();
+    }
+
+    const loadContractsStatusAndUserBalance = async () => {
+      const appMode = environment.AppMode;
+
+      // Read info from different contract MoCState.sol MoCInrate.sol MoCSettlement.sol MoC.sol
+      // in one call throught Multicall
+      const dataContractStatus = await contractStatus(
+        web3,
+        window.contractsInterfaces,
+        appMode
+      );
+
+      const accountBalance = await userBalance(
+        web3,
+        window.contractsInterfaces,
+        account,
+        appMode
+      );
+
+      setContractStatusData(dataContractStatus);
+      setUserBalanceData(accountBalance);
+
+    }
+
     const loadAccountData = async () => {
         const owner = await getAccount();
         const truncate_address =
@@ -170,102 +203,6 @@ const AuthenticateProvider = ({ children }) => {
         };
         console.log('accountData', accountData);
         setAccountData(accountData);
-    };
-    const loadBalanceData = async () => {
-        console.log('Reading Multicall2 Contract... address: ', multicall2);
-        const multicall = new web3.eth.Contract(MultiCall.abi, multicall2);
-
-        console.log('Reading MoC Contract... address: ', mocAddress);
-        const moc = new web3.eth.Contract(MocAbi.abi, mocAddress);
-
-        // Read contracts addresses from connector
-        [
-            mocStateAddress,
-            mocInrateAddress,
-            mocExchangeAddress,
-            mocSettlementAddress,
-            docTokenAddress,
-            bproTokenAddress
-        ] = await connectorAddresses(web3, multicall, moc);
-
-        console.log('Reading MoC State Contract... address: ', mocStateAddress);
-        const mocstate = new web3.eth.Contract(MocState.abi, mocStateAddress);
-
-        console.log(
-            'Reading MoC Inrate Contract... address: ',
-            mocInrateAddress
-        );
-        const mocinrate = new web3.eth.Contract(
-            MoCInrate.abi,
-            mocInrateAddress
-        );
-
-        console.log(
-            'Reading MoC Exchange Contract... address: ',
-            mocExchangeAddress
-        );
-        const mocexchange = new web3.eth.Contract(
-            MoCExchange.abi,
-            mocExchangeAddress
-        );
-
-        console.log(
-            'Reading MoC Settlement  Contract... address: ',
-            mocSettlementAddress
-        );
-        const mocsettlement = new web3.eth.Contract(
-            MoCSettlement.abi,
-            mocSettlementAddress
-        );
-
-        console.log('Reading DoC Token Contract... address: ', docTokenAddress);
-        const doctoken = new web3.eth.Contract(DocToken.abi, docTokenAddress);
-
-        console.log(
-            'Reading BPro Token Contract... address: ',
-            bproTokenAddress
-        );
-        const bprotoken = new web3.eth.Contract(
-            BProToken.abi,
-            bproTokenAddress
-        );
-
-        const mocTokenAddress = await mocstate.methods.getMoCToken().call();
-
-        console.log('Reading MoC Token Contract... address: ', mocTokenAddress);
-        const moctoken = new web3.eth.Contract(MoCToken.abi, mocTokenAddress);
-
-        // Read info from different contract MoCState.sol MoCInrate.sol MoCSettlement.sol MoC.sol
-        // in one call throught Multicall
-        const dataContractStatus = await contractStatus(
-            web3,
-            multicall,
-            moc,
-            mocstate,
-            mocinrate,
-            mocsettlement
-        );
-
-        console.log('auth dataContractStatus', dataContractStatus);
-        setcontractStatusData(dataContractStatus);
-
-        const user_address = account;
-        console.log('user_adresssssssss', account);
-
-        // Example user balance
-        const user_balance = await userBalance(
-            web3,
-            multicall,
-            moc,
-            mocinrate,
-            moctoken,
-            bprotoken,
-            doctoken,
-            user_address
-        );
-
-        setUserBalanceData(user_balance);
-        console.log(user_balance);
     };
 
     const getAccount = async () => {
@@ -306,6 +243,7 @@ const AuthenticateProvider = ({ children }) => {
         const web3 = new Web3(provider);
         return new web3.eth.Contract(abi, contractAddress);
     };
+
     const getTotalAmount = async (amount, transactionType) => {
         const comision = await getCommissionValue(amount, transactionType);
         console.log('Comision:' + comision);
@@ -315,6 +253,7 @@ const AuthenticateProvider = ({ children }) => {
             parseFloat(amount) + parseFloat(comision) + parseFloat(vendorMarkup)
         );
     };
+
     const getCommissionValue = async (amount, transactionType) => {
         try {
             const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
@@ -409,7 +348,9 @@ const AuthenticateProvider = ({ children }) => {
             TransactionTypeIdsMoC.MINT_BPRO_FEES_RBTC
         );
 
-        const moc = getContract(MocAbi.abi, mocAddress);
+        //const moc = getContract(MocAbi.abi, mocAddress);
+        const moc = window.contractsInterfaces.contracts.moc
+
         const estimateGas = await moc.methods
             .mintBProVendors(amountWei, vendorAddress)
             .estimateGas({ from: account, value: totalAmount });
