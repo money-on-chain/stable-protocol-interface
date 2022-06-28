@@ -1,7 +1,6 @@
 import { toContract } from '../numberHelper';
 import nodeManagerBase from './nodeManagerBase';
 // import nodeManagerStaking from './nodeManagerStaking';
-// import { Log } from 'meteor/logging'
 
 const BigNumber = require('bignumber.js');
 

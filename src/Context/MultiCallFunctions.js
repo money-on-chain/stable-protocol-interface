@@ -1,5 +1,4 @@
 import MoCConnector from '../Contracts/MoC/abi/MocConnector.json';
-const BigNumber = require('bignumber.js');
 
 const BUCKET_X2 =
     '0x5832000000000000000000000000000000000000000000000000000000000000';
@@ -322,9 +321,7 @@ const contractStatus = async (
 
     const d_moc_state = {};
     d_moc_state['blockHeight'] = multicallResult[0];
-    d_moc_state['bitcoinPrice'] = new BigNumber(
-        web3.utils.fromWei(listReturnData[0])
-    ).toFixed(0);
+    d_moc_state['bitcoinPrice'] = listReturnData[0];
 
     d_moc_state['mocPrice'] = listReturnData[1];
     d_moc_state['bproAvailableToRedeem'] = listReturnData[2];
@@ -348,13 +345,11 @@ const contractStatus = async (
     d_moc_state['mocPrecision'] = listReturnData[20];
     d_moc_state['x2Coverage'] = listReturnData[21];
     d_moc_state['bproPriceInRbtc'] = listReturnData[22];
-    d_moc_state['bproPriceInUsd'] = new BigNumber(
-        web3.utils.fromWei(listReturnData[23])
-    ).toFixed(4);
+    d_moc_state['bproPriceInUsd'] = listReturnData[23];
     d_moc_state['bproDiscountRate'] = listReturnData[24];
     d_moc_state['maxBproWithDiscount'] = listReturnData[25];
     d_moc_state['bproDiscountPrice'] = listReturnData[26];
-    d_moc_state['bprox2PriceInRbtc'] = web3.utils.fromWei(listReturnData[27]);
+    d_moc_state['bprox2PriceInRbtc'] = listReturnData[27];
     d_moc_state['bprox2PriceInBpro'] = listReturnData[28];
     d_moc_state['spotInrate'] = listReturnData[29];
 
@@ -399,7 +394,6 @@ const userBalance = async (
     doctoken,
     user_address
 ) => {
-    console.log('Reading user balance ...');
 
     const listMethods = [
         [
@@ -456,22 +450,12 @@ const userBalance = async (
 
     user_balance['blockHeight'] = multicallResult[0];
     user_balance['mocBalance'] = listReturnData[0];
-    user_balance['mocAllowance'] = new BigNumber(
-        web3.utils.fromWei(listReturnData[1])
-    ).toFixed(0);
-    console.log(user_balance['mocBalance'] + ' MoC Balance');
-    console.log(user_balance['mocAllowance'] + ' Allowance');
-    user_balance['docBalance'] = new BigNumber(
-        web3.utils.fromWei(listReturnData[2])
-    ).toFixed(4);
-    user_balance['bproBalance'] = new BigNumber(
-        web3.utils.fromWei(listReturnData[3])
-    ).toFixed(4);
+    user_balance['mocAllowance'] = listReturnData[1];
+    user_balance['docBalance'] = listReturnData[2];
+    user_balance['bproBalance'] = listReturnData[3];
     user_balance['rbtcBalance'] = listReturnData[4];
     user_balance['docToRedeem'] = listReturnData[5];
-    user_balance['bprox2Balance'] = new BigNumber(
-        web3.utils.fromWei(listReturnData[6])
-    ).toFixed(4);
+    user_balance['bprox2Balance'] = listReturnData[6];
     user_balance['potentialBprox2MaxInterest'] = '0';
     user_balance['bProHoldIncentive'] = '0';
     user_balance['estimateGasMintBpro'] = '2000000';

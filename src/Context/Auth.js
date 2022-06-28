@@ -1,9 +1,9 @@
 import { createContext, useEffect, useState } from 'react';
-import rLogin from '../Lib/rLogin';
+import getRLogin from '../Lib/rLogin';
 import Web3 from 'web3';
 import _ from 'lodash/core';
 import btcContractProvider from '../Contracts/MoC/abi/btcContractProvider';
-import MocAbi from '../Contracts/MoC/abi/Contract.json';
+import MocAbi from '../Contracts/MoC/abi/MoC.json';
 import MoCInrate from '../Contracts/MoC/abi/MoCInRateContract.json';
 import MocState from '../Contracts/MoC/abi/MoCState.json';
 import MultiCall from '../Contracts/MoC/abi/Multicall2.json';
@@ -18,7 +18,6 @@ import IDelayingMachine from '../Contracts/MoC/abi/IDelayingMachine.json';
 import {
     connectorAddresses
 } from './MultiCallFunctions.js';
-import { enable } from 'workbox-navigation-preload';
 import addressHelper from '../Lib/addressHelper';
 import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
 import convertHelper from '../Lib/convertHelper';
@@ -28,9 +27,13 @@ import {config, environment} from '../Config/config';
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
 
+import createNodeManager from '../Lib/nodeManagerFactory';
+import nodeManagerDecorator from '../Lib/nodeManagerDecorator';
 
 const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
+
+BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
 
 const AuthenticateContext = createContext({
     isLoggedIn: false,
@@ -48,8 +51,8 @@ const AuthenticateContext = createContext({
     Bprox2Redeem: async (amount) => {},
     disconnect: () => {},
     getTransactionReceipt: (hash) => {},
-    getStackedBalance:  async (address) => {},
-    getLockedBalance:  async (address) => {},
+    getStackedBalance: async (address) => {},
+    getLockedBalance: async (address) => {},
     stakingDeposit: async (mocs, address) => {},
     unstake: async (mocs) => {},
     getMoCAllowance: async (address) => {},
@@ -62,10 +65,9 @@ const AuthenticateContext = createContext({
     transferMocTo: async (to, amount) => {},
     calcMintInterestValues: async (amount) => {},
     approveReserve: async (address) => {},
-    convertToken: async (from, to, amount) => {},
+    convertToken: async (from, to, amount) => {}
 });
 
-let checkLoginFirstTime = true;
 const vendorAddress = '0xdda74880d638451e6d2c8d3fc19987526a7af730';
 let mocStateAddress = '';
 const mocAddress = '0x01AD6f8E884ed4DDC089fA3efC075E9ba45C9039';
@@ -113,11 +115,12 @@ const AuthenticateProvider = ({ children }) => {
     const socket = new FastBtcSocketWrapper();
 
     useEffect(() => {
-        if (checkLoginFirstTime) {
-            if (rLogin.cachedProvider) {
+        if (!window.rLogin) {
+            window.rLogin = getRLogin();
+
+            if (window.rLogin.cachedProvider) {
                 connect();
             }
-            checkLoginFirstTime = false;
         }
     });
 
@@ -129,13 +132,15 @@ const AuthenticateProvider = ({ children }) => {
     }, [account]);
 
     const connect = () =>
-        rLogin.connect().then((rLoginResponse) => {
+        window.rLogin.connect().then((rLoginResponse) => {
             const { provider, disconnect } = rLoginResponse;
             setProvider(provider);
 
             const web3 = new Web3(provider);
             setweb3(web3);
+            window.web3 = web3;
             window.rLoginDisconnect = disconnect;
+            window.nodeManager = {};
 
             // request user's account
             provider.request({ method: 'eth_accounts' }).then(([account]) => {
@@ -201,8 +206,28 @@ const AuthenticateProvider = ({ children }) => {
             GasPrice: await getGasPrice(),
             truncatedAddress: truncate_address
         };
-        console.log('accountData', accountData);
+
+        window.address = owner;
+
         setAccountData(accountData);
+    };
+
+    const getGasPrice = async () => {
+        const percentage = 12;
+        let gasPrice;
+        try {
+            gasPrice = await window.web3.eth.getGasPrice();
+        } catch (error) {
+            gasPrice = 65000000;
+        }
+        gasPrice = new BigNumber(gasPrice);
+        if (!percentage) {
+            return gasPrice.toString();
+        }
+        return gasPrice
+            .multipliedBy(percentage * 0.01)
+            .plus(gasPrice)
+            .toString();
     };
 
     const getAccount = async () => {
@@ -218,32 +243,11 @@ const AuthenticateProvider = ({ children }) => {
             console.log(e);
         }
     };
-    const getGasPrice = async () => {
-        const percentage = 12;
-        let gasPrice;
-        try {
-            const web3 = new Web3(provider);
-            gasPrice = await web3.eth.getGasPrice();
-            // gasPrice = web3.utils.fromWei(gasPrice);
-            return gasPrice;
-        } catch (e) {
-            console.log(e);
-        }
-        gasPrice = new BigNumber(gasPrice);
-        if (!percentage) {
-            return gasPrice.toString();
-        }
-        return gasPrice
-            .multipliedBy(percentage * 0.01)
-            .plus(gasPrice)
-            .toString();
-    };
 
     const getContract = (abi, contractAddress) => {
         const web3 = new Web3(provider);
         return new web3.eth.Contract(abi, contractAddress);
     };
-
     const getTotalAmount = async (amount, transactionType) => {
         const comision = await getCommissionValue(amount, transactionType);
         console.log('Comision:' + comision);
@@ -253,7 +257,6 @@ const AuthenticateProvider = ({ children }) => {
             parseFloat(amount) + parseFloat(comision) + parseFloat(vendorMarkup)
         );
     };
-
     const getCommissionValue = async (amount, transactionType) => {
         try {
             const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
@@ -471,15 +474,15 @@ const AuthenticateProvider = ({ children }) => {
         return transactionReceipt;
     };
 
-    const getStackedBalance = async address => {
+    const getStackedBalance = async (address) => {
         const from = address || account;
-        const anAddress = "0x051F724b67bdB72fd059fBb9c62ca56a92500FF9";
+        const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const moc = getContract(IStakingMachine.abi, anAddress);
         let balance = await moc.methods.getBalance(from).call();
         return balance;
     };
 
-    const getLockedBalance = async address => {
+    const getLockedBalance = async (address) => {
         const from = address || account;
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const moc = getContract(IStakingMachine.abi, anAddress);
@@ -488,14 +491,27 @@ const AuthenticateProvider = ({ children }) => {
     };
 
     const stakingDeposit = async (mocs, address, callback) => {
-        const from = account;// await getAccount();
+        const from = account; // await getAccount();
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const weiAmount = web3.utils.toWei(mocs, 'ether');
         const stakingMachine = getContract(IStakingMachine.abi, anAddress);
         const methodCall = stakingMachine.methods.deposit(weiAmount, address);
         const gasLimit = 2 * (await methodCall.estimateGas({ from }));
-        methodCall.call({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit});
-        return methodCall.send({ from, gasPrice: await getGasPrice(), gaS: gasLimit, gasLimit: gasLimit}, callback);
+        methodCall.call({
+            from,
+            gasPrice: await getGasPrice(),
+            gas: gasLimit,
+            gasLimit: gasLimit
+        });
+        return methodCall.send(
+            {
+                from,
+                gasPrice: await getGasPrice(),
+                gaS: gasLimit,
+                gasLimit: gasLimit
+            },
+            callback
+        );
     };
 
     const unstake = async (mocs, callback) => {
@@ -505,11 +521,24 @@ const AuthenticateProvider = ({ children }) => {
         const stakingMachine = getContract(IStakingMachine.abi, anAddress);
         const methodCall = stakingMachine.methods.withdraw(weiAmount);
         const gasLimit = 2 * (await methodCall.estimateGas({ from }));
-        methodCall.call({ from, gasPrice: await getGasPrice(), gas:gasLimit, gasLimit: gasLimit});
-        return methodCall.send({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit }, callback);
+        methodCall.call({
+            from,
+            gasPrice: await getGasPrice(),
+            gas: gasLimit,
+            gasLimit: gasLimit
+        });
+        return methodCall.send(
+            {
+                from,
+                gasPrice: await getGasPrice(),
+                gas: gasLimit,
+                gasLimit: gasLimit
+            },
+            callback
+        );
     };
 
-    const getMoCAllowance = async address => {
+    const getMoCAllowance = async (address) => {
         const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const from = address || account;
@@ -517,43 +546,74 @@ const AuthenticateProvider = ({ children }) => {
         return moc.methods.allowance(from, anAddress).call();
     };
 
-    const approveMoCToken = async (enabled, callback = () => { }) => {
+    const approveMoCToken = async (enabled, callback = () => {}) => {
         const from = account;
         console.log('from', from);
         const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
-        const newAllowance = enabled ? web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString()) : 0;
+        const newAllowance = enabled
+            ? web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString())
+            : 0;
         const moc = getContract(ERC20.abi, mocTokenAddress);
         console.log('newAllowance', newAllowance);
-        return moc.methods.approve(anAddress, newAllowance)
-            .send({ from, gasPrice: await getGasPrice()}, callback);
+        return moc.methods
+            .approve(anAddress, newAllowance)
+            .send({ from, gasPrice: await getGasPrice() }, callback);
     };
 
-    const withdraw = async (id, callback = () => { }) => {
+    const withdraw = async (id, callback = () => {}) => {
         const from = account;
-        const anAddress = "0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0";
+        const anAddress = '0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0';
         const delayingMachine = getContract(IDelayingMachine.abi, anAddress);
         const methodCall = delayingMachine.methods.withdraw(id);
         const gasLimit = 2 * (await methodCall.estimateGas({ from }));
-        methodCall.call({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit });
-        return methodCall.send({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit }, callback);
+        methodCall.call({
+            from,
+            gasPrice: await getGasPrice(),
+            gas: gasLimit,
+            gasLimit: gasLimit
+        });
+        return methodCall.send(
+            {
+                from,
+                gasPrice: await getGasPrice(),
+                gas: gasLimit,
+                gasLimit: gasLimit
+            },
+            callback
+        );
     };
 
     const cancelWithdraw = async (id, callback) => {
         const from = account;
-        const anAddress = "0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0";
+        const anAddress = '0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0';
         const delayingMachine = getContract(IDelayingMachine.abi, anAddress);
         const methodCall = delayingMachine.methods.cancel(id);
         const gasLimit = 2 * (await methodCall.estimateGas({ from }));
-        methodCall.call({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit });
-        return methodCall.send({ from, gasPrice: await getGasPrice(), gas: gasLimit, gasLimit: gasLimit }, callback);
+        methodCall.call({
+            from,
+            gasPrice: await getGasPrice(),
+            gas: gasLimit,
+            gasLimit: gasLimit
+        });
+        return methodCall.send(
+            {
+                from,
+                gasPrice: await getGasPrice(),
+                gas: gasLimit,
+                gasLimit: gasLimit
+            },
+            callback
+        );
     };
 
-    const getPendingWithdrawals = async address => {
+    const getPendingWithdrawals = async (address) => {
         const from = address || account;
         const anAddress = '0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0';
         const moc = getContract(IDelayingMachine.abi, anAddress);
-        const { ids, amounts, expirations } = await moc.methods.getTransactions(from).call();
+        const { ids, amounts, expirations } = await moc.methods
+            .getTransactions(from)
+            .call();
         const withdraws = [];
         for (let i = 0; i < ids.length; i++) {
             withdraws.push({
@@ -566,90 +626,113 @@ const AuthenticateProvider = ({ children }) => {
     };
 
     const transferDocTo = async (to, amount, callback) => {
-        const docAddress = "0x489049c48151924c07F86aa1DC6Cc3Fea91ed963";
+        const docAddress = '0x489049c48151924c07F86aa1DC6Cc3Fea91ed963';
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
         const from = account;
         const contractAmount = web3.utils.toWei(amount, 'ether');
         const docToken = getContract(ERC20.abi, docAddress);
         return docToken.methods
-          .transfer(toWithChecksum, contractAmount)
-          .send({ from, gasPrice: await getGasPrice() }, callback);
-      };
+            .transfer(toWithChecksum, contractAmount)
+            .send({ from, gasPrice: await getGasPrice() }, callback);
+    };
 
     const transferBproTo = async (to, amount, callback) => {
-        const bproAddress = "0x5639809FAFfF9082fa5B9a8843D12695871f68bd";
+        const bproAddress = '0x5639809FAFfF9082fa5B9a8843D12695871f68bd';
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
         const from = account;
         const contractAmount = web3.utils.toWei(amount, 'ether');
         const bproToken = getContract(ERC20.abi, bproAddress);
         return bproToken.methods
-        .transfer(toWithChecksum, contractAmount)
-        .send({ from, gasPrice: await getGasPrice() }, callback);
+            .transfer(toWithChecksum, contractAmount)
+            .send({ from, gasPrice: await getGasPrice() }, callback);
     };
 
     const transferMocTo = async (to, amount, callback) => {
-        const mocTokenAddress = "0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635";
+        const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
         const from = await module.getAccount();
         const contractAmount = web3.utils.toWei(amount, 'ether');
         const mocToken = getContract(ERC20.abi, mocTokenAddress);
         return mocToken.methods
-          .transfer(toWithChecksum, contractAmount)
-          .send({ from, gasPrice: await getGasPrice() }, callback);
+            .transfer(toWithChecksum, contractAmount)
+            .send({ from, gasPrice: await getGasPrice() }, callback);
     };
 
-    const calcMintInterestValues = amount => {
-        const mocInrateAddress = "0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c";
+    const calcMintInterestValues = (amount) => {
+        const mocInrateAddress = '0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c';
         const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
-            mocInrate.methods.calcMintInterestValues(strToBytes32(bucketX2), amount).call();
+        mocInrate.methods
+            .calcMintInterestValues(strToBytes32(bucketX2), amount)
+            .call();
     };
 
-    
     const approveReserve = (address) => {
         const weiAmount = web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString());
         const reserveTokenAddress = account;
         const reserveToken = getContract(ERC20.abi, reserveTokenAddress);
         const moc = getContract(MocAbi.abi, mocAddress);
-        return getGasPrice().then(price => {
-            return reserveToken.methods.approve(moc.options.address, weiAmount).send({ from: account, gasPrice: price});
-        })
+        return getGasPrice().then((price) => {
+            return reserveToken.methods
+                .approve(moc.options.address, weiAmount)
+                .send({ from: account, gasPrice: price });
+        });
     };
     /* const priceFields = getPriceFields();
     const convertToken = convertHelper(_.pick(contractStatusData, Object.keys(priceFields).concat(['reservePrecision']))); */
     const convertToken = (from, to, amount) => {
-        console.log('bitcoinprice', contractStatusData?.bitcoinPrice);
-        console.log('convertToken', from, to, amount);
-        const reservePrecision = contractStatusData?.reservePrecision;
-        // const reservePrecision = 1;
-        console.log('reservePrecision', reservePrecision);
-        const convertDocToUsd = amount => amount;
-        const convertBproToRbtc = amount => (amount * contractStatusData.bproPriceInRbtc) / reservePrecision;// .times(contractStatusData.bproPriceInRbtc).div(reservePrecision);
-        const convertBproToUsd = amount => (amount * contractStatusData.bproPriceInUsd) / reservePrecision; // .times(contractStatusData.bproPriceInUsd).div(reservePrecision);
-        const convertDocToRbtc = amount => (amount / contractStatusData?.bitcoinPrice) * reservePrecision; // .div(contractStatusData?.bitcoinPrice).times(reservePrecision);
-        const convertRbtcToUsd = amount => (amount * contractStatusData?.bitcoinPrice) / reservePrecision; //.times(contractStatusData?.bitcoinPrice).div(reservePrecision);
-        const convertRbtcToBpro = amount => (amount / contractStatusData.bproPriceInRbtc) * reservePrecision; // .div(contractStatusData.bproPriceInRbtc).times(reservePrecision);
-        const convertRbtcToDoc = amount => convertRbtcToUsd(amount);
-        const convertRbtcToBprox2 = amount => (amount / contractStatusData.bprox2PriceInRbtc) * reservePrecision;  // .div(contractStatusData.bprox2PriceInRbtc).times(reservePrecision);
-        const convertBprox2ToRbtc = amount => (amount * contractStatusData.bprox2PriceInRbtc) /reservePrecision; // .times(contractStatusData.bprox2PriceInRbtc).div(reservePrecision);
-        const convertBproToBprox2 = amount => (amount / contractStatusData.bprox2PriceInBpro) * reservePrecision; // .div(contractStatusData.bprox2PriceInBpro).times(reservePrecision);
-        const convertBprox2ToBpro = amount => (amount * contractStatusData.bprox2PriceInBpro) / reservePrecision; // .times(contractStatusData.bprox2PriceInBpro).div(reservePrecision);
-        const convertBprox2ToUsd = amount =>
-            amount // RESERVE
-            * contractStatusData.bprox2PriceInRbtc // .times(contractStatusData.bprox2PriceInRbtc) // RESERVE * RESERVE
-            // .div(reservePrecision) // RESERVE
-            / reservePrecision
-            // .times(contractStatusData.bitcoinPrice) // RESERVE * USD
-            * contractStatusData.bitcoinPrice
-           // .div(reservePrecision); // USD
-           / reservePrecision;
+        if (!contractStatusData) return '';
 
-        const convertMoCTokenToRbtc = amount => convertDocToRbtc(convertMoCTokenToUsd(amount));
-        const convertMoCTokenToUsd = amount => amount.times(contractStatusData.mocPrice).div(reservePrecision);
-        const convertRbtcToMoCToken = amount => convertRbtcToDoc(amount) / (contractStatusData?.mocPrice * reservePrecision); //.div(contractStatusData?.mocPrice).times(reservePrecision);
+        const {
+            bitcoinPrice,
+            bproPriceInUsd,
+            bproPriceInRbtc,
+            reservePrecision,
+            bprox2PriceInRbtc,
+            bprox2PriceInBpro,
+            mocPrice
+        } = contractStatusData;
+
+        const convertDocToUsd = (amount) => amount;
+        const convertBproToRbtc = (amount) =>
+            amount.times(bproPriceInRbtc).div(reservePrecision);
+        const convertBproToUsd = (amount) =>
+            amount.times(bproPriceInUsd).div(reservePrecision);
+        const convertDocToRbtc = (amount) =>
+            amount.div(bitcoinPrice).times(reservePrecision);
+        const convertRbtcToUsd = (amount) =>
+            amount.times(bitcoinPrice).div(reservePrecision);
+        const convertRbtcToBpro = (amount) =>
+            amount.div(bproPriceInRbtc).times(reservePrecision);
+        const convertRbtcToDoc = (amount) => convertRbtcToUsd(amount);
+        const convertRbtcToBprox2 = (amount) =>
+            amount.div(bprox2PriceInRbtc).times(reservePrecision);
+        const convertBprox2ToRbtc = (amount) =>
+            amount.times(bprox2PriceInRbtc).div(reservePrecision);
+        const convertBproToBprox2 = (amount) =>
+            amount.div(bprox2PriceInBpro).times(reservePrecision);
+        const convertBprox2ToBpro = (amount) =>
+            amount.times(bprox2PriceInBpro).div(reservePrecision);
+        const convertBprox2ToUsd = (amount) =>
+            amount // RESERVE
+                .times(bprox2PriceInRbtc) // RESERVE * RESERVE
+                .div(reservePrecision) // RESERVE
+                .times(bitcoinPrice) // RESERVE * USD
+                .div(reservePrecision); // USD
+
+        const convertMoCTokenToRbtc = (amount) =>
+            convertDocToRbtc(convertMoCTokenToUsd(amount));
+        const convertMoCTokenToUsd = (amount) =>
+            amount.times(mocPrice).div(reservePrecision);
+        const convertRbtcToMoCToken = (amount) =>
+            convertRbtcToDoc(amount).div(mocPrice).times(reservePrecision);
 
         const convertMap = {
             STABLE: { USD: convertDocToUsd, RESERVE: convertDocToRbtc },
-            RISKPRO: { USD: convertBproToUsd, RESERVE: convertBproToRbtc, RISKPROX: convertBproToBprox2 },
+            RISKPRO: {
+                USD: convertBproToUsd,
+                RESERVE: convertBproToRbtc,
+                RISKPROX: convertBproToBprox2
+            },
             RISKPROX: {
                 RESERVE: convertBprox2ToRbtc,
                 RISKPRO: convertBprox2ToBpro,
@@ -668,14 +751,14 @@ const AuthenticateProvider = ({ children }) => {
             }
         };
 
-        return from === to ? new BigNumber(amount) : convertMap[from][to](new BigNumber(amount));
+        return from === to
+            ? new BigNumber(amount)
+            : convertMap[from][to](new BigNumber(amount));
     };
-
-    
 
     return (
         <AuthenticateContext.Provider
-            value={{    
+            value={{
                 account,
                 accountData,
                 userBalanceData,

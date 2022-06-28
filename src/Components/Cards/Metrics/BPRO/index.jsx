@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthenticateContext } from '../../../../Context/Auth';
 import { getDatasMetrics } from '../../../../Helpers/helper';
 import { useTranslation } from "react-i18next";
+import { LargeNumber } from '../../../LargeNumber';
 
 function BPRO() {
     const auth = useContext(AuthenticateContext);
@@ -24,7 +25,9 @@ function BPRO() {
             <div className="CardMetricContent">
                 <div>
                     <h3>{t('MoC.metrics.RISKPRO.usd', { ns: 'moc' })}</h3>
-                    <span className={'space'}>{getBpro['bpro_usd']}</span>
+                    <span className={'space'}>
+                        <LargeNumber {...{ amount: getBpro['bpro_usd'], currencyCode: 'RISKPRO', includeCurrency: true }} />
+                        </span>
                     <h3>{t('MoC.metrics.RISKPRO.leverage', { ns: 'moc' })}</h3>
                     {getBpro['b0Leverage']}
                 </div>
@@ -35,7 +38,7 @@ function BPRO() {
                     <h3>{t('MoC.metrics.RISKPRO.availableRedeem', { ns: 'moc' })}</h3>
                     {getBpro['bproAvailableToRedeem']}
                     <h3>{t('MoC.metrics.RISKPRO.bproDiscountPriceUsd', { ns: 'moc' })}</h3>
-                    {getBpro['bpro_usd']}
+                    <LargeNumber {...{ amount: getBpro['bpro_usd'], currencyCode: 'RISKPRO' }} />
                 </div>
             </div>
         </div>
