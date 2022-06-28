@@ -99,7 +99,6 @@ export default function ListOperations(props) {
     useEffect(() => {
         if (currentHash) {
             const interval = setInterval(() => {
-                console.log('run')
                 transactionsList(current)
                 setTimer(30000)
             }, timer);

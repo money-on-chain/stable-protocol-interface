@@ -1,5 +1,5 @@
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Row, Col } from 'antd';
+import { Row, Col, Tooltip } from 'antd';
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { Button } from 'antd';
@@ -33,32 +33,32 @@ export default function TokenSummaryCard(props) {
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc'])
 
-    const getBalance = () => {
+    const getBalance = (tooltip) => {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return setToLocaleString((auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(6),6,i18n)
+                    return setToLocaleString((auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(!tooltip ? 6 : 20),!tooltip ? 6 : 20,i18n)
                 case 'riskpro':
-                    return setToLocaleString(((auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']) / auth.contractStatusData.bitcoinPrice).toFixed(6),6,i18n)
+                    return setToLocaleString(((auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * auth.web3.utils.fromWei(auth.userBalanceData['bproBalance'])) / auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(!tooltip ? 6 : 20),!tooltip ? 6 : 20,i18n)
                 case 'riskprox':
-                    return setToLocaleString(new BigNumber(auth.userBalanceData['bprox2Balance']).toFixed(6),6,i18n)
+                    return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(!tooltip ? 6 : 20),!tooltip ? 6 : 20,i18n)
             }
         } else {
             return (0).toFixed(6)
         }
     };
-    const getBalanceUSD = () => {
+    const getBalanceUSD = (tooltip) => {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
                     // return new BigNumber(auth.userBalanceData['docBalance']).toFixed(2)
-                    return setToLocaleString(new BigNumber(auth.userBalanceData['docBalance']).toFixed(2),2,i18n)
+                    return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['docBalance'])).toFixed(!tooltip ? 2 : 20),!tooltip ? 2 : 20,i18n)
                 case 'riskpro':
                     // return new BigNumber(auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']).toFixed(2);
-                    return setToLocaleString(new BigNumber(auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']).toFixed(2),2,i18n)
+                    return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * auth.web3.utils.fromWei(auth.userBalanceData['bproBalance'])).toFixed(!tooltip ? 2 : 20),!tooltip ? 2 : 20,i18n)
                 case 'riskprox':
                     // return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2);
-                    return setToLocaleString(new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2),2,i18n)
+                    return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.contractStatusData['bitcoinPrice']) * auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(!tooltip ? 2 : 20),!tooltip ? 2 : 20,i18n)
             }
         } else {
             return (0).toFixed(2)
@@ -119,15 +119,19 @@ export default function TokenSummaryCard(props) {
                 }}
             >
                 <div className="Numbers Left">
-                    <div className="Number Few">
-                        {getBalance()}{' '}
-                        {
-                            currenciesDetail.find(
-                                (x) => x.value === labelCoin.toUpperCase()
-                            ).label
-                        }
-                    </div>
-                    <div className="Number Few">{getBalanceUSD()} USD</div>
+                    <Tooltip placement="top" title={getBalance(true)}>
+                        <div className="Number Few">
+                            {getBalance()}{' '}
+                            {
+                                currenciesDetail.find(
+                                    (x) => x.value === labelCoin.toUpperCase()
+                                ).label
+                            }
+                        </div>
+                    </Tooltip>
+                    <Tooltip placement="top" title={getBalanceUSD(true)}>
+                        <div className="Number Few">{getBalanceUSD()} USD</div>
+                    </Tooltip>
                 </div>
             </Col>
             <Col

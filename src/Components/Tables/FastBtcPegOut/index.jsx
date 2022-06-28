@@ -95,7 +95,6 @@ export default function FastBtcPegOut(props) {
     useEffect(() => {
         if (currentHash) {
             const interval = setInterval(() => {
-                console.log('run')
                 getFastbtcPegout(current)
                 setTimer(30000)
             }, timer);
