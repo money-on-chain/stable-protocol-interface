@@ -1,6 +1,7 @@
 /* eslint-disable default-case */
 /* eslint-disable react/jsx-no-target-blank */
-import { Button, Tooltip } from 'antd';
+import { Button, Collapse, Slider } from 'antd';
+import { SettingFilled } from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
 import './style.scss';
 import { useState, useContext, useEffect } from 'react';
@@ -32,7 +33,8 @@ export default function MintModal(props) {
     convertToken,
     actionIsMint,
     tolerance,
-    setTolerance
+    setTolerance,
+    defaultSliderValue
   } = props;
 
   /* Disabled confirm button when not connected */
@@ -156,12 +158,21 @@ export default function MintModal(props) {
     setShowError(false);
     onCancel();
   };
+  
 
   const markStyle = {
     style: {
       color: '#707070',
       fontSize: 10
     }
+  };
+
+  const priceVariationToleranceMarks = {
+    0: { ...markStyle, label: '0.0%' },
+    1: { ...markStyle, label: '1%' },
+    2: { ...markStyle, label: '2%' },
+    5: { ...markStyle, label: '5%' },
+    10: { ...markStyle, label: '10%' }
   };
 
   const callback = (error, transactionHash) => {
@@ -189,7 +200,26 @@ export default function MintModal(props) {
         <div className="USDConversion">
           <LargeNumber currencyCode={'USD'} amount={receivingInUSD} includeCurrency />
         </div>
-
+        <Collapse className="CollapseTolerance">
+          <Collapse.Panel showArrow={false} header={<div className="PriceVariationSetting">
+            <SettingFilled className="icon"/>
+            <span className="SliderText">{t("global.CustomizePrize_VariationToleranceSettingsTitle")}</span>
+          </div>}>
+            <div className="PriceVariationContainer">
+              <h4>{t("global.CustomizePrize_VariationToleranceTitle")}</h4>
+              <Slider
+                className="SliderControl"
+                marks={priceVariationToleranceMarks}
+                defaultValue={defaultSliderValue}
+                min={0}
+                max={10}
+                step={0.1}
+                dots={false}
+                onChange={val => changeTolerance(val)}
+              />
+            </div>
+          </Collapse.Panel>
+        </Collapse>
         <div
           className="AlignedAndCentered"
           style={{ alignItems: 'start', marginBottom: 20 }}
