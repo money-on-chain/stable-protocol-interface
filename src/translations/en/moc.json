@@ -872,12 +872,12 @@
         "header_processing": "The operation is being processed. If your transaction takes longer than 90 mins, <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>open a support ticket</a> at Sovryn.",
         "header_complete": "Confirmed",
         "destinationAddress": "Destination BTC Addresss",
-        "valueBTC": "__value__",
-        "valueRBTC": "__value__",
+        "valueBTC": "{{value}}",
+        "valueRBTC": "{{value}}",
         "transaction1DetailsTitle": "Step 1/2: BTC TRANSACTION",
         "transaction2DetailsTitle": "Step 2/2: rBTC TRANSACTION",
         "transactionInfo": {
-          "step": "STEP __step__: __txName__ TRANSACTION",
+          "step": "STEP {{step}}: {{txName}} TRANSACTION",
           "status_pending": "Status {{statusIndex}}/2 pending",
           "status_confirmed": "Status {{statusIndex}}/2 confirmed",
           "valueDeposited": "Value deposited: {{value}}",
@@ -892,9 +892,9 @@
         },
         "limits_pegout": {
           "header": "Conversion limits",
-          "min": "Min: __minValue__ RBTC",
-          "max": "Max: __maxValue__ RBTC",
-          "fee": "Fee: __feeValue__"
+          "min": "Min: {{minValue}} RBTC",
+          "max": "Max: {{maxValue}} RBTC",
+          "fee": "Fee: {{feeValue}}"
         },
         "instructions": {
           "header": "Instructions",

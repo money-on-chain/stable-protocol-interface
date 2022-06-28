@@ -301,9 +301,9 @@
       },
       "BtcInBucket0": {
         "title": "Tokens en BitPRO",
-        "totalBtc": "Total de __tokenName__s",
-        "totalDoc": "Total de __tokenName__s",
-        "totalBitPro": "Total de __tokenName__s",
+        "totalBtc": "Total de {{tokenName}}s",
+        "totalDoc": "Total de {{tokenName}}s",
+        "totalBitPro": "Total de {{tokenName}}s",
         "tooltip": {
           "title": "Tokens en BitPro",
           "subtitle": "- Total de DoCs: Cantidad de DoC que brindan apalancamiento gratuito a BPro.\n- Total de rBTCs: La suma de lo anterior expresado en rBTC\n - Total de BitPros: Número de BPro emitidos por el sistema\n"
@@ -824,8 +824,8 @@
           "txHash": "Tx hash"
         },
         "columns": {
-          "valueBTC": "__value__ BTC",
-          "valueRBTC": "__value__ rBTC",
+          "valueBTC": "{{value}} BTC",
+          "valueRBTC": "{{value}} rBTC",
           "step_1": "1/2",
           "step_2": "2/2",
           "type_deposit": "Depósito de BTC",
@@ -876,29 +876,29 @@
         "header_processing": "The operation is being processed. If your transaction takes longer than 90 mins, <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>open a support ticket</a> at Sovryn.",
         "header_complete": "Confirmed",
         "destinationAddress": "Dirección BTC de destino",
-        "valueBTC": "__value__",
-        "valueRBTC": "__value__",
+        "valueBTC": "{{value}}",
+        "valueRBTC": "{{value}}",
         "transaction1DetailsTitle": "Paso 1/2: TRANSACCIÓN BTC",
         "transaction2DetailsTitle": "Paso 2/2: TRANSACCIÓN rBTC",
         "transactionInfo": {
-          "step": "PASO __step__: Transacción __txName__",
-          "status_pending": "Estado __statusIndex__/2 pendiente",
-          "status_confirmed": "Estado __statusIndex__/2 confirmado",
-          "valueDeposited": "Valor depositado: __value__",
+          "step": "PASO {{step}}: Transacción {{txName}}",
+          "status_pending": "Estado {{statusIndex}}/2 pendiente",
+          "status_confirmed": "Estado {{statusIndex}}/2 confirmado",
+          "valueDeposited": "Valor depositado: {{value}}",
           "toLabel": "Para TX:",
           "txHashLabel": "Tx hash:",
           "fromLabel": "De TX:"
         },
         "limits": {
           "header": "Límites de Conversion",
-          "min": "Mínimo: __minValue__ BTC",
-          "max": "Máximo: __maxValue__ BTC"
+          "min": "Mínimo: {{minValue}} BTC",
+          "max": "Máximo: {{maxValue}} BTC"
         },
         "limits_pegout": {
           "header": "Límites de Conversion",
-          "min": "Mínimo: __minValue__ BTC",
-          "max": "Máximo: __maxValue__ BTC",
-          "fee": "Fee: __feeValue__"
+          "min": "Mínimo: {{minValue}} BTC",
+          "max": "Máximo: {{maxValue}} BTC",
+          "fee": "Fee: {{feeValue}}"
         },
         "instructions": {
           "header": "Instrucciones",
