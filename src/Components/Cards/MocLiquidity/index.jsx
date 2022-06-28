@@ -90,8 +90,10 @@ function MocLiquidity(props) {
     };
 
     useEffect(() => {
-        claimsCall()
-    });
+        if(accountData.Owner!==undefined){
+            claimsCall()
+        }
+    },[accountData.Owner]);
 
     return (
         <div className="Card RewardsBalanceLiquidity withPadding hasTitle">
