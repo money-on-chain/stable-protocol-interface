@@ -6,7 +6,6 @@ import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import { AuthenticateContext } from '../../../Context/Auth';
 import Copy from '../../../Components/Page/Copy';
 import './style.scss';
-import rLogin from "../../../Lib/rLogin";
 import Web3 from "web3";
 import FastBtcBridge from "../../../Contracts/MoC/abi/FastBtcBridge.json";
 import { toNumberFormat, btcInSatoshis, DYNAMIC_FEE_DIVISOR, toWei, weiToNumberFormat } from '../../../Helpers/math-helpers';
