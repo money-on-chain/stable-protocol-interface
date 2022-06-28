@@ -37,6 +37,7 @@ export default function ListOperations(props) {
 
     const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);
+    const { accountData = {} } = auth;
     const [currencyCode, setCurrencyCode]=  useState('MOC');
     const [dataJson, setDataJson]=  useState([]);
     const [callTable, setCallTable]=  useState(false);
@@ -45,7 +46,7 @@ export default function ListOperations(props) {
     const [timer, setTimer] = useState(100);
 
     const transactionsList= (skip,call_table) => {
-        const datas= (token!='all')?{address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: config.transactions_list_address,limit:20,skip:(((skip-1)+(skip-1))*10)}
+        const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
         api('get', `${config.api_moctest}`+'webapp/transactions/list/', datas)
             .then(response => {
                 setDataJson(response);
@@ -100,18 +101,24 @@ export default function ListOperations(props) {
         if (currentHash) {
             const interval = setInterval(() => {
                 transactionsList(current)
-                setTimer(30000)
+
             }, timer);
             return () => clearInterval(interval);
+        }
+        if (accountData) {
+            setTimer(30000)
         }
     });
 
     var data = [];
 
     const onChange = (page) => {
-        setCurrent(page);
-        data_row(page);
-        transactionsList(page,true)
+        if( accountData!== undefined ){
+            setCurrent(page);
+            data_row(page);
+            transactionsList(page,true)
+        }
+
     };
 
     const data_row_coins2 = [];
