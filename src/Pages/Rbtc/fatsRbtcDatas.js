@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import rLogin from "../../Lib/rLogin";
+//import rLogin from "../../Lib/rLogin";
 import Web3 from "web3";
 import FastBtcBridge from "../../Contracts/MoC/abi/FastBtcBridge.json";
 import {toNumberFormat} from "../../Helpers/helper";
@@ -24,7 +24,7 @@ const FastRbtcProvider = ({ children }) => {
 
     useEffect(() => {
         if (checkLoginFirstTime) {
-            if (rLogin.cachedProvider) {
+            if (window.rLogin.cachedProvider) {
                 connect();
             }
         }
@@ -38,7 +38,7 @@ const FastRbtcProvider = ({ children }) => {
     }, [account]);
 
     const connect = () =>
-        rLogin.connect().then((rLoginResponse) => {
+        window.rLogin.connect().then((rLoginResponse) => {
             const { provider, disconnect } = rLoginResponse;
             setProvider(provider);
 

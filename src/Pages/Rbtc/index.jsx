@@ -93,7 +93,9 @@ export default function Rbtc(props) {
                         at Sovryn
                     </span>
                     {/*<FastBtcPegOut></FastBtcPegOut>*/}
-                    <Tabe></Tabe>
+                    <Tabe 
+                        accountData={auth.accountData}
+                    ></Tabe>
                 </div></>}
         </Fragment>
     );

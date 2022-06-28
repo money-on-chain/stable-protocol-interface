@@ -27,17 +27,17 @@ const TransactionTypeIdsRRC20 = {
   REDEEM_RISKPROX_FEES_MOC: 12,
 }
 
-const redeemBpro = () => async (memo, amount) => window.nodeManager.redeemBpro(memo, amount);
+const redeemBpro = () => async (memo, amount, callback) => window.nodeManager.redeemBpro(memo, amount, callback);
 
-const buyBproWithRBTC = (txType, commissionCurrencyCode) => async (memo, amount) => window.nodeManager.mintBpro(memo, amount, txType, commissionCurrencyCode);
+const buyBproWithRBTC = (txType, commissionCurrencyCode, callback) => async (memo, amount, callback) => window.nodeManager.mintBpro(memo, amount, txType, commissionCurrencyCode, callback);
 
-const buyDocWithRBTC = (txType, commissionCurrencyCode) => async (memo, amount) => window.nodeManager.mintDoc(memo, amount, txType, commissionCurrencyCode);
+const buyDocWithRBTC = (txType, commissionCurrencyCode, callback) => async (memo, amount, callback) => window.nodeManager.mintDoc(memo, amount, txType, commissionCurrencyCode, callback);
 
-const buyBprox2WithRBTC = (txType, commissionCurrencyCode) => async (memo, amount) => window.nodeManager.mintBprox2(memo, amount, txType, commissionCurrencyCode);
+const buyBprox2WithRBTC = (txType, commissionCurrencyCode, callback) => async (memo, amount, callback) => window.nodeManager.mintBprox2(memo, amount, txType, commissionCurrencyCode, callback);
 
-const redeemBprox2 = () => async (memo, amount) => window.nodeManager.redeemBprox2(memo, amount);
+const redeemBprox2 = () => async (memo, amount, callback) => window.nodeManager.redeemBprox2(memo, amount, callback);
 
-const redeemFreeDoc = () => async (memo, amount) => window.nodeManager.redeemFreeDoc(memo, amount);
+const redeemFreeDoc = () => async (memo, amount, callback) => window.nodeManager.redeemFreeDoc(memo, amount, callback);
 
 
 // TODO: pasar el txType por param.

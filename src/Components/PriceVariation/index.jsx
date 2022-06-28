@@ -51,12 +51,11 @@ export default function PriceVariation(props) {
     return (
         <Tooltip placement="topLeft" tooltip={tooltip} mouseEnterDelay={0.5}>
             <div className={'div_crypto'}>
-                {auth.isLoggedIn && <Fragment>
+                {<Fragment>
                 <img className={'crypto_img'} src={arrow} alt="arrow"
                      height={11}/>
                     <span className={'crypto_value'} style={{color: `${color}`}}>{variationText}</span> </Fragment>
                 }
-                {!auth.isLoggedIn && <Fragment><span className={'crypto_value'} style={{color: `${color}`}}>{0}</span></Fragment>}
             </div>
         </Tooltip>
     );
