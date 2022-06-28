@@ -226,10 +226,10 @@ const MintOrRedeemToken = (props) => {
         return;
       }
     }
-    onConfirmTransactionFinish();
+    // onConfirmTransactionFinish();
   };
 
-  const onConfirmTransactionFinish = async () => {
+  /* const onConfirmTransactionFinish = async () => {
     const exchangeMethod = getExchangeMethod(
       currencyYouExchange,
       currencyYouReceive,
@@ -244,9 +244,14 @@ const MintOrRedeemToken = (props) => {
       'RESERVE'
     );
 
-    exchangeMethod(userAmount, userToleranceAmount);
-    setConfirmingTransaction(false);
-  };
+    exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
+    // setConfirmingTransaction(false);
+  }; */
+
+  /* const callback = (error, transactionHash) => {
+    console.log(transactionHash);
+    setCurrentHash(transactionHash);
+  }; */
 
   const allowanceReserveModalClose = async () => {
     setShowModalAllowanceReserve(false);
@@ -537,12 +542,15 @@ const MintOrRedeemToken = (props) => {
         fee={commission}
         interests={interests}
         onCancel={closeConfirmationModal}
-        onConfirm={onConfirmTransaction}
+        // onConfirm={onConfirmTransaction}
         convertToken={auth.convertToken}
         tolerance={tolerance}
         setTolerance={setTolerance}
         actionIsMint={actionIsMint}
         defaultSliderValue={defaultSliderValue}
+        // txHash={currentHash}
+        commissionCurrency={commission.currencyCode}
+        valueYouExchange={valueYouExchange}
       />
     );
   };

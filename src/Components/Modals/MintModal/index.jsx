@@ -8,7 +8,11 @@ import { useState, useContext, useEffect } from 'react';
 import { Modal, notification } from 'antd';
 
 import { convertAmount } from '../../../Lib/exchangeManagerHelper';
-
+import { getExchangeMethod } from '../../../Lib/exchangeHelper';
+import {
+  formatValueToContract,
+  formatValueWithContractPrecision,
+} from '../../../Lib/Formats';
 import Copy from "../../Page/Copy";
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
 import { LargeNumber } from '../../LargeNumber';
@@ -34,7 +38,9 @@ export default function MintModal(props) {
     actionIsMint,
     tolerance,
     setTolerance,
-    defaultSliderValue
+    defaultSliderValue,
+    commissionCurrency,
+    valueYouExchange,
   } = props;
 
   /* Disabled confirm button when not connected */
@@ -60,14 +66,18 @@ export default function MintModal(props) {
   const [t, i18n]= useTranslation(["global",'moc'])
   const { appMode } = 'Moc';
 
+  let userComment = '';
+  let userTolerance = '';
+
   useEffect(() => {
       if (currentHash) {
+        console.log('currentHash', currentHash);
           const interval = setInterval(() => {
               getTransaction(currentHash)
           }, 15000);
           return () => clearInterval(interval);
       }
-  });
+  }, [currentHash]);
   useEffect(
     () => {
       setComment('');
@@ -101,11 +111,7 @@ export default function MintModal(props) {
 
     // Check if there are enough spendable balance to pay
     // take in care amount to pay gas fee
-    let uTolerance = 0;
-    if (actionIsMint) {
-      uTolerance = tolerance;
-    }
-    /*const { minimumUserBalanceToOperate } = Meteor.settings.public;
+    const minimumUserBalanceToOperate = "120000000000000";
     const userSpendable = await window.nodeManager.getSpendableBalance(window.address);
 
     let minimumBalance = new BigNumber(minimumUserBalanceToOperate);
@@ -119,9 +125,48 @@ export default function MintModal(props) {
     if (minimumBalance.gt(new BigNumber(userSpendable))) {
         setShowError(true);
         return;
-    }*/
-    onConfirm({ comment, tolerance: uTolerance });
+    }
+    // onConfirm({ comment, tolerance: uTolerance });
+    userComment = comment;
+    userTolerance = uTolerance;
 
+    /* const { appMode } = window;
+    // In rrc20 mode show allowance when need it
+    if (appMode === 'RRC20') {
+      const userAllowance = await window.nodeManager.getReserveAllowance(window.address);
+      if (valueYouExchange > userAllowance) {
+        allowanceReserveModalShow(true);
+        return;
+      }
+    } */
+    onConfirmTransactionFinish();
+
+  };
+
+  const onConfirmTransactionFinish = async () => {
+    console.log(exchanging.currencyCode, receiving.currencyCode, commissionCurrency );
+    const exchangeMethod = getExchangeMethod(
+      exchanging.currencyCode,
+      receiving.currencyCode,
+      `${commissionCurrency}_COMMISSION`
+    );
+    const userAmount = formatValueWithContractPrecision(valueYouExchange, 'RESERVE');
+    const userToleranceAmount = formatValueToContract(
+      new BigNumber(userTolerance)
+          .multipliedBy(userAmount)
+          .div(100)
+          .toFixed(),
+      'RESERVE'
+    );
+
+    exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
+  };
+
+  const callback = (error, transactionHash) => {
+    setLoading(false);
+    setCurrentHash(transactionHash);
+    setShowTransaction(true);
+    getTransaction(transactionHash);
   };
 
   const renderError = () => {
@@ -136,9 +181,10 @@ export default function MintModal(props) {
     await auth.getTransactionReceipt(hash, ()=> {
       setTransaction(false);
     }).then(res => {
-      if (res)
-      setShowTransaction(true);
-      setTransaction(true);
+      if (res) {
+        setShowTransaction(true);
+        setTransaction(true);
+      }
     }).catch(e => {
       setTransaction(false);
       notification['error']({
@@ -173,12 +219,6 @@ export default function MintModal(props) {
     2: { ...markStyle, label: '2%' },
     5: { ...markStyle, label: '5%' },
     10: { ...markStyle, label: '10%' }
-  };
-
-  const callback = (error, transactionHash) => {
-    setLoading(false);
-    setCurrentHash(transactionHash);
-    getTransaction(transactionHash);
   };
 
   const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
@@ -291,7 +331,7 @@ export default function MintModal(props) {
               >View on the explorer</a>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center'}}>
-              <Button type="primary" onClick={() => {handleComplete(); setCurrentHash(null); setShowTransaction(false)}}>Close</Button>
+              <Button type="primary" onClick={() => {cancelButton(); setCurrentHash(null); setShowTransaction(false)}}>Close</Button>
             </div>
           </div>
           : <>
