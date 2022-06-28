@@ -98,17 +98,15 @@ export default function ListOperations(props) {
     ];
 
     useEffect(() => {
-        if (currentHash) {
-            const interval = setInterval(() => {
+        if(accountData.Owner!==undefined){
+            if (currentHash) {
                 transactionsList(current)
-
-            }, timer);
-            return () => clearInterval(interval);
+            }
         }
         if (accountData) {
             setTimer(30000)
         }
-    });
+    },[accountData.Owner]);
 
     var data = [];
 
@@ -118,7 +116,6 @@ export default function ListOperations(props) {
             data_row(page);
             transactionsList(page,true)
         }
-
     };
 
     const data_row_coins2 = [];
