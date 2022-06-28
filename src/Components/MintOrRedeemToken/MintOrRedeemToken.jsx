@@ -41,19 +41,20 @@ import MintModal from '../Modals/MintModal';
 // import Switch from '../../atoms/Switch/Switch';
 import {useTranslation} from "react-i18next";
 import { AuthenticateContext } from '../../Context/Auth';
-import CoinSelect from '../Form/CoinSelect';
 
 
 const MintOrRedeemToken = (props) => {
+  const [t, i18n]= useTranslation(["global",'moc'])
+  const auth = useContext(AuthenticateContext);
+  const {web3} = auth;
+
   /* Context props */
-  const { token, mocState, userState } =
-    props;
+  const { token, mocState, userState } = props;
+
   let reservePrice;
   if (mocState && mocState.bitcoinPrice) {
-    reservePrice = mocState.bitcoinPrice;
+      reservePrice = mocState.bitcoinPrice;
   }
-  const auth = useContext(AuthenticateContext);
-  const [t, i18n]= useTranslation(["global",'moc'])
 
   /* State variable */
   const [currencyYouExchange, setCurrencyYouExchange] = useState('RESERVE');
@@ -62,94 +63,87 @@ const MintOrRedeemToken = (props) => {
   const [youExchangeIsValid, onYouExchangeValidityChange] = useState(false);
   const [youReceiveIsValid, onYouReceiveValidityChange] = useState(false);
   const [confirmingTransaction, setConfirmingTransaction] = useState(false);
-  const [interests, setInterests] = useState({
-    interestRate: '0',
-    interestValue: BigNumber('0')
-  });
+  const [interests, setInterests] = useState({ interestRate: '0', interestValue: BigNumber('0') });
   const actionIsMint = currencyYouExchange === 'RESERVE';
   const [loadingSwitch, setLoadingSwitch] = useState(false);
   const [commissionSwitch, setCommissionSwitch] = useState('RESERVE');
-  const [ShowModalAllowanceReserve, setShowModalAllowanceReserve] =
-    useState(false);
-  const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] =
-    useState('Confirm');
-
-  // const { bitcoinPrice = 0 } = props.StatusData ? props.StatusData : {};
+  const [ShowModalAllowanceReserve, setShowModalAllowanceReserve] = useState(false);
+  const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] = useState('Confirm');
+  const [tolerance, setTolerance] = useState('0.1');
 
   let userComment = '';
+  let userTolerance = '';
   const userAccountIsLoggedIn = mocState;
 
   /* Effects */
-  useEffect(() => {
-    if (auth.convertToken) {
-      onValueYouExchangeChange(valueYouReceive);
-    }
-  },[currencyYouExchange]); 
-  useEffect(() => {
-    const awaitInterests = async (newValueYouExchange) => {
-      const interests = await calcInterests(newValueYouExchange);
-      setInterests(interests);
-    };
-    if (auth.convertToken) {
-      awaitInterests(valueYouExchange);
-    }
-  }, [valueYouExchange]);
+  useEffect(
+    () => {
+      if (auth.convertToken) {
+        onValueYouExchangeChange(valueYouReceive);
+      }
+    },
+    [currencyYouExchange]
+  );
+  useEffect(
+    () => {
+      const awaitInterests = async newValueYouExchange => {
+        const interests = await calcInterests(newValueYouExchange);
+        setInterests(interests);
+      };
+      if (auth.convertToken) {
+        awaitInterests(valueYouExchange);
+      }
+    },
+    [valueYouExchange]
+  );
 
   /* Methods */
   const getCurrencyYouReceive = (actionIsMint, tokenToMintOrRedeem) => {
     return actionIsMint ? tokenToMintOrRedeem : 'RESERVE';
   };
 
-  const onValueYouExchangeChange = (newValueYouExchange) => {
-    console.log('newValueYouExchange', newValueYouExchange);
-    if (auth) {
-      setValueYouExchange(newValueYouExchange);
-      console.log('onvalue', currencyYouExchange, currencyYouReceive, newValueYouExchange);
-      const newValueYouReceiveInWei = convertAmount(
-        currencyYouExchange,
-        currencyYouReceive,
-        newValueYouExchange,
-        auth.convertToken
-      );
-      console.log('newValueYouReceiveInWei', newValueYouReceiveInWei);
-      setValueYouReceive(newValueYouReceiveInWei);
-    }
+  const onValueYouExchangeChange = newValueYouExchange => {
+    setValueYouExchange(newValueYouExchange);
+    const newValueYouReceiveInWei = convertAmount(
+      currencyYouExchange,
+      currencyYouReceive,
+      newValueYouExchange,
+      auth.convertToken
+    );
+    setValueYouReceive(newValueYouReceiveInWei);
   };
+
   const onValueYouReceiveChange = newValueYouReceive => {
-    if(auth){
-      setValueYouReceive(newValueYouReceive);
-      const newValueYouExchange = convertAmount(
-        currencyYouReceive,
-        currencyYouExchange,
-        newValueYouReceive,
-        auth.convertToken
-      );
-      console.log('newValueYouExchange', newValueYouExchange);
-      setValueYouExchange(newValueYouExchange);
-    };
-  }
- const onChangeCurrencyYouExchange = (newCurrencyYouExchange) => {
+    setValueYouReceive(newValueYouReceive);
+    const newValueYouExchange = convertAmount(
+      currencyYouReceive,
+      currencyYouExchange,
+      newValueYouReceive,
+      auth.convertToken
+    );
+    setValueYouExchange(newValueYouExchange);
+  };
+
+  const onChangeCurrencyYouExchange = (newCurrencyYouExchange) => {
     setCurrencyYouExchange(newCurrencyYouExchange);
   };
 
   const getMaxValues = () => {
-    if (auth) {
-      let maxValueYouExchange, maxValueYouReceive;
-      if (actionIsMint) {
-        maxValueYouReceive = getMaxMintableBalance(
-          token,
-          userState,
-          mocState,
-          auth.convertToken
-        ).value.toString();
-        maxValueYouExchange = convertAmount(token, 'RESERVE', maxValueYouReceive, auth.convertToken);
-      } else {
-        //action is redeem
-        maxValueYouExchange = getMaxRedeemableBalance(token, userState, mocState).value.toString();
-        maxValueYouReceive = convertAmount(token, 'RESERVE', maxValueYouExchange, auth.convertToken);
-      }
-      return { youExchange: maxValueYouExchange, youReceive: maxValueYouReceive };
+    let maxValueYouExchange, maxValueYouReceive;
+    if (actionIsMint) {
+      maxValueYouReceive = getMaxMintableBalance(
+        token,
+        userState,
+        mocState,
+        auth.convertToken
+      ).value.toString();
+      maxValueYouExchange = convertAmount(token, 'RESERVE', maxValueYouReceive, auth.convertToken);
+    } else {
+      //action is redeem
+      maxValueYouExchange = getMaxRedeemableBalance(token, userState, mocState).value.toString();
+      maxValueYouReceive = convertAmount(token, 'RESERVE', maxValueYouExchange, auth.convertToken);
     }
+    return { youExchange: maxValueYouExchange, youReceive: maxValueYouReceive };
   };
 
  const clear = () => {
@@ -160,13 +154,13 @@ const MintOrRedeemToken = (props) => {
   const openConfirmationModal = () => {
     setConfirmingTransaction(true);
   };
+
   const closeConfirmationModal = () => {
     setConfirmingTransaction(false);
   };
 
   const calcCommission = () => {
     if (!auth.convertToken || !mocState) return {};
-    const convertToken = auth.convertToken;
     const {
       commissionCurrency,
       commissionRate,
@@ -178,7 +172,7 @@ const MintOrRedeemToken = (props) => {
       currencyYouExchange,
       mocState,
       userState,
-      convertToken
+      convertToken: auth.convertToken
     });
 
     const commissionRateVisible = formatVisibleValue(
@@ -194,7 +188,7 @@ const MintOrRedeemToken = (props) => {
     };
   };
 
-  const calcInterests = async (newValueYouExchange) => {
+  const calcInterests = async newValueYouExchange => {
     let interestRate = '0',
       interestValue = BigNumber('0');
     if (actionIsMint && currencyYouReceive === 'RISKPROX') {
@@ -205,26 +199,28 @@ const MintOrRedeemToken = (props) => {
       );
       interestValue = new BigNumber(interestValue);
       //interestValue = new BigNumber(0.01).multipliedBy(interestValue).plus(interestValue);
+
       interestRate = formatValueToContract(
-          new BigNumber(interestValue)
-            .multipliedBy(100)
-            .div(newValueYouExchange)
-            .toFixed(),
+        new BigNumber(interestValue)
+          .multipliedBy(100)
+          .div(newValueYouExchange)
+          .toFixed(),
         'USD'
       );
+
       interestRate = formatVisibleValue(interestRate, 'commissionRate', formatLocalMap2[i18n.languages[0]]);
     }
     return { interestRate, interestValue };
   };
-  const onConfirmTransaction = async (comment) => {
-    userComment = comment;
 
-    const { appMode } = 'Moc' //o RRC20;
+  const onConfirmTransaction = async data => {
+    userComment = data.comment;
+    userTolerance = data.tolerance;
+
+    const { appMode } = window;
     // In rrc20 mode show allowance when need it
     if (appMode === 'RRC20') {
-      const userAllowance = await window.nodeManager.getReserveAllowance(
-        window.address
-      );
+      const userAllowance = await window.nodeManager.getReserveAllowance(window.address);
       if (valueYouExchange > userAllowance) {
         allowanceReserveModalShow(true);
         return;
@@ -239,10 +235,16 @@ const MintOrRedeemToken = (props) => {
       currencyYouReceive,
       `${commission.currencyCode}_COMMISSION`
     );
-    exchangeMethod(
-      userComment,
-      formatValueWithContractPrecision(valueYouExchange, 'RESERVE')
+    const userAmount = formatValueWithContractPrecision(valueYouExchange, 'RESERVE');
+    const userToleranceAmount = formatValueToContract(
+      new BigNumber(userTolerance)
+          .multipliedBy(userAmount)
+          .div(100)
+          .toFixed(),
+      'RESERVE'
     );
+
+    exchangeMethod(userAmount, userToleranceAmount);
     setConfirmingTransaction(false);
   };
 
@@ -407,6 +409,15 @@ const MintOrRedeemToken = (props) => {
   const totalsWithCommissionAndInterests = () => {
     let totalYouExchange = BigNumber(valueYouExchange);
     let totalYouReceive = BigNumber(valueYouReceive);
+
+    // Mint BTCX slippage (user tolerance)
+    // take in care user tolerance
+    //if (actionIsMint && currencyYouReceive === 'RISKPROX') {
+    if (actionIsMint) {
+      const userToleranceAmount = new BigNumber(tolerance).multipliedBy(totalYouExchange).div(100).toFixed();
+      totalYouExchange = totalYouExchange.plus(userToleranceAmount);
+    }
+
     const commission = calcCommission();
     if (actionIsMint) {
       if (commission.currencyCode === 'RESERVE') {
@@ -423,20 +434,19 @@ const MintOrRedeemToken = (props) => {
     return { totalYouExchange, totalYouReceive };
   };
 
-  /* Variables */
+    /* Variables */
 
   const currencyYouReceive = getCurrencyYouReceive(actionIsMint, token);
   const commission = calcCommission();
   const totals = totalsWithCommissionAndInterests();
-  
-  /* View */
+    /* View */
 
   const renderExchangeInputs = () => {
     return (
       <div className="ExchangeInputs AlignedAndCentered">
         <div className="YouExchange">
          <InputWithCurrencySelector
-            title={t('global.MintOrRedeemToken_YouExchange')}
+            title={t('global.MintOrRedeemToken_YouExchange', {ns: 'global'})}
             currencySelected={currencyYouExchange}
             onCurrencySelect={onChangeCurrencyYouExchange}
             inputValueInWei={valueYouExchange}
@@ -447,23 +457,12 @@ const MintOrRedeemToken = (props) => {
             showMaxValueAllowed
             validate={userAccountIsLoggedIn}
             showConvertBTC_RBTC_Link={false}
-          /> 
-         {/*  <CoinSelect 
-            label="You Exchange"
-            onCurrencySelect={onChangeCurrencyYouExchange}
-            onInputValueChange={onValueYouExchangeChange}
-            value={currencyYouExchange}
-            inputValueInWei={valueYouExchange}
-            currencyOptions={[token, 'RESERVE']}
-            // AccountData={auth.AccountData}
-            // UserBalanceData={auth.UserBalanceData}
-            token={token}
-          />*/}
+         />
         </div>
         <ArrowRightOutlined />
         <div className="YouReceive">
          <InputWithCurrencySelector
-            title={t('global.MintOrRedeemToken_YouReceive')}
+            title={t('global.MintOrRedeemToken_YouReceive', {ns: 'global'})}
             validate={userAccountIsLoggedIn}
             currencyOptions={[token, 'RESERVE']}
             onValidationStatusChange={onYouReceiveValidityChange}
@@ -474,33 +473,22 @@ const MintOrRedeemToken = (props) => {
             showMaxValueAllowed
             onInputValueChange={onValueYouReceiveChange}
             showConvertBTC_RBTC_Link={false}
-          /> 
-          {/*} <CoinSelect
-            label="You Receive"
-            inputValueInWei={valueYouReceive}
-            currencyOptions={[token, 'RESERVE']}
-            value={currencyYouReceive}
-            token={token}
-            // UserBalanceData={auth.UserBalanceData}
-            // AccountData={auth.AccountData}
-            // disabled
-          />*/}
+         />
         </div>
       </div>
     );
   };
+
+  const [currencyCode, setCurrencyCode]=  useState('USDPrice');
   const renderFooter = () => {
     return (
       <div className="MintOrRedeemTokenFooter AlignedAndCentered">
         <div className="ReserveInUSD">
           <span className={`Conversion ${window.appMode}`}>
             1 {t('MoC.Tokens_RESERVE_code', {ns: 'moc'})} ={' '}
-            <LargeNumber
-              className="ReservePrice"
-              amount={reservePrice}
-              currencyCode="USD"
-              includeCurrency
-            />
+                {auth.isLoggedIn && <>&nbsp;<LargeNumber amount={web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether')} {...{ currencyCode }} />
+                  <span>&nbsp;USD</span></>
+              }
           </span>
           <span className="Disclaimer">
             {t('global.MintOrRedeemToken_AmountMayDiffer')}
@@ -531,7 +519,10 @@ const MintOrRedeemToken = (props) => {
       </div>
     );
   };
+
   const renderConfirmTransactionModal = () => {
+    let defaultSliderValue = 0.1;
+    if (actionIsMint && currencyYouReceive === 'RISKPROX') { defaultSliderValue = 0.25; }
     return (
       <MintModal
         visible={confirmingTransaction}
@@ -548,6 +539,10 @@ const MintOrRedeemToken = (props) => {
         onCancel={closeConfirmationModal}
         onConfirm={onConfirmTransaction}
         convertToken={auth.convertToken}
+        tolerance={tolerance}
+        setTolerance={setTolerance}
+        actionIsMint={actionIsMint}
+        defaultSliderValue={defaultSliderValue}
       />
     );
   };
@@ -579,11 +574,13 @@ const MintOrRedeemToken = (props) => {
             feePercent: commission.percentage
           })}
         </p>
-        <LargeNumber
-          includeCurrency
-          amount={commission.value}
-          currencyCode={commission.currencyCode}
-        />
+        {!isNaN(commission.value) &&
+            <span>{commission.value} 333</span> &&
+            <LargeNumber
+                includeCurrency
+                amount={commission.value}
+                currencyCode={commission.currencyCode}
+            />}
         <Popover content={tooltip} placement="top">
           <div className="PayWithMocToken">
             <Switch

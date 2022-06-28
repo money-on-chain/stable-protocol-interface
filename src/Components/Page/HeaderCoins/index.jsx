@@ -14,7 +14,7 @@ function HeaderCoins(props) {
 
   useEffect(() => {
     // priceVariation24hs().then(data => setDailyVariation(data['24hs']));
-    
+
     setDailyVariation({
       "current": {
         "_id": "625031dc240b5f9601c09764",
@@ -60,7 +60,7 @@ function HeaderCoins(props) {
         } else {
           return 0;
         }
-  
+
       case 'riskprox':
         if (dailyVariation.current !== null) {
           return dailyVariation.current.bprox2PriceInUsd;

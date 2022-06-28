@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Input } from "antd";
-import RNS from '@rsksmart/rns';
 import './style.scss';
 import addressHelper from '../../Lib/addressHelper';
 import { DebounceInput } from 'react-debounce-input';
@@ -16,7 +15,7 @@ export default function InputAddress(props) {
   const [help, setHelp] = useState('');
   const [value, setValue] = useState('');
 
-  const rns = new RNS(window.ethereum, window.rnsAddress && { contractAddresses: {
+  const rns = new window.RNS(window.ethereum, window.rnsAddress && { contractAddresses: {
     registry: window.rnsAddress
   }});
 
