@@ -35,7 +35,7 @@ export default function InputWithCurrencySelector(props) {
     placeholder = '',
     showSelectPercent = false,
     onValueChange = () => {}
-  } = props;
+} = props;
 
   const [t, i18n]= useTranslation(["global",'moc'])
 
@@ -49,8 +49,6 @@ export default function InputWithCurrencySelector(props) {
   }, [cleanInputCount]);
   useEffect(
     () => {
-
-      console.log('validate & dirty', validate, dirty);
       if (validate && dirty) {
         setInputValidation(validateValue(inputValueInWei, maxValueAllowedInWei));
       }
@@ -66,7 +64,6 @@ export default function InputWithCurrencySelector(props) {
   );
 
   const handleValueChange = newValueInEther => {
-    console.log('handleValueChange', newValueInEther, currencySelected);
     const newValueInWei = formatValueToContract(newValueInEther, currencySelected);
     handleValueChangeInWei(newValueInWei);
     onValueChange(newValueInEther);
@@ -109,7 +106,7 @@ const testConditions = (conditionsAndMessages, value) => {
 const validateValue = (value, maxValueAllowedInWei) => {
   const validNumberRegex = /^$|^\d+\.?(\d+)?$/;
   const valueIsInvalidNumber = value => {
-      const valueInEther = formatVisibleValue(value, currencySelected, formatLocalMap2[i18n.languages[0]]);
+      const valueInEther = formatVisibleValue(value, currencySelected, formatLocalMap2['en']);
       return !validNumberRegex.test(valueInEther);
   };
   const valueIsBiggerThanMaxValueAllowed = value =>
@@ -124,13 +121,12 @@ const validateValue = (value, maxValueAllowedInWei) => {
           { condition: valueIsInvalidNumber, message: t('global.Error_numericField') },
           {
               condition: valueIsBiggerThanMaxValueAllowed,
-              message: t('global.Error_maxExceeded')
+              message: t('global.Error_maxExceeded', {ns: 'global'})
           },
           { condition: valueIsTooSmall, message: t('global.Error_numberTooSmall') }
       ],
       value
   );
-  console.log('result', result);
   return result;
 };
 
@@ -151,7 +147,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
             <Tooltip title={formatValueWithContractPrecision(inputValueInWei, currencySelected)}>
               <DebounceInput
                 placeholder={placeholder}
-                value={formatVisibleValue(inputValueInWei, currencySelected, formatLocalMap2[i18n.languages[0]])}
+                value={formatVisibleValue(inputValueInWei, currencySelected, formatLocalMap2['en'])}
                 debounceTimeout={1000}
                 onChange={event => handleValueChange(event.target.value)}
                 className={`valueInput ${
@@ -169,21 +165,17 @@ const validateValue = (value, maxValueAllowedInWei) => {
           </div>
         </Form.Item>
       </Form>
-      {showMaxValueAllowed && !showSelectPercent && (
+    {showMaxValueAllowed && !showSelectPercent && (
         <div className="AlignedAndCentered">
           <span className="setValueToMaxLink" onClick={setValueToMax}>
             {t('global.InputWithCurrencySelector_AddTotalAvailable')}
           </span>
           <div className="text-align-right">
             <LargeNumber
-              currencyCode={currencySelected}
-              amount={maxValueAllowedInWei}
-              includeCurrency
+                currencyCode={currencySelected}
+                amount={maxValueAllowedInWei}
+                includeCurrency
             />
-            {/* showConvertBTC_RBTC_Link && (        
-              <button onClick={() => FlowRouter.go('getRBTC') } 
-                className="link-like-btn">Convert BTC to RBTC</button>
-            )*/} 
           </div>
         </div>
       )}
@@ -207,11 +199,6 @@ const validateValue = (value, maxValueAllowedInWei) => {
                   amount={maxValueAllowedInWei}
                   includeCurrency
                 />
-                {/* showConvertBTC_RBTC_Link && (
-                  <button onClick={() => FlowRouter.go('getRBTC') }
-                    className="link-like-btn">{t(`global.InputWithCurrencySelector_ConvertBTCtoRBTC`)}
-                  </button>
-                )*/}
               </div>
             </div>
           </div>
