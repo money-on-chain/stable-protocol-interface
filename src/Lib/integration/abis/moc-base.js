@@ -1,5 +1,5 @@
-import coinbase from './abis/coinbase';
-import rrc20 from './abis/rrc20';
+import coinbase from './moc-coinbase';
+import rrc20 from './moc-rrc20';
 
 const baseAbis = (appMode) => {
   switch (appMode.toLowerCase()) {

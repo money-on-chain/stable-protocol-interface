@@ -1,5 +1,5 @@
-import { baseAbis } from './interfaces/base';
-import { omocAbis } from './interfaces/omoc';
+import { baseAbis } from './abis/moc-base';
+import { omocAbis } from './abis/omoc';
 
 import { addABI } from './transaction';
 import { connectorAddresses, registryAddresses } from './multicall';
