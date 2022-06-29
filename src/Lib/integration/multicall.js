@@ -495,9 +495,9 @@ const userBalance = async (web3, dContracts, userAddress, appMode) => {
 
   return userBalance
 }
-/*
-const calcCommission = async (web3, dContracts, dataContractStatus, reserveAmount, token, action) => {
-  const vendorAddress = `${process.env.VENDOR_ADDRESS}`.toLowerCase()
+
+const calcCommission = async (web3, dContracts, dataContractStatus, reserveAmount, token, action, vendorAddress) => {
+  //const vendorAddress = `${process.env.VENDOR_ADDRESS}`.toLowerCase()
 
   const multicall = dContracts.contracts.multicall
   const mocinrate = dContracts.contracts.mocinrate
@@ -585,7 +585,7 @@ const calcCommission = async (web3, dContracts, dataContractStatus, reserveAmoun
 
   return commission
 }
-
+/*
 const omocInfoAddress = async (web3, dContracts, userAddress, vestingAddress) => {
   const multicall = dContracts.contracts.multicall
   const istakingmachine = dContracts.contracts.istakingmachine
@@ -704,5 +704,6 @@ export {
   connectorAddresses,
   registryAddresses,
   contractStatus,
-  userBalance
+  userBalance,
+  calcCommission
   };

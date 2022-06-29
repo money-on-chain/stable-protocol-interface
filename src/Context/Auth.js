@@ -41,7 +41,6 @@ const AuthenticateContext = createContext({
     userBalanceData: null,
     contractStatusData: null,
     web3: null,
-    contracts: null,
     connect: () => {},
     DoCMint: async (amount) => {},
     DoCReedem: async (amount) => {},
@@ -166,7 +165,7 @@ const AuthenticateProvider = ({ children }) => {
     };
 
     const initContractsConnection = async () => {
-      window.contractsInterfaces = await readContracts(web3, environment);
+      window.integration = await readContracts(web3, environment);
       await loadContractsStatusAndUserBalance();
     }
 
@@ -177,19 +176,45 @@ const AuthenticateProvider = ({ children }) => {
       // in one call throught Multicall
       const dataContractStatus = await contractStatus(
         web3,
-        window.contractsInterfaces,
+        window.integration,
         appMode
       );
 
       const accountBalance = await userBalance(
         web3,
-        window.contractsInterfaces,
+        window.integration,
         account,
         appMode
       );
 
       setContractStatusData(dataContractStatus);
       setUserBalanceData(accountBalance);
+
+      const contracts = {
+          bproToken: window.integration.contracts.riskprotoken,
+          docToken: window.integration.contracts.stabletoken,
+          mocState: window.integration.contracts.mocstate,
+          mocInrate: window.integration.contracts.mocinrate,
+          mocExchange: window.integration.contracts.mocexchange,
+          mocSettlement: window.integration.contracts.mocsettlement,
+          moc: window.integration.contracts.moc,
+          mocToken: window.integration.contracts.moctoken
+      };
+
+      window.appMode = 'MoC';
+
+      window.nodeManager = await nodeManagerDecorator( await createNodeManager({
+            appMode: window.appMode,
+            web3: web3,
+            contracts,
+            mocContractAddress: window.integration.contracts.moc.options.address,
+            registryAddress: window.integration.contracts.iregistry.options.address,
+            partialExecutionSteps: {
+                settlement: 20,
+                liquidation: 20
+            },
+            gasPrice: getGasPrice
+      }));
 
     }
 
@@ -344,15 +369,16 @@ const AuthenticateProvider = ({ children }) => {
         );
     };
     const BPROMint = async (amount, callback) => {
-        const web3 = new Web3(provider);
-        const amountWei = web3.utils.toWei(amount);
+        //const web3 = new Web3(provider);
+        const amountWei = Web3.utils.toWei(amount);
         const totalAmount = await getTotalAmount(
             amountWei,
             TransactionTypeIdsMoC.MINT_BPRO_FEES_RBTC
         );
 
         //const moc = getContract(MocAbi.abi, mocAddress);
-        const moc = window.contractsInterfaces.contracts.moc
+        console.log('Mintttt BPRO')
+        const moc = window.integration.contracts.moc
 
         const estimateGas = await moc.methods
             .mintBProVendors(amountWei, vendorAddress)
