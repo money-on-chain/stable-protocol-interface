@@ -1,9 +1,10 @@
-import {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip} from 'recharts';
 import {AuthenticateContext} from "../../../Context/Auth";
 import { adjustPrecision, formatLocalMap, formatLocalMap2 } from '../../../Lib/Formats';
 import {useTranslation} from "react-i18next";
-
+import {LargeNumber} from "../../LargeNumber";
+import web3 from 'web3';
 
 const BigNumber = require('bignumber.js');
 // const COLORS = ['#00a651', '#ef8a13','#68cdc6','#808080' ];
@@ -39,8 +40,10 @@ function WalletBalancePie(props) {
 
     const set_moc_balance_usd = () =>{
         if (auth.userBalanceData && accountData.Balance) {
-            const moc_balance= (Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4);
-            const moc_balance_usd= Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)
+            // const moc_balance= (Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4);
+            // const moc_balance_usd= Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)
+            const moc_balance= (Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000)/auth.contractStatusData.bitcoinPrice).toFixed(6);
+            const moc_balance_usd= Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000)
             return {'normal':moc_balance,'usd':moc_balance_usd}
         }
     };
@@ -68,6 +71,7 @@ function WalletBalancePie(props) {
     const set_btc_usd = () =>{
         if (auth.userBalanceData && accountData.Balance) {
             const btc_usd= new BigNumber(auth.web3.utils.fromWei(auth.contractStatusData['bitcoinPrice']) * auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(4)
+            // const btc_usd= new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4)
             const btc= auth.userBalanceData['bprox2Balance'];
             return {'normal':btc,'usd':btc_usd}
         }
@@ -95,12 +99,9 @@ function WalletBalancePie(props) {
              const rbtc_main= new BigNumber(accountData.Balance).toFixed(4)
              const doc= set_doc_usd()['normal']
              const bpro= set_bpro_usd()['normal']
-             const btc= set_btc_usd()['normal']
+             const btc= set_btc_usd()['usd']
              const moc_balance= set_moc_balance_usd()['normal']
-             return (Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) + Number(moc_balance)).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                minimumFractionDigits: 6,
-                maximumFractionDigits: 6
-              });
+             return new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) + Number(moc_balance))).toFixed(6)
         }else{
             return (0).toFixed(6)
         }
@@ -118,15 +119,15 @@ function WalletBalancePie(props) {
                     class: 'STABLE'
                 },
                 {
-                    name: 'Group B', 
-                    alue: Number(((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
-                    set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6) +' RBTC',
-                    set2: auth.userBalanceData.bproBalance +' BPRO', class: 'RISKPRO'
+                    name: 'Group B',
+                    value: Number(((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
+                    set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4) +' RBTC',
+                    set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed(6) +' BPRO', class: 'RISKPRO'
                 },
                 {
                     name: 'Group C',
                     value: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)),
-                    set1: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4)+' RBTC',
+                    set1: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' RBTC',
                     set2: (set_moc_balance_usd()['usd']).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
@@ -179,7 +180,7 @@ function WalletBalancePie(props) {
                     <Tooltip content={<CustomTooltip />} />
                 </PieChart>
             </ResponsiveContainer>
-            <span className={'money-RBTC'}>{getBalance()} RBTC</span>
+            <span className={'money-RBTC'}> <LargeNumber {...{ amount: web3.utils.toWei(getBalance(), 'ether'), currencyCode: 'RESERVE', includeCurrency: true}} /></span>
             <span className={'money-USD'}>{getBalanceUSD()} USD</span>
         </div>
 

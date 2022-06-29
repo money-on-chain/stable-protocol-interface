@@ -75,6 +75,26 @@ function MocLiquidity(props) {
             .catch(() => setOperationStatus("error"))
     }
 
+    const [callClaims, setCallClaims] = useState(false);
+    const [claimsValue, setClaimsValue] = useState(null);
+    const [claimsValueData, setClaimsValueData] = useState([]);
+
+    const claimsCall= () => {
+        api('get', `${config.api_moneyonchain}balance/${accountData.Owner}`, {})
+            .then(response => {
+                setClaimsValue(response);
+            })
+            .catch((response) => {
+                console.log(response);
+            });
+    };
+
+    useEffect(() => {
+        if(accountData.Owner!==undefined){
+            claimsCall()
+        }
+    },[accountData.Owner]);
+
     return (
         <div className="Card RewardsBalanceLiquidity withPadding hasTitle">
             <div className="title">
@@ -86,7 +106,7 @@ function MocLiquidity(props) {
             <div className="Metric"><h2>{t("global.RewardsBalance_Amount", { ns: 'global' })}</h2>
                 <div className="IncentivesItem">
                     <h3>
-                        {auth.isLoggedIn && <LargeNumber amount={data_json_claim[0].mocs} currencyCode="REWARD" />}
+                        {auth.isLoggedIn && <LargeNumber amount={(claimsValue!=null)?claimsValue.moc_balance:0} currencyCode="REWARD" />}
                         {!auth.isLoggedIn && <span>0.000000 </span>}
                     </h3>
                     <p>MOC</p>

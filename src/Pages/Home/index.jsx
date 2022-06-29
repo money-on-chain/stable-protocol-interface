@@ -80,7 +80,7 @@ function Home(props) {
                             tokenName="stable"
                             color="#00a651"
                             page="/wallet/stable"
-                            balance={web3.utils.toWei(docBalance, 'ether')}
+                            balance={docBalance}
                             labelCoin={'RBTC'}
                             currencyCode={'STABLE'}
                         />
@@ -88,7 +88,7 @@ function Home(props) {
                             tokenName="riskpro"
                             color="#ef8a13"
                             page="/wallet/pro"
-                            balance={web3.utils.toWei(bproBalance, 'ether')}
+                            balance={bproBalance}
                             labelCoin={'RBTC'}
                             currencyCode={'RISKPRO'}
                         />
@@ -96,7 +96,7 @@ function Home(props) {
                             tokenName="riskprox"
                             color="#ed1c24"
                             page="/wallet/leveraged"
-                            balance={web3.utils.toWei(bprox2Balance, 'ether')}
+                            balance={bprox2Balance}
                             labelCoin={'RBTC'}
                             currencyCode={'RISKPROX'}
                         />
