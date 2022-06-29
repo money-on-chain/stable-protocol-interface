@@ -9,6 +9,7 @@ import { AuthenticateContext } from '../../Context/Auth';
 import { useTranslation } from "react-i18next";
 import './style.scss'
 import '../Home/style.scss'
+import Claims from "../../Components/Tables/Claims";
 
 export default function Rewards(props) {
     const auth = useContext(AuthenticateContext);
@@ -49,7 +50,7 @@ export default function Rewards(props) {
                 </Col>
             </Row>
             <div className="Card WalletOperations">
-                <ListOperations token={'MOC'}></ListOperations>
+                <Claims />
             </div>
         </Fragment>
     )
