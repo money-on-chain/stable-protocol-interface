@@ -118,4 +118,78 @@
       }
     }
   }
+  .PriceVariationSetting {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    .icon {
+        font-size: 16px;
+        color: #888888;
+    }
+
+    span.SliderText {
+        color: #707070;
+        font-size: 11px;
+        font-weight: normal;
+        padding-left: 10px;
+    }
+  }
+
+  .PriceVariationContainer {
+    border: solid 1px #707070;
+    padding: 4px 10px 4px 10px;
+    margin: 30px 0 10px;
+
+    .SliderControl {
+        color: #09c199;
+        background: #d8d8d8;
+        height: 10px;
+        border-radius: 5px;
+    }
+
+    .ant-slider-rail {
+        background: none;
+    }
+
+    .ant-slider-track {
+        background: #888888;
+        height: 10px;
+        margin-top: -4px;
+        border-radius: 5px;
+    }
+
+    .ant-slider-dot {
+        display: none;
+    }
+
+    .ant-slider-handle {
+        background: #09c199;
+        outline: none;
+        border: none;
+        width: 16px;
+        height: 16px;
+        margin-top: -7px;
+    }
+
+    h4 {
+        font-weight: normal;
+        color: #707070;
+    }
+  }
+
+  .CollapseTolerance {
+    margin-bottom: 30px;
+    background: none;
+    border: none;
+
+    .ant-collapse-header, .ant-collapse-item, .ant-collapse-content, .ant-collapse-content-box {
+        border: none;
+        padding: 0 !important;
+    }
+
+    .ant-collapse-content {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+  }
 }

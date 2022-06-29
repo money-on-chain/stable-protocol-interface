@@ -19,7 +19,7 @@ export default function MintModal(props) {
             <div style={{marginTop: 10, display: 'flex', width: '100%', paddingLeft: 20, paddingRight: 20}}>
                 <div className="YourAddress" style={{flexGrow: 1}}>
                     <h3>Your Address</h3>
-                    <Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Wallet}/>
+                    <Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Owner}/>
                 </div>
                 <div className="StatusLogin" style={{flexGrow: 0}}>
                     <h3>Status</h3>
