@@ -1,4 +1,4 @@
-import { Row, Col, Tooltip, Alert } from 'antd';
+import {Row, Col, Tooltip, Alert, Skeleton} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import _ from 'lodash/core';
 import React, { Fragment, useEffect, useState } from 'react';
@@ -19,6 +19,12 @@ export default function AmountCard(props) {
     const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;
+    const [loading, setLoading] = useState(true);
+    const timeSke= 2500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth.userBalanceData]);
     if (!auth) return null;
     const {
         tokenName = '',
@@ -70,6 +76,7 @@ export default function AmountCard(props) {
     return (
         <Fragment>
             <div className="Card CardAmount">
+                {!loading ? <>
                 <Row>
                     <Col span={22}>
                         <h3 className="CardTitle">{t("global.TokenSummary_Amount", { ns: 'global', tokenName: pre_label })}</h3>
@@ -104,7 +111,9 @@ export default function AmountCard(props) {
                         </div>
                     </div>
 
-                </Row>
+                </Row></>:
+                    <Skeleton active={true}  paragraph={{ rows: 4 }}></Skeleton>
+                }
             </div>
         </Fragment>
     )

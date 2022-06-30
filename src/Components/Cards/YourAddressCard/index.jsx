@@ -1,5 +1,5 @@
-import { Row, Col, Button } from 'antd';
-import React, {Fragment, useState} from 'react';
+import {Row, Col, Button, Skeleton} from 'antd';
+import React, {Fragment, useEffect, useState} from 'react';
 import { useContext } from 'react'
 import {AuthenticateContext} from "../../../Context/Auth";
 import SendModal from '../../Modals/SendModal';
@@ -20,8 +20,16 @@ export default function YourAddressCard(props) {
 
     const classname = `SendToken ${className}`;
 
+    const [loading, setLoading] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
+
     return (
         <div className="Card SendTokenContainer" style={{ height: height, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
+            {!loading ? <>
             <h3 className="CardTitle">{t('MoC.wallets.ownAddressLabel', {ns: 'moc'})} </h3>
             <div className={classname}>
                 <AddressContainer {...{ address }} accountData={accountData} />
@@ -36,7 +44,9 @@ export default function YourAddressCard(props) {
                         view={view}
                     /></Fragment>}
                 </Col>
-            </Row>
+            </Row></>:
+                <Skeleton active={true}  paragraph={{ rows: 4 }}></Skeleton>
+            }
         </div>
     )
 }
