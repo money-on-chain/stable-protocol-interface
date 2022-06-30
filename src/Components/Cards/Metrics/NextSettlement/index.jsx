@@ -3,6 +3,7 @@ import { AuthenticateContext } from '../../../../Context/Auth';
 import moment from "moment";
 import { getDatasMetrics } from '../../../../Helpers/helper';
 import { useTranslation } from "react-i18next";
+import { Skeleton } from 'antd';
 
 function NextSettlement() {
     const auth = useContext(AuthenticateContext);
@@ -37,6 +38,12 @@ function NextSettlement() {
     const [blocksToSettlement, setBlocksToSettlement] = useState(getDatas['blocksToSettlement']);
     const [blockHeight, setBlockHeight] = useState(getDatas['blockHeight']);
     const [settlementBlock, setSettlementBlock] = useState(Number(getDatas['blockHeight']) + Number(getDatas['blocksToSettlement']));
+    const [loading, setLoading] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
 
     useEffect(() => {
         setTimeout(function () {
@@ -71,23 +78,25 @@ function NextSettlement() {
             {/*<h2>{position}</h2>*/}
 
             <div className="CardMetricContent">
-                <div>
-                    <h3>{t('MoC.metrics.Settlement.date', { ns: 'moc' })}</h3>
-                    {daysHours?.date} <br /> {daysHours?.date_time}
-                    <h3>{t('MoC.metrics.Settlement.remainingDaysTitle', { ns: 'moc' })}</h3>
-                    {daysHours?.time}
-                    <h3>{t('MoC.metrics.Settlement.lastUpdateHeight', { ns: 'moc' })}</h3>
-                    {blockHeight}
-                </div>
-                <div className="separator" />
-                <div>
-                    {/*<h3>Blocks to <br /> settlement</h3>*/}
-                    <h3>{t('MoC.metrics.Settlement.blocksToSettlement', { ns: 'moc' })}</h3>
-                    {blocksToSettlement}
-                    {/*<h3>Settlement will <br /> happen on block</h3>*/}
-                    <h3>{t('MoC.metrics.Settlement.blockSettlement', { ns: 'moc' })}</h3>
-                    {settlementBlock}
-                </div>
+               {!loading 
+                ? <>
+                    <div>
+                        <h3>{t('MoC.metrics.Settlement.date', { ns: 'moc' })}</h3>
+                        {daysHours?.date} <br /> {daysHours?.date_time}
+                        <h3>{t('MoC.metrics.Settlement.remainingDaysTitle', { ns: 'moc' })}</h3>
+                        {daysHours?.time}
+                        <h3>{t('MoC.metrics.Settlement.lastUpdateHeight', { ns: 'moc' })}</h3>
+                        {blockHeight}
+                    </div>
+                    <div className="separator" /><div>
+                        {/*<h3>Blocks to <br /> settlement</h3>*/}
+                        <h3>{t('MoC.metrics.Settlement.blocksToSettlement', { ns: 'moc' })}</h3>
+                        {blocksToSettlement}
+                        {/*<h3>Settlement will <br /> happen on block</h3>*/}
+                        <h3>{t('MoC.metrics.Settlement.blockSettlement', { ns: 'moc' })}</h3>
+                        {settlementBlock}
+                    </div></>
+            : <Skeleton active={true} />}
             </div>
         </div>
     );

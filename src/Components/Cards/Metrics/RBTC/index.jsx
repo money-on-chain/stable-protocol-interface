@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Col, Row } from 'antd';
+import React, { useContext, useState, useEffect } from 'react';
+import { Col, Row, Skeleton } from 'antd';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { AuthenticateContext } from '../../../../Context/Auth';
 import { getDatasMetrics } from '../../../../Helpers/helper';
@@ -12,6 +12,12 @@ function RBTC() {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
     const [t, i18n] = useTranslation(["global", 'moc']);
+    const [loading, setLoading] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
 
     const setRbtc = () => {
         if (auth.userBalanceData && accountData.Balance) {
@@ -48,44 +54,45 @@ function RBTC() {
             </h3>
 
             <div className="CardMetricContent">
-                <div>
-                    <h3 style={{ textAlign: 'center' }}>{t('MoC.metrics.infoRBTC.title', { ns: 'moc' })}</h3>
-                    <div style={{ height: 180, width: 180, margin: '0 auto' }}>
-                        <ResponsiveContainer style={{ marginLeft: '0 !important' }}>
-                            <PieChart>
-                                <Pie
-                                    data={getPie()}
-                                    innerRadius={40}
-                                    outerRadius={90}
-                                    fill="#8884d8"
-                                    paddingAngle={1}
-                                    dataKey="value"
-                                >
-                                    {getPie() !== undefined &&
+                {!loading
+                    ? <>
+                        <div>
+                            <h3 style={{ textAlign: 'center' }}>{t('MoC.metrics.infoRBTC.title', { ns: 'moc' })}</h3>
+                            <div style={{ height: 180, width: 180, margin: '0 auto' }}>
+                                <ResponsiveContainer style={{ marginLeft: '0 !important' }}>
+                                    <PieChart>
+                                        <Pie
+                                            data={getPie()}
+                                            innerRadius={40}
+                                            outerRadius={90}
+                                            fill="#8884d8"
+                                            paddingAngle={1}
+                                            dataKey="value"
+                                        >
+                                            {getPie() !== undefined &&
 
-                                        getPie().map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                        ))
-
-                                    }
-                                </Pie>
-                            </PieChart>
-                        </ResponsiveContainer>
-                    </div>
-                    <div style={{ textAlign: 'center' }}>{getRiskprox['totalBTCAmount']} RBTC</div>
-                    <h3 style={{ textAlign: 'center' }}>{getRiskprox['totalBTCAmountUsd']} USD</h3>
-                </div>
-                <div className="separator" style={{ height: 220 }} />
-                <div style={{ marginLeft: 30 }}>
-                    <h3>{t('MoC.metrics.infoRBTC.priceRBTC', { ns: 'moc' })}</h3>
-                    <LargeNumber {...{ amount: getRiskprox['rbtc_usd'], currencyCode: 'RESERVE', includeCurrency: true }} />
-                    <h3>{t('MoC.metrics.infoRBTC.interest', { ns: 'moc' })}</h3>
-                    {getRiskprox['interest']} RBTC
-                    <h3>{t('MoC.metrics.infoRBTC.EMA', { ns: 'moc' })}</h3>
-                    {getRiskprox['bitcoinMovingAverage']} USD
-                    <h3>{t('MoC.metrics.infoRBTC.targetCoverage', { ns: 'moc' })}</h3>
-                    {getRiskprox['b0TargetCoverage']}
-                </div>
+                                                getPie().map((_entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                                ))}
+                                        </Pie>
+                                    </PieChart>
+                                </ResponsiveContainer>
+                            </div>
+                            <div style={{ textAlign: 'center' }}>{getRiskprox['totalBTCAmount']} RBTC</div>
+                                <h3 style={{ textAlign: 'center' }}>{getRiskprox['totalBTCAmountUsd']} USD</h3>
+                        </div>
+                        <div className="separator" style={{ height: 220 }} />
+                        <div style={{ marginLeft: 30 }}>
+                        <h3>{t('MoC.metrics.infoRBTC.priceRBTC', { ns: 'moc' })}</h3>
+                        <LargeNumber {...{ amount: getRiskprox['rbtc_usd'], currencyCode: 'RESERVE', includeCurrency: true }} />
+                        <h3>{t('MoC.metrics.infoRBTC.interest', { ns: 'moc' })}</h3>
+                        {getRiskprox['interest']} RBTC
+                        <h3>{t('MoC.metrics.infoRBTC.EMA', { ns: 'moc' })}</h3>
+                        {getRiskprox['bitcoinMovingAverage']} USD
+                        <h3>{t('MoC.metrics.infoRBTC.targetCoverage', { ns: 'moc' })}</h3>
+                        {getRiskprox['b0TargetCoverage']}
+                        </div></>
+                    : <Skeleton active={true} />}
             </div>
         </div>
     );
