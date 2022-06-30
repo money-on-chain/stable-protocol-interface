@@ -1,7 +1,7 @@
 import MintCard from '../../../Components/Cards/MintCard';
 import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
-import {Row, Col, Tooltip, Alert} from 'antd';
+import {Row, Col, Tooltip, Alert, Card, Skeleton} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, Fragment, useContext } from 'react';
 import TokenSummaryCard from '../../../Components/Cards/TokenSummaryCard';
@@ -66,6 +66,12 @@ export default function Mint(props) {
     });
 
     const [t, i18n] = useTranslation(["global", 'moc'])
+    const [loading, setLoading] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
 
     return (
         <Fragment>
@@ -85,21 +91,29 @@ export default function Mint(props) {
                             <div className="Card MintCard CardSettlement"  style={{minHeight:'144px'}}>
                                 <h3 className="CardTitle">{t('global.riskproxWallet_NextSettlement', { ns: 'global' })}</h3>
                                 {auth.isLoggedIn &&
-                                <Row>
-                                    <h2>In {daysHours?.time}</h2>
-                                    <div className="CaptionDateSettlement">{daysHours?.date}</div>
-                                    <div>
-                                        <span className="SettlementTitle">{t('MoC.settlement.remainingBlocks', { ns: 'moc' })}: </span>
-                                        {auth.contractStatusData?.blocksToSettlement}
-                                        <Tooltip placement="top" title={auth.contractStatusData?.blockHeight}>
-                                            <InfoCircleOutlined className="Icon" />
-                                        </Tooltip>
-                                    </div>
-                                </Row>}
+                                    <>{!loading ?
+                                        <Row>
+                                            <h2>In {daysHours?.time}</h2>
+                                            <div className="CaptionDateSettlement">{daysHours?.date}</div>
+                                            <div>
+                                                <span className="SettlementTitle">{t('MoC.settlement.remainingBlocks', { ns: 'moc' })}: </span>
+                                                {auth.contractStatusData?.blocksToSettlement}
+                                                <Tooltip placement="top" title={auth.contractStatusData?.blockHeight}>
+                                                    <InfoCircleOutlined className="Icon" />
+                                                </Tooltip>
+                                            </div>
+                                        </Row>:
+                                        <Row>
+                                            <Skeleton active={true} paragraph={{ rows: 0 }}></Skeleton>
+                                        </Row>
+                                    }</>
+                                }
                             </div>
                         </Col>
                         <Col span={24} style={{ marginTop: '1em' }}>
+
                             <div className="Card MintCard Bprox2Metrix">
+                                {!loading ? <>
                                 <h3 className="CardTitle">{t('MoC.general.x2Leverage', { ns: 'moc' })}</h3>
                                 <div>
                                     <span>2.0000</span>
@@ -107,7 +121,8 @@ export default function Mint(props) {
                                 <h3 className="CardTitle">{t('global.riskproxWallet_CurrentRate', { ns: 'global' })}</h3>
                                 <div>
                                     <span>0.027379</span>
-                                </div>
+                                </div></>: <Skeleton active={true} paragraph={{ rows: 2 }}></Skeleton>
+                            }
                             </div>
                         </Col>
                     </Row>
