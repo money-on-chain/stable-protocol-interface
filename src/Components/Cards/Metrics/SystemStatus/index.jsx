@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 // import {CheckOutlined, CheckCircleFilled} from '@ant-design/icons';
 import { CheckCircleFilled, CheckOutlined, CloseOutlined, CloseCircleFilled } from "@ant-design/icons";
 import { AuthenticateContext } from "../../../../Context/Auth";
@@ -6,6 +6,7 @@ import { getDatasMetrics } from '../../../../Helpers/helper'
 import { formatValueToContract } from '../../../../Lib/Formats';
 import SystemOperations from "./operations";
 import { useTranslation } from "react-i18next";
+import { Skeleton } from 'antd';
 
 const BigNumber = require('bignumber.js');
 const iconCheckColor = '#09c199';
@@ -17,6 +18,13 @@ function SystemStatus() {
 
     const getDatas = getDatasMetrics(auth)
     const [t, i18n] = useTranslation(["global", 'moc'])
+
+    const [loading, setLoading] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
 
 
     // coverage === getDatas['globalCoverageClean']
@@ -143,17 +151,20 @@ function SystemStatus() {
         <div className="Card CardSystemStatus">
             <h3 className="CardTitle">System Status</h3>
             <div className="CardMetricContent" style={{ marginTop: 0, justifyItems: 'center' }}>
-                <div>
-                    <div className="CardMetricContent" style={{ alignItems: 'center', justifyItems: 'center', marginTop: 0 }}>
-                        <CheckCircleFilled style={{ marginLeft: 5, fontSize: 30 }} className={className}/>
-                        <div className={className}  style={{fontWeight: 500, marginLeft: 10 }} dangerouslySetInnerHTML={{ __html: customTitle(t("MoC.metrics.".concat(className.concat('.title')),{ns: 'moc'})) }}></div>
-                    </div>
-                    <h5 style={{ marginLeft: 35 }}> {t("MoC.metrics.".concat(className.concat('.subtitle')),{ns: 'moc'}) } </h5>
-                </div>
-                <div>
-                    <h3>{t('global.Metrics_globalCoverage', { ns: 'global' })}</h3>
-                    <span style={{ color: className }}>{getDatas['globalCoverage']} </span>
-                </div>
+                {!loading
+                    ? <><div>
+                            <div className="CardMetricContent" style={{ alignItems: 'center', justifyItems: 'center', marginTop: 0 }}>
+                                <CheckCircleFilled style={{ marginLeft: 5, fontSize: 30 }} className={className} />
+                                <div className={className} style={{ fontWeight: 500, marginLeft: 10 }} dangerouslySetInnerHTML={{ __html: customTitle(t("MoC.metrics.".concat(className.concat('.title')), { ns: 'moc' })) }}></div>
+                            </div>
+                            <h5 style={{ marginLeft: 35 }}> {t("MoC.metrics.".concat(className.concat('.subtitle')), { ns: 'moc' })} </h5>
+                        </div>
+                        <div>
+                            <h3>{t('global.Metrics_globalCoverage', { ns: 'global' })}</h3>
+                            <span style={{ color: className }}>{getDatas['globalCoverage']} </span>
+                        </div>
+                    </> : <Skeleton active={true} />
+                }
             </div>
             <h3 className="CardTitle" style={{ marginTop: 50 }}>{t('MoC.metrics.systemOperations.title', { ns: 'moc' })}</h3>
             {/*<div className="CardMetricContent" style={{marginTop: 10}}>*/}
@@ -170,7 +181,10 @@ function SystemStatus() {
             {/*    </div>*/}
             {/*</div>*/}
             <div className="CardMetricContent" style={{ marginTop: 10 }}>
-                <SystemOperations statusClassName={className} operationsAvailable={operationsAvailable} />
+                {!loading
+                   ? <SystemOperations statusClassName={className} operationsAvailable={operationsAvailable} />
+                   : <Skeleton active={true} />
+                }
             </div>
         </div>
     )
