@@ -24,7 +24,7 @@ function Home(props) {
     const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
     const data_row_coins2= [];
 
-    const b=getDatasMetrics(auth)
+
 
 
 

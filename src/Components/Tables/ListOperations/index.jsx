@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import 'antd/dist/antd.css';
 import './style.scss';
-import { Table, Progress, Result, Tooltip } from 'antd';
+import {Table, Progress, Result, Tooltip, Skeleton} from 'antd';
 import RowDetail from "../RowDetail";
 import classnames from 'classnames';
 import api from '../../../services/api';
@@ -44,6 +44,13 @@ export default function ListOperations(props) {
     const [totalTable, setTotalTable]=  useState(0);
     const [currentHash, setCurrentHash] = useState(true);
     const [timer, setTimer] = useState(100);
+
+    const [loadingSke, setLoadingSke] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
 
     const transactionsList= (skip,call_table) => {
         const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
@@ -266,6 +273,10 @@ export default function ListOperations(props) {
         xScroll,
     }
 
+    useEffect(() => {
+        setTimeout(() => setLoadingSke(false), timeSke)
+    },[auth]);
+
     return (
         <>
             <div className="title">
@@ -274,6 +285,7 @@ export default function ListOperations(props) {
                     <InfoCircleOutlined className="Icon" />
                 </Tooltip>
             </div>
+            {!loadingSke ? <>
             <Table
                 {...state}
                 expandable={{
@@ -291,7 +303,9 @@ export default function ListOperations(props) {
                 columns={tableColumns}
                 dataSource={hasData ? (auth.isLoggedIn == true) ? data : null : null}
                 scroll={scroll}
-            />
+            /></>:
+                <Skeleton active={true}  paragraph={{ rows: 4 }}></Skeleton>
+            }
         </>
     );
 }

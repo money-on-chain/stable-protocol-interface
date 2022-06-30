@@ -3,11 +3,11 @@ import React, {Fragment, useEffect} from 'react';
 import { useContext,useState } from 'react'
 import { AuthenticateContext } from "../../../Context/Auth";
 import CountUp from 'react-countup';
-import {Alert, Button, Tooltip} from 'antd';
+import {Alert, Button, Skeleton, Tooltip} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import data_json from '../../../services/liquidity_mining.json';
 import data_json_claim from '../../../services/claims.json';
-import { setNumber } from '../../../Helpers/helper'
+import {getRewardedToday, setNumber} from '../../../Helpers/helper'
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
@@ -75,14 +75,14 @@ function MocLiquidity(props) {
             .catch(() => setOperationStatus("error"))
     }
 
-    const [callClaims, setCallClaims] = useState(false);
     const [claimsValue, setClaimsValue] = useState(null);
-    const [claimsValueData, setClaimsValueData] = useState([]);
+    const [rewardedToday, setRewardedToday] = useState(0);
 
     const claimsCall= () => {
         api('get', `${config.api_moneyonchain}balance/${accountData.Owner}`, {})
             .then(response => {
                 setClaimsValue(response);
+                setRewardedToday(getRewardedToday(response.daily_moc,auth.userBalanceData['bproBalance'],response.total_bpro))
             })
             .catch((response) => {
                 console.log(response);
@@ -93,10 +93,18 @@ function MocLiquidity(props) {
         if(accountData.Owner!==undefined){
             claimsCall()
         }
-    },[accountData.Owner]);
+    },[auth, accountData.Owner]);
+
+    const [loading, setLoading] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
 
     return (
         <div className="Card RewardsBalanceLiquidity withPadding hasTitle">
+            {!loading ? <>
             <div className="title">
                 <h1>{t("global.RewardsBalance_MocLiquidityMining", { ns: 'global' })}</h1>
                 <Tooltip placement="topRight" title={t("global.RewardsBalance_MoreInfo", { ns: 'global' })} className='Tooltip'>
@@ -115,19 +123,20 @@ function MocLiquidity(props) {
             <div className="Metric"><h2>{t("global.RewardsBalance_EarnedToday", { ns: 'global' })}</h2>
                 <div className="IncentivesItem">
                     <h3>
+                        { rewardedToday!=0 &&
                         <CountUp
-                            end={Number(Web3.utils.fromWei(data_json.moc_balance, 'kether')).toFixed(6)}
-                            start={(Number(Web3.utils.fromWei(data_json.moc_balance, 'kether')).toFixed(6))-1}
+                            end={rewardedToday}
+                            start={rewardedToday-1}
                             useEasing={false}
                             decimals={6}
                             separator={i18n.languages[0] === 'es' ? '.' : ','}
                             decimal={i18n.languages[0] === 'es' ? ',' : '.'}
                             onEnd={({ pauseResume, reset, start, update }) => start()}
                             duration={20000}
-                        />
+                        />}
                         {!auth.isLoggedIn && <span>0.000000</span>}
                         </h3>
-                    <p>MOC</p>
+                    { rewardedToday!=0 && <p>MOC</p>}
                 </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -152,7 +161,9 @@ function MocLiquidity(props) {
                     operationStatus={operationStatus}
                     txHash={txHash}
                 />
-            </div>
+            </div></>:
+                <Skeleton active={true}  paragraph={{ rows: 2 }}></Skeleton>
+            }
         </div>
     )
 }

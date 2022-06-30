@@ -1,6 +1,6 @@
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Row, Col, Tooltip } from 'antd';
-import React, { useState } from 'react';
+import {Row, Col, Tooltip, Skeleton} from 'antd';
+import React, {useEffect, useState} from 'react';
 import { useContext } from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -68,8 +68,16 @@ export default function TokenSummaryCard(props) {
     const { convertToken } = auth;
     const convertTo = convertToCurrency => convertToken(tokenName, convertToCurrency, 900114098986076075281);
 
+    const [loading, setLoading] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
+
     return (
         <Row className="Card TokenSummaryCard" style={{'height':'135px'}}>
+            {!loading ? <>
             <InformationModal currencyCode={currencyCode} />
             <Col
                 span={7}
@@ -149,7 +157,9 @@ export default function TokenSummaryCard(props) {
                     icon={<ArrowRightOutlined
                     />}
                 />
-            </Col>
+            </Col></>:
+                <Skeleton active={true}  paragraph={{ rows: 2 }}></Skeleton>
+            }
         </Row>
     );
 }
