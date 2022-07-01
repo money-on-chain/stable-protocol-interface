@@ -29,18 +29,20 @@ const readContracts = async (web3, environment) => {
     MoCVendors
   } = baseAbis(appMode);
 
-  dContracts.json.Multicall2 = Multicall2
-  dContracts.json.MoCConnector = MoCConnector
-  dContracts.json.MoC = MoC
-  dContracts.json.MoCState = MoCState
-  dContracts.json.MoCExchange = MoCExchange
-  dContracts.json.MoCInrate = MoCInrate
-  dContracts.json.MoCSettlement = MoCSettlement
-  dContracts.json.StableToken = StableToken
-  dContracts.json.RiskProToken = RiskProToken
-  dContracts.json.MoCToken = MoCToken
-  dContracts.json.ReserveToken = ReserveToken
-  dContracts.json.MoCVendors = MoCVendors
+  const abiContracts = {}
+
+  abiContracts.Multicall2 = Multicall2
+  abiContracts.MoCConnector = MoCConnector
+  abiContracts.MoC = MoC
+  abiContracts.MoCState = MoCState
+  abiContracts.MoCExchange = MoCExchange
+  abiContracts.MoCInrate = MoCInrate
+  abiContracts.MoCSettlement = MoCSettlement
+  abiContracts.StableToken = StableToken
+  abiContracts.RiskProToken = RiskProToken
+  abiContracts.MoCToken = MoCToken
+  abiContracts.ReserveToken = ReserveToken
+  abiContracts.MoCVendors = MoCVendors
 
   console.log('Reading Multicall2 Contract... address: ', environment.Multicall2)
   const multicall = new web3.eth.Contract(Multicall2.abi, environment.Multicall2)
@@ -120,13 +122,13 @@ const readContracts = async (web3, environment) => {
 
 
   // Omoc Contracts
-  dContracts.json.IRegistry = IRegistry
-  dContracts.json.IStakingMachine = IStakingMachine
-  dContracts.json.IDelayMachine = IDelayMachine
-  dContracts.json.ISupporters = ISupporters
-  dContracts.json.IVestingMachine = IVestingMachine
-  dContracts.json.IVotingMachine = IVotingMachine
-  dContracts.json.IVestingFactory = IVestingFactory
+  abiContracts.IRegistry = IRegistry
+  abiContracts.IStakingMachine = IStakingMachine
+  abiContracts.IDelayMachine = IDelayMachine
+  abiContracts.ISupporters = ISupporters
+  abiContracts.IVestingMachine = IVestingMachine
+  abiContracts.IVotingMachine = IVotingMachine
+  abiContracts.IVestingFactory = IVestingFactory
 
   const iregistry = new web3.eth.Contract(IRegistry.abi, environment.IRegistry)
   dContracts.contracts.iregistry = iregistry
@@ -172,7 +174,7 @@ const readContracts = async (web3, environment) => {
   dContracts.contracts.ivotingmachine = ivotingmachine
 
   // Add to abi decoder
-  addABI(dContracts, appMode)
+  addABI(abiContracts, appMode)
 
   return dContracts
 }

@@ -1,35 +1,30 @@
-/*
-const abiDecoder = require('abi-decoder')
-const Web3 = require('web3')
-*/
-
 import abiDecoder from 'abi-decoder';
 import Web3 from 'web3';
 import { toContractPrecision, getAppMode } from './utils';
 
-const addABI = (dContracts, appMode) => {
+const addABI = (abiContracts, appMode) => {
 
   // Abi decoder
-  abiDecoder.addABI(dContracts.json.MoC.abi)
-  abiDecoder.addABI(dContracts.json.MoCState.abi)
-  abiDecoder.addABI(dContracts.json.MoCExchange.abi)
-  abiDecoder.addABI(dContracts.json.MoCInrate.abi)
-  abiDecoder.addABI(dContracts.json.MoCSettlement.abi)
-  abiDecoder.addABI(dContracts.json.StableToken.abi)
-  abiDecoder.addABI(dContracts.json.RiskProToken.abi)
-  abiDecoder.addABI(dContracts.json.MoCToken.abi)
-  abiDecoder.addABI(dContracts.json.MoCVendors.abi)
+  abiDecoder.addABI(abiContracts.MoC.abi)
+  abiDecoder.addABI(abiContracts.MoCState.abi)
+  abiDecoder.addABI(abiContracts.MoCExchange.abi)
+  abiDecoder.addABI(abiContracts.MoCInrate.abi)
+  abiDecoder.addABI(abiContracts.MoCSettlement.abi)
+  abiDecoder.addABI(abiContracts.StableToken.abi)
+  abiDecoder.addABI(abiContracts.RiskProToken.abi)
+  abiDecoder.addABI(abiContracts.MoCToken.abi)
+  abiDecoder.addABI(abiContracts.MoCVendors.abi)
   if (appMode === 'RRC20') {
-    abiDecoder.addABI(dContracts.json.ReserveToken.abi)
+    abiDecoder.addABI(abiContracts.ReserveToken.abi)
   }
-  /*
-  abiDecoder.addABI(dContracts.json.IRegistry.abi)
-  abiDecoder.addABI(dContracts.json.IStakingMachine.abi)
-  abiDecoder.addABI(dContracts.json.IDelayMachine.abi)
-  abiDecoder.addABI(dContracts.json.ISupporters.abi)
-  abiDecoder.addABI(dContracts.json.IVestingMachine.abi)
-  abiDecoder.addABI(dContracts.json.IVotingMachine.abi)
-  */
+
+  abiDecoder.addABI(abiContracts.IRegistry.abi)
+  abiDecoder.addABI(abiContracts.IStakingMachine.abi)
+  abiDecoder.addABI(abiContracts.IDelayMachine.abi)
+  abiDecoder.addABI(abiContracts.ISupporters.abi)
+  abiDecoder.addABI(abiContracts.IVestingMachine.abi)
+  abiDecoder.addABI(abiContracts.IVotingMachine.abi)
+
 }
 
 const renderEventField = (eveName, eveValue) => {
