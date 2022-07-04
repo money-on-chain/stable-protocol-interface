@@ -26,6 +26,7 @@ import {config, environment} from '../Config/config';
 
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
+import { mintRiskPro } from '../Lib/integration/interfaces-coinbase';
 
 import createNodeManager from '../Lib/nodeManagerFactory';
 import nodeManagerDecorator from '../Lib/nodeManagerDecorator';
@@ -42,6 +43,7 @@ const AuthenticateContext = createContext({
     contractStatusData: null,
     web3: null,
     connect: () => {},
+    interfaceMintRiskPro: async (amount, slippage, callback) => {},
     DoCMint: async (amount) => {},
     DoCReedem: async (amount) => {},
     BPROMint: async (amount) => {},
@@ -163,6 +165,25 @@ const AuthenticateProvider = ({ children }) => {
         setIsLoggedIn(false);
         await window.rLoginDisconnect();
     };
+
+    const buildInterfaceContext = () => {
+      return {
+        web3,
+        contractStatusData,
+        userBalanceData,
+        config,
+        environment,
+        account,
+        vendorAddress
+      }
+
+    }
+
+    const interfaceMintRiskPro = async (amount, slippage, callback) => {
+      const interfaceContext = buildInterfaceContext();
+      await mintRiskPro(interfaceContext, amount, slippage, callback)
+
+    }
 
     const initContractsConnection = async () => {
       window.integration = await readContracts(web3, environment);
@@ -793,6 +814,7 @@ const AuthenticateProvider = ({ children }) => {
                 web3,
                 connect,
                 disconnect,
+                interfaceMintRiskPro,
                 DoCMint,
                 DoCReedem,
                 BPROMint,

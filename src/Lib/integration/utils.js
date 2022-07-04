@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-//const BigNumber = require('bignumber.js')
 
-import BigNumber from 'bignumber.js'
+import BigNumber from 'bignumber.js';
+import Web3 from 'web3';
 
 BigNumber.config({
   ROUNDING_MODE: BigNumber.ROUND_DOWN,

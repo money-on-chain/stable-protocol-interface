@@ -159,7 +159,8 @@ export default function MintModal(props) {
       'RESERVE'
     );
 
-    exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
+    //exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
+    auth.interfaceMintRiskPro(userAmount, 0, callback);
   };
 
   const callback = (error, transactionHash) => {
