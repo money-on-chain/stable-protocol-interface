@@ -46,4 +46,15 @@ const addCommissions = async (interfaceContext, reserveAmount, token, action) =>
   return valueToSend
 }
 
-export { addCommissions };
+const calcMintInterest = async (interfaceContext, amount) => {
+
+  const { web3, contractStatusData, userBalanceData, config, environment, account, vendorAddress } = interfaceContext;
+  const dContracts = window.integration;
+
+  const mocinrate = dContracts.contracts.mocinrate
+  const calcMintInterest = await mocinrate.methods.calcMintInterestValues(BUCKET_X2, toContractPrecision(amount)).call()
+  return calcMintInterest
+}
+
+
+export { addCommissions, calcMintInterest };

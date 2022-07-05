@@ -26,7 +26,7 @@ import {config, environment} from '../Config/config';
 
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
-import { mintRiskPro, redeemRiskPro } from '../Lib/integration/interfaces-coinbase';
+import { mintStable, redeemStable, mintRiskPro, redeemRiskPro, mintRiskProx, redeemRiskProx } from '../Lib/integration/interfaces-coinbase';
 
 import createNodeManager from '../Lib/nodeManagerFactory';
 import nodeManagerDecorator from '../Lib/nodeManagerDecorator';
@@ -46,6 +46,10 @@ const AuthenticateContext = createContext({
     interfaceExchangeMethod: async (sourceCurrency, targetCurrency, amount, slippage, callback) => {},
     interfaceMintRiskPro: async (amount, slippage, callback) => {},
     interfaceRedeemRiskPro: async (amount, slippage, callback) => {},
+    interfaceMintStable: async (amount, slippage, callback) => {},
+    interfaceRedeemStable: async (amount, slippage, callback) => {},
+    interfaceMintRiskProx: async (amount, slippage, callback) => {},
+    interfaceRedeemRiskProx: async (amount, slippage, callback) => {},
     DoCMint: async (amount) => {},
     DoCReedem: async (amount) => {},
     BPROMint: async (amount) => {},
@@ -185,14 +189,14 @@ const AuthenticateProvider = ({ children }) => {
       const appMode = environment.AppMode;
       const appModeString = `APP_MODE_${appMode}`;
 
-      const buyCurrencyMap = {
+      const exchangeCurrencyMap = {
           RISKPROX: {
             RESERVE: {
               APP_MODE_MoC: {
-                exchangeFunction: interfaceMintRiskPro
+                exchangeFunction: interfaceRedeemRiskProx
               },
               APP_MODE_RRC20: {
-                exchangeFunction: interfaceMintRiskPro
+                exchangeFunction: null
               }
             }
           },
@@ -202,17 +206,17 @@ const AuthenticateProvider = ({ children }) => {
                 exchangeFunction: interfaceRedeemRiskPro
               },
               APP_MODE_RRC20: {
-                exchangeFunction: interfaceRedeemRiskPro
+                exchangeFunction: null
               }
             }
           },
           STABLE: {
             RESERVE: {
               APP_MODE_MoC: {
-                exchangeFunction: interfaceMintRiskPro
+                exchangeFunction: interfaceRedeemStable
               },
               APP_MODE_RRC20: {
-                exchangeFunction: interfaceMintRiskPro
+                exchangeFunction: null
               }
             }
           },
@@ -222,31 +226,41 @@ const AuthenticateProvider = ({ children }) => {
                 exchangeFunction: interfaceMintRiskPro
               },
               APP_MODE_RRC20: {
-                exchangeFunction: interfaceMintRiskPro
+                exchangeFunction: null
               }
             },
             STABLE: {
               APP_MODE_MoC: {
-                exchangeFunction: interfaceMintRiskPro
+                exchangeFunction: interfaceMintStable
               },
               APP_MODE_RRC20: {
-                exchangeFunction: interfaceMintRiskPro
+                exchangeFunction: null
               }
             },
             RISKPROX: {
               APP_MODE_MoC: {
-                exchangeFunction: interfaceMintRiskPro
+                exchangeFunction: interfaceMintRiskProx
               },
               APP_MODE_RRC20: {
-                exchangeFunction: interfaceMintRiskPro
+                exchangeFunction: null
               }
             }
           }
       };
 
-      const exchangeMethod = buyCurrencyMap[sourceCurrency][targetCurrency][appModeString].exchangeFunction;
+      const exchangeMethod = exchangeCurrencyMap[sourceCurrency][targetCurrency][appModeString].exchangeFunction;
       exchangeMethod(amount, slippage, callback).then((res) => console.log(res, callback));
 
+    }
+
+    const interfaceMintStable = async (amount, slippage, callback) => {
+      const interfaceContext = buildInterfaceContext();
+      await mintStable(interfaceContext, amount, slippage, callback);
+    }
+
+    const interfaceRedeemStable = async (amount, slippage, callback) => {
+      const interfaceContext = buildInterfaceContext();
+      await redeemStable(interfaceContext, amount, slippage, callback);
     }
 
     const interfaceMintRiskPro = async (amount, slippage, callback) => {
@@ -257,6 +271,16 @@ const AuthenticateProvider = ({ children }) => {
     const interfaceRedeemRiskPro = async (amount, slippage, callback) => {
       const interfaceContext = buildInterfaceContext();
       await redeemRiskPro(interfaceContext, amount, slippage, callback);
+    }
+
+    const interfaceMintRiskProx = async (amount, slippage, callback) => {
+      const interfaceContext = buildInterfaceContext();
+      await mintRiskProx(interfaceContext, amount, slippage, callback);
+    }
+
+    const interfaceRedeemRiskProx = async (amount, slippage, callback) => {
+      const interfaceContext = buildInterfaceContext();
+      await redeemRiskProx(interfaceContext, amount, slippage, callback);
     }
 
     const initContractsConnection = async () => {
@@ -891,6 +915,10 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceExchangeMethod,
                 interfaceMintRiskPro,
                 interfaceRedeemRiskPro,
+                interfaceMintStable,
+                interfaceRedeemStable,
+                interfaceMintRiskProx,
+                interfaceRedeemRiskProx,
                 DoCMint,
                 DoCReedem,
                 BPROMint,
