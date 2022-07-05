@@ -20,6 +20,11 @@ export function getDatasMetrics(auth){
     const coin_usd= config.coin_usd
     if (auth.userBalanceData) {
         if (auth.userBalanceData) {
+            console.log('000000000000000000000000000000000')
+            console.log(auth)
+            // console.log(auth.userBalanceData)
+            // console.log(auth.userBalanceData['bproBalance'])
+            console.log('000000000000000000000000000000000')
             const globalCoverage= Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
             const globalCoverageClean= Number(auth.contractStatusData['globalCoverage']).toFixed(4)
 
@@ -98,7 +103,7 @@ export function getDatasMetrics(auth){
 
 
 export function readJsonTable(data_j,t, i18n){
-    var set_event= "";
+    var set_event= "TRANSFER";
     if(data_j.event.includes("Mint")){set_event='MINT'}
     if(data_j.event.includes("Settlement")){set_event='SETTLEMENT'}
     if(data_j.event.includes("Redeem")){set_event='REDEEM'}
@@ -440,9 +445,6 @@ export function readJsonClaims(data_j,t, i18n){
 
 }
 
-
-
-
 const StatusReward = ({ state, result }) => {
     let textToRender = '';
     let colorToRender;
@@ -468,3 +470,11 @@ const StatusReward = ({ state, result }) => {
         </div>
     );
 };
+
+export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro){
+    const set_daily_moc= new BigNumber(web3.utils.fromWei(daily_moc.toString()))
+    const set_user_balance_bproBalance= new BigNumber(web3.utils.fromWei(user_balance_bproBalance.toString()))
+    const set_total_bpro= new BigNumber(web3.utils.fromWei(total_bpro.toString()))
+
+    return new BigNumber((set_daily_moc).multipliedBy(set_user_balance_bproBalance)).div(set_total_bpro).multipliedBy(0.6)
+}

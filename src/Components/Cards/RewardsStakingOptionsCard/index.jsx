@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {Row, Col, Tabs, Button, Table, Alert} from 'antd';
+import {Row, Col, Tabs, Button, Table, Alert, Skeleton} from 'antd';
 import moment from "moment";
 import PerformanceChart from '../../../Components/PerformanceChart';
 import { LargeNumber } from '../../LargeNumber';
@@ -74,6 +74,13 @@ export default function RewardsStakingOptions(props) {
     const [withdrawalId, setWithdrawalId] = useState("0");
     const [t, i18n] = useTranslation(["global", 'moc'])
 
+    const [loading, setLoading] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
+    
     useEffect(() => {
         setStakingBalances();
     }, []);
@@ -147,77 +154,79 @@ export default function RewardsStakingOptions(props) {
         }
         return (
             <div className="StakingTabContent">
-                <Row>
-                    <Col xs={4}>
-                        {auth.isLoggedIn &&
-                        <PerformanceChart />}
-                    </Col>
-                    <Col xs={20}>
-                        <Row className="RewardsOptionsOverview">
-                            <div>
-                                {t("global.RewardsOptions_AvailableToStake", { ns: 'global' })}
-                                <h3 className="amount">
-                                    <LargeNumber amount={mocBalance} currencyCode="REWARD" /> {t("MoC.Tokens_MOC_code", { ns: 'moc' })}
-                                </h3>
-                            </div>
-                            <div style={{ textAlign: 'right' }}>
-                                {t("global.RewardsOptions_Staked", { ns: 'global' })}
-                                <h3 className="amount">
-                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t("MoC.Tokens_MOC_code", { ns: 'moc' })}
-                                </h3>
-                            </div>
-                        </Row>
-                        <Row style={{ marginTop: '1em' }}>
-                            <Col xs={24}>
-                                {/* <CoinSelect
-                                    label={t('global.RewardsOptions_AmountToStakePlaceholder', { ns: 'global' })}
-                                    value={'MOC'}
-                                    AccountData={props.AccountData}
-                                    UserBalanceData={props.UserBalanceData}
-                                    token={token}
-                                    onInputValueChange={onStakingInputValueChange}
-                                    inputValueInWei={stakingAmountInputValue}
-                                    currencyOptions={'MOC'}
-                                /> */}
-                                <InputWithCurrencySelector
-                                    cleanInputCount={cleanInputCount}
-                                    title={t("global.RewardsOptions_AmountToStakePlaceholder")}
-                                    currencySelected={'MOC'}
-                                    onCurrencySelect={() => {
+                {!loading
+                    ?<Row>
+                        <Col xs={4}>
+                            {auth.isLoggedIn &&
+                            <PerformanceChart />}
+                        </Col>
+                        <Col xs={20}>
+                            <Row className="RewardsOptionsOverview">
+                                <div>
+                                    {t("global.RewardsOptions_AvailableToStake", { ns: 'global' })}
+                                    <h3 className="amount">
+                                        <LargeNumber amount={mocBalance} currencyCode="REWARD" /> {t("MoC.Tokens_MOC_code", { ns: 'moc' })}
+                                    </h3>
+                                </div>
+                                <div style={{ textAlign: 'right' }}>
+                                    {t("global.RewardsOptions_Staked", { ns: 'global' })}
+                                    <h3 className="amount">
+                                        <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t("MoC.Tokens_MOC_code", { ns: 'moc' })}
+                                    </h3>
+                                </div>
+                            </Row>
+                            <Row style={{ marginTop: '1em' }}>
+                                <Col xs={24}>
+                                    {/* <CoinSelect
+                                        label={t('global.RewardsOptions_AmountToStakePlaceholder', { ns: 'global' })}
+                                        value={'MOC'}
+                                        AccountData={props.AccountData}
+                                        UserBalanceData={props.UserBalanceData}
+                                        token={token}
+                                        onInputValueChange={onStakingInputValueChange}
+                                        inputValueInWei={stakingAmountInputValue}
+                                        currencyOptions={'MOC'}
+                                    /> */}
+                                    <InputWithCurrencySelector
+                                        cleanInputCount={cleanInputCount}
+                                        title={t("global.RewardsOptions_AmountToStakePlaceholder")}
+                                        currencySelected={'MOC'}
+                                        onCurrencySelect={() => {
+                                        }}
+                                        // onCurrencySelect={onChangeCurrencyYouExchange}
+                                        inputValueInWei={stakingAmountInputValue}
+                                        onInputValueChange={onStakingInputValueChange}
+                                        currencyOptions={['MOC']}
+                                        // onValidationStatusChange={onYouExchangeValidityChange}
+                                        onValidationStatusChange={() => {
+                                        }}
+                                        maxValueAllowedInWei={mocBalance}
+                                        showMaxValueAllowed
+                                        validate={auth}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row style={{ marginTop: '1em' }}>
+                                <Col xs={24}>
+                                    <span>
+                                        {t('global.RewardsOptions_AmountToStakeNote', { ns: 'global' })}
+                                    </span>
+                                </Col>
+                            </Row>
+                            <Row style={{ marginTop: '2.1em' }}>
+                                <Button
+                                    disabled={btnDisable}
+                                    type="primary"
+                                    className="StakingBtn"
+                                    style={{ fontWeight: 700 }}
+                                    onClick={() => {
+                                        clickButtonStake(stakingAmountInputValue);
                                     }}
-                                    // onCurrencySelect={onChangeCurrencyYouExchange}
-                                    inputValueInWei={stakingAmountInputValue}
-                                    onInputValueChange={onStakingInputValueChange}
-                                    currencyOptions={['MOC']}
-                                    // onValidationStatusChange={onYouExchangeValidityChange}
-                                    onValidationStatusChange={() => {
-                                    }}
-                                    maxValueAllowedInWei={mocBalance}
-                                    showMaxValueAllowed
-                                    validate={auth}
-                                />
-                            </Col>
-                        </Row>
-                        <Row style={{ marginTop: '1em' }}>
-                            <Col xs={24}>
-                                <span>
-                                    {t('global.RewardsOptions_AmountToStakeNote', { ns: 'global' })}
-                                </span>
-                            </Col>
-                        </Row>
-                        <Row style={{ marginTop: '2.1em' }}>
-                            <Button
-                                disabled={btnDisable}
-                                type="primary"
-                                className="StakingBtn"
-                                style={{ fontWeight: 700 }}
-                                onClick={() => {
-                                    clickButtonStake(stakingAmountInputValue);
-                                  }}
-                            >Stake</Button>
-                        </Row>
-                    </Col>
-                </Row>
+                                >Stake</Button>
+                            </Row>
+                        </Col>
+                    </Row> : <Skeleton active={true} />
+                }
             </div>)
     };
 

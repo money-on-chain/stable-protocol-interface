@@ -9,8 +9,8 @@
   }
   .Tooltip{
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 25px;
+    right: 25px;
     color: #707070;
     cursor: pointer;
   }
@@ -114,7 +114,7 @@
   @media screen and (max-width: 1175px) {
     width:100%;
   }
-  @media screen and (min-width: 1176px) and (max-width: 1230px){
+  @media screen and (min-width: 1176px) and (max-width: 1430px){
     width:29%;
   }
 }

@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {
-  notification,
-  Popover,
-  Button,
-  Spin,
-  Modal,
-  Card,
-  Switch } from 'antd';
+    notification,
+    Popover,
+    Button,
+    Spin,
+    Modal,
+    Card,
+    Switch, Skeleton
+} from 'antd';
 
 import './style.scss';
 // import ArrowRightOutlined from '@ant-design/icons/ArrowRightOutlined';
@@ -74,6 +75,13 @@ const MintOrRedeemToken = (props) => {
   let userComment = '';
   let userTolerance = '';
   const userAccountIsLoggedIn = mocState;
+
+    const [loading, setLoading] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
 
   /* Effects */
   useEffect(
@@ -491,7 +499,7 @@ const MintOrRedeemToken = (props) => {
         <div className="ReserveInUSD">
           <span className={`Conversion ${window.appMode}`}>
             1 {t('MoC.Tokens_RESERVE_code', {ns: 'moc'})} ={' '}
-                {auth.isLoggedIn && <>&nbsp;<LargeNumber amount={web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether')} {...{ currencyCode }} />
+                {auth.isLoggedIn && <>&nbsp;<LargeNumber amount={auth.contractStatusData['bitcoinPrice']} {...{ currencyCode }} />
                   <span>&nbsp;USD</span></>
               }
           </span>
@@ -618,7 +626,8 @@ const MintOrRedeemToken = (props) => {
     </div>
   );
 
-  return (
+  return (<>
+      {!loading ?
     <Card
       title={
         actionIsMint
@@ -627,6 +636,7 @@ const MintOrRedeemToken = (props) => {
       }
       // loading={loading}
       className="Card MintOrRedeemToken"
+      style={{height: '100%'}}
     >
       {auth.convertToken && mocState && (
         <>
@@ -641,8 +651,12 @@ const MintOrRedeemToken = (props) => {
           {renderAllowanceReserveModal()}
         </>
       )}
-    </Card>
-  );
-};
+    </Card>:
+      <Card title={actionIsMint? t('global.MintOrRedeemToken_Mint') : t('global.MintOrRedeemToken_Redeem')} className="Card MintOrRedeemToken" style={{height: '100%'}}>
+          <Skeleton active={true} paragraph={{ rows: 6 }}></Skeleton>
+      </Card>
+    }</>
+  )
+}
 
 export default MintOrRedeemToken;

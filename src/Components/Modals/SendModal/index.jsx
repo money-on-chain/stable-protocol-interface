@@ -14,6 +14,7 @@ import addressHelper from '../../../Lib/addressHelper';
 import { toBigNumber } from "../../../Lib/numberHelper";
 import { formatVisibleValue } from "../../../Lib/Formats";
 import { AuthenticateContext } from "../../../Context/Auth";
+import AlertLabel from "../../AlertLabel/AlertLabel";
 
 const BigNumber = require('bignumber.js');
 
@@ -145,6 +146,10 @@ export default function SendModal(props) {
 
   const maxtoSend = getMaxToSend();
 
+  const onChangeInputAddress = event => {
+    setAddress(event.target.value)
+  };
+
   return (
     <>
       <Button
@@ -154,17 +159,19 @@ export default function SendModal(props) {
       >{t('MoC.wallet.send', { ns: 'moc' })}
       </Button>
       <Modal
-        title="Send"
+        title={t("MoC.wallet.send", { ns: 'moc' })}
         visible={visible}
         onCancel={handleCancel}
         footer={null}
       >
         <div>
+          {visibleAlertInvalidAddress && <AlertLabel />}
           <InputAddress
-            title="Receiver address or domain"
+            title={t("MoC.wallets.receiverAddress", { ns: 'moc' })}
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={(event) => onChangeInputAddress(event)}
             className="separation"
+            isValidChecksumAddress={window.nodeManager && window.nodeManager.isCheckSumAddress}
           />
           <InputWithCurrencySelector
             validate

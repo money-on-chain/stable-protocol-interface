@@ -1,5 +1,5 @@
-import React, { Fragment, useContext } from "react";
-import {Row, Col, Alert} from 'antd';
+import React, { Fragment, useContext, useState, useEffect } from "react";
+import {Row, Col, Alert, Skeleton} from 'antd';
 import RewardsStakingOptions from "../../Components/Cards/RewardsStakingOptionsCard";
 import YourAddressCard from '../../Components/Cards/YourAddressCard';
 import MocLiquidity from "../../Components/Cards/MocLiquidity";
@@ -14,6 +14,12 @@ import Claims from "../../Components/Tables/Claims";
 export default function Rewards(props) {
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc']);
+    const [loading, setLoading] = useState(true);
+    const timeSke= 1500
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), timeSke)
+    },[auth]);
 
     return (
         <Fragment>
@@ -50,7 +56,11 @@ export default function Rewards(props) {
                 </Col>
             </Row>
             <div className="Card WalletOperations">
-                <Claims />
+                {
+                    !loading
+                        ? <Claims />
+                        : <Skeleton active={true} />
+                }
             </div>
         </Fragment>
     )
