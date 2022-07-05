@@ -78,7 +78,7 @@ const FreeDocInterest = {
 
 const commissionRate = {
     contractDecimals: 18,
-    decimals: 1
+    decimals: 2
 };
 
 const formatMap = {

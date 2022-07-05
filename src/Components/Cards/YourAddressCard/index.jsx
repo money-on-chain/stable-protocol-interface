@@ -28,16 +28,16 @@ export default function YourAddressCard(props) {
     },[auth]);
 
     return (
-        <div className="Card SendTokenContainer" style={{ height: height, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
+        <div className="Card SendTokenContainer" style={{ height: height, display: 'flex', flexDirection: 'column', flex: 1 }}>
             {!loading ? <>
-            <h3 className="CardTitle">{t('MoC.wallets.ownAddressLabel', {ns: 'moc'})} </h3>
+            <h3 className={"CardTitle margin-bottom-10"}>{t('MoC.wallets.ownAddressLabel', {ns: 'moc'})} </h3>
             <div className={classname}>
                 <AddressContainer {...{ address }} accountData={accountData} />
             </div>
             <Row style={{ display: 'flex', justifyContent: 'center'}} className="SendBtn">
                 <Col>
                     {auth.isLoggedIn && <Fragment>
-                    <SendModal
+                        <br/><SendModal
                         {...{ tokensToSend: [tokenToSend], iconWallet}}
                         currencyOptions={props.currencyOptions}
                         userState={auth}

@@ -22,12 +22,12 @@ const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth)
 };
 
 const currencies = [
-  { value: 'RESERVE',     image: `${window.location.origin}/Moc/icon-reserve.svg`,    label: 'RBTC' },
-  { value: 'STABLE',      image: `${window.location.origin}/Moc/icon-stable.svg`,     label: 'DOC' },
-  { value: 'RISKPRO',     image: `${window.location.origin}/Moc/icon-riskpro.svg`,    label: 'BPRO' },
-  { value: 'RISKPROX',    image: `${window.location.origin}/Moc/icon-riskprox.svg`,   label: 'BTCX' },
-  { value: 'MOC',         image: `${window.location.origin}/Moc/icon-moc.svg`,        label: 'MOC' },
-  { value: 'RBTC',         image: `${window.location.origin}/Moc/icon-moc.svg`,        label: 'RBTC' },
+  { value: 'RESERVE',     image: `Moc/icon-reserve.svg`,    label: 'RBTC' },
+  { value: 'STABLE',      image: `Moc/icon-stable.svg`,     label: 'DOC' },
+  { value: 'RISKPRO',     image: `Moc/icon-riskpro.svg`,    label: 'BPRO' },
+  { value: 'RISKPROX',    image: `Moc/icon-riskprox.svg`,   label: 'BTCX' },
+  { value: 'MOC',         image: `Moc/icon-moc.svg`,        label: 'MOC' },
+  { value: 'RBTC',         image: `Moc/icon-moc.svg`,        label: 'RBTC' },
 ];
 
 export {

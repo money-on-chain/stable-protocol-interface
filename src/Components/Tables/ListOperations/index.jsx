@@ -222,7 +222,7 @@ export default function ListOperations(props) {
                 key: element.key,
                 info: '',
                 event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
-                asset: <img className="uk-preserve-width uk-border-circle" src={window.location.origin + `/Moc/` + asset[0].image} alt="avatar" width={32} />,
+                asset: <img className="uk-preserve-width uk-border-circle" src={`Moc/` + asset[0].image} alt="avatar" width={32} />,
                 // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                 platform: <span className="display-inline CurrencyTx">{element.platform}</span>,
                 wallet: <span className="display-inline ">{element.wallet} </span>,
