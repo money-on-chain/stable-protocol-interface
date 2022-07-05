@@ -20,17 +20,20 @@
     flex-direction:column;
     margin-left:7px;
     .div_values-coin{
-      position:relative;
-      top:-54px;
-      left:82px;
+      //position:relative;
+      //top:-54px;
+      //left:82px;
       font-size:12px;
     }
   }
 
-  .value_usd{
+  .value_usd1{
     flex-grow: 0;
     color:white;
     height:15px;
+    .number-label{
+      font-size: 12px;
+    }
   }
 
   .div_crypto{

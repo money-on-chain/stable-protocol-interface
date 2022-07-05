@@ -31,7 +31,7 @@ function MocAmount() {
 
     return (
         <div className="ContainerMocAmountDatas height-auto">
-            <div className="Card RewardsBalanceAmount withPadding hasTitle padding-1-2">
+            <div className="Card RewardsBalanceAmount withPadding hasTitle ">
                     {!loading ? <>
                         <div className="title">
                             <h1>{t("global.RewardsBalance_MocAmount", {ns: 'global'})}</h1>

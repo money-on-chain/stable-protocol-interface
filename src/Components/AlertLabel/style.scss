@@ -1,0 +1,32 @@
+//@import '{}/client/css/_general_styling.scss';
+
+.AlertLabel {
+  color: #f5222d;
+  background: #fff1f0;
+  border-color: #ffa39e;
+  border-radius: 3px;
+  width: 100%;
+  margin-bottom: 2em;
+  padding: 0.75em;
+  display: flex;
+  align-items: flex-start;
+
+  img {
+    margin-right: 0.75em;
+    width: 24px;
+  }
+
+  .AlertText {
+    p {
+      //@include primary-text(1em, #f5222d, 400);
+
+      strong {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.AlertMaxAmount {
+  width: 95%;
+}
