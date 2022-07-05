@@ -159,8 +159,11 @@ export default function MintModal(props) {
       'RESERVE'
     );
 
+    const userToleranceFormat = new BigNumber(userTolerance).toFixed();
+
     //exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
-    auth.interfaceMintRiskPro(userAmount, 0, callback);
+    //auth.interfaceMintRiskPro(userAmount, userToleranceFormat, callback);
+    auth.interfaceExchangeMethod(exchanging.currencyCode, receiving.currencyCode, userAmount, userToleranceFormat, callback);
   };
 
   const callback = (error, transactionHash) => {

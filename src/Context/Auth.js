@@ -26,7 +26,7 @@ import {config, environment} from '../Config/config';
 
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
-import { mintRiskPro } from '../Lib/integration/interfaces-coinbase';
+import { mintRiskPro, redeemRiskPro } from '../Lib/integration/interfaces-coinbase';
 
 import createNodeManager from '../Lib/nodeManagerFactory';
 import nodeManagerDecorator from '../Lib/nodeManagerDecorator';
@@ -43,7 +43,9 @@ const AuthenticateContext = createContext({
     contractStatusData: null,
     web3: null,
     connect: () => {},
+    interfaceExchangeMethod: async (sourceCurrency, targetCurrency, amount, slippage, callback) => {},
     interfaceMintRiskPro: async (amount, slippage, callback) => {},
+    interfaceRedeemRiskPro: async (amount, slippage, callback) => {},
     DoCMint: async (amount) => {},
     DoCReedem: async (amount) => {},
     BPROMint: async (amount) => {},
@@ -179,10 +181,82 @@ const AuthenticateProvider = ({ children }) => {
 
     }
 
+    const interfaceExchangeMethod = async (sourceCurrency, targetCurrency, amount, slippage, callback) => {
+      const appMode = environment.AppMode;
+      const appModeString = `APP_MODE_${appMode}`;
+
+      const buyCurrencyMap = {
+          RISKPROX: {
+            RESERVE: {
+              APP_MODE_MoC: {
+                exchangeFunction: interfaceMintRiskPro
+              },
+              APP_MODE_RRC20: {
+                exchangeFunction: interfaceMintRiskPro
+              }
+            }
+          },
+          RISKPRO: {
+            RESERVE: {
+              APP_MODE_MoC: {
+                exchangeFunction: interfaceRedeemRiskPro
+              },
+              APP_MODE_RRC20: {
+                exchangeFunction: interfaceRedeemRiskPro
+              }
+            }
+          },
+          STABLE: {
+            RESERVE: {
+              APP_MODE_MoC: {
+                exchangeFunction: interfaceMintRiskPro
+              },
+              APP_MODE_RRC20: {
+                exchangeFunction: interfaceMintRiskPro
+              }
+            }
+          },
+          RESERVE: {
+            RISKPRO: {
+              APP_MODE_MoC: {
+                exchangeFunction: interfaceMintRiskPro
+              },
+              APP_MODE_RRC20: {
+                exchangeFunction: interfaceMintRiskPro
+              }
+            },
+            STABLE: {
+              APP_MODE_MoC: {
+                exchangeFunction: interfaceMintRiskPro
+              },
+              APP_MODE_RRC20: {
+                exchangeFunction: interfaceMintRiskPro
+              }
+            },
+            RISKPROX: {
+              APP_MODE_MoC: {
+                exchangeFunction: interfaceMintRiskPro
+              },
+              APP_MODE_RRC20: {
+                exchangeFunction: interfaceMintRiskPro
+              }
+            }
+          }
+      };
+
+      const exchangeMethod = buyCurrencyMap[sourceCurrency][targetCurrency][appModeString].exchangeFunction;
+      exchangeMethod(amount, slippage, callback).then((res) => console.log(res, callback));
+
+    }
+
     const interfaceMintRiskPro = async (amount, slippage, callback) => {
       const interfaceContext = buildInterfaceContext();
-      await mintRiskPro(interfaceContext, amount, slippage, callback)
+      await mintRiskPro(interfaceContext, amount, slippage, callback);
+    }
 
+    const interfaceRedeemRiskPro = async (amount, slippage, callback) => {
+      const interfaceContext = buildInterfaceContext();
+      await redeemRiskPro(interfaceContext, amount, slippage, callback);
     }
 
     const initContractsConnection = async () => {
@@ -814,7 +888,9 @@ const AuthenticateProvider = ({ children }) => {
                 web3,
                 connect,
                 disconnect,
+                interfaceExchangeMethod,
                 interfaceMintRiskPro,
+                interfaceRedeemRiskPro,
                 DoCMint,
                 DoCReedem,
                 BPROMint,
