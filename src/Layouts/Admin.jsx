@@ -130,7 +130,8 @@ export default function Admin() {
             </Sider>
             <Layout>
                 <Header className="Header" style={{ paddingLeft: 18 }}>
-                    <Image height={40} src={logoImage} />
+                    {/*<Image height={40} src={logoImage} />*/}
+                    <img src={logoImage} alt="icon"  className='header-logo'/>
                     <div className="MiddleSide">
                         <HeaderCoins tokenName="stable" image={'icon-rbtclogo.svg'} />
                         <HeaderCoins tokenName="riskpro" image={'BPROIcon.svg'} />

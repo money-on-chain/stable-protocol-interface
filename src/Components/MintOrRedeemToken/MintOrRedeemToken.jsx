@@ -499,7 +499,7 @@ const MintOrRedeemToken = (props) => {
         <div className="ReserveInUSD">
           <span className={`Conversion ${window.appMode}`}>
             1 {t('MoC.Tokens_RESERVE_code', {ns: 'moc'})} ={' '}
-                {auth.isLoggedIn && <>&nbsp;<LargeNumber amount={web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether')} {...{ currencyCode }} />
+                {auth.isLoggedIn && <>&nbsp;<LargeNumber amount={auth.contractStatusData['bitcoinPrice']} {...{ currencyCode }} />
                   <span>&nbsp;USD</span></>
               }
           </span>

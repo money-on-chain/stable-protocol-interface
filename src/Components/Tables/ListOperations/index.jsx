@@ -155,84 +155,83 @@ export default function ListOperations(props) {
         json_end.forEach((data_j) => {
             const datas_response = readJsonTable(data_j,t,i18n)
 
-            // if (datas_response['wallet_detail'] !== '--' && datas_response['wallet_detail'] !== 11) {
-                const detail = {
-                    event: datas_response['set_event']
-                    , created: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
-                    , details: datas_response['RBTCAmount']
-                    , asset: datas_response['set_asset']
-                    , confirmation: (true) ? <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
-                    , address: (datas_response['address']!='--')? <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} /> : '--'
-                    , platform: datas_response['amount']
-                    , platform_fee: datas_response['platform_fee_value']
-                    , block: datas_response['blockNumber']
-                    , wallet: datas_response['wallet_value']
-                    , interests: datas_response['interests']
-                    , tx_hash_truncate: datas_response['tx_hash_truncate']
-                    , tx_hash: datas_response['tx_hash']
-                    , leverage: datas_response['leverage']
-                    , gas_fee: datas_response['gas_fee']
-                    , price: datas_response['price']
-                    , comments: '--'
-                };
+            const detail = {
+                event: datas_response['set_event']
+                , created: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
+                , details: datas_response['RBTCAmount']
+                , asset: datas_response['set_asset']
+                , confirmation: (true) ? <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
+                , address: (datas_response['address']!='--')? <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} /> : '--'
+                , platform: datas_response['amount']
+                , platform_fee: datas_response['platform_fee_value']
+                , block: datas_response['blockNumber']
+                , wallet: datas_response['wallet_value']
+                , interests: datas_response['interests']
+                , tx_hash_truncate: datas_response['tx_hash_truncate']
+                , tx_hash: datas_response['tx_hash']
+                , leverage: datas_response['leverage']
+                , gas_fee: datas_response['gas_fee']
+                , price: datas_response['price']
+                , comments: '--'
+            };
 
-                data_row_coins2.push({
-                    key: data_j._id,
-                    info: '',
-                    event: datas_response['set_event'],
-                    asset: datas_response['set_asset'],
-                    // platform: `+ ${datas_response['paltform_detail']}`,
-                    // platform: formatVisibleValue(
-                    //     datas_response['paltform_detail'],
-                    //     'STABLE',
-                    //     'es'
-                    // ),
-                    platform: datas_response['paltform_detail'],
-                    // platform: (data_j.amount!==undefined)? <LargeNumber amount={datas_response['paltform_detail']} {...{ currencyCode }} /> : '--',
-                    // wallet: (data_j.RBTCAmount!==undefined)? `${wallet_detail} RBTC`:'--',
-                    wallet: datas_response['wallet_value_main'],
-                    date: datas_response['lastUpdatedAt'],
-                    status: { txt: datas_response['set_status_txt'], percent: datas_response['set_status_percent'] },
-                    detail: detail,
-                });
-            // }
+            data_row_coins2.push({
+                key: data_j._id,
+                info: '',
+                event: datas_response['set_event'],
+                asset: datas_response['set_asset'],
+                // platform: `+ ${datas_response['paltform_detail']}`,
+                // platform: formatVisibleValue(
+                //     datas_response['paltform_detail'],
+                //     'STABLE',
+                //     'es'
+                // ),
+                platform: datas_response['paltform_detail'],
+                // platform: (data_j.amount!==undefined)? <LargeNumber amount={datas_response['paltform_detail']} {...{ currencyCode }} /> : '--',
+                // wallet: (data_j.RBTCAmount!==undefined)? `${wallet_detail} RBTC`:'--',
+                wallet: datas_response['wallet_value_main'],
+                date: datas_response['lastUpdatedAt'],
+                status: { txt: datas_response['set_status_txt'], percent: datas_response['set_status_percent'] },
+                detail: detail,
+            });
+
         });
         data_row_coins2.forEach((element, index) => {
             const asset = [];
-            // if (element.wallet != '--' && element.wallet != 11) {
-                switch (element.asset) {
-                    case 'STABLE':
-                        asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
-                        data_row_coins2[index].detail.asset = 'DOC';
-                        break;
-                    case 'RISKPRO':
-                        asset.push({ 'image': 'icon-riskpro.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
-                        data_row_coins2[index].detail.asset = 'BPRO'
-                        break;
-                    case 'RISKPROX':
-                        asset.push({ 'image': 'icon-riskprox.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
-                        data_row_coins2[index].detail.asset = 'BTCX'
-                        break;
-                    default:
-                        asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
-                        data_row_coins2[index].detail.asset = 'DOC'
-                        break;
-                }
 
-                data.push({
-                    key: element.key,
-                    info: '',
-                    event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
-                    asset: <img className="uk-preserve-width uk-border-circle" src={window.location.origin + `/Moc/` + asset[0].image} alt="avatar" width={32} />,
-                    // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
-                    platform: <span className="display-inline CurrencyTx">{element.platform}</span>,
-                    wallet: <span className="display-inline ">{element.wallet} </span>,
-                    date: <span>{element.date}</span>,
-                    status: <div style={{ width: '100%' }}><Progress percent={element.status.percent} /><br /><span
-                        className="color-confirmed conf_title">{element.status.txt}</span></div>,
-                    description: <RowDetail detail={element.detail} />,
-                });
-            // }
+            switch (element.asset) {
+                case 'STABLE':
+                    asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
+                    data_row_coins2[index].detail.asset = 'DOC';
+                    break;
+                case 'RISKPRO':
+                    asset.push({ 'image': 'icon-riskpro.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
+                    data_row_coins2[index].detail.asset = 'BPRO'
+                    break;
+                case 'RISKPROX':
+                    asset.push({ 'image': 'icon-riskprox.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
+                    data_row_coins2[index].detail.asset = 'BTCX'
+                    break;
+                default:
+                    asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
+                    data_row_coins2[index].detail.asset = 'DOC'
+                    break;
+            }
+
+            data.push({
+                key: element.key,
+                info: '',
+                event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
+                asset: <img className="uk-preserve-width uk-border-circle" src={window.location.origin + `/Moc/` + asset[0].image} alt="avatar" width={32} />,
+                // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
+                platform: <span className="display-inline CurrencyTx">{element.platform}</span>,
+                wallet: <span className="display-inline ">{element.wallet} </span>,
+                date: <span>{element.date}</span>,
+                status: <div style={{ width: '100%' }}><Progress percent={element.status.percent} /><br /><span
+                    className="color-confirmed conf_title">{element.status.txt}</span></div>,
+                description: <RowDetail detail={element.detail} />,
+            });
+
         })
         /*******************************end extraer datos del json con el json seteado por limit y skip***********************************/
     }

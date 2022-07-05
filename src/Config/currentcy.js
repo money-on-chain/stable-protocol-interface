@@ -4,7 +4,7 @@ const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth)
     case 'RISKPRO':
       return {
         amount: userState?.bproBalance,
-        methodTransferTo: auth?.transferBproTo,
+        methodTransferTo: window.nodeManager.transferBproTo,
       };
     case 'STABLE':
       return {

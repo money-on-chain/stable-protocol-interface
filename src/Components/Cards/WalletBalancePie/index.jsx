@@ -96,16 +96,14 @@ function WalletBalancePie(props) {
 
     const getBalance = () => {
         if (auth.userBalanceData) {
-             const rbtc_main= new BigNumber(accountData.Balance).toFixed(4)
-             const doc= set_doc_usd()['normal']
-             const bpro= set_bpro_usd()['normal']
-             const btc= set_btc_usd()['usd']
-             const moc_balance= set_moc_balance_usd()['normal']
-             return new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) + Number(moc_balance))).toFixed(6)
+            const rbtc_main= (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
+            const doc= ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4)
+            const bpro= (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
+            const btc= Number(new BigNumber(accountData.Balance))
+            return new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) )).toFixed(6)
         }else{
             return (0).toFixed(6)
         }
-
     };
 
     const getPie = () => {
@@ -121,13 +119,13 @@ function WalletBalancePie(props) {
                 {
                     name: 'Group B',
                     value: Number(((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
-                    set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4) +' RBTC',
+                    set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4) +' RBTC2222222',
                     set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed(6) +' BPRO', class: 'RISKPRO'
                 },
                 {
                     name: 'Group C',
                     value: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)),
-                    set1: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' RBTC',
+                    set1: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' RBTC333333333',
                     set2: (set_moc_balance_usd()['usd']).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2

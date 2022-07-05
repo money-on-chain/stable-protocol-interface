@@ -9,7 +9,8 @@ export default function InputAddress(props) {
 
   const {
     title,
-    className } = props;
+    className,
+    onChange} = props;
 
   const [statusInput, setStatusInput] = useState(null);
   const [help, setHelp] = useState('');
@@ -50,13 +51,13 @@ export default function InputAddress(props) {
     setHelp(help);
   };
 
-  const onChange = (e) => {
-    const val = e.target.value;
-    onStartResolving(val);
-    if(!val) return onResolutionCompleted(true, '', val);
-
-    addressOrRNSIsValid(val);
-  };
+  // const onChange = (e) => {
+  //   const val = e.target.value;
+  //   onStartResolving(val);
+  //   if(!val) return onResolutionCompleted(true, '', val);
+  //
+  //   addressOrRNSIsValid(val);
+  // };
 
   return (
     <div className={`InputAddressContainer ${className || ""}`}>
