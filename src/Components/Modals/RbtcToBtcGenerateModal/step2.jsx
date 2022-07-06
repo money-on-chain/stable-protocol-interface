@@ -83,7 +83,7 @@ function Step2(props) {
                         return <Fragment>
                             <div className="alert-message-modal">
                                 <div className="alert-message">
-                                    <img src={`${window.location.origin+'/icon-atention.svg'}`} alt="" />
+                                    <img src={'icon-atention.svg'} alt="" />
                                     <p>Double check that you are entering the correct BTC destination address.</p>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@ function Step2(props) {
                             <div className={'inputAmount'}>
                                 <input type="number" ref={amountInput}  onBlur={handleChangeAmount} onMouseLeave={handleChangeAmount} placeholder="Enter rBTC amount to send" className="valueInput"/>
                                 <div>
-                                    <img src={window.location.origin + '/Moc/icon-reserve.svg'} alt={'sdssd'} width={30}/>
+                                    <img src={'Moc/icon-reserve.svg'} alt={'sdssd'} width={30}/>
                                     <span>RBTC </span>
                                 </div>
                             </div>

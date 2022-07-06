@@ -28,7 +28,7 @@ export default function BtcToRbtcGenerateModal(props) {
 
   const address = accountData?.Owner;
   const socket = auth.socket;
-  
+
   const cleanupState = () => {
     setStateFBtc(initialState);
   };
@@ -106,7 +106,7 @@ export default function BtcToRbtcGenerateModal(props) {
   const ModalFooter = () => {
     return (
       <div className="AlertWarning" type="warning" icon="" >
-        <img src={`${window.location.origin+'/icon-atention.svg'}`} alt=""/>
+        <img src={'icon-atention.svg'} alt=""/>
         <div>{t('MoC.fastbtc.topUpWalletModal.footer', {ns: 'moc'})}</div>
       </div>
     )

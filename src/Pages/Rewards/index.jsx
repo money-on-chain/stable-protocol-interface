@@ -43,7 +43,7 @@ export default function Rewards(props) {
                     <YourAddressCard
                         height="100%"
                         tokenToSend="MOC"
-                        iconWallet={`${window.location.origin}/Moc/icon-moc.svg`}
+                        iconWallet={`Moc/icon-moc.svg`}
                         view={'moc'}
                     // currencyOptions={['RESERVE', 'MOC']}
                     />

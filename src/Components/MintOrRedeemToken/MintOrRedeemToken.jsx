@@ -578,7 +578,6 @@ const MintOrRedeemToken = (props) => {
       setLoadingSwitch(false);
     }
     //const [commissionSwitch, setCommissionSwitch] = useState("RESERVE");
-
     let tooltip = enoughMOCBalance
       ? contentFee('payWithMocToken')
       : contentFee('notEnoughMocToken');

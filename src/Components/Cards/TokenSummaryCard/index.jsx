@@ -97,8 +97,7 @@ export default function TokenSummaryCard(props) {
                         <img
                             height={45}
                             src={
-                                window.location.origin +
-                                `/Moc/icon-${tokenName}.svg`
+                                `Moc/icon-${tokenName}.svg`
                             }
                             alt="icon-wallet"
                         />

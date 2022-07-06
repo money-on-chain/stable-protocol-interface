@@ -14,8 +14,8 @@ const AddressContainer = ({ address, accountData }) => {
     return (
         <div className="AddressContainer">
           <QRCode value={accountData.Wallet} size="128" alt="qrCode"  />
-            {auth.isLoggedIn && <Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Wallet}/>}
-            {!auth.isLoggedIn && <Copy textToShow={'0x0000...0000'} textToCopy={'0x0000...0000'}/>}
+            {auth.isLoggedIn && <><br/><Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Wallet}/></>}
+            {!auth.isLoggedIn && <><br/><Copy textToShow={'0x0000...0000'} textToCopy={'0x0000...0000'}/></>}
           <a className="RNSLink" href={window.rnsUrl} target="_blank" rel="noopener noreferrer">
             {t(`MoC.rns.register`, {ns: 'moc'})}
          </a>
