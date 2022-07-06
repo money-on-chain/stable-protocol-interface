@@ -87,17 +87,6 @@ const formatTimestamp = (timestamp) => {
   }).format(timestamp)
 }
 
-/*
-module.exports = {
-  getGasPrice,
-  toContractPrecision,
-  getAppMode,
-  getAppMoCProject,
-  formatVisibleValue,
-  formatTimestamp,
-  BUCKET_X2,
-  BUCKET_C0
-}*/
 
 export {
   getGasPrice,

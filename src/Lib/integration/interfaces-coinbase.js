@@ -7,8 +7,9 @@ import { toContractPrecision, getGasPrice, BUCKET_X2 } from './utils';
 const mintStable = async (interfaceContext, reserveAmount, mintSlippage, callback) => {
   // Mint stable token with collateral coin base
 
-  const { web3, contractStatusData, userBalanceData, config, environment, account, vendorAddress } = interfaceContext;
+  const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
+  const { environment } = config;
 
   // get bitcoin price from contract
   const bitcoinPrice = new BigNumber(Web3.utils.fromWei(contractStatusData.bitcoinPrice))
@@ -66,8 +67,9 @@ const mintStable = async (interfaceContext, reserveAmount, mintSlippage, callbac
 const redeemStable = async (interfaceContext, stableAmount, mintSlippage, callback) => {
   // Redeem stable token receiving coin base
 
-  const { web3, contractStatusData, userBalanceData, config, environment, account, vendorAddress } = interfaceContext;
+  const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
+  const { environment } = config;
 
   // get bitcoin price from contract
   const bitcoinPrice = new BigNumber(Web3.utils.fromWei(contractStatusData.bitcoinPrice))
@@ -116,8 +118,9 @@ const redeemStable = async (interfaceContext, stableAmount, mintSlippage, callba
 const mintRiskPro = async (interfaceContext, reserveAmount, mintSlippage, callback) => {
   // Mint RiskPro token with collateral coin base
 
-  const { web3, contractStatusData, userBalanceData, config, environment, account, vendorAddress } = interfaceContext;
+  const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
+  const { environment } = config;
 
   // Price of RISKPRO in RESERVE
   const riskproPriceInReserve = new BigNumber(Web3.utils.fromWei(contractStatusData.bproPriceInRbtc))
@@ -170,8 +173,9 @@ const mintRiskPro = async (interfaceContext, reserveAmount, mintSlippage, callba
 const redeemRiskPro = async (interfaceContext, riskproAmount, mintSlippage, callback) => {
   // Redeem RISKPRO token receiving coin base
 
-  const { web3, contractStatusData, userBalanceData, config, environment, account, vendorAddress } = interfaceContext;
+  const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
+  const { environment } = config;
 
   // Price of RISKPRO in RESERVE
   const riskproPriceInReserve = new BigNumber(Web3.utils.fromWei(contractStatusData.bproPriceInRbtc))
@@ -217,8 +221,9 @@ const redeemRiskPro = async (interfaceContext, riskproAmount, mintSlippage, call
 const mintRiskProx = async (interfaceContext, reserveAmount, mintSlippage, callback) => {
   // Mint RiskproX token with collateral coin base
 
-  const { web3, contractStatusData, userBalanceData, config, environment, account, vendorAddress } = interfaceContext;
+  const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
+  const { environment } = config;
 
   // Price of Riskprox in coinbase
   const bprox2PriceInReserve = new BigNumber(Web3.utils.fromWei(contractStatusData.bprox2PriceInRbtc))
@@ -282,8 +287,9 @@ const mintRiskProx = async (interfaceContext, reserveAmount, mintSlippage, callb
 const redeemRiskProx = async (interfaceContext, riskproxAmount, mintSlippage, callback) => {
   // Redeem RISKPROx token receiving coin base
 
-  const { web3, contractStatusData, userBalanceData, config, environment, account, vendorAddress } = interfaceContext;
+  const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
+  const { environment } = config;
 
   // Price of RISKPROx in RESERVE
   const riskproxPriceInReserve = new BigNumber(Web3.utils.fromWei(contractStatusData.bprox2PriceInRbtc))

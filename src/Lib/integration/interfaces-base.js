@@ -7,8 +7,9 @@ import {toContractPrecision, BUCKET_X2, BUCKET_C0} from './utils';
 
 const addCommissions = async (interfaceContext, reserveAmount, token, action) => {
 
-  const { web3, contractStatusData, userBalanceData, config, environment, account, vendorAddress } = interfaceContext;
+  const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
+  const {environment} = config;
 
   // get reserve price from contract
   const reservePrice = new BigNumber(Web3.utils.fromWei(contractStatusData.bitcoinPrice))
@@ -48,8 +49,9 @@ const addCommissions = async (interfaceContext, reserveAmount, token, action) =>
 
 const calcMintInterest = async (interfaceContext, amount) => {
 
-  const { web3, contractStatusData, userBalanceData, config, environment, account, vendorAddress } = interfaceContext;
+  const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
+  const { environment } = config;
 
   const mocinrate = dContracts.contracts.mocinrate
   const calcMintInterest = await mocinrate.methods.calcMintInterestValues(BUCKET_X2, toContractPrecision(amount)).call()

@@ -9,9 +9,9 @@
   "environment": {
     "AppMode": "MoC",
     "AppProject": "MoC",
-    "MoC": "0x01AD6f8E884ed4DDC089fA3efC075E9ba45C9039",
+    "MoC": "0x2820f6d4D199B8D8838A4B26F9917754B86a0c1F",
     "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8",
-    "IRegistry": "0x2c4b59ede1998229a9509ec7d15d206e91a246f1",
+    "IRegistry": "0xf078375a3dD89dDF4D9dA460352199C6769b5f10",
     "tokens": {
       "COINBASE": {
           "name": "RBTC",

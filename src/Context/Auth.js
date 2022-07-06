@@ -2,27 +2,11 @@ import { createContext, useEffect, useState } from 'react';
 import getRLogin from '../Lib/rLogin';
 import Web3 from 'web3';
 import _ from 'lodash/core';
-import btcContractProvider from '../Contracts/MoC/abi/btcContractProvider';
-import MocAbi from '../Contracts/MoC/abi/MoC.json';
-import MoCInrate from '../Contracts/MoC/abi/MoCInRateContract.json';
-import MocState from '../Contracts/MoC/abi/MoCState.json';
-import MultiCall from '../Contracts/MoC/abi/Multicall2.json';
-import MoCExchange from '../Contracts/MoC/abi/MoCExchange.json';
-import MoCSettlement from '../Contracts/MoC/abi/MoCSettlement.json';
-import DocToken from '../Contracts/MoC/abi/DocToken.json';
-import BProToken from '../Contracts/MoC/abi/BProToken.json';
-import MoCToken from '../Contracts/MoC/abi/MoCToken.json';
-import ERC20 from '../Contracts/MoC/abi/RC20Contract';
-import IStakingMachine from '../Contracts/MoC/abi/IStakingMachine.json';
-import IDelayingMachine from '../Contracts/MoC/abi/IDelayingMachine.json';
-import {
-    connectorAddresses
-} from './MultiCallFunctions.js';
 import addressHelper from '../Lib/addressHelper';
 import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
 import convertHelper from '../Lib/convertHelper';
 import { getPriceFields } from '../Lib/price';
-import {config, environment} from '../Config/config';
+import { config } from '../Config/config';
 
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
@@ -50,12 +34,6 @@ const AuthenticateContext = createContext({
     interfaceRedeemStable: async (amount, slippage, callback) => {},
     interfaceMintRiskProx: async (amount, slippage, callback) => {},
     interfaceRedeemRiskProx: async (amount, slippage, callback) => {},
-    DoCMint: async (amount) => {},
-    DoCReedem: async (amount) => {},
-    BPROMint: async (amount) => {},
-    BPROReedem: async (amount) => {},
-    Bprox2Mint: async (amount) => {},
-    Bprox2Redeem: async (amount) => {},
     disconnect: () => {},
     getTransactionReceipt: (hash) => {},
     getStackedBalance: async (address) => {},
@@ -75,31 +53,8 @@ const AuthenticateContext = createContext({
     convertToken: async (from, to, amount) => {}
 });
 
-const vendorAddress = '0xdda74880d638451e6d2c8d3fc19987526a7af730';
-let mocStateAddress = '';
-const mocAddress = '0x01AD6f8E884ed4DDC089fA3efC075E9ba45C9039';
-const btcProviderAddress = '0x8BF2f24AfBb9dBE4F2a54FD72748FC797BB91F81';
-let mocInrateAddress = '';
-let mocExchangeAddress = '';
-let mocSettlementAddress = '';
-let docTokenAddress = '';
-let bproTokenAddress = '';
-const multicall2 = '0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8';
 const bucketX2 = 'X2';
-const TransactionTypeIdsMoC = {
-    MINT_BPRO_FEES_RBTC: 1,
-    REDEEM_BPRO_FEES_RBTC: 2,
-    MINT_DOC_FEES_RBTC: 3,
-    REDEEM_DOC_FEES_RBTC: 4,
-    MINT_BTCX_FEES_RBTC: 5,
-    REDEEM_BTCX_FEES_RBTC: 6,
-    MINT_BPRO_FEES_MOC: 7,
-    REDEEM_BPRO_FEES_MOC: 8,
-    MINT_DOC_FEES_MOC: 9,
-    REDEEM_DOC_FEES_MOC: 10,
-    MINT_BTCX_FEES_MOC: 11,
-    REDEEM_BTCX_FEES_MOC: 12
-};
+
 const AuthenticateProvider = ({ children }) => {
     const [contractStatusData, setContractStatusData] = useState(null);
     const [provider, setProvider] = useState(null);
@@ -178,15 +133,14 @@ const AuthenticateProvider = ({ children }) => {
         contractStatusData,
         userBalanceData,
         config,
-        environment,
         account,
-        vendorAddress
+        vendorAddress: config.vendor
       }
 
     }
 
     const interfaceExchangeMethod = async (sourceCurrency, targetCurrency, amount, slippage, callback) => {
-      const appMode = environment.AppMode;
+      const appMode = config.environment.AppMode;
       const appModeString = `APP_MODE_${appMode}`;
 
       const exchangeCurrencyMap = {
@@ -284,12 +238,12 @@ const AuthenticateProvider = ({ children }) => {
     }
 
     const initContractsConnection = async () => {
-      window.integration = await readContracts(web3, environment);
+      window.integration = await readContracts(web3, config.environment);
       await loadContractsStatusAndUserBalance();
     }
 
     const loadContractsStatusAndUserBalance = async () => {
-      const appMode = environment.AppMode;
+      const appMode = config.environment.AppMode;
 
       // Read info from different contract MoCState.sol MoCInrate.sol MoCSettlement.sol MoC.sol
       // in one call throught Multicall
@@ -402,6 +356,7 @@ const AuthenticateProvider = ({ children }) => {
         );
     };
     const getCommissionValue = async (amount, transactionType) => {
+        /*
         try {
             const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
             const comission = await mocInrate.methods
@@ -412,10 +367,12 @@ const AuthenticateProvider = ({ children }) => {
             return comission;
         } catch (e) {
             console.log(e);
-        }
+        }*/
+
     };
 
     const getVendorMarkup = async (amount) => {
+    /*
         try {
             const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
 
@@ -428,112 +385,14 @@ const AuthenticateProvider = ({ children }) => {
         } catch (e) {
             console.log(e);
         }
+        */
     };
 
-    const estimateGasMintBprox2 = async (
-        address,
-        weiAmount,
-        totalBtcAmount
-    ) => {
-        const moc = getContract(MocAbi.abi, mocAddress);
-        moc.methods
-            .mintBProxVendors(strToBytes32(bucketX2), weiAmount, vendorAddress)
-            .estimateGas({ from: address, value: totalBtcAmount });
-    };
 
     const strToBytes32 = (bucket) => web3.utils.asciiToHex(bucket, 32);
 
-    const DoCMint = async (amount, callback) => {
-        const web3 = new Web3(provider);
-        const moc = getContract(MocAbi.abi, mocAddress);
-
-        const amountWei = web3.utils.toWei(amount);
-        const totalAmount = await getTotalAmount(
-            amountWei,
-            TransactionTypeIdsMoC.MINT_DOC_FEES_RBTC
-        );
-
-        const estimateGas = await moc.methods
-            .mintDocVendors(amountWei, vendorAddress)
-            .estimateGas({ from: account, value: totalAmount });
-
-        return moc.methods.mintDocVendors(amountWei, vendorAddress).send(
-            {
-                from: account,
-                value: totalAmount, //Importe con comisión incluida
-                gasPrice: web3.utils.toWei(accountData.GasPrice),
-                gas: 2 * estimateGas,
-                gasLimit: 2 * estimateGas
-            },
-            callback
-        );
-    };
-
-    const DoCReedem = async (amount, callback) => {
-        const web3 = new Web3(provider);
-        const amountWei = web3.utils.toWei(amount);
-        const moc = getContract(MocAbi.abi, mocAddress);
-        const estimateGas =
-            (await moc.methods
-                .redeemFreeDocVendors(amountWei, vendorAddress)
-                .estimateGas({ from: account })) * 2;
-        return moc.methods.redeemFreeDocVendors(amountWei, vendorAddress).send(
-            {
-                from: account,
-                gasPrice: web3.utils.toWei(accountData.GasPrice),
-                gas: estimateGas,
-                gasLimit: estimateGas
-            },
-            callback
-        );
-    };
-    const BPROMint = async (amount, callback) => {
-        //const web3 = new Web3(provider);
-        const amountWei = Web3.utils.toWei(amount);
-        const totalAmount = await getTotalAmount(
-            amountWei,
-            TransactionTypeIdsMoC.MINT_BPRO_FEES_RBTC
-        );
-
-        //const moc = getContract(MocAbi.abi, mocAddress);
-        console.log('Mintttt BPRO')
-        const moc = window.integration.contracts.moc
-
-        const estimateGas = await moc.methods
-            .mintBProVendors(amountWei, vendorAddress)
-            .estimateGas({ from: account, value: totalAmount });
-
-        return moc.methods.mintBProVendors(amountWei, vendorAddress).send(
-            {
-                from: account,
-                value: totalAmount, //Importe con comisión incluida
-                gasPrice: web3.utils.toWei(accountData.GasPrice),
-                gas: 2 * estimateGas,
-                gasLimit: 2 * estimateGas
-            },
-            callback
-        );
-    };
-    const BPROReedem = async (amount, callback) => {
-        const web3 = new Web3(provider);
-        const amountWei = web3.utils.toWei(amount);
-        const moc = getContract(MocAbi.abi, mocAddress);
-        const estimateGas =
-            (await moc.methods
-                .redeemBProVendors(amountWei, vendorAddress)
-                .estimateGas({ from: account })) * 2;
-        return moc.methods.redeemBProVendors(amountWei, vendorAddress).send(
-            {
-                from: account,
-                gasPrice: web3.utils.toWei(accountData.GasPrice),
-                gas: estimateGas,
-                gasLimit: estimateGas
-            },
-            callback
-        );
-    };
-
     const getDoCBalance = async (address) => {
+    /*
         const contract = new web3.eth.Contract(
             ERC20.abi,
             '0xCb46C0DdC60d18eFEB0e586c17AF6Ea36452DaE0'.toLocaleLowerCase()
@@ -542,71 +401,7 @@ const AuthenticateProvider = ({ children }) => {
         let tokenBalance = await contract.methods.balanceOf(address).call();
 
         return tokenBalance;
-    };
-    const Bprox2Mint = async (btcAmount, callback) => {
-        const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
-        const from = account;
-        const moc = getContract(MocAbi.abi, mocAddress);
-        const weiAmount = new BigNumber(
-            web3.utils.toWei(btcAmount, 'ether')
-        ).toFixed(0);
-        const btcInterestAmount = mocInrate.methods
-            .calcMintInterestValues(strToBytes32(bucketX2), weiAmount)
-            .call();
-
-        // Interest Margin. TODO: Is this ok? Where did this interestFinal came from?
-        const interestFinal = new BigNumber(0.01)
-            .multipliedBy(btcInterestAmount)
-            .plus(btcInterestAmount);
-
-        const totalBtcAmount = await getTotalAmount(
-            weiAmount,
-            TransactionTypeIdsMoC.MINT_BTCX_FEES_RBTC
-        );
-
-        const duplicateEstimateGasMintBprox2 =
-            2 * (await estimateGasMintBprox2(from, weiAmount, totalBtcAmount));
-        return moc.methods
-            .mintBProxVendors(strToBytes32(bucketX2), weiAmount, vendorAddress)
-            .send(
-                {
-                    from,
-                    value: totalBtcAmount,
-                    gasPrice: web3.utils.toWei(accountData.GasPrice),
-                    gas: duplicateEstimateGasMintBprox2,
-                    gasLimit: duplicateEstimateGasMintBprox2
-                },
-                callback
-            );
-    };
-
-    const Bprox2Redeem = async (bprox2Amount, callback) => {
-        const from = account;
-        const weiAmount = web3.utils.toWei(bprox2Amount, 'ether');
-        const moc = getContract(MocAbi.abi, mocAddress);
-        const estimateGas =
-            (await moc.methods
-                .redeemBProxVendors(
-                    strToBytes32(bucketX2),
-                    weiAmount,
-                    vendorAddress
-                )
-                .estimateGas({ from })) * 2;
-        return moc.methods
-            .redeemBProxVendors(
-                strToBytes32(bucketX2),
-                weiAmount,
-                vendorAddress
-            )
-            .send(
-                {
-                    from,
-                    gas: estimateGas,
-                    gasLimit: estimateGas,
-                    gasPrice: web3.utils.toWei(accountData.GasPrice)
-                },
-                callback
-            );
+    */
     };
 
     const getTransactionReceipt = async (hash, callback) => {
@@ -620,22 +415,27 @@ const AuthenticateProvider = ({ children }) => {
     };
 
     const getStackedBalance = async (address) => {
+    /*
         const from = address || account;
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const moc = getContract(IStakingMachine.abi, anAddress);
         let balance = await moc.methods.getBalance(from).call();
         return balance;
+    */
     };
 
     const getLockedBalance = async (address) => {
+        /*
         const from = address || account;
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const moc = getContract(IStakingMachine.abi, anAddress);
         let lockedBalance = await moc.methods.getLockedBalance(from).call();
         return lockedBalance;
+        */
     };
 
     const stakingDeposit = async (mocs, address, callback) => {
+        /*
         const from = account; // await getAccount();
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const weiAmount = web3.utils.toWei(mocs, 'ether');
@@ -657,9 +457,11 @@ const AuthenticateProvider = ({ children }) => {
             },
             callback
         );
+        */
     };
 
     const unstake = async (mocs, callback) => {
+        /*
         const from = account;
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const weiAmount = web3.utils.toWei(mocs, 'ether');
@@ -681,17 +483,21 @@ const AuthenticateProvider = ({ children }) => {
             },
             callback
         );
+        */
     };
 
     const getMoCAllowance = async (address) => {
+        /*
         const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
         const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
         const from = address || account;
         const moc = getContract(ERC20.abi, mocTokenAddress);
         return moc.methods.allowance(from, anAddress).call();
+        */
     };
 
     const approveMoCToken = async (enabled, callback = () => {}) => {
+        /*
         const from = account;
         console.log('from', from);
         const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
@@ -704,9 +510,11 @@ const AuthenticateProvider = ({ children }) => {
         return moc.methods
             .approve(anAddress, newAllowance)
             .send({ from, gasPrice: await getGasPrice() }, callback);
+        */
     };
 
     const withdraw = async (id, callback = () => {}) => {
+        /*
         const from = account;
         const anAddress = '0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0';
         const delayingMachine = getContract(IDelayingMachine.abi, anAddress);
@@ -727,9 +535,11 @@ const AuthenticateProvider = ({ children }) => {
             },
             callback
         );
+        */
     };
 
     const cancelWithdraw = async (id, callback) => {
+        /*
         const from = account;
         const anAddress = '0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0';
         const delayingMachine = getContract(IDelayingMachine.abi, anAddress);
@@ -750,9 +560,11 @@ const AuthenticateProvider = ({ children }) => {
             },
             callback
         );
+        */
     };
 
     const getPendingWithdrawals = async (address) => {
+        /*
         const from = address || account;
         const anAddress = '0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0';
         const moc = getContract(IDelayingMachine.abi, anAddress);
@@ -768,9 +580,11 @@ const AuthenticateProvider = ({ children }) => {
             });
         }
         return withdraws;
+        */
     };
 
     const transferDocTo = async (to, amount, callback) => {
+        /*
         const docAddress = '0x489049c48151924c07F86aa1DC6Cc3Fea91ed963';
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
         const from = account;
@@ -779,9 +593,11 @@ const AuthenticateProvider = ({ children }) => {
         return docToken.methods
             .transfer(toWithChecksum, contractAmount)
             .send({ from, gasPrice: await getGasPrice() }, callback);
+        */
     };
 
     const transferBproTo = async (to, amount, callback) => {
+        /*
         const bproAddress = '0x5639809FAFfF9082fa5B9a8843D12695871f68bd';
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
         const from = account;
@@ -790,9 +606,11 @@ const AuthenticateProvider = ({ children }) => {
         return bproToken.methods
             .transfer(toWithChecksum, contractAmount)
             .send({ from, gasPrice: await getGasPrice() }, callback);
+        */
     };
 
     const transferMocTo = async (to, amount, callback) => {
+        /*
         const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
         const from = await module.getAccount();
@@ -801,17 +619,21 @@ const AuthenticateProvider = ({ children }) => {
         return mocToken.methods
             .transfer(toWithChecksum, contractAmount)
             .send({ from, gasPrice: await getGasPrice() }, callback);
+        */
     };
 
     const calcMintInterestValues = (amount) => {
+        /*
         const mocInrateAddress = '0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c';
         const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
         mocInrate.methods
             .calcMintInterestValues(strToBytes32(bucketX2), amount)
             .call();
+        */
     };
 
     const approveReserve = (address) => {
+        /*
         const weiAmount = web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString());
         const reserveTokenAddress = account;
         const reserveToken = getContract(ERC20.abi, reserveTokenAddress);
@@ -821,6 +643,7 @@ const AuthenticateProvider = ({ children }) => {
                 .approve(moc.options.address, weiAmount)
                 .send({ from: account, gasPrice: price });
         });
+        */
     };
     /* const priceFields = getPriceFields();
     const convertToken = convertHelper(_.pick(contractStatusData, Object.keys(priceFields).concat(['reservePrecision']))); */
@@ -919,12 +742,6 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceRedeemStable,
                 interfaceMintRiskProx,
                 interfaceRedeemRiskProx,
-                DoCMint,
-                DoCReedem,
-                BPROMint,
-                BPROReedem,
-                Bprox2Mint,
-                Bprox2Redeem,
                 getTransactionReceipt,
                 getStackedBalance,
                 getLockedBalance,
