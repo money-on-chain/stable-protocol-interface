@@ -18,7 +18,7 @@ export default function Copy(props) {
             <img
                 width={17}
                 height={17}
-                src={window.location.origin + '/Moc/copy2.png'}
+                src={'Moc/copy2.png'}
                 alt=""
                 style={{marginRight: 10}}
             />

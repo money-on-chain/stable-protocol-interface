@@ -47,7 +47,7 @@ function RBTC() {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={window.location.origin + '/Moc/icon-reserve.svg'}
+                    src={'Moc/icon-reserve.svg'}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t('MoC.Tokens_RESERVE_name', { ns: 'moc' })}

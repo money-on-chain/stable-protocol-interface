@@ -22,7 +22,7 @@ function DOC() {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={window.location.origin + '/Moc/icon-stable.svg'}
+                    src={'Moc/icon-stable.svg'}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t('MoC.wallets.STABLE.title', { ns: 'moc' })}
