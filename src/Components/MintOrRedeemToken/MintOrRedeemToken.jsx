@@ -24,7 +24,7 @@ import InputWithCurrencySelector from '../Form/InputWithCurrencySelector';
 // import ButtonSecondary from '../../atoms/ButtonSecondary/ButtonSecondary';
 // import ConfirmTransactionModal from '../../molecules/ConfirmTransactionModal/ConfirmTransactionModal';
 // import { userAccountIsLoggedIn } from '../../../../api/helpers/userAccountHelper';
-import { getExchangeMethod } from '../../Lib/exchangeHelper';
+//import { getExchangeMethod } from '../../Lib/exchangeHelper';
 import {
   formatVisibleValue,
   formatValueToContract,
@@ -228,7 +228,7 @@ const MintOrRedeemToken = (props) => {
     const { appMode } = window;
     // In rrc20 mode show allowance when need it
     if (appMode === 'RRC20') {
-      const userAllowance = await window.nodeManager.getReserveAllowance(window.address);
+      const userAllowance = await auth.getReserveAllowance(window.address);
       if (valueYouExchange > userAllowance) {
         allowanceReserveModalShow(true);
         return;

@@ -171,7 +171,7 @@ export default function SendModal(props) {
             value={address}
             onChange={(event) => onChangeInputAddress(event)}
             className="separation"
-            isValidChecksumAddress={window.nodeManager && window.nodeManager.isCheckSumAddress}
+            isValidChecksumAddress={auth && auth.isCheckSumAddress}
           />
           <InputWithCurrencySelector
             validate

@@ -8,7 +8,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Modal, notification } from 'antd';
 
 import { convertAmount } from '../../../Lib/exchangeManagerHelper';
-import { getExchangeMethod } from '../../../Lib/exchangeHelper';
+//import { getExchangeMethod } from '../../../Lib/exchangeHelper';
 import {
   formatValueToContract,
   formatValueWithContractPrecision,
@@ -145,11 +145,12 @@ export default function MintModal(props) {
 
   const onConfirmTransactionFinish = async () => {
     console.log(exchanging.currencyCode, receiving.currencyCode, commissionCurrency );
+    /*
     const exchangeMethod = getExchangeMethod(
       exchanging.currencyCode,
       receiving.currencyCode,
       `${commissionCurrency}_COMMISSION`
-    );
+    );*/
     const userAmount = formatValueWithContractPrecision(valueYouExchange, 'RESERVE');
     const userToleranceAmount = formatValueToContract(
       new BigNumber(userTolerance)

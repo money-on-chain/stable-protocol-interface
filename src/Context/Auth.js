@@ -17,8 +17,8 @@ import { transferStableTo, transferRiskProTo, transferMocTo, calcMintInterest } 
 import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unStake, delayMachineWithdraw, delayMachineCancelWithdraw, approveMoCTokenStaking } from '../Lib/integration/interfaces-omoc';
 import { getGasPrice } from '../Lib/integration/utils';
 
-import createNodeManager from '../Lib/nodeManagerFactory';
-import nodeManagerDecorator from '../Lib/nodeManagerDecorator';
+//import createNodeManager from '../Lib/nodeManagerFactory';
+//import nodeManagerDecorator from '../Lib/nodeManagerDecorator';
 
 const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
@@ -278,6 +278,7 @@ const AuthenticateProvider = ({ children }) => {
 
       window.appMode = 'MoC';
 
+      /*
       window.nodeManager = await nodeManagerDecorator( await createNodeManager({
             appMode: window.appMode,
             web3: web3,
@@ -290,6 +291,7 @@ const AuthenticateProvider = ({ children }) => {
             },
             gasPrice: interfaceGasPrice
       }));
+      */
 
     }
 
@@ -359,6 +361,13 @@ const AuthenticateProvider = ({ children }) => {
             transactionReceipt = true;
         }
         return transactionReceipt;
+    };
+
+    const toCheckSumAddress = address => helper.toCheckSumAddress(address);
+
+    const isCheckSumAddress = address => {
+        if (address === undefined) return false;
+        return helper.isValidAddressChecksum(address);
     };
 
     const interfaceGasPrice = async () => {

@@ -9,7 +9,7 @@ import {AuthenticateContext} from "../../Context/Auth";
 const AddressContainer = ({ address, accountData }) => {
     const auth = useContext(AuthenticateContext);
     let addressToShow = '0x0000000000000000000000000000000';
-    if (window.nodeManager && address) addressToShow = window.nodeManager.toCheckSumAddress(address);
+    if (address) addressToShow = auth.toCheckSumAddress(address);
     const [t, i18n]= useTranslation(["global",'moc'])
     return (
         <div className="AddressContainer">
