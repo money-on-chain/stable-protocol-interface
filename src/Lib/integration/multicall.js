@@ -432,6 +432,39 @@ const contractStatus = async (web3, dContracts, appMode) => {
 
   dMocState.commissionRates = commissionRates
 
+  // Historics Price 24hs ago
+  const d24BlockHeights = dMocState.blockHeight - dMocState.dayBlockSpan;
+  // Remove decode result parameter
+  if (appMode === 'MoC') {
+      listMethods = [
+          [mocstate.options.address, mocstate.methods.getBitcoinPrice().encodeABI(), 'uint256'], // 0
+          [mocstate.options.address, mocstate.methods.getMoCPrice().encodeABI(), 'uint256'], // 1
+          [mocstate.options.address, mocstate.methods.bproUsdPrice().encodeABI(), 'uint256'], // 2
+          [mocstate.options.address, mocstate.methods.bucketBProTecPrice(BUCKET_X2).encodeABI(), 'uint256'], // 3
+      ]
+  } else {
+    listMethods = [
+          [mocstate.options.address, mocstate.methods.getReserveTokenPrice().encodeABI(), 'uint256'], // 0
+          [mocstate.options.address, mocstate.methods.getMoCPrice().encodeABI(), 'uint256'], // 1
+          [mocstate.options.address, mocstate.methods.riskProUsdPrice().encodeABI(), 'uint256'], // 2
+          [mocstate.options.address, mocstate.methods.bucketRiskProTecPrice(BUCKET_X2).encodeABI(), 'uint256'], // 3
+      ]
+  }
+
+  const cleanListMethodsHistoric = listMethods.map(x => [x[0], x[1]])
+
+  const multicallResultHistoric = await multicall.methods.tryBlockAndAggregate(false, cleanListMethodsHistoric).call({}, d24BlockHeights)
+
+  const listReturnDataHistoric = multicallResultHistoric[2].map((item, itemIndex) => web3.eth.abi.decodeParameter(listMethods[itemIndex][2], item.returnData))
+
+  const historic = {}
+  historic.bitcoinPrice = listReturnDataHistoric[0]
+  historic.mocPrice = listReturnDataHistoric[1]
+  historic.bproPriceInUsd = listReturnDataHistoric[2]
+  historic.bprox2PriceInRbtc = listReturnDataHistoric[3]
+
+  dMocState.historic = historic
+
   return dMocState
 }
 
