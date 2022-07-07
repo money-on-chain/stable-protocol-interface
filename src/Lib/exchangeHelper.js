@@ -38,6 +38,7 @@ const buyBprox2WithRBTC = (txType, commissionCurrencyCode, callback) => async (m
 const redeemBprox2 = () => async (memo, amount, callback) => window.nodeManager.redeemBprox2(memo, amount, callback);
 
 const redeemFreeDoc = () => async (memo, amount, callback) => window.nodeManager.redeemFreeDoc(memo, amount, callback);
+// const redeemFreeDoc = () => async (memo, amount, callback) => window.nodeManager.redeemFreeDoc(memo, "0.100000000000000000", callback);
 
 
 // TODO: pasar el txType por param.
@@ -198,8 +199,14 @@ const buyCurrencyMap = {
 const appMode = 'MoC' // o RRC20;
 const appModeString = `APP_MODE_MoC`;
 
-const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>
-  buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
+
+
+const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>{
+  console.log('getExchangeMethodgetExchangeMethod')
+  console.log(sourceCurrency)
+  console.log('getExchangeMethodgetExchangeMethod')
+  return  buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
+}
 
 const getTargetOptionsFor = currency => {
   if (!Object.prototype.hasOwnProperty.call(buyCurrencyMap, currency))

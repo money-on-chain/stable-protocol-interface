@@ -58,7 +58,6 @@ const AuthenticateContext = createContext({
     transferBproTo: async (to, amount) => {},
     transferMocTo: async (to, amount) => {},
     calcMintInterestValues: async (amount) => {},
-    approveReserve: async (address) => {},
     convertToken: async (from, to, amount) => {}
 });
 
@@ -291,10 +290,12 @@ const AuthenticateProvider = ({ children }) => {
                 liquidation: 20
             },
             gasPrice: getGasPrice
-        }));
+        }),loadBalanceData);
 
         setUserBalanceData(user_balance);
     };
+
+    window.loadBalanceData= loadBalanceData
 
     const getGasPrice = async () => {
         const percentage = 12;
@@ -748,17 +749,7 @@ const AuthenticateProvider = ({ children }) => {
             .call();
     };
 
-    const approveReserve = (address) => {
-        const weiAmount = web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString());
-        const reserveTokenAddress = account;
-        const reserveToken = getContract(ERC20.abi, reserveTokenAddress);
-        const moc = getContract(MocAbi.abi, mocAddress);
-        return getGasPrice().then((price) => {
-            return reserveToken.methods
-                .approve(moc.options.address, weiAmount)
-                .send({ from: account, gasPrice: price });
-        });
-    };
+
     /* const priceFields = getPriceFields();
     const convertToken = convertHelper(_.pick(contractStatusData, Object.keys(priceFields).concat(['reservePrecision']))); */
     const convertToken = (from, to, amount) => {
@@ -869,7 +860,6 @@ const AuthenticateProvider = ({ children }) => {
                 transferBproTo,
                 transferMocTo,
                 calcMintInterestValues,
-                approveReserve,
                 socket,
                 convertToken
             }}

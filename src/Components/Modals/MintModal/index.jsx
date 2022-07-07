@@ -8,7 +8,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Modal, notification } from 'antd';
 
 import { convertAmount } from '../../../Lib/exchangeManagerHelper';
-import { getExchangeMethod } from '../../../Lib/exchangeHelper';
+import {getExchangeMethod, getExchangeMethod22} from '../../../Lib/exchangeHelper';
 import {
   formatValueToContract,
   formatValueWithContractPrecision,
@@ -42,7 +42,6 @@ export default function MintModal(props) {
     commissionCurrency,
     valueYouExchange,
   } = props;
-
   /* Disabled confirm button when not connected */
   const { address } = true; //window;
   var btnDisable = false;
@@ -59,7 +58,7 @@ export default function MintModal(props) {
   const tokenNameReceive = receiving.currencyCode
     ? currenciesDetail.find((x) => x.value === receiving.currencyCode).label
     : '';
-  
+
   const [currentHash, setCurrentHash] = useState(null);
   const [comment, setComment] = useState('');
   const [showError, setShowError] = useState(false);
@@ -108,7 +107,8 @@ export default function MintModal(props) {
   };
 
   const confirmButton = async ({comment, tolerance}) => {
-
+console.log('confirmButtonconfirmButton*******************')
+    // return false
     // Check if there are enough spendable balance to pay
     // take in care amount to pay gas fee
     const minimumUserBalanceToOperate = "120000000000000";
@@ -144,7 +144,6 @@ export default function MintModal(props) {
   };
 
   const onConfirmTransactionFinish = async () => {
-    console.log(exchanging.currencyCode, receiving.currencyCode, commissionCurrency );
     const exchangeMethod = getExchangeMethod(
       exchanging.currencyCode,
       receiving.currencyCode,
@@ -158,8 +157,8 @@ export default function MintModal(props) {
           .toFixed(),
       'RESERVE'
     );
-
-    exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
+    // exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
+    exchangeMethod(userComment, userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
   };
 
   const callback = (error, transactionHash) => {
@@ -204,7 +203,6 @@ export default function MintModal(props) {
     setShowError(false);
     onCancel();
   };
-  
 
   const markStyle = {
     style: {
@@ -223,6 +221,12 @@ export default function MintModal(props) {
 
   const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
   const styleReceive = tokenNameReceive === receiving.currencyCode ? { color } : {};
+
+  // setInterval(() => {
+  //   console.log('Interval triggered');
+  //   auth.connect()
+  //   console.log('Interval triggered');
+  // }, 5000);
 
   return (
     <Modal
