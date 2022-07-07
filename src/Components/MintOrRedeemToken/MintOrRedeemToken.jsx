@@ -200,7 +200,7 @@ const MintOrRedeemToken = (props) => {
     let interestRate = '0',
       interestValue = BigNumber('0');
     if (actionIsMint && currencyYouReceive === 'RISKPROX') {
-      interestValue = await auth.calcMintInterestValues(
+      interestValue = await auth.interfaceCalcMintInterestValues(
         BigNumber(newValueYouExchange)
           .toFixed(0)
           .toString()
@@ -332,7 +332,7 @@ const MintOrRedeemToken = (props) => {
 
   const setAllowanceReserve = () => {
     setModalAllowanceReserveMode('Waiting');
-    const result = auth.approveReserve(null, (a, _txHash) => {
+    const result = auth.interfaceApproveReserve(null, (a, _txHash) => {
       msgAllowanceTx(_txHash);
     });
     result.then(() => setDoneAllowanceReserve()).catch(() => setFailAllowanceReserve());
@@ -352,7 +352,7 @@ const MintOrRedeemToken = (props) => {
 
   const setAllowance = async allowanceEnabled => {
     setLoadingSwitch(true);
-    await auth.approveMoCToken(allowanceEnabled, (error, _txHash) => {
+    await auth.interfaceApproveMoCTokenStaking(allowanceEnabled, (error, _txHash) => {
       msgAllowanceTx(_txHash);
     }).then(res => {
       setDoneSwitch(allowanceEnabled);

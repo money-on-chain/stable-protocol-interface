@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 import Web3 from 'web3';
 
 import { calcCommission } from './multicall';
-import {toContractPrecision, BUCKET_X2, BUCKET_C0} from './utils';
+import {toContractPrecision, BUCKET_X2, BUCKET_C0, getGasPrice} from './utils';
 
 
 const addCommissions = async (interfaceContext, reserveAmount, token, action) => {
@@ -49,14 +49,102 @@ const addCommissions = async (interfaceContext, reserveAmount, token, action) =>
 
 const calcMintInterest = async (interfaceContext, amount) => {
 
-  const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
+  const { web3, account } = interfaceContext;
   const dContracts = window.integration;
-  const { environment } = config;
+
+  amount = new BigNumber(amount);
+
+  console.log("DEBUGG>>");
+  console.log(amount);
 
   const mocinrate = dContracts.contracts.mocinrate
   const calcMintInterest = await mocinrate.methods.calcMintInterestValues(BUCKET_X2, toContractPrecision(amount)).call()
   return calcMintInterest
 }
 
+const transferStableTo = async (interfaceContext, to, amount, callback) => {
 
-export { addCommissions, calcMintInterest };
+  const { web3, account } = interfaceContext;
+  const dContracts = window.integration;
+
+  const stabletoken = dContracts.contracts.stabletoken
+
+  // Calculate estimate gas cost
+  const estimateGas = await stabletoken.methods
+    .transfer(to, toContractPrecision(amount))
+    .estimateGas({ from: account })
+
+  // Send tx
+  const receipt = stabletoken.methods
+    .transfer(to, toContractPrecision(amount))
+    .send(
+            {
+                from: account,
+                gasPrice: await getGasPrice(web3),
+                gas: estimateGas * 2,
+                gasLimit: estimateGas * 2
+            },
+            callback
+        );
+
+  return receipt
+}
+
+const transferRiskProTo = async (interfaceContext, to, amount, callback) => {
+
+  const { web3, account } = interfaceContext;
+  const dContracts = window.integration;
+
+  const riskprotoken = dContracts.contracts.riskprotoken
+
+  // Calculate estimate gas cost
+  const estimateGas = await riskprotoken.methods
+    .transfer(to, toContractPrecision(amount))
+    .estimateGas({ from: account })
+
+  // Send tx
+  const receipt = riskprotoken.methods
+    .transfer(to, toContractPrecision(amount))
+    .send(
+            {
+                from: account,
+                gasPrice: await getGasPrice(web3),
+                gas: estimateGas * 2,
+                gasLimit: estimateGas * 2
+            },
+            callback
+        );
+
+  return receipt
+}
+
+const transferMocTo = async (interfaceContext, to, amount, callback) => {
+
+  const { web3, account } = interfaceContext;
+  const dContracts = window.integration;
+
+  const moctoken = dContracts.contracts.moctoken
+
+  // Calculate estimate gas cost
+  const estimateGas = await moctoken.methods
+    .transfer(to, toContractPrecision(amount))
+    .estimateGas({ from: account })
+
+  // Send tx
+  const receipt = moctoken.methods
+    .transfer(to, toContractPrecision(amount))
+    .send(
+            {
+                from: account,
+                gasPrice: await getGasPrice(web3),
+                gas: estimateGas * 2,
+                gasLimit: estimateGas * 2
+            },
+            callback
+        );
+
+  return receipt
+}
+
+
+export { addCommissions, calcMintInterest, transferStableTo, transferRiskProTo, transferMocTo };

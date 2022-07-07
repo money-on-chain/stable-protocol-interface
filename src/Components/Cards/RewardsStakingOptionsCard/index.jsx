@@ -90,9 +90,9 @@ export default function RewardsStakingOptions(props) {
         if (props.UserBalanceData) {
             setMocBalance(props.UserBalanceData.mocBalance);
             [_stakedBalance, _lockedBalance, _pendingWithdrawals] = await Promise.all([
-                auth.getStackedBalance(),
-                auth.getLockedBalance(),
-                auth.getPendingWithdrawals()
+                auth.interfaceStackedBalance(),
+                auth.interfaceLockedBalance(),
+                auth.interfacePendingWithdrawals()
             ]);
         }
         const pendingWithdrawalsFormatted = _pendingWithdrawals

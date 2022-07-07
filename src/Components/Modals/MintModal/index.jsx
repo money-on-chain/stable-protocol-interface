@@ -112,7 +112,7 @@ export default function MintModal(props) {
     // Check if there are enough spendable balance to pay
     // take in care amount to pay gas fee
     const minimumUserBalanceToOperate = "120000000000000";
-    const userSpendable = await window.nodeManager.getSpendableBalance(window.address);
+    const userSpendable = await auth.getSpendableBalance(window.address);
 
     let minimumBalance = new BigNumber(minimumUserBalanceToOperate);
     let uTolerance = 0;

@@ -11,6 +11,11 @@ import { config } from '../Config/config';
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
 import { mintStable, redeemStable, mintRiskPro, redeemRiskPro, mintRiskProx, redeemRiskProx } from '../Lib/integration/interfaces-coinbase';
+import { AllowanceUseReserveToken } from '../Lib/integration/interfaces-rrc20';
+
+import { transferStableTo, transferRiskProTo, transferMocTo, calcMintInterest } from '../Lib/integration/interfaces-base';
+import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unStake, delayMachineWithdraw, delayMachineCancelWithdraw, approveMoCTokenStaking } from '../Lib/integration/interfaces-omoc';
+import { getGasPrice } from '../Lib/integration/utils';
 
 import createNodeManager from '../Lib/nodeManagerFactory';
 import nodeManagerDecorator from '../Lib/nodeManagerDecorator';
@@ -36,24 +41,21 @@ const AuthenticateContext = createContext({
     interfaceRedeemRiskProx: async (amount, slippage, callback) => {},
     disconnect: () => {},
     getTransactionReceipt: (hash) => {},
-    getStackedBalance: async (address) => {},
-    getLockedBalance: async (address) => {},
-    stakingDeposit: async (mocs, address) => {},
-    unstake: async (mocs) => {},
-    getMoCAllowance: async (address) => {},
-    approveMoCToken: async (address) => {},
-    withdraw: async (id) => {},
-    cancelWithdraw: async (id) => {},
-    getPendingWithdrawals: async (address) => {},
-    transferDocTo: async (to, amount) => {},
-    transferBproTo: async (to, amount) => {},
-    transferMocTo: async (to, amount) => {},
-    calcMintInterestValues: async (amount) => {},
-    approveReserve: async (address) => {},
+    interfaceStackedBalance: async (address) => {},
+    interfaceLockedBalance: async (address) => {},
+    interfaceStakingDeposit: async (mocs, address) => {},
+    interfaceUnStake: async (mocs) => {},
+    interfaceApproveMoCTokenStaking: async (address) => {},
+    interfaceDelayMachineWithdraw: async (id) => {},
+    interfaceDelayMachineCancelWithdraw: async (id) => {},
+    interfacePendingWithdrawals: async (address) => {},
+    interfaceTransferStableTo: async (to, amount) => {},
+    interfaceTransferRiskProTo: async (to, amount) => {},
+    interfaceTransferMocTo: async (to, amount) => {},
+    interfaceCalcMintInterestValues: async (amount) => {},
+    interfaceApproveReserve: async (address) => {},
     convertToken: async (from, to, amount) => {}
 });
-
-const bucketX2 = 'X2';
 
 const AuthenticateProvider = ({ children }) => {
     const [contractStatusData, setContractStatusData] = useState(null);
@@ -286,7 +288,7 @@ const AuthenticateProvider = ({ children }) => {
                 settlement: 20,
                 liquidation: 20
             },
-            gasPrice: getGasPrice
+            gasPrice: interfaceGasPrice
       }));
 
     }
@@ -301,31 +303,13 @@ const AuthenticateProvider = ({ children }) => {
             Wallet: account,
             Owner: owner,
             Balance: await getBalance(account),
-            GasPrice: await getGasPrice(),
+            GasPrice: await interfaceGasPrice(),
             truncatedAddress: truncate_address
         };
 
         window.address = owner;
 
         setAccountData(accountData);
-    };
-
-    const getGasPrice = async () => {
-        const percentage = 12;
-        let gasPrice;
-        try {
-            gasPrice = await window.web3.eth.getGasPrice();
-        } catch (error) {
-            gasPrice = 65000000;
-        }
-        gasPrice = new BigNumber(gasPrice);
-        if (!percentage) {
-            return gasPrice.toString();
-        }
-        return gasPrice
-            .multipliedBy(percentage * 0.01)
-            .plus(gasPrice)
-            .toString();
     };
 
     const getAccount = async () => {
@@ -342,67 +326,30 @@ const AuthenticateProvider = ({ children }) => {
         }
     };
 
-    const getContract = (abi, contractAddress) => {
-        const web3 = new Web3(provider);
-        return new web3.eth.Contract(abi, contractAddress);
-    };
-    const getTotalAmount = async (amount, transactionType) => {
-        const comision = await getCommissionValue(amount, transactionType);
-        console.log('Comision:' + comision);
-        const vendorMarkup = await getVendorMarkup(amount);
-        console.log('vendorMarkup:' + vendorMarkup);
-        return (
-            parseFloat(amount) + parseFloat(comision) + parseFloat(vendorMarkup)
-        );
-    };
-    const getCommissionValue = async (amount, transactionType) => {
-        /*
-        try {
-            const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
-            const comission = await mocInrate.methods
-                .calcCommissionValue(amount, transactionType)
-                .call();
-            console.log(comission);
-
-            return comission;
-        } catch (e) {
-            console.log(e);
-        }*/
-
+    const getMoCAllowance = async (address) => {
+        const from = address || account;
+        const dContracts = window.integration;
+        const moctoken = dContracts.contracts.moctoken;
+        const moc = dContracts.contracts.moc;
+        return moctoken.methods.allowance(from, moc._address).call();
     };
 
-    const getVendorMarkup = async (amount) => {
-    /*
-        try {
-            const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
+    const getMoCBalance = async (address) => {
+        const from = address || account;
+        const dContracts = window.integration;
+        const moctoken = dContracts.contracts.moctoken;
+        return moctoken.methods.balanceOf(from).call();
+    }
 
-            const comission = await mocInrate.methods
-                .calculateVendorMarkup(vendorAddress, amount)
-                .call();
-            console.log('Vendor Markup:' + comission);
+    const getSpendableBalance = async (address) => {
+        const from = address || account;
+        return await web3.eth.getBalance(from);
+    }
 
-            return comission;
-        } catch (e) {
-            console.log(e);
-        }
-        */
-    };
-
-
-    const strToBytes32 = (bucket) => web3.utils.asciiToHex(bucket, 32);
-
-    const getDoCBalance = async (address) => {
-    /*
-        const contract = new web3.eth.Contract(
-            ERC20.abi,
-            '0xCb46C0DdC60d18eFEB0e586c17AF6Ea36452DaE0'.toLocaleLowerCase()
-        );
-
-        let tokenBalance = await contract.methods.balanceOf(address).call();
-
-        return tokenBalance;
-    */
-    };
+    const getReserveAllowance = async (address) => {
+        const from = address || account;
+        return await web3.eth.getBalance(from);
+    }
 
     const getTransactionReceipt = async (hash, callback) => {
         const web3 = new Web3(provider);
@@ -414,236 +361,77 @@ const AuthenticateProvider = ({ children }) => {
         return transactionReceipt;
     };
 
-    const getStackedBalance = async (address) => {
-    /*
+    const interfaceGasPrice = async () => {
+        return getGasPrice(web3);
+    };
+
+    const interfaceStackedBalance = async (address) => {
         const from = address || account;
-        const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
-        const moc = getContract(IStakingMachine.abi, anAddress);
-        let balance = await moc.methods.getBalance(from).call();
-        return balance;
-    */
+        return stackedBalance(from);
     };
 
-    const getLockedBalance = async (address) => {
-        /*
+    const interfaceLockedBalance = async (address) => {
         const from = address || account;
-        const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
-        const moc = getContract(IStakingMachine.abi, anAddress);
-        let lockedBalance = await moc.methods.getLockedBalance(from).call();
-        return lockedBalance;
-        */
+        return lockedBalance(from);
     };
 
-    const stakingDeposit = async (mocs, address, callback) => {
-        /*
-        const from = account; // await getAccount();
-        const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
-        const weiAmount = web3.utils.toWei(mocs, 'ether');
-        const stakingMachine = getContract(IStakingMachine.abi, anAddress);
-        const methodCall = stakingMachine.methods.deposit(weiAmount, address);
-        const gasLimit = 2 * (await methodCall.estimateGas({ from }));
-        methodCall.call({
-            from,
-            gasPrice: await getGasPrice(),
-            gas: gasLimit,
-            gasLimit: gasLimit
-        });
-        return methodCall.send(
-            {
-                from,
-                gasPrice: await getGasPrice(),
-                gaS: gasLimit,
-                gasLimit: gasLimit
-            },
-            callback
-        );
-        */
-    };
-
-    const unstake = async (mocs, callback) => {
-        /*
-        const from = account;
-        const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
-        const weiAmount = web3.utils.toWei(mocs, 'ether');
-        const stakingMachine = getContract(IStakingMachine.abi, anAddress);
-        const methodCall = stakingMachine.methods.withdraw(weiAmount);
-        const gasLimit = 2 * (await methodCall.estimateGas({ from }));
-        methodCall.call({
-            from,
-            gasPrice: await getGasPrice(),
-            gas: gasLimit,
-            gasLimit: gasLimit
-        });
-        return methodCall.send(
-            {
-                from,
-                gasPrice: await getGasPrice(),
-                gas: gasLimit,
-                gasLimit: gasLimit
-            },
-            callback
-        );
-        */
-    };
-
-    const getMoCAllowance = async (address) => {
-        /*
-        const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
-        const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
+    const interfacePendingWithdrawals = async (address) => {
         const from = address || account;
-        const moc = getContract(ERC20.abi, mocTokenAddress);
-        return moc.methods.allowance(from, anAddress).call();
-        */
+        return pendingWithdrawals(from);
     };
 
-    const approveMoCToken = async (enabled, callback = () => {}) => {
-        /*
-        const from = account;
-        console.log('from', from);
-        const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
-        const anAddress = '0x051F724b67bdB72fd059fBb9c62ca56a92500FF9';
-        const newAllowance = enabled
-            ? web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString())
-            : 0;
-        const moc = getContract(ERC20.abi, mocTokenAddress);
-        console.log('newAllowance', newAllowance);
-        return moc.methods
-            .approve(anAddress, newAllowance)
-            .send({ from, gasPrice: await getGasPrice() }, callback);
-        */
-    };
-
-    const withdraw = async (id, callback = () => {}) => {
-        /*
-        const from = account;
-        const anAddress = '0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0';
-        const delayingMachine = getContract(IDelayingMachine.abi, anAddress);
-        const methodCall = delayingMachine.methods.withdraw(id);
-        const gasLimit = 2 * (await methodCall.estimateGas({ from }));
-        methodCall.call({
-            from,
-            gasPrice: await getGasPrice(),
-            gas: gasLimit,
-            gasLimit: gasLimit
-        });
-        return methodCall.send(
-            {
-                from,
-                gasPrice: await getGasPrice(),
-                gas: gasLimit,
-                gasLimit: gasLimit
-            },
-            callback
-        );
-        */
-    };
-
-    const cancelWithdraw = async (id, callback) => {
-        /*
-        const from = account;
-        const anAddress = '0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0';
-        const delayingMachine = getContract(IDelayingMachine.abi, anAddress);
-        const methodCall = delayingMachine.methods.cancel(id);
-        const gasLimit = 2 * (await methodCall.estimateGas({ from }));
-        methodCall.call({
-            from,
-            gasPrice: await getGasPrice(),
-            gas: gasLimit,
-            gasLimit: gasLimit
-        });
-        return methodCall.send(
-            {
-                from,
-                gasPrice: await getGasPrice(),
-                gas: gasLimit,
-                gasLimit: gasLimit
-            },
-            callback
-        );
-        */
-    };
-
-    const getPendingWithdrawals = async (address) => {
-        /*
+    const interfaceStakingDeposit = async (mocs, address, callback) => {
         const from = address || account;
-        const anAddress = '0xa5D66d8dE70e0A8Be6398BC487a9b346177004B0';
-        const moc = getContract(IDelayingMachine.abi, anAddress);
-        const { ids, amounts, expirations } = await moc.methods
-            .getTransactions(from)
-            .call();
-        const withdraws = [];
-        for (let i = 0; i < ids.length; i++) {
-            withdraws.push({
-                id: ids[i],
-                amount: amounts[i],
-                expiration: expirations[i]
-            });
-        }
-        return withdraws;
-        */
+        const interfaceContext = buildInterfaceContext();
+        return stakingDeposit(interfaceContext, mocs, address, callback);
     };
 
-    const transferDocTo = async (to, amount, callback) => {
-        /*
-        const docAddress = '0x489049c48151924c07F86aa1DC6Cc3Fea91ed963';
+    const interfaceUnStake = async (mocs, callback) => {
+        const interfaceContext = buildInterfaceContext();
+        return unStake(interfaceContext, mocs, callback);
+    };
+
+    const interfaceDelayMachineWithdraw = async (id, callback = () => {}) => {
+        const interfaceContext = buildInterfaceContext();
+        return delayMachineWithdraw(interfaceContext, id, callback);
+    };
+
+    const interfaceDelayMachineCancelWithdraw = async (id, callback) => {
+        const interfaceContext = buildInterfaceContext();
+        return delayMachineCancelWithdraw(interfaceContext, id, callback);
+    };
+
+    const interfaceApproveMoCTokenStaking = async (enabled, callback = () => {}) => {
+        const interfaceContext = buildInterfaceContext();
+        return approveMoCTokenStaking(interfaceContext, enabled, callback);
+    };
+
+    const interfaceTransferStableTo = async (to, amount, callback) => {
+        const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        const from = account;
-        const contractAmount = web3.utils.toWei(amount, 'ether');
-        const docToken = getContract(ERC20.abi, docAddress);
-        return docToken.methods
-            .transfer(toWithChecksum, contractAmount)
-            .send({ from, gasPrice: await getGasPrice() }, callback);
-        */
+        return transferStableTo(interfaceContext, toWithChecksum, amount, callback);
     };
 
-    const transferBproTo = async (to, amount, callback) => {
-        /*
-        const bproAddress = '0x5639809FAFfF9082fa5B9a8843D12695871f68bd';
+    const interfaceTransferRiskProTo = async (to, amount, callback) => {
+        const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        const from = account;
-        const contractAmount = web3.utils.toWei(amount, 'ether');
-        const bproToken = getContract(ERC20.abi, bproAddress);
-        return bproToken.methods
-            .transfer(toWithChecksum, contractAmount)
-            .send({ from, gasPrice: await getGasPrice() }, callback);
-        */
+        return transferRiskProTo(interfaceContext, toWithChecksum, amount, callback);
     };
 
-    const transferMocTo = async (to, amount, callback) => {
-        /*
-        const mocTokenAddress = '0x0399c7F7B37E21cB9dAE04Fb57E24c68ed0B4635';
+    const interfaceTransferMocTo = async (to, amount, callback) => {
+        const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        const from = await module.getAccount();
-        const contractAmount = web3.utils.toWei(amount, 'ether');
-        const mocToken = getContract(ERC20.abi, mocTokenAddress);
-        return mocToken.methods
-            .transfer(toWithChecksum, contractAmount)
-            .send({ from, gasPrice: await getGasPrice() }, callback);
-        */
+        return transferMocTo(interfaceContext, toWithChecksum, amount, callback);
     };
 
-    const calcMintInterestValues = (amount) => {
-        /*
-        const mocInrateAddress = '0x8CA7685F69B4bb96D221049Ac84e2F9363ca7F2c';
-        const mocInrate = getContract(MoCInrate.abi, mocInrateAddress);
-        mocInrate.methods
-            .calcMintInterestValues(strToBytes32(bucketX2), amount)
-            .call();
-        */
+    const interfaceCalcMintInterestValues = (amount) => {
+        const interfaceContext = buildInterfaceContext();
+        return calcMintInterest(interfaceContext, amount);
     };
 
-    const approveReserve = (address) => {
-        /*
-        const weiAmount = web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString());
-        const reserveTokenAddress = account;
-        const reserveToken = getContract(ERC20.abi, reserveTokenAddress);
-        const moc = getContract(MocAbi.abi, mocAddress);
-        return getGasPrice().then((price) => {
-            return reserveToken.methods
-                .approve(moc.options.address, weiAmount)
-                .send({ from: account, gasPrice: price });
-        });
-        */
+    const interfaceApproveReserve = (address, callback) => {
+        const interfaceContext = buildInterfaceContext();
+        AllowanceUseReserveToken(interfaceContext, true, callback);
     };
     /* const priceFields = getPriceFields();
     const convertToken = convertHelper(_.pick(contractStatusData, Object.keys(priceFields).concat(['reservePrecision']))); */
@@ -743,20 +531,19 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceMintRiskProx,
                 interfaceRedeemRiskProx,
                 getTransactionReceipt,
-                getStackedBalance,
-                getLockedBalance,
-                stakingDeposit,
-                unstake,
-                getMoCAllowance,
-                approveMoCToken,
-                withdraw,
-                cancelWithdraw,
-                getPendingWithdrawals,
-                transferDocTo,
-                transferBproTo,
-                transferMocTo,
-                calcMintInterestValues,
-                approveReserve,
+                interfaceStackedBalance,
+                interfaceLockedBalance,
+                interfaceStakingDeposit,
+                interfaceUnStake,
+                interfaceApproveMoCTokenStaking,
+                interfaceDelayMachineWithdraw,
+                interfaceDelayMachineCancelWithdraw,
+                interfacePendingWithdrawals,
+                interfaceTransferStableTo,
+                interfaceTransferRiskProTo,
+                interfaceTransferMocTo,
+                interfaceCalcMintInterestValues,
+                interfaceApproveReserve,
                 socket,
                 convertToken
             }}
