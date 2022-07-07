@@ -87,46 +87,5 @@ const decodeEvents = (receipt) => {
   return filteredEvents
 }
 
-const sendTransaction = async (web3, value, estimateGas, encodedCall, toContract) => {
-  const userAddress = `${process.env.USER_ADDRESS}`.toLowerCase()
-  const privateKey = process.env.USER_PK
-  const gasMultiplier = process.env.GAS_MULTIPLIER
 
-  console.log('Please wait... sending transaction... Wait until blockchain mine transaction!')
-
-  let valueToSend
-  if ((typeof value === 'undefined') || value === null) {
-    valueToSend = '0x'
-  } else {
-    valueToSend = toContractPrecision(value)
-  }
-
-  // Get gas price from node
-  const gasPrice = await web3.eth.getGasPrice()
-
-  // Sign transaction need it PK
-  const transaction = await web3.eth.accounts.signTransaction(
-    {
-      from: userAddress,
-      to: toContract,
-      value: valueToSend,
-      gas: estimateGas * gasMultiplier,
-      gasPrice,
-      gasLimit: estimateGas * gasMultiplier,
-      data: encodedCall
-    },
-    privateKey
-  )
-
-  // Send transaction and get recipt
-  const receipt = await web3.eth.sendSignedTransaction(
-    transaction.rawTransaction
-  )
-
-  // Print decode events
-  const filteredEvents = decodeEvents(receipt)
-
-  return { receipt, filteredEvents }
-}
-
-export { sendTransaction, addABI };
+export { addABI, decodeEvents };

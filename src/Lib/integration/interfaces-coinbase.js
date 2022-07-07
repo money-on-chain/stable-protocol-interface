@@ -4,7 +4,7 @@ import Web3 from 'web3';
 import { addCommissions, calcMintInterest } from './interfaces-base';
 import { toContractPrecision, getGasPrice, BUCKET_X2 } from './utils';
 
-const mintStable = async (interfaceContext, reserveAmount, mintSlippage, callback) => {
+const mintStable = async (interfaceContext, reserveAmount, mintSlippage, onTransaction, onReceipt) => {
   // Mint stable token with collateral coin base
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
@@ -56,15 +56,14 @@ const mintStable = async (interfaceContext, reserveAmount, mintSlippage, callbac
                 gasPrice: await getGasPrice(web3),
                 gas: estimateGas * 2,
                 gasLimit: estimateGas * 2
-            },
-            callback
-        );
+            }
+        ).on('transactionHash', onTransaction).on('receipt', onReceipt);
 
   return receipt
 
 }
 
-const redeemStable = async (interfaceContext, stableAmount, mintSlippage, callback) => {
+const redeemStable = async (interfaceContext, stableAmount, mintSlippage, onTransaction, onReceipt) => {
   // Redeem stable token receiving coin base
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
@@ -108,14 +107,13 @@ const redeemStable = async (interfaceContext, stableAmount, mintSlippage, callba
                 gasPrice: await getGasPrice(web3),
                 gas: estimateGas * 2,
                 gasLimit: estimateGas * 2
-            },
-            callback
-        );
+            }
+        ).on('transactionHash', onTransaction).on('receipt', onReceipt);
 
   return receipt
 }
 
-const mintRiskPro = async (interfaceContext, reserveAmount, mintSlippage, callback) => {
+const mintRiskPro = async (interfaceContext, reserveAmount, mintSlippage, onTransaction, onReceipt) => {
   // Mint RiskPro token with collateral coin base
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
@@ -163,14 +161,13 @@ const mintRiskPro = async (interfaceContext, reserveAmount, mintSlippage, callba
                 gasPrice: await getGasPrice(web3),
                 gas: estimateGas * 2,
                 gasLimit: estimateGas * 2
-            },
-            callback
-        );
+            }
+        ).on('transactionHash', onTransaction).on('receipt', onReceipt);
 
   return receipt
 }
 
-const redeemRiskPro = async (interfaceContext, riskproAmount, mintSlippage, callback) => {
+const redeemRiskPro = async (interfaceContext, riskproAmount, mintSlippage, onTransaction, onReceipt) => {
   // Redeem RISKPRO token receiving coin base
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
@@ -211,14 +208,13 @@ const redeemRiskPro = async (interfaceContext, riskproAmount, mintSlippage, call
                 gasPrice: await getGasPrice(web3),
                 gas: estimateGas * 2,
                 gasLimit: estimateGas * 2
-            },
-            callback
-        );
+            }
+        ).on('transactionHash', onTransaction).on('receipt', onReceipt);
 
   return receipt
 }
 
-const mintRiskProx = async (interfaceContext, reserveAmount, mintSlippage, callback) => {
+const mintRiskProx = async (interfaceContext, reserveAmount, mintSlippage, onTransaction, onReceipt) => {
   // Mint RiskproX token with collateral coin base
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
@@ -277,14 +273,13 @@ const mintRiskProx = async (interfaceContext, reserveAmount, mintSlippage, callb
                 gasPrice: await getGasPrice(web3),
                 gas: estimateGas * 2,
                 gasLimit: estimateGas * 2
-            },
-            callback
-        );
+            }
+        ).on('transactionHash', onTransaction).on('receipt', onReceipt);
 
   return receipt
 }
 
-const redeemRiskProx = async (interfaceContext, riskproxAmount, mintSlippage, callback) => {
+const redeemRiskProx = async (interfaceContext, riskproxAmount, mintSlippage, onTransaction, onReceipt) => {
   // Redeem RISKPROx token receiving coin base
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
@@ -324,9 +319,8 @@ const redeemRiskProx = async (interfaceContext, riskproxAmount, mintSlippage, ca
                 gasPrice: await getGasPrice(web3),
                 gas: estimateGas * 2,
                 gasLimit: estimateGas * 2
-            },
-            callback
-        );
+            }
+        ).on('transactionHash', onTransaction).on('receipt', onReceipt);
 
   return receipt
 

@@ -12,6 +12,7 @@ import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
 import { mintStable, redeemStable, mintRiskPro, redeemRiskPro, mintRiskProx, redeemRiskProx } from '../Lib/integration/interfaces-coinbase';
 import { AllowanceUseReserveToken } from '../Lib/integration/interfaces-rrc20';
+import { decodeEvents } from '../Lib/integration/transaction';
 
 import { transferStableTo, transferRiskProTo, transferMocTo, calcMintInterest } from '../Lib/integration/interfaces-base';
 import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unStake, delayMachineWithdraw, delayMachineCancelWithdraw, approveMoCTokenStaking } from '../Lib/integration/interfaces-omoc';
@@ -32,15 +33,16 @@ const AuthenticateContext = createContext({
     contractStatusData: null,
     web3: null,
     connect: () => {},
-    interfaceExchangeMethod: async (sourceCurrency, targetCurrency, amount, slippage, callback) => {},
-    interfaceMintRiskPro: async (amount, slippage, callback) => {},
-    interfaceRedeemRiskPro: async (amount, slippage, callback) => {},
-    interfaceMintStable: async (amount, slippage, callback) => {},
-    interfaceRedeemStable: async (amount, slippage, callback) => {},
-    interfaceMintRiskProx: async (amount, slippage, callback) => {},
-    interfaceRedeemRiskProx: async (amount, slippage, callback) => {},
+    interfaceExchangeMethod: async (sourceCurrency, targetCurrency, amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintRiskPro: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemRiskPro: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintStable: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemStable: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintRiskProx: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemRiskProx: async (amount, slippage, onTransaction, onReceipt) => {},
     disconnect: () => {},
     getTransactionReceipt: (hash) => {},
+    interfaceDecodeEvents: async (receipt) => {},
     interfaceStackedBalance: async (address) => {},
     interfaceLockedBalance: async (address) => {},
     interfaceStakingDeposit: async (mocs, address) => {},
@@ -54,7 +56,8 @@ const AuthenticateContext = createContext({
     interfaceTransferMocTo: async (to, amount) => {},
     interfaceCalcMintInterestValues: async (amount) => {},
     interfaceApproveReserve: async (address) => {},
-    convertToken: async (from, to, amount) => {}
+    convertToken: async (from, to, amount) => {},
+    getSpendableBalance: async (address) => {}
 });
 
 const AuthenticateProvider = ({ children }) => {
@@ -141,7 +144,7 @@ const AuthenticateProvider = ({ children }) => {
 
     }
 
-    const interfaceExchangeMethod = async (sourceCurrency, targetCurrency, amount, slippage, callback) => {
+    const interfaceExchangeMethod = async (sourceCurrency, targetCurrency, amount, slippage, onTransaction, onReceipt) => {
       const appMode = config.environment.AppMode;
       const appModeString = `APP_MODE_${appMode}`;
 
@@ -205,38 +208,38 @@ const AuthenticateProvider = ({ children }) => {
       };
 
       const exchangeMethod = exchangeCurrencyMap[sourceCurrency][targetCurrency][appModeString].exchangeFunction;
-      exchangeMethod(amount, slippage, callback).then((res) => console.log(res, callback));
+      return exchangeMethod(amount, slippage, onTransaction, onReceipt);
 
     }
 
-    const interfaceMintStable = async (amount, slippage, callback) => {
+    const interfaceMintStable = async (amount, slippage, onTransaction, onReceipt) => {
       const interfaceContext = buildInterfaceContext();
-      await mintStable(interfaceContext, amount, slippage, callback);
+      await mintStable(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceRedeemStable = async (amount, slippage, callback) => {
+    const interfaceRedeemStable = async (amount, slippage, onTransaction, onReceipt) => {
       const interfaceContext = buildInterfaceContext();
-      await redeemStable(interfaceContext, amount, slippage, callback);
+      await redeemStable(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceMintRiskPro = async (amount, slippage, callback) => {
+    const interfaceMintRiskPro = async (amount, slippage, onTransaction, onReceipt) => {
       const interfaceContext = buildInterfaceContext();
-      await mintRiskPro(interfaceContext, amount, slippage, callback);
+      await mintRiskPro(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceRedeemRiskPro = async (amount, slippage, callback) => {
+    const interfaceRedeemRiskPro = async (amount, slippage, onTransaction, onReceipt) => {
       const interfaceContext = buildInterfaceContext();
-      await redeemRiskPro(interfaceContext, amount, slippage, callback);
+      await redeemRiskPro(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceMintRiskProx = async (amount, slippage, callback) => {
+    const interfaceMintRiskProx = async (amount, slippage, onTransaction, onReceipt) => {
       const interfaceContext = buildInterfaceContext();
-      await mintRiskProx(interfaceContext, amount, slippage, callback);
+      await mintRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceRedeemRiskProx = async (amount, slippage, callback) => {
+    const interfaceRedeemRiskProx = async (amount, slippage, onTransaction, onReceipt) => {
       const interfaceContext = buildInterfaceContext();
-      await redeemRiskProx(interfaceContext, amount, slippage, callback);
+      await redeemRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
     const initContractsConnection = async () => {
@@ -354,7 +357,7 @@ const AuthenticateProvider = ({ children }) => {
     }
 
     const getTransactionReceipt = async (hash, callback) => {
-        const web3 = new Web3(provider);
+        //const web3 = new Web3(provider);
         let transactionReceipt = false;
         let transaction = await web3.eth.getTransactionReceipt(hash);
         if (transaction) {
@@ -372,6 +375,12 @@ const AuthenticateProvider = ({ children }) => {
 
     const interfaceGasPrice = async () => {
         return getGasPrice(web3);
+    };
+
+    const interfaceDecodeEvents = async (receipt) => {
+        const txRcp = await web3.eth.getTransactionReceipt(receipt.transactionHash);
+        const filteredEvents = decodeEvents(txRcp);
+        return filteredEvents;
     };
 
     const interfaceStackedBalance = async (address) => {
@@ -554,7 +563,9 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceCalcMintInterestValues,
                 interfaceApproveReserve,
                 socket,
-                convertToken
+                convertToken,
+                getSpendableBalance,
+                interfaceDecodeEvents
             }}
         >
             {children}

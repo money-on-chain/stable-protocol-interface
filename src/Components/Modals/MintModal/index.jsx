@@ -19,6 +19,7 @@ import { LargeNumber } from '../../LargeNumber';
 import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
+
 export default function MintModal(props) {
   const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
   const {
@@ -164,7 +165,7 @@ export default function MintModal(props) {
 
     //exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
     //auth.interfaceMintRiskPro(userAmount, userToleranceFormat, callback);
-    auth.interfaceExchangeMethod(exchanging.currencyCode, receiving.currencyCode, userAmount, userToleranceFormat, callback);
+    auth.interfaceExchangeMethod(exchanging.currencyCode, receiving.currencyCode, userAmount, userToleranceFormat, onTransaction, onReceipt);
   };
 
   const callback = (error, transactionHash) => {
@@ -172,6 +173,18 @@ export default function MintModal(props) {
     setCurrentHash(transactionHash);
     setShowTransaction(true);
     getTransaction(transactionHash);
+  };
+
+  const onTransaction = (transactionHash) => {
+    setLoading(false);
+    setCurrentHash(transactionHash);
+    setShowTransaction(true);
+    getTransaction(transactionHash);
+  };
+
+  const onReceipt = async (receipt) => {
+    console.log("On receipt");
+    const filteredEvents = auth.interfaceDecodeEvents(receipt);
   };
 
   const renderError = () => {
