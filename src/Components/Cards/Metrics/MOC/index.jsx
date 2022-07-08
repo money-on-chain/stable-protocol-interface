@@ -3,8 +3,9 @@ import { AuthenticateContext } from '../../../../Context/Auth';
 import { getDatasMetrics } from '../../../../Helpers/helper';
 import { useTranslation } from "react-i18next";
 import { Skeleton } from 'antd';
+import { LargeNumber } from '../../../LargeNumber';
 
-function MOC() {
+function MOC(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
 
@@ -28,11 +29,12 @@ function MOC() {
                 /> {t('MoC.metrics.Moc.title', { ns: 'moc' })}
             </h3>
 
-            <div className="CardMetricContent">
+            <div className="CardMetricContent MocThemeMetric">
                 {!loading
                     ? <div>
-                        <h3>{t('MoC.metrics.Moc.price', { ns: 'moc' })}</h3>
-                        {getDatas['current_price']}
+                        <h5>{t('MoC.metrics.Moc.price', { ns: 'moc' })}</h5>
+                        <LargeNumber amount={props.mocPrice} currencyCode="USDPrice" includeCurrency={false} />
+                        {/*getDatas['current_price']*/}
                     </div>
                 : <Skeleton active={true} />}
             </div>

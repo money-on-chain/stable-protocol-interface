@@ -44,7 +44,7 @@ function MocLiquidity(props) {
     const [incentiveState, setIncentiveState] = useState(null);
     const [incentiveStateData, setIincentiveStateData] = useState([]);
 
-    const { accountData } = auth;
+    const { accountData, userBalanceData } = auth;
 
     const agent= () => {
         api('get', `${config.api_moneyonchain}`+'agent', {})
@@ -70,7 +70,11 @@ function MocLiquidity(props) {
     };
 
     const claim =()=>{
-        claimRewards(accountData.Owner,incentiveState.agent_address,  incentiveState.gas_cost,  (a, _txHash) => {setModalOpen(true);setTxHash(_txHash);})
+        claimRewards(accountData.Owner,incentiveState.agent_address,  incentiveState.gas_cost,  (a, _txHash) => {
+            setModalOpen(true);
+            setTxHash(_txHash);
+            console.log('_txHash', _txHash);
+            })
             .then( () => setOperationStatus("success"))
             .catch(() => setOperationStatus("error"))
     }
@@ -82,7 +86,8 @@ function MocLiquidity(props) {
         api('get', `${config.api_moneyonchain}balance/${accountData.Owner}`, {})
             .then(response => {
                 setClaimsValue(response);
-                setRewardedToday(getRewardedToday(response.daily_moc,auth.userBalanceData['bproBalance'],response.total_bpro))
+                console.log('bproBalancea', userBalanceData.bproBalance);
+                setRewardedToday(getRewardedToday(response.daily_moc,userBalanceData.bproBalance,response.total_bpro))
             })
             .catch((response) => {
                 console.log(response);
@@ -90,7 +95,7 @@ function MocLiquidity(props) {
     };
 
     useEffect(() => {
-        if(accountData.Owner!==undefined){
+        if(userBalanceData && accountData.Owner!==undefined){
             claimsCall()
         }
     },[auth, accountData.Owner]);

@@ -234,7 +234,7 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
               textToCopy={state.deposit.address} fastBTC={true}
             />
           </div>
-          <div>
+          <div style={{ border: '2 solid', padding: '3px 3px 0px 3px', borderRadius: 5 }}>
             <QRCode value={address} size="128" alt="qrCode"  />
           </div>
         </div>

@@ -32,7 +32,7 @@ export default function YourAddressCard(props) {
             {!loading ? <>
             <h3 className={"CardTitle margin-bottom-10"}>{t('MoC.wallets.ownAddressLabel', {ns: 'moc'})} </h3>
             <div className={classname}>
-                <AddressContainer {...{ address }} accountData={accountData} />
+                <AddressContainer {...{ address }} accountData={accountData} view={view} />
             </div>
             <Row style={{ display: 'flex', justifyContent: 'center'}} className="SendBtn">
                 <Col>

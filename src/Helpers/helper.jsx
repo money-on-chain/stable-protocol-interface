@@ -16,6 +16,7 @@ export function setNumber(number){
     }
 }
 
+
 export function getDatasMetrics(auth){
     const coin_usd= config.coin_usd
     if (auth.userBalanceData) {
@@ -26,6 +27,7 @@ export function getDatasMetrics(auth){
             // console.log(auth.userBalanceData['bproBalance'])
             console.log('000000000000000000000000000000000')
             const globalCoverage= Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
+            const globalCoverageTooltip = Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')); 
             const globalCoverageClean= Number(auth.contractStatusData['globalCoverage']).toFixed(4)
 
             const bpro_usd= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bproPriceInUsd']), 'Kwei')).toFixed(5);
@@ -36,21 +38,29 @@ export function getDatasMetrics(auth){
             const current_price= (setNumber(auth.contractStatusData['blockSpan']) / 10000).toFixed(2);
 
             const b0DocAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0DocAmount']), 'kether')).toFixed(5);
+            const b0DocAmountTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0DocAmount']), 'kether'));
             const docAvailableToRedeem= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['docAvailableToRedeem']), 'kether')).toFixed(5);
+            const docAvailableToRedeemTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['docAvailableToRedeem']), 'kether'));
             const docAvailableToMint= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['docAvailableToMint']), 'ether')).toFixed(2);
+            const docAvailableToMintTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['docAvailableToMint']), 'ether'));
 
             const btcx_usd= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinPrice']), 'Kwei')).toFixed(5);
             const btcx_interest= parseFloat(web3.utils.fromWei(setNumber(auth.userBalanceData['bprox2Balance']), 'Kwei')).toFixed(5);
+            const btcx_interes_tooltip = parseFloat(web3.utils.fromWei(setNumber(auth.userBalanceData['bprox2Balance']), 'Kwei'));
             const btcx_x2Leverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage']), 'ether')).toFixed(6);
             const btcx_x2Coverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2Coverage']), 'ether')).toFixed(6);
             const btcx_AvailableToMint= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bprox2AvailableToMint']), 'ether')).toFixed(6);
 
             const rbtc_usd= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinPrice']), 'kwei')).toFixed(5)
             const rbtc_interest= parseFloat(setNumber(auth.userBalanceData['bprox2Balance'])).toFixed(6);
-            const totalBTCAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['totalBTCAmount']), 'ether')).toFixed(5)
-            const totalBTCAmountUsd= ((totalBTCAmount * coin_usd)/1000).toFixed(6)
+            const totalBTCAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['totalBTCAmount']), 'ether')).toFixed(5);
+            const totalBTCAmountTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['totalBTCAmount']), 'ether'));
+            const totalBTCAmountUsd= ((totalBTCAmount * coin_usd)/1000).toFixed(6);
+            const totalBTCAmountUsdTooltip = ((totalBTCAmount * coin_usd)/1000);
             const b0TargetCoverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0TargetCoverage']), 'ether')).toFixed(6);
+            const b0TargetCoverageTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0TargetCoverage']), 'ether'));
             const bitcoinMovingAverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinMovingAverage']), 'kether')).toFixed(5);
+            const bitcoinMovingAverageTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinMovingAverage']), 'kether'));
 
             const liquidity_totalBTCAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['totalBTCAmount']), 'ether')).toFixed(6);
             const liquidity_docAvailableToRedeem= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['docAvailableToRedeem']), 'kether')).toFixed(5);
@@ -64,35 +74,35 @@ export function getDatasMetrics(auth){
             const paused= (auth.contractStatusData['paused']);
 
             return {
-                globalCoverage:globalCoverage,
+                globalCoverage:globalCoverage,globalCoverageTooltip: globalCoverageTooltip,
                 bpro_usd:bpro_usd,b0Leverage:b0Leverage,b0BproAmount:b0BproAmount,bproAvailableToRedeem:bproAvailableToRedeem,
                 current_price:current_price,
-                b0DocAmount:b0DocAmount,docAvailableToRedeem:docAvailableToRedeem,docAvailableToMint:docAvailableToMint,
-                btcx_usd:btcx_usd,interest:btcx_interest,x2Leverage:btcx_x2Leverage,x2Coverage:btcx_x2Coverage,bprox2AvailableToMint:btcx_AvailableToMint,
-                rbtc_usd:rbtc_usd,rbtc_interest:rbtc_interest,totalBTCAmount:totalBTCAmount,totalBTCAmountUsd:totalBTCAmountUsd,b0TargetCoverage:b0TargetCoverage,bitcoinMovingAverage:bitcoinMovingAverage,
+                b0DocAmount:b0DocAmount,b0DocAmountTooltip:b0DocAmountTooltip,docAvailableToRedeem:docAvailableToRedeem,docAvailableToRedeemTooltip:docAvailableToRedeemTooltip,docAvailableToMint:docAvailableToMint,docAvailableToMintTooltip:docAvailableToMintTooltip,
+                btcx_usd:btcx_usd,interest:btcx_interest,interestTooltip:btcx_interes_tooltip,x2Leverage:btcx_x2Leverage,x2Coverage:btcx_x2Coverage,bprox2AvailableToMint:btcx_AvailableToMint,
+                rbtc_usd:rbtc_usd,rbtc_interest:rbtc_interest,totalBTCAmount:totalBTCAmount,totalBTCAmountTooltip:totalBTCAmountTooltip,totalBTCAmountUsd:totalBTCAmountUsd,totalBTCAmountUsdTooltip:totalBTCAmountUsdTooltip,b0TargetCoverage:b0TargetCoverage,b0TargetCoverageTooltip:b0TargetCoverageTooltip,bitcoinMovingAverage:bitcoinMovingAverage,bitcoinMovingAverageTooltip:bitcoinMovingAverageTooltip,
                 liquidity_totalBTCAmount:liquidity_totalBTCAmount,liquidity_docAvailableToRedeem:liquidity_docAvailableToRedeem,liquidity_b0BproAmount:liquidity_b0BproAmount,liquidity_interest:liquidity_rbtc_interest,liquidity_x2DocAmount:liquidity_x2DocAmount,liquidity_x2BproAmount:liquidity_x2BproAmount,
                 blocksToSettlement:blocksToSettlement,blockHeight:blockHeight,paused:paused,
                 globalCoverageClean:globalCoverageClean
             };
         } else {
-            return {globalCoverage: 0,
+            return {globalCoverage: 0,globalCoverageTooltip: 0,
                     bpro_usd:0,b0Leverage:0,b0BproAmount:0,bproAvailableToRedeem:0,
                     current_price:0,
-                    b0DocAmount:0,docAvailableToRedeem:0,docAvailableToMint:0,
-                    btcx_usd:0,interest:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
-                    rbtc_usd:0,rbtc_interest:0,totalBTCAmount:0,totalBTCAmountUsd:0,b0TargetCoverage:0,bitcoinMovingAverage:0,
-                    liquidity_totalBTCAmount:0,liquidity_docAvailableToRedeem:0,liquidity_b0BproAmount:0,liquidity_interest:0,liquidity_x2DocAmount:0,liquidity_x2BproAmount:0,
+                    b0DocAmount:0,b0DocAmountTooltip:0,docAvailableToRedeem:0,docAvailableToRedeemTooltip:0,docAvailableToMint:0,docAvailableToMintTooltip:0,
+                    btcx_usd:0,interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
+                    rbtc_usd:0,rbtc_interest:0,totalBTCAmount:0,totalBTCAmountTooltip:0,totalBTCAmountUsd:0,totalBTCAmountUsdTooltip:0,b0TargetCoverage:0,b0TargetCoverageTooltip:0,bitcoinMovingAverage:0,bitcoinMovingAverageTooltip:0,
+                    liquidity_totalBTCAmount:0,liquidity_docAvailableToRedeem:0,docAvailableToRedeemTooltip:0,liquidity_b0BproAmount:0,liquidity_interest:0,liquidity_x2DocAmount:0,liquidity_x2BproAmount:0,
                     blocksToSettlement:0,blockHeight:0,paused:false,
                     globalCoverageClean:0
             };
         }
     }else{
-        return {globalCoverage:0,
+        return {globalCoverage:0,globalCoverageTooltip: 0,
                 bpro_usd:0,b0Leverage:0,b0BproAmount:0,bproAvailableToRedeem:0,
                 current_price:0,
-                b0DocAmount:0,docAvailableToRedeem:0,docAvailableToMint:0,
-                btcx_usd:0,interest:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
-                rbtc_usd:0,rbtc_interest:0,totalBTCAmount:0,totalBTCAmountUsd:0,b0TargetCoverage:0,bitcoinMovingAverage:0,
+                b0DocAmount:0,b0DocAmountTooltip:0,docAvailableToRedeem:0,docAvailableToMint:0,docAvailableToMintTooltip:0,
+                btcx_usd:0,interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
+                rbtc_usd:0,rbtc_interest:0,totalBTCAmount:0,totalBTCAmountTooltip:0,totalBTCAmountUsd:0,totalBTCAmountUsdTooltip:0,b0TargetCoverage:0,b0TargetCoverageTooltip:0,bitcoinMovingAverage:0,bitcoinMovingAverageTooltip:0,
                 liquidity_totalBTCAmount:0,liquidity_docAvailableToRedeem:0,liquidity_b0BproAmount:0,liquidity_interest:0,liquidity_x2DocAmount:0,liquidity_x2BproAmount:0,
                 blocksToSettlement:0,blockHeight:0,paused:false,
                 globalCoverageClean:0

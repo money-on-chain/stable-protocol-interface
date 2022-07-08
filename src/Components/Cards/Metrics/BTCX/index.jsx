@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
 import { Skeleton } from 'antd';
 
-function BTCX() {
+function BTCX(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
 
@@ -29,24 +29,35 @@ function BTCX() {
                 /> {t('MoC.wallets.RISKPROX.title', { ns: 'moc' })}
             </h3>
 
-            <div className="CardMetricContent">
+            <div className="CardMetricContent BProxThemeMetric">
                 {!loading
                     ? <>
                         <div>
-                            <h3>{t('MoC.metrics.RISKPROX.usd', { ns: 'moc' })}</h3>
+                            <h5>{t('MoC.metrics.RISKPROX.usd', { ns: 'moc' })}</h5>
                             <span>
-                                <LargeNumber {...{ amount: getBtcx['btcx_usd'], currencyCode: 'RISKPROX', includeCurrency: true }} />
+                                {/*<LargeNumber {...{ amount: getBtcx['btcx_usd'], currencyCode: 'RISKPROX', includeCurrency: true }} />*/}
+                                <LargeNumber amount={props.usdValue} currencyCode={'USDPrice'} />
                             </span>
-                            <h3>{t('MoC.metrics.RISKPROX.total', { ns: 'moc' })}</h3>
-                            <span className={'red space'}>{getBtcx['interest']}</span>
-                            <h3>{t('MoC.metrics.RISKPROX.availableMint', { ns: 'moc' })}</h3>
-                            <span className={'red'}>{getBtcx['bprox2AvailableToMint']}</span>
+                            <h5>{t('MoC.metrics.RISKPROX.total', { ns: 'moc' })}</h5>
+                            <span className={'red space'}>
+                                <LargeNumber amount={props.total} currencyCode="RISKPROX" />
+                                {/*getBtcx['interest']*/}
+                            </span>
+                            <h5>{t('MoC.metrics.RISKPROX.availableMint', { ns: 'moc' })}</h5>
+                            <span className={'red'}>
+                                <LargeNumber amount={props.availableMint} currencyCode="RISKPROX" />
+                                {/*getBtcx['bprox2AvailableToMint']*/}
+                            </span>
                         </div>
                         <div className="separator" /><div>
-                            <h3>{t('MoC.metrics.RISKPROX.leverage', { ns: 'moc' })}</h3>
-                            <span className={'space'}>{getBtcx['x2Leverage']}</span>
-                            <h3>{t('MoC.metrics.RISKPROX.coverage', { ns: 'moc' })}</h3>
-                            {getBtcx['x2Coverage']}
+                            <h5>{t('MoC.metrics.RISKPROX.leverage', { ns: 'moc' })}</h5>
+                            <span className={'space'}>
+                                <LargeNumber amount={props.leverage} currencyCode="RISKPROX" />
+                                {/*getBtcx['x2Leverage']*/}
+                            </span>
+                            <h5>{t('MoC.metrics.RISKPROX.coverage', { ns: 'moc' })}</h5>
+                            <LargeNumber amount={props.coverage} currencyCode="RISKPROX" />
+                            {/*getBtcx['x2Coverage']*/}
                         </div></>
                 : <Skeleton active={true} />}
             </div>

@@ -6,13 +6,13 @@ import { getDatasMetrics } from '../../../../Helpers/helper'
 import { formatValueToContract } from '../../../../Lib/Formats';
 import SystemOperations from "./operations";
 import { useTranslation } from "react-i18next";
-import { Skeleton } from 'antd';
+import { Skeleton, Tooltip } from 'antd';
 
 const BigNumber = require('bignumber.js');
 const iconCheckColor = '#09c199';
 const iconCheckColorCloseOutlined = '#ed1c24';
 
-function SystemStatus() {
+function SystemStatus(props) {
 
     const auth = useContext(AuthenticateContext);
 
@@ -145,7 +145,7 @@ function SystemStatus() {
 
 
     const price_active = true
-    const { className, operationsAvailable, title, subtitle } = getConfigByCoverage(getDatas['globalCoverageClean'], getDatas['paused'], getDatas['blocksToSettlement'], price_active);
+    const { className, operationsAvailable, title, subtitle } = getConfigByCoverage(props.coverage, props.paused, props.blocksToSettlement, price_active);; // getConfigByCoverage(getDatas['globalCoverageClean'], getDatas['paused'], getDatas['blocksToSettlement'], price_active);
 
     return (
         <div className="Card CardSystemStatus">
@@ -155,13 +155,17 @@ function SystemStatus() {
                     ? <><div>
                             <div className="CardMetricContent" style={{ alignItems: 'center', justifyItems: 'center', marginTop: 0 }}>
                                 <CheckCircleFilled style={{ marginLeft: 5, fontSize: 30 }} className={className} />
-                                <div className={className} style={{ fontWeight: 500, marginLeft: 10 }} dangerouslySetInnerHTML={{ __html: customTitle(t("MoC.metrics.".concat(className.concat('.title')), { ns: 'moc' })) }}></div>
+                                <div className={className} style={{ fontWeight: 500, marginLeft: 10, fontSize: '19.6px' }} dangerouslySetInnerHTML={{ __html: customTitle(t("MoC.metrics.".concat(className.concat('.title')), { ns: 'moc' })) }}></div>
                             </div>
                             <h5 style={{ marginLeft: 35 }}> {t("MoC.metrics.".concat(className.concat('.subtitle')), { ns: 'moc' })} </h5>
                         </div>
                         <div>
-                            <h3>{t('global.Metrics_globalCoverage', { ns: 'global' })}</h3>
-                            <span style={{ color: className }}>{getDatas['globalCoverage']} </span>
+                            <h5>{t('global.Metrics_globalCoverage', { ns: 'global' })}</h5>
+                            <Tooltip placement="top" title={getDatas['globalCoverageTooltip']}>
+                                <span className={className} style={{fontSize: 21 }}>
+                                    {getDatas['globalCoverage']}
+                                </span>
+                            </Tooltip>
                         </div>
                     </> : <Skeleton active={true} />
                 }

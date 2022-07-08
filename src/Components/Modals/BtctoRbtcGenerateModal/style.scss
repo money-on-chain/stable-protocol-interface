@@ -234,7 +234,7 @@
     border-radius: 8px;
     background: #08374F;
     padding: 4px 10px;
-
+    align-items: center;
     img {
 
     }
@@ -242,9 +242,10 @@
     div {
         color: #fff;
         padding-left: 12px;
-        font-family: "Montserrat", sans-serif;
-        font-weight: normal;
+        font-family: Montserrat, sans-serif;
+        font-weight: 400;
         font-size: 14px;
         text-align: left;
+        line-height: 16px;
     }
 }

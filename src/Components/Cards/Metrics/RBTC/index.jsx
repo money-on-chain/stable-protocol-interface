@@ -1,19 +1,26 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Col, Row, Skeleton } from 'antd';
+import { Col, Row, Skeleton, Tooltip } from 'antd';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { Tooltip as TooltipRecharts } from 'recharts';
 import { AuthenticateContext } from '../../../../Context/Auth';
 import { getDatasMetrics } from '../../../../Helpers/helper';
 import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
+import { formatVisibleValue } from '../../../../Lib/Formats';
 
 const COLORS = ['#ef8a13', '#00a651'];
 
-function RBTC() {
+function RBTC(props) {
     const auth = useContext(AuthenticateContext);
-    const { accountData } = auth;
+    const { accountData, convertToken } = auth;
     const [t, i18n] = useTranslation(["global", 'moc']);
     const [loading, setLoading] = useState(true);
-    const timeSke= 1500
+    const timeSke= 1500;
+    const totalRISKPROInUSD = convertToken("RISKPRO", "USD", props.totalRISKPRO);
+    const totalRISKPROXInUSD = convertToken("RISKPROX", "USD", props.totalRISKPROX);
+    // TODO
+    const totalUSD = 0; // totalRISKPROInUSD?.plus(totalRISKPROXInUSD?.plus(props.totalSTABLE));
+    const totalRBTC = convertToken("STABLE", "RESERVE", totalUSD);
 
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke)
@@ -40,7 +47,38 @@ function RBTC() {
         }
     };
 
-    const getRiskprox = getDatasMetrics(auth)
+    const getRiskprox = getDatasMetrics(auth);
+    const toShow = ({ totalSTABLE, totalRISKPRO, totalRISKPROX }) => {
+        return [
+          {
+            currencyCode: "RISKPRO",
+            balance: totalRISKPRO,
+          },
+          {
+            currencyCode: "RISKPROX",
+            balance: totalRISKPROX
+          },
+          {
+            currencyCode: "STABLE",
+            balance: totalSTABLE
+          }
+        ]
+    };
+    
+    const tokensToShow = toShow({ totalSTABLE: props.totalSTABLE, totalRISKPRO: props.totalRISKPRO, totalRISKPROX: props.totalRISKPROX });
+
+    const CustomTooltip = ({payload}) => {
+        const data = payload && payload[0];
+        if(!data) {
+            return null;
+        }
+        return <div className="custom-tooltip pieChartTooltip">
+        {/*<p className="label">{`${label} : ${payload[0].value}`}</p>*/}
+        {/*<p className="intro">{getIntroOfPage(label)}</p>*/}
+        <p className="value-1">{`${payload[0].payload.value} ${payload[0].payload.set1}`}</p>
+        <p className={`${payload[0].payload.class}`}>{`${payload[0].payload.value} ${payload[0].payload.set2}`}</p>
+    </div>
+    }
 
     return (
         <div className="Card CardSystemStatus">
@@ -75,22 +113,43 @@ function RBTC() {
                                                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                                 ))}
                                         </Pie>
+                                        <TooltipRecharts content={<CustomTooltip />} />
                                     </PieChart>
                                 </ResponsiveContainer>
                             </div>
-                            <div style={{ textAlign: 'center' }}>{getRiskprox['totalBTCAmount']} RBTC</div>
-                                <h3 style={{ textAlign: 'center' }}>{getRiskprox['totalBTCAmountUsd']} USD</h3>
+                            <div style={{ textAlign: 'center' }}>
+                                <LargeNumber amount={totalRBTC} currencyCode={"RESERVE"} includeCurrency={true} />
+                                {/* <Tooltip placement="top" title={getRiskprox['totalBTCAmountTooltip']}>
+                                    {getRiskprox['totalBTCAmount']} RBTC
+                                </Tooltip> */}
+                            </div>
+                            <h3 style={{ textAlign: 'center' }}>
+                                <LargeNumber amount={totalUSD} currencyCode="USD" includeCurrency={true} />
+                                {/* <Tooltip placement='top' title={getRiskprox['totalBTCAmountUsdTooltip']}>
+                                {getRiskprox['totalBTCAmountUsd']} USD
+                                </Tooltip> */}
+                            </h3>
                         </div>
                         <div className="separator" style={{ height: 220 }} />
                         <div style={{ marginLeft: 30 }}>
                         <h3>{t('MoC.metrics.infoRBTC.priceRBTC', { ns: 'moc' })}</h3>
-                        <LargeNumber {...{ amount: getRiskprox['rbtc_usd'], currencyCode: 'RESERVE', includeCurrency: true }} />
+                        <LargeNumber amount={props.rbtcPrice} currencyCode={"USDPrice"} includeCurrency={true} />
+                        {/* <LargeNumber {...{ amount: getRiskprox['rbtc_usd'], currencyCode: 'RESERVE', includeCurrency: true }} /> */}
                         <h3>{t('MoC.metrics.infoRBTC.interest', { ns: 'moc' })}</h3>
-                        {getRiskprox['interest']} RBTC
+                        <LargeNumber amount={props.b0BTCInrateBag} currencyCode={"RESERVE"} includeCurrency={true} />
+                        {/* <Tooltip placement="top" title={getRiskprox['interestTooltip']}>
+                            {getRiskprox['interest']} RBTC
+                        </Tooltip> */}
                         <h3>{t('MoC.metrics.infoRBTC.EMA', { ns: 'moc' })}</h3>
-                        {getRiskprox['bitcoinMovingAverage']} USD
+                        <LargeNumber amount={props.EMA} currencyCode={"USDPrice"} includeCurrency={true} />
+                        {/* <Tooltip placement="top" title={getRiskprox['bitcoinMovingAverageTooltip']}> 
+                            {getRiskprox['bitcoinMovingAverage']} USD
+                        </Tooltip> */}
                         <h3>{t('MoC.metrics.infoRBTC.targetCoverage', { ns: 'moc' })}</h3>
-                        {getRiskprox['b0TargetCoverage']}
+                        <LargeNumber amount={props.targetCoverage} currencyCode={"RESERVE"} includeCurrency={false} />
+                        {/* <Tooltip placement="top" title={getRiskprox['b0TargetCoverageTooltip']}>
+                            {getRiskprox['b0TargetCoverage']}
+                        </Tooltip>*/}
                         </div></>
                     : <Skeleton active={true} />}
             </div>
