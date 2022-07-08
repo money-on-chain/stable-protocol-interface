@@ -28,7 +28,7 @@ export default function StakingOptionsModal(props) {
     const setAllowance = async () => {
         setStep(1);
         // setStep(2); // sacar
-        await auth.approveMoCToken(true, (error) => {
+        await auth.interfaceApproveMoCTokenStaking(true, (error) => {
         }).then(res => {
                 setStep(2);
                 return null;
@@ -45,7 +45,7 @@ export default function StakingOptionsModal(props) {
 
     const depositMoCs = async () => {
         onClose();
-        await auth.stakingDeposit(amountInEth, accountData.Wallet, (error, txHash) => {
+        await auth.interfaceStakingDeposit(amountInEth, accountData.Wallet, (error, txHash) => {
             if (error) {
                 return error;
             }
@@ -68,7 +68,7 @@ export default function StakingOptionsModal(props) {
 
     const restakeMoCs = async () => {
         onClose();
-        await auth.cancelWithdraw(withdrawalId, (error, txHash) => {
+        await auth.interfaceDelayMachineCancelWithdraw(withdrawalId, (error, txHash) => {
                 if (error) return error;
 
                 const status = 'pending';
@@ -93,7 +93,7 @@ export default function StakingOptionsModal(props) {
 
     const unstakeMoCs = async () => {
         onClose();
-        await auth.unstake(amountInEth, (error, txHash) => {
+        await auth.interfaceUnStake(amountInEth, (error, txHash) => {
                 if (error) return error;
 
                 const status = 'pending';
@@ -115,7 +115,7 @@ export default function StakingOptionsModal(props) {
     };
     const withdrawMoCs = () => {
         onClose();
-        auth.withdraw(withdrawalId, (error, txHash) => {
+        auth.interfaceDelayMachineWithdraw(withdrawalId, (error, txHash) => {
                 if (error) return error;
 
                 const status = 'pending';

@@ -27,42 +27,28 @@ const TransactionTypeIdsRRC20 = {
   REDEEM_RISKPROX_FEES_MOC: 12,
 }
 
-const redeemBpro = () => async (memo, amount, callback) => window.nodeManager.redeemBpro(memo, amount, callback);
-
-const buyBproWithRBTC = (txType, commissionCurrencyCode, callback) => async (memo, amount, callback) => window.nodeManager.mintBpro(memo, amount, txType, commissionCurrencyCode, callback);
-
-const buyDocWithRBTC = (txType, commissionCurrencyCode, callback) => async (memo, amount, callback) => window.nodeManager.mintDoc(memo, amount, txType, commissionCurrencyCode, callback);
-
-const buyBprox2WithRBTC = (txType, commissionCurrencyCode, callback) => async (memo, amount, callback) => window.nodeManager.mintBprox2(memo, amount, txType, commissionCurrencyCode, callback);
-
-const redeemBprox2 = () => async (memo, amount, callback) => window.nodeManager.redeemBprox2(memo, amount, callback);
-
-const redeemFreeDoc = () => async (memo, amount, callback) => window.nodeManager.redeemFreeDoc(memo, amount, callback);
-// const redeemFreeDoc = () => async (memo, amount, callback) => window.nodeManager.redeemFreeDoc(memo, "0.100000000000000000", callback);
-
-
 // TODO: pasar el txType por param.
 const buyCurrencyMap = {
   RISKPROX: {
     RESERVE: {
       MOC_COMMISSION: {
         APP_MODE_MoC: {
-          exchangeFunction: redeemBprox2(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.REDEEM_BTCX_FEES_MOC
         },
         APP_MODE_RRC20: {
-          exchangeFunction: redeemBprox2(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.REDEEM_RISKPROX_FEES_MOC
         }
       },
       RESERVE_COMMISSION: {
         APP_MODE_MoC: {
-          exchangeFunction: redeemBprox2(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.REDEEM_BTCX_FEES_RBTC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: redeemBprox2(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.REDEEM_RISKPROX_FEES_RESERVE
         }
       },
@@ -72,23 +58,23 @@ const buyCurrencyMap = {
     RESERVE: {
       MOC_COMMISSION:{
         APP_MODE_MoC: {
-          exchangeFunction: redeemBpro(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.REDEEM_BPRO_FEES_MOC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: redeemBpro(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.REDEEM_RISKPRO_FEES_MOC
         }
       },
       RESERVE_COMMISSION: {
         APP_MODE_MoC: {
-          exchangeFunction: redeemBpro(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.REDEEM_BPRO_FEES_RBTC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: redeemBpro(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.REDEEM_RISKPRO_FEES_RESERVE
         }
       }
@@ -98,23 +84,23 @@ const buyCurrencyMap = {
     RESERVE: {
       MOC_COMMISSION:{
         APP_MODE_MoC: {
-          exchangeFunction: redeemFreeDoc(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.REDEEM_DOC_FEES_MOC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: redeemFreeDoc(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.REDEEM_STABLETOKEN_FEES_MOC
         }
       },
       RESERVE_COMMISSION: {
         APP_MODE_MoC: {
-          exchangeFunction: redeemFreeDoc(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.REDEEM_DOC_FEES_RBTC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: redeemFreeDoc(),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.REDEEM_STABLETOKEN_FEES_RESERVE
         }
       }
@@ -124,23 +110,23 @@ const buyCurrencyMap = {
     RISKPRO: {
       MOC_COMMISSION:{
         APP_MODE_MoC: {
-          exchangeFunction: buyBproWithRBTC(TransactionTypeIdsMoC.MINT_BPRO_FEES_MOC, "MOC"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.MINT_BPRO_FEES_MOC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: buyBproWithRBTC(TransactionTypeIdsRRC20.MINT_RISKPRO_FEES_MOC, "MOC"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.MINT_RISKPRO_FEES_MOC
         }
       },
       RESERVE_COMMISSION: {
         APP_MODE_MoC: {
-          exchangeFunction: buyBproWithRBTC(TransactionTypeIdsMoC.MINT_BPRO_FEES_RBTC, "RESERVE"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.MINT_BPRO_FEES_RBTC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: buyBproWithRBTC(TransactionTypeIdsRRC20.MINT_RISKPRO_FEES_RESERVE, "RESERVE"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.MINT_RISKPRO_FEES_RESERVE
         }
       }
@@ -148,23 +134,23 @@ const buyCurrencyMap = {
     STABLE: {
       MOC_COMMISSION:{
         APP_MODE_MoC: {
-          exchangeFunction: buyDocWithRBTC(TransactionTypeIdsMoC.MINT_DOC_FEES_MOC, "MOC"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.MINT_DOC_FEES_MOC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: buyDocWithRBTC(TransactionTypeIdsRRC20.MINT_STABLETOKEN_FEES_MOC, "MOC"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.MINT_STABLETOKEN_FEES_MOC
         }
       },
       RESERVE_COMMISSION: {
         APP_MODE_MoC: {
-          exchangeFunction: buyDocWithRBTC(TransactionTypeIdsMoC.MINT_DOC_FEES_RBTC, "RESERVE"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.MINT_DOC_FEES_RBTC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: buyDocWithRBTC(TransactionTypeIdsRRC20.MINT_STABLETOKEN_FEES_RESERVE, "RESERVE"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.MINT_STABLETOKEN_FEES_RESERVE
         }
       }
@@ -172,23 +158,23 @@ const buyCurrencyMap = {
     RISKPROX: {
       MOC_COMMISSION:{
         APP_MODE_MoC: {
-          exchangeFunction: buyBprox2WithRBTC(TransactionTypeIdsMoC.MINT_BTCX_FEES_MOC, "MOC"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.MINT_BTCX_FEES_MOC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: buyBprox2WithRBTC(TransactionTypeIdsRRC20.MINT_RISKPROX_FEES_MOC, "MOC"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.MINT_RISKPROX_FEES_MOC
         }
       },
       RESERVE_COMMISSION: {
         APP_MODE_MoC: {
-          exchangeFunction: buyBprox2WithRBTC(TransactionTypeIdsMoC.MINT_BTCX_FEES_RBTC, "RESERVE"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.MINT_BTCX_FEES_RBTC
 
         },
         APP_MODE_RRC20: {
-          exchangeFunction: buyBprox2WithRBTC(TransactionTypeIdsRRC20.MINT_RISKPROX_FEES_RESERVE, "RESERVE"),
+          exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsRRC20.MINT_RISKPROX_FEES_RESERVE
         }
       }
@@ -199,14 +185,8 @@ const buyCurrencyMap = {
 const appMode = 'MoC' // o RRC20;
 const appModeString = `APP_MODE_MoC`;
 
-
-
-const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>{
-  console.log('getExchangeMethodgetExchangeMethod')
-  console.log(sourceCurrency)
-  console.log('getExchangeMethodgetExchangeMethod')
-  return  buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
-}
+const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>
+  buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
 
 const getTargetOptionsFor = currency => {
   if (!Object.prototype.hasOwnProperty.call(buyCurrencyMap, currency))

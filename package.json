@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "stable-protocol-dapp",
   "version": "0.1.0",
   "private": true,
   "homepage": ".",
@@ -8,6 +8,8 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "@walletconnect/web3-provider": "^1.7.5",
+    "abi-decoder": "^2.4.0",
     "antd": "^4.19.3",
     "axios": "^0.27.2",
     "bignumber.js": "^9.0.2",

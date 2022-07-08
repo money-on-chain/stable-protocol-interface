@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import React, {Fragment, useContext, useEffect, useState} from "react";
 import {weiToNumberFormat} from '../../../Helpers/math-helpers'
 import Web3 from "web3";
-import FastBtcBridge from "../../../Contracts/MoC/abi/FastBtcBridge.json";
+import FastBtcBridge from "../../../Contracts/coinbase/FastBtcBridge.json";
 import { toContract } from '../../../Lib/numberHelper';
 import Copy from "../../Page/Copy";
 const BigNumber = require('bignumber.js');

@@ -1,0 +1,93 @@
+{
+  "vendor": "0xdda74880d638451e6d2c8d3fc19987526a7af730",
+  "api": {
+    "api_url": "http://localhost:9002/api/v1/",
+    "api_admin_url": "http://localhost:9002/api/admin/v1/",
+    "api_moctest": "https://api-moctest.coinfabrik.com/api/v1/",
+    "api_moneyonchain": "https://moc-incentives-alpha.moneyonchain.com/"
+  },
+  "environment": {
+    "AppMode": "RRC20",
+    "AppProject": "RDoC",
+    "MoC": "0xCfF3fcaeC2352C672C38d77cb1a064B7D50ce7e1",
+    "Multicall2": "0x8f344c3b2a02a801c24635f594c5652c8a2eb02a",
+    "BProToken": "0x440CD83C160De5C96Ddb20246815eA44C7aBBCa8",
+    "IRegistry": "0xCD101a2414256DA8F8E25d7b483b3cf639a71683",
+    "tokens": {
+      "COINBASE": {
+          "name": "RBTC",
+          "decimals": "6"
+      },
+      "RESERVE": {
+          "name": "RBTC",
+          "decimals": "6"
+      },
+      "STABLE": {
+          "name": "DOC",
+          "decimals": "2"
+      },
+      "RISKPRO": {
+          "name": "BPRO",
+          "decimals": "6"
+      },
+      "RISKPROX": {
+          "name": "BTCX",
+          "decimals": "6"
+      },
+      "MOC": {
+          "name": "MOC",
+          "decimals": "2"
+      }
+    },
+    "Precisions": {
+      "REWARDPrecision": {
+        "contractDecimals": 18,
+        "decimals": 6
+      },
+      "valueVariation": {
+        "contractDecimals": 18,
+        "decimals": 2
+      },
+      "mocPrecision": {
+        "contractDecimals": 18,
+        "decimals": 2
+      },
+      "RBTCPrecision": {
+        "contractDecimals": 18,
+        "decimals": 6
+      },
+      "USDPrecision": {
+        "contractDecimals": 18,
+        "decimals": 2
+      },
+      "PriceUSDPrecision": {
+        "contractDecimals": 18,
+        "decimals": 2
+      },
+      "COVPrecision": {
+        "contractDecimals": 18,
+        "decimals": 4
+      },
+      "percentagePrecision": {
+        "contractDecimals": 6,
+        "decimals": 0
+      },
+      "visiblePercentage": {
+        "contractDecimals": 0,
+        "decimals": 6
+      },
+      "RISKPROXInterest": {
+        "contractDecimals": 18,
+        "decimals": 6
+      },
+      "FreeDocInterest": {
+        "contractDecimals": 18,
+        "decimals": 2
+      },
+      "commissionRate": {
+        "contractDecimals": 18,
+        "decimals": 2
+      }
+    }
+  }
+}

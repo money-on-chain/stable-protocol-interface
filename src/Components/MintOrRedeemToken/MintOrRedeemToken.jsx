@@ -24,7 +24,7 @@ import InputWithCurrencySelector from '../Form/InputWithCurrencySelector';
 // import ButtonSecondary from '../../atoms/ButtonSecondary/ButtonSecondary';
 // import ConfirmTransactionModal from '../../molecules/ConfirmTransactionModal/ConfirmTransactionModal';
 // import { userAccountIsLoggedIn } from '../../../../api/helpers/userAccountHelper';
-import { getExchangeMethod } from '../../Lib/exchangeHelper';
+//import { getExchangeMethod } from '../../Lib/exchangeHelper';
 import {
   formatVisibleValue,
   formatValueToContract,
@@ -200,7 +200,7 @@ const MintOrRedeemToken = (props) => {
     let interestRate = '0',
       interestValue = BigNumber('0');
     if (actionIsMint && currencyYouReceive === 'RISKPROX') {
-      interestValue = await window.nodeManager.calcMintInterestValues(
+      interestValue = await auth.interfaceCalcMintInterestValues(
         BigNumber(newValueYouExchange)
           .toFixed(0)
           .toString()
@@ -228,7 +228,7 @@ const MintOrRedeemToken = (props) => {
     const { appMode } = window;
     // In rrc20 mode show allowance when need it
     if (appMode === 'RRC20') {
-      const userAllowance = await window.nodeManager.getReserveAllowance(window.address);
+      const userAllowance = await auth.getReserveAllowance(window.address);
       if (valueYouExchange > userAllowance) {
         allowanceReserveModalShow(true);
         return;
@@ -332,7 +332,7 @@ const MintOrRedeemToken = (props) => {
 
   const setAllowanceReserve = () => {
     setModalAllowanceReserveMode('Waiting');
-    const result = window.nodeManager.approveReserve(window.address, (a, _txHash) => {
+    const result = auth.interfaceApproveReserve(null, (a, _txHash) => {
       msgAllowanceTx(_txHash);
     });
     result.then(() => setDoneAllowanceReserve()).catch(() => setFailAllowanceReserve());
@@ -350,28 +350,19 @@ const MintOrRedeemToken = (props) => {
     allowanceReserveModalClose();
   };
 
-  // const setAllowance = async allowanceEnabled => {
-  //   setLoadingSwitch(true);
-  //   await auth.approveMoCToken(allowanceEnabled, (error, _txHash) => {
-  //     msgAllowanceTx(_txHash);
-  //   }).then(res => {
-  //     setDoneSwitch(allowanceEnabled);
-  //   })
-  //       .catch(e => {
-  //         console.error(e);
-  //         setFailSwitch();
-  //       });
-  //   msgAllowanceSend();
-  // };
-
-    const setAllowance = allowanceEnabled => {
-        setLoadingSwitch(true);
-        const result = window.nodeManager.approveMoCToken(allowanceEnabled, (error, _txHash) => {
-             msgAllowanceTx(_txHash);
+  const setAllowance = async allowanceEnabled => {
+    setLoadingSwitch(true);
+    await auth.interfaceApproveMoCTokenStaking(allowanceEnabled, (error, _txHash) => {
+      msgAllowanceTx(_txHash);
+    }).then(res => {
+      setDoneSwitch(allowanceEnabled);
+    })
+        .catch(e => {
+          console.error(e);
+          setFailSwitch();
         });
-        result.then(() => setDoneSwitch(allowanceEnabled)).catch(() => setFailSwitch());
-        msgAllowanceSend();
-    };
+    msgAllowanceSend();
+  };
 
   const msgAllowanceReserveSend = () => {
     notification['warning']({
