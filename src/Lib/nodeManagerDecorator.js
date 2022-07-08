@@ -40,7 +40,7 @@ const txProcessedCallback = (onError, onSuccess) => (error, transactionHash) => 
   onSuccess(transactionHash);
 };
 
-export default async function nodeManagerDecorator (nodeManager) {
+export default async function nodeManagerDecorator (nodeManager,loadBalanceData) {
   // Copying the object avoids infinite recursion
   const decoratedNodeManager = Object.assign({}, nodeManager);
   Object.keys(contractMethodMap).forEach(contractMethod => {
@@ -88,7 +88,20 @@ export default async function nodeManagerDecorator (nodeManager) {
       };
 
       const onSuccess = txHash => {
+        // auth.loadBalanceData()
+        // auth.connect()
+        // window.location.reload(false);
+        // console.log('window.location.reload(false)')
         transactionHash = txHash;
+        let resp= null
+        setInterval(() => {
+          if(resp==null){
+            window.web3.eth.getTransactionReceipt(txHash).then(x=> {
+              resp=x;
+              loadBalanceData()
+            })
+          }
+        }, 5000);
         // Log.info({message: "Success!, txHash: " + txHash + " and memo is: " + memo});
         // Meteor.call('transaction.pushTxHash', {
         //   contractMethod,

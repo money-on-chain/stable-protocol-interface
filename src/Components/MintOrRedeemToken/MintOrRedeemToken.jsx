@@ -200,7 +200,7 @@ const MintOrRedeemToken = (props) => {
     let interestRate = '0',
       interestValue = BigNumber('0');
     if (actionIsMint && currencyYouReceive === 'RISKPROX') {
-      interestValue = await auth.calcMintInterestValues(
+      interestValue = await window.nodeManager.calcMintInterestValues(
         BigNumber(newValueYouExchange)
           .toFixed(0)
           .toString()
@@ -332,7 +332,7 @@ const MintOrRedeemToken = (props) => {
 
   const setAllowanceReserve = () => {
     setModalAllowanceReserveMode('Waiting');
-    const result = auth.approveReserve(null, (a, _txHash) => {
+    const result = window.nodeManager.approveReserve(window.address, (a, _txHash) => {
       msgAllowanceTx(_txHash);
     });
     result.then(() => setDoneAllowanceReserve()).catch(() => setFailAllowanceReserve());
@@ -350,19 +350,28 @@ const MintOrRedeemToken = (props) => {
     allowanceReserveModalClose();
   };
 
-  const setAllowance = async allowanceEnabled => {
-    setLoadingSwitch(true);
-    await auth.approveMoCToken(allowanceEnabled, (error, _txHash) => {
-      msgAllowanceTx(_txHash);
-    }).then(res => {
-      setDoneSwitch(allowanceEnabled);
-    })
-        .catch(e => {
-          console.error(e);
-          setFailSwitch();
+  // const setAllowance = async allowanceEnabled => {
+  //   setLoadingSwitch(true);
+  //   await auth.approveMoCToken(allowanceEnabled, (error, _txHash) => {
+  //     msgAllowanceTx(_txHash);
+  //   }).then(res => {
+  //     setDoneSwitch(allowanceEnabled);
+  //   })
+  //       .catch(e => {
+  //         console.error(e);
+  //         setFailSwitch();
+  //       });
+  //   msgAllowanceSend();
+  // };
+
+    const setAllowance = allowanceEnabled => {
+        setLoadingSwitch(true);
+        const result = window.nodeManager.approveMoCToken(allowanceEnabled, (error, _txHash) => {
+             msgAllowanceTx(_txHash);
         });
-    msgAllowanceSend();
-  };
+        result.then(() => setDoneSwitch(allowanceEnabled)).catch(() => setFailSwitch());
+        msgAllowanceSend();
+    };
 
   const msgAllowanceReserveSend = () => {
     notification['warning']({
@@ -590,7 +599,7 @@ const MintOrRedeemToken = (props) => {
           })}
         </p>
         {!isNaN(commission.value) &&
-            <span>{commission.value} 333</span> &&
+            <span>{commission.value}</span> &&
             <LargeNumber
                 includeCurrency
                 amount={commission.value}

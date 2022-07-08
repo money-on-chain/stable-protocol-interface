@@ -174,7 +174,6 @@ export default async function nodeManagerBase ({ web3, contracts, partialExecuti
     console.info({ message: `Calling redeem free Doc, account: ${from}, amount: ${contractAmount}.` });
     const estimateGas = (await contractFunctions.redeemFreeDoc(contractAmount, vendor.address).estimateGas({ from })) * 2;
     let params = { from, gas: estimateGas, gasLimit: estimateGas, gasPrice: await gasPrice() };
-    console.log('redeemFreeDoc', params, contractAmount, callback);
     return contractFunctions
       .redeemFreeDoc(contractAmount, vendor.address)
       .send(params, callback);
