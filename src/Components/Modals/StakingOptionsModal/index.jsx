@@ -17,9 +17,10 @@ export default function StakingOptionsModal(props) {
    const [t, i18n]= useTranslation(["global",'moc'])
 
     useEffect(() => {
-        // if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
+        if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
     }, []);
     console.log('mode', mode);
+    console.log('amount', amount);
     if (!mode) return null;
 
 

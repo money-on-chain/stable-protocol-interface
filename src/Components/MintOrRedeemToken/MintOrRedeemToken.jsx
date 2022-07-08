@@ -590,7 +590,7 @@ const MintOrRedeemToken = (props) => {
           })}
         </p>
         {!isNaN(commission.value) &&
-            <span>{commission.value} 333</span> &&
+            <span>{commission.value}</span> &&
             <LargeNumber
                 includeCurrency
                 amount={commission.value}

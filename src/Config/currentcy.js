@@ -21,6 +21,19 @@ const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth)
   }
 };
 
+const getMaxAvailableOfCurrencyCode = (mocState, currencyCode, isRedeem) => {
+  switch (currencyCode) {
+    case 'RISKPRO':
+      return mocState.bproAvailableToRedeem;
+    case 'STABLE':
+      return isRedeem ? mocState.docAvailableToRedeem : mocState.docAvailableToMint;
+    case 'RISKPROX':
+      return mocState.bprox2AvailableToMint;
+    default:
+      return undefined;
+  }
+};
+
 const currencies = [
   { value: 'RESERVE',     image: `Moc/icon-reserve.svg`,    label: 'RBTC' },
   { value: 'STABLE',      image: `Moc/icon-stable.svg`,     label: 'DOC' },
@@ -32,5 +45,6 @@ const currencies = [
 
 export {
   getBalanceAndTransferMethodOfTokenToSend,
-  currencies
+  currencies,
+  getMaxAvailableOfCurrencyCode
 }

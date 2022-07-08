@@ -242,6 +242,12 @@ export default function MintModal(props) {
   const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
   const styleReceive = tokenNameReceive === receiving.currencyCode ? { color } : {};
 
+  // setInterval(() => {
+  //   console.log('Interval triggered');
+  //   auth.connect()
+  //   console.log('Interval triggered');
+  // }, 5000);
+
   return (
     <Modal
       visible={visible}

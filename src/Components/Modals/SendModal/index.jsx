@@ -155,7 +155,7 @@ export default function SendModal(props) {
       <Button
         type="primary"
         onClick={showModal}
-        style={{ width: 90, fontFamily: 'Montserrat,sans-serif', fontSize: '1em', fontWeight: view === 'moc' ? 700 : 500 }}
+        style={{ width: 90, fontFamily: 'Montserrat,sans-serif', fontSize: '1em', fontWeight: view === 'moc' ? 700 : 500, marginTop: view === 'moc' && '5.9em'  }}
       >{t('MoC.wallet.send', { ns: 'moc' })}
       </Button>
       <Modal

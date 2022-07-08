@@ -134,10 +134,14 @@ export default function RewardsStakingOptions(props) {
         setStakingAmountInputValue(value);
       };
 
+      const onUnstakingInputValueChange = value => {
+        setUnstakingAmountInputValue(value);
+      };
+
     const clickButtonStake = (amountInputValue) => {
         console.log(amountInputValue);
         if (amountInputValue > 0) {
-          // setModalAmount(amountInputValue);
+          setModalAmount(amountInputValue);
           setModalMode("staking");
         } else {
           alert("Please fill amount you want to stake");
@@ -160,7 +164,7 @@ export default function RewardsStakingOptions(props) {
                             {auth.isLoggedIn &&
                             <PerformanceChart />}
                         </Col>
-                        <Col xs={20}>
+                        <Col xs={20} style={{ maxWidth: 520, marginLeft: '3em' }}>
                             <Row className="RewardsOptionsOverview">
                                 <div>
                                     {t("global.RewardsOptions_AvailableToStake", { ns: 'global' })}
@@ -206,14 +210,14 @@ export default function RewardsStakingOptions(props) {
                                     />
                                 </Col>
                             </Row>
-                            <Row style={{ marginTop: '1em' }}>
+                            <Row style={{ marginTop: '1em' }} className="typography">
                                 <Col xs={24}>
                                     <span>
                                         {t('global.RewardsOptions_AmountToStakeNote', { ns: 'global' })}
                                     </span>
                                 </Col>
                             </Row>
-                            <Row style={{ marginTop: '2.1em' }}>
+                            <Row style={{ marginTop: '3.8em' }}>
                                 <Button
                                     disabled={btnDisable}
                                     type="primary"
@@ -242,7 +246,7 @@ export default function RewardsStakingOptions(props) {
                         {auth.isLoggedIn &&
                         <PerformanceChart />}
                     </Col>
-                    <Col xs={20}>
+                    <Col xs={20} style={{ maxWidth: 520, marginLeft: '3em' }}>
                         <Row className="RewardsOptionsOverview">
                             <div>
                                 {t('global.RewardsOptions_AvailableToUnstake', { ns: 'global' })}
@@ -269,7 +273,7 @@ export default function RewardsStakingOptions(props) {
                                     }}
                                     // onCurrencySelect={onChangeCurrencyYouExchange}
                                     inputValueInWei={unstakingAmountInputValue}
-                                    onInputValueChange={() => setUnstakingAmountInputValue(stackedBalance)}
+                                    onInputValueChange={onUnstakingInputValueChange /*() => setUnstakingAmountInputValue(stackedBalance)*/}
                                     currencyOptions={['MOC']}
                                     // onValidationStatusChange={onYouExchangeValidityChange}
                                     onValidationStatusChange={() => {
@@ -287,7 +291,7 @@ export default function RewardsStakingOptions(props) {
                                 />*/ }
                             </Col>
                         </Row>
-                        <Row style={{ marginTop: '1em' }}>
+                        <Row style={{ marginTop: '1em' }} className="typography">
                             <Col xs={24}>
                                 <span>
                                     {t('global.RewardsOptions_UnstakingNote.first', { ns: 'global' })}
@@ -295,7 +299,7 @@ export default function RewardsStakingOptions(props) {
                                 </span>
                             </Col>
                         </Row>
-                        <Row style={{ marginTop: '3.7em' }}>
+                        <Row style={{ marginTop: '3.8em' }}>
                             <Button
                                 disabled={btnDisable}
                                 type="primary"
@@ -322,7 +326,7 @@ export default function RewardsStakingOptions(props) {
                     dataSource={pendingWithdrawals}
                     rowKey="id"
                 />
-                <Row className="WithdrawTabFooter">
+                <Row className="WithdrawTabFooter" style={{ marginTop: '8em' }}>
                     <Col xs={24} md={8}>
                         <div className="WithdrawCTALabel">
                             <span className="grey">{t('global.StakingOptions_PendingExpiration', { ns: 'global' })}</span>

@@ -23,14 +23,14 @@ const OperationStatusModal = ({ className, visible, onCancel, title, operationSt
             </div>
             <div className="InfoContainer">
                 <span className="title">{t('global.RewardsClaimButton_Modal_Hash')}</span>
-                <Copy textToShow='Copy' textToCopy={txHash}/>
+                <Copy textToShow={txHash !== undefined ? txHash?.substring(0, 6) + '...' + txHash?.substring(txHash?.length-4, txHash?.length) : 'No Hash'} textToCopy={txHash}/>
             </div>
             <a href={`https://explorer.testnet.rsk.co/tx/${txHash}`} target="_blank">
                 {t('global.RewardsClaimButton_Modal_ViewOnExplorer')}
             </a>
             <br/>
             <br/>
-            <div style={{'textAlign':'center'}}><Button type="primary" onClick={onCancel}>{t('global.RewardsClaimButton_Modal_Close', { ns: 'global' })}</Button></div>
+            <div style={{'textAlign':'center'}}><Button type="primary" style={{ width: 130 }} onClick={onCancel}>{t('global.RewardsClaimButton_Modal_Close', { ns: 'global' })}</Button></div>
         </Modal>
     );
 };

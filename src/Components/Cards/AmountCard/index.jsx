@@ -20,6 +20,7 @@ export default function AmountCard(props) {
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;
     const [loading, setLoading] = useState(true);
+    const [show, setShow] = useState('');
     const timeSke= 2500
 
     useEffect(() => {
@@ -72,6 +73,12 @@ export default function AmountCard(props) {
     // const converToUSD = convertToCurrency => ConvertToken(tokenName, convertToCurrency, getBalanceUSD());
 
     const pre_label = t(`MoC.Tokens_${tokenName.toUpperCase()}_name`, { ns: 'moc' })
+
+    // setInterval(() => {
+    //   console.log('Interval triggered');
+    //   setShow(<LargeNumber {...{ amount: getBalance(), currencyCode: tokenName }} />)
+    //   console.log('Interval triggered');
+    // }, 10000);
 
     return (
         <Fragment>

@@ -54,7 +54,7 @@ export default function Rbtc(props) {
             {auth.isLoggedIn && <><h1 className="PageTitle">{t('MoC.fastbtc.title', { ns: 'moc' })}</h1>
                 <h3 className="PageSubTitle">{t('MoC.fastbtc.subTitle', { ns: 'moc' })}</h3>
                 <Row gutter={15}>
-                    <Col xs={24} md={12} xl={4}>
+                    <Col xs={24} md={12} xl={5}>
                         <Sovryn tokenName="stable" titleName="DoC" />
                     </Col>
                     <Col xs={24} md={12} xl={10}>
@@ -70,7 +70,7 @@ export default function Rbtc(props) {
                         accountData={auth.accountData}
                         />
                     </Col>
-                    <Col xs={24} md={24} xl={10}>
+                    <Col xs={24} md={24} xl={9}>
                         <BtcToRbtc
                             title="BTC to rBTC Peg Out"
                             description={t('MoC.fastbtc.getBTC_description', { ns: 'moc' })}

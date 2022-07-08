@@ -77,23 +77,23 @@ function NextSettlement() {
             </h3>
             {/*<h2>{position}</h2>*/}
 
-            <div className="CardMetricContent">
+            <div className="CardMetricContent BProThemeMetric">
                {!loading 
                 ? <>
                     <div>
-                        <h3>{t('MoC.metrics.Settlement.date', { ns: 'moc' })}</h3>
+                        <h5>{t('MoC.metrics.Settlement.date', { ns: 'moc' })}</h5>
                         {daysHours?.date} <br /> {daysHours?.date_time}
-                        <h3>{t('MoC.metrics.Settlement.remainingDaysTitle', { ns: 'moc' })}</h3>
+                        <h5>{t('MoC.metrics.Settlement.remainingDaysTitle', { ns: 'moc' })}</h5>
                         {daysHours?.time}
-                        <h3>{t('MoC.metrics.Settlement.lastUpdateHeight', { ns: 'moc' })}</h3>
+                        <h5>{t('MoC.metrics.Settlement.lastUpdateHeight', { ns: 'moc' })}</h5>
                         {blockHeight}
                     </div>
                     <div className="separator" /><div>
-                        {/*<h3>Blocks to <br /> settlement</h3>*/}
-                        <h3>{t('MoC.metrics.Settlement.blocksToSettlement', { ns: 'moc' })}</h3>
+                        {/*<h5>Blocks to <br /> settlement</h5>*/}
+                        <h5>{t('MoC.metrics.Settlement.blocksToSettlement', { ns: 'moc' })}</h5>
                         {blocksToSettlement}
-                        {/*<h3>Settlement will <br /> happen on block</h3>*/}
-                        <h3>{t('MoC.metrics.Settlement.blockSettlement', { ns: 'moc' })}</h3>
+                        {/*<h5>Settlement will <br /> happen on block</h5>*/}
+                        <h5>{t('MoC.metrics.Settlement.blockSettlement', { ns: 'moc' })}</h5>
                         {settlementBlock}
                     </div></>
             : <Skeleton active={true} />}

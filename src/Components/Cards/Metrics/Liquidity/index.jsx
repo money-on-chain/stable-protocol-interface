@@ -3,8 +3,9 @@ import { AuthenticateContext } from '../../../../Context/Auth';
 import { getDatasMetrics } from '../../../../Helpers/helper';
 import { useTranslation } from "react-i18next";
 import { Skeleton } from 'antd';
+import { LargeNumber } from '../../../LargeNumber';
 
-function Liquidity() {
+function Liquidity(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
 
@@ -23,23 +24,29 @@ function Liquidity() {
                 {t('MoC.metrics.bucketsInTokens.title', { ns: 'moc' })} {t('MoC.Tokens_RISKPRO_name', { ns: 'moc' })} | {t('MoC.metrics.bucketsInTokens.title', { ns: 'moc' })} {t('MoC.Tokens_RISKPROX_name', { ns: 'moc' })}
             </h3>
 
-            <div className="CardMetricContent">
+            <div className="CardMetricContent BProThemeMetric">
                {!loading
                 ? <><div>
-                        <h3>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_RESERVE_name', { ns: 'moc' })}</h3>
-                        {getDatas['liquidity_totalBTCAmount']}
-                        <h3>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_STABLE_name', { ns: 'moc' })}</h3>
-                        {getDatas['liquidity_docAvailableToRedeem']}
-                        <h3>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_RISKPRO_name', { ns: 'moc' })}</h3>
-                        {getDatas['liquidity_b0BproAmount']}
+                        <h5>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_RESERVE_name', { ns: 'moc' })}</h5>
+                        <LargeNumber amount={props.b0BTCAmount} currencyCode={'RESERVE'} />
+                        {/*getDatas['liquidity_totalBTCAmount']*/}
+                        <h5>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_STABLE_name', { ns: 'moc' })}</h5>
+                        <LargeNumber amount={props.b0DocAmount} currencyCode={'STABLE'} />
+                        {/*getDatas['liquidity_docAvailableToRedeem']*/}
+                        <h5>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_RISKPRO_name', { ns: 'moc' })}</h5>
+                        <LargeNumber amount={props.b0BproAmount} currencyCode={'RISKPRO'} />
+                        {/*getDatas['liquidity_b0BproAmount']*/}
                     </div>
                     <div className="separator" /><div>
-                        <h3>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_RESERVE_name', { ns: 'moc' })}</h3>
-                        {getDatas['liquidity_interest']}
-                        <h3>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_STABLE_name', { ns: 'moc' })}</h3>
-                        {getDatas['liquidity_x2DocAmount']}
-                        <h3>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_RISKPROX_name', { ns: 'moc' })}</h3>
-                        {getDatas['liquidity_x2BproAmount']}
+                        <h5>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_RESERVE_name', { ns: 'moc' })}</h5>
+                        <LargeNumber amount={props.x2BTCAmount} currencyCode={'RESERVE'} />
+                        {/*getDatas['liquidity_interest']*/}
+                        <h5>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_STABLE_name', { ns: 'moc' })}</h5>
+                        <LargeNumber amount={props.x2DocAmount} currencyCode={'STABLE'} />
+                        {/*getDatas['liquidity_x2DocAmount']*/}
+                        <h5>{t('MoC.metrics.bucketsInTokens.total', { ns: 'moc' })} {t('MoC.Tokens_RISKPROX_name', { ns: 'moc' })}</h5>
+                        <LargeNumber amount={props.x2BproAmount} currencyCode={'RISKPROX'} />
+                        {/*getDatas['liquidity_x2BproAmount']*/}
                     </div></>
                 : <Skeleton active={true} />}
             </div>
