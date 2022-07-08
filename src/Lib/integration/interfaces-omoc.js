@@ -32,21 +32,23 @@ const pendingWithdrawals = async (address) => {
     return withdraws;
 };
 
-const stakingDeposit = async (interfaceContext, mocs, address, callback) => {
+const stakingDeposit = async (interfaceContext, amount, address, callback) => {
 
   const { web3, account } = interfaceContext;
   const dContracts = window.integration;
 
   const istakingmachine = dContracts.contracts.istakingmachine
 
+  amount = new BigNumber(amount);
+
   // Calculate estimate gas cost
   const estimateGas = await istakingmachine.methods
-    .deposit(toContractPrecision(mocs), address)
+    .deposit(toContractPrecision(amount), address)
     .estimateGas({ from: account })
 
   // Send tx
   const receipt = istakingmachine.methods
-    .deposit(toContractPrecision(mocs), address)
+    .deposit(toContractPrecision(amount), address)
     .send(
             {
                 from: account,
@@ -60,21 +62,23 @@ const stakingDeposit = async (interfaceContext, mocs, address, callback) => {
   return receipt
 }
 
-const unStake = async (interfaceContext, mocs, callback) => {
+const unStake = async (interfaceContext, amount, callback) => {
 
   const { web3, account } = interfaceContext;
   const dContracts = window.integration;
 
   const istakingmachine = dContracts.contracts.istakingmachine
 
+  amount = new BigNumber(amount);
+
   // Calculate estimate gas cost
   const estimateGas = await istakingmachine.methods
-    .withdraw(toContractPrecision(mocs))
+    .withdraw(toContractPrecision(amount))
     .estimateGas({ from: account })
 
   // Send tx
   const receipt = istakingmachine.methods
-    .withdraw(toContractPrecision(mocs))
+    .withdraw(toContractPrecision(amount))
     .send(
             {
                 from: account,

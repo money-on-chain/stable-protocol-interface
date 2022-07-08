@@ -442,9 +442,11 @@ const AuthenticateProvider = ({ children }) => {
         return transferMocTo(interfaceContext, toWithChecksum, amount, callback);
     };
 
-    const interfaceCalcMintInterestValues = (amount) => {
+    const interfaceCalcMintInterestValues = async (amount) => {
         const interfaceContext = buildInterfaceContext();
-        return calcMintInterest(interfaceContext, amount);
+        const mintInterest = await calcMintInterest(interfaceContext, amount);
+        const formattedValue = new BigNumber(Web3.utils.fromWei(mintInterest));
+        return formattedValue;
     };
 
     const interfaceApproveReserve = (address, callback) => {
