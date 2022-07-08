@@ -20,7 +20,7 @@ export default function Copy(props) {
                 height={17}
                 src={'Moc/copy2.png'}
                 alt=""
-                style={{marginRight: 10}}
+                style={{marginRight: 10, cursor: 'pointer'}}
             />
             {textToShow}
         </span>

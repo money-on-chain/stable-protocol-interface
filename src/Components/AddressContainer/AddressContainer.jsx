@@ -6,13 +6,13 @@ import {useTranslation} from "react-i18next";
 import Copy from '../Page/Copy';
 import {AuthenticateContext} from "../../Context/Auth";
 
-const AddressContainer = ({ address, accountData }) => {
+const AddressContainer = ({ address, accountData, view }) => {
     const auth = useContext(AuthenticateContext);
     let addressToShow = '0x0000000000000000000000000000000';
     if (window.nodeManager && address) addressToShow = window.nodeManager.toCheckSumAddress(address);
     const [t, i18n]= useTranslation(["global",'moc'])
     return (
-        <div className="AddressContainer">
+        <div className="AddressContainer" style={{ marginTop: view === 'moc' && '5em'}}>
           <QRCode value={accountData.Wallet} size="128" alt="qrCode"  />
             {auth.isLoggedIn && <><br/><Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Wallet}/></>}
             {!auth.isLoggedIn && <><br/><Copy textToShow={'0x0000...0000'} textToCopy={'0x0000...0000'}/></>}
