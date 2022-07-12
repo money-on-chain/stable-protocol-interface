@@ -1,3 +1,4 @@
+@import '../../../assets/css/general_styling';
 .WalletBalance {
   padding: 1.6em;
   border-radius: 6px;
@@ -134,7 +135,7 @@
   text-align: center;
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1em;
+  font-size:16px!important;
   font-weight: 600;
   color: white;
   .value-1 {
@@ -178,4 +179,77 @@
 
 .padding-1-2{
   padding: 1.2em !important;
+}
+
+.PieChart{
+  .piePiece{
+      &.STABLE {
+          fill: $color-moc-stable;
+          .RRC20 & {
+              fill: $color-roc-stable;
+          }
+      }
+      &.RISKPRO {
+          fill: $color-moc-riskpro;
+          .RRC20 & {
+              fill: $color-roc-riskpro;
+          }
+      }
+      &.RISKPROX {
+          fill: $color-moc-riskprox;
+          .RRC20 & {
+              fill: $color-roc-riskprox;
+          }
+      }
+      &.MOC {
+          fill: $color-moc;
+      }
+      &.EMPTY {
+          fill: $low-grey;
+      }
+  }
+  .chart-inner-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      padding-top: 40%;
+      text-align: center;
+  }
+  
+  .pieChartTooltip {
+      z-index: 2;
+      background: $secondary-color;
+      border-radius: 5px;
+      padding: 10px;
+      text-align: center;
+      @include primary-text(1em, white, 400);
+      .STABLE {
+          color: $color-moc-stable;
+          .RRC20 & {
+              color: $color-roc-stable;
+          }
+          font-weight: 700;
+      }
+      .RISKPRO {
+          color: $color-moc-riskpro;
+          .RRC20 & {
+              color: $color-roc-riskpro;
+          }
+          font-weight: 700;
+      }
+      .RISKPROX {
+          color: $color-moc-riskprox;
+          .RRC20 & {
+              color: $color-roc-riskprox;
+          }
+          font-weight: 700;
+      }
+      .MOC {
+          color: $color-moc;
+          font-weight: 700;
+      }
+  }
 }

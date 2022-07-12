@@ -6,9 +6,10 @@ import { AuthenticateContext } from '../../../../Context/Auth';
 import { getDatasMetrics } from '../../../../Helpers/helper';
 import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
-import { formatVisibleValue } from '../../../../Lib/Formats';
+import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../../Lib/Formats';
+import BigNumber from 'bignumber.js';
 
-const COLORS = ['#ef8a13', '#00a651'];
+const COLORS = ['#00a651','#ef8a13'];
 
 function RBTC(props) {
     const auth = useContext(AuthenticateContext);
@@ -18,8 +19,7 @@ function RBTC(props) {
     const timeSke= 1500;
     const totalRISKPROInUSD = convertToken("RISKPRO", "USD", props.totalRISKPRO);
     const totalRISKPROXInUSD = convertToken("RISKPROX", "USD", props.totalRISKPROX);
-    // TODO
-    const totalUSD = 0; // totalRISKPROInUSD?.plus(totalRISKPROXInUSD?.plus(props.totalSTABLE));
+    const totalUSD = totalRISKPROInUSD ? totalRISKPROInUSD?.plus(totalRISKPROXInUSD?.plus(props.totalSTABLE)) : 0;
     const totalRBTC = convertToken("STABLE", "RESERVE", totalUSD);
 
     useEffect(() => {
@@ -67,17 +67,47 @@ function RBTC(props) {
     
     const tokensToShow = toShow({ totalSTABLE: props.totalSTABLE, totalRISKPRO: props.totalRISKPRO, totalRISKPROX: props.totalRISKPROX });
 
+    let totalBalance = new BigNumber(0);
+    let balancesData = tokensToShow.map(({balance, currencyCode}) => {
+        const balanceInReserve = convertToken(currencyCode, "RESERVE", balance);
+        const balanceInReserveInEther = adjustPrecision(
+            balanceInReserve,
+            "RESERVE").value;
+        totalBalance = totalBalance.plus(balance);
+        return {
+            reserveValue: balanceInReserveInEther.toNumber(),
+            currencyCode: currencyCode,
+            balance
+        }
+    });
+    balancesData = balancesData.filter(({balance}) => new BigNumber(balance).gt(0));
+    if(totalBalance.eq(0)) {
+        balancesData.push({
+            currencyCode: "EMPTY",
+            reserveValue: 1
+        });
+    }
+
+    console.log('balancesData', balancesData);
+
     const CustomTooltip = ({payload}) => {
         const data = payload && payload[0];
         if(!data) {
             return null;
         }
-        return <div className="custom-tooltip pieChartTooltip">
-        {/*<p className="label">{`${label} : ${payload[0].value}`}</p>*/}
-        {/*<p className="intro">{getIntroOfPage(label)}</p>*/}
-        <p className="value-1">{`${payload[0].payload.value} ${payload[0].payload.set1}`}</p>
-        <p className={`${payload[0].payload.class}`}>{`${payload[0].payload.value} ${payload[0].payload.set2}`}</p>
-    </div>
+        return (<div className="pieChartTooltip">
+            {data.payload.currencyCode !== "EMPTY" ? <>
+            <div>
+            {data.payload.reserveValue.toFixed(6)} {t(`MoC.Tokens_RESERVE_code`, {ns: 'moc'})}
+            </div>
+            <div className={data.payload.currencyCode}>
+            {formatVisibleValue(data.payload.balance, data.payload.currencyCode, formatLocalMap2[i18n.languages[0]])}
+            {t(`MoC.Tokens_${data.payload.currencyCode}_code`, {ns: 'moc'})}
+            </div> </>
+            : <div>{t(`global.TotalBalanceCard_noFunds`)}</div>
+            }
+        </div>)
+        
     }
 
     return (
@@ -96,22 +126,18 @@ function RBTC(props) {
                     ? <>
                         <div>
                             <h3 style={{ textAlign: 'center' }}>{t('MoC.metrics.infoRBTC.title', { ns: 'moc' })}</h3>
-                            <div style={{ height: 180, width: 180, margin: '0 auto' }}>
+                            <div style={{ height: 180, width: 180, margin: '0 auto' }} className="PieChart">
                                 <ResponsiveContainer style={{ marginLeft: '0 !important' }}>
                                     <PieChart>
                                         <Pie
-                                            data={getPie()}
+                                            data={balancesData}
                                             innerRadius={40}
                                             outerRadius={90}
                                             fill="#8884d8"
                                             paddingAngle={1}
-                                            dataKey="value"
+                                            dataKey="reserveValue"
                                         >
-                                            {getPie() !== undefined &&
-
-                                                getPie().map((_entry, index) => (
-                                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                                ))}
+                                            {balancesData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} className={`piePiece ${entry.currencyCode}`}/>)}
                                         </Pie>
                                         <TooltipRecharts content={<CustomTooltip />} />
                                     </PieChart>
@@ -119,37 +145,21 @@ function RBTC(props) {
                             </div>
                             <div style={{ textAlign: 'center' }}>
                                 <LargeNumber amount={totalRBTC} currencyCode={"RESERVE"} includeCurrency={true} />
-                                {/* <Tooltip placement="top" title={getRiskprox['totalBTCAmountTooltip']}>
-                                    {getRiskprox['totalBTCAmount']} RBTC
-                                </Tooltip> */}
                             </div>
                             <h3 style={{ textAlign: 'center' }}>
                                 <LargeNumber amount={totalUSD} currencyCode="USD" includeCurrency={true} />
-                                {/* <Tooltip placement='top' title={getRiskprox['totalBTCAmountUsdTooltip']}>
-                                {getRiskprox['totalBTCAmountUsd']} USD
-                                </Tooltip> */}
                             </h3>
                         </div>
                         <div className="separator" style={{ height: 220 }} />
                         <div style={{ marginLeft: 30 }}>
                         <h3>{t('MoC.metrics.infoRBTC.priceRBTC', { ns: 'moc' })}</h3>
                         <LargeNumber amount={props.rbtcPrice} currencyCode={"USDPrice"} includeCurrency={true} />
-                        {/* <LargeNumber {...{ amount: getRiskprox['rbtc_usd'], currencyCode: 'RESERVE', includeCurrency: true }} /> */}
                         <h3>{t('MoC.metrics.infoRBTC.interest', { ns: 'moc' })}</h3>
                         <LargeNumber amount={props.b0BTCInrateBag} currencyCode={"RESERVE"} includeCurrency={true} />
-                        {/* <Tooltip placement="top" title={getRiskprox['interestTooltip']}>
-                            {getRiskprox['interest']} RBTC
-                        </Tooltip> */}
                         <h3>{t('MoC.metrics.infoRBTC.EMA', { ns: 'moc' })}</h3>
                         <LargeNumber amount={props.EMA} currencyCode={"USDPrice"} includeCurrency={true} />
-                        {/* <Tooltip placement="top" title={getRiskprox['bitcoinMovingAverageTooltip']}> 
-                            {getRiskprox['bitcoinMovingAverage']} USD
-                        </Tooltip> */}
                         <h3>{t('MoC.metrics.infoRBTC.targetCoverage', { ns: 'moc' })}</h3>
                         <LargeNumber amount={props.targetCoverage} currencyCode={"RESERVE"} includeCurrency={false} />
-                        {/* <Tooltip placement="top" title={getRiskprox['b0TargetCoverageTooltip']}>
-                            {getRiskprox['b0TargetCoverage']}
-                        </Tooltip>*/}
                         </div></>
                     : <Skeleton active={true} />}
             </div>

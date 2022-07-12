@@ -87,7 +87,7 @@ function MocLiquidity(props) {
             .then(response => {
                 setClaimsValue(response);
                 console.log('bproBalancea', userBalanceData.bproBalance);
-                setRewardedToday(getRewardedToday(response.daily_moc,userBalanceData.bproBalance,response.total_bpro))
+                setRewardedToday(getRewardedToday(response.daily_moc,userBalanceData.bproBalance,response.total_bpro));
             })
             .catch((response) => {
                 console.log(response);
