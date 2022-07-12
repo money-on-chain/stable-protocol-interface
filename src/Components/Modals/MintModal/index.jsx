@@ -44,6 +44,10 @@ export default function MintModal(props) {
   } = props;
   /* Disabled confirm button when not connected */
   const { address } = true; //window;
+  console.log('export default function MintModal(props) {');
+  console.log(fee);
+  console.log(valueYouExchange);
+  console.log('export default function MintModal(props) {');
   var btnDisable = false;
   if (!address || !isLoggedIn) {
     btnDisable = true;
@@ -149,7 +153,7 @@ console.log('confirmButtonconfirmButton*******************')
       receiving.currencyCode,
       `${commissionCurrency}_COMMISSION`
     );
-    const userAmount = formatValueWithContractPrecision(valueYouExchange, 'RESERVE');
+    let userAmount = formatValueWithContractPrecision(valueYouExchange, 'RESERVE');
     const userToleranceAmount = formatValueToContract(
       new BigNumber(userTolerance)
           .multipliedBy(userAmount)
@@ -157,7 +161,9 @@ console.log('confirmButtonconfirmButton*******************')
           .toFixed(),
       'RESERVE'
     );
-
+    if( fee.enoughMOCBalance==true ){
+      userAmount= userAmount - window.web3.utils.fromWei(((fee.percentage)*100).toString(), 'ether')
+    }
     const userToleranceFormat = new BigNumber(userTolerance).toFixed();
     //exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
     //auth.interfaceMintRiskPro(userAmount, userToleranceFormat, callback);
@@ -244,12 +250,6 @@ console.log('confirmButtonconfirmButton*******************')
 
   const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
   const styleReceive = tokenNameReceive === receiving.currencyCode ? { color } : {};
-
-  // setInterval(() => {
-  //   console.log('Interval triggered');
-  //   auth.connect()
-  //   console.log('Interval triggered');
-  // }, 5000);
 
   return (
     <Modal
