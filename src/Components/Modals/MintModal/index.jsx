@@ -8,7 +8,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Modal, notification } from 'antd';
 
 import { convertAmount } from '../../../Lib/exchangeManagerHelper';
-//import { getExchangeMethod } from '../../../Lib/exchangeHelper';
+import { getExchangeMethod } from '../../../Lib/exchangeHelper';
 import {
   formatValueToContract,
   formatValueWithContractPrecision,
@@ -19,7 +19,6 @@ import { LargeNumber } from '../../LargeNumber';
 import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
-
 export default function MintModal(props) {
   const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
   const {
@@ -43,7 +42,6 @@ export default function MintModal(props) {
     commissionCurrency,
     valueYouExchange,
   } = props;
-
   /* Disabled confirm button when not connected */
   const { address } = true; //window;
   var btnDisable = false;
@@ -60,7 +58,7 @@ export default function MintModal(props) {
   const tokenNameReceive = receiving.currencyCode
     ? currenciesDetail.find((x) => x.value === receiving.currencyCode).label
     : '';
-  
+
   const [currentHash, setCurrentHash] = useState(null);
   const [comment, setComment] = useState('');
   const [showError, setShowError] = useState(false);
@@ -109,7 +107,8 @@ export default function MintModal(props) {
   };
 
   const confirmButton = async ({comment, tolerance}) => {
-
+console.log('confirmButtonconfirmButton*******************')
+    // return false
     // Check if there are enough spendable balance to pay
     // take in care amount to pay gas fee
     const minimumUserBalanceToOperate = "120000000000000";
@@ -145,13 +144,11 @@ export default function MintModal(props) {
   };
 
   const onConfirmTransactionFinish = async () => {
-    console.log(exchanging.currencyCode, receiving.currencyCode, commissionCurrency );
-    /*
     const exchangeMethod = getExchangeMethod(
       exchanging.currencyCode,
       receiving.currencyCode,
       `${commissionCurrency}_COMMISSION`
-    );*/
+    );
     const userAmount = formatValueWithContractPrecision(valueYouExchange, 'RESERVE');
     const userToleranceAmount = formatValueToContract(
       new BigNumber(userTolerance)
@@ -162,7 +159,6 @@ export default function MintModal(props) {
     );
 
     const userToleranceFormat = new BigNumber(userTolerance).toFixed();
-
     //exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
     //auth.interfaceMintRiskPro(userAmount, userToleranceFormat, callback);
     auth.interfaceExchangeMethod(exchanging.currencyCode, receiving.currencyCode, userAmount, userToleranceFormat, onTransaction, onReceipt);
@@ -183,7 +179,15 @@ export default function MintModal(props) {
   };
 
   const onReceipt = async (receipt) => {
-    console.log("On receipt");
+    let resp= null
+    setInterval(() => {
+      if(resp==null){
+        window.web3.eth.getTransactionReceipt(receipt.transactionHash).then(x=> {
+          resp=x;
+          auth.loadContractsStatusAndUserBalance()
+        })
+      }
+    }, 5000);
     const filteredEvents = auth.interfaceDecodeEvents(receipt);
   };
 
@@ -222,7 +226,6 @@ export default function MintModal(props) {
     setShowError(false);
     onCancel();
   };
-  
 
   const markStyle = {
     style: {

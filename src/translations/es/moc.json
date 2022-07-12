@@ -337,7 +337,7 @@
       "title": "Settlement",
       "subtitle": "Manteniendo todo en orden desde el bloque génesis.",
       "redeemQueue": "Cola de solicitudes de redención de __tokenName__",
-      "remainingDays": "En __days__ días __hours__ horas",
+      "remainingDays": "En {{days}} días {{hours}} horas",
       "remainingBlocks": "Bloques faltantes",
       "infoText": "Estas redenciones serán efectivas en el próximo settlement. Si desea canjear su tenencia de DoC hoy, debe marcar en la casilla de la derecha los tokens DISPONIBLES PARA CANJEAR DOC. Si ese valor es cero, eso significa que no hay DOCs disponibles para canjear ahora."
     },

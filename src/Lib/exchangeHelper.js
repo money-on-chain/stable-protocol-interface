@@ -27,6 +27,20 @@ const TransactionTypeIdsRRC20 = {
   REDEEM_RISKPROX_FEES_MOC: 12,
 }
 
+const redeemBpro = () => async (memo, amount, callback) => window.nodeManager.redeemBpro(memo, "0.100000000000000000", callback);
+
+const buyBproWithRBTC = (txType, commissionCurrencyCode, callback) => async (memo, amount, callback) => window.nodeManager.mintBpro(memo, amount, txType, commissionCurrencyCode, callback);
+
+const buyDocWithRBTC = (txType, commissionCurrencyCode, callback) => async (memo, amount, callback) => window.nodeManager.mintDoc(memo, amount, txType, commissionCurrencyCode, callback);
+
+const buyBprox2WithRBTC = (txType, commissionCurrencyCode, callback) => async (memo, amount, callback) => window.nodeManager.mintBprox2(memo, amount, txType, commissionCurrencyCode, callback);
+
+const redeemBprox2 = () => async (memo, amount, callback) => window.nodeManager.redeemBprox2(memo, amount, callback);
+
+const redeemFreeDoc = () => async (memo, amount, callback) => window.nodeManager.redeemFreeDoc(memo, amount, callback);
+// const redeemFreeDoc = () => async (memo, amount, callback) => window.nodeManager.redeemFreeDoc(memo, "0.100000000000000000", callback);
+
+
 // TODO: pasar el txType por param.
 const buyCurrencyMap = {
   RISKPROX: {
@@ -186,7 +200,7 @@ const appMode = 'MoC' // o RRC20;
 const appModeString = `APP_MODE_MoC`;
 
 const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>
-  buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
+    buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
 
 const getTargetOptionsFor = currency => {
   if (!Object.prototype.hasOwnProperty.call(buyCurrencyMap, currency))

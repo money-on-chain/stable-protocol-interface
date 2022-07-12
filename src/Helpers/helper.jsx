@@ -16,8 +16,7 @@ export function setNumber(number){
     }
 }
 
-
-export function getDatasMetrics(auth){
+export function getDatasMetrics(auth,i18n=null){
     const coin_usd= config.coin_usd
     if (auth.userBalanceData) {
         if (auth.userBalanceData) {
@@ -27,7 +26,7 @@ export function getDatasMetrics(auth){
             // console.log(auth.userBalanceData['bproBalance'])
             console.log('000000000000000000000000000000000')
             const globalCoverage= Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
-            const globalCoverageTooltip = Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')); 
+            const globalCoverageTooltip = Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether'));
             const globalCoverageClean= Number(auth.contractStatusData['globalCoverage']).toFixed(4)
 
             const bpro_usd= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bproPriceInUsd']), 'Kwei')).toFixed(5);
@@ -46,8 +45,13 @@ export function getDatasMetrics(auth){
 
             const btcx_usd= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinPrice']), 'Kwei')).toFixed(5);
             const btcx_interest= parseFloat(web3.utils.fromWei(setNumber(auth.userBalanceData['bprox2Balance']), 'Kwei')).toFixed(5);
+
+            let btcx_x2Leverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage']), 'ether')).toFixed(6);
+            if(i18n!=null){
+                btcx_x2Leverage= setToLocaleString(parseFloat(Web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage'])), 'Kwei'),4,i18n)
+            }
+
             const btcx_interes_tooltip = parseFloat(web3.utils.fromWei(setNumber(auth.userBalanceData['bprox2Balance']), 'Kwei'));
-            const btcx_x2Leverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage']), 'ether')).toFixed(6);
             const btcx_x2Coverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2Coverage']), 'ether')).toFixed(6);
             const btcx_AvailableToMint= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bprox2AvailableToMint']), 'ether')).toFixed(6);
 
@@ -88,7 +92,7 @@ export function getDatasMetrics(auth){
             return {globalCoverage: 0,globalCoverageTooltip: 0,
                     bpro_usd:0,b0Leverage:0,b0BproAmount:0,bproAvailableToRedeem:0,
                     current_price:0,
-                    b0DocAmount:0,b0DocAmountTooltip:0,docAvailableToRedeem:0,docAvailableToRedeemTooltip:0,docAvailableToMint:0,docAvailableToMintTooltip:0,
+                    b0DocAmount:0,b0DocAmountTooltip:0,docAvailableToRedeem:0,docAvailableToMint:0,docAvailableToMintTooltip:0,
                     btcx_usd:0,interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
                     rbtc_usd:0,rbtc_interest:0,totalBTCAmount:0,totalBTCAmountTooltip:0,totalBTCAmountUsd:0,totalBTCAmountUsdTooltip:0,b0TargetCoverage:0,b0TargetCoverageTooltip:0,bitcoinMovingAverage:0,bitcoinMovingAverageTooltip:0,
                     liquidity_totalBTCAmount:0,liquidity_docAvailableToRedeem:0,docAvailableToRedeemTooltip:0,liquidity_b0BproAmount:0,liquidity_interest:0,liquidity_x2DocAmount:0,liquidity_x2BproAmount:0,

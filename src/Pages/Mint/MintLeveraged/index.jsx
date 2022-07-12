@@ -11,6 +11,9 @@ import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../Context/Auth';
 import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedeemToken';
 import './style.scss'
+import {getDatasMetrics} from "../../../Helpers/helper";
+import {getInrateToSettlement} from "../../../Helpers/mocStateHelper";
+import {LargeNumber} from "../../../Components/LargeNumber";
 
 export default function Mint(props) {
     const [daysHours, setDaysHours] = useState(null);
@@ -28,11 +31,15 @@ export default function Mint(props) {
         var s = Math.floor(seconds % 60);
         var dDisplay = d > 0 ? d + (d == 1 ? " day " : " days ") : "";
         var hDisplay = h > 0 ? h + (h == 1 ? " hour " : " hours ") : "";
+        var dDisplayLit = d > 0 ? d:'';
+        var hDisplayLit = h > 0 ? h:'';
         var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
         var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
         result.time = dDisplay + hDisplay;
-        const today = moment().add(d, 'd').add(h, 'h').add(m, 'm').add(s, 's');
-        result.date = moment(today).format('MMMM DD, YYYY HH:mm:ss');
+        const today = moment().add(d, 'd').add(h, 'h').add(s, 's');
+        result.date = moment(today).format('MMMM Do YYYY, h:mm:ss a');
+        result.days = (dDisplayLit=='')? 0 : dDisplayLit;
+        result.hours = (hDisplayLit=='')? 0 : hDisplayLit;
         return result;
     };
 
@@ -43,6 +50,10 @@ export default function Mint(props) {
     }, [auth]);
 
     const data_row_coins = [];
+
+    const mocState = auth.contractStatusData;
+    const inrateToSettlement = mocState && getInrateToSettlement(mocState);
+    const formatDecimalRatioAsPercent = amount => (Number.isNaN(amount) ? 0 : amount * 100);
 
     data_row_coins.push({
         key: 0,
@@ -73,6 +84,8 @@ export default function Mint(props) {
         setTimeout(() => setLoading(false), timeSke)
     },[auth]);
 
+    const getBtcx = getDatasMetrics(auth,i18n);
+
     return (
         <Fragment>
             <h1 className="PageTitle">{t('MoC.wallets.RISKPROX.title', { ns: 'moc' })}</h1>
@@ -93,7 +106,7 @@ export default function Mint(props) {
                                 {auth.isLoggedIn &&
                                     <>{!loading ?
                                         <Row>
-                                            <h2>In {daysHours?.time}</h2>
+                                            <h2>{ t('MoC.settlement.remainingDays', { ns: 'moc' ,days:daysHours?.days, hours:daysHours?.hours}) }</h2>
                                             <div className="CaptionDateSettlement">{daysHours?.date}</div>
                                             <div>
                                                 <span className="SettlementTitle">{t('MoC.settlement.remainingBlocks', { ns: 'moc' })}: </span>
@@ -116,11 +129,16 @@ export default function Mint(props) {
                                 {!loading ? <>
                                 <h3 className="CardTitle">{t('MoC.general.x2Leverage', { ns: 'moc' })}</h3>
                                 <div>
-                                    <span>2.0000</span>
+                                    <span>{getBtcx['x2Leverage']}</span>
                                 </div>
                                 <h3 className="CardTitle">{t('global.riskproxWallet_CurrentRate', { ns: 'global' })}</h3>
                                 <div>
-                                    <span>0.027379</span>
+                                    {/*<span>0.027379</span>*/}
+                                    <LargeNumber
+                                        amount={formatDecimalRatioAsPercent(inrateToSettlement)}
+                                        showCurrencyCode
+                                        currencyCode="RISKPROXInterest"
+                                    />
                                 </div></>: <Skeleton active={true} paragraph={{ rows: 2 }}></Skeleton>
                             }
                             </div>

@@ -337,7 +337,7 @@
       "title": "Settlement",
       "subtitle": "Keeping the house in order since genesis block",
       "redeemQueue": "__tokenName__ redeem queue",
-      "remainingDays": "In __days__ days __hours__ hours",
+      "remainingDays": "In {{days}} days {{hours}} hours",
       "remainingBlocks": "Remaining blocks",
       "infoText": "These redemptions are going to be effective on the next settlement. If you want to redeem your DoC holding today, you should check in the box of the right the AVAILABLE TO REDEEM DOC tokens. If there that value is zero, that means that non DOC is available to be redeemed now."
     },
