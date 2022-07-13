@@ -185,15 +185,7 @@ console.log('confirmButtonconfirmButton*******************')
   };
 
   const onReceipt = async (receipt) => {
-    let resp= null
-    setInterval(() => {
-      if(resp==null){
-        window.web3.eth.getTransactionReceipt(receipt.transactionHash).then(x=> {
-          resp=x;
-          auth.loadContractsStatusAndUserBalance()
-        })
-      }
-    }, 5000);
+    auth.loadContractsStatusAndUserBalance()
     const filteredEvents = auth.interfaceDecodeEvents(receipt);
   };
 

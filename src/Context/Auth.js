@@ -19,7 +19,6 @@ import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unSt
 import { getGasPrice } from '../Lib/integration/utils';
 
 //import createNodeManager from '../Lib/nodeManagerFactory';
-//import nodeManagerDecorator from '../Lib/nodeManagerDecorator';
 
 const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
@@ -281,21 +280,6 @@ const AuthenticateProvider = ({ children }) => {
         };
 
         window.appMode = 'MoC';
-
-        /*
-        window.nodeManager = await nodeManagerDecorator( await createNodeManager({
-              appMode: window.appMode,
-              web3: web3,
-              contracts,
-              mocContractAddress: window.integration.contracts.moc.options.address,
-              registryAddress: window.integration.contracts.iregistry.options.address,
-              partialExecutionSteps: {
-                  settlement: 20,
-                  liquidation: 20
-              },
-              gasPrice: interfaceGasPrice
-        }));
-        */
 
     }
 
