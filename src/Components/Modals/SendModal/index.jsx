@@ -34,7 +34,6 @@ export default function SendModal(props) {
   const [maxExceeded, setMaxExceeded] = useState(false);
   const [maxExceededRetries, setMaxExceededRetries] = useState(0);
   const [tokenToSend, setTokenToSend] = useState(props.tokensToSend && props.tokensToSend[0]);
-  const [comment, setComment] = useState('');
   const [inputIsValid, setInputIsValid] = useState(true);
 
   const [t, i18n] = useTranslation(["global", 'moc']);
@@ -49,7 +48,6 @@ export default function SendModal(props) {
     setMaxExceeded(false);
     setMaxExceededRetries(0);
     setTokenToSend(tokensToSend && tokensToSend[0]);
-    setComment('');
     setInputIsValid(true);
   };
 
