@@ -409,22 +409,22 @@ const AuthenticateProvider = ({ children }) => {
         return approveMoCTokenStaking(interfaceContext, enabled, callback);
     };
 
-    const interfaceTransferStableTo = async (to, amount, callback) => {
+    const interfaceTransferStableTo = async (to, amount, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferStableTo(interfaceContext, toWithChecksum, amount, callback);
+        return transferStableTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
     };
 
-    const interfaceTransferRiskProTo = async (to, amount, callback) => {
+    const interfaceTransferRiskProTo = async (to, amount, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferRiskProTo(interfaceContext, toWithChecksum, amount, callback);
+        return transferRiskProTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
     };
 
-    const interfaceTransferMocTo = async (to, amount, callback) => {
+    const interfaceTransferMocTo = async (to, amount, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferMocTo(interfaceContext, toWithChecksum, amount, callback);
+        return transferMocTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
     };
 
     const interfaceCalcMintInterestValues = async (amount) => {

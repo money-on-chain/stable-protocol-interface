@@ -126,8 +126,20 @@ export default function SendModal(props) {
   };
 
   const doTransferAndHide = (methodTransferTo, inputAddress) => {
-    methodTransferTo(comment, inputAddress, formatVisibleValue(amountToSend, tokenToSend, "en"));
+    methodTransferTo(inputAddress, formatVisibleValue(amountToSend, tokenToSend, "en"), onTransaction, onReceipt);
     setDefaultState();
+  };
+
+  const onTransaction = (transactionHash) => {
+    console.log("On sent transaction");
+    console.log(transactionHash);
+
+  };
+
+  const onReceipt = async (receipt) => {
+    console.log("On receipt");
+    auth.loadContractsStatusAndUserBalance();
+    const filteredEvents = auth.interfaceDecodeEvents(receipt);
   };
 
   const showAlertAmountMessage = retryNumber => {
