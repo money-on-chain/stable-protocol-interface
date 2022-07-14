@@ -19,7 +19,6 @@ import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unSt
 import { getGasPrice } from '../Lib/integration/utils';
 
 //import createNodeManager from '../Lib/nodeManagerFactory';
-//import nodeManagerDecorator from '../Lib/nodeManagerDecorator';
 
 const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
@@ -57,7 +56,8 @@ const AuthenticateContext = createContext({
     interfaceCalcMintInterestValues: async (amount) => {},
     interfaceApproveReserve: async (address) => {},
     convertToken: async (from, to, amount) => {},
-    getSpendableBalance: async (address) => {}
+    getSpendableBalance: async (address) => {},
+    loadContractsStatusAndUserBalance: async (address) => {}
 });
 
 const AuthenticateProvider = ({ children }) => {
@@ -133,168 +133,153 @@ const AuthenticateProvider = ({ children }) => {
     };
 
     const buildInterfaceContext = () => {
-      return {
-        web3,
-        contractStatusData,
-        userBalanceData,
-        config,
-        account,
-        vendorAddress: config.vendor
-      }
+        return {
+            web3,
+            contractStatusData,
+            userBalanceData,
+            config,
+            account,
+            vendorAddress: config.vendor
+        }
 
     }
 
     const interfaceExchangeMethod = async (sourceCurrency, targetCurrency, amount, slippage, onTransaction, onReceipt) => {
-      const appMode = config.environment.AppMode;
-      const appModeString = `APP_MODE_${appMode}`;
+        const appMode = config.environment.AppMode;
+        const appModeString = `APP_MODE_${appMode}`;
 
-      const exchangeCurrencyMap = {
-          RISKPROX: {
-            RESERVE: {
-              APP_MODE_MoC: {
-                exchangeFunction: interfaceRedeemRiskProx
-              },
-              APP_MODE_RRC20: {
-                exchangeFunction: null
-              }
-            }
-          },
-          RISKPRO: {
-            RESERVE: {
-              APP_MODE_MoC: {
-                exchangeFunction: interfaceRedeemRiskPro
-              },
-              APP_MODE_RRC20: {
-                exchangeFunction: null
-              }
-            }
-          },
-          STABLE: {
-            RESERVE: {
-              APP_MODE_MoC: {
-                exchangeFunction: interfaceRedeemStable
-              },
-              APP_MODE_RRC20: {
-                exchangeFunction: null
-              }
-            }
-          },
-          RESERVE: {
+        const exchangeCurrencyMap = {
+            RISKPROX: {
+                RESERVE: {
+                    APP_MODE_MoC: {
+                        exchangeFunction: interfaceRedeemRiskProx
+                    },
+                    APP_MODE_RRC20: {
+                        exchangeFunction: null
+                    }
+                }
+            },
             RISKPRO: {
-              APP_MODE_MoC: {
-                exchangeFunction: interfaceMintRiskPro
-              },
-              APP_MODE_RRC20: {
-                exchangeFunction: null
-              }
+                RESERVE: {
+                    APP_MODE_MoC: {
+                        exchangeFunction: interfaceRedeemRiskPro
+                    },
+                    APP_MODE_RRC20: {
+                        exchangeFunction: null
+                    }
+                }
             },
             STABLE: {
-              APP_MODE_MoC: {
-                exchangeFunction: interfaceMintStable
-              },
-              APP_MODE_RRC20: {
-                exchangeFunction: null
-              }
+                RESERVE: {
+                    APP_MODE_MoC: {
+                        exchangeFunction: interfaceRedeemStable
+                    },
+                    APP_MODE_RRC20: {
+                        exchangeFunction: null
+                    }
+                }
             },
-            RISKPROX: {
-              APP_MODE_MoC: {
-                exchangeFunction: interfaceMintRiskProx
-              },
-              APP_MODE_RRC20: {
-                exchangeFunction: null
-              }
+            RESERVE: {
+                RISKPRO: {
+                    APP_MODE_MoC: {
+                        exchangeFunction: interfaceMintRiskPro
+                    },
+                    APP_MODE_RRC20: {
+                        exchangeFunction: null
+                    }
+                },
+                STABLE: {
+                    APP_MODE_MoC: {
+                        exchangeFunction: interfaceMintStable
+                    },
+                    APP_MODE_RRC20: {
+                        exchangeFunction: null
+                    }
+                },
+                RISKPROX: {
+                    APP_MODE_MoC: {
+                        exchangeFunction: interfaceMintRiskProx
+                    },
+                    APP_MODE_RRC20: {
+                        exchangeFunction: null
+                    }
+                }
             }
-          }
-      };
+        };
 
-      const exchangeMethod = exchangeCurrencyMap[sourceCurrency][targetCurrency][appModeString].exchangeFunction;
-      return exchangeMethod(amount, slippage, onTransaction, onReceipt);
+        const exchangeMethod = exchangeCurrencyMap[sourceCurrency][targetCurrency][appModeString].exchangeFunction;
+        return exchangeMethod(amount, slippage, onTransaction, onReceipt);
 
     }
 
     const interfaceMintStable = async (amount, slippage, onTransaction, onReceipt) => {
-      const interfaceContext = buildInterfaceContext();
-      await mintStable(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        const interfaceContext = buildInterfaceContext();
+        await mintStable(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
     const interfaceRedeemStable = async (amount, slippage, onTransaction, onReceipt) => {
-      const interfaceContext = buildInterfaceContext();
-      await redeemStable(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        const interfaceContext = buildInterfaceContext();
+        await redeemStable(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
     const interfaceMintRiskPro = async (amount, slippage, onTransaction, onReceipt) => {
-      const interfaceContext = buildInterfaceContext();
-      await mintRiskPro(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        const interfaceContext = buildInterfaceContext();
+        await mintRiskPro(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
     const interfaceRedeemRiskPro = async (amount, slippage, onTransaction, onReceipt) => {
-      const interfaceContext = buildInterfaceContext();
-      await redeemRiskPro(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        const interfaceContext = buildInterfaceContext();
+        await redeemRiskPro(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
     const interfaceMintRiskProx = async (amount, slippage, onTransaction, onReceipt) => {
-      const interfaceContext = buildInterfaceContext();
-      await mintRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        const interfaceContext = buildInterfaceContext();
+        await mintRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
     const interfaceRedeemRiskProx = async (amount, slippage, onTransaction, onReceipt) => {
-      const interfaceContext = buildInterfaceContext();
-      await redeemRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        const interfaceContext = buildInterfaceContext();
+        await redeemRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
     const initContractsConnection = async () => {
-      window.integration = await readContracts(web3, config.environment);
-      await loadContractsStatusAndUserBalance();
+        window.integration = await readContracts(web3, config.environment);
+        await loadContractsStatusAndUserBalance();
     }
 
     const loadContractsStatusAndUserBalance = async () => {
-      const appMode = config.environment.AppMode;
+        const appMode = config.environment.AppMode;
 
-      // Read info from different contract MoCState.sol MoCInrate.sol MoCSettlement.sol MoC.sol
-      // in one call throught Multicall
-      const dataContractStatus = await contractStatus(
-        web3,
-        window.integration,
-        appMode
-      );
+        // Read info from different contract MoCState.sol MoCInrate.sol MoCSettlement.sol MoC.sol
+        // in one call throught Multicall
+        const dataContractStatus = await contractStatus(
+            web3,
+            window.integration,
+            appMode
+        );
 
-      const accountBalance = await userBalance(
-        web3,
-        window.integration,
-        account,
-        appMode
-      );
+        const accountBalance = await userBalance(
+            web3,
+            window.integration,
+            account,
+            appMode
+        );
 
-      setContractStatusData(dataContractStatus);
-      setUserBalanceData(accountBalance);
+        setContractStatusData(dataContractStatus);
+        setUserBalanceData(accountBalance);
 
-      const contracts = {
-          bproToken: window.integration.contracts.riskprotoken,
-          docToken: window.integration.contracts.stabletoken,
-          mocState: window.integration.contracts.mocstate,
-          mocInrate: window.integration.contracts.mocinrate,
-          mocExchange: window.integration.contracts.mocexchange,
-          mocSettlement: window.integration.contracts.mocsettlement,
-          moc: window.integration.contracts.moc,
-          mocToken: window.integration.contracts.moctoken
-      };
+        const contracts = {
+            bproToken: window.integration.contracts.riskprotoken,
+            docToken: window.integration.contracts.stabletoken,
+            mocState: window.integration.contracts.mocstate,
+            mocInrate: window.integration.contracts.mocinrate,
+            mocExchange: window.integration.contracts.mocexchange,
+            mocSettlement: window.integration.contracts.mocsettlement,
+            moc: window.integration.contracts.moc,
+            mocToken: window.integration.contracts.moctoken
+        };
 
-      window.appMode = 'MoC';
-
-      /*
-      window.nodeManager = await nodeManagerDecorator( await createNodeManager({
-            appMode: window.appMode,
-            web3: web3,
-            contracts,
-            mocContractAddress: window.integration.contracts.moc.options.address,
-            registryAddress: window.integration.contracts.iregistry.options.address,
-            partialExecutionSteps: {
-                settlement: 20,
-                liquidation: 20
-            },
-            gasPrice: interfaceGasPrice
-      }));
-      */
+        window.appMode = 'MoC';
 
     }
 
@@ -567,7 +552,8 @@ const AuthenticateProvider = ({ children }) => {
                 socket,
                 convertToken,
                 getSpendableBalance,
-                interfaceDecodeEvents
+                interfaceDecodeEvents,
+                loadContractsStatusAndUserBalance
             }}
         >
             {children}

@@ -186,7 +186,7 @@ const appMode = 'MoC' // o RRC20;
 const appModeString = `APP_MODE_MoC`;
 
 const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>
-  buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
+    buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
 
 const getTargetOptionsFor = currency => {
   if (!Object.prototype.hasOwnProperty.call(buyCurrencyMap, currency))

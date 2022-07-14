@@ -28,7 +28,7 @@ export default function YourAddressCard(props) {
     },[auth]);
 
     return (
-        <div className="Card SendTokenContainer" style={{ height: height, display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <div className="Card SendTokenContainer" style={{ height: height, display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
             {!loading ? <>
             <h3 className={"CardTitle margin-bottom-10"}>{t('MoC.wallets.ownAddressLabel', {ns: 'moc'})} </h3>
             <div className={classname}>

@@ -572,7 +572,6 @@ const MintOrRedeemToken = (props) => {
 
   const renderComissionCurrencySwitch = () => {
     const { enoughMOCBalance } = commission;
-
     if (commissionSwitch !== commission.currencyCode) {
       setCommissionSwitch(commission.currencyCode);
       setLoadingSwitch(false);
