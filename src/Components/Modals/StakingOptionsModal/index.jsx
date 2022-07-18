@@ -11,7 +11,7 @@ export default function StakingOptionsModal(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
     const { mode, onClose, visible, amount, onConfirm, withdrawalId, setBlockedWithdrawals } = props;
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(2);
 
    const amountInEth = Web3.utils.fromWei(amount);
    const [t, i18n]= useTranslation(["global",'moc'])
@@ -19,15 +19,13 @@ export default function StakingOptionsModal(props) {
     useEffect(() => {
         if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
     }, []);
-    console.log('mode', mode);
-    console.log('amount', amount);
     if (!mode) return null;
 
 
     //methods
     const setAllowance = async () => {
         setStep(1);
-        // setStep(2); // sacar
+        // setStep(2);
         await auth.interfaceApproveMoCTokenStaking(true, (error) => {
         }).then(res => {
                 setStep(2);
@@ -189,6 +187,7 @@ export default function StakingOptionsModal(props) {
                                 <Button
                                     type="primary"
                                     onClick={depositMoCs}
+                                    className="ButtonPrimary"
                                 >{t('global.StakingOptionsModal_Comfirm')}</Button>
                             </div>
                         </div>
@@ -221,6 +220,7 @@ export default function StakingOptionsModal(props) {
                         <Button
                             type="primary"
                             onClick={unstakeMoCs}
+                            className="ButtonPrimary"
                         >{t('global.StakingOptionsModal_Comfirm')}</Button>
                     </div>
                 </div>
@@ -249,6 +249,7 @@ export default function StakingOptionsModal(props) {
                         <Button
                             type="primary"
                             onClick={withdrawMoCs}
+                            className="ButtonPrimary"
                         >{t('global.StakingOptionsModal_Comfirm')}</Button>
                     </div>
                 </div>
@@ -277,6 +278,7 @@ export default function StakingOptionsModal(props) {
                         <Button
                             type="primary"
                             onClick={restakeMoCs}
+                            className="ButtonPrimary"
                         >{t('global.StakingOptionsModal_Comfirm')}</Button>
                     </div>
                 </div>

@@ -38,7 +38,7 @@ function BTCX(props) {
                                 {/*<LargeNumber {...{ amount: getBtcx['btcx_usd'], currencyCode: 'RISKPROX', includeCurrency: true }} />*/}
                                 <LargeNumber amount={props.usdValue} currencyCode={'USDPrice'} />
                             </span>
-                            <h5>{t('MoC.metrics.RISKPROX.total', { ns: 'moc' })}</h5>
+                            <h5 style={{ marginTop: '2em' }}>{t('MoC.metrics.RISKPROX.total', { ns: 'moc' })}</h5>
                             <span className={'red space'}>
                                 <LargeNumber amount={props.total} currencyCode="RISKPROX" />
                                 {/*getBtcx['interest']*/}

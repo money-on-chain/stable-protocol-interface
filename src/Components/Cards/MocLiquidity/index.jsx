@@ -157,7 +157,7 @@ function MocLiquidity(props) {
                         </button>
                     </Link>
 
-                    : <Button style={{ marginTop: '3.5em' }} type="primary" disabled={!auth.isLoggedIn} onClick={claim}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>
+                    : <Button style={{ marginTop: '3.5em', fontFamily: 'Montserrat,sans-serif', fontSize: '1em', fontWeight: 700 }} type="primary" disabled={!auth.isLoggedIn} onClick={claim}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>
                 }
                 <OperationStatusModal
                     className="ClaimStatusModal"
