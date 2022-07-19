@@ -820,8 +820,8 @@
           "txHash": "Tx hash"
         },
         "columns": {
-          "valueBTC": "__value__ BTC",
-          "valueRBTC": "__value__ rBTC",
+          "valueBTC": "{{value}} BTC",
+          "valueRBTC": "{{value}} rBTC",
           "step_1": "1/2",
           "step_2": "2/2",
           "type_deposit": "BTC deposit",

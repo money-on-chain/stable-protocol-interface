@@ -145,7 +145,9 @@ export default function FastBtcPegOut(props) {
                         ,transId: <Copy textToShow={datas_response['hash_id_cut']} textToCopy={datas_response['hashId']} />
                         ,blockNumber: datas_response['blockNumber']
                         ,rskAddress: <Copy textToShow={datas_response['rskAddressCut']} textToCopy={datas_response['rskAddress']} />
-                    };
+                        ,transactionHashLastUpdated: <Copy textToShow={datas_response['transactionHashLastUpdated']} textToCopy={datas_response['transactionHashLastUpdated']} />
+
+                    }
 
                     data_row_coins2.push({
                         key: datas_response['hashId']

@@ -160,7 +160,7 @@ export default function ListOperations(props) {
                 , created: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
                 , details: datas_response['RBTCAmount']
                 , asset: datas_response['set_asset']
-                , confirmation: (true) ? <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span>
+                , confirmation: datas_response['confirmationTime'] ? (true) ? <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span> : ''
                 , address: (datas_response['address']!='--')? <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} /> : '--'
                 , platform: datas_response['amount']
                 , platform_fee: datas_response['platform_fee_value']
@@ -228,7 +228,7 @@ export default function ListOperations(props) {
                 wallet: <span className="display-inline ">{element.wallet} </span>,
                 date: <span>{element.date}</span>,
                 status: <div style={{ width: '100%' }}><Progress percent={element.status.percent} /><br /><span
-                    className="color-confirmed conf_title">{element.status.txt}</span></div>,
+                    className={element.status.txt === 'confirmed' ? 'color-confirmed conf_title' : 'color-confirming conf_title'}>{element.status.txt}</span></div>,
                 description: <RowDetail detail={element.detail} />,
             });
 
