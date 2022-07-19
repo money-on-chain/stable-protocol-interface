@@ -204,6 +204,9 @@ console.log('confirmButtonconfirmButton*******************')
       if (res) {
         setShowTransaction(true);
         setTransaction(true);
+        if( auth!= null && auth!==undefined ){
+          auth.loadContractsStatusAndUserBalance()
+        }
       }
     }).catch(e => {
       setTransaction(false);
@@ -222,6 +225,9 @@ console.log('confirmButtonconfirmButton*******************')
 
   const cancelButton = () => {
     setShowError(false);
+    setTransaction(false)
+    setCurrentHash(null);
+    setShowTransaction(false)
     onCancel();
   };
 

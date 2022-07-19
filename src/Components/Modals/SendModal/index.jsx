@@ -99,6 +99,8 @@ export default function SendModal(props) {
   };
 
   const handleOk = debounce(() => {
+    // setAddress(amountToSend)
+    // setAddress(address)
     const methodTransferTo = getMethodTransferTo();
     const isCheckSumAddress = (address === undefined) ? false : helper.isValidAddressChecksum(address);
     if (isCheckSumAddress) {
@@ -151,6 +153,7 @@ export default function SendModal(props) {
 
   const getMethodTransferTo = () => {
     const { methodTransferTo } = getBalanceAndTransferMethodOfTokenToSend(userState.userBalanceData, tokenToSend, auth);
+    //const { methodTransferTo } = getBalanceAndTransferMethodOfTokenToSend(userState.userBalanceData, tokenToSend, auth,amountToSend,address);
     return methodTransferTo;
   }
 

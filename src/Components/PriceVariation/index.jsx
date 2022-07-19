@@ -21,8 +21,8 @@ export default function PriceVariation(props) {
     const arrow = `Moc/${isPositive ? 'icon-arrow-up2' : 'icon-arrow-down2'}.svg`;
     const sign = isPositive ? '+' : '-';
     const color = isPositive ? '#3fcb97' : '#f2316a';
-    const formattedVar = formatValueVariation(priceVariation.current, i18n.languages[0]);
-    const formattedPerc = parseFloat(((priceVariation.day - priceVariation.current)/priceVariation.day)*100).toLocaleString(i18n.languages[0], {minimumFractionDigits:2, maximumFractionDigits:2});
+    const formattedVar = formatValueVariation((priceVariation.current - priceVariation.day)/0.01, i18n.languages[0]);
+    const formattedPerc = parseFloat(((priceVariation.current - priceVariation.day)/priceVariation.day)*100).toLocaleString(i18n.languages[0], {minimumFractionDigits:2, maximumFractionDigits:2});
     const variationText = `${sign}${formattedVar} (${formattedPerc}%)`;
     const tooltip = (
         <div className="PriceVariationTooltip">
