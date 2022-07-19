@@ -350,18 +350,26 @@ const MintOrRedeemToken = (props) => {
     allowanceReserveModalClose();
   };
 
+
   const setAllowance = async allowanceEnabled => {
-    setLoadingSwitch(true);
-    await auth.interfaceApproveMoCTokenStaking(allowanceEnabled, (error, _txHash) => {
-      msgAllowanceTx(_txHash);
-    }).then(res => {
+
+    const onTransactionAllowance = (transactionHash) => {
+      setLoadingSwitch(true);
+      msgAllowanceTx(transactionHash);
+      msgAllowanceSend();
+    };
+
+    const onReceiptAllowance = async (receipt) => {
+      const filteredEvents = auth.interfaceDecodeEvents(receipt);
+      auth.loadContractsStatusAndUserBalance();
       setDoneSwitch(allowanceEnabled);
-    })
-        .catch(e => {
-          console.error(e);
-          setFailSwitch();
-        });
-    msgAllowanceSend();
+    };
+
+    await auth.interfaceApproveMoCTokenCommission(allowanceEnabled, onTransactionAllowance, onReceiptAllowance).catch(e => {
+      console.error(e);
+      setFailSwitch();
+    });
+
   };
 
   const msgAllowanceReserveSend = () => {
