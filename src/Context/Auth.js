@@ -14,7 +14,7 @@ import { mintStable, redeemStable, mintRiskPro, redeemRiskPro, mintRiskProx, red
 import { AllowanceUseReserveToken } from '../Lib/integration/interfaces-rrc20';
 import { decodeEvents } from '../Lib/integration/transaction';
 
-import { transferStableTo, transferRiskProTo, transferMocTo, calcMintInterest } from '../Lib/integration/interfaces-base';
+import { transferStableTo, transferRiskProTo, transferMocTo, calcMintInterest, approveMoCTokenCommission } from '../Lib/integration/interfaces-base';
 import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unStake, delayMachineWithdraw, delayMachineCancelWithdraw, approveMoCTokenStaking } from '../Lib/integration/interfaces-omoc';
 import { getGasPrice } from '../Lib/integration/utils';
 
@@ -39,6 +39,7 @@ const AuthenticateContext = createContext({
     interfaceRedeemStable: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceMintRiskProx: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceRedeemRiskProx: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceApproveMoCTokenCommission: async (enabled, onTransaction, onReceipt) => {},
     disconnect: () => {},
     getTransactionReceipt: (hash) => {},
     interfaceDecodeEvents: async (receipt) => {},
@@ -46,7 +47,7 @@ const AuthenticateContext = createContext({
     interfaceLockedBalance: async (address) => {},
     interfaceStakingDeposit: async (mocs, address) => {},
     interfaceUnStake: async (mocs) => {},
-    interfaceApproveMoCTokenStaking: async (address) => {},
+    interfaceApproveMoCTokenStaking: async (enabled) => {},
     interfaceDelayMachineWithdraw: async (id) => {},
     interfaceDelayMachineCancelWithdraw: async (id) => {},
     interfacePendingWithdrawals: async (address) => {},
@@ -241,6 +242,11 @@ const AuthenticateProvider = ({ children }) => {
         const interfaceContext = buildInterfaceContext();
         await redeemRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
+
+    const interfaceApproveMoCTokenCommission = async (enabled, onTransaction, onReceipt) => {
+        const interfaceContext = buildInterfaceContext();
+        return approveMoCTokenCommission(interfaceContext, enabled, onTransaction, onReceipt);
+    };
 
     const initContractsConnection = async () => {
         window.integration = await readContracts(web3, config.environment);
@@ -535,6 +541,7 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceRedeemStable,
                 interfaceMintRiskProx,
                 interfaceRedeemRiskProx,
+                interfaceApproveMoCTokenCommission,
                 getTransactionReceipt,
                 interfaceStackedBalance,
                 interfaceLockedBalance,

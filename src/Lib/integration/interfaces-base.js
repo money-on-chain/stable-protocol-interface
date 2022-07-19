@@ -147,4 +147,37 @@ const transferMocTo = async (interfaceContext, to, amount, onTransaction, onRece
 }
 
 
-export { addCommissions, calcMintInterest, transferStableTo, transferRiskProTo, transferMocTo };
+const approveMoCTokenCommission = async (interfaceContext, enabled, onTransaction, onReceipt) => {
+
+  const { web3, account } = interfaceContext;
+  const dContracts = window.integration;
+
+  const mocAddress = dContracts.contracts.moc._address
+  const moctoken = dContracts.contracts.moctoken
+
+  const newAllowance = enabled
+        ? Web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString())
+        : 0;
+
+  // Calculate estimate gas cost
+  const estimateGas = await moctoken.methods
+    .approve(mocAddress, newAllowance)
+    .estimateGas({ from: account })
+
+  // Send tx
+  const receipt = moctoken.methods
+    .approve(mocAddress, newAllowance)
+    .send({
+            from: account,
+            value: '0x',
+            gasPrice: await getGasPrice(web3),
+            gas: estimateGas * 2,
+            gasLimit: estimateGas * 2
+          }
+        ).on('transactionHash', onTransaction).on('receipt', onReceipt);
+
+  return receipt
+}
+
+
+export { addCommissions, calcMintInterest, transferStableTo, transferRiskProTo, transferMocTo, approveMoCTokenCommission };
