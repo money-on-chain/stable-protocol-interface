@@ -80,14 +80,14 @@ function MocLiquidity(props) {
     }
 
     const [claimsValue, setClaimsValue] = useState(null);
-    const [rewardedToday, setRewardedToday] = useState(0);
+    const [rewardedToday, setRewardedToday] = useState({toGetToday: 0, toGetNow: 0, time_left: 0});
 
     const claimsCall= () => {
         api('get', `${config.api_moneyonchain}balance/${accountData.Owner}`, {})
             .then(response => {
                 setClaimsValue(response);
-                console.log('bproBalancea', userBalanceData.bproBalance);
-                setRewardedToday(getRewardedToday(response.daily_moc,userBalanceData.bproBalance,response.total_bpro));
+                const { toGetToday, toGetNow, time_left } = getRewardedToday(response.daily_moc, userBalanceData.bproBalance, response.total_bpro, response.end_block_dt)
+                setRewardedToday({toGetToday: toGetToday, toGetNow: toGetNow, time_left: time_left});
             })
             .catch((response) => {
                 console.log(response);
@@ -128,16 +128,16 @@ function MocLiquidity(props) {
             <div className="Metric"><h2>{t("global.RewardsBalance_EarnedToday", { ns: 'global' })}</h2>
                 <div className="IncentivesItem">
                     <h3>
-                        { rewardedToday!=0 &&
+                        { rewardedToday!=undefined && rewardedToday.toGetToday!=0 &&
                         <CountUp
-                            end={rewardedToday}
-                            start={rewardedToday-1}
+                            end={rewardedToday.toGetToday.toFixed(6)}
+                            start={rewardedToday.toGetNow.toFixed(6)}
                             useEasing={false}
                             decimals={6}
                             separator={i18n.languages[0] === 'es' ? '.' : ','}
                             decimal={i18n.languages[0] === 'es' ? ',' : '.'}
                             onEnd={({ pauseResume, reset, start, update }) => start()}
-                            duration={20000}
+                            duration={rewardedToday.time_left}
                         />}
                         {!auth.isLoggedIn && <span>0.000000</span>}
                         </h3>
