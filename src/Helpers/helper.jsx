@@ -522,10 +522,22 @@ const StatusReward = ({ state, result }) => {
     );
 };
 
-export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro){
+export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro, end_block_dt){
     const set_daily_moc= new BigNumber(web3.utils.fromWei(daily_moc.toString()))
     const set_user_balance_bproBalance= new BigNumber(web3.utils.fromWei(user_balance_bproBalance.toString()))
     const set_total_bpro= new BigNumber(web3.utils.fromWei(total_bpro.toString()))
 
-    return new BigNumber((set_daily_moc).multipliedBy(set_user_balance_bproBalance)).div(set_total_bpro).multipliedBy(0.6)
+    let start = new Date(end_block_dt);
+    let now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+    tomorrow.setUTCHours(0,0,0,0);
+    let datediff = Math.round((tomorrow - start)/(1000*24*60*60));
+    tomorrow.setUTCHours(1,0,0,0);
+    let timediff = Math.round((tomorrow - start)/(1000));
+    let time_left = (tomorrow.getTime() - now.getTime())/1000;
+    let toGetToday = (set_daily_moc.toNumber())? set_daily_moc.multipliedBy(set_user_balance_bproBalance).multipliedBy(datediff).div(set_total_bpro).multipliedBy(0.6) : 0;
+    let toGetNow  = toGetToday.multipliedBy((timediff-time_left)/(timediff));
+
+    return {toGetToday, toGetNow, time_left}
 }
