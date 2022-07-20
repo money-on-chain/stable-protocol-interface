@@ -86,8 +86,6 @@ function MocLiquidity(props) {
         api('get', `${config.api_moneyonchain}balance/${accountData.Owner}`, {})
             .then(response => {
                 setClaimsValue(response);
-                console.log('bproBalancea', userBalanceData.bproBalance);
-                console.log(response);
                 const { toGetToday, toGetNow, time_left } = getRewardedToday(response.daily_moc, userBalanceData.bproBalance, response.total_bpro, response.end_block_dt)
                 setRewardedToday({toGetToday: toGetToday, toGetNow: toGetNow, time_left: time_left});
             })
