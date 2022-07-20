@@ -49,6 +49,7 @@ export default function FastBtcPegOut(props) {
         api('get', `${config.api_moctest}`+'webapp/fastbtc/pegout', {address: accountData.Owner })
             .then(response => {
                 setDataJson(response);
+                console.log('dataJson', response);
                 setTotalTable(response.total)
                 if(call_table){
                     setCallTable(call_table)
@@ -128,6 +129,7 @@ export default function FastBtcPegOut(props) {
 
         /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
         data = [];
+        console.log('json_end', json_end);
 
         if(json_end!==undefined){
             json_end.forEach((data_j) => {
@@ -143,7 +145,9 @@ export default function FastBtcPegOut(props) {
                         ,transId: <Copy textToShow={datas_response['hash_id_cut']} textToCopy={datas_response['hashId']} />
                         ,blockNumber: datas_response['blockNumber']
                         ,rskAddress: <Copy textToShow={datas_response['rskAddressCut']} textToCopy={datas_response['rskAddress']} />
-                    };
+                        ,transactionHashLastUpdated: <Copy textToShow={datas_response['transactionHashLastUpdated']} textToCopy={datas_response['transactionHashLastUpdated']} />
+
+                    }
 
                     data_row_coins2.push({
                         key: datas_response['hashId']

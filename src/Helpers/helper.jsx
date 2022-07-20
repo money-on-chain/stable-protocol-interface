@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import web3 from "web3";
 import config from '../Config/constants';
 import Web3 from "web3";
@@ -383,12 +384,47 @@ export const dateFU= (date_u)=>{
     return (new Date(date_u * 1000).toISOString().slice(0, 19).replace('T', ' '));
 }
 
+const setStatus = (status) => {
+    let text = '';
+    let colorClass = '';
+    switch (status) {
+        case 0: {
+            text = "Initializing";
+            colorClass = "color-default";
+            break;
+        }
+        case 1: {
+            text = "Validating";
+            colorClass = "color-default"
+            break;
+        }
+        case 2: {
+            text = "Pending";
+            colorClass = "color-default";
+            break;
+        }
+        case 3: {
+            text = "Confirmed";
+            colorClass = "color-confirmed";
+            break;
+        }
+        case 4: {
+            text = "Refunded";
+            colorClass = "color-failed";
+            break;
+        }
+    }
+
+    let state = {text: text, colorClass: colorClass};
+    return state;
+};
 
 export function readJsonTableFastBtcPegOut(data_j){
 
     const hash_id= (data_j.transferId!==undefined)? data_j.transferId : '--'
     const hash_id_cut= (data_j.transferId!==undefined)? data_j.transferId?.slice(0, 5)+'...'+ data_j.transferId?.slice(-4) : '--'
-    const status= (data_j.status!==undefined)? (data_j.status==3)? 'Confirmed' : 'Failed' : '--'
+    // const status= (data_j.status!==undefined)? (data_j.status===3)? 'Confirmed' : 'Failed' : '--'
+    const status = data_j.status ? setStatus(data_j.status) : '--'
     // const btcAmount= (data_j.amountSatoshi!==undefined)? data_j.amountSatoshi : '--'
     const btcAmount= (data_j.amountSatoshi!==undefined)? parseFloat(data_j.amountSatoshi/100000000).toFixed(6) : 0
     // const btcFee= (data_j.feeSatoshi!==undefined)? data_j.feeSatoshi : '--'
@@ -402,11 +438,12 @@ export function readJsonTableFastBtcPegOut(data_j){
     const blockNumber= (data_j.blockNumber!==undefined)? data_j.blockNumber : '--'
     const rskAddress= (data_j.rskAddress!==undefined)? data_j.rskAddress : '--'
     const rskAddressCut= (data_j.rskAddress!==undefined)? data_j.rskAddress?.slice(0, 5)+'...'+ data_j.rskAddress?.slice(-4) : '--'
+    const transactionHashLastUpdated = (data_j.transactionHashLastUpdated!==undefined)? data_j.transactionHashLastUpdated?.slice(0, 5)+'...'+ data_j.transactionHashLastUpdated?.slice(-4) : '--'
 
     return {
-        hashId:hash_id,status:status, btcAmount:btcAmount,btcFee:btcFee,timestamp:timestamp,
+        hashId:hash_id,status:status?.text, statusColor: status?.colorClass, btcAmount:btcAmount,btcFee:btcFee,timestamp:timestamp,
         btcAddress:btcAddress,date:date,hash_id_cut:hash_id_cut,btcAddressCut:btcAddressCut,transactionHash:transactionHash,
-        transactionHashCut:transactionHashCut,blockNumber:blockNumber,rskAddress:rskAddress,rskAddressCut:rskAddressCut
+        transactionHashCut:transactionHashCut,blockNumber:blockNumber,rskAddress:rskAddress,rskAddressCut:rskAddressCut, transactionHashLastUpdated:transactionHashLastUpdated
     }
 
 }

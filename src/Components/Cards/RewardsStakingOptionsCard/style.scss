@@ -56,3 +56,8 @@
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif!important;
 }
+
+.RewardsOptionsContainer .ant-table-content {
+    height: calc(180px + 1rem);
+    overflow: auto;
+}

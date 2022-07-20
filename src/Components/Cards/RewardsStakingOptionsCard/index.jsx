@@ -422,7 +422,7 @@ export default function RewardsStakingOptions(props) {
                 <TabPane tab="Unstake" key={1}>
                     {renderUnstaking()}
                 </TabPane>
-                <TabPane tab="Withdraw" key={2}>
+                <TabPane tab="Withdraw" key={2} className="RewardsOptionsContainer">
                     {renderWithdraw()}
                 </TabPane>
             </Tabs>

@@ -76,7 +76,7 @@ function RowDetailPegOut(props) {
                 </td>
                 <th className="ant-descriptions-item-label__" colSpan="1">Status</th>
                 <td className="ant-descriptions-item-content" colSpan="1">
-                    <span className="___status-confirmed">{props.detail.status}</span>
+                    <span className={props.detail.statusColor}>{props.detail.status}</span>
                 </td>
             </tr>
             <tr className="ant-descriptions-row">
@@ -100,7 +100,7 @@ function RowDetailPegOut(props) {
                     {/*        </div>*/}
                     {/*    </div>*/}
                     {/*    <button type="button" className="ant-btn ant-btn-link ant-btn-sm"><span></span></button></span>*/}
-                    --
+                    {props.detail.transactionHashLastUpdated}
                 </td>
             </tr>
             <tr className="ant-descriptions-row">

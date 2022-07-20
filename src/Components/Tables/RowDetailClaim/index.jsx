@@ -49,7 +49,11 @@ function RowDetail(props) {
                         {props.detail.gas_cost}
                     </td>
                     <th className="ant-descriptions-item-label-th ant-descriptions-border-bottom" colSpan="1">{t('MoC.operations.columns_detailed.txSent', { ns: 'moc' })}</th>
-                    <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">{props.detail.sent_hash}     </td>
+                    <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">
+                        <a className="ant-descriptions-a" href={'https://explorer.testnet.rsk.co/tx/' + props.detail.sent_hash} target="_blank">
+                            <span>{props.detail.truncate_sent_hash}</span>
+                        </a>
+                    </td>
                 </tr>
                 <tr className="ant-descriptions-row">
                     <th className="ant-descriptions-item-label-th ant-descriptions-border-bottom" colSpan="1">{t('MoC.operations.columns_detailed.detail', { ns: 'moc' })}</th>

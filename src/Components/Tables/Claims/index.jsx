@@ -53,6 +53,7 @@ export default function Claims(props) {
         const datas= {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
         api('get', config.api_moneyonchain+'claims/'+accountData.Owner, datas)
             .then(response => {
+                console.log('response', response);
                 setDataJson(response);
                 setTotalTable(response.total)
                 if(call_table){
@@ -133,10 +134,10 @@ export default function Claims(props) {
         }
         /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
         data = [];
+        console.log('json_end', json_end);
 
         json_end.forEach((data_j) => {
             const datas_response = readJsonClaims(data_j,t,i18n)
-
             const date_formated= <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES} unix>{datas_response['creation']}</Moment></span>
             const amount_set= (datas_response['mocs']!=='--')? '+'+ datas_response['mocs'] + ' MOC': datas_response['mocs']
 
@@ -149,7 +150,8 @@ export default function Claims(props) {
                 , address: '--'
                 , amount: amount_set
                 , gas_cost: datas_response['gas_cost']
-                , sent_hash: (datas_response['sent_hash']!='--')? <Copy textToShow={datas_response['truncate_sent_hash']} textToCopy={datas_response['sent_hash']} /> : '--'
+                , sent_hash: datas_response['sent_hash']
+                , truncate_sent_hash: datas_response['truncate_sent_hash']
                 , hash: (datas_response['hash']!='--')? datas_response['hash'] : '--'
                 , truncate_hash: (datas_response['truncate_hash']!='--')? datas_response['truncate_hash'] : '--'
                 , status: datas_response['state']
