@@ -93,18 +93,18 @@ function HeaderCoins(props) {
   };
 
   const getPriceVariation = () => {
-    switch (tokenName)
-    {
-      case 'reserve':
-      case 'stable':
-        return {day: dailyVariation['24hs'].bitcoinPrice, current: dailyVariation['current'].bitcoinPrice};
-
-      case 'riskpro':
-        return {day: dailyVariation['24hs'].bproPriceInUsd, current: dailyVariation['current'].bproPriceInUsd};
-
-      case 'riskprox':
-        return {day: dailyVariation['24hs'].bprox2PriceInUsd, current: dailyVariation['current'].bprox2PriceInUsd};
-      default:
+    if( auth.contractStatusData ){
+      switch (tokenName)
+      {
+        case 'reserve':
+        case 'stable':
+          return {day: auth.contractStatusData.historic.bitcoinPrice, current: auth.contractStatusData.bitcoinPrice};
+        case 'riskpro':
+          return {day: auth.contractStatusData.historic.bproPriceInUsd, current: auth.contractStatusData.bproPriceInUsd};
+        case 'riskprox':
+          return {day: auth.contractStatusData.historic.bitcoinPrice, current: auth.contractStatusData.bitcoinPrice};
+        default:
+      }
     }
   };
 
@@ -118,7 +118,7 @@ function HeaderCoins(props) {
           <span className="value_usd1">
             <LargeNumber {...{ amount: getBalanceUSD(), currencyCode: 'USDPrice', includeCurrency: true }} />
           </span>
-          <PriceVariation priceVariation={getPriceVariation()} blockHeight={dailyVariation['24hs'].blockHeight} />
+          { auth.contractStatusData && <PriceVariation priceVariation={getPriceVariation()} blockHeight={dailyVariation['24hs'].blockHeight} /> }
         </div>
       </div>}
     </>

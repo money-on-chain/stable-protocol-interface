@@ -15,8 +15,8 @@ const CustomTooltip = ({ active, payload, label }) => {
             <div className="custom-tooltip pieChartTooltip">
                 {/*<p className="label">{`${label} : ${payload[0].value}`}</p>*/}
                 {/*<p className="intro">{getIntroOfPage(label)}</p>*/}
-                <p className="value-1" style={{ fontSize: 18 }}>{`${payload[0].payload.set1}`}</p>
-                <p className={`${payload[0].payload.class}`} style={{ fontSize: 18 }}>{`${payload[0].payload.set2}`}</p>
+                <p className="value-1" style={{ fontSize: 14 }}>{`${payload[0].payload.set1}`}</p>
+                <p className={`${payload[0].payload.class}`} style={{ fontSize: 14 }}>{`${payload[0].payload.set2}`}</p>
             </div>
         );
     }
@@ -175,7 +175,7 @@ function WalletBalancePie(props) {
 
                         }
                     </Pie>
-                    <Tooltip content={<CustomTooltip />} />
+                    <Tooltip content={<CustomTooltip />} overlayStyle={{fontSize: '12px'}}/>
                 </PieChart>
             </ResponsiveContainer>
             <span className={'money-RBTC'}> <LargeNumber {...{ amount: web3.utils.toWei(getBalance(), 'ether'), currencyCode: 'RESERVE', includeCurrency: true}} /></span>
