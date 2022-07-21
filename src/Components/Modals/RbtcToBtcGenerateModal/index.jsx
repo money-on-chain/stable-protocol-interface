@@ -39,7 +39,7 @@ export default function RbtcToBtcGenerateModal(props) {
     };
 
     const loadBalanceData = async () => {
-        const fastBtcBridgeAddress = config.enviroment.fastBtcBridgeAddress;
+        const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
         console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         if (web3 != null) {
             const fastBtcBridge = new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);

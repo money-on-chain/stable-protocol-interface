@@ -8,6 +8,7 @@ import data_json from '../../../services/webapp_transactions_list';
 import Moment from 'react-moment';
 import { readJsonTable, setNumber } from '../../../Helpers/helper'
 import Copy from "../../Page/Copy";
+import {useTranslation} from "react-i18next";
 
 const columns = [
     {
@@ -45,6 +46,7 @@ const title = () => 'Here is title';
 const showHeader = true;
 const pagination = { position: 'bottom' };
 const BigNumber = require('bignumber.js');
+const [t, i18n]= useTranslation(["global",'moc'])
 
 class ListOperations extends React.Component {
 
@@ -292,7 +294,7 @@ class ListOperations extends React.Component {
 
         return (
             <>
-                <div className="title"><h1>Last Operations</h1></div>
+                <div className="title"><h1>{t('MoC.operations.title', {ns: 'mocfastBtcBridgeAddress'})}</h1></div>
                 <Table
                     {...this.state}
                     pagination={{ position: [this.state.top, this.state.bottom], defaultCurrent: 1, onChange: (current) => setCurrent(current), total: Object.keys(data_json.transactions).length }}

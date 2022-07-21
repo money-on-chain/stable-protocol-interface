@@ -55,7 +55,7 @@ export default function Step3(props) {
     };
 
     const currentFeeData = async () => {
-        const fastBtcBridgeAddress = config.enviroment.fastBtcBridgeAddress;
+        const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
         console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         console.log(Web3.utils.toWei(props.rbtcAmount, 'ether'))
         console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
