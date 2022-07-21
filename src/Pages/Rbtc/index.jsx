@@ -9,7 +9,7 @@ import { AuthenticateContext } from '../../Context/Auth';
 import { useTranslation } from "react-i18next";
 import './style.scss'
 import FastBtcPegOut from "../../Components/Tables/FastBtcPegOut";
-import Tabe from "../../Components/Tables/FastBtcPegOut/tabe";
+import Table from "../../Components/Tables/FastBtcPegOut/table";
 
 export default function Rbtc(props) {
     const data_row_coins = [];
@@ -93,9 +93,9 @@ export default function Rbtc(props) {
                         at Sovryn
                     </span>
                     {/*<FastBtcPegOut></FastBtcPegOut>*/}
-                    <Tabe 
+                    <Table 
                         accountData={auth.accountData}
-                    ></Tabe>
+                    ></Table>
                 </div></>}
         </Fragment>
     );
