@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
 import Web3 from "web3";
 import api from "../../../services/api";
-import config from "../../../Config/config";
+import {config} from "../../../Config/config";
 import OperationStatusModal from "../../Modals/OperationStatusModal/OperationStatusModal";
 
 const BigNumber = require('bignumber.js');

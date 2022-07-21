@@ -1,5 +1,5 @@
 import api from "../services/api";
-import config from "../Config/config";
+import {config} from "../Config/config";
 import axios from "axios";
 
 async function priceVariation24hs() {

@@ -13,7 +13,7 @@ import Copy from "../../Page/Copy";
 import RowDetailPegOut from "./RowDetailPegOut";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import api from "../../../services/api";
-import config from "../../../Config/config";
+import {config} from "../../../Config/config";
 
 export default function FastBtcPegOut(props) {
 

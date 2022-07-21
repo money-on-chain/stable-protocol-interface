@@ -1,16 +1,18 @@
 import React from 'react';
 import { Select } from 'antd';
 import './style.scss';
-import { currencies } from '../../Config/currentcy';
+import { currencies, getCurrenciesDetail } from '../../Config/currentcy';
+import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
 
 export default function SelectCurrency(props) {
   const { value, onChange, currencyOptions, disabled } = props;
-  const options = currencies.map(it => ({
+  const [t, i18n]= useTranslation(["global",'moc']);
+  const options = getCurrenciesDetail().map(it => ({
     value: it.value,
     image: it.image,
-    label: it.label
+    label: t(it.longNameKey, { ns: 'moc' }),
   }));
   const option = options.find(it => it.value === value);
   const optionsFiltered = options.filter(it => currencyOptions.includes(it.value));

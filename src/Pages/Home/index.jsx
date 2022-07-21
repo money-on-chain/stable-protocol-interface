@@ -81,7 +81,7 @@ function Home(props) {
                             color="#00a651"
                             page="/wallet/stable"
                             balance={docBalance}
-                            labelCoin={'RBTC'}
+                            labelCoin={'RESERVE'}
                             currencyCode={'STABLE'}
                         />
                         <TokenSummaryCard
@@ -89,7 +89,7 @@ function Home(props) {
                             color="#ef8a13"
                             page="/wallet/pro"
                             balance={bproBalance}
-                            labelCoin={'RBTC'}
+                            labelCoin={'RESERVE'}
                             currencyCode={'RISKPRO'}
                         />
                         <TokenSummaryCard
@@ -97,7 +97,7 @@ function Home(props) {
                             color="#ed1c24"
                             page="/wallet/leveraged"
                             balance={bprox2Balance}
-                            labelCoin={'RBTC'}
+                            labelCoin={'RESERVE'}
                             currencyCode={'RISKPROX'}
                         />
                     </div>
