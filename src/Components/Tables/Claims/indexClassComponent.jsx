@@ -4,19 +4,10 @@ import './style.scss';
 import { Table, Progress, Result } from 'antd';
 import RowDetail from "../RowDetail";
 import classnames from 'classnames';
-import api from '../../../services/api';
 import data_json from '../../../services/webapp_transactions_list';
 import Moment from 'react-moment';
-import { useState } from 'react'
-import Web3 from 'web3';
 import { readJsonTable, setNumber } from '../../../Helpers/helper'
-import config from '../../../Config/constants';
 import Copy from "../../Page/Copy";
-import { adjustPrecision, formatLocalMap } from "../../../Lib/Formats";
-import Tooltip from 'antd/lib/tooltip';
-import NumericLabel from 'react-pretty-numbers';
-import DollarOutlined from '@ant-design/icons/DollarOutlined';
-import { useTranslation } from "react-i18next";
 
 const columns = [
     {
