@@ -88,6 +88,9 @@ const AuthenticateProvider = ({ children }) => {
 
             if (window.rLogin.cachedProvider) {
                 connect();
+            } else {
+                connect();
+                document.querySelectorAll('.rlogin-modal-hitbox')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
             }
         }
     });
@@ -129,8 +132,10 @@ const AuthenticateProvider = ({ children }) => {
             GasPrice: 0,
             truncatedAddress: ''
         });
+        setUserBalanceData(null);
         setIsLoggedIn(false);
         await window.rLoginDisconnect();
+        connect();
     };
 
     const buildInterfaceContext = () => {

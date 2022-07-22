@@ -512,3 +512,91 @@ a {
 .margin-bottom-10{
   margin-bottom: 10px !important;
 }
+
+.rlogin-modal-header{
+  background-color: #08374F;
+}
+
+.rlogin-modal-close-button{
+  display: none;
+}
+
+.rlogin-modal-lightbox{
+  backdrop-filter: blur(5px) !important;
+}
+
+.rlogin-modal-body{
+  border: 4px solid #08374F;
+  border-bottom-right-radius: 11px;
+  border-bottom-left-radius: 11px;
+}
+
+
+
+.ant-modal-header{
+  background-color: #08374F;
+  padding: 8px 24px;
+  border-radius: 0 0 0 0;
+}
+
+.ant-modal-title, .ant-modal-close{
+  color: white;
+  text-align: center;
+}
+
+.ant-modal-title{
+  font-size: 19px;
+  font-weight: 600;
+}
+
+
+.ant-modal-close {
+  top: -7px;
+}
+
+.ant-modal-close-x {
+  font-size: 21px;
+}
+
+.ant-modal-content{
+  border: 4px solid #08374F;
+}
+
+.flex-grow-0{
+  flex-grow: 0;
+}
+
+.color-08374F{
+  color: #08374F !important;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.mrb-0{
+  margin-bottom: 0px !important;
+}
+
+.mrt-0{
+  margin-top: 0px !important;
+}
+
+.font-size-14{
+  font-size: 14px;
+}
+
+.Legend-s1 {
+  font-size: .8em;
+  color: #08374F;
+  margin-top: 10px;
+}
+
+.display-flex{
+  display:flex;
+}
+
+.width-120{
+  width:120px;
+}
+
