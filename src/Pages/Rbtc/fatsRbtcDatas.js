@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 //import rLogin from "../../Lib/rLogin";
 import Web3 from "web3";
 import FastBtcBridge from "../../Contracts/coinbase/FastBtcBridge.json";
@@ -10,7 +10,7 @@ import { config } from '../../Config/config';
 const FastRbtcContext = createContext({
     limits: null,
     getLimits:  async () => {},
-    connect: () => {},
+    // connect: () => {},
     loadData: async () => {},
 });
 
@@ -22,6 +22,7 @@ const FastRbtcProvider = ({ children }) => {
     const [web3, setweb3] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [limits, setLimits] = useState(null);
+    const auth = useContext(AuthenticateContext);
 
     useEffect(() => {
         if (checkLoginFirstTime) {
@@ -38,22 +39,7 @@ const FastRbtcProvider = ({ children }) => {
         }
     }, [account]);
 
-    const connect = () =>
-        window.rLogin.connect().then((rLoginResponse) => {
-            const { provider, disconnect } = rLoginResponse;
-            setProvider(provider);
-
-            //const web3 = new Web3(provider);
-            setweb3(new Web3(provider));
-            window.rLoginDisconnect = disconnect;
-            checkLoginFirstTime = false;
-
-            // request user's account
-            provider.request({ method: 'eth_accounts' }).then(([account]) => {
-                setAccount(account);
-                setIsLoggedIn(true);
-            });
-        });
+    const connect = () => auth.connect();
 
     const loadData = async () => {
         const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
