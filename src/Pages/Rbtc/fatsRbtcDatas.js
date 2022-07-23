@@ -4,6 +4,7 @@ import Web3 from "web3";
 import FastBtcBridge from "../../Contracts/coinbase/FastBtcBridge.json";
 import {toNumberFormat} from "../../Helpers/helper";
 import {AuthenticateContext} from "../../Context/Auth";
+import { config } from '../../Config/config';
 
 
 const FastRbtcContext = createContext({
@@ -55,7 +56,7 @@ const FastRbtcProvider = ({ children }) => {
         });
 
     const loadData = async () => {
-        const fastBtcBridgeAddress = '0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A';
+        const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
         console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         const fastBtcBridge= new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
         const fastBtcBridgeGetFees = () => {
