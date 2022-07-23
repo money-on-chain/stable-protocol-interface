@@ -30,7 +30,7 @@ export default function BtcToRbtc(props) {
                 <Col xs={8}>
                     <div className='text-center'>
                         <img className="logo-img" width="111"
-                             src="https://static.moneyonchain.com/moc-alphatestnet/public/images/icon-btc_to_rbtc.svg"
+                             src={'icons/icon-btc_to_rbtc.svg'}
                              alt=""/>
                     </div>
                 </Col>

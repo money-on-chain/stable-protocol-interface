@@ -107,7 +107,7 @@ export default function RbtcToBtcGenerateModal(props) {
     const titleModal = (
         <div className='title'>
             <div className="CardLogo">
-                <img width="32" src="https://static.moneyonchain.com/moc-alphatestnet/public/images/icon-sovryn_fastbtc.svg" alt="" />
+                <img width="32" src={'icons/icon-sovryn_fastbtc.svg'} alt="" />
                 <h1>Sovryn <br />FastBTC</h1>
                 <div className='title-text'>
                     <h1>{title}</h1>
