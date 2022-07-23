@@ -805,8 +805,10 @@
     "login": "Conectarse",
     "fastbtc": {
       "title": "FastBTC",
+      "titleCard_pegin": "BTC to rBTC Peg In",
       "getRBTC": "Convierte BTC a rBTC",
       "getRBTC_description": "Convierta BTC de la red Bitcoin a rBTC Smart Bitcoins utilizando el FastBTC integrado de Sovryn.",
+      "titleCard_pegout": "BTC to rBTC Peg Out",
       "getBTC": "Convierte rBTC a BTC",
       "getBTC_description": "Convierta rBTC Smart Bitcoins a BTC utilizando el FastBTC integrado de Sovryn.",
       "subTitle": "Integracion de Sovryn FastBTC",
@@ -834,7 +836,9 @@
           "status_confirmed": "Confirmado",
           "dateAddedFormat": "YYYY-MM-DD HH:mm:SS"
         },
-        "upperSummary": "Si el rBTC no se encuentra visible en su billetera después de 60 minutos abra un <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>ticket de soporte</a> en Sovryn",
+        "upperSummary_1": "Si el rBTC no se encuentra visible en su billetera después de 60 minutos abra un ",
+        "upperSummary_2": "ticket de soporte",
+        "upperSummary_3":" en Sovryn",
         "table": {
           "triggerDesc": "Ordenear descendentemente",
           "triggerAsc": "Ordenar ascendentemente"
