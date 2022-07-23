@@ -11,6 +11,7 @@ import FastBtcBridge from "../../../Contracts/coinbase/FastBtcBridge.json";
 import { toNumberFormat, btcInSatoshis, DYNAMIC_FEE_DIVISOR, toWei, weiToNumberFormat } from '../../../Helpers/math-helpers';
 import { useTranslation } from "react-i18next";
 import Step2 from "./step2";
+import { config } from '../../../Config/config';
 
 export default function RbtcToBtcGenerateModal(props) {
 
@@ -38,7 +39,7 @@ export default function RbtcToBtcGenerateModal(props) {
     };
 
     const loadBalanceData = async () => {
-        const fastBtcBridgeAddress = '0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A';
+        const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
         console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         if (web3 != null) {
             const fastBtcBridge = new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);

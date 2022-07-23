@@ -1,6 +1,6 @@
 /* eslint-disable default-case */
 import web3 from "web3";
-import config from '../Config/constants';
+import {config} from '../Config/config';
 import Web3 from "web3";
 import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber";
 import moment from 'moment';

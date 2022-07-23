@@ -1,5 +1,5 @@
 import api from "../services/api";
-import config from "../Config/constants";
+import {config} from "../Config/config";
 import axios from "axios";
 
 async function priceVariation24hs() {
@@ -20,7 +20,7 @@ export { priceVariation24hs };
 
 
 export function callPrices(datas) {
-    return fetch(`${config.api_moctest}`+'webapp/prices/var/?address='+datas)
+  return fetch(`${config.api.api_moctest}`+'webapp/prices/var/?address='+datas)
         .then((response) => response.json())
         .catch((err) => {
             console.log(err);

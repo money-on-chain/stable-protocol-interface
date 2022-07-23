@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
 import Web3 from "web3";
 import api from "../../../services/api";
-import config from "../../../Config/constants";
+import {config} from "../../../Config/config";
 import OperationStatusModal from "../../Modals/OperationStatusModal/OperationStatusModal";
 
 const BigNumber = require('bignumber.js');
@@ -47,7 +47,7 @@ function MocLiquidity(props) {
     const { accountData, userBalanceData } = auth;
 
     const agent= () => {
-        api('get', `${config.api_moneyonchain}`+'agent', {})
+        api('get', `${config.api.api_moneyonchain}`+'agent', {})
             .then(response => {
                 setIncentiveState(response);
             })
@@ -83,7 +83,7 @@ function MocLiquidity(props) {
     const [rewardedToday, setRewardedToday] = useState({toGetToday: 0, toGetNow: 0, time_left: 0});
 
     const claimsCall= () => {
-        api('get', `${config.api_moneyonchain}balance/${accountData.Owner}`, {})
+        api('get', `${config.api.api_moneyonchain}balance/${accountData.Owner}`, {})
             .then(response => {
                 setClaimsValue(response);
                 const { toGetToday, toGetNow, time_left } = getRewardedToday(response.daily_moc, userBalanceData.bproBalance, response.total_bpro, response.end_block_dt)

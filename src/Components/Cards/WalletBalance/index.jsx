@@ -30,7 +30,7 @@ function WalletBalance(props) {
                 {auth.isLoggedIn &&
                 <div className="TotalBalanceBottom justify-content-initial">
                     <div className="CopyableText ">
-                        <span className="title">Address</span>
+                        <span className="title">{t('MoC.operations.columns_detailed.address', {ns: 'moc'})}</span>
                         <div>
                             <Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Wallet}/>
                         </div>
