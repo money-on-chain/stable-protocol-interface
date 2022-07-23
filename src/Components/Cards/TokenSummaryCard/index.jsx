@@ -129,7 +129,7 @@ export default function TokenSummaryCard(props) {
                     <Tooltip placement="top" title={getBalance(true)}>
                         <div className="Number Few">
                             {getBalance()}{' '}
-                            {t(`MoC.Tokens_${labelCoin.toUpperCase()}_code`, {ns: 'moc'})}   
+                            {labelCoin}   
                         </div>
                     </Tooltip>
                     <Tooltip placement="top" title={getBalanceUSD(true)}>
