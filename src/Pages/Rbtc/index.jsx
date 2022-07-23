@@ -12,30 +12,8 @@ import FastBtcPegOut from "../../Components/Tables/FastBtcPegOut";
 import Table from "../../Components/Tables/FastBtcPegOut/table";
 
 export default function Rbtc(props) {
-    const data_row_coins = [];
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc']);
-
-    data_row_coins.push({
-        key: 0,
-        info: '',
-        event: 'DOC',
-        asset: 'DOC',
-        platform: '+ 0.00',
-        wallet: '-0.000032',
-        date: '2022-04-18 18:23',
-        status: { txt: 'Confirmed', percent: 100 },
-    });
-    data_row_coins.push({
-        key: 1,
-        info: '',
-        event: 'DOC',
-        asset: 'DOC',
-        platform: '+ 0.00',
-        wallet: '-0.000032',
-        date: '2022-04-18 18:23',
-        status: { txt: 'Confirmed', percent: 100 },
-    });
 
     const [rbtcGenVisible, setRbtcGenVisible] = useState(false);
     const [btcGenVisible, setBtcGenVisible] = useState(false);
