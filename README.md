@@ -31,7 +31,7 @@ You can:
 | RiskProx          | ROC     | RIFX        | RIF          |
 
 
-### Setup
+### Setup: Running develop
 
 Install packages
 
@@ -39,9 +39,9 @@ Install packages
 
 Run
 
-`npm run start`
+`npm run start:moc-alpha-testnet`
 
-**Note:** Copy content of src/Config/config.mocMainnet2.json to src/Config/config.default.json, depends on the environment you want to run.
+**Note:** Start the environment you want to run ex. **"start:moc-testnet"** to start environment Moc Testnet 
 
 
 ### Environment table
