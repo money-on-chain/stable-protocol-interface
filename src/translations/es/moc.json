@@ -823,7 +823,13 @@
           "valueBtc": "Valor (BTC)",
           "btcadr": "Direccion de BTC",
           "web3adr": "Direccion de RSK",
-          "txHash": "Tx hash"
+          "txHash": "Tx hash",
+          "btcAmount": "Monto de BTC",
+          "transferId": "Id de Transferencia",
+          "blockN": "Nº de Bloque",
+          "feebtc": "Tarifa de BTC",
+          "txLastUpdated": "Última actualización TX",
+          "dateLastUpdated": "Fecha de última actualización"
         },
         "columns": {
           "valueBTC": "{{value}} BTC",

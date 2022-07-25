@@ -202,19 +202,19 @@ export default function ListOperations(props) {
             switch (element.asset) {
                 case 'STABLE':
                     asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
-                    data_row_coins2[index].detail.asset = 'DOC';
+                    data_row_coins2[index].detail.asset = t('MoC.Tokens_STABLE_code', { ns: 'moc' });
                     break;
                 case 'RISKPRO':
                     asset.push({ 'image': 'icon-riskpro.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
-                    data_row_coins2[index].detail.asset = 'BPRO'
+                    data_row_coins2[index].detail.asset = t('MoC.Tokens_RISKPRO_code', { ns: 'moc' });
                     break;
                 case 'RISKPROX':
                     asset.push({ 'image': 'icon-riskprox.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
-                    data_row_coins2[index].detail.asset = 'BTCX'
+                    data_row_coins2[index].detail.asset = t('MoC.Tokens_RISKPROX_code', { ns: 'moc' });
                     break;
                 default:
                     asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
-                    data_row_coins2[index].detail.asset = 'DOC'
+                    data_row_coins2[index].detail.asset = t('MoC.Tokens_STABLE_code', { ns: 'moc' });
                     break;
             }
 
