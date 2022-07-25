@@ -182,7 +182,9 @@ const buyCurrencyMap = {
   }
 };
 
-const appMode = 'MoC' // o RRC20;
+import { config } from '../Config/config';
+
+const appMode = config.environment.AppMode
 const appModeString = `APP_MODE_MoC`;
 
 const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>
