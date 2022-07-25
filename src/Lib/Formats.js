@@ -1,4 +1,6 @@
+import { config } from '../Config/config';
 const BigNumber = require('bignumber.js');
+const precisions = config.environment.Precisions;
 
 const formatLocalMap = {
     es: {
@@ -21,83 +23,23 @@ BigNumber.config({
     FORMAT: formatLocalMap.en
 });
 
-const REWARDPrecision = {
-    contractDecimals: 18,
-    decimals: 6
-};
-
-const valueVariation = {
-    contractDecimals: 20,
-    decimals: 2
-};
-
-const mocPrecision = {
-    contractDecimals: 18,
-    decimals: 2
-};
-
-const RBTCPrecision = {
-    contractDecimals: 18,
-    decimals: 6
-};
-
-const USDPrecision = {
-    contractDecimals: 18,
-    decimals: 2
-};
-
-const PriceUSDPrecision = {
-    contractDecimals: 18,
-    decimals: 2
-};
-
-const COVPrecision = {
-    contractDecimals: 18,
-    decimals: 4
-};
-
-const percentagePrecision = {
-    contractDecimals: 6,
-    decimals: 0
-};
-
-const visiblePercentage = {
-    contractDecimals: 0,
-    decimals: 6
-};
-
-const RISKPROXInterest = {
-    contractDecimals: 18,
-    decimals: 6
-};
-
-const FreeDocInterest = {
-    contractDecimals: 18,
-    decimals: 2
-};
-
-const commissionRate = {
-    contractDecimals: 18,
-    decimals: 2
-};
-
 const formatMap = {
-    RISKPROX: RBTCPrecision,
-    RISKPRO: RBTCPrecision,
-    STABLE: USDPrecision,
-    USD: USDPrecision,
-    USDPrice: PriceUSDPrecision,
-    RESERVE: RBTCPrecision,
-    MOC: mocPrecision,
-    REWARD: REWARDPrecision,
-    COV: COVPrecision,
-    LEV: COVPrecision,
-    percentage: percentagePrecision,
-    visiblePercentage: visiblePercentage,
-    RISKPROXInterest: RISKPROXInterest,
-    FreeDocInterest: FreeDocInterest,
-    commissionRate: commissionRate,
-    valueVariation: valueVariation
+    RISKPROX: precisions.RBTCPrecision,
+    RISKPRO: precisions.RBTCPrecision,
+    STABLE: precisions.USDPrecision,
+    USD: precisions.USDPrecision,
+    USDPrice: precisions.PriceUSDPrecision,
+    RESERVE: precisions.RBTCPrecision,
+    MOC: precisions.mocPrecision,
+    REWARD: precisions.REWARDPrecision,
+    COV: precisions.COVPrecision,
+    LEV: precisions.COVPrecision,
+    percentage: precisions.percentagePrecision,
+    visiblePercentage: precisions.visiblePercentage,
+    RISKPROXInterest: precisions.RISKPROXInterest,
+    FreeDocInterest: precisions.FreeDocInterest,
+    commissionRate: precisions.commissionRate,
+    valueVariation: precisions.valueVariation
 };
 
 const precision = ({ contractDecimals }) =>
@@ -175,9 +117,6 @@ export {
     formatPerc,
     formatDecimalRatioAsPercent,
     adjustPrecision,
-    RBTCPrecision,
-    USDPrecision,
-    COVPrecision,
     precision,
     formatLocalMap,
     formatLocalMap2
