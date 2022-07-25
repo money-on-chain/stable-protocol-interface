@@ -4,7 +4,6 @@ import Web3 from 'web3';
 import _ from 'lodash/core';
 import addressHelper from '../Lib/addressHelper';
 import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
-import convertHelper from '../Lib/convertHelper';
 import { getPriceFields } from '../Lib/price';
 import { config } from '../Config/config';
 
@@ -444,8 +443,7 @@ const AuthenticateProvider = ({ children }) => {
         const interfaceContext = buildInterfaceContext();
         AllowanceUseReserveToken(interfaceContext, true, callback);
     };
-    /* const priceFields = getPriceFields();
-    const convertToken = convertHelper(_.pick(contractStatusData, Object.keys(priceFields).concat(['reservePrecision']))); */
+    
     const convertToken = (from, to, amount) => {
         if (!contractStatusData) return '';
 

@@ -7,7 +7,6 @@ import { AuthenticateContext } from '../../../Context/Auth';
 import { LargeNumber } from '../../LargeNumber';
 import { useTranslation } from "react-i18next";
 import { set_doc_usd } from "../../../Helpers/helper";
-// import convertHelper from '../../../Lib/convertHelper';
 import { getPriceFields } from '../../../Lib/price';
 import BalanceItem from '../../BalanceItem/BalanceItem';
 import InformationModal from '../../Modals/InformationModal';
@@ -31,7 +30,6 @@ export default function AmountCard(props) {
         tokenName = '',
         color = '',
         titleName = '' } = props;
-    // const convertToken = convertHelper(_.pick(mocStatePrices, Object.keys(priceFields).concat(['reservePrecision'])));
 
     const getBalance = () => {
         if (auth.userBalanceData) {
