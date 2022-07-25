@@ -1,3 +1,5 @@
+import { config } from '../Config/config';
+
 const TransactionTypeIdsMoC = {
   MINT_BPRO_FEES_RBTC: 1,
   REDEEM_BPRO_FEES_RBTC: 2,
@@ -182,7 +184,6 @@ const buyCurrencyMap = {
   }
 };
 
-import { config } from '../Config/config';
 
 const appMode = config.environment.AppMode
 const appModeString = `APP_MODE_${appMode}`;

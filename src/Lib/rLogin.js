@@ -1,4 +1,4 @@
-
+import { config } from '../Config/config';
 const getRLogin = () => {
 
     const rpcUrls = {
@@ -6,7 +6,7 @@ const getRLogin = () => {
         31: 'https://public-node.testnet.rsk.co'
     };
 
-    const chainId = 31;
+    const chainId = config.chainId;
     var selectedNetwork = {};
     selectedNetwork[parseInt(chainId)] = rpcUrls[parseInt(chainId)];
 
