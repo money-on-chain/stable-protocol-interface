@@ -6,6 +6,7 @@ import {
 } from './Formats';
 import { toBigNumber, minimum } from './numberHelper';
 import { getTransactionType } from './exchangeHelper';
+import { config } from '../Config/config';
 
 const BigNumber = require('bignumber.js');
 
@@ -143,7 +144,8 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
   } = mocState || {};
   if(!convertToken) return {};
   
-  const vendor = { address: "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076", markup: "500000000000000" };
+  // const vendor = { address: "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076", markup: "500000000000000" };
+  const vendor = config.vendor;
 
   const valueYouExchangeInRESERVE = convertToken(currencyYouExchange, "RESERVE", valueYouExchange);
   const valueYouExchangeInMOC = convertToken("RESERVE", "MOC", valueYouExchangeInRESERVE);

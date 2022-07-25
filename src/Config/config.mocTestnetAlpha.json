@@ -1,5 +1,8 @@
 {
-  "vendor": "0xdda74880d638451e6d2c8d3fc19987526a7af730",
+  "vendor": {
+    "address": "0xdda74880d638451e6d2c8d3fc19987526a7af730",
+    "markup": "500000000000000"
+  },
   "api": {
     "api_url": "http://localhost:9002/api/v1/",
     "api_admin_url": "http://localhost:9002/api/admin/v1/",
