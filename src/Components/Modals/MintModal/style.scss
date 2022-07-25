@@ -5,7 +5,6 @@
     padding-left: 60px;
     padding-right: 60px;
     padding-bottom: 35px;
-    padding-top: 100px;
     @media (max-width: 500px) {
       padding-bottom: 24px;
       padding-left: 24px;
@@ -178,7 +177,6 @@
   }
 
   .CollapseTolerance {
-    margin-bottom: 30px;
     background: none;
     border: none;
 
@@ -193,3 +191,49 @@
     }
   }
 }
+
+.div-price-v{
+  margin: auto;
+  width: fit-content;
+  margin-top: 30px;
+  color: red;
+}
+
+
+.img-status{
+  margin-top: 20px;
+  margin-left: -28px;
+}
+
+.Transaction_confirmation{
+  text-align: center;
+  text-transform: uppercase;
+  color:#08374F;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.Operation_successful{
+  text-align:center;
+  text-transform: uppercase;
+  color:#08374F;
+  font-weight:600;
+  font-size: 15px;
+}
+
+.Operation_failed{
+  text-align:center;
+  text-transform:uppercase;
+  color:#D00038;
+  font-weight:600;
+  font-size:15px;
+}
+
+.Transaction_ID{
+  width: 50%;
+  float: left;
+  color: #08374F;
+  font-weight: 600;
+}
+
+

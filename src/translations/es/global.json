@@ -170,6 +170,12 @@
         "Error_maxExceeded": "El número excede el máximo permitido",
 
         "ConfirmTransactionModal_Title": "Detalle de operación",
+        "Operation_Details_Title": "Detalles de operación",
+        "Transaction_ID": "ID de Transacción",
+        "Transaction_confirmation": "esperar confirmación de transacción",
+        "Operation_successful": "Operación exitosa",
+        "Operation_failed": "¡operación fallida!",
+        "Bttn_Continue": "Continuar",
         "ConfirmTransactionModal_Exchanging": "Pagando",
         "ConfirmTransactionModal_Receiving": "Recibiendo",
         "ConfirmTransactionModal_MOCFee": "Comisión",

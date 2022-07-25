@@ -170,6 +170,12 @@
         "Error_maxExceeded": "The number exceeds the maximum allowed",
 
         "ConfirmTransactionModal_Title": "Operation Detail",
+        "Operation_Details_Title": "Operation Details",
+        "Transaction_ID": "Transaction ID",
+        "Transaction_confirmation": "wait for transaction confirmation",
+        "Operation_successful": "operation successful",
+        "Operation_failed": "operation failed!",
+        "Bttn_Continue": "Continue",
         "ConfirmTransactionModal_Exchanging": "Exchanging",
         "ConfirmTransactionModal_Receiving": "Receiving",
         "ConfirmTransactionModal_MOCFee": "Fee",
