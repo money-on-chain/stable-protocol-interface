@@ -185,7 +185,7 @@ const buyCurrencyMap = {
 import { config } from '../Config/config';
 
 const appMode = config.environment.AppMode
-const appModeString = `APP_MODE_MoC`;
+const appModeString = `APP_MODE_${appMode}`;
 
 const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>
     buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
