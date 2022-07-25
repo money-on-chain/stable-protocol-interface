@@ -95,7 +95,7 @@ function WalletBalancePie(props) {
     };
 
     const getBalance = () => {
-        if (auth.userBalanceData) {
+        if (auth.userBalanceData && accountData.Balance) {
             const rbtc_main= (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
             const doc= ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4)
             const bpro= (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
