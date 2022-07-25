@@ -11,7 +11,7 @@ import BigNumber from 'bignumber.js';
 
 const COLORS = ['#00a651','#ef8a13'];
 
-function RBTC(props) {
+function Reserve(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData, convertToken } = auth;
     const [t, i18n] = useTranslation(["global", 'moc']);
@@ -167,4 +167,4 @@ function RBTC(props) {
     );
 }
 
-export default RBTC;
+export default Reserve;

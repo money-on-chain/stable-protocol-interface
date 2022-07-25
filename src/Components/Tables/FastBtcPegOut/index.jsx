@@ -13,7 +13,7 @@ import Copy from "../../Page/Copy";
 import RowDetailPegOut from "./RowDetailPegOut";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import api from "../../../services/api";
-import config from "../../../Config/constants";
+import {config} from "../../../Config/config";
 
 export default function FastBtcPegOut(props) {
 
@@ -46,7 +46,7 @@ export default function FastBtcPegOut(props) {
 
 
     const getFastbtcPegout= (skip,call_table) => {
-        api('get', `${config.api_moctest}`+'webapp/fastbtc/pegout', {address: accountData.Owner })
+        api('get', `${config.api.api_moctest}`+'webapp/fastbtc/pegout', {address: accountData.Owner })
             .then(response => {
                 setDataJson(response);
                 console.log('dataJson', response);

@@ -8,7 +8,7 @@ import api from '../../../services/api';
 import Moment from 'react-moment';
 import { useState } from 'react'
 import {readJsonTable, setNumber, myParseDate, getDatasMetrics} from '../../../Helpers/helper'
-import config from '../../../Config/constants';
+import {config} from '../../../Config/config';
 import Copy from "../../Page/Copy";
 import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
@@ -54,7 +54,7 @@ export default function ListOperations(props) {
 
     const transactionsList= (skip,call_table) => {
         const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
-        api('get', `${config.api_moctest}`+'webapp/transactions/list/', datas)
+        api('get', `${config.api.api_moctest}`+'webapp/transactions/list/', datas)
             .then(response => {
                 setDataJson(response);
                 setTotalTable(response.total)

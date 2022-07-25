@@ -14,7 +14,7 @@ import {
   formatValueWithContractPrecision,
 } from '../../../Lib/Formats';
 import Copy from "../../Page/Copy";
-import { currencies as currenciesDetail } from '../../../Config/currentcy';
+import { getCurrencyDetail } from '../../../Config/currentcy';
 import { LargeNumber } from '../../LargeNumber';
 import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";
@@ -59,10 +59,10 @@ export default function MintModal(props) {
   const [txtTransaction, setTxtTransaction] = useState('PENDING');
   const auth = useContext(AuthenticateContext);
   const tokenNameExchange = exchanging.currencyCode
-    ? currenciesDetail.find((x) => x.value === exchanging.currencyCode).label
+    ? getCurrencyDetail(exchanging.currencyCode).longNameKey
     : '';
   const tokenNameReceive = receiving.currencyCode
-    ? currenciesDetail.find((x) => x.value === receiving.currencyCode).label
+    ? getCurrencyDetail(receiving.currencyCode).longNameKey
     : '';
 
   const [currentHash, setCurrentHash] = useState(null);

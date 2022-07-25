@@ -35,16 +35,24 @@ const getMaxAvailableOfCurrencyCode = (mocState, currencyCode, isRedeem) => {
 };
 
 const currencies = [
-  { value: 'RESERVE',     image: `Moc/icon-reserve.svg`,    label: 'RBTC' },
-  { value: 'STABLE',      image: `Moc/icon-stable.svg`,     label: 'DOC' },
-  { value: 'RISKPRO',     image: `Moc/icon-riskpro.svg`,    label: 'BPRO' },
-  { value: 'RISKPROX',    image: `Moc/icon-riskprox.svg`,   label: 'BTCX' },
-  { value: 'MOC',         image: `Moc/icon-moc.svg`,        label: 'MOC' },
-  { value: 'RBTC',         image: `Moc/icon-moc.svg`,        label: 'RBTC' },
-];
+  { value: 'RESERVE',     image: `Moc/icon-reserve.svg` },
+  { value: 'STABLE',      image: `Moc/icon-stable.svg` },
+  { value: 'RISKPRO',     image: `Moc/icon-riskpro.svg` },
+  { value: 'RISKPROX',    image: `Moc/icon-riskprox.svg` },
+  { value: 'MOC',         image: `Moc/icon-moc.svg` },
+  { value: 'RBTC',         image: `Moc/icon-moc.svg` },
+].map(it => ({
+  ...it,
+  longNameKey: `MoC.Tokens_${it.value}_code`,
+}));
+
+const getCurrenciesDetail = () => currencies;
+const getCurrencyDetail = currencyCode => currencies.find(it => it.value === currencyCode);
 
 export {
   getBalanceAndTransferMethodOfTokenToSend,
   currencies,
-  getMaxAvailableOfCurrencyCode
+  getMaxAvailableOfCurrencyCode,
+  getCurrenciesDetail,
+  getCurrencyDetail
 }

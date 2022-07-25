@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
 import { Skeleton } from 'antd';
 
-function BPRO(props) {
+function RiskPro(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
 
@@ -61,4 +61,4 @@ function BPRO(props) {
     );
 }
 
-export default BPRO;
+export default RiskPro;

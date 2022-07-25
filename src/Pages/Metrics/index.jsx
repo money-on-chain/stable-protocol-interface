@@ -1,10 +1,10 @@
 import React, { Fragment, useContext } from 'react';
 import SystemStatus from '../../Components/Cards/Metrics/SystemStatus'
-import RBTC from '../../Components/Cards/Metrics/RBTC'
+import RESERVE from '../../Components/Cards/Metrics/RESERVE'
 import MOC from '../../Components/Cards/Metrics/MOC'
-import BTCX from '../../Components/Cards/Metrics/BTCX'
-import DOC from '../../Components/Cards/Metrics/DOC'
-import BPRO from '../../Components/Cards/Metrics/BPRO'
+import RISKPROX from '../../Components/Cards/Metrics/RISKPROX'
+import STABLE from '../../Components/Cards/Metrics/STABLE'
+import RISKPRO from '../../Components/Cards/Metrics/RISKPRO'
 import Liquidity from '../../Components/Cards/Metrics/Liquidity'
 import NextSettlement from '../../Components/Cards/Metrics/NextSettlement'
 import BigNumber from 'bignumber.js';
@@ -103,7 +103,7 @@ function Metrics(props) {
                     <SystemStatus coverage={globalCoverage} paused={paused} blocksToSettlement={blocksToSettlement}/>
                 </Col>
                 <Col className={'RBTCSection'}>
-                    <RBTC
+                    <RESERVE
                         rbtcPrice={bitcoinPrice}
                         totalSTABLE={totalDocAmount}
                         totalRISKPRO={totalBpro}
@@ -117,14 +117,14 @@ function Metrics(props) {
 
             <Row style={{ marginTop: 15 }} gutter={15} className="MetricsCardsContainer">
                 <Col className={'MetricsCardsDOC'}>
-                    <DOC
+                    <STABLE
                         availableRedeem={maxStableRedeemAvailable}
                         availableMint={maxStableMintAvailable}
                         total={totalDocAmount}
                     />
                 </Col>
                 <Col className={'MetricsCardsBPRO'}>
-                    <BPRO
+                    <RISKPRO
                         total={totalBpro}
                         availableRedeem={maxRiskproRedeemAvailable}
                         leverage={b0Leverage}
@@ -133,7 +133,7 @@ function Metrics(props) {
                     />
                 </Col>
                 <Col className={'MetricsCardsBTCX'}>
-                    <BTCX
+                    <RISKPROX
                         leverage={x2Leverage}
                         coverage={x2Coverage}
                         availableMint={maxRiskproxMintAvailable}

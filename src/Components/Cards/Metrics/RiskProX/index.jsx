@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
 import { Skeleton } from 'antd';
 
-function BTCX(props) {
+function RiskProX(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
 
@@ -65,4 +65,4 @@ function BTCX(props) {
     );
 }
 
-export default BTCX;
+export default RiskProX;

@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticateContext } from '../../../Context/Auth';
-import { currencies as currenciesDetail } from '../../../Config/currentcy';
+import { currencies as currenciesDetail, getCurrencyDetail } from '../../../Config/currentcy';
 import { LargeNumber } from "../../LargeNumber";
 import { useTranslation } from "react-i18next";
 import InformationModal from '../../Modals/InformationModal';
@@ -129,11 +129,7 @@ export default function TokenSummaryCard(props) {
                     <Tooltip placement="top" title={getBalance(true)}>
                         <div className="Number Few">
                             {getBalance()}{' '}
-                            {
-                                currenciesDetail.find(
-                                    (x) => x.value === labelCoin.toUpperCase()
-                                ).label
-                            }
+                            {labelCoin}   
                         </div>
                     </Tooltip>
                     <Tooltip placement="top" title={getBalanceUSD(true)}>

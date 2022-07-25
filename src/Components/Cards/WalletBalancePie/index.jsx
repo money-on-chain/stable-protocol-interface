@@ -112,24 +112,24 @@ function WalletBalancePie(props) {
                 {
                     name: 'Group A',
                     value: Number((set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
-                    set1: (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' RBTC',
-                    set2: (set_doc_usd()['usd']).toFormat(2, formatLocalMap[i18n.languages[0]]) +' DOC',
+                    set1: (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' '+ t('MoC.Tokens_RESERVE_code', {ns: 'moc'}),
+                    set2: (set_doc_usd()['usd']).toFormat(2, formatLocalMap[i18n.languages[0]]) +' '+ t('MoC.Tokens_STABLE_code', {ns: 'moc'}),
                     class: 'STABLE'
                 },
                 {
                     name: 'Group B',
                     value: Number(((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
-                    set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4) +' RBTC',
-                    set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed(6) +' BPRO', class: 'RISKPRO'
+                    set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4) +' '+ t('MoC.Tokens_RESERVE_code', {ns: 'moc'}),
+                    set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed(6) +' '+ t('MoC.Tokens_RISKPRO_code', {ns: 'moc'}), class: 'RISKPRO'
                 },
                 {
                     name: 'Group C',
                     value: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)),
-                    set1: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' RBTC',
+                    set1: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' '+ t('MoC.Tokens_RESERVE_code', {ns: 'moc'}),
                     set2: (set_moc_balance_usd()['usd']).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
-                      }) +' MOC',
+                    }) +' '+ t('MoC.Tokens_MOC_code', {ns: 'moc'}),
                     class: 'RISKPROX'
                 },
                 {
@@ -138,11 +138,11 @@ function WalletBalancePie(props) {
                     set1: (Number(new BigNumber(accountData.Balance))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 6,
                         maximumFractionDigits: 6
-                      })+' RBTC',
+                    })+' '+ t('MoC.Tokens_RESERVE_code', {ns: 'moc'}),
                     set2: (Number(new BigNumber(accountData.Balance))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 6,
                         maximumFractionDigits: 6
-                      })+' RBTC',
+                    })+' '+ t('MoC.Tokens_RESERVE_code', {ns: 'moc'}),
                     class: 'RBTC_MAIN'
                 }
 

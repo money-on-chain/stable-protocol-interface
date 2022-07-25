@@ -3,12 +3,14 @@ import { Row, Col, Tooltip, Button } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
+import {useTranslation} from "react-i18next";
 const BigNumber = require('bignumber.js');
 
 export default function BtcToRbtc(props) {
+    const [t, i18n]= useTranslation(["global",'moc'])
     const{
         title = 'BTC to rBTC Peg In',
-        description = 'Convert BTC from the Bitcoin network to rBTC Smart Bitcoins using the integrated FastBTC from Sovryn.',
+        description = t('MoC.fastbtc.getRBTC_description', {ns: 'moc'}),
         btnAction = ()=>{},
         btnText = 'Convert rBTC to BTC'
     } = props;
@@ -30,7 +32,7 @@ export default function BtcToRbtc(props) {
                 <Col xs={8}>
                     <div className='text-center'>
                         <img className="logo-img" width="111"
-                             src="https://static.moneyonchain.com/moc-alphatestnet/public/images/icon-btc_to_rbtc.svg"
+                             src={'icons/icon-btc_to_rbtc.svg'}
                              alt=""/>
                     </div>
                 </Col>

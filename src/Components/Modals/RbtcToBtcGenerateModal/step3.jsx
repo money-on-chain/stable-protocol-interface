@@ -5,6 +5,7 @@ import Web3 from "web3";
 import FastBtcBridge from "../../../Contracts/coinbase/FastBtcBridge.json";
 import { toContract } from '../../../Lib/numberHelper';
 import Copy from "../../Page/Copy";
+import { config } from '../../../Config/config';
 const BigNumber = require('bignumber.js');
 
 
@@ -54,7 +55,7 @@ export default function Step3(props) {
     };
 
     const currentFeeData = async () => {
-        const fastBtcBridgeAddress = '0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A';
+        const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
         console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         console.log(Web3.utils.toWei(props.rbtcAmount, 'ether'))
         console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
@@ -80,12 +81,11 @@ export default function Step3(props) {
         }
     };
 
-    const fastBtcBridgeAddress = '0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A';
+    const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
     console.log('sendTransaction: Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
     const fastBtcBridge = new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
 
     const sendTransaction= async () => {
-        // const fastBtcBridgeAddress = '0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A';
         // console.log('sendTransaction: Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         if(web3!=null){
             setlabelTrx('Waiting')

@@ -12,7 +12,7 @@ import {
     readJsonClaims,
     dateFU
 } from '../../../Helpers/helper'
-import config from '../../../Config/constants';
+import {config} from '../../../Config/config';
 import Copy from "../../Page/Copy";
 import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
@@ -51,7 +51,7 @@ export default function Claims(props) {
 
     const transactionsList= (skip,call_table) => {
         const datas= {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
-        api('get', config.api_moneyonchain+'claims/'+accountData.Owner, datas)
+        api('get', config.api.api_moneyonchain+'claims/'+accountData.Owner, datas)
             .then(response => {
                 console.log('response', response);
                 setDataJson(response);

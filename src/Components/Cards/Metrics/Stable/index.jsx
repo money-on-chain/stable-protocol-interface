@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Skeleton, Tooltip } from 'antd';
 import { LargeNumber } from '../../../LargeNumber';
 
-function DOC(props) {
+function Stable(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
 
@@ -54,4 +54,4 @@ function DOC(props) {
     );
 }
 
-export default DOC;
+export default Stable;

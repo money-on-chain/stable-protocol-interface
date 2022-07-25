@@ -11,13 +11,13 @@ export default function StakingOptionsModal(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
     const { mode, onClose, visible, amount, onConfirm, withdrawalId, setBlockedWithdrawals } = props;
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(0);
 
    const amountInEth = Web3.utils.fromWei(amount);
    const [t, i18n]= useTranslation(["global",'moc'])
 
     useEffect(() => {
-        if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
+        // if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
     }, []);
     if (!mode) return null;
 
@@ -25,7 +25,6 @@ export default function StakingOptionsModal(props) {
     //methods
     const setAllowance = async () => {
         setStep(1);
-        // setStep(2);
         await auth.interfaceApproveMoCTokenStaking(true, (error) => {
         }).then(res => {
                 setStep(2);

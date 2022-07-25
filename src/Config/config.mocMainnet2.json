@@ -12,6 +12,7 @@
     "MoC": "0xf773B590aF754D597770937Fa8ea7AbDf2668370",
     "Multicall2": "0x8f344c3b2a02a801c24635f594c5652c8a2eb02a",
     "IRegistry": "0xCD101a2414256DA8F8E25d7b483b3cf639a71683",
+    "fastBtcBridgeAddress": "0x0D5006330289336ebdF9d0AC9E0674f91b4851eA",
     "tokens": {
       "COINBASE": {
           "name": "RBTC",
@@ -88,5 +89,6 @@
         "decimals": 2
       }
     }
-  }
+  },
+  "coin_usd": 48275.86
 }

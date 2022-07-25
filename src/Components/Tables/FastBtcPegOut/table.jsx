@@ -1,7 +1,7 @@
 import { Tabs, Tooltip, Button, Skeleton } from 'antd';
 import React, { useEffect, useContext, useState } from 'react';
 import FastBtcPegOut from "./index";
-import { Table } from 'antd';
+import { Table as TableAntd } from 'antd';
 import { AuthenticateContext } from '../../../Context/Auth';
 import {useTranslation} from "react-i18next";
 import { getDepositHistory } from "../../../Lib/fastBTC/fastBTCMethods";
@@ -13,7 +13,7 @@ const onChange = (key) => {
     console.log(key);
 };
 
-const Tabe = ({ accountData }) => {
+const Table = ({ accountData }) => {
   const auth = useContext(AuthenticateContext);
   useEffect(() => {
     auth.socket.initialize();
@@ -134,7 +134,7 @@ const Tabe = ({ accountData }) => {
   return (
     <Tabs defaultActiveKey="1" onChange={onChange}>
       <TabPane tab="Peg In" key="1">
-        <Table
+        <TableAntd
           columns={columns}
           rowKey={record => record.txHash}
           locale={locale}
@@ -157,4 +157,4 @@ const Tabe = ({ accountData }) => {
   );
 };
 
-export default Tabe;
+export default Table;

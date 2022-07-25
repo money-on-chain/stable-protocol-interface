@@ -36,8 +36,8 @@ function SystemStatus(props) {
     const configStatusGreen = {
         // className: '#00a651',
         className: 'statusGreen',
-        title: 'Fully Operational',
-        subtitle: "The system is in optimum status",
+        title: t('MoC.metrics.statusGreen.title', {ns: 'moc'}),
+        subtitle: t('MoC.metrics.statusGreen.subtitle', {ns: 'moc'}),
         operationsAvailable: [
             "mintSTABLE",
             "redeemSTABLEOnSettlement",
@@ -52,8 +52,8 @@ function SystemStatus(props) {
     const configStatusYellow = {
         // className: '#E9BF4A',
         className: 'statusYellow',
-        title: 'Partially Operational',
-        subtitle: "BPro cannot be redeemed. DoC cannot be minted",
+        title: t('MoC.metrics.statusYellow.title', {ns: 'moc'}),
+        subtitle: t('MoC.metrics.statusYellow.subtitle', {ns: 'moc'}),
         operationsAvailable: [
             "redeemSTABLEOnSettlement",
             "mintRISKPRO",
@@ -65,8 +65,8 @@ function SystemStatus(props) {
     const configStatusOrange = {
         // className: '#ef8a13',
         className: 'statusOrange',
-        title: 'Opportunity Mode',
-        subtitle: "BPro at a discount price!",
+        title: t('MoC.metrics.statusOrange.title', {ns: 'moc'}),
+        subtitle: t('MoC.metrics.statusOrange.subtitle', {ns: 'moc'}),
         operationsAvailable: [
             "mintRISKPRO",
             "mintRISKPROX",
@@ -77,8 +77,8 @@ function SystemStatus(props) {
     const configStatusRed = {
         // className: '#ed1c24',
         className: 'statusRed',
-        title: "Protected Mode",
-        subtitle: "No operations allowed",
+        title: t('MoC.metrics.statusRed.title', {ns: 'moc'}),
+        subtitle: t('MoC.metrics.statusRed.subtitle', {ns: 'moc'}),
         operationsAvailable: [
             "mintRISKPROX",
             "redeemRISKPROX"
