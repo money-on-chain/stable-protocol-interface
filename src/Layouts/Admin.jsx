@@ -19,10 +19,12 @@ export default function Admin() {
     const location = useLocation();
     const { accountData } = useContext(AuthenticateContext);
     const [drawerVisible, setDrawerVisible] = useState(false);
+
+    const [t, i18n] = useTranslation(["global", 'moc']);
     const loginButtonSettings = accountData.Wallet
         ? {
             title: accountData.truncatedAddress,
-            subtitle: new BigNumber(accountData.Balance).toFixed(4) + ' RBTC',
+            subtitle: new BigNumber(accountData.Balance).toFixed(4) + ' ' +  t('MoC.Tokens_RESERVE_code', { ns: 'moc' }),
             status: 'Active'
         }
         : { title: 'Connect' };
@@ -57,8 +59,6 @@ export default function Admin() {
     const toggleDrawerVisible = () => {
         setDrawerVisible(!drawerVisible);
     };
-
-    const [t, i18n] = useTranslation(["global", 'moc']);
 
     return (
         <Layout>
