@@ -1,0 +1,25 @@
+@import "../../assets/css/general_styling";
+
+.BalanceItem {
+  display: flex;
+  flex-flow: row;
+  box-sizing: border-box;
+  align-items: baseline;
+
+  h1 {
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-size: 15px!important;
+    font-weight: 500;
+    color: #707070;
+  }
+
+  h4 {
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-size: 15px!important;
+    font-weight: 500;
+    color: #707070;
+    margin-left: 0.3em;
+  }
+}

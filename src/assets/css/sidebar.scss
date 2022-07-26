@@ -1,0 +1,56 @@
+.Sidebar {
+  border-right: 1px solid #f0f0f0;
+  background: #fff;
+  top: 54px !important;
+
+  .ant-menu {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    margin-top: 10px;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .ant-menu-item {
+    padding: 0 calc(50% - 15px) !important;
+    margin: 0 !important;
+    &.ant-menu-item-selected, &:hover {
+    }
+  }
+
+  .ant-menu-item-icon, .ant-menu-title-content {
+    color: #888888;
+  }
+
+  .ant-menu-item-icon {
+    width: 30px;
+    height: 30px;
+    span {
+      font-size: 30px;
+    }
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .ant-menu-title-content {
+    display: none !important;
+  }
+}
+
+.DrawerMenu {
+  .ant-drawer-body {
+    padding: 0 !important;
+  }
+  .ant-menu-item-icon, .ant-menu-title-content {
+    color: #888888;
+  }
+  .ant-menu-item-selected {
+    &::after {
+      border-right-color: #000;
+    }
+  }
+}

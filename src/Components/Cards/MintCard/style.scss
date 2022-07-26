@@ -1,0 +1,149 @@
+@import '../../../assets/css/general_styling';
+
+.MintOrRedeemToken {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    & > .title {
+        margin-bottom: 20px;
+    }
+    .YouExchange, .YouReceive {
+        width: 45%;
+    }
+    .ClearButton {
+        margin-right: 15px;
+    }
+    .ReserveInUSD {
+        .Disclaimer {
+            color: $low-grey;
+            max-width: 200px;
+            line-height: 16px;
+            font-size: 0.9em;
+            display: block;
+        }
+        .Conversion {
+            display: flex;
+            .ReservePrice {
+                margin-left: 5px;
+            }
+        }
+    }
+    .MintOrRedeemTokenFooter {
+        margin-top: 30px;
+    }
+    .CommissionCurrencySwitch {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 350px;
+        @include secondary-text(1em, black, 400);
+        p {
+            @include secondary-text(1em, black, 400);
+        }
+        margin-top: 1em;
+    }
+    .ExchangeInputs {
+        svg {
+            cursor: default;
+        }
+    }
+    @media (max-width: 500px) {
+        padding: 20px;
+        .ExchangeInputs {
+            flex-direction: column;
+            .anticon-arrow-right {
+                display: none;
+            }
+        }
+        h1 {
+            @include primary-text(1.3em, black, 400);
+            margin-bottom: 20px;
+        }
+        .YouExchange, .YouReceive {
+            width: 100%;
+        }
+        .YouReceive {
+            margin-top: 20px;
+        }
+        .CommissionCurrencySwitch {
+            width: 100%;
+        }
+        .MintOrRedeemTokenFooter {
+            flex-direction: column;
+            align-items: flex-start;
+            .MainActions {
+                flex-direction: column;
+                width: 100%;
+                button {
+                    width: 90%;
+                    margin: 15px 0 0 0;
+                }
+            }
+        }
+    }
+}
+
+
+
+.ReserveAllowanceModal {
+    h1.ReserveAllowanceModal_Title {
+        @include primary-text(1em, $grey, 400);
+        position: absolute;
+        top: 15px;
+    }
+
+    .ReserveAllowanceModal_Content {
+        margin: auto;
+        max-width: 400px;
+        &.AllowanceLoading {
+            text-align: center;
+        }
+        .ant-spin {
+            // position: relative;
+            // left: 50%;
+            // transform: translateX(-50%);
+            span[role="img"] {
+                font-size: 72px;
+                color: $primary-color;
+                margin: 2rem 0;
+            }
+        }
+    }
+
+    .InfoContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        .title {
+            @include primary-text(1em, black, 400);
+        }
+        .value {
+            &.amount {
+                @include primary-text(1em, black, 400);
+                color: $primary-color;
+                display: flex;
+                span {
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+
+    .ButtonPrimary {
+        width: 130px;
+        margin: auto;
+        margin-top: 1rem;
+    }
+
+    .ActionButtonsRow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+      .ButtonPrimary {
+        margin: 1rem 0.25rem;
+        margin-left: 0.5rem;
+      }
+    }
+}

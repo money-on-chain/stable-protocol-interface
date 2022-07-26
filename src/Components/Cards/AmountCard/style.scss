@@ -1,0 +1,25 @@
+@import "../../../assets/css/general_styling";
+
+.WalletCurrencyPrice {
+  .item {
+    margin-bottom: 0.8em;
+  }
+
+  h4 {
+    .MoC & {
+      @include primary-text(1em, $secondary-dark-color, 400);
+    }
+    .RRC20 & {
+      @include primary-text(1em, $accent-color, 500);
+    }
+  }
+
+  @media (max-width: 500px) {
+    h1 > div > span {
+      font-size: 12px !important;
+    }
+    h4 {
+      font-size: 12px !important;
+    }
+  }
+}

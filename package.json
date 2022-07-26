@@ -1,0 +1,90 @@
+{
+  "name": "stable-protocol-interface",
+  "version": "2.0.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "@walletconnect/web3-provider": "^1.7.5",
+    "abi-decoder": "^2.4.0",
+    "antd": "^4.19.3",
+    "axios": "^0.27.2",
+    "bignumber.js": "^9.0.2",
+    "d3": "^7.4.4",
+    "env-cmd": "^10.1.0",
+    "i18next": "^21.8.2",
+    "lodash.debounce": "^4.0.8",
+    "moment": "^2.29.3",
+    "react": "^17.0.2",
+    "react-countup": "^6.2.0",
+    "react-debounce-input": "^3.2.5",
+    "react-device-detect": "^2.2.2",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.16.9",
+    "react-moment": "^1.1.2",
+    "react-pretty-numbers": "^3.0.0",
+    "react-qr-code": "^2.0.5",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "^4.0.3",
+    "recharts": "^2.1.9",
+    "rskjs-util": "^1.0.3",
+    "sass": "^1.51.0",
+    "satoshi-bitcoin": "^1.0.5",
+    "socket.io-client": "^4.5.1",
+    "web-vitals": "^0.2.4",
+    "web3": "^1.5.0",
+    "workbox-background-sync": "^5.1.4",
+    "workbox-broadcast-update": "^5.1.4",
+    "workbox-cacheable-response": "^5.1.4",
+    "workbox-core": "^5.1.4",
+    "workbox-expiration": "^5.1.4",
+    "workbox-google-analytics": "^5.1.4",
+    "workbox-navigation-preload": "^5.1.4",
+    "workbox-precaching": "^5.1.4",
+    "workbox-range-requests": "^5.1.4",
+    "workbox-routing": "^5.1.4",
+    "workbox-strategies": "^5.1.4",
+    "workbox-streams": "^5.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start:moc-alpha-testnet": "env-cmd -f .env.mocTestnetAlpha react-scripts start",
+    "start:moc-testnet": "env-cmd -f .env.mocTestnet react-scripts start",
+    "start:moc-mainnet": "env-cmd -f .env.mocMainnet2 react-scripts start",
+    "build": "export NODE_OPTIONS=--max_old_space_size=4096 && react-scripts build",
+    "build:moc-alpha-testnet": "export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.mocTestnetAlpha react-scripts build",
+    "build:moc-testnet": "export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.mocTestnet react-scripts build",
+    "build:moc-mainnet": "export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.mocMainnet2 react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@pawjs/sass": "^2.2.6",
+    "html-webpack-plugin": "^4.5.2",
+    "source-map-explorer": "^2.5.2",
+    "webpack": "4.46.0",
+    "webpack-cli": "^4.10.0"
+  }
+}

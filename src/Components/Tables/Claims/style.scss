@@ -1,0 +1,84 @@
+.Card.WalletOperations .title {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.components-table-demo-control-bar .ant-form-item {
+  margin-right: 16px;
+  margin-bottom: 8px;
+}
+
+
+.ant-table-thead>tr>th {
+  background: #fff !important;
+  color: #232222 !important;
+  text-transform: uppercase !important;
+}
+
+.color-token-stable {
+  color: #00a651;
+}
+
+.color-token-riskprox {
+  color: #ed1b32;
+}
+
+.color-token-riskpro {
+  color: #ff9415;
+}
+
+.event-action {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.CurrencyTx {
+  font-weight: 600;
+  div{
+    display: inline-block;
+  }
+}
+
+.ant-descriptions-item-label-th{
+  font-weight: 600;
+}
+.ant-descriptions-border-bottom{
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ant-descriptions-a{
+  color : #1890ff;
+  cursor: pointer;
+}
+
+.color-confirmed{
+  color: #478210;
+}
+
+.ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+  position: fixed !important;
+
+}
+
+.show-desk{
+  display: inline-block;
+}
+
+.show-mobile{
+  display: none;
+}
+
+.conf_title:first-letter {
+  text-transform: uppercase;
+}
+
+.Tooltip{
+  color: #707070;
+  cursor: pointer;
+}
+
+.ant-tooltip-inner{
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+}
