@@ -19,10 +19,12 @@ export default function Admin() {
     const location = useLocation();
     const { accountData } = useContext(AuthenticateContext);
     const [drawerVisible, setDrawerVisible] = useState(false);
+
+    const [t, i18n] = useTranslation(["global", 'moc']);
     const loginButtonSettings = accountData.Wallet
         ? {
             title: accountData.truncatedAddress,
-            subtitle: new BigNumber(accountData.Balance).toFixed(4) + ' RBTC',
+            subtitle: new BigNumber(accountData.Balance).toFixed(4) + ' ' +  t('MoC.Tokens_RESERVE_code', { ns: 'moc' }),
             status: 'Active'
         }
         : { title: 'Connect' };
@@ -57,8 +59,6 @@ export default function Admin() {
     const toggleDrawerVisible = () => {
         setDrawerVisible(!drawerVisible);
     };
-
-    const [t, i18n] = useTranslation(["global", 'moc']);
 
     return (
         <Layout>
@@ -166,28 +166,28 @@ export default function Admin() {
                         onClick={() => navigate('/')}
                         icon={<HomeFilled style={{ fontSize: 30 }} />}
                     >
-                        Home
+                        {t('MoC.menu-drawer.home', { ns: 'moc' })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-stable"
                         onClick={() => navigate('/wallet/stable')}
                         icon={<span className="icon-icon-stable"></span>}
                     >
-                        DoC
+                        {t('MoC.menu-drawer.STABLEWallet', { ns: 'moc' })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-pro"
                         onClick={() => navigate('/wallet/pro')}
                         icon={<span className="icon-icon-riskpro"></span>}
                     >
-                        BPro
+                        {t('MoC.menu-drawer.RISKPROWallet', { ns: 'moc' })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-leveraged"
                         onClick={() => navigate('/wallet/leveraged')}
                         icon={<span className="icon-icon-riskprox"></span>}
                     >
-                        BTCx
+                        {t('MoC.menu-drawer.RISKPROXWallet', { ns: 'moc' })}
                     </Menu.Item>
 
                     <Menu.Item
@@ -195,14 +195,14 @@ export default function Admin() {
                         onClick={() => navigate('/metrics')}
                         icon={PieChartFilled}
                     >
-                        BTCx
+                        {t('MoC.menu-drawer.RISKPROXWallet', { ns: 'moc' })}
                     </Menu.Item>
                     <Menu.Item
                         key="rewards"
                         onClick={() => navigate('/rewards')}
                         icon={<span className="icon-icon-moc"></span>}
                     >
-                        MoC
+                        {t('MoC.menu-drawer.rewards', { ns: 'moc' })}
                     </Menu.Item>
                 </Menu>
             </Drawer>

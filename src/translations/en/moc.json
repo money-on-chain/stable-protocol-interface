@@ -152,7 +152,7 @@
       "notifications": "Notifications",
       "information": "Information",
       "faqs": "Help Center",
-      "rewards": "MoC Tokens",
+      "rewards": "MoC",
       "language": "Language",
       "RISKPROWallet": "BPro",
       "RISKPROXWallet": "BTCx",
@@ -819,7 +819,13 @@
           "valueBtc": "Value",
           "btcadr": "BTC address",
           "web3adr": "RSK address",
-          "txHash": "Tx hash"
+          "txHash": "Tx hash",
+          "btcAmount": "BTC Amount",
+          "transferId": "Transfer ID",
+          "blockN": "Block Nº",
+          "feebtc": "Fee BTC",
+          "txLastUpdated": "TX Last Updated",
+          "dateLastUpdated": "Date Last Updated"
         },
         "columns": {
           "valueBTC": "{{value}} BTC",

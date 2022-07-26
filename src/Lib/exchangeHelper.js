@@ -1,3 +1,5 @@
+import { config } from '../Config/config';
+
 const TransactionTypeIdsMoC = {
   MINT_BPRO_FEES_RBTC: 1,
   REDEEM_BPRO_FEES_RBTC: 2,
@@ -182,8 +184,9 @@ const buyCurrencyMap = {
   }
 };
 
-const appMode = 'MoC' // o RRC20;
-const appModeString = `APP_MODE_MoC`;
+
+const appMode = config.environment.AppMode
+const appModeString = `APP_MODE_${appMode}`;
 
 const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>
     buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;

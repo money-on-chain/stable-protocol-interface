@@ -1,9 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
 import rskUtils from 'rskjs-util';
+import { config } from '../Config/config';
 
 const forceChecksumAddressInput = true;
 const forceRskIp60Addresses = true;
-const chainId = "31"; //local 31 en mainnet 30
+const chainId = config.chainId;
 
 const toWeb3CheckSumAddress = web3 => address => {
   return web3.utils.toChecksumAddress(address);
