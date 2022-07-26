@@ -1,0 +1,38 @@
+@import '../../../assets/css/general_styling';
+
+.OperationStatusModal {
+  padding: 46px;
+    h1 {
+        @include primary-text(1em, $grey, 400);
+        position: absolute;
+        top: 15px;
+    }
+    .InfoContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title {
+            @include primary-text(1em, black, 400);
+        }
+        .value {
+            @include primary-text(1em, black, 400);
+            &.success {
+                color: $primary-color;
+            }
+            &.error {
+                color: $red;
+            }
+            &.pending {
+                color: $color-pending;
+            }
+        }
+    }
+    a {
+        color: $primary-color;
+    }
+    .ButtonPrimary {
+        width: 130px;
+        margin: auto;
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,25 @@
+.icon-coin-stable {
+  span {
+    &.path1::before {
+      color: #fff;
+    }
+    &.path2::before {
+      color: #888888;
+    }
+  }
+}
+
+.ant-menu-item {
+  [class^="icon-"], [class*=" icon-"] {
+    &::before {
+      font-size: 30px;
+    }
+  }
+  &.ant-menu-item-selected, &:hover {
+    background: #fff !important;
+    .ant-menu-item-icon, .ant-menu-title-content {
+      color: #03a885;
+      transition: all ease-in-out 0.3s;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+@import './config_styling';
+
+// Colors
+
+$black: #000;
+$white: #fff;
+
+$darker-grey: #232222;
+$dark-grey: #575756;
+$grey: #707070;
+$medium-grey: #878787;
+$low-grey: #B9B9B9;
+$light-grey: #F7F7F7;
+
+$green: #3fcb97;
+$red: #f2316a;
+
+// Shadow
+
+$shadow: 0 1px 6px rgba(147, 141, 158, 0.16), 0 2px 6px rgba(52, 53, 62, 0.16);
+
+// Container
+
+@mixin container() {
+  background: #fff;
+  box-shadow: $shadow;
+  border-radius: 6px;
+  padding: 1em;
+}
+
+// Theme Colors
+
+@mixin border-theme($theme-color) {
+  border-bottom: solid;
+  -webkit-border-image: $theme-color;
+  -moz-border-image: $theme-color;
+  -o-border-image: $theme-color;
+  border-image: $theme-color;
+  border-image-slice: 1;
+  border-bottom-width: 8px;
+  border-bottom-style: solid;
+}
+
+@mixin input-style($border-color) {
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-color: $border-color;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
