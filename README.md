@@ -1,2 +1,0 @@
-## Webapp stable ipfs
-
