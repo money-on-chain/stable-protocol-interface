@@ -7,7 +7,7 @@
   "api": {
     "api_url": "http://localhost:9002/api/v1/",
     "api_admin_url": "http://localhost:9002/api/admin/v1/",
-    "api_moctest": "https://api-operations-alpha-testnet.moneyonchain.com/api/v1/",
+    "api_moctest": "https://api-moctest.coinfabrik.com/api/v1/",
     "api_moneyonchain": "https://moc-incentives-alpha.moneyonchain.com/"
   },
   "environment": {
@@ -18,28 +18,28 @@
     "IRegistry": "0x2c4b59ede1998229a9509ec7d15d206e91a246f1",
     "tokens": {
       "COINBASE": {
-          "name": "RBTC",
-          "decimals": "6"
+        "name": "RBTC",
+        "decimals": "6"
       },
       "RESERVE": {
-          "name": "RBTC",
-          "decimals": "6"
+        "name": "RBTC",
+        "decimals": "6"
       },
       "STABLE": {
-          "name": "DOC",
-          "decimals": "2"
+        "name": "DOC",
+        "decimals": "2"
       },
       "RISKPRO": {
-          "name": "BPRO",
-          "decimals": "6"
+        "name": "BPRO",
+        "decimals": "6"
       },
       "RISKPROX": {
-          "name": "BTCX",
-          "decimals": "6"
+        "name": "BTCX",
+        "decimals": "6"
       },
       "MOC": {
-          "name": "MOC",
-          "decimals": "2"
+        "name": "MOC",
+        "decimals": "2"
       }
     },
     "Precisions": {

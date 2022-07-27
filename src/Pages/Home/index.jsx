@@ -25,11 +25,12 @@ function Home(props) {
     const data_row_coins2= [];
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             if(auth.isLoggedIn){
                 auth.loadContractsStatusAndUserBalance();
             }
         }, 30000);
+        return () => clearInterval(interval);
     },[]);
 
     useEffect(() => {

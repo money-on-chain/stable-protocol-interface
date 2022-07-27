@@ -104,11 +104,12 @@ export default function FastBtcPegOut(props) {
     ];
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             if (currentHash) {
                 getFastbtcPegout(current)
             }
         }, 30000);
+        return () => clearInterval(interval);
     });
 
     var data = [];

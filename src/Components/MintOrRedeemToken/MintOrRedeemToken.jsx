@@ -470,7 +470,7 @@ const MintOrRedeemToken = (props) => {
             title={t('global.MintOrRedeemToken_YouExchange', {ns: 'global'})}
             currencySelected={currencyYouExchange}
             onCurrencySelect={onChangeCurrencyYouExchange}
-            inputValueInWei={valueYouExchange}
+            inputValueInWei={(valueYouExchange==0)? 0.00: valueYouExchange}
             onInputValueChange={onValueYouExchangeChange}
             currencyOptions={[token, 'RESERVE']}
             onValidationStatusChange={onYouExchangeValidityChange}
@@ -489,7 +489,7 @@ const MintOrRedeemToken = (props) => {
             onValidationStatusChange={onYouReceiveValidityChange}
             currencySelected={currencyYouReceive}
             disableCurrencySelector
-            inputValueInWei={valueYouReceive}
+            inputValueInWei={(valueYouReceive==0)? 0.00: valueYouReceive}
             maxValueAllowedInWei={getMaxValues().youReceive}
             showMaxValueAllowed
             onInputValueChange={onValueYouReceiveChange}

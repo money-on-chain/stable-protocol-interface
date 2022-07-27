@@ -14,11 +14,12 @@ export default function Mint(props) {
     const auth = useContext(AuthenticateContext);
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             if(auth.isLoggedIn){
                 auth.loadContractsStatusAndUserBalance();
             }
         }, 30000);
+        return () => clearInterval(interval);
     },[]);
 
     return (

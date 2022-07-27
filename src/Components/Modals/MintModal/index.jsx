@@ -221,6 +221,16 @@ export default function MintModal(props) {
     });
   } ;
 
+  const partClose=()=>{
+    setShowError(false);
+    setTransaction(false)
+    setCurrentHash(null);
+    setShowTransaction(false)
+    setTimeout(function(){
+      onCancel();
+    }, 200);
+  }
+
   const changeTolerance = (newTolerance) => {
     setTolerance(newTolerance);
     setShowError(false);
@@ -230,15 +240,13 @@ export default function MintModal(props) {
 
   const cancelButton = () => {
     if(confirmModal==false){
-      setConfirmModal(true)
+      if( showTransaction ){
+        setConfirmModal(true)
+      }else{
+        partClose()
+      }
     }else{
-      setShowError(false);
-      setTransaction(false)
-      setCurrentHash(null);
-      setShowTransaction(false)
-      setTimeout(function(){
-        onCancel();
-      }, 200);
+      partClose()
       setConfirmModal(false)
     }
   };
@@ -275,11 +283,6 @@ export default function MintModal(props) {
 
   const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
   const styleReceive = tokenNameReceive === receiving.currencyCode ? { color } : {};
-
-  console.log('exchanging.currencyCode----------------------')
-  console.log(exchanging.currencyCode)
-  console.log(receiving.currencyCode)
-  console.log('exchanging.currencyCode----------------------')
 
   return (
     <Modal

@@ -21,12 +21,13 @@ function Metrics(props) {
     const mocState = auth.contractStatusData;
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             if(auth.isLoggedIn){
                 auth.loadContractsStatusAndUserBalance();
             }
         }, 30000);
-    },[auth]);
+        return () => clearInterval(interval);
+    },[]);
 
     let {
         b0Leverage = 0,
