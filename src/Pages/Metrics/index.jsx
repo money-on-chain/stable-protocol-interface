@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import SystemStatus from '../../Components/Cards/Metrics/SystemStatus'
 import Reserve from '../../Components/Cards/Metrics/Reserve'
 import MOC from '../../Components/Cards/Metrics/MOC'
@@ -19,6 +19,14 @@ function Metrics(props) {
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;
     const mocState = auth.contractStatusData;
+
+    useEffect(() => {
+        setInterval(() => {
+            if(auth.isLoggedIn){
+                auth.loadContractsStatusAndUserBalance();
+            }
+        }, 30000);
+    },[auth]);
 
     let {
         b0Leverage = 0,
@@ -70,23 +78,23 @@ function Metrics(props) {
     const bproDiscountPriceRBTC = new BigNumber(bproDiscountPrice);
     const bproDiscountPriceUsd =
         (convertToken && convertToken('RESERVE', 'USD', bproDiscountPriceRBTC)) || 0;
-    
+
     const totalDocAmount = b0DocAmount.plus(x2DocAmount);
     const totalDocInRBTC = (convertToken && convertToken('STABLE', 'RESERVE', totalDocAmount)) || 0;
     const totalBproInRBTC = b0BproAmount.multipliedBy(new BigNumber(bproPriceInRbtc).div(10 ** 18));
     const totalBpro = (convertToken && convertToken('RESERVE', 'RISKPRO', totalBproInRBTC)) || 0;
-    
+
     const totalBproxInRBTC = x2BproAmount.multipliedBy(
         new BigNumber(bprox2PriceInRbtc).div(10 ** 18)
     ); //new BigNumber(x2BTCAmount);
     const totalBprox = (convertToken && convertToken('RESERVE', 'RISKPROX', totalBproxInRBTC)) || 0;
-    
+
     const totalBproInUSD = (convertToken && convertToken('RESERVE', 'USD', totalBproInRBTC)) || 0;
     const totalBproxInUSD = (convertToken && convertToken('RESERVE', 'USD', totalBproxInRBTC)) || 0;
     const adjustedTargetCoverage = parseFloat(
         b0TargetCoverage * (bitcoinPrice / Math.min(bitcoinPrice, bitcoinMovingAverage))
     );
-    
+
     return (
         <Fragment>
             {!auth.isLoggedIn && <Alert

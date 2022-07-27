@@ -11,26 +11,40 @@ import Router from './Router';
 import { AuthenticateProvider } from './Context/Auth';
 import {I18nextProvider} from "react-i18next";
 import i18next from "i18next";
-import global_es from "./translations/es/global.json"
-import global_en from "./translations/en/global.json"
-import moc_es from "./translations/es/moc.json"
-import moc_en from "./translations/en/moc.json"
+import {config} from "./Config/config";
+// import global_es from "./translations/MoC/es/global.json"
+// import global_en from "./translations/MoC/en/global.json"
+// import moc_es from "./translations/MoC/es/moc.json"
+// import moc_en from "./translations/MoC/en/moc.json"
 
 
-i18next.init({
-    interpolation: {escapeValue:false},
-    lng: "en",
-    resources: {
-        es: {
-            global: global_es,
-            moc: moc_es
-        },
-        en: {
-            global: global_en,
-            moc: moc_en
-        },
+
+async function loadTranslations() {
+    try {
+        let moc_es= await import(`./translations/${config.environment.AppMode}/es/moc.json`);
+        let moc_en= await import(`./translations/${config.environment.AppMode}/en/moc.json`);
+        let global_es= await import(`./translations/${config.environment.AppMode}/es/global.json`)
+        let global_en= await import(`./translations/${config.environment.AppMode}/en/global.json`)
+        i18next.init({
+            interpolation: {escapeValue:false},
+            lng: "en",
+            resources: {
+                es: {
+                    global: global_es,
+                    moc: moc_es
+                },
+                en: {
+                    global: global_en,
+                    moc: moc_en
+                },
+            }
+        })
+    } catch (error) {
+        console.log(`Ocurrió un error: ${error}`);
     }
-})
+}
+
+loadTranslations()
 
 ReactDOM.render(
     <React.StrictMode>

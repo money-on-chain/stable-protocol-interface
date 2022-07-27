@@ -1,6 +1,5 @@
 import api from "../services/api";
 import {config} from "../Config/config";
-import axios from "axios";
 
 async function priceVariation24hs() {
     const response = await fetch("https://api-moctest.coinfabrik.com/api/v1/webapp/prices/var/", {
@@ -19,11 +18,14 @@ async function priceVariation24hs() {
 export { priceVariation24hs };
 
 
-export function callPrices(datas) {
-  return fetch(`${config.api.api_moctest}`+'webapp/prices/var/?address='+datas)
-        .then((response) => response.json())
-        .catch((err) => {
-            console.log(err);
-        });
+export async function callPrices(datas) {
+    try {
+        const resp = await fetch(`${config.api.api_moctest}`+'webapp/prices/var/?address='+datas, {}, 1000)
+        const data = await resp.json()
+        return data
+    } catch (e) {
+        if (e === "timeout") {
+            return e
+        }
+    }
 }
-

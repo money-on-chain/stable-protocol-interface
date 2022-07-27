@@ -2,7 +2,7 @@ import MintCard from '../../../Components/Cards/MintCard';
 import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
 import {Row, Col, Switch, Alert} from 'antd';
-import React, { Fragment, useContext } from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../Context/Auth';
@@ -12,6 +12,14 @@ import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedee
 
 export default function Mint(props) {
     const auth = useContext(AuthenticateContext);
+
+    useEffect(() => {
+        setInterval(() => {
+            if(auth.isLoggedIn){
+                auth.loadContractsStatusAndUserBalance();
+            }
+        }, 30000);
+    },[]);
 
     const [t, i18n] = useTranslation(["global", 'moc'])
 

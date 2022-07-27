@@ -43,7 +43,6 @@ export default function ListOperations(props) {
     const [callTable, setCallTable]=  useState(false);
     const [totalTable, setTotalTable]=  useState(0);
     const [currentHash, setCurrentHash] = useState(true);
-    const [timer, setTimer] = useState(100);
 
     const [loadingSke, setLoadingSke] = useState(true);
     const timeSke= 1500
@@ -53,21 +52,30 @@ export default function ListOperations(props) {
     },[auth]);
 
     const transactionsList= (skip,call_table) => {
-        const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
-        api('get', `${config.api.api_moctest}`+'webapp/transactions/list/', datas)
-            .then(response => {
-                setDataJson(response);
-                setTotalTable(response.total)
-                if(call_table){
-                    setCallTable(call_table)
+        if(auth.isLoggedIn){
+            const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
+            setTimeout(() => {
+                try {
+                    api('get', `${config.api.api_moctest}`+'webapp/transactions/list/', datas)
+                        .then(response => {
+                            setDataJson(response);
+                            setTotalTable(response.total)
+                            if(call_table){
+                                setCallTable(call_table)
+                            }
+                        })
+                        .catch((response) => {
+                            console.log(response);
+                            if(call_table){
+                                setCallTable(call_table)
+                            }
+                        });
+                } catch (error) {
+                    console.error({ error });
+                    console.log(error);
                 }
-            })
-            .catch((response) => {
-                console.log(response);
-                if(call_table){
-                    setCallTable(call_table)
-                }
-            });
+            }, 500);
+        }
     };
 
 
@@ -105,13 +113,16 @@ export default function ListOperations(props) {
     ];
 
     useEffect(() => {
-        if(accountData.Owner!==undefined){
-            if (currentHash) {
+        setInterval(() => {
+            if (accountData.Owner) {
                 transactionsList(current)
             }
-        }
-        if (accountData) {
-            setTimer(30000)
+        }, 30000);
+    },[]);
+    
+    useEffect(() => {
+        if (accountData.Owner) {
+            transactionsList(current)
         }
     },[accountData.Owner]);
 
@@ -127,7 +138,7 @@ export default function ListOperations(props) {
 
     const data_row_coins2 = [];
     var json_end = []
-    const data_row = (set_current) => {
+    const data_row = () => {
         /*******************************sort descending by date lastUpdatedAt***********************************/
         if(dataJson.transactions!==undefined){
             dataJson.transactions.sort((a, b) => {
@@ -298,7 +309,13 @@ export default function ListOperations(props) {
                             <DownCircleOutlined onClick={e => onExpand(record, e)} />
                         )
                 }}
-                pagination={{pageSize:20, position: [top, bottom], defaultCurrent: 1, onChange:onChange , total: totalTable }}
+                pagination={
+                    {pageSize:20,
+                        position: [top, bottom],
+                        defaultCurrent: 1,
+                        onChange:onChange ,
+                        total: totalTable }
+                }
                 columns={tableColumns}
                 dataSource={hasData ? (auth.isLoggedIn == true) ? data : null : null}
                 scroll={scroll}

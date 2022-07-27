@@ -75,22 +75,17 @@ export default function MintModal(props) {
   let userTolerance = '';
 
   useEffect(() => {
+    setInterval(() => {
       if (currentHash) {
-        console.log('currentHash', currentHash);
-          const interval = setInterval(() => {
-              getTransaction(currentHash)
-          }, 15000);
-          return () => clearInterval(interval);
+        console.log("updated4");
+        getTransaction(currentHash)
       }
-  }, [currentHash]);
+    }, 15000);
+  }, []);
+
   useEffect(
     () => {
       setComment('');
-      if(document.querySelectorAll('.ant-modal')[0]!==undefined ){
-        console.log('eeeeeeeeeeeee 333333333333333333333333333')
-        // document.querySelectorAll('.ant-modal-wrap')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
-        // document.querySelectorAll('.ant-modal-content')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
-      }
     },
     [visible]
   );
@@ -231,13 +226,36 @@ export default function MintModal(props) {
     setShowError(false);
   };
 
+  const [confirmModal, setConfirmModal] = useState(false);
+
   const cancelButton = () => {
+    if(confirmModal==false){
+      setConfirmModal(true)
+    }else{
+      setShowError(false);
+      setTransaction(false)
+      setCurrentHash(null);
+      setShowTransaction(false)
+      setTimeout(function(){
+        onCancel();
+      }, 200);
+      setConfirmModal(false)
+    }
+  };
+
+  const cancelFull = () => {
     setShowError(false);
     setTransaction(false)
-    setTxtTransaction('PENDING')
     setCurrentHash(null);
     setShowTransaction(false)
-    onCancel();
+    setTimeout(function(){
+      onCancel();
+    }, 200);
+    setConfirmModal(false)
+  };
+
+  const changeContent= () => {
+    setConfirmModal(false)
   };
 
   const markStyle = {
@@ -258,9 +276,10 @@ export default function MintModal(props) {
   const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
   const styleReceive = tokenNameReceive === receiving.currencyCode ? { color } : {};
 
-console.log('vvvvvvvvvvvvvvvvvv')
-console.log(visible)
-console.log('vvvvvvvvvvvvvvvvvv')
+  console.log('exchanging.currencyCode----------------------')
+  console.log(exchanging.currencyCode)
+  console.log(receiving.currencyCode)
+  console.log('exchanging.currencyCode----------------------')
 
   return (
     <Modal
@@ -295,10 +314,11 @@ console.log('vvvvvvvvvvvvvvvvvv')
               </span>
             </div>
           </div>
-          <div className="MOCFee mrb-0">
-            <div className={`AlignedAndCentered Amount mrb-0 mrt-0`}>
-              <span className="Name color-08374F">{`Interest`}</span>
-              <span className={`Value ${appMode}`}>
+          { receiving.currencyCode=='RISKPROX' &&
+            <><div className="MOCFee mrb-0">
+              <div className={`AlignedAndCentered Amount mrb-0 mrt-0`}>
+                <span className="Name color-08374F">{`Interest`}</span>
+                <span className={`Value ${appMode}`}>
                   {auth.isLoggedIn &&
                   <LargeNumber
                       currencyCode={fee?.currencyCode}
@@ -306,26 +326,27 @@ console.log('vvvvvvvvvvvvvvvvvv')
                       includeCurrency
                       className="color-08374F"
                   />}
-                {!auth.isLoggedIn && <span>0.000000 RBTC</span>}
+                  {!auth.isLoggedIn && <span>0.000000 RBTC</span>}
                 </span>
-            </div>
-          </div>
-          {interests &&
-          interests?.interestValue &&
-          interests?.interestValue.gt(0) && (
-              <div className="MOCFee">
-                <div className={`AlignedAndCentered Amount`}>
-                  <span className="Name">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>
-                  <span className={`Value ${appMode}`}>
-                      <LargeNumber
-                          currencyCode={'RESERVE' }
-                          amount={interests.interestValue}
-                          includeCurrency
-                      />
-                    </span>
-                </div>
               </div>
-          )}
+            </div></>
+          }
+          {/*{interests &&*/}
+          {/*interests?.interestValue &&*/}
+          {/*interests?.interestValue.gt(0) && (*/}
+          {/*    <div className="MOCFee">*/}
+          {/*      <div className={`AlignedAndCentered Amount`}>*/}
+          {/*        <span className="Name">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>*/}
+          {/*        <span className={`Value ${appMode}`}>*/}
+          {/*            <LargeNumber*/}
+          {/*                currencyCode={'RESERVE' }*/}
+          {/*                amount={interests.interestValue}*/}
+          {/*                includeCurrency*/}
+          {/*            />*/}
+          {/*          </span>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*)}*/}
           <div className="Legend-s1">
             {t('global.ConfirmTransactionModal_MOCFee_Disclaimer')}<br/>
             {t('global.ConfirmTransactionModal_AmountMayDifferDisclaimer')}
@@ -358,48 +379,30 @@ console.log('vvvvvvvvvvvvvvvvvv')
           style={{ alignItems: 'start'}}
         >
           <div className="Name">
-            {/*<div className="MOCFee">*/}
-            {/*  <div className={`AlignedAndCentered Amount`}>*/}
-            {/*    <span className="Name">{`${t('global.ConfirmTransactionModal_MOCFee')} (${(fee?.percentage!==undefined)? fee.percentage: 0.15}%)`}</span>*/}
-            {/*    <span className={`Value ${appMode}`}>*/}
-            {/*      {auth.isLoggedIn &&*/}
-            {/*      <LargeNumber*/}
-            {/*        currencyCode={fee?.currencyCode}*/}
-            {/*        amount={fee?.value}*/}
-            {/*        includeCurrency*/}
-            {/*      />}*/}
-            {/*      {!auth.isLoggedIn && <span>0.000000 RBTC</span>}*/}
-            {/*    </span>*/}
-            {/*  </div>*/}
-            {/*</div>*/}
-            {interests &&
-              interests?.interestValue &&
-              interests?.interestValue.gt(0) && (
-                <div className="MOCFee">
-                  <div className={`AlignedAndCentered Amount`}>
-                    <span className="Name">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>
-                    <span className={`Value ${appMode}`}>
-                      <LargeNumber
-                        currencyCode={'RESERVE' }
-                        amount={interests.interestValue}
-                        includeCurrency
-                      />
-                    </span>
-                  </div>
-                </div>
-          )}
+          {/*  {interests &&*/}
+          {/*    interests?.interestValue &&*/}
+          {/*    interests?.interestValue.gt(0) && (*/}
+          {/*      <div className="MOCFee">*/}
+          {/*        <div className={`AlignedAndCentered Amount 333333333333`}>*/}
+          {/*          <span className="Name">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>*/}
+          {/*          <span className={`Value ${appMode}`}>*/}
+          {/*            <LargeNumber*/}
+          {/*              currencyCode={'RESERVE' }*/}
+          {/*              amount={interests.interestValue}*/}
+          {/*              includeCurrency*/}
+          {/*            />*/}
+          {/*          </span>*/}
+          {/*        </div>*/}
+          {/*      </div>*/}
+          {/*)}*/}
           </div>
           {/*<span className="Value">0.00 MOC</span>*/}
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-around'}}>
+      <div className={'div-c1'}>
         {showTransaction
           ? <div style={{ width: '100%' }}>
-            {/*<div>*/}
-            {/*  <p style={{ width: '50%', float: 'left' }}>Transaction status</p>*/}
-            {/*  <p style={{ textAlign: 'right', color: transaction ? '#09c199' : '#f1a954' }}>{transaction ? 'SUCCESSFUL' : 'PENDING'}</p>*/}
-            {/*</div>*/}
             <div>
               <p className={'Transaction_ID'}>{t('global.Transaction_ID')}</p>
               <div style={{ textAlign: 'right' }}>
@@ -424,11 +427,6 @@ console.log('vvvvvvvvvvvvvvvvvv')
             </div>
           </div>
           : <>
-            {/*<Button*/}
-            {/*  onClick={() => cancelButton()}*/}
-            {/*>*/}
-            {/*  Cancel*/}
-            {/*</Button>*/}
             <Button
               type="primary"
               disabled={!auth.isLoggedIn}
@@ -436,6 +434,28 @@ console.log('vvvvvvvvvvvvvvvvvv')
             >{t("global.Bttn_Continue")}</Button>
         </>}
       </div>
+      <Modal visible={confirmModal} footer={null} width={450}>
+        <img className={'img-campana'} width={27} height={30} src={'campana.png'}/>
+        <div className={'div-txt'}>
+        <p className={'color-08374F'}>Copy the transaction ID before closing since the information about this operation will not be available in the APP until successful.</p>
+        <div>
+          {showTransaction &&
+          <> <div style={{ width: '100%' }}>
+            <div>
+              <p className={'Transaction_ID'}>{t('global.Transaction_ID')}</p>
+              <div style={{ textAlign: 'right' }}>
+                <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash}/>
+              </div>
+            </div>
+          </div>
+          </>
+          }
+        </div>
+        <br/>
+        <Button type="default" onClick={() => cancelFull()} className={'width-140'} >{"Close"}</Button>
+        <Button type="primary" onClick={() => changeContent(1)} className={'float-right width-140'}>{"Return"}</Button>
+        </div>
+      </Modal>
     </Modal>
   );
 }

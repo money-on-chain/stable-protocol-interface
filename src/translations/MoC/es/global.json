@@ -237,6 +237,8 @@
         "ReserveAllowanceModal_allowanceSendTitle": "Allowance",
         "ReserveAllowanceModal_allowanceSendDescription": "Por favor, aprueba la transacción en tu billetera para utilizar Tokens MoC en la plataforma.",
         "CustomizePrize_VariationToleranceSettingsTitle": "Personalizar la tolerancia de variación de precios",
-        "CustomizePrize_VariationToleranceTitle": "Tolerancia de variación de precio"
+        "CustomizePrize_VariationToleranceTitle": "Tolerancia de variación de precio",
+        "Connected_Wallet": "Cartera conectada",
+        "Disconnect": "Desconectar"
     }
 }

@@ -138,7 +138,7 @@ const Table = ({ accountData }) => {
           columns={columns}
           rowKey={record => record.txHash}
           locale={locale}
-          dataSource={operations && 
+          dataSource={operations.length > 0 && 
             operations.map(result => {
               const item = result;
               item.step =

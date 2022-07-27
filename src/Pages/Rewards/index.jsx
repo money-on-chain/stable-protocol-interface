@@ -18,6 +18,14 @@ export default function Rewards(props) {
     const timeSke= 1500
 
     useEffect(() => {
+        setInterval(() => {
+            if(auth.isLoggedIn){
+                auth.loadContractsStatusAndUserBalance();
+            }
+        }, 30000);
+    },[]);
+
+    useEffect(() => {
         setTimeout(() => setLoading(false), timeSke)
     },[auth]);
 

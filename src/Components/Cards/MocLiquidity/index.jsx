@@ -47,13 +47,22 @@ function MocLiquidity(props) {
     const { accountData, userBalanceData } = auth;
 
     const agent= () => {
-        api('get', `${config.api.api_moneyonchain}`+'agent', {})
-            .then(response => {
-                setIncentiveState(response);
-            })
-            .catch((response) => {
-                console.log(response);
-            });
+        if(auth.isLoggedIn) {
+            setTimeout(() => {
+                try {
+                    api('get', `${config.api.api_moneyonchain}` + 'agent', {})
+                        .then(response => {
+                            setIncentiveState(response);
+                        })
+                        .catch((response) => {
+                            console.log(response);
+                        });
+                } catch (error) {
+                    console.error({error});
+                    console.log(error);
+                }
+            }, 500);
+        }
     };
 
     useEffect(() => {
@@ -83,15 +92,28 @@ function MocLiquidity(props) {
     const [rewardedToday, setRewardedToday] = useState({toGetToday: 0, toGetNow: 0, time_left: 0});
 
     const claimsCall= () => {
-        api('get', `${config.api.api_moneyonchain}balance/${accountData.Owner}`, {})
-            .then(response => {
-                setClaimsValue(response);
-                const { toGetToday, toGetNow, time_left } = getRewardedToday(response.daily_moc, userBalanceData.bproBalance, response.total_bpro, response.end_block_dt)
-                setRewardedToday({toGetToday: toGetToday, toGetNow: toGetNow, time_left: time_left});
-            })
-            .catch((response) => {
-                console.log(response);
-            });
+        if(auth.isLoggedIn) {
+            setTimeout(() => {
+                try {
+                    api('get', `${config.api.api_moneyonchain}balance/${accountData.Owner}`, {})
+                        .then(response => {
+                            setClaimsValue(response);
+                            const {
+                                toGetToday,
+                                toGetNow,
+                                time_left
+                            } = getRewardedToday(response.daily_moc, userBalanceData.bproBalance, response.total_bpro, response.end_block_dt)
+                            setRewardedToday({toGetToday: toGetToday, toGetNow: toGetNow, time_left: time_left});
+                        })
+                        .catch((response) => {
+                            console.log(response);
+                        });
+                } catch (error) {
+                    console.error({error});
+                    console.log(error);
+                }
+            }, 500);
+        }
     };
 
     useEffect(() => {
