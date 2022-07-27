@@ -153,7 +153,7 @@ const AuthenticateProvider = ({ children }) => {
             userBalanceData,
             config,
             account,
-            vendorAddress: config.vendor
+            vendorAddress: config.vendor.address
         }
 
     }
