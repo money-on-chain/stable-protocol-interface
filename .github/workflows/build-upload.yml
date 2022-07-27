@@ -31,7 +31,6 @@ jobs:
           release_branches: release.*,hotfix.*
           default_bump: fix
           custom_tag: ${{ env.PACKAGE_VERSION }}
-
           
 #  create_release:
 #    name: Create Release
