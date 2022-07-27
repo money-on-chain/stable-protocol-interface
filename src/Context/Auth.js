@@ -267,6 +267,7 @@ const AuthenticateProvider = ({ children }) => {
     }
 
     const loadContractsStatusAndUserBalance = async () => {
+        if (!window.integration) return;
         const appMode = config.environment.AppMode;
 
         // Read info from different contract MoCState.sol MoCInrate.sol MoCSettlement.sol MoC.sol
