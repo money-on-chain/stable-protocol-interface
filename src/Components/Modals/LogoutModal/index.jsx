@@ -1,9 +1,9 @@
-import { Modal } from 'antd';
-import { useContext, useState } from 'react';
+import {Col, Modal, Row} from 'antd';
+import React, { useContext, useState } from 'react';
 import { Button } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
-import Copy from '../../../Components/Page/Copy';
+import CopyModal from "../../Page/CopyModal";
 import {useTranslation} from "react-i18next";
 export default function MintModal(props) {
     const auth = useContext(AuthenticateContext);
@@ -13,6 +13,7 @@ export default function MintModal(props) {
 
     return (
         <Modal
+            title={t("global.Connected_Wallet", { ns: 'global' })}
             visible={visible}
             footer={''}
             width={400}
@@ -20,37 +21,18 @@ export default function MintModal(props) {
         >
             <div style={{marginTop: 10, display: 'flex', width: '100%', paddingLeft: 20, paddingRight: 20}}>
                 <div className="YourAddress" style={{flexGrow: 1}}>
-                    <h3>{t('global.Header_yourAddress')}</h3>
-                    <Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Owner}/>
+                    <h3>{t('global.TotalBalanceCard_address')}</h3>
                 </div>
                 <div className="StatusLogin" style={{flexGrow: 0}}>
-                    <h3>{t('global.Header_status')}</h3>
-                    <h3 style={{color: '#079a7a'}}>{t('global.Header_connected')}</h3>
+                    <CopyModal textToShow={accountData.truncatedAddress} textToCopy={accountData.Owner}/>
                 </div>
             </div>
 
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyItems: 'center',
-                width: '100%',
-                marginTop: 10
-            }}>
-                <Button
-                    className="ArrowButton"
-                    icon={<LogoutOutlined style={{fontSize: 34}} />}
-                    style={{
-                        width: 70,
-                        height: 70,
-                        justifySelf: 'center'
-                    }}
-                    onClick={() => {
-                        auth.disconnect();
-                        handleClose();
-                    }}
-                />
-                <h3 style={{marginTop: 15}}>{t('global.Header_logout')}</h3>
+            <div style={{marginTop: 10, display: 'flex', width: '100%', paddingLeft: 20, paddingRight: 20}}>
+                <Col span={24} style={{ justifyContent: 'space-evenly' }}>
+                    <Button style={{'float':'left','width':'120px'}} onClick={() => {auth.disconnect(); handleClose();}}>{t("global.Disconnect", { ns: 'global' })}</Button>
+                    <Button style={{'float':'right','width':'120px'}} type="primary"  onClick={() => {handleClose();}}>{t("global.RewardsClaimButton_Modal_Close", { ns: 'global' })}</Button>
+                </Col>
             </div>
         </Modal>
     );

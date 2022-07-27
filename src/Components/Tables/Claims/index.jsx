@@ -50,22 +50,31 @@ export default function Claims(props) {
     const [timer, setTimer] = useState(100);
 
     const transactionsList= (skip,call_table) => {
-        const datas= {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
-        api('get', config.api.api_moneyonchain+'claims/'+accountData.Owner, datas)
-            .then(response => {
-                console.log('response', response);
-                setDataJson(response);
-                setTotalTable(response.total)
-                if(call_table){
-                    setCallTable(call_table)
+        if(auth.isLoggedIn) {
+            const datas = {address: accountData.Owner, limit: 20, skip: (((skip - 1) + (skip - 1)) * 10)}
+            setTimeout(() => {
+                try {
+                    api('get', config.api.api_moneyonchain + 'claims/' + accountData.Owner, datas)
+                        .then(response => {
+                            console.log('response', response);
+                            setDataJson(response);
+                            setTotalTable(response.total)
+                            if (call_table) {
+                                setCallTable(call_table)
+                            }
+                        })
+                        .catch((response) => {
+                            console.log(response);
+                            if (call_table) {
+                                setCallTable(call_table)
+                            }
+                        });
+                } catch (error) {
+                    console.error({error});
+                    console.log(error);
                 }
-            })
-            .catch((response) => {
-                console.log(response);
-                if(call_table){
-                    setCallTable(call_table)
-                }
-            });
+            }, 500);
+        }
     };
 
 
@@ -104,10 +113,16 @@ export default function Claims(props) {
                 transactionsList(current)
             }
         }
-        if (accountData) {
-            setTimer(30000)
-        }
     },[accountData.Owner]);
+
+    useEffect(() => {
+        setInterval(() => {
+            if (currentHash) {
+                console.log("updated3")
+                transactionsList(current)
+            }
+        }, 30000);
+    },[]);
 
     var data = [];
 

@@ -2,7 +2,7 @@ import RbtcToBtcGenerateModal from '../../Components/Modals/RbtcToBtcGenerateMod
 import BtcToRbtcGenerateModal from '../../Components/Modals/BtctoRbtcGenerateModal';
 import BtcToRbtc from '../../Components/Cards/BtcToRbtc';
 import {Row, Col, Alert} from 'antd';
-import React, { Fragment, useState, useContext } from 'react';
+import React, {Fragment, useState, useContext, useEffect} from 'react';
 import ListOperations from "../../Components/Tables/ListOperations";
 import Sovryn from "../../Components/Cards/Sovryn";
 import { AuthenticateContext } from '../../Context/Auth';
@@ -14,6 +14,14 @@ import Table from "../../Components/Tables/FastBtcPegOut/table";
 export default function Rbtc(props) {
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc']);
+
+    useEffect(() => {
+        setInterval(() => {
+            if(auth.isLoggedIn){
+                auth.loadContractsStatusAndUserBalance();
+            }
+        }, 30000);
+    },[]);
 
     const [rbtcGenVisible, setRbtcGenVisible] = useState(false);
     const [btcGenVisible, setBtcGenVisible] = useState(false);
@@ -73,7 +81,7 @@ export default function Rbtc(props) {
                         {t('MoC.fastbtc.history.upperSummary_3', { ns: 'moc' })}
                     </span>
                     {/*<FastBtcPegOut></FastBtcPegOut>*/}
-                    <Table 
+                    <Table
                         accountData={auth.accountData}
                     ></Table>
                 </div></>}

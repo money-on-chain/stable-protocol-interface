@@ -46,20 +46,29 @@ export default function FastBtcPegOut(props) {
 
 
     const getFastbtcPegout= (skip,call_table) => {
-        api('get', `${config.api.api_moctest}`+'webapp/fastbtc/pegout', {address: accountData.Owner })
-            .then(response => {
-                setDataJson(response);
-                console.log('dataJson', response);
-                setTotalTable(response.total)
-                if(call_table){
-                    setCallTable(call_table)
+        if(auth.isLoggedIn) {
+            setTimeout(() => {
+                try {
+                    api('get', `${config.api.api_moctest}` + 'webapp/fastbtc/pegout', {address: accountData.Owner})
+                        .then(response => {
+                            setDataJson(response);
+                            console.log('dataJson', response);
+                            setTotalTable(response.total)
+                            if (call_table) {
+                                setCallTable(call_table)
+                            }
+                        })
+                        .catch((response) => {
+                            if (call_table) {
+                                setCallTable(call_table)
+                            }
+                        });
+                } catch (error) {
+                    console.error({error});
+                    console.log(error);
                 }
-            })
-            .catch((response) => {
-                if(call_table){
-                    setCallTable(call_table)
-                }
-            });
+            }, 500);
+        }
     };
 
     const columns = [
@@ -95,13 +104,11 @@ export default function FastBtcPegOut(props) {
     ];
 
     useEffect(() => {
-        if (currentHash) {
-            const interval = setInterval(() => {
+        setInterval(() => {
+            if (currentHash) {
                 getFastbtcPegout(current)
-                setTimer(30000)
-            }, timer);
-            return () => clearInterval(interval);
-        }
+            }
+        }, 30000);
     });
 
     var data = [];

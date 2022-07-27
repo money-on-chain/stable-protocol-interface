@@ -2,6 +2,7 @@ import configOmoc from './omoc.json';
 import {toContractPrecision, BUCKET_X2, BUCKET_C0} from './utils';
 
 const connectorAddresses = async (web3, dContracts, appMode) => {
+  if (!dContracts) return;
   const multicall = dContracts.contracts.multicall
   const mocconnector = dContracts.contracts.mocconnector
 
@@ -32,6 +33,7 @@ const connectorAddresses = async (web3, dContracts, appMode) => {
 const registryAddresses = async (web3, dContracts) => {
   // getting constants from omoc.json
   //const configOmoc = readJsonFile('./src/lib/omoc.json')
+  if (!dContracts) return;
   const multicall = dContracts.contracts.multicall
   const iregistry = dContracts.contracts.iregistry
 
@@ -54,7 +56,7 @@ const registryAddresses = async (web3, dContracts) => {
 
 
 const contractStatus = async (web3, dContracts, appMode) => {
-
+  if (!dContracts) return;
   const multicall = dContracts.contracts.multicall
   const moc = dContracts.contracts.moc
   const mocstate = dContracts.contracts.mocstate
@@ -469,7 +471,7 @@ const contractStatus = async (web3, dContracts, appMode) => {
 }
 
 const userBalance = async (web3, dContracts, userAddress, appMode) => {
-
+  if (!dContracts) return;
   const multicall = dContracts.contracts.multicall
   const moc = dContracts.contracts.moc
   const mocinrate = dContracts.contracts.mocinrate
