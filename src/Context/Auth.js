@@ -6,7 +6,6 @@ import addressHelper from '../Lib/addressHelper';
 import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
 import { getPriceFields } from '../Lib/price';
 import { config } from '../Config/config';
-
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
 import { mintStable, redeemStable, mintRiskPro, redeemRiskPro, mintRiskProx, redeemRiskProx } from '../Lib/integration/interfaces-coinbase';
@@ -81,6 +80,10 @@ const AuthenticateProvider = ({ children }) => {
     // Fast BTC socket
     const socket = new FastBtcSocketWrapper();
 
+    async function loadCss() {
+        let css_logout= await import ('../assets/css/logout.scss');
+     }
+
     useEffect(() => {
         if (!window.rLogin) {
             window.rLogin = getRLogin();
@@ -89,10 +92,15 @@ const AuthenticateProvider = ({ children }) => {
                 connect();
             } else {
                 connect();
-                document.querySelectorAll('.rlogin-modal-hitbox')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
+                disableLogin();
             }
         }
     });
+
+    const disableLogin = () => {
+        document.querySelectorAll('.rlogin-modal-hitbox')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
+        loadCss()
+    }
 
     useEffect(() => {
         if (account) {
@@ -135,6 +143,7 @@ const AuthenticateProvider = ({ children }) => {
         setIsLoggedIn(false);
         await window.rLoginDisconnect();
         connect();
+        disableLogin();
     };
 
     const buildInterfaceContext = () => {
@@ -293,6 +302,8 @@ const AuthenticateProvider = ({ children }) => {
 
     }
 
+    window.updateMulticall = loadContractsStatusAndUserBalance;
+
     const loadAccountData = async () => {
         const owner = await getAccount();
         const truncate_address =
@@ -448,7 +459,7 @@ const AuthenticateProvider = ({ children }) => {
         const interfaceContext = buildInterfaceContext();
         AllowanceUseReserveToken(interfaceContext, true, callback);
     };
-    
+
     const convertToken = (from, to, amount) => {
         if (!contractStatusData) return '';
 

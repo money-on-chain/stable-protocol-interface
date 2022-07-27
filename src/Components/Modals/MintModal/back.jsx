@@ -75,19 +75,17 @@ export default function MintModal(props) {
     let userTolerance = '';
 
     useEffect(() => {
-        if (currentHash) {
-            console.log('currentHash', currentHash);
-            const interval = setInterval(() => {
+        setInterval(() => {
+            if (currentHash) {
                 getTransaction(currentHash)
-            }, 15000);
-            return () => clearInterval(interval);
-        }
-    }, [currentHash]);
+            }
+        }, 15000);
+    }, []);
+
     useEffect(
         () => {
             setComment('');
             if(document.querySelectorAll('.ant-modal')[0]!==undefined ){
-                console.log('eeeeeeeeeeeee 333333333333333333333333333')
                 document.querySelectorAll('.ant-modal-wrap')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
             }
         },

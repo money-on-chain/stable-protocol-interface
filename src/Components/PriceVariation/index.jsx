@@ -21,7 +21,7 @@ export default function PriceVariation(props) {
     const arrow = `Moc/${isPositive ? 'icon-arrow-up2' : 'icon-arrow-down2'}.svg`;
     const sign = isPositive ? '+' : '';
     const color = isPositive ? '#3fcb97' : '#f2316a';
-    const formattedVar = formatValueVariation((priceVariation.current - priceVariation.day)/0.01, i18n.languages[0]);
+    const formattedVar = formatValueVariation((priceVariation.current - priceVariation.day), i18n.languages[0]);
     const formattedPerc = parseFloat(((priceVariation.current - priceVariation.day)/priceVariation.day)*100).toLocaleString(i18n.languages[0], {minimumFractionDigits:2, maximumFractionDigits:2});
     const variationText = `${sign}${formattedVar} (${formattedPerc}%)`;
     const tooltip = (
@@ -54,7 +54,7 @@ export default function PriceVariation(props) {
                 {<Fragment>
                 <img className={'crypto_img'} src={arrow} alt="arrow"
                      height={11}/>
-                    <span className={'crypto_value'} style={{color: `${color}`}}>{variationText}</span> </Fragment>
+                    <span className={'crypto_value 22222222222222'} style={{color: `${color}`}}>{variationText}</span> </Fragment>
                 }
             </div>
         </Tooltip>

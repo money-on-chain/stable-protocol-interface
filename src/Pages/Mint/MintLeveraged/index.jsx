@@ -19,6 +19,14 @@ export default function Mint(props) {
     const [daysHours, setDaysHours] = useState(null);
     const auth = useContext(AuthenticateContext);
 
+    useEffect(() => {
+        setInterval(() => {
+            if(auth.isLoggedIn){
+                auth.loadContractsStatusAndUserBalance();
+            }
+        }, 30000);
+    },[]);
+
     const decimaltoHour = (dayBlockSpan, blocksToSettlement) => {
         const result = {};
         const num = ((blocksToSettlement * 24) / dayBlockSpan);

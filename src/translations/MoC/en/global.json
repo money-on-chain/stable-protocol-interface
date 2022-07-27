@@ -236,6 +236,8 @@
         "ReserveAllowanceModal_allowanceSendTitle": "Allowance",
         "ReserveAllowanceModal_allowanceSendDescription": "Please approve tx in your wallet to use MoC Token in the platform",
         "CustomizePrize_VariationToleranceSettingsTitle": "Customize Price Varitation Tolerance",
-        "CustomizePrize_VariationToleranceTitle": "Price Variation Tolerance"
+        "CustomizePrize_VariationToleranceTitle": "Price Variation Tolerance",
+        "Connected_Wallet": "Connected Wallet",
+        "Disconnect": "Disconnect"
     }
 }

@@ -1,5 +1,3 @@
-import { Meteor } from 'meteor/meteor';
-
 const rskUtils = require('rskjs-util');
 
 const { forceChecksumAddressInput, forceRskIp60Addresses, chainId } = Meteor.settings.public;
