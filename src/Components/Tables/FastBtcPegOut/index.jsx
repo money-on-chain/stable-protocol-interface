@@ -49,7 +49,7 @@ export default function FastBtcPegOut(props) {
         if(auth.isLoggedIn) {
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.api_moctest}` + 'webapp/fastbtc/pegout', {address: accountData.Owner})
+                    api('get', `${config.api.operations}` + 'webapp/fastbtc/pegout', {address: accountData.Owner})
                         .then(response => {
                             setDataJson(response);
                             console.log('dataJson', response);

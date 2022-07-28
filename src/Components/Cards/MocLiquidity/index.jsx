@@ -50,7 +50,7 @@ function MocLiquidity(props) {
         if(auth.isLoggedIn) {
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.api_moneyonchain}` + 'agent', {})
+                    api('get', `${config.api.incentives}` + 'agent', {})
                         .then(response => {
                             setIncentiveState(response);
                         })
@@ -95,7 +95,7 @@ function MocLiquidity(props) {
         if(auth.isLoggedIn) {
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.api_moneyonchain}balance/${accountData.Owner}`, {})
+                    api('get', `${config.api.incentives}balance/${accountData.Owner}`, {})
                         .then(response => {
                             setClaimsValue(response);
                             const {
