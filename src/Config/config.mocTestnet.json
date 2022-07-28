@@ -8,6 +8,22 @@
     "operations": "https://api-operations-testnet.moneyonchain.com/api/v1/",
     "incentives": "https://moc-incentives-testnet.moneyonchain.com/"
   },
+  "minimumUserBalanceToOperate": "120000000000000",
+  "transfer": [
+    {
+      "address": "0xA066d6e20e122deB1139FA3Ae3e96d04578c67B5",
+      "title": "TEX"
+    }
+  ],
+  "globalCoverage": {
+    "ok": 4,
+    "warning": 2,
+    "dangerous": 1.5
+  },
+  "rns": {
+    "url": "https://testnet.manager.rns.rifos.org",
+    "address": "0x7d284aaac6e925aad802a53c0c69efe3764597b8"
+  },
   "environment": {
     "AppMode": "MoC",
     "AppProject": "MoC",

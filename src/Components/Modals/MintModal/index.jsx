@@ -20,6 +20,8 @@ import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";
+import { config } from '../../../Config/config';
+
 export default function MintModal(props) {
   const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
   const {
@@ -115,7 +117,8 @@ export default function MintModal(props) {
   const confirmButton = async ({comment, tolerance}) => {
     // Check if there are enough spendable balance to pay
     // take in care amount to pay gas fee
-    const minimumUserBalanceToOperate = "120000000000000";
+
+    const minimumUserBalanceToOperate = config.minimumUserBalanceToOperate;
     const userSpendable = await auth.getSpendableBalance(window.address);
 
     let minimumBalance = new BigNumber(minimumUserBalanceToOperate);
