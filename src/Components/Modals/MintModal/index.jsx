@@ -76,15 +76,6 @@ export default function MintModal(props) {
   let userComment = '';
   let userTolerance = '';
 
-  useEffect(() => {
-    setInterval(() => {
-      if (currentHash) {
-        console.log("updated4");
-        getTransaction(currentHash)
-      }
-    }, 15000);
-  }, []);
-
   useEffect(
     () => {
       setComment('');
@@ -189,6 +180,10 @@ export default function MintModal(props) {
 
   const onReceipt = async (receipt) => {
     auth.loadContractsStatusAndUserBalance()
+    console.log('onReceipt-----------------')
+    console.log(receipt.transactionHash)
+    getTransaction(receipt.transactionHash)
+    console.log('onReceipt-----------------')
     const filteredEvents = auth.interfaceDecodeEvents(receipt);
   };
 
@@ -414,7 +409,6 @@ export default function MintModal(props) {
               <div style={{ textAlign: 'right' }}>
                 <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash}/>
               </div>
-
             </div>
             <div>
               {(() => {
