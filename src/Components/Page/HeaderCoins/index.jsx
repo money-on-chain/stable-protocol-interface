@@ -8,14 +8,20 @@ import web3 from "web3";
 import {Alert} from "antd";
 import {setNumber, setToLocaleString} from "../../../Helpers/helper";
 import {useTranslation} from "react-i18next";
-import {callPrices} from "../../../Context/Api";
 
 function HeaderCoins(props) {
   const auth = useContext(AuthenticateContext);
   const { accountData = {} } = auth;
   const { image, arrow, color, tokenName } = props;
-  const [dailyVariation, setDailyVariation] = useState(null);
+  const [timeRefresh, setTimeRefresh] = useState(new Date());
 
+  useEffect(() => {
+        setInterval(() => {
+            setTimeRefresh(new Date())
+        }, 30000);
+  }, [auth]);
+
+  /*
   useEffect(() => {
     if(accountData.Owner!==undefined){
       callPrices(accountData.Owner)
@@ -28,6 +34,7 @@ function HeaderCoins(props) {
         });
     }
   }, [accountData.Owner]);
+  */
 
   // useEffect(() => {
   //   setDailyVariation({
@@ -63,7 +70,7 @@ function HeaderCoins(props) {
   const [t, i18n] = useTranslation(["global", 'moc'])
 
   const getBalanceUSD = () => {
-    if (auth.userBalanceData) {
+    if (auth.contractStatusData) {
       switch (props.tokenName) {
         case 'stable':
           if (auth.contractStatusData['bitcoinPrice'] != 0) {
@@ -83,7 +90,7 @@ function HeaderCoins(props) {
           }
 
         case 'riskprox':
-          if (auth.userBalanceData['bprox2PriceInRbtc'] != 0) {
+          if (auth.contractStatusData['bprox2PriceInRbtc'] != 0) {
             return (auth.contractStatusData['bitcoinPrice'] * web3.utils.fromWei(setNumber(auth.contractStatusData['bprox2PriceInRbtc']), 'ether'))
           } else {
               return 0;
@@ -102,7 +109,10 @@ function HeaderCoins(props) {
         case 'riskpro':
           return {day: auth.contractStatusData.historic.bproPriceInUsd, current: auth.contractStatusData.bproPriceInUsd};
         case 'riskprox':
-          return {day: auth.contractStatusData.historic.bitcoinPrice, current: auth.contractStatusData.bitcoinPrice};
+          return {
+            day: (auth.contractStatusData.historic.bitcoinPrice * web3.utils.fromWei(setNumber(auth.contractStatusData.historic.bprox2PriceInRbtc), 'ether')),
+            current: (auth.contractStatusData.bitcoinPrice * web3.utils.fromWei(setNumber(auth.contractStatusData.bprox2PriceInRbtc), 'ether'))
+            };
         default:
       }
     }
@@ -111,14 +121,14 @@ function HeaderCoins(props) {
   const [currencyCode, setCurrencyCode]=  useState('USDPrice');
 
   return (
-    <>{ dailyVariation &&
+    <>{
       <div className={'mrl-25 div_coin'}>
         <img src={image} alt="arrow" height={38}/>
         <div className={'div_values'}>
           <span className="value_usd1">
             <LargeNumber {...{ amount: getBalanceUSD(), currencyCode: 'USDPrice', includeCurrency: true }} />
           </span>
-          { auth.contractStatusData && <PriceVariation priceVariation={getPriceVariation()} blockHeight={dailyVariation['24hs'].blockHeight} /> }
+          { auth.contractStatusData && <PriceVariation priceVariation={getPriceVariation()} blockHeight={auth.contractStatusData.historic.blockHeight} /> }
         </div>
       </div>}
     </>

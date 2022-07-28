@@ -267,6 +267,7 @@ const AuthenticateProvider = ({ children }) => {
     }
 
     const loadContractsStatusAndUserBalance = async () => {
+        console.log("Update Status and balance");
         if (!window.integration) return;
         const appMode = config.environment.AppMode;
 
