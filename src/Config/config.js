@@ -13,6 +13,7 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_CHAIN_ID) DefaultConfig.chainId = process.env.REACT_APP_CHAIN_ID;
     if (process.env.REACT_APP_VENDOR_ADDRESS) DefaultConfig.vendor.address = process.env.REACT_APP_VENDOR_ADDRESS;
     if (process.env.REACT_APP_VENDOR_MARKUP) DefaultConfig.vendor.markup = process.env.REACT_APP_VENDOR_MARKUP;
+    if (process.env.REACT_APP_MINIMUM_BALANCE_TO_OPERATE) DefaultConfig.minimumUserBalanceToOperate = process.env.REACT_APP_MINIMUM_BALANCE_TO_OPERATE;
 
     return DefaultConfig
 }
