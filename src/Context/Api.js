@@ -20,7 +20,7 @@ export { priceVariation24hs };
 
 export async function callPrices(datas) {
     try {
-        const resp = await fetch(`${config.api.api_moctest}`+'webapp/prices/var/?address='+datas, {}, 1000)
+        const resp = await fetch(`${config.api.operations}`+'webapp/prices/var/?address='+datas, {}, 1000)
         const data = await resp.json()
         return data
     } catch (e) {

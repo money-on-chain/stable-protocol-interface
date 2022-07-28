@@ -7,6 +7,13 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_ENVIRONMENT_MOC) DefaultConfig.environment.MoC = process.env.REACT_APP_ENVIRONMENT_MOC;
     if (process.env.REACT_APP_ENVIRONMENT_MULTICALL2) DefaultConfig.environment.Multicall2 = process.env.REACT_APP_ENVIRONMENT_MULTICALL2;
     if (process.env.REACT_APP_ENVIRONMENT_IREGISTRY) DefaultConfig.environment.IRegistry = process.env.REACT_APP_ENVIRONMENT_IREGISTRY;
+    if (process.env.REACT_APP_ENVIRONMENT_FASTBTC_BRIDGE_ADDRESS) DefaultConfig.environment.fastBtcBridgeAddress = process.env.REACT_APP_ENVIRONMENT_FASTBTC_BRIDGE_ADDRESS;
+    if (process.env.REACT_APP_API_OPERATIONS) DefaultConfig.api.operations = process.env.REACT_APP_API_OPERATIONS;
+    if (process.env.REACT_APP_API_INCENTIVES) DefaultConfig.api.incentives = process.env.REACT_APP_API_INCENTIVES;
+    if (process.env.REACT_APP_CHAIN_ID) DefaultConfig.chainId = process.env.REACT_APP_CHAIN_ID;
+    if (process.env.REACT_APP_VENDOR_ADDRESS) DefaultConfig.vendor.address = process.env.REACT_APP_VENDOR_ADDRESS;
+    if (process.env.REACT_APP_VENDOR_MARKUP) DefaultConfig.vendor.markup = process.env.REACT_APP_VENDOR_MARKUP;
+
     return DefaultConfig
 }
 
