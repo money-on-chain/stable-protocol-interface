@@ -180,10 +180,8 @@ export default function MintModal(props) {
 
   const onReceipt = async (receipt) => {
     auth.loadContractsStatusAndUserBalance()
-    console.log('onReceipt-----------------')
-    console.log(receipt.transactionHash)
     getTransaction(receipt.transactionHash)
-    console.log('onReceipt-----------------')
+    setConfirmModal(false)
     const filteredEvents = auth.interfaceDecodeEvents(receipt);
   };
 
@@ -239,7 +237,11 @@ export default function MintModal(props) {
   const cancelButton = () => {
     if(confirmModal==false){
       if( showTransaction ){
-        setConfirmModal(true)
+        if( txtTransaction!= 'SUCCESSFUL'){
+          setConfirmModal(true)
+        }else{
+          partClose()
+        }
       }else{
         partClose()
       }
