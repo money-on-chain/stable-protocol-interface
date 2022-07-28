@@ -18,11 +18,12 @@ export default function Rewards(props) {
     const timeSke= 1500
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             if(auth.isLoggedIn){
                 auth.loadContractsStatusAndUserBalance();
             }
         }, 30000);
+        return () => clearInterval(interval);
     },[]);
 
     useEffect(() => {

@@ -116,12 +116,12 @@ export default function Claims(props) {
     },[accountData.Owner]);
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             if (currentHash) {
-                console.log("updated3")
                 transactionsList(current)
             }
         }, 30000);
+        return () => clearInterval(interval);
     },[]);
 
     var data = [];

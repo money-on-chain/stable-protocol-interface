@@ -21,58 +21,14 @@ export function getDatasMetrics(auth,i18n=null){
     const coin_usd= config.coin_usd
     if (auth.userBalanceData) {
         if (auth.userBalanceData) {
-            console.log('000000000000000000000000000000000')
-            console.log(auth)
-            // console.log(auth.userBalanceData)
-            // console.log(auth.userBalanceData['bproBalance'])
-            console.log('000000000000000000000000000000000')
             const globalCoverage= Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
             const globalCoverageTooltip = Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether'));
             const globalCoverageClean= Number(auth.contractStatusData['globalCoverage']).toFixed(4)
 
-            const bpro_usd= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bproPriceInUsd']), 'Kwei')).toFixed(5);
-            const b0Leverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0Leverage']), 'ether')).toFixed(6);
-            const b0BproAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0BproAmount']), 'ether')).toFixed(6);
-            const bproAvailableToRedeem= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bproAvailableToRedeem']), 'ether')).toFixed(6);
-
-            const current_price= (setNumber(auth.contractStatusData['blockSpan']) / 10000).toFixed(2);
-
-            const b0DocAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0DocAmount']), 'kether')).toFixed(5);
-            const b0DocAmountTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0DocAmount']), 'kether'));
-            const docAvailableToRedeem= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['docAvailableToRedeem']), 'kether')).toFixed(5);
-            const docAvailableToRedeemTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['docAvailableToRedeem']), 'kether'));
-            const docAvailableToMint= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['docAvailableToMint']), 'ether')).toFixed(2);
-            const docAvailableToMintTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['docAvailableToMint']), 'ether'));
-
-            const btcx_usd= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinPrice']), 'Kwei')).toFixed(5);
-            const btcx_interest= parseFloat(web3.utils.fromWei(setNumber(auth.userBalanceData['bprox2Balance']), 'Kwei')).toFixed(5);
-
             let btcx_x2Leverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage']), 'ether')).toFixed(6);
             if(i18n!=null){
-                btcx_x2Leverage= setToLocaleString(parseFloat(Web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage'])), 'Kwei'),4,i18n)
+                btcx_x2Leverage= setToLocaleString(parseFloat(Web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage'])), 'ether'),4,i18n)
             }
-
-            const btcx_interes_tooltip = parseFloat(web3.utils.fromWei(setNumber(auth.userBalanceData['bprox2Balance']), 'Kwei'));
-            const btcx_x2Coverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2Coverage']), 'ether')).toFixed(6);
-            const btcx_AvailableToMint= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bprox2AvailableToMint']), 'ether')).toFixed(6);
-
-            const rbtc_usd= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinPrice']), 'kwei')).toFixed(5)
-            const rbtc_interest= parseFloat(setNumber(auth.userBalanceData['bprox2Balance'])).toFixed(6);
-            const totalBTCAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['totalBTCAmount']), 'ether')).toFixed(5);
-            const totalBTCAmountTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['totalBTCAmount']), 'ether'));
-            const totalBTCAmountUsd= ((totalBTCAmount * coin_usd)/1000).toFixed(6);
-            const totalBTCAmountUsdTooltip = ((totalBTCAmount * coin_usd)/1000);
-            const b0TargetCoverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0TargetCoverage']), 'ether')).toFixed(6);
-            const b0TargetCoverageTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0TargetCoverage']), 'ether'));
-            const bitcoinMovingAverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinMovingAverage']), 'kether')).toFixed(5);
-            const bitcoinMovingAverageTooltip = parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinMovingAverage']), 'kether'));
-
-            const liquidity_totalBTCAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['totalBTCAmount']), 'ether')).toFixed(6);
-            const liquidity_docAvailableToRedeem= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['docAvailableToRedeem']), 'kether')).toFixed(5);
-            const liquidity_b0BproAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['b0BproAmount']), 'ether')).toFixed(6);
-            const liquidity_rbtc_interest= parseFloat(web3.utils.fromWei(setNumber(auth.userBalanceData['bprox2Balance']), 'ether')).toFixed(6);
-            const liquidity_x2DocAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2DocAmount']), 'ether')).toFixed(2);
-            const liquidity_x2BproAmount= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2BproAmount']), 'ether')).toFixed(6);
 
             const blocksToSettlement= (auth.contractStatusData['blocksToSettlement']);
             const blockHeight= (auth.contractStatusData['blockHeight']);
@@ -80,36 +36,20 @@ export function getDatasMetrics(auth,i18n=null){
 
             return {
                 globalCoverage:globalCoverage,globalCoverageTooltip: globalCoverageTooltip,
-                bpro_usd:bpro_usd,b0Leverage:b0Leverage,b0BproAmount:b0BproAmount,bproAvailableToRedeem:bproAvailableToRedeem,
-                current_price:current_price,
-                b0DocAmount:b0DocAmount,b0DocAmountTooltip:b0DocAmountTooltip,docAvailableToRedeem:docAvailableToRedeem,docAvailableToRedeemTooltip:docAvailableToRedeemTooltip,docAvailableToMint:docAvailableToMint,docAvailableToMintTooltip:docAvailableToMintTooltip,
-                btcx_usd:btcx_usd,interest:btcx_interest,interestTooltip:btcx_interes_tooltip,x2Leverage:btcx_x2Leverage,x2Coverage:btcx_x2Coverage,bprox2AvailableToMint:btcx_AvailableToMint,
-                rbtc_usd:rbtc_usd,rbtc_interest:rbtc_interest,totalBTCAmount:totalBTCAmount,totalBTCAmountTooltip:totalBTCAmountTooltip,totalBTCAmountUsd:totalBTCAmountUsd,totalBTCAmountUsdTooltip:totalBTCAmountUsdTooltip,b0TargetCoverage:b0TargetCoverage,b0TargetCoverageTooltip:b0TargetCoverageTooltip,bitcoinMovingAverage:bitcoinMovingAverage,bitcoinMovingAverageTooltip:bitcoinMovingAverageTooltip,
-                liquidity_totalBTCAmount:liquidity_totalBTCAmount,liquidity_docAvailableToRedeem:liquidity_docAvailableToRedeem,liquidity_b0BproAmount:liquidity_b0BproAmount,liquidity_interest:liquidity_rbtc_interest,liquidity_x2DocAmount:liquidity_x2DocAmount,liquidity_x2BproAmount:liquidity_x2BproAmount,
-                blocksToSettlement:blocksToSettlement,blockHeight:blockHeight,paused:paused,
+                x2Leverage:btcx_x2Leverage,blocksToSettlement:blocksToSettlement,blockHeight:blockHeight,paused:paused,
                 globalCoverageClean:globalCoverageClean
             };
         } else {
             return {globalCoverage: 0,globalCoverageTooltip: 0,
-                    bpro_usd:0,b0Leverage:0,b0BproAmount:0,bproAvailableToRedeem:0,
-                    current_price:0,
-                    b0DocAmount:0,b0DocAmountTooltip:0,docAvailableToRedeem:0,docAvailableToMint:0,docAvailableToMintTooltip:0,
-                    btcx_usd:0,interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
-                    rbtc_usd:0,rbtc_interest:0,totalBTCAmount:0,totalBTCAmountTooltip:0,totalBTCAmountUsd:0,totalBTCAmountUsdTooltip:0,b0TargetCoverage:0,b0TargetCoverageTooltip:0,bitcoinMovingAverage:0,bitcoinMovingAverageTooltip:0,
-                    liquidity_totalBTCAmount:0,liquidity_docAvailableToRedeem:0,docAvailableToRedeemTooltip:0,liquidity_b0BproAmount:0,liquidity_interest:0,liquidity_x2DocAmount:0,liquidity_x2BproAmount:0,
-                    blocksToSettlement:0,blockHeight:0,paused:false,
+                    interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
+                    liquidity_interest:0,blocksToSettlement:0,blockHeight:0,paused:false,
                     globalCoverageClean:0
             };
         }
     }else{
         return {globalCoverage:0,globalCoverageTooltip: 0,
-                bpro_usd:0,b0Leverage:0,b0BproAmount:0,bproAvailableToRedeem:0,
-                current_price:0,
-                b0DocAmount:0,b0DocAmountTooltip:0,docAvailableToRedeem:0,docAvailableToMint:0,docAvailableToMintTooltip:0,
-                btcx_usd:0,interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
-                rbtc_usd:0,rbtc_interest:0,totalBTCAmount:0,totalBTCAmountTooltip:0,totalBTCAmountUsd:0,totalBTCAmountUsdTooltip:0,b0TargetCoverage:0,b0TargetCoverageTooltip:0,bitcoinMovingAverage:0,bitcoinMovingAverageTooltip:0,
-                liquidity_totalBTCAmount:0,liquidity_docAvailableToRedeem:0,liquidity_b0BproAmount:0,liquidity_interest:0,liquidity_x2DocAmount:0,liquidity_x2BproAmount:0,
-                blocksToSettlement:0,blockHeight:0,paused:false,
+                interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
+                liquidity_interest:0,blocksToSettlement:0,blockHeight:0,paused:false,
                 globalCoverageClean:0
         };
     }
@@ -217,12 +157,6 @@ export function readJsonTable(data_j,t, i18n){
         i18n:i18n
     })
     const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
-    const platform_fee= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(6) : ''
-    const platform_fee_usd= (data_j.rbtcCommission!==undefined || data_j.mocCommissionValue!==undefined)? ((parseFloat(Web3.utils.fromWei(setNumber(new BigNumber(data_j.rbtcCommission).gt(0)? data_j.rbtcCommission : data_j.mocCommissionValue)), 'Kwei').toFixed(2))*config.coin_usd).toFixed(2) : ''
-    const gasFee= (data_j.gasFeeRBTC!==undefined)? parseFloat(Web3.utils.fromWei(setNumber(data_j.gasFeeRBTC)), 'Kwei').toFixed(6) : 0
-    const gasFeeUSD= `${(gasFee * config.coin_usd).toFixed(2)} USD`
-    const interest_detail= (data_j.USDInterests!==undefined)? parseFloat(Web3.utils.fromWei(Web3.utils.toWei(setNumber(data_j.USDInterests), 'Kwei')), 'Kwei').toFixed(6) : 0
-    const interest_detail_usd= (interest_detail * config.coin_usd).toFixed(2)
     const truncate_address= (data_j.otherAddress)? data_j.otherAddress.substring(0, 6) + '...' + data_j.otherAddress.substring(data_j.otherAddress.length - 4, data_j.otherAddress.length) : '--'
     const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
 
@@ -345,8 +279,6 @@ export function readJsonTable(data_j,t, i18n){
     return {set_event:set_event,set_asset:set_asset,set_status_txt:set_status_txt,set_status_percent:set_status_percent,
         wallet_detail:wallet_detail,wallet_detail_usd:wallet_detail_usd,
         paltform_detail_usd:paltform_detail_usd,paltform_detail:paltform_detail,
-        platform_fee:platform_fee,platform_fee_usd:platform_fee_usd,gasFee:gasFee,
-        gasFeeUSD:gasFeeUSD,interest_detail:interest_detail,interest_detail_usd:interest_detail_usd,
         truncate_address:truncate_address,truncate_txhash:truncate_txhash,
         lastUpdatedAt:lastUpdatedAt,RBTCAmount:RBTCAmount,confirmationTime:confirmationTime,
         address:address,amount:amount,platform_fee_value:platform_fee_value,
@@ -460,7 +392,7 @@ export function setToLocaleString(value,fixed,i18n){
 export function readJsonClaims(data_j,t, i18n){
 
     const set_asset= 'CLAIM';
-    const mocs= (data_j.mocs!==undefined)? setToLocaleString(parseFloat(Web3.utils.fromWei(setNumber(data_j.mocs)), 'Kwei'),2,i18n)  : '--'
+    const mocs= (data_j.mocs!==undefined)? setToLocaleString(parseFloat(Web3.utils.fromWei(setNumber(data_j.mocs)), 'ether'),config.environment.Precisions.mocPrecision.decimals,i18n)  : '--'
     // const mocs= DetailedLargeNumber({
     //     amount: data_j.mocs,
     //     currencyCode: 'MOC',

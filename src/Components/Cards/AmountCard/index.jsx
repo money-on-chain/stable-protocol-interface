@@ -72,12 +72,6 @@ export default function AmountCard(props) {
 
     const pre_label = t(`MoC.Tokens_${tokenName.toUpperCase()}_name`, { ns: 'moc' })
 
-    // setInterval(() => {
-    //   console.log('Interval triggered');
-    //   setShow(<LargeNumber {...{ amount: getBalance(), currencyCode: tokenName }} />)
-    //   console.log('Interval triggered');
-    // }, 10000);
-
     return (
         <Fragment>
             <div className="Card CardAmount">

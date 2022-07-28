@@ -16,11 +16,12 @@ export default function Rbtc(props) {
     const [t, i18n] = useTranslation(["global", 'moc']);
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             if(auth.isLoggedIn){
                 auth.loadContractsStatusAndUserBalance();
             }
         }, 30000);
+        return () => clearInterval(interval);
     },[]);
 
     const [rbtcGenVisible, setRbtcGenVisible] = useState(false);
