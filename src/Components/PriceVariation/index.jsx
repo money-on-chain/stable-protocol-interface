@@ -3,12 +3,10 @@ import React, {Fragment, useContext} from 'react';
 import { Tooltip } from 'antd';
 import { formatVisibleValue, formatValueVariation, formatPerc } from '../../Lib/Formats';
 import i18n from "i18next";
-import {AuthenticateContext} from "../../Context/Auth";
 
 export default function PriceVariation(props) {
    // if (!props.priceVariation) return null;
 
-    const auth = useContext(AuthenticateContext);
     const { currencyName, currencyCode, priceVariation, blockHeight } = props;
    /* const {
         isDailyVariation,
@@ -51,11 +49,12 @@ export default function PriceVariation(props) {
     return (
         <Tooltip placement="topLeft" tooltip={tooltip} mouseEnterDelay={0.5}>
             <div className={'div_crypto'}>
-                {<Fragment>
-                <img className={'crypto_img'} src={arrow} alt="arrow"
-                     height={11}/>
-                    <span className={'crypto_value 22222222222222'} style={{color: `${color}`}}>{variationText}</span> </Fragment>
-                }
+
+                <Fragment>
+                  <img className={'crypto_img'} src={arrow} alt="arrow" height={11}/>
+                  <span className={'crypto_value 22222222222222'} style={{color: `${color}`}}>{variationText}</span>
+                </Fragment>
+
             </div>
         </Tooltip>
     );

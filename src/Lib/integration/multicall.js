@@ -464,6 +464,7 @@ const contractStatus = async (web3, dContracts, appMode) => {
   historic.mocPrice = listReturnDataHistoric[1]
   historic.bproPriceInUsd = listReturnDataHistoric[2]
   historic.bprox2PriceInRbtc = listReturnDataHistoric[3]
+  historic.blockHeight = d24BlockHeights
 
   dMocState.historic = historic
 
