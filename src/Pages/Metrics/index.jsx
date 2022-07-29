@@ -20,15 +20,6 @@ function Metrics(props) {
     const { convertToken } = auth;
     const mocState = auth.contractStatusData;
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            if(auth.isLoggedIn){
-                auth.loadContractsStatusAndUserBalance();
-            }
-        }, 30000);
-        return () => clearInterval(interval);
-    },[]);
-
     let {
         b0Leverage = 0,
         globalCoverage = '0',

@@ -109,6 +109,15 @@ const AuthenticateProvider = ({ children }) => {
         }
     }, [account]);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if(account){
+                loadContractsStatusAndUserBalance();
+            }
+        }, 30000);
+        return () => clearInterval(interval);
+    },[account]);
+
     const connect = () =>
         window.rLogin.connect().then((rLoginResponse) => {
             const { provider, disconnect } = rLoginResponse;
@@ -583,5 +592,7 @@ const AuthenticateProvider = ({ children }) => {
         </AuthenticateContext.Provider>
     );
 };
+
+
 
 export { AuthenticateContext, AuthenticateProvider };
