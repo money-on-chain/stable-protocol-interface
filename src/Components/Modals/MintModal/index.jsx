@@ -240,6 +240,7 @@ export default function MintModal(props) {
         if( txtTransaction!= 'SUCCESSFUL'){
           setConfirmModal(true)
         }else{
+          setTxtTransaction('PENDING')
           partClose()
         }
       }else{
