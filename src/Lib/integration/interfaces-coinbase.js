@@ -94,12 +94,12 @@ const redeemStable = async (interfaceContext, stableAmount, mintSlippage, onTran
 
   // Calculate estimate gas cost
   const estimateGas = await moc.methods
-    .redeemFreeDocVendors(toContractPrecision(new BigNumber(stableAmount)), "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076")
+    .redeemFreeDocVendors(toContractPrecision(new BigNumber(stableAmount)), vendorAddress)
     .estimateGas({ from: account, value: '0x' })
 
   // Send tx
   const receipt = moc.methods
-    .redeemFreeDocVendors(toContractPrecision(new BigNumber(stableAmount)), "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076")
+    .redeemFreeDocVendors(toContractPrecision(new BigNumber(stableAmount)), vendorAddress)
     .send(
             {
                 from: account,
