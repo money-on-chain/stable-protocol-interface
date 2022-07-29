@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import React from "react";
+import { config } from '../../../Config/config';
 
 export default function CopyModal(props) {
 
@@ -16,7 +17,7 @@ export default function CopyModal(props) {
 
     return (
         <><span style={{ display: fastBTC && 'flex','fontSize':'12px',color:'#09C199'}}>
-            <a className="" href={'https://explorer.testnet.rsk.co/address/' + textToCopy} target="_blank">
+            <a className="" href={`${config.explorerUrl}/address/${textToCopy}`} target="_blank">
                 {textToShow}
             </a>
         </span>
