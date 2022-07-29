@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-// import {CheckOutlined, CheckCircleFilled} from '@ant-design/icons';
-import { CheckCircleFilled, CheckOutlined, CloseOutlined, CloseCircleFilled } from "@ant-design/icons";
+import { CheckCircleFilled } from "@ant-design/icons";
 import { AuthenticateContext } from "../../../../Context/Auth";
 import { getDatasMetrics } from '../../../../Helpers/helper'
 import { formatValueToContract } from '../../../../Lib/Formats';
@@ -9,8 +8,6 @@ import { useTranslation } from "react-i18next";
 import { Skeleton, Tooltip } from 'antd';
 
 const BigNumber = require('bignumber.js');
-const iconCheckColor = '#09c199';
-const iconCheckColorCloseOutlined = '#ed1c24';
 
 function SystemStatus(props) {
 
@@ -27,14 +24,7 @@ function SystemStatus(props) {
     },[auth]);
 
 
-    // coverage === getDatas['globalCoverageClean']
-    // paused === getDatas['paused']
-    // blocksToSettlement === getDatas['blocksToSettlement']
-
-    // const {className, operationsAvailable} = getConfigByCoverage(coverage, paused, blocksToSettlement, price_active);
-
     const configStatusGreen = {
-        // className: '#00a651',
         className: 'statusGreen',
         title: t('MoC.metrics.statusGreen.title', {ns: 'moc'}),
         subtitle: t('MoC.metrics.statusGreen.subtitle', {ns: 'moc'}),
@@ -50,7 +40,6 @@ function SystemStatus(props) {
     }
 
     const configStatusYellow = {
-        // className: '#E9BF4A',
         className: 'statusYellow',
         title: t('MoC.metrics.statusYellow.title', {ns: 'moc'}),
         subtitle: t('MoC.metrics.statusYellow.subtitle', {ns: 'moc'}),
@@ -63,7 +52,6 @@ function SystemStatus(props) {
     }
 
     const configStatusOrange = {
-        // className: '#ef8a13',
         className: 'statusOrange',
         title: t('MoC.metrics.statusOrange.title', {ns: 'moc'}),
         subtitle: t('MoC.metrics.statusOrange.subtitle', {ns: 'moc'}),
@@ -75,7 +63,6 @@ function SystemStatus(props) {
     }
 
     const configStatusRed = {
-        // className: '#ed1c24',
         className: 'statusRed',
         title: t('MoC.metrics.statusRed.title', {ns: 'moc'}),
         subtitle: t('MoC.metrics.statusRed.subtitle', {ns: 'moc'}),
@@ -87,19 +74,16 @@ function SystemStatus(props) {
 
 
     const configStatusPaused = {
-        // className: '#ed1c24',
         className: 'statusPaused',
         operationsAvailable: []
     }
 
     const configStatusSettlement = {
-        // className: '#ed1c24',
         className: 'statusSettlement',
         operationsAvailable: []
     }
 
     const configStatusNoPrice = {
-        // className: '#ed1c24',
         className: 'statusNoPrice',
         operationsAvailable: []
     }
@@ -145,7 +129,7 @@ function SystemStatus(props) {
 
 
     const price_active = true
-    const { className, operationsAvailable, title, subtitle } = getConfigByCoverage(props.coverage, props.paused, props.blocksToSettlement, price_active);; // getConfigByCoverage(getDatas['globalCoverageClean'], getDatas['paused'], getDatas['blocksToSettlement'], price_active);
+    const { className, operationsAvailable } = getConfigByCoverage(props.coverage, props.paused, props.blocksToSettlement, price_active);
 
     return (
         <div className="Card CardSystemStatus">
@@ -171,19 +155,6 @@ function SystemStatus(props) {
                 }
             </div>
             <h3 className="CardTitle" style={{ marginTop: 50 }}>{t('MoC.metrics.systemOperations.title', { ns: 'moc' })}</h3>
-            {/*<div className="CardMetricContent" style={{marginTop: 10}}>*/}
-            {/*    <div>*/}
-            {/*        <h3><CheckOutlined style={{color: iconCheckColor}} /> Mint DoC</h3>*/}
-            {/*        <h3><CheckOutlined style={{color: iconCheckColor}} /> Redeem DoC</h3>*/}
-            {/*    </div>*/}
-            {/*    <div className="separator" style={{height: 100}} />*/}
-            {/*    <div>*/}
-            {/*        <h3><CheckOutlined style={{color: iconCheckColor}} /> Mint BPro</h3>*/}
-            {/*        <h3><CheckOutlined style={{color: iconCheckColor}} /> Redeem BPro</h3>*/}
-            {/*        <h3><CheckOutlined style={{color: iconCheckColor}} /> Mint BTCx</h3>*/}
-            {/*        <h3><CheckOutlined style={{color: iconCheckColor}} /> Redeem BTCx</h3>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <div className="CardMetricContent" style={{ marginTop: 10 }}>
                 {!loading
                    ? <SystemOperations statusClassName={className} operationsAvailable={operationsAvailable} />

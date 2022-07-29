@@ -1,49 +1,25 @@
 import './style.scss'
-import React, {Fragment, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import { useContext,useState } from 'react'
 import { AuthenticateContext } from "../../../Context/Auth";
 import CountUp from 'react-countup';
-import {Alert, Button, Skeleton, Tooltip} from 'antd';
+import { Button, Skeleton, Tooltip} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import data_json from '../../../services/liquidity_mining.json';
-import data_json_claim from '../../../services/claims.json';
-import {getRewardedToday, setNumber} from '../../../Helpers/helper'
+import {getRewardedToday} from '../../../Helpers/helper'
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
-import Web3 from "web3";
 import api from "../../../services/api";
 import {config} from "../../../Config/config";
 import OperationStatusModal from "../../Modals/OperationStatusModal/OperationStatusModal";
 
-const BigNumber = require('bignumber.js');
 
 function MocLiquidity(props) {
     const auth = useContext(AuthenticateContext);
     const {web3} = auth;
-
-    const set_moc_balance_usd = () => {
-        if (auth.userBalanceData) {
-            return Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0] / 10000).toFixed(2)
-        }
-    };
-
-    const setreadyClaim = () => {
-        // return  parseFloat(Web3.utils.fromWei(data_json.moc_balance, 'ether')).toFixed(4)
-        if ( auth.isLoggedIn ){
-            return Number(new BigNumber(setNumber(data_json.moc_balance) / 10000000000000000000000)).toFixed(9)
-        }else{
-            return (0).toFixed(6)
-        }
-    }
-
     const [t, i18n] = useTranslation(["global", 'moc'])
-
-
     const [callAgent, setCallAgent] = useState(false);
     const [incentiveState, setIncentiveState] = useState(null);
-    const [incentiveStateData, setIincentiveStateData] = useState([]);
-
     const { accountData, userBalanceData } = auth;
 
     const agent= () => {

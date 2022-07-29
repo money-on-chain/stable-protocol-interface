@@ -12,9 +12,6 @@ import ListOperations from "../../Components/Tables/ListOperations";
 import data_json from "../../services/webapp_transactions_list.json";
 import {useTranslation} from "react-i18next";
 import './style.scss';
-import web3 from "web3";
-import {InfoCircleOutlined} from "@ant-design/icons";
-import {getDatasMetrics} from "../../Helpers/helper";
 
 function Home(props) {
 

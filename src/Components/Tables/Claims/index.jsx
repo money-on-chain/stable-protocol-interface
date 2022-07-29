@@ -13,7 +13,6 @@ import {
     dateFU
 } from '../../../Helpers/helper'
 import {config} from '../../../Config/config';
-import Copy from "../../Page/Copy";
 import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";

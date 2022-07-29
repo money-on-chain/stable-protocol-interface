@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Col, Row, Skeleton, Tooltip } from 'antd';
+import {  Skeleton } from 'antd';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { Tooltip as TooltipRecharts } from 'recharts';
 import { AuthenticateContext } from '../../../../Context/Auth';
-import { getDatasMetrics } from '../../../../Helpers/helper';
 import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
 import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../../Lib/Formats';
@@ -47,7 +46,6 @@ function Reserve(props) {
         }
     };
 
-    const getRiskprox = getDatasMetrics(auth);
     const toShow = ({ totalSTABLE, totalRISKPRO, totalRISKPROX }) => {
         return [
           {

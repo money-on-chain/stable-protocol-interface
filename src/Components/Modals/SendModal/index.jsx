@@ -159,8 +159,8 @@ export default function SendModal(props) {
 
   const maxtoSend = getMaxToSend();
 
-  const onChangeInputAddress = event => {
-    setAddress(event.target.value)
+  const onChangeInputAddress = (address) => {
+    setAddress(address)
   };
 
   return (
