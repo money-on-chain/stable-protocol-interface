@@ -168,7 +168,7 @@ export default function ListOperations(props) {
             const datas_response = readJsonTable(data_j,t,i18n)
 
             const detail = {
-                event: datas_response['set_event']
+                event:  datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : datas_response['set_event']
                 , created: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
                 , details: datas_response['RBTCAmount']
                 , asset: datas_response['set_asset']
@@ -190,7 +190,7 @@ export default function ListOperations(props) {
             data_row_coins2.push({
                 key: data_j._id,
                 info: '',
-                event: datas_response['set_event'],
+                event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : datas_response['set_event'],
                 asset: datas_response['set_asset'],
                 // platform: `+ ${datas_response['paltform_detail']}`,
                 // platform: formatVisibleValue(
