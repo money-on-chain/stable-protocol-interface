@@ -326,7 +326,7 @@ export default function MintModal(props) {
                   {auth.isLoggedIn &&
                   <LargeNumber
                       currencyCode={fee?.currencyCode}
-                      amount={fee?.value}
+                      amount={interests?.interestValue}
                       includeCurrency
                       className="color-08374F"
                   />}
