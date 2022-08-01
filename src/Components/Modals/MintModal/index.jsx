@@ -296,11 +296,11 @@ export default function MintModal(props) {
     >
       <div className="TabularContent">
         {renderAmount(t('global.ConfirmTransactionModal_Exchanging'), exchanging, 'AmountExchanging')}
-        <LargeNumber currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
+        <LargeNumber tooltip="topLeft" currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
         {showError && renderError()}
         <div className={'text-align-center'}><img width={30} height={30} src={'d-arrow.png'} alt="ssa"/></div>
         {renderAmount(t('global.ConfirmTransactionModal_Receiving'), receiving, 'AmountReceiving')}
-        <LargeNumber currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
+        <LargeNumber tooltip="topLeft" currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
         <hr style={{ border: '1px solid #08374F','opacity':'0.5' }} />
         <div className="Name font-size-14">
           <div className="MOCFee mrb-0">
@@ -313,6 +313,7 @@ export default function MintModal(props) {
                       amount={fee?.value}
                       includeCurrency
                       className="color-08374F"
+                      tooltip="topRight"
                   />}
                 {!auth.isLoggedIn && <span>0.000000 RBTC</span>}
               </span>
