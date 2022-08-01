@@ -28,7 +28,7 @@ const LargeNumberF2 = ({ amount, currencyCode, includeCurrency, numericLabelPara
 
   return (<>
           { !isNaN(value) &&
-          <Tooltip title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
+          <Tooltip placement="topLeft" title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
               <div className={className} style={{'display':'flex'}}>
                   <NumericLabel style={{'flexGrow':'0'}} {... {params }}>{value.toString()}</NumericLabel>
                   <span className={'number-label color-08374F'} style={{'flexGrow':'1'}}>{includeCurrency && ` ${t(`MoC.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>

@@ -156,7 +156,7 @@ export default function Claims(props) {
             const amount_set= (datas_response['mocs']!=='--')? '+'+ datas_response['mocs'] + ' MOC': datas_response['mocs']
 
             const detail = {
-                event: 'CLAIM'
+                event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : 'CLAIM'
                 , created: date_formated
                 , gas_fee: '--'
                 , asset: datas_response['set_asset']
@@ -178,7 +178,7 @@ export default function Claims(props) {
             data_row_coins2.push({
                 key: data_j.hash,
                 info: '',
-                event: 'CLAIM',
+                event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : 'CLAIM',
                 asset: datas_response['set_asset'],
                 amount: amount_set,
                 wallet: datas_response['wallet_value_main'],
