@@ -331,6 +331,8 @@ export default function MintModal(props) {
                   currencyCode={'RESERVE' }
                   amount={interests.interestValue}
                   includeCurrency
+                  className="color-08374F"
+                  tooltip="topRight"
               />}
                   {!auth.isLoggedIn && <span>0.000000 RBTC</span>}
                 </span>
