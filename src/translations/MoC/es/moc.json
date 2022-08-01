@@ -619,9 +619,9 @@
       "yearlyInrateComment": " (ajustado anual)"
     },
     "operations": {
-      "title": "Últimas Operaciones",
+      "title": "Últimas Operaciones Confirmadas",
       "tooltip": {
-        "text": "Pendiente: Transacción en espera de confirmación.\nConfirmando: transacción con al menos una confirmación y menos de 10.\nConfirmada: Transacción con más de 10 confirmaciones.\nAbierta: Transacción confirmada, la transacción se puso en cola correctamente para procesarse en el siguiente elemento.\nSettled: Transacción ejecutada en el último acuerdo."
+        "text": "Listando operaciones con al menos 1 bloque confirmado.\nConfirmando: transacción con al menos una confirmación y menos de 10.\nConfirmada: Transacción con más de 10 confirmaciones.\nAbierta: Transacción confirmada, la transacción se puso en cola correctamente para procesarse en el siguiente elemento.\nSettled: Transacción ejecutada en el último acuerdo."
       },
       "empty": "Sin operaciones",
       "explain": {
