@@ -6,7 +6,7 @@ import {useTranslation} from "react-i18next";
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { formatLocalMap2 } from '../../Lib/Formats';
 
-const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams, className }) => {
+const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams, className, tooltip }) => {
 
   const [t, i18n]= useTranslation(["global",'moc']);
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
@@ -31,7 +31,7 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
 
   return (<>
           { !isNaN(value) &&
-          <Tooltip title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
+          <Tooltip placement={tooltip ? tooltip : 'top'} title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
               <div className={className}>
                   {/* <NumericLabel {... {params }}>{amount?.toString()}</NumericLabel> */}
                   <NumericLabel {... {params }}>{value.toString()}</NumericLabel>
