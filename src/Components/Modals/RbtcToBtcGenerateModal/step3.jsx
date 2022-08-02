@@ -18,6 +18,7 @@ export default function Step3(props) {
     const [labelColor, setLabelColor] = useState('white');
     // const [headerIcon, setHeaderIcon] = useState('icon-atention.svg');
     const [imgTrx, setImgTrx] = useState('icon-atention.svg');
+    // const [imgTrx, setImgTrx] = useState('status-pending.png');
     const [isVisible, setIsVisible] = useState(true)
     const [completed, setCompleted] = useState(false);
     const [buttonCompleted, setButtonCompleted] = useState('Confirm');
@@ -94,7 +95,7 @@ export default function Step3(props) {
 
             const fastBtcTransferToBtc= () => {
                 return new Promise((resolve, reject) => {
-                    setImgTrx('icon-processing.svg')
+                    setImgTrx('status-pending.png')
                     setIsVisible(false)
                     setlabelTrx('Waiting')
                     fastBtcBridge.methods.transferToBtc(props.rbtcAddress).send(
@@ -183,7 +184,6 @@ export default function Step3(props) {
                         break;
                     }
                     case "4": {
-                        console.log("44444444444444")
                         console.log(responseBTC.status)
                         setLabelColor("red");
                         setlabelTrx("Refunded");
@@ -216,7 +216,7 @@ export default function Step3(props) {
                         || labelTrx=='Initializing' || labelTrx=='Validating') &&
                         <Fragment>
                             <p style={{'display':'flex','width':'100%'}}>
-                                <img style={{'flexGrow':'0'}} className={'rotate'} src={imgTrx} alt="" />
+                                <img style={{'flexGrow':'0'}} className={'rotate'} src={imgTrx} alt="" width={28} height={28}/>
                                 <span style={{'flexGrow':'1','textAlign':'center','marginTop':'5px','marginLeft':'-45px','color':labelColor}}><b>{labelTrx}</b></span>
                             </p>
                         </Fragment>}

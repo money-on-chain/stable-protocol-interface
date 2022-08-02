@@ -398,7 +398,7 @@ export default function MintModal(props) {
             <div>
               <p className={'Transaction_ID'}>{t('global.Transaction_ID')}</p>
               <div style={{ textAlign: 'right' }}>
-                <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash}/>
+                <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash} typeUrl={'tx'} />
               </div>
             </div>
             <div>
@@ -435,7 +435,7 @@ export default function MintModal(props) {
             <div>
               <p className={'Transaction_ID'}>{t('global.Transaction_ID')}</p>
               <div style={{ textAlign: 'right' }}>
-                <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash}/>
+                <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash}  typeUrl={'tx'}/>
               </div>
             </div>
           </div>
