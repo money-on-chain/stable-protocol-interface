@@ -56,7 +56,7 @@ export default function ListOperations(props) {
             const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.api_moctest}`+'webapp/transactions/list/', datas)
+                    api('get', `${config.api.operations}`+'webapp/transactions/list/', datas)
                         .then(response => {
                             setDataJson(response);
                             setTotalTable(response.total)
@@ -113,13 +113,14 @@ export default function ListOperations(props) {
     ];
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             if (accountData.Owner) {
                 transactionsList(current)
             }
         }, 30000);
+        return () => clearInterval(interval);
     },[]);
-    
+
     useEffect(() => {
         if (accountData.Owner) {
             transactionsList(current)
@@ -167,7 +168,7 @@ export default function ListOperations(props) {
             const datas_response = readJsonTable(data_j,t,i18n)
 
             const detail = {
-                event: datas_response['set_event']
+                event:  datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : datas_response['set_event']
                 , created: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
                 , details: datas_response['RBTCAmount']
                 , asset: datas_response['set_asset']
@@ -189,7 +190,7 @@ export default function ListOperations(props) {
             data_row_coins2.push({
                 key: data_j._id,
                 info: '',
-                event: datas_response['set_event'],
+                event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : datas_response['set_event'],
                 asset: datas_response['set_asset'],
                 // platform: `+ ${datas_response['paltform_detail']}`,
                 // platform: formatVisibleValue(

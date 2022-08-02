@@ -13,7 +13,6 @@ import {
     dateFU
 } from '../../../Helpers/helper'
 import {config} from '../../../Config/config';
-import Copy from "../../Page/Copy";
 import { useTranslation } from "react-i18next";
 import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
@@ -54,7 +53,7 @@ export default function Claims(props) {
             const datas = {address: accountData.Owner, limit: 20, skip: (((skip - 1) + (skip - 1)) * 10)}
             setTimeout(() => {
                 try {
-                    api('get', config.api.api_moneyonchain + 'claims/' + accountData.Owner, datas)
+                    api('get', config.api.incentives + 'claims/' + accountData.Owner, datas)
                         .then(response => {
                             console.log('response', response);
                             setDataJson(response);
@@ -116,12 +115,12 @@ export default function Claims(props) {
     },[accountData.Owner]);
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             if (currentHash) {
-                console.log("updated3")
                 transactionsList(current)
             }
         }, 30000);
+        return () => clearInterval(interval);
     },[]);
 
     var data = [];
@@ -157,7 +156,7 @@ export default function Claims(props) {
             const amount_set= (datas_response['mocs']!=='--')? '+'+ datas_response['mocs'] + ' MOC': datas_response['mocs']
 
             const detail = {
-                event: 'CLAIM'
+                event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : 'CLAIM'
                 , created: date_formated
                 , gas_fee: '--'
                 , asset: datas_response['set_asset']
@@ -179,7 +178,7 @@ export default function Claims(props) {
             data_row_coins2.push({
                 key: data_j.hash,
                 info: '',
-                event: 'CLAIM',
+                event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : 'CLAIM',
                 asset: datas_response['set_asset'],
                 amount: amount_set,
                 wallet: datas_response['wallet_value_main'],

@@ -13,14 +13,6 @@ export default function Mint(props) {
     const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);
 
-    useEffect(() => {
-        setInterval(() => {
-            if(auth.isLoggedIn){
-                auth.loadContractsStatusAndUserBalance();
-            }
-        }, 30000);
-    },[]);
-
     return (
         <Fragment>
             {!auth.isLoggedIn && <Alert

@@ -5,11 +5,26 @@
   },
   "chainId": 30,
   "api": {
-    "api_url": "http://localhost:9002/api/v1/",
-    "api_admin_url": "http://localhost:9002/api/admin/v1/",
-    "api_moctest": "https://api-moctest.coinfabrik.com/api/v1/",
-    "api_moneyonchain": "https://moc-incentives-alpha.moneyonchain.com/"
+    "operations": "https://api-operations.moneyonchain.com/api/v1/",
+    "incentives": "https://moc-incentives.moneyonchain.com/"
   },
+  "minimumUserBalanceToOperate": "120000000000000",
+  "transfer": [
+    {
+      "address": "0x4ebd075534d9E24cE134f8BC962311c913730a84",
+      "title": "TEX"
+    }
+  ],
+  "globalCoverage": {
+    "ok": 4,
+    "warning": 2,
+    "dangerous": 1.5
+  },
+  "rns": {
+    "url": "https://manager.rns.rifos.org",
+    "address": "0xcb868aeabd31e2b66f74e9a55cf064abb31a4ad5"
+  },
+  "explorerUrl": "https://explorer.rsk.co",
   "environment": {
     "AppMode": "MoC",
     "AppProject": "MoC",

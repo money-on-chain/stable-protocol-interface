@@ -21,14 +21,14 @@ You can:
 * RIF on Chain (Collateral RIF) please review the contracts [here](https://github.com/money-on-chain/RDOC-Contract) 
 
 
-| Token generic     | Project | Token Name  | Collateral   |
-|-------------------|---------|-------------|--------------|
-| Stable            | MOC     | DOC         | RBTC         |
-| RiskPro           | MOC     | BPRO        | RBTC         |
-| RiskProx          | MOC     | BTCX        | RBTC         |
-| Stable            | ROC     | RDOC        | RIF          |
-| RiskPro           | ROC     | RIFP        | RIF          |
-| RiskProx          | ROC     | RIFX        | RIF          |
+| Token generic     | Project | Token Name  | Collateral   | Network |
+|-------------------|---------|-------------|--------------|---------|
+| Stable            | MOC     | DOC         | RBTC         | RSK     |
+| RiskPro           | MOC     | BPRO        | RBTC         | RSK     |
+| RiskProx          | MOC     | BTCX        | RBTC         | RSK     |
+| Stable            | ROC     | RDOC        | RIF          | RSK     |
+| RiskPro           | ROC     | RIFP        | RIF          | RSK     |
+| RiskProx          | ROC     | RIFX        | RIF          | RSK     |
 
 
 ### Setup: Running develop
@@ -39,7 +39,7 @@ Install packages
 
 Run
 
-`npm run start:moc-alpha-testnet`
+`npm run start:moc-testnet`
 
 **Note:** Start the environment you want to run ex. **"start:moc-testnet"** to start environment Moc Testnet 
 
@@ -48,14 +48,14 @@ Run
 
 Environment is our already deployed contracts. For example **mocMainnet2** is our MOC current production environment.
 
-| Network Name      | Project | Enviroment                       | Network    |
-|-------------------|---------|----------------------------------|------------|
-| mocTestnetAlpha   | MOC     |                                  | Testnet    |
-| mocTestnet        | MOC     | app-testnet.moneyonchain.com     | Testnet    |
-| mocMainnet2       | MOC     | app.moneyonchain.com             | Mainnet    |
-| rdocTestnetAlpha  | RIF     |                                  | Testnet    |
-| rdocTestnet       | RIF     | app-roc-testnet.moneyonchain.com | Testnet    |
-| rdocMainnet       | RIF     | app-roc.moneyonchain.com         | Mainnet    |
+| Network Name      | Project | Url                              | Environment | Network |
+|-------------------|---------|----------------------------------|-------------|---------|
+| mocTestnetAlpha   | MOC     |                                  | Testnet     | RSK     |
+| mocTestnet        | MOC     | app-testnet.moneyonchain.com     | Testnet     | RSK     |
+| mocMainnet2       | MOC     | app.moneyonchain.com             | Mainnet     | RSK     |
+| rdocTestnetAlpha  | RIF     |                                  | Testnet     | RSK     |
+| rdocTestnet       | RIF     | app-roc-testnet.moneyonchain.com | Testnet     | RSK     |
+| rdocMainnet       | RIF     | app-roc.moneyonchain.com         | Mainnet     | RSK     |
 
 
 ### Faucets

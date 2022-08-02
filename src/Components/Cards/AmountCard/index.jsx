@@ -6,8 +6,6 @@ import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { LargeNumber } from '../../LargeNumber';
 import { useTranslation } from "react-i18next";
-import { set_doc_usd } from "../../../Helpers/helper";
-import { getPriceFields } from '../../../Lib/price';
 import BalanceItem from '../../BalanceItem/BalanceItem';
 import InformationModal from '../../Modals/InformationModal';
 import { formatLocalMap2 } from '../../../Lib/Formats';
@@ -71,12 +69,6 @@ export default function AmountCard(props) {
     // const converToUSD = convertToCurrency => ConvertToken(tokenName, convertToCurrency, getBalanceUSD());
 
     const pre_label = t(`MoC.Tokens_${tokenName.toUpperCase()}_name`, { ns: 'moc' })
-
-    // setInterval(() => {
-    //   console.log('Interval triggered');
-    //   setShow(<LargeNumber {...{ amount: getBalance(), currencyCode: tokenName }} />)
-    //   console.log('Interval triggered');
-    // }, 10000);
 
     return (
         <Fragment>

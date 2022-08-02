@@ -194,7 +194,7 @@
         "MintOrRedeemToken_Mint": "Mint",
         "MintOrRedeemToken_Redeem": "Redeem",
         "MintOrRedeemToken_Fee": "Fee ({{feePercent}}%): ",
-        "MintOrRedeemToken_Interest": "Interest rate (__interestRate__%): ",
+        "MintOrRedeemToken_Interest": "Interest rate ({{interestRate}}%): ",
 
         "InputWithCurrencySelector_AddTotalAvailable": "Add total available",
         "InputWithCurrencySelector_AddAvailable": "Available balance",

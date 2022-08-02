@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
-import { Form, Input } from "antd";
+import React, { useState, useContext } from 'react';
+import { Form } from "antd";
 import './style.scss';
+import { AuthenticateContext } from "../../Context/Auth";
 import addressHelper from '../../Lib/addressHelper';
 import { DebounceInput } from 'react-debounce-input';
-import web3 from 'web3';
+import { config } from '../../Config/config';
 
 export default function InputAddress(props) {
 
+  const auth = useContext(AuthenticateContext);
+  const {web3} = auth;
   const {
     title,
     className,
-    onChange} = props;
+    onChange
+  } = props;
 
   const [statusInput, setStatusInput] = useState(null);
   const [help, setHelp] = useState('');
   const [value, setValue] = useState('');
 
-  const rns = new window.RNS(window.ethereum, window.rnsAddress && { contractAddresses: {
-    registry: window.rnsAddress
+  const rns = new window.RNS(window.ethereum, config.rns.address && { contractAddresses: {
+    registry: config.rns.address
   }});
 
   const helper = addressHelper(web3);
@@ -49,15 +53,15 @@ export default function InputAddress(props) {
   const onResolutionCompleted = (validateStatus, help, val) => {
     setStatusInput(validateStatus ? 'success' : 'error');
     setHelp(help);
+    onChange(val);
   };
 
-  // const onChange = (e) => {
-  //   const val = e.target.value;
-  //   onStartResolving(val);
-  //   if(!val) return onResolutionCompleted(true, '', val);
-  //
-  //   addressOrRNSIsValid(val);
-  // };
+  const onChangeInput = (e) => {
+    const val = e.target.value;
+     onStartResolving(val);
+     if(!val) return onResolutionCompleted(true, '', val);
+    addressOrRNSIsValid(val);
+   };
 
   return (
     <div className={`InputAddressContainer ${className || ""}`}>
@@ -67,7 +71,7 @@ export default function InputAddress(props) {
           <DebounceInput
             value={value}
             debounceTimeout={600}
-            onChange={(e) => onChange(e)}
+            onChange={(e) => onChangeInput(e)}
             className={`${statusInput === 'error' ? 'formError' : ''}`}
           />
         </Form.Item>

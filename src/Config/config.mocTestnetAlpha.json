@@ -5,17 +5,33 @@
   },
   "chainId": 31,
   "api": {
-    "api_url": "http://localhost:9002/api/v1/",
-    "api_admin_url": "http://localhost:9002/api/admin/v1/",
-    "api_moctest": "https://api-moctest.coinfabrik.com/api/v1/",
-    "api_moneyonchain": "https://moc-incentives-alpha.moneyonchain.com/"
+    "operations": "https://api-operations-alpha-testnet.moneyonchain.com/api/v1/",
+    "incentives": "https://moc-incentives-alpha.moneyonchain.com/"
   },
+  "minimumUserBalanceToOperate": "120000000000000",
+  "transfer": [
+    {
+      "address": "0xA066d6e20e122deB1139FA3Ae3e96d04578c67B5",
+      "title": "TEX"
+    }
+  ],
+  "globalCoverage": {
+    "ok": 4,
+    "warning": 2,
+    "dangerous": 1.5
+  },
+  "rns": {
+    "url": "https://testnet.manager.rns.rifos.org",
+    "address": "0x7d284aaac6e925aad802a53c0c69efe3764597b8"
+  },
+  "explorerUrl": "https://explorer.testnet.rsk.co",
   "environment": {
     "AppMode": "MoC",
     "AppProject": "MoC",
     "MoC": "0x01AD6f8E884ed4DDC089fA3efC075E9ba45C9039",
     "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8",
     "IRegistry": "0x2c4b59ede1998229a9509ec7d15d206e91a246f1",
+    "fastBtcBridgeAddress": "0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A",
     "tokens": {
       "COINBASE": {
           "name": "RBTC",

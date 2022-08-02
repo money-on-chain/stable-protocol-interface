@@ -4,6 +4,7 @@ import {Button} from 'antd';
 import './style.scss'
 import {useTranslation} from "react-i18next";
 import Copy from "../../Page/Copy";
+import { config } from '../../../Config/config';
 
 const OperationStatusModal = ({ className, visible, onCancel, title, operationStatus, txHash }) => {
   const [t, i18n]= useTranslation(["global",'moc'])
@@ -25,7 +26,7 @@ const OperationStatusModal = ({ className, visible, onCancel, title, operationSt
                 <span className="title">{t('global.RewardsClaimButton_Modal_Hash')}</span>
                 <Copy textToShow={txHash !== undefined ? txHash?.substring(0, 6) + '...' + txHash?.substring(txHash?.length-4, txHash?.length) : 'No Hash'} textToCopy={txHash}/>
             </div>
-            <a href={`https://explorer.testnet.rsk.co/tx/${txHash}`} target="_blank">
+            <a href={`${config.explorerUrl}/tx/${txHash}`} target="_blank">
                 {t('global.RewardsClaimButton_Modal_ViewOnExplorer')}
             </a>
             <br/>

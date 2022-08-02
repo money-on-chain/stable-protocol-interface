@@ -13,14 +13,6 @@ import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedee
 export default function Mint(props) {
     const auth = useContext(AuthenticateContext);
 
-    useEffect(() => {
-        setInterval(() => {
-            if(auth.isLoggedIn){
-                auth.loadContractsStatusAndUserBalance();
-            }
-        }, 30000);
-    },[]);
-
     const [t, i18n] = useTranslation(["global", 'moc'])
 
     return (

@@ -1,16 +1,10 @@
 
-import React, { Fragment, useState } from 'react';
-import { useContext } from 'react'
-import { AuthenticateContext } from "../../../Context/Auth";
+import React from 'react';
 import { useTranslation } from "react-i18next";
-import Web3 from 'web3'
-const BigNumber = require('bignumber.js');
-
+import { config } from '../../../Config/config';
 
 
 function RowDetail(props) {
-
-    const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc']);
 
     return (
@@ -56,7 +50,7 @@ function RowDetail(props) {
                     <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1"><span>{props.detail.interests}    </span></td>
                     <th className="ant-descriptions-item-label-th ant-descriptions-border-bottom" colSpan="1">{t('MoC.operations.columns_detailed.tx', { ns: 'moc' })}</th>
                     <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">
-                        <a className="ant-descriptions-a" href={'https://explorer.testnet.rsk.co/tx/' + props.detail.tx_hash} target="_blank">
+                        <a className="ant-descriptions-a" href={`${config.explorerUrl}/tx/${props.detail.tx_hash}`} target="_blank">
                             <span>{props.detail.tx_hash_truncate}         </span>
                         </a>
                     </td>

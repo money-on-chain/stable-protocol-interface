@@ -619,9 +619,9 @@
       "yearlyInrateComment": " (ajustado anual)"
     },
     "operations": {
-      "title": "Last Operations",
+      "title": "Last Confirmed Operations",
       "tooltip": {
-        "text": "Pending: Transaction awaiting confirmation.\nConfirming: Transaction with at least one confirmation and less than 10.\nConfirmed: Transaction with more than 10 confirmations.\nOpen: Transaction confirmed, transaction successfully queued to processed on next stlement.\nSettled: Transaction executed on last settlement."
+        "text": "Only list >= 1 block confirmation.\nConfirming: Transaction with at least one confirmation and less than 10.\nConfirmed: Transaction with more than 10 confirmations.\nOpen: Transaction confirmed, transaction successfully queued to processed on next settlement.\nSettled: Transaction executed on last settlement."
       },
       "empty": "No operations",
       "explain": {

@@ -49,7 +49,7 @@ export default function FastBtcPegOut(props) {
         if(auth.isLoggedIn) {
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.api_moctest}` + 'webapp/fastbtc/pegout', {address: accountData.Owner})
+                    api('get', `${config.api.operations}` + 'webapp/fastbtc/pegout', {address: accountData.Owner})
                         .then(response => {
                             setDataJson(response);
                             console.log('dataJson', response);
@@ -104,11 +104,12 @@ export default function FastBtcPegOut(props) {
     ];
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             if (currentHash) {
                 getFastbtcPegout(current)
             }
         }, 30000);
+        return () => clearInterval(interval);
     });
 
     var data = [];

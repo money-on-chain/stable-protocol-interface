@@ -4,7 +4,6 @@ import RewardsStakingOptions from "../../Components/Cards/RewardsStakingOptionsC
 import YourAddressCard from '../../Components/Cards/YourAddressCard';
 import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import MocAmount from "../../Components/Cards/MocAmount";
-import ListOperations from "../../Components/Tables/ListOperations";
 import { AuthenticateContext } from '../../Context/Auth';
 import { useTranslation } from "react-i18next";
 import './style.scss'
@@ -16,14 +15,6 @@ export default function Rewards(props) {
     const [t, i18n] = useTranslation(["global", 'moc']);
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
-
-    useEffect(() => {
-        setInterval(() => {
-            if(auth.isLoggedIn){
-                auth.loadContractsStatusAndUserBalance();
-            }
-        }, 30000);
-    },[]);
 
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke)

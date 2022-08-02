@@ -20,6 +20,8 @@ import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";
+import { config } from '../../../Config/config';
+
 export default function MintModal(props) {
   const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
   const {
@@ -74,15 +76,6 @@ export default function MintModal(props) {
   let userComment = '';
   let userTolerance = '';
 
-  useEffect(() => {
-    setInterval(() => {
-      if (currentHash) {
-        console.log("updated4");
-        getTransaction(currentHash)
-      }
-    }, 15000);
-  }, []);
-
   useEffect(
     () => {
       setComment('');
@@ -115,7 +108,8 @@ export default function MintModal(props) {
   const confirmButton = async ({comment, tolerance}) => {
     // Check if there are enough spendable balance to pay
     // take in care amount to pay gas fee
-    const minimumUserBalanceToOperate = "120000000000000";
+
+    const minimumUserBalanceToOperate = config.minimumUserBalanceToOperate;
     const userSpendable = await auth.getSpendableBalance(window.address);
 
     let minimumBalance = new BigNumber(minimumUserBalanceToOperate);
@@ -186,6 +180,8 @@ export default function MintModal(props) {
 
   const onReceipt = async (receipt) => {
     auth.loadContractsStatusAndUserBalance()
+    getTransaction(receipt.transactionHash)
+    setConfirmModal(false)
     const filteredEvents = auth.interfaceDecodeEvents(receipt);
   };
 
@@ -221,6 +217,16 @@ export default function MintModal(props) {
     });
   } ;
 
+  const partClose=()=>{
+    setShowError(false);
+    setTransaction(false)
+    setCurrentHash(null);
+    setShowTransaction(false)
+    setTimeout(function(){
+      onCancel();
+    }, 200);
+  }
+
   const changeTolerance = (newTolerance) => {
     setTolerance(newTolerance);
     setShowError(false);
@@ -230,15 +236,18 @@ export default function MintModal(props) {
 
   const cancelButton = () => {
     if(confirmModal==false){
-      setConfirmModal(true)
+      if( showTransaction ){
+        if( txtTransaction!= 'SUCCESSFUL'){
+          setConfirmModal(true)
+        }else{
+          setTxtTransaction('PENDING')
+          partClose()
+        }
+      }else{
+        partClose()
+      }
     }else{
-      setShowError(false);
-      setTransaction(false)
-      setCurrentHash(null);
-      setShowTransaction(false)
-      setTimeout(function(){
-        onCancel();
-      }, 200);
+      partClose()
       setConfirmModal(false)
     }
   };
@@ -276,11 +285,6 @@ export default function MintModal(props) {
   const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
   const styleReceive = tokenNameReceive === receiving.currencyCode ? { color } : {};
 
-  console.log('exchanging.currencyCode----------------------')
-  console.log(exchanging.currencyCode)
-  console.log(receiving.currencyCode)
-  console.log('exchanging.currencyCode----------------------')
-
   return (
     <Modal
       visible={visible}
@@ -292,11 +296,11 @@ export default function MintModal(props) {
     >
       <div className="TabularContent">
         {renderAmount(t('global.ConfirmTransactionModal_Exchanging'), exchanging, 'AmountExchanging')}
-        <LargeNumber currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
+        <LargeNumber tooltip="topLeft" currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
         {showError && renderError()}
         <div className={'text-align-center'}><img width={30} height={30} src={'d-arrow.png'} alt="ssa"/></div>
         {renderAmount(t('global.ConfirmTransactionModal_Receiving'), receiving, 'AmountReceiving')}
-        <LargeNumber currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
+        <LargeNumber tooltip="topLeft" currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
         <hr style={{ border: '1px solid #08374F','opacity':'0.5' }} />
         <div className="Name font-size-14">
           <div className="MOCFee mrb-0">
@@ -309,44 +313,32 @@ export default function MintModal(props) {
                       amount={fee?.value}
                       includeCurrency
                       className="color-08374F"
+                      tooltip="topRight"
                   />}
                 {!auth.isLoggedIn && <span>0.000000 RBTC</span>}
               </span>
             </div>
           </div>
-          { receiving.currencyCode=='RISKPROX' &&
+          { interests &&
+          interests?.interestValue &&
+          interests?.interestValue.gt(0) &&
             <><div className="MOCFee mrb-0">
               <div className={`AlignedAndCentered Amount mrb-0 mrt-0`}>
-                <span className="Name color-08374F">{`Interest`}</span>
-                <span className={`Value ${appMode}`}>
+                <span className="Name color-08374F">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>
+                <span className={`Value ${appMode} color-08374F`}>
                   {auth.isLoggedIn &&
                   <LargeNumber
-                      currencyCode={fee?.currencyCode}
-                      amount={fee?.value}
-                      includeCurrency
-                      className="color-08374F"
-                  />}
+                  currencyCode={'RESERVE' }
+                  amount={interests.interestValue}
+                  includeCurrency
+                  className="color-08374F"
+                  tooltip="topRight"
+              />}
                   {!auth.isLoggedIn && <span>0.000000 RBTC</span>}
                 </span>
               </div>
             </div></>
           }
-          {/*{interests &&*/}
-          {/*interests?.interestValue &&*/}
-          {/*interests?.interestValue.gt(0) && (*/}
-          {/*    <div className="MOCFee">*/}
-          {/*      <div className={`AlignedAndCentered Amount`}>*/}
-          {/*        <span className="Name">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>*/}
-          {/*        <span className={`Value ${appMode}`}>*/}
-          {/*            <LargeNumber*/}
-          {/*                currencyCode={'RESERVE' }*/}
-          {/*                amount={interests.interestValue}*/}
-          {/*                includeCurrency*/}
-          {/*            />*/}
-          {/*          </span>*/}
-          {/*      </div>*/}
-          {/*    </div>*/}
-          {/*)}*/}
           <div className="Legend-s1">
             {t('global.ConfirmTransactionModal_MOCFee_Disclaimer')}<br/>
             {t('global.ConfirmTransactionModal_AmountMayDifferDisclaimer')}
@@ -408,7 +400,6 @@ export default function MintModal(props) {
               <div style={{ textAlign: 'right' }}>
                 <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash}/>
               </div>
-
             </div>
             <div>
               {(() => {

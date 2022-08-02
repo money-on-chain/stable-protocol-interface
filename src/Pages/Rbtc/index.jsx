@@ -15,14 +15,6 @@ export default function Rbtc(props) {
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc']);
 
-    useEffect(() => {
-        setInterval(() => {
-            if(auth.isLoggedIn){
-                auth.loadContractsStatusAndUserBalance();
-            }
-        }, 30000);
-    },[]);
-
     const [rbtcGenVisible, setRbtcGenVisible] = useState(false);
     const [btcGenVisible, setBtcGenVisible] = useState(false);
 
