@@ -23,8 +23,8 @@ async function loadTranslations() {
     try {
         let moc_es= await import(`./translations/${config.environment.AppMode}/es/moc.json`);
         let moc_en= await import(`./translations/${config.environment.AppMode}/en/moc.json`);
-        let global_es= await import(`./translations/${config.environment.AppMode}/es/global.json`)
-        let global_en= await import(`./translations/${config.environment.AppMode}/en/global.json`)
+        let global_es= await import(`./translations/global-es.json`)
+        let global_en= await import(`./translations/global-en.json`)
         i18next.init({
             interpolation: {escapeValue:false},
             lng: "en",
