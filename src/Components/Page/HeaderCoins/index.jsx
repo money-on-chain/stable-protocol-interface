@@ -128,7 +128,7 @@ function HeaderCoins(props) {
           <span className="value_usd1">
             <LargeNumber {...{ amount: getBalanceUSD(), currencyCode: 'USDPrice', includeCurrency: true }} />
           </span>
-          { auth.contractStatusData && <PriceVariation priceVariation={getPriceVariation()} blockHeight={auth.contractStatusData.historic.blockHeight} /> }
+          { auth.contractStatusData && <PriceVariation tokenName={tokenName} priceVariation={getPriceVariation()} blockHeight={auth.contractStatusData.historic.blockHeight} /> }
         </div>
       </div>}
     </>

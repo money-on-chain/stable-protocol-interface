@@ -57,6 +57,8 @@ const formatValueFromMap = (amount, mapEntry, format, decimals) => {
 };
 
 const adjustPrecision = (amount, currencyCode) => {
+    // console.log('qqqqqqqqqqqqqqqqqqq')
+    // return false
     const fd = formatMap[currencyCode];
     return fd
         ? {
