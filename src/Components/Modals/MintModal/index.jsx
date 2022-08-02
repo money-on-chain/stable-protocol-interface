@@ -319,40 +319,26 @@ export default function MintModal(props) {
               </span>
             </div>
           </div>
-          { receiving.currencyCode=='RISKPROX' &&
+          { interests &&
+          interests?.interestValue &&
+          interests?.interestValue.gt(0) &&
             <><div className="MOCFee mrb-0">
               <div className={`AlignedAndCentered Amount mrb-0 mrt-0`}>
-                <span className="Name color-08374F">{`Interest`}</span>
-                <span className={`Value ${appMode}`}>
+                <span className="Name color-08374F">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>
+                <span className={`Value ${appMode} color-08374F`}>
                   {auth.isLoggedIn &&
                   <LargeNumber
-                      currencyCode={fee?.currencyCode}
-                      amount={interests?.interestValue}
-                      includeCurrency
-                      className="color-08374F"
-                      tooltip="topRight"
-                  />}
+                  currencyCode={'RESERVE' }
+                  amount={interests.interestValue}
+                  includeCurrency
+                  className="color-08374F"
+                  tooltip="topRight"
+              />}
                   {!auth.isLoggedIn && <span>0.000000 RBTC</span>}
                 </span>
               </div>
             </div></>
           }
-          {/*{interests &&*/}
-          {/*interests?.interestValue &&*/}
-          {/*interests?.interestValue.gt(0) && (*/}
-          {/*    <div className="MOCFee">*/}
-          {/*      <div className={`AlignedAndCentered Amount`}>*/}
-          {/*        <span className="Name">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>*/}
-          {/*        <span className={`Value ${appMode}`}>*/}
-          {/*            <LargeNumber*/}
-          {/*                currencyCode={'RESERVE' }*/}
-          {/*                amount={interests.interestValue}*/}
-          {/*                includeCurrency*/}
-          {/*            />*/}
-          {/*          </span>*/}
-          {/*      </div>*/}
-          {/*    </div>*/}
-          {/*)}*/}
           <div className="Legend-s1">
             {t('global.ConfirmTransactionModal_MOCFee_Disclaimer')}<br/>
             {t('global.ConfirmTransactionModal_AmountMayDifferDisclaimer')}

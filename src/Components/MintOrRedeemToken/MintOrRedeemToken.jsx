@@ -97,7 +97,6 @@ const MintOrRedeemToken = (props) => {
       const awaitInterests = async newValueYouExchange => {
         const interests = await calcInterests(newValueYouExchange);
         setInterests(interests);
-        console.log('interests: ',interests);
       };
       if (auth.convertToken) {
         awaitInterests(valueYouExchange);
