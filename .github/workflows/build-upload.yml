@@ -101,14 +101,14 @@ jobs:
           tag_name: ${{ needs.bump_version.outputs.new_tag }}
           release_name: Release MoC ${{ needs.bump_version.outputs.new_tag }}
           body: |
-            Production IPFS hash of the deployment:
+            **Production IPFS hash of the deployment**:
             - CIDv0: `${{ steps.upload.outputs.hash }}`
             - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`
             
             The latest release is always accessible via our alias to the Cloudflare IPFS gateway at [app.moneyonchain.com](https://app.moneyonchain.com) .            
             
             Main Production gateways:
-            - [app.moneyonchain.com](https://app.moneyonchain.com)
+            - https://app.moneyonchain.com
             - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload.outputs.hash }}            
             
             Alternative Production gateways:
@@ -119,20 +119,20 @@ jobs:
             - https://${{ steps.convert_cidv0.outputs.cidv1 }}.ipfs.cf-ipfs.com/
             - [ipfs://${{ steps.upload.outputs.hash }}/](ipfs://${{ steps.upload.outputs.hash }}/)
             
-            Staging (testnet) IPFS hash of the deployment:
-            - CIDv0: `${{ steps.upload_testnet.outputs.hash }}`
-            - CIDv1: `${{ steps.convert_cidv0_testnet.outputs.cidv1 }}`
+            **Staging (testnet) IPFS hash of the deployment**:
+            - CIDv0: `${{ steps.upload_staging.outputs.hash }}`
+            - CIDv1: `${{ steps.convert_cidv0_staging.outputs.cidv1 }}`
             
             Staging (testnet) gateways:
-            - [app-testnet.moneyonchain.com](https://app-testnet.moneyonchain.com)
-            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_testnet.outputs.hash }}            
+            - https://app-testnet.moneyonchain.com
+            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_staging.outputs.hash }}            
             
             Alternative Staging (testnet) gateways:
-            - https://gateway.pinata.cloud/ipfs/${{ steps.upload_testnet.outputs.hash }}
-            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_testnet.outputs.hash }}
-            - https://ipfs.io/ipfs/${{ steps.upload_testnet.outputs.hash }}
-            - https://${{ steps.convert_cidv0_testnet.outputs.cidv1 }}.ipfs.dweb.link/
-            - https://${{ steps.convert_cidv0_testnet.outputs.cidv1 }}.ipfs.cf-ipfs.com/
-            - [ipfs://${{ steps.upload_testnet.outputs.hash }}/](ipfs://${{ steps.upload_testnet.outputs.hash }}/)
+            - https://gateway.pinata.cloud/ipfs/${{ steps.upload_staging.outputs.hash }}
+            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_staging.outputs.hash }}
+            - https://ipfs.io/ipfs/${{ steps.upload_staging.outputs.hash }}
+            - https://${{ steps.convert_cidv0_staging.outputs.cidv1 }}.ipfs.dweb.link/
+            - https://${{ steps.convert_cidv0_staging.outputs.cidv1 }}.ipfs.cf-ipfs.com/
+            - [ipfs://${{ steps.upload_staging.outputs.hash }}/](ipfs://${{ steps.upload_staging.outputs.hash }}/)
                         
             ${{ needs.bump_version.outputs.changelog }}
