@@ -11,6 +11,9 @@ export default function InformationModal({ currencyCode }) {
 
   const showModal = () => {
     setIsModalVisible(true);
+      setTimeout(function(){
+          document.querySelector('.ant-modal-close-x').style.color="#6c6d6f";
+      }, 100);
   };
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -22,11 +25,15 @@ export default function InformationModal({ currencyCode }) {
 
   const pre_label = t(`MoC.Tokens_${currencyCode.toUpperCase()}_name`, { ns: 'moc' })
 
+    // document.querySelectorAll('.rlogin-modal-hitbox')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
+
+
   const TokenInformationContent = ({ token }) => (
     <Row>
       <Col span={24}>
         <hr className='FactSheetLine' />
         <p className='FactSheet'>{`${t(`MoC.TokenInformationContent.${token}.factSheet`, { ns: 'moc' })}`}</p>
+          <p>{token}</p>
         <h4 className='FactSheetTitle' dangerouslySetInnerHTML={{ __html: t(`MoC.TokenInformationContent.${token}.title`, { ns: 'moc', returnObjectTrees: false }) }} />
       </Col>
       <Col xs={24} sm={24} md={12}>

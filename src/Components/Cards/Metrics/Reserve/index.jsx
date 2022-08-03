@@ -62,7 +62,7 @@ function Reserve(props) {
           }
         ]
     };
-    
+
     const tokensToShow = toShow({ totalSTABLE: props.totalSTABLE, totalRISKPRO: props.totalRISKPRO, totalRISKPROX: props.totalRISKPROX });
 
     let totalBalance = new BigNumber(0);
@@ -105,7 +105,7 @@ function Reserve(props) {
             : <div>{t(`global.TotalBalanceCard_noFunds`)}</div>
             }
         </div>)
-        
+
     }
 
     return (
@@ -113,7 +113,7 @@ function Reserve(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={'Moc/icon-reserve.svg'}
+                    src={process.env.PUBLIC_URL + "/Moc/icon-reserve.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t('MoC.Tokens_RESERVE_name', { ns: 'moc' })}

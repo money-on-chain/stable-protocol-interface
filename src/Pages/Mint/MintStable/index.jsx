@@ -48,6 +48,7 @@ export default function Mint(props) {
                         AccountData={auth.accountData}
                         userState={auth.userBalanceData}
                         mocState={auth.contractStatusData}
+                        style={'height'}
                     />
                 </Col>
             </Row>
