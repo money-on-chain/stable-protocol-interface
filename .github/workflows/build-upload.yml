@@ -51,28 +51,51 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Docker Build image
-        run: docker build -t builder_webapp -f Dockerfile .
+        run: docker build -t builder_stable_interface -f Dockerfile .
 
-      - name: Build With image
-        run: docker run --rm --name webapp-IPFS-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" -v "$(pwd)"/build/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_webapp
+      # Target Mainnet
+      - name: Compile Mainnet
+        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:moc-mainnet" -v "$(pwd)"/build/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
 
-
-      - name: Pin to IPFS
+      - name: Pin to IPFS Mainnet
         id: upload
         uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.3
         with:
-          pin-name: MoC ${{ needs.bump_version.outputs.new_tag }}
+          pin-name: MoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
           path: './build'
           pinata-api-key: ${{ secrets.PINATA_API_KEY }}
           pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
 
-      - name: Convert CIDv0 to CIDv1
+      - name: Convert CIDv0 to CIDv1 Mainnet
         id: convert_cidv0
         uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
         with:
           cidv0: ${{ steps.upload.outputs.hash }}
 
+      # Clean all from dir
+      - name: Clean Build Folder
+        run: rm -r "$(pwd)"/build/*
 
+      # Target Staging Testnet
+      - name: Compile Staging
+        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:moc-alpha-testnet" -v "$(pwd)"/build/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
+
+      - name: Pin to IPFS Staging
+        id: upload_staging
+        uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.3
+        with:
+          pin-name: MoC Testnet ${{ needs.bump_version.outputs.new_tag }}
+          path: './build'
+          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
+
+      - name: Convert CIDv0 to CIDv1 Staging
+        id: convert_cidv0_staging
+        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
+        with:
+          cidv0: ${{ steps.upload_staging.outputs.hash }}
+
+      # Create the release
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1.1.0
@@ -80,20 +103,40 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         with:
           tag_name: ${{ needs.bump_version.outputs.new_tag }}
-          release_name: Release ${{ needs.bump_version.outputs.new_tag }}
+          release_name: Release MoC ${{ needs.bump_version.outputs.new_tag }}
           body: |
-            IPFS hash of the deployment:
+            Production IPFS hash of the deployment:
             - CIDv0: `${{ steps.upload.outputs.hash }}`
             - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`
-            The latest release is always accessible via our alias to the Cloudflare IPFS gateway at [app.moneyonchain.com](https://app.moneyonchain.com).
-            You can also access the Moc Interface directly from an IPFS gateway.
-            **You should use an IPFS gateway that enforces origin separation**, or our alias to the latest release at [app.moneyonchain.com](https://app.moneyonchain.com.
-            Your settings are never remembered across different URLs.
-            IPFS gateways:
+            
+            The latest release is always accessible via our alias to the Cloudflare IPFS gateway at [app.moneyonchain.com](https://app.moneyonchain.com) .            
+            
+            Main Production gateways:
+            - [app.moneyonchain.com](https://app.moneyonchain.com)
+            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload.outputs.hash }}            
+            
+            Alternative Production gateways:
             - https://gateway.pinata.cloud/ipfs/${{ steps.upload.outputs.hash }}
             - https://cloudflare-ipfs.com/ipfs/${{ steps.upload.outputs.hash }}
             - https://ipfs.io/ipfs/${{ steps.upload.outputs.hash }}
             - https://${{ steps.convert_cidv0.outputs.cidv1 }}.ipfs.dweb.link/
             - https://${{ steps.convert_cidv0.outputs.cidv1 }}.ipfs.cf-ipfs.com/
             - [ipfs://${{ steps.upload.outputs.hash }}/](ipfs://${{ steps.upload.outputs.hash }}/)
+            
+            Staging (testnet) IPFS hash of the deployment:
+            - CIDv0: `${{ steps.upload_testnet.outputs.hash }}`
+            - CIDv1: `${{ steps.convert_cidv0_testnet.outputs.cidv1 }}`
+            
+            Staging (testnet) gateways:
+            - [app-testnet.moneyonchain.com](https://app-testnet.moneyonchain.com)
+            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_testnet.outputs.hash }}            
+            
+            Alternative Staging (testnet) gateways:
+            - https://gateway.pinata.cloud/ipfs/${{ steps.upload_testnet.outputs.hash }}
+            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_testnet.outputs.hash }}
+            - https://ipfs.io/ipfs/${{ steps.upload_testnet.outputs.hash }}
+            - https://${{ steps.convert_cidv0_testnet.outputs.cidv1 }}.ipfs.dweb.link/
+            - https://${{ steps.convert_cidv0_testnet.outputs.cidv1 }}.ipfs.cf-ipfs.com/
+            - [ipfs://${{ steps.upload_testnet.outputs.hash }}/](ipfs://${{ steps.upload_testnet.outputs.hash }}/)
+                        
             ${{ needs.bump_version.outputs.changelog }}

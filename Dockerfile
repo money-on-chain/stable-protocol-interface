@@ -1,15 +1,19 @@
 FROM node:14
 
 # Author
-MAINTAINER Nicolas Flores
+MAINTAINER Nicolas Flores & Martin Mulone
 
 WORKDIR /usr/src/app
 COPY package.json ./
+RUN npm install
+
+# copy environments targets
 COPY .env ./
 COPY .env.mocTestnetAlpha ./
 COPY .env.mocTestnet ./
 COPY .env.mocMainnet2 ./
 
-RUN npm install
+# build script target
+COPY build_target.sh ./
 
-CMD  ["npm", "run", "build:moc-alpha-testnet"]
+CMD /bin/bash -c 'bash ./build_target.sh'
