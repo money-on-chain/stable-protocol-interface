@@ -24,7 +24,7 @@ export default function CopyModal(props) {
         &nbsp;&nbsp;&nbsp;<img onClick={onClick}
                                width={15}
                                height={17}
-                               src={'copy-verde.png'}
+                               src={process.env.PUBLIC_URL + "/global/copy-verde.png"}
                                alt=""
                                style={{marginRight: 10, cursor: 'pointer',marginTop: -10}}
     /></>

@@ -100,8 +100,8 @@ export default function Mint(props) {
                 </Col>
                 <Col xs={24} md={12} xl={5}>
                     <Row>
-                        <Col span={24}>
-                            <div className="Card MintCard CardSettlement"  style={{minHeight:'144px'}}>
+                        <Col span={24}   style={{minHeight:'163px'}}>
+                            <div className="Card MintCard CardSettlement"  style={{minHeight:'100%'}}>
                                 <h3 className="CardTitle">{t('global.riskproxWallet_NextSettlement', { ns: 'global' })}</h3>
                                 {auth.isLoggedIn &&
                                     <>{!loading ?
@@ -123,7 +123,7 @@ export default function Mint(props) {
                                 }
                             </div>
                         </Col>
-                        <Col span={24} style={{ marginTop: '1em' }}>
+                        <Col span={24} style={{ marginTop: '1em',minHeight:'163px' }}>
 
                             <div className="Card MintCard Bprox2Metrix">
                                 {!loading ? <>
@@ -159,6 +159,7 @@ export default function Mint(props) {
                         AccountData={auth.accountData}
                         userState={auth.userBalanceData}
                         mocState={auth.contractStatusData}
+                        style={'height'}
                     />
                 </Col>
             </Row>

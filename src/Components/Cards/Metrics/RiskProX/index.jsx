@@ -20,7 +20,7 @@ function RiskProX(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={'Moc/icon-riskprox.svg'}
+                    src={process.env.PUBLIC_URL + '/Moc/icon-riskprox.svg'}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t('MoC.wallets.RISKPROX.title', { ns: 'moc' })}
