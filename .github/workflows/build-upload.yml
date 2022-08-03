@@ -72,20 +72,16 @@ jobs:
         with:
           cidv0: ${{ steps.upload.outputs.hash }}
 
-      # Clean all from dir
-      - name: Clean Build Folder
-        run: rm -r "$(pwd)"/build/*
-
       # Target Staging Testnet
       - name: Compile Staging
-        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:moc-alpha-testnet" -v "$(pwd)"/build/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
+        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:moc-alpha-testnet" -v "$(pwd)"/build_staging/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
 
       - name: Pin to IPFS Staging
         id: upload_staging
         uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.3
         with:
           pin-name: MoC Testnet ${{ needs.bump_version.outputs.new_tag }}
-          path: './build'
+          path: './build_staging'
           pinata-api-key: ${{ secrets.PINATA_API_KEY }}
           pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
 
