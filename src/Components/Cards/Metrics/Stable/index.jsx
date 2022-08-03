@@ -19,7 +19,7 @@ function Stable(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={'Moc/icon-stable.svg'}
+                    src={process.env.PUBLIC_URL + "/Moc/icon-stable.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t('MoC.wallets.STABLE.title', { ns: 'moc' })}

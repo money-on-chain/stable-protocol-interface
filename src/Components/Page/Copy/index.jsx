@@ -27,7 +27,7 @@ export default function Copy(props) {
             <img onClick={onClick}
                  width={17}
                  height={17}
-                 src={'Moc/copy2.png'}
+                 src={process.env.PUBLIC_URL + '/Moc/copy2.png'}
                  alt=""
                  style={{marginRight: 10, cursor: 'pointer','flexGrow':'0','marginTop':'3px'}}
             />

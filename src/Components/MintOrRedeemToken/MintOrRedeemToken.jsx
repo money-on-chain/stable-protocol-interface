@@ -50,7 +50,7 @@ const MintOrRedeemToken = (props) => {
   const {web3} = auth;
 
   /* Context props */
-  const { token, mocState, userState } = props;
+  const { token, mocState, userState,style } = props;
 
   let reservePrice;
   if (mocState && mocState.bitcoinPrice) {
@@ -636,13 +636,11 @@ const MintOrRedeemToken = (props) => {
       {!loading ?
     <Card
       title={
-        actionIsMint
-          ? t('global.MintOrRedeemToken_Mint')
-          : t('global.MintOrRedeemToken_Redeem')
+          style
       }
       // loading={loading}
       className="Card MintOrRedeemToken"
-      style={{height: '100%'}}
+      style={(style=='minHeight')? {'minHeight':'375px'}: {'height':'100%'}}
     >
       {auth.convertToken && mocState && (
         <>

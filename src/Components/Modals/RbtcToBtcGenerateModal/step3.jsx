@@ -216,13 +216,13 @@ export default function Step3(props) {
                         || labelTrx=='Initializing' || labelTrx=='Validating') &&
                         <Fragment>
                             <p style={{'display':'flex','width':'100%'}}>
-                                <img style={{'flexGrow':'0'}} className={'rotate'} src={imgTrx} alt="" width={28} height={28}/>
+                                <img style={{'flexGrow':'0'}} className={'rotate'} src={process.env.PUBLIC_URL + "/global/" + imgTrx} alt="" width={28} height={28}/>
                                 <span style={{'flexGrow':'1','textAlign':'center','marginTop':'5px','marginLeft':'-45px','color':labelColor}}><b>{labelTrx}</b></span>
                             </p>
                         </Fragment>}
                     { ( (labelTrx!='Pending' && labelTrx!='Mined' && labelTrx!='Failed' && labelTrx!='Waiting'
                         && labelTrx!='Initializing' && labelTrx!='Validating') || (labelTrx=='Confirmed')) &&
-                        <p style={{'display':'flex','width':'100%'}}><img style={{'flexGrow':'0'}} src={imgTrx} alt="332" />
+                        <p style={{'display':'flex','width':'100%'}}><img style={{'flexGrow':'0'}} src={process.env.PUBLIC_URL + "/global/" + imgTrx} alt="332" />
                             <span style={{'flexGrow':'1','marginLeft':'10px'}}>{labelTrx}</span>
                         </p>}
                 </div>

@@ -96,9 +96,7 @@ export default function TokenSummaryCard(props) {
                     >
                         <img
                             height={45}
-                            src={
-                                `Moc/icon-${tokenName}.svg`
-                            }
+                            src={process.env.PUBLIC_URL + `/Moc/icon-${tokenName}.svg` }
                             alt="icon-wallet"
                         />
                     </Col>
@@ -129,7 +127,7 @@ export default function TokenSummaryCard(props) {
                     <Tooltip placement="top" title={getBalance(true)}>
                         <div className="Number Few">
                             {getBalance()}{' '}
-                            {labelCoin}   
+                            {labelCoin}
                         </div>
                     </Tooltip>
                     <Tooltip placement="top" title={getBalanceUSD(true)}>

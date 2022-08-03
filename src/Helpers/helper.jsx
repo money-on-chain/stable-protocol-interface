@@ -392,18 +392,18 @@ export function setToLocaleString(value,fixed,i18n){
 export function readJsonClaims(data_j,t, i18n){
 
     const set_asset= 'CLAIM';
-    const mocs= (data_j.mocs!==undefined)? setToLocaleString(parseFloat(Web3.utils.fromWei(setNumber(data_j.mocs)), 'ether'),config.environment.Precisions.mocPrecision.decimals,i18n)  : '--'
-    // const mocs= DetailedLargeNumber({
-    //     amount: data_j.mocs,
-    //     currencyCode: 'MOC',
-    //     includeCurrency: true,
-    //     isPositive: true,
-    //     showSign: true,
-    //     amountUSD: data_j.USDAmount ? data_j.USDAmount : 0,
-    //     showUSD: true,
-    //     t: t,
-    //     i18n:i18n
-    // })
+    const mocs= DetailedLargeNumber({
+        amount: data_j.mocs,
+        currencyCode: 'MOC',
+        includeCurrency: true,
+        // isPositive: data_j.event == 'RiskProxRedeem' ? false : true,
+        isPositive: true,
+        showSign: true,
+        amountUSD: data_j.gasFeeUSD ? data_j.gasFeeUSD : 0,
+        showUSD: true,
+        t: t,
+        i18n:i18n
+    })
     const creation= (data_j.creation!==undefined)? data_j.creation: '--'
     const state= StatusReward({ state: data_j.state, result: data_j.result })
     const sent_hash= (data_j.sent_hash!==null)? data_j.sent_hash: '--'

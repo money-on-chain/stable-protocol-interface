@@ -12,20 +12,16 @@ import { AuthenticateProvider } from './Context/Auth';
 import {I18nextProvider} from "react-i18next";
 import i18next from "i18next";
 import {config} from "./Config/config";
-// import global_es from "./translations/MoC/es/global.json"
-// import global_en from "./translations/MoC/en/global.json"
-// import moc_es from "./translations/MoC/es/moc.json"
-// import moc_en from "./translations/MoC/en/moc.json"
-
 
 
 async function loadTranslations() {
     try {
-        let moc_es= await import(`./translations/${config.environment.AppMode}/es/moc.json`);
-        let moc_en= await import(`./translations/${config.environment.AppMode}/en/moc.json`);
-        let global_es= await import(`./translations/${config.environment.AppMode}/es/global.json`)
-        let global_en= await import(`./translations/${config.environment.AppMode}/en/global.json`)
-        i18next.init({
+        const strmoc= config.environment.AppMode
+        let moc_es= await import('./translations/'+strmoc+'/es/moc.json');
+        let moc_en= await import('./translations/'+strmoc+'/en/moc.json');
+        let global_es= await import('./translations/'+strmoc+'/es/global.json')
+        let global_en= await import('./translations/'+strmoc+'/en/global.json')
+        await i18next.init({
             interpolation: {escapeValue:false},
             lng: "en",
             resources: {
@@ -51,7 +47,8 @@ ReactDOM.render(
         <I18nextProvider i18n={i18next}>
             <AuthenticateProvider>
                 <HashRouter>
-                    <React.Suspense fallback={ <span>Loading...</span> }>
+                    {/*<React.Suspense fallback={ <span>Loading...</span> }>*/}
+                    <React.Suspense fallback={ <img style={{'position':'fixed','left': '50%','top':'50%','transform':'translateX(-50%) translateY(-50%)'}} width={50} height={50} src={process.env.PUBLIC_URL + "/global/status-pending.png"} alt="ssa" className={'img-status rotate'}/> }>
                         <Router />
                     </React.Suspense>
                 </HashRouter>

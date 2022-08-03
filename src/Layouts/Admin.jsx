@@ -2,7 +2,6 @@ import '../assets/css/global.scss';
 import { Outlet } from 'react-router-dom';
 import { Layout, Menu, Image, Drawer, Button } from 'antd';
 import { HomeFilled, MenuOutlined, CloseOutlined, PieChartFilled, InfoCircleFilled } from '@ant-design/icons';
-import logoImage from '../assets/icons/logo.svg';
 import LoginButton from '../Components/Auth/LoginButton/index';
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -130,8 +129,7 @@ export default function Admin() {
             </Sider>
             <Layout>
                 <Header className="Header" style={{ paddingLeft: 18 }}>
-                    {/*<Image height={40} src={logoImage} />*/}
-                    <img src={logoImage} alt="icon"  className='header-logo'/>
+                    <img src={process.env.PUBLIC_URL + "/global/logo.svg"} className='header-logo'/>
                     <div className="MiddleSide">
                         <HeaderCoins tokenName="stable" image={'icon-rbtclogo.svg'} />
                         <HeaderCoins tokenName="riskpro" image={'BPROIcon.svg'} />
