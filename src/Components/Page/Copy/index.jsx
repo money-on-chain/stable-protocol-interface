@@ -1,8 +1,10 @@
 import { notification } from 'antd';
+import {config} from "../../../Config/config";
+import React from "react";
 
 export default function Copy(props) {
 
-    const {textToShow = '', textToCopy = '', fastBTC = false} = props;
+    const {textToShow = '', textToCopy = '', fastBTC = false, typeUrl=''} = props;
 
     const onClick = () => {
         navigator.clipboard.writeText(textToCopy);
@@ -13,16 +15,27 @@ export default function Copy(props) {
         });
     };
 
+    let url_set=config.explorerUrl+'/address/'+textToCopy
+    switch (typeUrl){
+        case "tx":
+            url_set=config.explorerUrl+'/tx/'+textToCopy
+            break;
+    }
+
     return (
-        <span onClick={onClick} style={{ display: fastBTC && 'flex','fontSize':'12px'}}>
-            <img
-                width={17}
-                height={17}
-                src={'Moc/copy2.png'}
-                alt=""
-                style={{marginRight: 10, cursor: 'pointer'}}
+        <><div style={{display:"flex"}}>
+            <img onClick={onClick}
+                 width={17}
+                 height={17}
+                 src={'Moc/copy2.png'}
+                 alt=""
+                 style={{marginRight: 10, cursor: 'pointer','flexGrow':'0','marginTop':'3px'}}
             />
-            {textToShow}
+            <span style={{ display: fastBTC && 'flex','fontSize':'12px'}}>
+            <a style={{ 'color':'black','flexGrow':'1'}} href={url_set} target="_blank">
+                {textToShow}
+            </a>
         </span>
+        </div></>
     );
 }
