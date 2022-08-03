@@ -96,8 +96,8 @@ export default function PriceVariation(props) {
             <div className={'div_crypto'}>
                 <Fragment>
                     <Tooltip placement="topLeft" title={tooltip} mouseEnterDelay={0.5}>
-                        <img className={'crypto_img'} src={arrow} alt="arrow" height={11}/>
-                        <span className={'crypto_value 22222222222222'} style={{color: `${color}`}}>{variationText}</span>
+                        <img className={'crypto_img'} src={process.env.PUBLIC_URL + '/' +arrow} alt="arrow" height={11}/>
+                        <span className={'crypto_value'} style={{color: `${color}`}}>{variationText}</span>
                     </Tooltip>
                 </Fragment>
             </div>

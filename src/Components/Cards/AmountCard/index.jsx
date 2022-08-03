@@ -86,7 +86,7 @@ export default function AmountCard(props) {
                     <Col>
                         <img
                             width={56}
-                            src={`Moc/icon-${tokenName.toLowerCase()}.svg`}
+                            src={process.env.PUBLIC_URL + `/Moc/icon-${tokenName.toLowerCase()}.svg`}
                             alt="icon-wallet"
                         />
                     </Col>
