@@ -31,6 +31,7 @@
 }
 
 .WithdrawTabFooter {
+    min-height: calc(242px + 3rem);
     .amount {
         display: inline;
     }
