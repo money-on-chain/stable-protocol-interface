@@ -19,7 +19,7 @@ function RiskPro(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={'Moc/icon-riskpro.svg'}
+                    src={process.env.PUBLIC_URL + "/Moc/icon-riskpro.svg" }
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t('MoC.wallets.RISKPRO.title', { ns: 'moc' })}

@@ -35,12 +35,12 @@ const getMaxAvailableOfCurrencyCode = (mocState, currencyCode, isRedeem) => {
 };
 
 const currencies = [
-  { value: 'RESERVE',     image: `Moc/icon-reserve.svg` },
-  { value: 'STABLE',      image: `Moc/icon-stable.svg` },
-  { value: 'RISKPRO',     image: `Moc/icon-riskpro.svg` },
-  { value: 'RISKPROX',    image: `Moc/icon-riskprox.svg` },
-  { value: 'MOC',         image: `Moc/icon-moc.svg` },
-  { value: 'RBTC',         image: `Moc/icon-moc.svg` },
+  { value: 'RESERVE',     image: process.env.PUBLIC_URL + "/Moc/icon-reserve.svg" },
+  { value: 'STABLE',      image: process.env.PUBLIC_URL + "/Moc/icon-stable.svg" },
+  { value: 'RISKPRO',     image: process.env.PUBLIC_URL + "/Moc/icon-riskpro.svg" },
+  { value: 'RISKPROX',    image: process.env.PUBLIC_URL + "/Moc/icon-riskprox.svg" },
+  { value: 'MOC',         image: process.env.PUBLIC_URL + "/Moc/icon-moc.svg" },
+  { value: 'RBTC',         image: process.env.PUBLIC_URL + "/Moc/icon-moc.svg" },
 ].map(it => ({
   ...it,
   longNameKey: `MoC.Tokens_${it.value}_code`,

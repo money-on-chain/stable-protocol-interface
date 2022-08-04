@@ -13,7 +13,7 @@ const getRLogin = () => {
     const supportedChains = Object.keys(rpcUrls).map(Number);
 
     const rLogin = new window.RLogin.default({
-        cacheProvider: true,
+        cacheProvider: false,
         providerOptions: {
             walletconnect: {
                 package: window.WalletConnectProvider.default,

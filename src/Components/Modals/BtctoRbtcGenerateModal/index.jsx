@@ -23,7 +23,6 @@ export default function BtcToRbtcGenerateModal(props) {
   const {visible = false, handleClose = () => {}, accountData} = props;
   const [t, i18n]= useTranslation(["global",'moc'])
   const [stateFBtc, setStateFBtc] = useState(initialState);
-  const [headerIcon, setHeaderIcon] = useState('icon-atention.svg');
   const [underMaintenance, setUnderMaintenance] = useState(false);
 
   const address = accountData?.Owner;
@@ -94,7 +93,7 @@ export default function BtcToRbtcGenerateModal(props) {
   const getModalTitle = () => (
     <div className="ModalHeaderTitle">
       <div className="CardLogo">
-        <img width="32" src={'icons/icon-sovryn_fastbtc.svg'} alt=""/>
+        <img width="32" src={process.env.PUBLIC_URL + '/icons/icon-sovryn_fastbtc.svg'} alt=""/>
         <h1>Sovryn<br/>FastBTC</h1>
       </div>
       <div className="title">
@@ -106,7 +105,7 @@ export default function BtcToRbtcGenerateModal(props) {
   const ModalFooter = () => {
     return (
       <div className="AlertWarning" type="warning" icon="" >
-        <img src={'icon-atention.svg'} alt=""/>
+        <img src={process.env.PUBLIC_URL + "/global/icon-atention.svg"} alt=""/>
         <div>{t('MoC.fastbtc.topUpWalletModal.footer', {ns: 'moc'})}</div>
       </div>
     )

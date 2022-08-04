@@ -42,7 +42,7 @@ export default function Rewards(props) {
                     <YourAddressCard
                         height="100%"
                         tokenToSend="MOC"
-                        iconWallet={`Moc/icon-moc.svg`}
+                        iconWallet={process.env.PUBLIC_URL + "/Moc/icon-moc.svg" }
                         view={'moc'}
                     // currencyOptions={['RESERVE', 'MOC']}
                     />

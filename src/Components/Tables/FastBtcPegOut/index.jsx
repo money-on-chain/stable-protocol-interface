@@ -124,7 +124,7 @@ export default function FastBtcPegOut(props) {
     var json_end = []
     const data_row = (set_current) => {
         /*******************************sort descending by date lastUpdatedAt***********************************/
-        if(dataJson.transactions!==undefined){
+        if(dataJson.pegout_requests!==undefined){
             dataJson.pegout_requests.sort((a, b) => {
                 return myParseDate(b.updated) - myParseDate(a.updated)
             });
@@ -133,6 +133,10 @@ export default function FastBtcPegOut(props) {
 
         /*******************************set json group according to limits***********************************/
         json_end = dataJson.pegout_requests
+        if( dataJson.pegout_requests==undefined ){
+            getFastbtcPegout(current)
+            json_end = dataJson.pegout_requests
+        }
         /*******************************end set json group according to limits***********************************/
 
         /*******************************extraer datos del json con el json seteado por limit y skip***********************************/

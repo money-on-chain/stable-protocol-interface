@@ -151,7 +151,8 @@ export default function Claims(props) {
         json_end.forEach((data_j) => {
             const datas_response = readJsonClaims(data_j,t,i18n)
             const date_formated= <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES} unix>{datas_response['creation']}</Moment></span>
-            const amount_set=datas_response['mocs'] // (datas_response['mocs']!=='--')? '+'+ datas_response['mocs'] + ' MOC': datas_response['mocs']
+            const amount_set= datas_response['mocs']
+
             const detail = {
                 event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : 'CLAIM'
                 , created: date_formated
@@ -193,7 +194,7 @@ export default function Claims(props) {
                 key: element.key,
                 info: '',
                 event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
-                asset: <img className="uk-preserve-width uk-border-circle" src={`Moc/` + asset[0].image} alt="avatar" width={32} />,
+                asset: <img className="uk-preserve-width uk-border-circle" src={process.env.PUBLIC_URL + "/Moc/" + asset[0].image} alt="avatar" width={32} />,
                 amount: <span className="display-inline CurrencyTx">{element.amount}</span>,
                 date: <span>{element.date}</span>,
                 status: <span>{element.status}</span>,
