@@ -74,7 +74,7 @@ jobs:
 
       # Target Staging Testnet
       - name: Compile Staging
-        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:moc-alpha-testnet" -v "$(pwd)"/build_staging/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
+        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:moc-testnet" -v "$(pwd)"/build_staging/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
 
       - name: Pin to IPFS Staging
         id: upload_staging
