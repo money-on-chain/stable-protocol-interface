@@ -182,6 +182,13 @@ const approveMoCTokenStaking = async (interfaceContext, enabled, callback) => {
   return receipt
 }
 
+const getMoCAllowance = async (address) => {
+  const dContracts = window.integration;
+  const moctoken = dContracts.contracts.moctoken;
+  const stakingAddress = dContracts.contracts.istakingmachine._address
+  return await moctoken.methods.allowance(address, stakingAddress).call();
+};
+
 
 
 export {
@@ -192,5 +199,6 @@ export {
   unStake,
   delayMachineWithdraw,
   delayMachineCancelWithdraw,
-  approveMoCTokenStaking
+  approveMoCTokenStaking,
+  getMoCAllowance,
 };

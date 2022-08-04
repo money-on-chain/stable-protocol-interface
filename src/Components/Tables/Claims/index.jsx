@@ -55,7 +55,6 @@ export default function Claims(props) {
                 try {
                     api('get', config.api.incentives + 'claims/' + accountData.Owner, datas)
                         .then(response => {
-                            console.log('response', response);
                             setDataJson(response);
                             setTotalTable(response.total)
                             if (call_table) {
@@ -148,13 +147,11 @@ export default function Claims(props) {
         }
         /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
         data = [];
-        console.log('json_end', json_end);
 
         json_end.forEach((data_j) => {
             const datas_response = readJsonClaims(data_j,t,i18n)
             const date_formated= <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES} unix>{datas_response['creation']}</Moment></span>
-            const amount_set= (datas_response['mocs']!=='--')? '+'+ datas_response['mocs'] + ' MOC': datas_response['mocs']
-
+            const amount_set=datas_response['mocs'] // (datas_response['mocs']!=='--')? '+'+ datas_response['mocs'] + ' MOC': datas_response['mocs']
             const detail = {
                 event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : 'CLAIM'
                 , created: date_formated
