@@ -83,7 +83,7 @@ export default function RewardsStakingOptions(props) {
     
     useEffect(() => {
         setStakingBalances();
-    }, []);
+    }, [auth]);
 
     const setStakingBalances = async () => {
         let [_stakedBalance, _lockedBalance, _pendingWithdrawals] = ["0", "0", []];
