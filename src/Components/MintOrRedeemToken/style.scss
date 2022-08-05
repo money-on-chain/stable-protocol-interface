@@ -1,6 +1,11 @@
 @import '../../assets/css/general_styling';
 
 .MintOrRedeemToken {
+
+    @media screen and (min-width: 100px) and (max-width: 1199px){
+        margin-top: 10px;
+    }
+
     .ant-card-head {
         border-bottom: none!important;
         margin-bottom: -9px!important;

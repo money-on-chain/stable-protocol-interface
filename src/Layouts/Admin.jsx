@@ -187,14 +187,6 @@ export default function Admin() {
                     >
                         {t('MoC.menu-drawer.RISKPROXWallet', { ns: 'moc' })}
                     </Menu.Item>
-
-                    <Menu.Item
-                        key="mint-leveraged"
-                        onClick={() => navigate('/metrics')}
-                        icon={PieChartFilled}
-                    >
-                        {t('MoC.menu-drawer.RISKPROXWallet', { ns: 'moc' })}
-                    </Menu.Item>
                     <Menu.Item
                         key="rewards"
                         onClick={() => navigate('/rewards')}
@@ -202,6 +194,22 @@ export default function Admin() {
                     >
                         {t('MoC.menu-drawer.rewards', { ns: 'moc' })}
                     </Menu.Item>
+
+                    <Menu.Item
+                        key="getRBTC"
+                        onClick={() => navigate('/getRBTC')}
+                        icon={<span className="icon-icon-btc"></span>}
+                    >{t('MoC.menu-sidebar.getRBTC', { ns: 'moc' })}
+                    </Menu.Item>
+
+                    <Menu.Item
+                        key="metrics"
+                        onClick={() => navigate('/metrics')}
+                        icon={<PieChartFilled  style={{ fontSize: 30 }} />}
+                    >
+                        {t('MoC.menu-drawer.Metrics', { ns: 'moc' })}
+                    </Menu.Item>
+
                 </Menu>
             </Drawer>
         </Layout>

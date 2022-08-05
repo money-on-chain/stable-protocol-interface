@@ -76,14 +76,16 @@ export default function TokenSummaryCard(props) {
     },[auth]);
 
     return (
-        <Row className="Card TokenSummaryCard" style={{'height':'135px'}}>
+        // <Row className="Card TokenSummaryCard" style={{'height':'135px'}}>
+        <Row className="Card TokenSummaryCard" style={{'height':'135px','display':'flex'}}>
             {!loading ? <>
             <InformationModal currencyCode={currencyCode} />
             <Col
-                span={7}
+                // span={7}
                 style={{
                     ...styleCentered,
                     textAlign: 'right'
+                    ,'flexGrow':'0'
                 }}
             >
                 <Row className="ArrowHomeIndicators arrow-center-values">
@@ -115,12 +117,13 @@ export default function TokenSummaryCard(props) {
                 </Row>
             </Col>
             <Col
-                span={14}
+                // span={14}
                 style={{
                     ...styleCentered,
                     flexDirection: 'column',
                     justifyContent: 'center',
                     textAlign: 'right'
+                    ,'flexGrow':'1'
                 }}
             >
                 <div className="Numbers Left">
@@ -136,7 +139,7 @@ export default function TokenSummaryCard(props) {
                 </div>
             </Col>
             <Col
-                span={3}
+                // span={3}
                 style={{
                     ...styleCentered,
                     justifyContent: 'flex-end'

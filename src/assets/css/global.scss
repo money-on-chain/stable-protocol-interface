@@ -311,6 +311,9 @@ a {
 }
 
 .CardSettlement {
+  @media screen and (min-width: 100px) and (max-width: 767px){
+    margin-top: 10px;
+  }
   h2 {
     margin: 0;
     font-family: Montserrat,sans-serif;
@@ -611,4 +614,8 @@ a {
 
 .float-right{
   float:right;
+}
+
+.copy-txt{
+  color: #09C199;
 }
