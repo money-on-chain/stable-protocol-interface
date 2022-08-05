@@ -55,7 +55,6 @@ export default function Claims(props) {
                 try {
                     api('get', config.api.incentives + 'claims/' + accountData.Owner, datas)
                         .then(response => {
-                            console.log('response', response);
                             setDataJson(response);
                             setTotalTable(response.total)
                             if (call_table) {
@@ -148,7 +147,6 @@ export default function Claims(props) {
         }
         /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
         data = [];
-        console.log('json_end', json_end);
 
         json_end.forEach((data_j) => {
             const datas_response = readJsonClaims(data_j,t,i18n)

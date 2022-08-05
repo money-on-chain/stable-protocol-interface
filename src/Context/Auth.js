@@ -13,7 +13,7 @@ import { AllowanceUseReserveToken } from '../Lib/integration/interfaces-rrc20';
 import { decodeEvents } from '../Lib/integration/transaction';
 
 import { transferStableTo, transferRiskProTo, transferMocTo, calcMintInterest, approveMoCTokenCommission } from '../Lib/integration/interfaces-base';
-import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unStake, delayMachineWithdraw, delayMachineCancelWithdraw, approveMoCTokenStaking } from '../Lib/integration/interfaces-omoc';
+import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unStake, delayMachineWithdraw, delayMachineCancelWithdraw, approveMoCTokenStaking, getMoCAllowance } from '../Lib/integration/interfaces-omoc';
 import { getGasPrice } from '../Lib/integration/utils';
 
 //import createNodeManager from '../Lib/nodeManagerFactory';
@@ -42,6 +42,7 @@ const AuthenticateContext = createContext({
     getTransactionReceipt: (hash) => {},
     interfaceDecodeEvents: async (receipt) => {},
     interfaceStackedBalance: async (address) => {},
+    interfaceGetMoCAllowance: async (address) => {},
     interfaceLockedBalance: async (address) => {},
     interfaceStakingDeposit: async (mocs, address) => {},
     interfaceUnStake: async (mocs) => {},
@@ -355,14 +356,6 @@ const AuthenticateProvider = ({ children }) => {
         }
     };
 
-    const getMoCAllowance = async (address) => {
-        const from = address || account;
-        const dContracts = window.integration;
-        const moctoken = dContracts.contracts.moctoken;
-        const moc = dContracts.contracts.moc;
-        return moctoken.methods.allowance(from, moc._address).call();
-    };
-
     const getMoCBalance = async (address) => {
         const from = address || account;
         const dContracts = window.integration;
@@ -412,6 +405,12 @@ const AuthenticateProvider = ({ children }) => {
         return stackedBalance(from);
     };
 
+    
+    const interfaceGetMoCAllowance = async (address) => {
+        const from = address || account;
+        return getMoCAllowance(from);
+    }
+
     const interfaceLockedBalance = async (address) => {
         const from = address || account;
         return lockedBalance(from);
@@ -442,6 +441,7 @@ const AuthenticateProvider = ({ children }) => {
         const interfaceContext = buildInterfaceContext();
         return delayMachineCancelWithdraw(interfaceContext, id, callback);
     };
+
 
     const interfaceApproveMoCTokenStaking = async (enabled, callback = () => {}) => {
         const interfaceContext = buildInterfaceContext();
@@ -576,6 +576,7 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceApproveMoCTokenCommission,
                 getTransactionReceipt,
                 interfaceStackedBalance,
+                interfaceGetMoCAllowance,
                 interfaceLockedBalance,
                 interfaceStakingDeposit,
                 interfaceUnStake,

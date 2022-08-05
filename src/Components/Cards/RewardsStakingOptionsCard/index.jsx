@@ -83,7 +83,7 @@ export default function RewardsStakingOptions(props) {
     
     useEffect(() => {
         setStakingBalances();
-    }, []);
+    }, [auth]);
 
     const setStakingBalances = async () => {
         let [_stakedBalance, _lockedBalance, _pendingWithdrawals] = ["0", "0", []];
@@ -117,11 +117,15 @@ export default function RewardsStakingOptions(props) {
                 readyToWithdrawAmount = BigNumber.sum(readyToWithdrawAmount, amount).toFixed(0);
             }
         });
+        const arrayDes=  pendingWithdrawalsFormatted.sort(function(a, b) {
+            return b.id-a.id;
+        });
+        
         setLockedBalance(_lockedBalance);
         setStakedBalance(_stakedBalance);
         setTotalPendingExpiration(pendingExpirationAmount);
         setTotalAvailableToWithdraw(readyToWithdrawAmount);
-        setPendingWithdrawals(pendingWithdrawalsFormatted);
+        setPendingWithdrawals(arrayDes);
     };
 
     const onValueStakingChange = (newValueStakingChange) => {
@@ -326,7 +330,7 @@ export default function RewardsStakingOptions(props) {
                     dataSource={pendingWithdrawals}
                     rowKey="id"
                 />
-                <Row className="WithdrawTabFooter" style={{ marginTop: '8em' }}>
+                <Row className="WithdrawTabFooter">
                     <Col xs={24} md={8}>
                         <div className="WithdrawCTALabel">
                             <span className="grey">{t('global.StakingOptions_PendingExpiration', { ns: 'global' })}</span>

@@ -15,6 +15,7 @@ import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
+import { LargeNumber } from '../../LargeNumber';
 
 
 export default function ListOperations(props) {
@@ -59,6 +60,7 @@ export default function ListOperations(props) {
                     api('get', `${config.api.operations}`+'webapp/transactions/list/', datas)
                         .then(response => {
                             setDataJson(response);
+                            console.log(response);
                             setTotalTable(response.total)
                             if(call_table){
                                 setCallTable(call_table)

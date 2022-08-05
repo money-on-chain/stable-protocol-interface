@@ -390,7 +390,6 @@ export function setToLocaleString(value,fixed,i18n){
 
 
 export function readJsonClaims(data_j,t, i18n){
-
     const set_asset= 'CLAIM';
     const mocs= DetailedLargeNumber({
         amount: data_j.mocs,

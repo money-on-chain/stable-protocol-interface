@@ -1,6 +1,9 @@
 @import '../../../assets/css/general_styling';
 
 .OperationStatusModal {
+    .ant-modal-close-x {
+        color: rgb(0 0 0 / 85%);
+    }
   padding: 46px;
     h1 {
         @include primary-text(1em, $grey, 400);
