@@ -218,6 +218,7 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
           console.log('------ ERRROR ------');
           console.log(e);
         });
+      console.log(state.step, '"""', state.deposit.address);
     },
     [state.deposit.address]
   );
