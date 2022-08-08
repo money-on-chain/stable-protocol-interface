@@ -153,7 +153,7 @@ function MocLiquidity(props) {
             <div className="Metric"><h2>{t("global.RewardsBalance_EarnedToday", { ns: 'global' })}</h2>
                 <div className="IncentivesItem">
                     <h3>
-                        { rewardedToday!=undefined && rewardedToday.toGetToday!=0 &&
+                        {auth.isLoggedIn && rewardedToday!=undefined && rewardedToday.toGetToday!=0 &&
                         <CountUp
                             end={rewardedToday.toGetToday.toFixed(6)}
                             start={rewardedToday.toGetNow.toFixed(6)}

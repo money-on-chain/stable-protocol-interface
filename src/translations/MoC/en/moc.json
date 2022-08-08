@@ -156,6 +156,7 @@
       "language": "Language",
       "RISKPROWallet": "BPro",
       "RISKPROXWallet": "BTCx",
+      "Metrics": "Metrics",
       "STABLEWallet": "DoC",
       "getRBTC": "BTC to RBTC"
     },
@@ -944,6 +945,7 @@
       }
     },
     "staking": "Staking",
-    "Staking_AnnualizedPerformanceTitle": "MoC Staking Annualized Performance"
+    "Staking_AnnualizedPerformanceTitle": "MoC Staking Annualized Performance",
+    "PleaseReviewYourWallet": "Please review your wallet."
   }
 }

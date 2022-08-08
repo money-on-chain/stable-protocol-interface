@@ -15,6 +15,7 @@ import { toBigNumber } from "../../../Lib/numberHelper";
 import { formatVisibleValue } from "../../../Lib/Formats";
 import { AuthenticateContext } from "../../../Context/Auth";
 import AlertLabel from "../../AlertLabel/AlertLabel";
+import ListOperations from "../../Tables/ListOperations";
 
 const BigNumber = require('bignumber.js');
 
@@ -137,8 +138,12 @@ export default function SendModal(props) {
   };
 
   const onReceipt = async (receipt) => {
-    console.log("On receipt");
     auth.loadContractsStatusAndUserBalance();
+    setTimeout(function(){
+      if (typeof window.renderTable !== "undefined") {
+          window.renderTable(1)
+      }
+    }, 3000);
     const filteredEvents = auth.interfaceDecodeEvents(receipt);
   };
 

@@ -4,7 +4,7 @@ import { Button, Collapse, Slider } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
 import './style.scss';
-import React, { useState, useContext, useEffect } from 'react';
+import React, {useState, useContext, useEffect, Fragment} from 'react';
 import { Modal, notification } from 'antd';
 
 import { convertAmount } from '../../../Lib/exchangeManagerHelper';
@@ -109,6 +109,9 @@ export default function MintModal(props) {
     // Check if there are enough spendable balance to pay
     // take in care amount to pay gas fee
 
+    setTxtTransaction('REVIEW')
+    setShowTransaction(true)
+
     const minimumUserBalanceToOperate = config.minimumUserBalanceToOperate;
     const userSpendable = await auth.getSpendableBalance(window.address);
 
@@ -175,6 +178,8 @@ export default function MintModal(props) {
     setLoading(false);
     setCurrentHash(transactionHash);
     setShowTransaction(true);
+    setTxtTransaction('PENDING')
+    document.querySelector('.imgRotate').style.textAlign="inherit";
     getTransaction(transactionHash);
   };
 
@@ -237,7 +242,7 @@ export default function MintModal(props) {
   const cancelButton = () => {
     if(confirmModal==false){
       if( showTransaction ){
-        if( txtTransaction!= 'SUCCESSFUL'){
+        if( txtTransaction!= 'SUCCESSFUL' && txtTransaction!= 'REVIEW' ){
           setConfirmModal(true)
         }else{
           setTxtTransaction('PENDING')
@@ -395,15 +400,18 @@ export default function MintModal(props) {
       <div className={'div-c1'}>
         {showTransaction
           ? <div style={{ width: '100%' }}>
-            <div>
-              <p className={'Transaction_ID'}>{t('global.Transaction_ID')}</p>
-              <div style={{ textAlign: 'right' }}>
-                <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash} typeUrl={'tx'} />
+              <div>
+                { currentHash!=null && <><p className={'Transaction_ID'}>{t('global.Transaction_ID')}</p>
+                <div style={{ textAlign: 'right' }}>
+                  <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash} typeUrl={'tx'} />
+                </div></>
+              }
               </div>
-            </div>
-            <div>
+            <div className={'imgRotate'} style={{'textAlign':'center'}}>
               {(() => {
                 switch (txtTransaction) {
+                  case 'REVIEW':
+                    return <><p><img src={process.env.PUBLIC_URL + "/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p></>;
                   case 'PENDING':
                     return <><p><img src={process.env.PUBLIC_URL + "/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
                   case 'SUCCESSFUL':
