@@ -1,6 +1,9 @@
 .RbtcToBtcModal{
-    .ant-modal-header___ {
-        background-color: black;
+    .ant-modal-content{
+        border-color: black!important;
+    }
+    .ant-modal-header {
+        background-color: black!important;
         color: white;
         padding: 7px;
     }

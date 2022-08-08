@@ -60,6 +60,9 @@ const renderEvent = (evente) => {
 }
 
 const decodeEvents = (receipt) => {
+
+  if (!receipt.logs) return;
+
   const decodedLogs = abiDecoder.decodeLogs(receipt.logs)
 
   const filterIncludes = [

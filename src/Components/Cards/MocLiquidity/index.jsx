@@ -12,6 +12,7 @@ import {LargeNumber} from "../../LargeNumber";
 import api from "../../../services/api";
 import {config} from "../../../Config/config";
 import OperationStatusModal from "../../Modals/OperationStatusModal/OperationStatusModal";
+import moment from 'moment';
 
 
 function MocLiquidity(props) {
@@ -42,8 +43,8 @@ function MocLiquidity(props) {
     };
 
     useEffect(() => {
-        setCallAgent(true)
-        agent()
+        setCallAgent(true);
+        agent();
     },[callAgent]);
 
     const [modalOpen, setModalOpen] = useState(false);
@@ -66,6 +67,7 @@ function MocLiquidity(props) {
 
     const [claimsValue, setClaimsValue] = useState(null);
     const [rewardedToday, setRewardedToday] = useState({toGetToday: 0, toGetNow: 0, time_left: 0});
+    const [enableButtonClaim, setEnableButtonClaim] = useState(false);
 
     const claimsCall= () => {
         if(auth.isLoggedIn) {
@@ -92,9 +94,34 @@ function MocLiquidity(props) {
         }
     };
 
+    const enableClaim = () => {
+        let today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        const datas = {address: accountData.Owner, limit: 20, skip: (((1 - 1) + (1 - 1)) * 10)}
+        setTimeout(() => {
+            try {
+                api('get', config.api.incentives + 'claims/' + accountData.Owner, datas)
+                    .then(response => {
+                        const disabled = response.some((e) => (moment.unix(e.creation).format("MM/DD/YYYY") === today));
+                        setEnableButtonClaim(disabled);
+                    })
+                    .catch((response) => {
+                    });
+            } catch (error) {
+                console.error({error});
+                console.log(error);
+            }
+        }, 500);
+    }
+
     useEffect(() => {
         if(userBalanceData && accountData.Owner!==undefined){
-            claimsCall()
+            claimsCall();
+            enableClaim();
         }
     },[auth, accountData.Owner]);
 
@@ -126,7 +153,7 @@ function MocLiquidity(props) {
             <div className="Metric"><h2>{t("global.RewardsBalance_EarnedToday", { ns: 'global' })}</h2>
                 <div className="IncentivesItem">
                     <h3>
-                        { rewardedToday!=undefined && rewardedToday.toGetToday!=0 &&
+                        {auth.isLoggedIn && rewardedToday!=undefined && rewardedToday.toGetToday!=0 &&
                         <CountUp
                             end={rewardedToday.toGetToday.toFixed(6)}
                             start={rewardedToday.toGetNow.toFixed(6)}
@@ -155,7 +182,7 @@ function MocLiquidity(props) {
                         </button>
                     </Link>
 
-                    : <Button style={{ marginTop: '3.5em', fontFamily: 'Montserrat,sans-serif', fontSize: '1em', fontWeight: 700 }} type="primary" disabled={!auth.isLoggedIn} onClick={claim}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>
+                    : <Button style={{ marginTop: '3.5em', fontFamily: 'Montserrat,sans-serif', fontSize: '1em', fontWeight: 700 }} type="primary" disabled={!auth.isLoggedIn || enableButtonClaim} onClick={claim}>{t('global.RewardsClaimButton_Claim', { ns: 'global' })}</Button>
                 }
                 <OperationStatusModal
                     className="ClaimStatusModal"

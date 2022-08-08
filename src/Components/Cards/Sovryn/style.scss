@@ -33,7 +33,7 @@
   .content-container {
     padding: 13px;
     ul {
-      margin-top: 15px;
+      // margin-top: 15px;
       padding-left: 15px;
       li {
         line-height: 19px;
@@ -49,7 +49,7 @@
     opacity: .1;
   }
   .FastBTCLeftPanel {
-    margin-top: 66px;
+    margin-top: 54px;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
@@ -58,4 +58,10 @@
   }
 
 
+}
+
+.FastBTCLeftPanel{
+  @media only screen and (max-width: 1432px) and (min-width: 1200px)  {
+    margin-top: 30px !important;
+  }
 }

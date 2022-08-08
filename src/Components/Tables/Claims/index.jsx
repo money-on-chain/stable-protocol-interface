@@ -18,6 +18,7 @@ import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
+import moment from 'moment';
 
 
 export default function Claims(props) {
@@ -55,7 +56,6 @@ export default function Claims(props) {
                 try {
                     api('get', config.api.incentives + 'claims/' + accountData.Owner, datas)
                         .then(response => {
-                            console.log('response', response);
                             setDataJson(response);
                             setTotalTable(response.total)
                             if (call_table) {
@@ -148,11 +148,11 @@ export default function Claims(props) {
         }
         /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
         data = [];
-        console.log('json_end', json_end);
 
         json_end.forEach((data_j) => {
             const datas_response = readJsonClaims(data_j,t,i18n)
-            const date_formated= <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES} unix>{datas_response['creation']}</Moment></span>
+            moment.locale(i18n.language);
+            const date_formated= <span>{moment.unix(datas_response['creation']).format("YYYY-MM-DD HH:mm:ss")}</span>// <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES} unix>{datas_response['creation']}</Moment></span>
             const amount_set= datas_response['mocs']
 
             const detail = {

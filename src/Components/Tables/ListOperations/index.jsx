@@ -15,6 +15,7 @@ import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
+import { LargeNumber } from '../../LargeNumber';
 
 
 export default function ListOperations(props) {
@@ -51,7 +52,16 @@ export default function ListOperations(props) {
         setTimeout(() => setLoading(false), timeSke)
     },[auth]);
 
-    const transactionsList= (skip,call_table) => {
+
+    // window.renderTable('load', () => {
+    //     transactionsList(1)
+    // });
+
+    window["renderTable"] = function() {transactionsList(1)}
+
+
+
+        const transactionsList= (skip,call_table) => {
         if(auth.isLoggedIn){
             const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
             setTimeout(() => {
@@ -59,6 +69,7 @@ export default function ListOperations(props) {
                     api('get', `${config.api.operations}`+'webapp/transactions/list/', datas)
                         .then(response => {
                             setDataJson(response);
+                            console.log(response);
                             setTotalTable(response.total)
                             if(call_table){
                                 setCallTable(call_table)
@@ -119,7 +130,7 @@ export default function ListOperations(props) {
             }
         }, 30000);
         return () => clearInterval(interval);
-    },[]);
+    },[accountData.Owner]);
 
     useEffect(() => {
         if (accountData.Owner) {

@@ -17,7 +17,10 @@ export default function StakingOptionsModal(props) {
    const [t, i18n]= useTranslation(["global",'moc'])
 
     useEffect(() => {
-        // if (auth.UserBalanceData?.mocAllowance > amount) setStep(2);
+        (async () => {
+            const allowanceAmount = await auth.interfaceGetMoCAllowance();
+            if (allowanceAmount > amount) setStep(2);
+        })();
     }, []);
     if (!mode) return null;
 
@@ -145,11 +148,13 @@ export default function StakingOptionsModal(props) {
                         <div className="StakingOptionsModal_Content">
                             <p>{t('global.StakingOptionsModal_AllowanceDescription')}
                             </p>
-                            <Button
-                                type="primary"
-                                onClick={() => setAllowance()}
-                            >{t('global.StakingOptionsModal_Authorize')}
-                            </Button>
+                            <div style={{ display: 'flex', justifyContent: 'center'}}>
+                                <Button
+                                    type="primary"
+                                    onClick={setAllowance}
+                                >{t('global.StakingOptionsModal_Authorize')}
+                                </Button>
+                            </div>
                         </div>
                     </>
                 )
