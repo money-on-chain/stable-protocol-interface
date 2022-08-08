@@ -107,6 +107,7 @@ export default function Step3(props) {
                         }).then(response => {
                         web3.eth.getTransactionReceipt(response.transactionHash)
                             .then(responseRSKTopics => {
+                                console.log(responseRSKTopics);
                                 setlabelTrx('Waiting')
                                 setCompleted(true);
                                 setIsVisible(true)
@@ -259,7 +260,7 @@ export default function Step3(props) {
             <div className="AmountSummary">
                 <div className="Detail">Tx ID</div>
                 <div className="Amount">
-                    <Copy textToShow={labelTxid?.slice(0, 5)+'...'+ labelTxid?.slice(-4)} textToCopy={labelTxid} />
+                    <Copy textToShow={labelTxid?.slice(0, 5)+'...'+ labelTxid?.slice(-4)} textToCopy={labelTxid} typeUrl="tx" />
                 </div>
             </div>
             }

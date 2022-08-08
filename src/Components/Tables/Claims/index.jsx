@@ -18,6 +18,7 @@ import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
+import moment from 'moment';
 
 
 export default function Claims(props) {
@@ -150,7 +151,8 @@ export default function Claims(props) {
 
         json_end.forEach((data_j) => {
             const datas_response = readJsonClaims(data_j,t,i18n)
-            const date_formated= <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES} unix>{datas_response['creation']}</Moment></span>
+            moment.locale(i18n.language);
+            const date_formated= <span>{moment.unix(datas_response['creation']).format("YYYY-MM-DD HH:mm:ss")}</span>// <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES} unix>{datas_response['creation']}</Moment></span>
             const amount_set= datas_response['mocs']
 
             const detail = {
