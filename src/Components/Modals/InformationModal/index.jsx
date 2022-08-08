@@ -13,7 +13,7 @@ export default function InformationModal({ currencyCode }) {
     setIsModalVisible(true);
       setTimeout(function(){
           document.querySelector('.ant-modal-close-x').style.color="#6c6d6f";
-      }, 100);
+      }, 200);
   };
   const handleCancel = () => {
     setIsModalVisible(false);

@@ -52,7 +52,16 @@ export default function ListOperations(props) {
         setTimeout(() => setLoading(false), timeSke)
     },[auth]);
 
-    const transactionsList= (skip,call_table) => {
+
+    // window.renderTable('load', () => {
+    //     transactionsList(1)
+    // });
+
+    window["renderTable"] = function() {transactionsList(1)}
+
+
+
+        const transactionsList= (skip,call_table) => {
         if(auth.isLoggedIn){
             const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
             setTimeout(() => {
@@ -121,7 +130,7 @@ export default function ListOperations(props) {
             }
         }, 30000);
         return () => clearInterval(interval);
-    },[]);
+    },[accountData.Owner]);
 
     useEffect(() => {
         if (accountData.Owner) {

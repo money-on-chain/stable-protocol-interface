@@ -11,6 +11,10 @@
     text-align: -webkit-center;
   }
 
+  @media screen and (max-width:1024px) {
+    padding-right: 0;
+  }
+
   .CardTitle {
     font-family: Montserrat,sans-serif;
     font-size: 15px;
@@ -218,7 +222,7 @@
       padding-top: 40%;
       text-align: center;
   }
-  
+
   .pieChartTooltip {
       z-index: 2;
       background: $secondary-color;
