@@ -5,6 +5,7 @@ import { Table as TableAntd } from 'antd';
 import { AuthenticateContext } from '../../../Context/Auth';
 import {useTranslation} from "react-i18next";
 import { getDepositHistory } from "../../../Lib/fastBTC/fastBTCMethods";
+import { config } from '../../../Config/config';
 import moment from 'moment';
 import SatoshiToBTC from 'satoshi-bitcoin';
 const { TabPane } = Tabs;
@@ -110,7 +111,7 @@ const Table = ({ accountData }) => {
               size="small"
               onClick={() =>
                 window.open(
-                  `${record.type === 'deposit' ? window.btcExplorer : window.explorerUrl}/tx/${
+                  `${record.type === 'deposit' ? config.btcExplorer : config.explorerUrl}/tx/${
                     record.txHash
                   }`
                 )
