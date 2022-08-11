@@ -332,7 +332,7 @@ const setStatus = (status) => {
         }
         case 2: {
             text = "Pending";
-            colorClass = "color-default";
+            colorClass = "color-pending";
             break;
         }
         case 3: {

@@ -235,7 +235,7 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
             />
           </div>
           <div style={{ border: '2px solid', padding: '3px 3px 0px 3px', borderRadius: 5 }}>
-            <QRCode value={address} size={150} alt="qrCode"  />
+            <QRCode value={state.deposit.address} size={150} alt="qrCode"  />
           </div>
         </div>
       ) : (
