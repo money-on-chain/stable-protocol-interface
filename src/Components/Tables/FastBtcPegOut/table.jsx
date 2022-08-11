@@ -93,8 +93,8 @@ const Table = ({ accountData }) => {
       render: (text, record) => {
         const value = SatoshiToBTC.toBitcoin(text);
         return record.type === 'deposit'
-          ? t('MoC.fastbtc.history.columns.valueBTC', { value }, {ns: 'moc'})
-          : t('MoC.fastbtc.history.columns.valueRBTC', { value }, {ns: 'moc'});
+          ? t('MoC.fastbtc.history.columns.valueBTC', {ns: 'moc', value})
+          : t('MoC.fastbtc.history.columns.valueRBTC', {ns: 'moc', value});
       },
       responsive: ['sm']
     },
