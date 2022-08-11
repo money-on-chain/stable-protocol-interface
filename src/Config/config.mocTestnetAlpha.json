@@ -25,6 +25,7 @@
     "address": "0x7d284aaac6e925aad802a53c0c69efe3764597b8"
   },
   "explorerUrl": "https://explorer.testnet.rsk.co",
+  "btcExplorer": "https://live.blockcypher.com/btc-testnet",
   "environment": {
     "AppMode": "MoC",
     "AppProject": "MoC",

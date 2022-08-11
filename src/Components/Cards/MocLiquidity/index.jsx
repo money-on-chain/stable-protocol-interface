@@ -27,7 +27,7 @@ function MocLiquidity(props) {
         if(auth.isLoggedIn) {
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.incentives}` + 'agent', {})
+                    api('get', `${config.api.incentives}` + 'agent/', {})
                         .then(response => {
                             setIncentiveState(response);
                         })

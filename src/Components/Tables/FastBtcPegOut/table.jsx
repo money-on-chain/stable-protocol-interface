@@ -5,6 +5,7 @@ import { Table as TableAntd } from 'antd';
 import { AuthenticateContext } from '../../../Context/Auth';
 import {useTranslation} from "react-i18next";
 import { getDepositHistory } from "../../../Lib/fastBTC/fastBTCMethods";
+import { config } from '../../../Config/config';
 import moment from 'moment';
 import SatoshiToBTC from 'satoshi-bitcoin';
 const { TabPane } = Tabs;
@@ -93,8 +94,8 @@ const Table = ({ accountData }) => {
       render: (text, record) => {
         const value = SatoshiToBTC.toBitcoin(text);
         return record.type === 'deposit'
-          ? t('MoC.fastbtc.history.columns.valueBTC', { value }, {ns: 'moc'})
-          : t('MoC.fastbtc.history.columns.valueRBTC', { value }, {ns: 'moc'});
+          ? t('MoC.fastbtc.history.columns.valueBTC', {ns: 'moc', value})
+          : t('MoC.fastbtc.history.columns.valueRBTC', {ns: 'moc', value});
       },
       responsive: ['sm']
     },
@@ -110,7 +111,7 @@ const Table = ({ accountData }) => {
               size="small"
               onClick={() =>
                 window.open(
-                  `${record.type === 'deposit' ? window.btcExplorer : window.explorerUrl}/tx/${
+                  `${record.type === 'deposit' ? config.btcExplorer : config.explorerUrl}/tx/${
                     record.txHash
                   }`
                 )

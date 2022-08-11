@@ -434,7 +434,7 @@ const MintOrRedeemToken = (props) => {
     // Mint BTCX slippage (user tolerance)
     // take in care user tolerance
     //if (actionIsMint && currencyYouReceive === 'RISKPROX') {
-    if (actionIsMint) {
+    if (actionIsMint && currencyYouReceive !== 'STABLE') {
       const userToleranceAmount = new BigNumber(tolerance).multipliedBy(totalYouExchange).div(100).toFixed();
       totalYouExchange = totalYouExchange.plus(userToleranceAmount);
     }
