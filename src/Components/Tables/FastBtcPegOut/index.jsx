@@ -147,7 +147,7 @@ export default function FastBtcPegOut(props) {
             json_end.forEach((data_j) => {
                 const datas_response = readJsonTableFastBtcPegOut(data_j)
                     const detail = {
-                        status: <span style={{color:'#478210'}}>{datas_response['status']}</span>
+                        status: <span className={datas_response['statusColor']}>{datas_response['status']}</span>
                         ,btcAmount: datas_response['btcAmount']
                         ,btcFee: datas_response['btcFee']
                         ,btcAddress: <Copy textToShow={datas_response['btcAddressCut']} textToCopy={datas_response['btcAddress']} />
@@ -164,7 +164,7 @@ export default function FastBtcPegOut(props) {
                     data_row_coins2.push({
                         key: datas_response['hashId']
                         ,hashId: <Copy textToShow={datas_response['transactionHashCut']} textToCopy={datas_response['transactionHash']} />
-                        ,status: <span style={{color:'#478210'}}>{datas_response['status']}</span>
+                        ,status: <span className={datas_response['statusColor']}>{datas_response['status']}</span>
                         ,btcAmount: datas_response['btcAmount']
                         ,btcFee: datas_response['btcFee']
                         ,btcAddress: <Copy textToShow={datas_response['btcAddressCut']} textToCopy={datas_response['btcAddress']} />
