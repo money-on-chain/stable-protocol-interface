@@ -454,6 +454,7 @@ const StatusReward = ({ state, result }) => {
 };
 
 export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro, end_block_dt){
+    if (!daily_moc) return {toGetToday: 0.0, toGetNow: 0.0, time_left: 0}
     const set_daily_moc= new BigNumber(web3.utils.fromWei(daily_moc.toString()))
     const set_user_balance_bproBalance= new BigNumber(web3.utils.fromWei(user_balance_bproBalance.toString()))
     const set_total_bpro= new BigNumber(web3.utils.fromWei(total_bpro.toString()))
