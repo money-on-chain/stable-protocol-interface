@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import { Tabs, Tooltip, Button, Skeleton } from 'antd';
 import React, { useEffect, useContext, useState } from 'react';
 import FastBtcPegOut from "./index";
@@ -85,7 +86,7 @@ const Table = ({ accountData }) => {
       title: t('MoC.fastbtc.history.columns_headers.status', {ns: 'moc'}),
       key: 'status',
       dataIndex: 'status',
-      render: text => t('MoC.fastbtc.history.columns.status_' + text, {ns: 'moc'})
+      render: text => <span className={setStatus(text)}>{t('MoC.fastbtc.history.columns.status_' + text, {ns: 'moc'})}</span>
     },
     {
       title: t('MoC.fastbtc.history.columns_headers.valueBtc', {ns: 'moc'}),
@@ -125,6 +126,33 @@ const Table = ({ accountData }) => {
       }
     }
   ];
+
+  const setStatus = (status) => {
+    let colorClass = '';
+    switch (status) {
+        case 'Initializing': {
+            colorClass = "color-default";
+            break;
+        }
+        case 'Validating': {
+            colorClass = "color-default"
+            break;
+        }
+        case 'Pending': {
+            colorClass = "color-pending";
+            break;
+        }
+        case 'Confirmed': {
+            colorClass = "color-confirmed";
+            break;
+        }
+        case 'Refunded': {
+            colorClass = "color-failed";
+            break;
+        }
+    }
+    return colorClass;
+};
 
   const locale = {
     emptyText: loading ? <Skeleton active /> : t('MoC.operations.empty', {ns: 'moc'}),
