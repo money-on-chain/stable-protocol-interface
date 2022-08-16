@@ -153,7 +153,7 @@ export default function FastBtcPegOut(props) {
                         ,btcAddress: <Copy textToShow={datas_response['btcAddressCut']} textToCopy={datas_response['btcAddress']} />
                         ,date: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['date']}</Moment></span>
                         ,timestamp: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['timestamp']}</Moment></span>
-                        ,transactionHash: <Copy textToShow={datas_response['transactionHashCut']} textToCopy={datas_response['transactionHash']} />
+                        ,transactionHash: <Copy textToShow={datas_response['transactionHashCut']} textToCopy={datas_response['transactionHash']} typeUrl={'tx'}/>
                         ,transId: <Copy textToShow={datas_response['hash_id_cut']} textToCopy={datas_response['hashId']} />
                         ,blockNumber: datas_response['blockNumber']
                         ,rskAddress: <Copy textToShow={datas_response['rskAddressCut']} textToCopy={datas_response['rskAddress']} />

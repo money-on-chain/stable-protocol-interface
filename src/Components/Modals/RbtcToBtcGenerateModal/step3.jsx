@@ -177,7 +177,7 @@ export default function Step3(props) {
                         break;
                     }
                     case "3": {
-                        setLabelColor("green");
+                        setLabelColor("white");
                         setlabelTrx("Confirmed");
                         setImgTrx("icon-confirmed.svg");
                         clearInterval(intervalBTCCheck);
@@ -223,8 +223,9 @@ export default function Step3(props) {
                         </Fragment>}
                     { ( (labelTrx!='Pending' && labelTrx!='Mined' && labelTrx!='Failed' && labelTrx!='Waiting'
                         && labelTrx!='Initializing' && labelTrx!='Validating') || (labelTrx=='Confirmed')) &&
-                        <p style={{'display':'flex','width':'100%'}}><img style={{'flexGrow':'0'}} src={process.env.PUBLIC_URL + "/global/" + imgTrx} alt="332" />
-                            <span style={{'flexGrow':'1','marginLeft':'10px'}}>{labelTrx}</span>
+                        <p style={{'display':'flex','width':'100%'}}>
+                            <img style={{'flexGrow':'0'}} src={process.env.PUBLIC_URL + "/global/" + imgTrx} alt="332" />
+                            <span style={{'flexGrow':'1','textAlign':'center','marginTop':'5px','marginLeft':'-45px','color':labelColor}}>{labelTrx}</span>
                         </p>}
                 </div>
             </div>

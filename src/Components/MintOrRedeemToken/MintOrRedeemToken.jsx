@@ -635,9 +635,11 @@ const MintOrRedeemToken = (props) => {
   return (<>
       {!loading ?
     <Card
-      title={
-          style
-      }
+        title={
+            actionIsMint
+                ? t('global.MintOrRedeemToken_Mint')
+                : t('global.MintOrRedeemToken_Redeem')
+        }
       // loading={loading}
       className="Card MintOrRedeemToken"
       style={(style=='minHeight')? {'minHeight':'375px'}: {'height':'100%'}}
