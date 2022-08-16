@@ -356,7 +356,6 @@ const MintOrRedeemToken = (props) => {
     const onTransactionAllowance = (transactionHash) => {
       setLoadingSwitch(true);
       msgAllowanceTx(transactionHash);
-      msgAllowanceSend();
     };
 
     const onReceiptAllowance = async (receipt) => {
@@ -365,6 +364,7 @@ const MintOrRedeemToken = (props) => {
       setDoneSwitch(allowanceEnabled);
     };
 
+    msgAllowanceSend();
     await auth.interfaceApproveMoCTokenCommission(allowanceEnabled, onTransactionAllowance, onReceiptAllowance).catch(e => {
       console.error(e);
       setFailSwitch();
@@ -378,7 +378,7 @@ const MintOrRedeemToken = (props) => {
       description: t(
         'global.ReserveAllowanceModal_allowanceSendDescription'
       ),
-      duration: 10
+      duration: 20
     });
   };
 
@@ -386,7 +386,7 @@ const MintOrRedeemToken = (props) => {
     notification['warning']({
       message: t('MoC.exchange.allowance.allowanceSendTitle', {ns: 'moc'}),
       description: t('MoC.exchange.allowance.allowanceSendDescription', {ns: 'moc'}),
-      duration: 10
+      duration: 20
     });
   };
 
@@ -409,7 +409,7 @@ const MintOrRedeemToken = (props) => {
       description: t('MoC.exchange.allowance.allowanceTxDescription', {ns: 'moc'}),
       btn,
       key,
-      duration: 20
+      duration: 35
     });
   };
 
