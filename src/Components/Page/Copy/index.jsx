@@ -32,10 +32,10 @@ export default function Copy(props) {
                  style={{marginRight: 10, cursor: 'pointer','flexGrow':'0','marginTop':'3px'}}
             />
             <span style={{ display: fastBTC && 'flex','fontSize':'12px'}}>
-            <a style={{ color:'#09c199',flexGrow:'1', fontweight:'bold'}} href={url_set} target="_blank">
-                {textToShow}
-            </a>
-        </span>
+                <a style={{ color:'#09c199',flexGrow:'1', fontweight:'bold'}} href={url_set} target="_blank">
+                    {textToShow}
+                </a>
+            </span>
         </div></>
     );
 }

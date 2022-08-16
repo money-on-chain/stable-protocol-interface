@@ -157,7 +157,7 @@ export function readJsonTable(data_j,t, i18n){
         i18n:i18n
     })
     const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
-    const truncate_address= (data_j.otherAddress)? data_j.otherAddress.substring(0, 6) + '...' + data_j.otherAddress.substring(data_j.otherAddress.length - 4, data_j.otherAddress.length) : '--'
+    const truncate_address= (data_j.address)? data_j.address.substring(0, 6) + '...' + data_j.address.substring(data_j.address.length - 4, data_j.address.length) : '--'
     const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
 
     // const lastUpdatedAt= data_j.lastUpdatedAt
@@ -186,7 +186,7 @@ export function readJsonTable(data_j,t, i18n){
         i18n:i18n
     })
     const confirmationTime= data_j.confirmationTime
-    const address= data_j.otherAddress ? data_j.otherAddress : '--'
+    const address= (data_j.address !='')? data_j.address : '--'
     const amount=  DetailedLargeNumber({
         amount: data_j.amount,
         currencyCode: data_j.tokenInvolved,
@@ -320,6 +320,7 @@ const setStatus = (status) => {
     let text = '';
     let colorClass = '';
     switch (status) {
+        case '':
         case 0: {
             text = "Initializing";
             colorClass = "color-default";

@@ -87,7 +87,7 @@ const AuthenticateProvider = ({ children }) => {
 
     useEffect(() => {
         if (!window.rLogin) {
-            window.rLogin = getRLogin();
+            window.rLogin = getRLogin(process.env.REACT_APP_CHAIN_ID);
 
             if (window.rLogin.cachedProvider) {
                 connect();
@@ -97,6 +97,8 @@ const AuthenticateProvider = ({ children }) => {
             }
         }
     });
+
+    window.ethereum.on('chainChanged', (_chainId) => window.location.reload());
 
     const disableLogin = () => {
         document.querySelectorAll('.rlogin-modal-hitbox')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
@@ -405,7 +407,7 @@ const AuthenticateProvider = ({ children }) => {
         return stackedBalance(from);
     };
 
-    
+
     const interfaceGetMoCAllowance = async (address) => {
         const from = address || account;
         return getMoCAllowance(from);

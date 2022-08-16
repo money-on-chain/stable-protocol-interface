@@ -16,6 +16,7 @@ import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import { LargeNumber } from '../../LargeNumber';
+import RowColumn from "../RowDetail/RowColumn";
 
 
 export default function ListOperations(props) {
@@ -43,7 +44,15 @@ export default function ListOperations(props) {
     const [dataJson, setDataJson]=  useState([]);
     const [callTable, setCallTable]=  useState(false);
     const [totalTable, setTotalTable]=  useState(0);
-    const [currentHash, setCurrentHash] = useState(true);
+
+    const [eventHidden, setEventHidden] = useState(false);
+    const [assetHidden, setAssetHidden] = useState(false);
+    const [platformHidden, setPlatformHidden] = useState(false);
+    const [walletHidden, setWalletHidden] = useState(false);
+    const [dateHidden, setDateHidden] = useState(false);
+    const [statusHidden, setStatusHidden] = useState(false);
+    const [statusLabelHidden, setStatusLabelHidden] = useState(false);
+
 
     const [loadingSke, setLoadingSke] = useState(true);
     const timeSke= 1500
@@ -52,14 +61,7 @@ export default function ListOperations(props) {
         setTimeout(() => setLoading(false), timeSke)
     },[auth]);
 
-
-    // window.renderTable('load', () => {
-    //     transactionsList(1)
-    // });
-
     window["renderTable"] = function() {transactionsList(1)}
-
-
 
         const transactionsList= (skip,call_table) => {
         if(auth.isLoggedIn){
@@ -89,7 +91,55 @@ export default function ListOperations(props) {
         }
     };
 
+    const [width, setWidth]   = useState(window.innerWidth);
+    const [height, setHeight] = useState(window.innerHeight);
+    const updateDimensions = () => {
+        setWidth(window.innerWidth);
+        setHeight(window.innerHeight);
+    }
+    useEffect(() => {
+        window.addEventListener("resize", updateDimensions);
 
+        if( width<992 ){
+            setWalletHidden(true)
+        }else{
+            setWalletHidden(false)
+        }
+
+        if( width<576 ){
+            setEventHidden(true)
+            setDateHidden(true)
+            setAssetHidden(false);
+            setPlatformHidden(false);
+            setStatusHidden(false);
+            setStatusLabelHidden(true)
+        }else{
+            if( width>576 && width<=768 ){
+                setAssetHidden(false);
+                setPlatformHidden(false);
+                setDateHidden(false);
+                setStatusHidden(false);
+                setEventHidden(true);
+                setStatusLabelHidden(false)
+                setStatusLabelHidden(true)
+            }else{
+                setEventHidden(false);
+                setAssetHidden(false);
+                setPlatformHidden(false);
+                setDateHidden(false);
+                setStatusHidden(false);
+                setStatusLabelHidden(false)
+            }
+        }
+    }, [window.innerWidth]);
+
+    const changeStatus= (percent,txt) =>{
+        if( width<=768 ){
+            return (<Progress type="circle" percent={percent} width={30}/>)
+        }else{
+            return (<><Progress percent={percent} /><br /><span className={txt === 'confirmed' ? 'color-confirmed conf_title' : 'color-confirming conf_title'}>{txt}</span></>);
+        }
+    }
 
     const columns = [
         {
@@ -100,28 +150,34 @@ export default function ListOperations(props) {
         {
             title: t('MoC.operations.columns.event', { ns: 'moc' }),
             dataIndex: 'event',
+            hidden:eventHidden
         },
         {
             title: t('MoC.operations.columns.type', { ns: 'moc' }),
             dataIndex: 'asset',
+            hidden:assetHidden
         },
         {
             title: t('MoC.operations.columns.amount', { ns: 'moc' }),
             dataIndex: 'platform',
+            hidden:platformHidden
         },
         {
             title: t('MoC.operations.columns.totalBtc', { ns: 'moc' }),
             dataIndex: 'wallet',
+            hidden:walletHidden
         },
         {
             title: t('MoC.operations.columns.date', { ns: 'moc' }),
             dataIndex: 'date',
+            hidden:dateHidden
         },
         {
-            title: t('MoC.operations.columns.status', { ns: 'moc' }),
+            title: (!statusLabelHidden)? t('MoC.operations.columns.status', { ns: 'moc' }): '',
             dataIndex: 'status',
+            hidden:statusHidden
         },
-    ];
+    ].filter(item => !item.hidden);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -203,15 +259,7 @@ export default function ListOperations(props) {
                 info: '',
                 event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : datas_response['set_event'],
                 asset: datas_response['set_asset'],
-                // platform: `+ ${datas_response['paltform_detail']}`,
-                // platform: formatVisibleValue(
-                //     datas_response['paltform_detail'],
-                //     'STABLE',
-                //     'es'
-                // ),
                 platform: datas_response['paltform_detail'],
-                // platform: (data_j.amount!==undefined)? <LargeNumber amount={datas_response['paltform_detail']} {...{ currencyCode }} /> : '--',
-                // wallet: (data_j.RBTCAmount!==undefined)? `${wallet_detail} RBTC`:'--',
                 wallet: datas_response['wallet_value_main'],
                 date: datas_response['lastUpdatedAt'],
                 status: { txt: datas_response['set_status_txt'], percent: datas_response['set_status_percent'] },
@@ -250,9 +298,10 @@ export default function ListOperations(props) {
                 platform: <span className="display-inline CurrencyTx">{element.platform}</span>,
                 wallet: <span className="display-inline ">{element.wallet} </span>,
                 date: <span>{element.date}</span>,
-                status: <div style={{ width: '100%' }}><Progress percent={element.status.percent} /><br /><span
-                    className={element.status.txt === 'confirmed' ? 'color-confirmed conf_title' : 'color-confirming conf_title'}>{element.status.txt}</span></div>,
-                description: <RowDetail detail={element.detail} />,
+                status: <div style={{ width: '100%' }}>
+                    {changeStatus(element.status.percent,element.status.txt)}
+                </div>,
+                description: (width<=768)? <RowColumn detail={element.detail} /> : <RowDetail detail={element.detail} />,
             });
 
         })
