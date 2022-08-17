@@ -44,8 +44,9 @@ export default function StakingOptionsModal(props) {
     };
 
     const depositMoCs = async () => {
-        onClose();
+        setStep(99);
         await auth.interfaceStakingDeposit(amountInEth, accountData.Wallet, (error, txHash) => {
+            onClose();
             if (error) {
                 return error;
             }
@@ -197,6 +198,17 @@ export default function StakingOptionsModal(props) {
                         </div>
                     </>
                 );
+            },
+            '99': () => {
+                return (
+                    <>
+                        <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_ReviewYourWallet')}</h1>
+                        <div className="StakingOptionsModal_Content AllowanceLoading">
+                            <Spin indicator={<LoadingOutlined />} />
+                            <p>{t('global.StakingOptionsModal_ReviewYourWalletDescription')}</p>
+                        </div>
+                    </>
+                )
             }
         }
 
