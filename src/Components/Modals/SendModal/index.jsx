@@ -143,7 +143,7 @@ export default function SendModal(props) {
       if (typeof window.renderTable !== "undefined") {
           window.renderTable(1)
       }
-    }, 3000);
+    }, 10000);
     const filteredEvents = auth.interfaceDecodeEvents(receipt);
   };
 
