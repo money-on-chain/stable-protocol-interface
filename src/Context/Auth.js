@@ -128,10 +128,12 @@ const AuthenticateProvider = ({ children }) => {
 
             const web3 = new Web3(provider);
             provider.on('accountsChanged', function (accounts) {
-                if ( accounts.length==0 ){
+                disconnect();
+                window.location.reload();
+                /*if ( accounts.length==0 ){
                     disconnect()
                     window.location.reload()
-                }
+                }*/
             });
 
             setweb3(web3);
