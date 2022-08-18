@@ -9,7 +9,13 @@ import { config } from '../Config/config';
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
 import { mintStable, redeemStable, mintRiskPro, redeemRiskPro, mintRiskProx, redeemRiskProx } from '../Lib/integration/interfaces-coinbase';
-import { AllowanceUseReserveToken } from '../Lib/integration/interfaces-rrc20';
+import { AllowanceUseReserveToken,
+    mintStableRRC20,
+    redeemStableRRC20,
+    mintRiskProRRC20,
+    redeemRiskProRRC20,
+    mintRiskProxRRC20,
+    redeemRiskProxRRC20 } from '../Lib/integration/interfaces-rrc20';
 import { decodeEvents } from '../Lib/integration/transaction';
 
 import { transferStableTo, transferRiskProTo, transferMocTo, calcMintInterest, approveMoCTokenCommission } from '../Lib/integration/interfaces-base';
@@ -37,6 +43,12 @@ const AuthenticateContext = createContext({
     interfaceRedeemStable: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceMintRiskProx: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceRedeemRiskProx: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintRiskProRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemRiskProRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintStableRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemStableRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintRiskProxRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemRiskProxRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceApproveMoCTokenCommission: async (enabled, onTransaction, onReceipt) => {},
     disconnect: () => {},
     getTransactionReceipt: (hash) => {},
@@ -190,7 +202,7 @@ const AuthenticateProvider = ({ children }) => {
                         exchangeFunction: interfaceRedeemRiskProx
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: null
+                        exchangeFunction: interfaceRedeemRiskProxRRC20
                     }
                 }
             },
@@ -200,7 +212,7 @@ const AuthenticateProvider = ({ children }) => {
                         exchangeFunction: interfaceRedeemRiskPro
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: null
+                        exchangeFunction: interfaceRedeemRiskProRRC20
                     }
                 }
             },
@@ -210,7 +222,7 @@ const AuthenticateProvider = ({ children }) => {
                         exchangeFunction: interfaceRedeemStable
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: null
+                        exchangeFunction: interfaceRedeemStableRRC20
                     }
                 }
             },
@@ -220,7 +232,7 @@ const AuthenticateProvider = ({ children }) => {
                         exchangeFunction: interfaceMintRiskPro
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: null
+                        exchangeFunction: interfaceMintRiskProRRC20
                     }
                 },
                 STABLE: {
@@ -228,7 +240,7 @@ const AuthenticateProvider = ({ children }) => {
                         exchangeFunction: interfaceMintStable
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: null
+                        exchangeFunction: interfaceMintStableRRC20
                     }
                 },
                 RISKPROX: {
@@ -236,7 +248,7 @@ const AuthenticateProvider = ({ children }) => {
                         exchangeFunction: interfaceMintRiskProx
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: null
+                        exchangeFunction: interfaceMintRiskProxRRC20
                     }
                 }
             }
@@ -252,9 +264,19 @@ const AuthenticateProvider = ({ children }) => {
         await mintStable(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
+    const interfaceMintStableRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+        const interfaceContext = buildInterfaceContext();
+        await mintStableRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
+    }
+
     const interfaceRedeemStable = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         await redeemStable(interfaceContext, amount, slippage, onTransaction, onReceipt);
+    }
+
+    const interfaceRedeemStableRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+        const interfaceContext = buildInterfaceContext();
+        await redeemStableRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
     const interfaceMintRiskPro = async (amount, slippage, onTransaction, onReceipt) => {
@@ -262,9 +284,19 @@ const AuthenticateProvider = ({ children }) => {
         await mintRiskPro(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
+    const interfaceMintRiskProRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+        const interfaceContext = buildInterfaceContext();
+        await mintRiskProRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
+    }
+
     const interfaceRedeemRiskPro = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         await redeemRiskPro(interfaceContext, amount, slippage, onTransaction, onReceipt);
+    }
+
+    const interfaceRedeemRiskProRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+        const interfaceContext = buildInterfaceContext();
+        await redeemRiskProRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
     const interfaceMintRiskProx = async (amount, slippage, onTransaction, onReceipt) => {
@@ -272,9 +304,19 @@ const AuthenticateProvider = ({ children }) => {
         await mintRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
+    const interfaceMintRiskProxRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+        const interfaceContext = buildInterfaceContext();
+        await mintRiskProxRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
+    }
+
     const interfaceRedeemRiskProx = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         await redeemRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
+    }
+
+    const interfaceRedeemRiskProxRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+        const interfaceContext = buildInterfaceContext();
+        await redeemRiskProxRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
     const interfaceApproveMoCTokenCommission = async (enabled, onTransaction, onReceipt) => {
@@ -577,6 +619,12 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceRedeemStable,
                 interfaceMintRiskProx,
                 interfaceRedeemRiskProx,
+                interfaceMintRiskProRRC20,
+                interfaceRedeemRiskProRRC20,
+                interfaceMintStableRRC20,
+                interfaceRedeemStableRRC20,
+                interfaceMintRiskProxRRC20,
+                interfaceRedeemRiskProxRRC20,
                 interfaceApproveMoCTokenCommission,
                 getTransactionReceipt,
                 interfaceStackedBalance,
