@@ -48,14 +48,14 @@ Run
 
 Environment is our already deployed contracts. For example **mocMainnet2** is our MOC current production environment.
 
-| Network Name      | Project | Url                              | Environment | Network |
-|-------------------|---------|----------------------------------|-------------|---------|
-| mocTestnetAlpha   | MOC     |                                  | Testnet     | RSK     |
-| mocTestnet        | MOC     | app-testnet.moneyonchain.com     | Testnet     | RSK     |
-| mocMainnet2       | MOC     | app.moneyonchain.com             | Mainnet     | RSK     |
-| rdocTestnetAlpha  | RIF     |                                  | Testnet     | RSK     |
-| rdocTestnet       | RIF     | app-roc-testnet.moneyonchain.com | Testnet     | RSK     |
-| rdocMainnet       | RIF     | app-roc.moneyonchain.com         | Mainnet     | RSK     |
+| Network Name      | Project | Url                          | Environment | Network |
+|-------------------|---------|------------------------------|-------------|---------|
+| mocTestnetAlpha   | MOC     |                              | Testnet     | RSK     |
+| mocTestnet        | MOC     | app-testnet.moneyonchain.com | Testnet     | RSK     |
+| mocMainnet2       | MOC     | app.moneyonchain.com         | Mainnet     | RSK     |
+| rdocTestnetAlpha  | RIF     |                              | Testnet     | RSK     |
+| rdocTestnet       | RIF     | app-testnet.rifonchain.com   | Testnet     | RSK     |
+| rdocMainnet       | RIF     | app.rifonchain.com           | Mainnet     | RSK     |
 
 
 ### Faucets
