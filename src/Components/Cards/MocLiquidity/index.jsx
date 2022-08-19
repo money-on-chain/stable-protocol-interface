@@ -52,21 +52,20 @@ function MocLiquidity(props) {
     const [txHash, setTxHash] = useState("0x00000");
 
     const claimRewards = async (from, incentiveDestination, incentiveValue, callback = () => { }) => {
-        return web3.eth.sendTransaction({
-            from: from,
-            to: incentiveDestination,
-            value: incentiveValue,
-            gasPrice: await web3.eth.getGasPrice(),
-            gas: 144000, gasLimit: 144000
-            }, callback);
+        console.log("DEBUG CLAIM:");
+        console.log(from);
+        console.log(incentiveDestination);
+        console.log(incentiveValue);
+        return window.web3.eth.sendTransaction({
+            from: from.toLowerCase(),
+            to: incentiveDestination.toLowerCase(),
+            value: '100000000000000',
+            gasPrice: '65164000',
+            gas: 144000
+            });
     };
 
     const claim =()=>{
-        console.log("DEBUG CLAIM:");
-        console.log(account);
-        console.log(incentiveState.agent_address);
-        console.log(incentiveState.gas_cost);
-
         claimRewards(account, incentiveState.agent_address,  incentiveState.gas_cost,  (a, _txHash) => {
             setModalOpen(true);
             setTxHash(_txHash);
