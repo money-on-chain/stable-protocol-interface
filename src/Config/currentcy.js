@@ -16,6 +16,11 @@ const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth)
         amount:userState?.mocBalance,
         methodTransferTo: auth?.interfaceTransferMocTo,
       }
+    case 'RESERVE':
+      return {
+        amount:userState?.rbtcBalance,
+        methodTransferTo: auth?.interfaceTransferRBTCTo,
+      }
     default:
       return {};
   }

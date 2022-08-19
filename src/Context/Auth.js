@@ -65,6 +65,7 @@ const AuthenticateContext = createContext({
     interfaceTransferStableTo: async (to, amount) => {},
     interfaceTransferRiskProTo: async (to, amount) => {},
     interfaceTransferMocTo: async (to, amount) => {},
+    interfaceTransferRBTCTo: async (to, amount) => {},
     interfaceCalcMintInterestValues: async (amount) => {},
     interfaceApproveReserve: async (address) => {},
     convertToken: async (from, to, amount) => {},
@@ -512,6 +513,12 @@ const AuthenticateProvider = ({ children }) => {
         return transferMocTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
     };
 
+    const interfaceTransferRBTCTo = async (to, amount, onTransaction, onReceipt) => {
+        const interfaceContext = buildInterfaceContext();
+        const toWithChecksum = helper.toWeb3CheckSumAddress(to);
+        return transferMocTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
+    }
+
     const interfaceCalcMintInterestValues = async (amount) => {
         const interfaceContext = buildInterfaceContext();
         const mintInterest = await calcMintInterest(interfaceContext, amount);
@@ -639,6 +646,7 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceTransferStableTo,
                 interfaceTransferRiskProTo,
                 interfaceTransferMocTo,
+                interfaceTransferRBTCTo,
                 interfaceCalcMintInterestValues,
                 interfaceApproveReserve,
                 socket,

@@ -36,7 +36,7 @@ function WalletBalance(props) {
                         </div>
                     </div>
                     <div>
-                        <SendModal userState={auth} tokensToSend={['RISKPRO', 'STABLE']}/>
+                        <SendModal userState={auth} tokensToSend={['RISKPRO', 'STABLE', 'RESERVE']}/>
                     </div>
                 </div>}
             </div>
