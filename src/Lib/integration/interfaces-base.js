@@ -146,6 +146,15 @@ const transferMocTo = async (interfaceContext, to, amount, onTransaction, onRece
   return receipt
 }
 
+const transferRBTCTo = async (interfaceContext, to, amount, callback) => {
+  const { web3, account } = interfaceContext;
+  const receipt = await web3.eth.sendTransaction({
+    from: account, to: to, value: amount, gasPrice: await web3.eth.getGasPrice(), gas: 144000, gasLimit: 144000
+  }, callback);
+
+  return receipt;
+}
+
 
 const approveMoCTokenCommission = async (interfaceContext, enabled, onTransaction, onReceipt) => {
 
@@ -180,4 +189,4 @@ const approveMoCTokenCommission = async (interfaceContext, enabled, onTransactio
 }
 
 
-export { addCommissions, calcMintInterest, transferStableTo, transferRiskProTo, transferMocTo, approveMoCTokenCommission };
+export { addCommissions, calcMintInterest, transferStableTo, transferRiskProTo, transferMocTo, transferRBTCTo, approveMoCTokenCommission };

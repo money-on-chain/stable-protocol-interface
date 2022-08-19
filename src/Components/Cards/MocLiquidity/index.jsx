@@ -21,7 +21,7 @@ function MocLiquidity(props) {
     const [t, i18n] = useTranslation(["global", 'moc'])
     const [callAgent, setCallAgent] = useState(false);
     const [incentiveState, setIncentiveState] = useState(null);
-    const { accountData, userBalanceData } = auth;
+    const { account, accountData, userBalanceData } = auth;
 
     const agent= () => {
         if(auth.isLoggedIn) {
@@ -52,11 +52,22 @@ function MocLiquidity(props) {
     const [txHash, setTxHash] = useState("0x00000");
 
     const claimRewards = async (from, incentiveDestination, incentiveValue, callback = () => { }) => {
-        return web3.eth.sendTransaction({ from: from, to: incentiveDestination, value: incentiveValue, gasPrice: await web3.eth.getGasPrice()}, callback);
+        return web3.eth.sendTransaction({
+            from: from,
+            to: incentiveDestination,
+            value: incentiveValue,
+            gasPrice: await web3.eth.getGasPrice(),
+            gas: 144000, gasLimit: 144000
+            }, callback);
     };
 
     const claim =()=>{
-        claimRewards(accountData.Owner,incentiveState.agent_address,  incentiveState.gas_cost,  (a, _txHash) => {
+        console.log("DEBUG CLAIM:");
+        console.log(account);
+        console.log(incentiveState.agent_address);
+        console.log(incentiveState.gas_cost);
+
+        claimRewards(account, incentiveState.agent_address,  incentiveState.gas_cost,  (a, _txHash) => {
             setModalOpen(true);
             setTxHash(_txHash);
             console.log('_txHash', _txHash);
