@@ -53,14 +53,14 @@ Run
 Environment is our already deployed contracts. 
 **Develop**: npm run start:<environment>
 
-| Name             | Project | Main Gateway                 | Environment | Network | npm run                 |
-|------------------|---------|------------------------------|-------------|---------|-------------------------|
-| MoC TestnetAlpha | MOC     |                              | Testnet     | RSK     | start:moc-alpha-testnet |
-| MoC Testnet      | MOC     | app-testnet.moneyonchain.com | Testnet     | RSK     | start:moc-testnet       |
-| MoC Mainnet      | MOC     | app.moneyonchain.com         | Mainnet     | RSK     | start:moc-mainnet       |
-| RoC TestnetAlpha | RIF     |                              | Testnet     | RSK     | start:roc-alpha-testnet |
-| RoC Testnet      | RIF     | app-testnet.rifonchain.com   | Testnet     | RSK     | start:roc-testnet       |
-| RoC Mainnet      | RIF     | app.rifonchain.com           | Mainnet     | RSK     | start:roc-mainnet       |
+| Name             | Project | Main Gateway                                 | Environment | Network | npm run                 |
+|------------------|---------|----------------------------------------------|-------------|---------|-------------------------|
+| MoC TestnetAlpha | MOC     |                                              | Testnet     | RSK     | start:moc-alpha-testnet |
+| MoC Testnet      | MOC     | [link](https://app-testnet.moneyonchain.com) | Testnet     | RSK     | start:moc-testnet       |
+| MoC Mainnet      | MOC     | [link](https://app.moneyonchain.com)         | Mainnet     | RSK     | start:moc-mainnet       |
+| RoC TestnetAlpha | RIF     |                                              | Testnet     | RSK     | start:roc-alpha-testnet |
+| RoC Testnet      | RIF     | [link](https://app-testnet.rifonchain.com)   | Testnet     | RSK     | start:roc-testnet       |
+| RoC Mainnet      | RIF     | [link](https://app.rifonchain.com)           | Mainnet     | RSK     | start:roc-mainnet       |
 
 
 ### Faucets
