@@ -31,7 +31,7 @@ function MOC(props) {
                 {!loading
                     ? <div>
                         <h5>{t('MoC.metrics.Moc.price', { ns: 'moc' })}</h5>
-                        <LargeNumber amount={props.mocPrice} currencyCode="USDPrice" includeCurrency={false} />
+                        <LargeNumber amount={props.mocPrice} currencyCode="MOCMetrics" tooltip="topLeft"/>
                     </div>
                 : <Skeleton active={true} />}
             </div>
