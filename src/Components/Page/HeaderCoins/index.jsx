@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-import './style.scss';
+
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import PriceVariation from '../../PriceVariation';
@@ -10,6 +10,18 @@ import {setNumber, setToLocaleString} from "../../../Helpers/helper";
 import {useTranslation} from "react-i18next";
 
 function HeaderCoins(props) {
+
+  async function loadAssets() {
+    try {
+      if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+        let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+      }
+    } catch (error) {
+      console.log(`Ocurrió un error al cargar imgs: ${error}`);
+    }
+  }
+  loadAssets()
+
   const auth = useContext(AuthenticateContext);
   const { accountData = {} } = auth;
   const { image, arrow, color, tokenName } = props;

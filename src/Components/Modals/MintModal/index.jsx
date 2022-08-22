@@ -3,7 +3,7 @@
 import { Button, Collapse, Slider } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
-import './style.scss';
+import './RDoC/style.scss';
 import React, {useState, useContext, useEffect, Fragment} from 'react';
 import { Modal, notification } from 'antd';
 
@@ -75,6 +75,17 @@ export default function MintModal(props) {
 
   let userComment = '';
   let userTolerance = '';
+
+  async function loadAssets() {
+    try {
+      if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+        let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+      }
+    } catch (error) {
+      console.log(`Ocurrió un error al cargar imgs: ${error}`);
+    }
+  }
+  loadAssets()
 
   useEffect(
     () => {

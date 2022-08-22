@@ -12,9 +12,20 @@ import {Row, Col, Tooltip, Alert} from 'antd';
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../Context/Auth';
 import { getMaxAvailableOfCurrencyCode } from '../../Config/currentcy';
-import './style.scss'
 
 function Metrics(props) {
+
+    async function loadAssets() {
+        try {
+            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+            }
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
     const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;

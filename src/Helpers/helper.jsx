@@ -474,3 +474,21 @@ export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro
 
     return {toGetToday, toGetNow, time_left}
 }
+
+export function getUSD(coin,value,auth,i18n=null){
+    if (auth.contractStatusData) {
+        switch (coin) {
+            case 'STABLE':
+                return  setToLocaleString(new BigNumber(1 * web3.utils.fromWei(value.toString())).toFixed(2),2,i18n)
+            case 'RISKPRO':
+                return  setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * web3.utils.fromWei(value.toString())).toFixed(2),2,i18n)
+            case 'MOC':
+                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['mocPrice']) * web3.utils.fromWei(value.toString())).toFixed(2),2,i18n)
+            case 'RESERVE':
+                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * web3.utils.fromWei(value.toString())).toFixed(2),2,i18n)
+
+        }
+    }else{
+        return 0
+    }
+}
