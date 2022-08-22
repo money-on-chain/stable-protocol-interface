@@ -34,7 +34,7 @@ jobs:
 
   create_release:
     name: Create Release
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     needs: bump_version
     if: ${{ needs.bump_version.outputs.new_tag != null }}
     steps:
