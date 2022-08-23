@@ -2,7 +2,7 @@ name: Pre-Release
 on:
   push:
     branches:
-      - master
+      - pre-release
 jobs:
   bump_version:
     name: Bump Version
