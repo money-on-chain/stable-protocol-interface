@@ -12,10 +12,10 @@ import { getBalanceAndTransferMethodOfTokenToSend } from '../../../Config/curren
 import { useTranslation } from "react-i18next";
 import addressHelper from '../../../Lib/addressHelper';
 import { toBigNumber } from "../../../Lib/numberHelper";
-import { formatVisibleValue } from "../../../Lib/Formats";
+import {formatLocalMap2, formatVisibleValue} from "../../../Lib/Formats";
 import { AuthenticateContext } from "../../../Context/Auth";
 import AlertLabel from "../../AlertLabel/AlertLabel";
-import ListOperations from "../../Tables/ListOperations";
+import Copy from "../../Page/Copy";
 
 const BigNumber = require('bignumber.js');
 
@@ -41,6 +41,11 @@ export default function SendModal(props) {
   const helper = addressHelper(web3);
   const auth = useContext(AuthenticateContext);
 
+  const [showTransaction, setShowTransaction] = useState(false);
+  const [currentHash, setCurrentHash] = useState(null);
+  const [txType, setTxType] = useState('');
+  const [txtTransaction, setTxtTransaction] = useState('');
+
   const getDefaultState = () => {
     setVisible(false);
     setAddress('');
@@ -53,20 +58,22 @@ export default function SendModal(props) {
   };
 
   const changeValueYouAddTotal = () => {
-    switch (currencyYouReceive) {
-      case 'RBTC':
-        setAddTotalSend(new BigNumber(props.AccountData.Balance).toFixed(4));
-      case 'STABLE':
-        setAddTotalSend(docBalance);
-        break;
-      case 'RISKPRO':
-        setAddTotalSend(bproBalance);
-        break;
-      case 'RISKPROX':
-        setAddTotalSend(bprox2Balance);
-      case 'MOC':
-        setAddTotalSend(mocBalance);
-        break;
+    if( props.currencyOptions===undefined ){
+      return  'MOC'
+    }else{
+      switch (props.currencyOptions[1]) {
+        case 'STABLE':
+          return 'DOC'
+          break;
+        case 'RISKPRO':
+          return  'BPRO'
+          break;
+        case 'RISKPROX':
+          return 'BPROX'
+        case 'MOC':
+          return 'MOC'
+          break;
+      }
     }
   };
 
@@ -79,7 +86,7 @@ export default function SendModal(props) {
   };
 
   const handleCancel = () => {
-    setDefaultState();
+    cancelFull();
   };
 
   const getMaxToSend = () => {
@@ -116,7 +123,20 @@ export default function SendModal(props) {
     } else {
       showAlertMessageAddress();
     }
+    setStatusScreen(2)
   }, 1000);
+
+  const cancelFull = () => {
+    setTimeout(function(){
+      setVisible(false);
+    }, 200);
+    setStatusScreen(false)
+  };
+
+  const changeContent= () => {
+    setStatusScreen(1)
+    setShowTransaction(true);
+  };
 
   const isAmountOverMaxAllowed = (amount, maxAvailable, currencyCode) => {
     const maxSourceAvailable = toBigNumber(maxAvailable);
@@ -128,13 +148,13 @@ export default function SendModal(props) {
 
   const doTransferAndHide = (methodTransferTo, inputAddress) => {
     methodTransferTo(inputAddress, formatVisibleValue(amountToSend, tokenToSend, "en"), onTransaction, onReceipt);
-    setDefaultState();
   };
 
   const onTransaction = (transactionHash) => {
     console.log("On sent transaction");
     console.log(transactionHash);
-
+    setCurrentHash(transactionHash);
+    setStatusScreen(3)
   };
 
   const onReceipt = async (receipt) => {
@@ -144,6 +164,7 @@ export default function SendModal(props) {
           window.renderTable(1)
       }
     }, 10000);
+    setStatusScreen(4)
     const filteredEvents = auth.interfaceDecodeEvents(receipt);
   };
 
@@ -168,6 +189,8 @@ export default function SendModal(props) {
     setAddress(address)
   };
 
+  const [statusScreen, setStatusScreen] = useState(false);
+
   return (
     <>
       <Button
@@ -184,6 +207,8 @@ export default function SendModal(props) {
       >
         <div>
           {visibleAlertInvalidAddress && <AlertLabel />}
+          {(statusScreen!=1 && statusScreen!=2 && statusScreen!=3 && statusScreen!=4) &&
+          <>
           <InputAddress
             title={t("MoC.wallets.receiverAddress", { ns: 'moc' })}
             value={address}
@@ -204,21 +229,101 @@ export default function SendModal(props) {
             onValidationStatusChange={onInputValidityChange}
             className="separation"
           />
-          {/* <CoinSelect
-            label="MoC Tokens I want to stake"
-            value={currencyYouReceive}
-            UserBalanceData={props.UserBalanceData}
-            token={token}
-            AccountData={props.AccountData}
-            onInputValueChange={changeValueYouAddTotal}
-            inputValueInWei={addTotalSend}
-          /> */}
           <Row style={{ marginTop: '2em' }}>
             <Col span={24} style={{ display: 'flex', justifyContent: 'space-evenly' }}>
               <Button onClick={() => handleCancel()}>Cancel</Button>
-              <Button type="primary" onClick={() => handleOk()}>Confirm</Button>
+              <Button type="primary" onClick={() => changeContent()}>Confirm</Button>
             </Col>
           </Row>
+          </>
+          }
+          {statusScreen == 1 &&
+          <>
+            <div className={'div-txt'}>
+              <div>
+                {showTransaction &&
+                <>
+                  <div style={{ width: '100%','display':'inline-block' }}>
+                    <p className={'Transaction_ID'} style={{'float':'left'}}>Transfer</p>
+                    <div style={{'float':'right'}}>
+                      <p className={'copy-txt'}>{formatVisibleValue(amountToSend, tokenToSend, formatLocalMap2['en'])}&nbsp;&nbsp;&nbsp;<span>{changeValueYouAddTotal()}</span></p>
+                    </div>
+                  </div>
+                  <br/>
+                  <div style={{ width: '100%','display':'inline-block' }}>
+                    <p className={'Transaction_ID'}  style={{'float':'left'}}>To</p>
+                    <div style={{ float: 'right' }}>
+                      <Copy textToShow={address?.slice(0, 5)+'...'+ address?.slice(-4)} textToCopy={address} />
+                    </div>
+                  </div>
+                  <br/>
+                </>
+                }
+              </div>
+              <br/>
+              <div>
+                <Button type="default" onClick={() => cancelFull()} className={'width-140'} >{"Cancel"}</Button>
+                <Button type="primary" onClick={() => handleOk()} className={'float-right width-140'}>{"Confirm"}</Button>
+              </div>
+            </div>
+          </>
+          }
+          { statusScreen == 2 &&
+          <>
+              <div style={{'textAlign':'center'}}>
+                <img src={process.env.PUBLIC_URL + "/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>
+                <br/>
+                <br/>
+                <p className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p>
+                <br/>
+                <Button type="primary" onClick={() => cancelFull()} className={'width-140'}>{"Close"}</Button>
+              </div>
+          </>
+          }
+          {(statusScreen == 3 || statusScreen == 4 ) &&
+          <>
+            <div className={'div-txt'}>
+              <div>
+                {showTransaction &&
+                <>
+                  <div style={{ width: '100%','display':'inline-block' }}>
+                    <p className={'Transaction_ID'}   style={{'float':'left'}}>Transaction ID</p>
+                    <div style={{ float: 'right' }}>
+                        <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash} typeUrl={'tx'}/>
+                    </div>
+                  </div>
+                  <div style={{'textAlign':'center'}}>
+                  {(() => {
+                    switch (statusScreen) {
+                      case 3:
+                        return <img src={process.env.PUBLIC_URL + "/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>;
+                      case 4:
+                        return <img width={50} height={50} src={process.env.PUBLIC_URL + "/global/status-success.png"} alt="ssa" className={'img-status'}/>;
+                    }
+                  })()}
+                  </div>
+
+                  <div style={{'textAlign':'center'}}>
+                    <br/>
+                    {(() => {
+                      switch (statusScreen) {
+                        case 3:
+                          return <p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation', {ns: 'global'})}</p>;
+                        case 4:
+                          return <p className={'Operation_successful'}>{t('global.Operation_successful')}</p>;
+
+                      }
+                    })()}
+
+                    <br/>
+                    <Button type="primary" className={'width-140'} onClick={() => cancelFull()} >{"Close"}</Button>
+                  </div>
+                </>
+                }
+              </div>
+            </div>
+          </>
+          }
         </div>
       </Modal>
     </>

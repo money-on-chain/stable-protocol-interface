@@ -9,7 +9,6 @@ import { AuthenticateContext } from '../../../Context/Auth';
 import BigNumber from "bignumber.js";
 import OperationStatusModal from '../../Modals/OperationStatusModal/OperationStatusModal';
 import { useTranslation } from "react-i18next";
-import './style.scss';
 import InputWithCurrencySelector from '../../Form/InputWithCurrencySelector';
 
 const { TabPane } = Tabs;
@@ -53,6 +52,17 @@ const getColumns = (renderActionsFunction, t) => [
 
 export default function RewardsStakingOptions(props) {
 
+    async function loadAssets() {
+        try {
+            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+            }
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
     const auth = useContext(AuthenticateContext);
     // falta los SETS
     const [stakingAmountInputValue, setStakingAmountInputValue] = useState("0.00");
@@ -80,7 +90,7 @@ export default function RewardsStakingOptions(props) {
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke)
     },[auth]);
-    
+
     useEffect(() => {
         setStakingBalances();
     }, [auth]);
@@ -120,7 +130,7 @@ export default function RewardsStakingOptions(props) {
         const arrayDes=  pendingWithdrawalsFormatted.sort(function(a, b) {
             return b.id-a.id;
         });
-        
+
         setLockedBalance(_lockedBalance);
         setStakedBalance(_stakedBalance);
         setTotalPendingExpiration(pendingExpirationAmount);

@@ -148,9 +148,14 @@ const transferMocTo = async (interfaceContext, to, amount, onTransaction, onRece
 
 const transferRBTCTo = async (interfaceContext, to, amount, callback) => {
   const { web3, account } = interfaceContext;
-  const receipt = await web3.eth.sendTransaction({
-    from: account, to: to, value: amount, gasPrice: await web3.eth.getGasPrice(), gas: 144000, gasLimit: 144000
-  }, callback);
+  const receipt = await web3.eth.sendTransaction(
+  {
+    from: account.toLowerCase(),
+    to: to.toLowerCase(),
+    value: amount,
+    gasPrice: await getGasPrice(web3),
+    gas: 72000
+  });
 
   return receipt;
 }

@@ -1,4 +1,3 @@
-import './style.scss'
 import React, { useEffect} from 'react';
 import { useContext,useState } from 'react'
 import { AuthenticateContext } from "../../../Context/Auth";
@@ -13,6 +12,7 @@ import api from "../../../services/api";
 import {config} from "../../../Config/config";
 import OperationStatusModal from "../../Modals/OperationStatusModal/OperationStatusModal";
 import moment from 'moment';
+import {getGasPrice} from "../../../Lib/integration/utils";
 
 
 function MocLiquidity(props) {
@@ -22,6 +22,17 @@ function MocLiquidity(props) {
     const [callAgent, setCallAgent] = useState(false);
     const [incentiveState, setIncentiveState] = useState(null);
     const { account, accountData, userBalanceData } = auth;
+
+    async function loadAssets() {
+        try {
+            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+            }
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
 
     const agent= () => {
         if(auth.isLoggedIn) {
@@ -52,15 +63,11 @@ function MocLiquidity(props) {
     const [txHash, setTxHash] = useState("0x00000");
 
     const claimRewards = async (from, incentiveDestination, incentiveValue, callback = () => { }) => {
-        console.log("DEBUG CLAIM:");
-        console.log(from);
-        console.log(incentiveDestination);
-        console.log(incentiveValue);
         return window.web3.eth.sendTransaction({
             from: from.toLowerCase(),
             to: incentiveDestination.toLowerCase(),
             value: '100000000000000',
-            gasPrice: '65164000',
+            gasPrice: await getGasPrice(window.web3),
             gas: 144000
             });
     };

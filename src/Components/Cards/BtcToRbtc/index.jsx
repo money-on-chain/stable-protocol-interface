@@ -1,4 +1,3 @@
-import './style.scss'
 import { Row, Col, Tooltip, Button } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
@@ -7,6 +6,18 @@ import {useTranslation} from "react-i18next";
 const BigNumber = require('bignumber.js');
 
 export default function BtcToRbtc(props) {
+
+    async function loadAssets() {
+        try {
+            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+            }
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
     const [t, i18n]= useTranslation(["global",'moc'])
     const{
         title = 'BTC to rBTC Peg In',
@@ -32,7 +43,7 @@ export default function BtcToRbtc(props) {
                 <Col xs={8}>
                     <div className='text-center'>
                         <img className="logo-img" width="111"
-                             src={process.env.PUBLIC_URL + '/icons/icon-btc_to_rbtc.svg'}
+                             src={process.env.PUBLIC_URL + '/icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-btc_to_rbtc.svg'}
                              alt=""/>
                     </div>
                 </Col>

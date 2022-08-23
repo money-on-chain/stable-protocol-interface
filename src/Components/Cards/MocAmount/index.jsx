@@ -1,4 +1,3 @@
-import './style.scss'
 import React, {Fragment, useEffect, useState} from 'react';
 import { useContext } from 'react'
 import { AuthenticateContext } from "../../../Context/Auth";
@@ -11,6 +10,17 @@ import BalanceItemCard from "../BalanceItemCard/BalanceItemCard";
 const BigNumber = require('bignumber.js');
 
 function MocAmount() {
+
+    async function loadAssets() {
+        try {
+            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+            }
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
 
     const auth = useContext(AuthenticateContext);
 

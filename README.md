@@ -17,8 +17,8 @@ You can:
 
 **Projects**
 
-* Dollar on Chain (Main project - Collateral RBTC) please review the contracts [here](https://github.com/money-on-chain/main-RBTC-contract)
-* RIF on Chain (Collateral RIF) please review the contracts [here](https://github.com/money-on-chain/RDOC-Contract) 
+* Dollar on Chain (DoC) (Main project - Collateral RBTC) please review the contracts [here](https://github.com/money-on-chain/main-RBTC-contract)
+* RIF on Chain (RoC) (Collateral RIF) please review the contracts [here](https://github.com/money-on-chain/RDOC-Contract) 
 
 
 | Token generic     | Project | Token Name  | Collateral   | Network |
@@ -50,17 +50,17 @@ Run
 
 ### Environment table
 
-Environment is our already deployed contracts. For example **mocMainnet2** is our MOC current production environment.
+Environment is our already deployed contracts. 
 **Develop**: npm run start:<environment>
 
-| Network Name      | Project | Url                          | Environment | Network | npm run                 |
-|-------------------|---------|------------------------------|-------------|---------|-------------------------|
-| mocTestnetAlpha   | MOC     |                              | Testnet     | RSK     | start:moc-alpha-testnet |
-| mocTestnet        | MOC     | app-testnet.moneyonchain.com | Testnet     | RSK     | start:moc-testnet       |
-| mocMainnet2       | MOC     | app.moneyonchain.com         | Mainnet     | RSK     | start:moc-mainnet       |
-| rdocTestnetAlpha  | RIF     |                              | Testnet     | RSK     | start:roc-alpha-testnet |
-| rdocTestnet       | RIF     | app-testnet.rifonchain.com   | Testnet     | RSK     | start:roc-testnet       |
-| rdocMainnet       | RIF     | app.rifonchain.com           | Mainnet     | RSK     | start:roc-mainnet       |
+| Name             | Project | Main Gateway                                 | Environment | Network | npm run                 |
+|------------------|---------|----------------------------------------------|-------------|---------|-------------------------|
+| MoC TestnetAlpha | MOC     |                                              | Testnet     | RSK     | start:moc-alpha-testnet |
+| MoC Testnet      | MOC     | [link](https://app-testnet.moneyonchain.com) | Testnet     | RSK     | start:moc-testnet       |
+| MoC Mainnet      | MOC     | [link](https://app.moneyonchain.com)         | Mainnet     | RSK     | start:moc-mainnet       |
+| RoC TestnetAlpha | RIF     |                                              | Testnet     | RSK     | start:roc-alpha-testnet |
+| RoC Testnet      | RIF     | [link](https://app-testnet.rifonchain.com)   | Testnet     | RSK     | start:roc-testnet       |
+| RoC Mainnet      | RIF     | [link](https://app.rifonchain.com)           | Mainnet     | RSK     | start:roc-mainnet       |
 
 
 ### Faucets
@@ -77,7 +77,7 @@ If you want to integrate Money on Chain protocols please review our Integration 
 
 ### IPFS notes
 
-Each commit gets deployed to IPFS automatically
+Each release gets deployed to IPFS automatically.
 
 **Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
 
