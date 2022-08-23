@@ -8,8 +8,6 @@ import {
     Card,
     Switch, Skeleton
 } from 'antd';
-
-import './style.scss';
 // import ArrowRightOutlined from '@ant-design/icons/ArrowRightOutlined';
 import { LoadingOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import {
@@ -45,6 +43,18 @@ import { AuthenticateContext } from '../../Context/Auth';
 
 
 const MintOrRedeemToken = (props) => {
+
+    async function loadAssets() {
+        try {
+            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+            }
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
   const [t, i18n]= useTranslation(["global",'moc'])
   const auth = useContext(AuthenticateContext);
   const {web3} = auth;

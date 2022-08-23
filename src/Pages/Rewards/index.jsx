@@ -6,11 +6,23 @@ import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import MocAmount from "../../Components/Cards/MocAmount";
 import { AuthenticateContext } from '../../Context/Auth';
 import { useTranslation } from "react-i18next";
-import './style.scss'
-import '../Home/style.scss'
+
 import Claims from "../../Components/Tables/Claims";
 
 export default function Rewards(props) {
+
+    async function loadAssets() {
+        try {
+            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+                let css2= await import('./../Home/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+            }
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc']);
     const [loading, setLoading] = useState(true);

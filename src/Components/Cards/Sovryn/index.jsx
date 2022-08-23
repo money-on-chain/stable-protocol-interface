@@ -1,4 +1,3 @@
-import './style.scss'
 import { Row, Col, Tooltip } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
@@ -12,6 +11,17 @@ export default function Sovryn(props) {
         tokenName = '',
         color = '',
         titleName = '' } = props;
+
+    async function loadAssets() {
+        try {
+            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+            }
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
 
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc']);
@@ -46,7 +56,7 @@ export default function Sovryn(props) {
                 {/*<Col span={22}>*/}
                 <div className="title">
                     <div className="CardLogo">
-                        <img width="32" src={process.env.PUBLIC_URL + '/icons/icon-sovryn_fastbtc.svg'} alt="" />
+                        <img width="32" src={process.env.PUBLIC_URL + '/icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-sovryn_fastbtc.svg'} alt="" />
                         <h1>Sovryn <br />FastBTC</h1>
                     </div>
                 </div>
@@ -54,7 +64,7 @@ export default function Sovryn(props) {
             </Row>
             <Row>
                 <div className="content-container"><img className="logo-img" width="111"
-                    src={process.env.PUBLIC_URL + '/icons/icon-rbtclogo.svg'}
+                    src={process.env.PUBLIC_URL + '/icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-rbtclogo.svg'}
                     alt="" />
                     <div className="FastBTCLeftPanel"><b>{t('MoC.fastbtc.leftPannel.header', { ns: 'moc' })}</b>
                         <ul>
