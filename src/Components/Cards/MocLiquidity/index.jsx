@@ -13,6 +13,7 @@ import api from "../../../services/api";
 import {config} from "../../../Config/config";
 import OperationStatusModal from "../../Modals/OperationStatusModal/OperationStatusModal";
 import moment from 'moment';
+import getGasPrice from "../../../Lib/integration/utils";
 
 
 function MocLiquidity(props) {
@@ -52,15 +53,11 @@ function MocLiquidity(props) {
     const [txHash, setTxHash] = useState("0x00000");
 
     const claimRewards = async (from, incentiveDestination, incentiveValue, callback = () => { }) => {
-        console.log("DEBUG CLAIM:");
-        console.log(from);
-        console.log(incentiveDestination);
-        console.log(incentiveValue);
         return window.web3.eth.sendTransaction({
             from: from.toLowerCase(),
             to: incentiveDestination.toLowerCase(),
             value: '100000000000000',
-            gasPrice: '65164000',
+            gasPrice: await getGasPrice(window.web3),
             gas: 144000
             });
     };
