@@ -7,7 +7,7 @@
 }
 .InputWithCurrencySelector {
     h3 {
-        @include primary-text(1em, $medium-grey, 400);
+        @include primary-text(1em, $blue, 400);
     }
     .MainContainer {
         display: flex;

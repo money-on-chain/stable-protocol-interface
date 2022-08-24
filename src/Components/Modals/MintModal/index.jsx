@@ -47,10 +47,6 @@ export default function MintModal(props) {
   } = props;
   /* Disabled confirm button when not connected */
   const { address } = true; //window;
-  console.log('export default function MintModal(props) {');
-  console.log(fee);
-  console.log(valueYouExchange);
-  console.log('export default function MintModal(props) {');
   var btnDisable = false;
   if (!address || !isLoggedIn) {
     btnDisable = true;
@@ -78,9 +74,9 @@ export default function MintModal(props) {
 
   async function loadAssets() {
     try {
-      if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+
         let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-      }
+
     } catch (error) {
       console.log(`Ocurrió un error al cargar imgs: ${error}`);
     }
@@ -314,7 +310,7 @@ export default function MintModal(props) {
         {renderAmount(t('global.ConfirmTransactionModal_Exchanging'), exchanging, 'AmountExchanging')}
         <LargeNumber tooltip="topLeft" currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
         {showError && renderError()}
-        <div className={'text-align-center'}><img width={30} height={30} src={process.env.PUBLIC_URL + "/global/d-arrow.png"} alt="ssa"/></div>
+        <div className={'text-align-center'}><img width={30} height={30} src={"/global/d-arrow.png"} alt="ssa"/></div>
         {renderAmount(t('global.ConfirmTransactionModal_Receiving'), receiving, 'AmountReceiving')}
         <LargeNumber tooltip="topLeft" currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
         <hr style={{ border: '1px solid #08374F','opacity':'0.5' }} />
@@ -363,7 +359,7 @@ export default function MintModal(props) {
         {!showTransaction &&<div className={'div-price-v'}>
         <Collapse className="CollapseTolerance">
           <Collapse.Panel showArrow={false} header={<div className="PriceVariationSetting">
-            <img width={17} height={17} src={process.env.PUBLIC_URL + "/global/torq.png"} alt="ssa"/>
+            <img width={17} height={17} src={"/global/torq.png"} alt="ssa"/>
             <span className="SliderText color-08374F font-size-12">{t("global.CustomizePrize_VariationToleranceSettingsTitle")}</span>
           </div>}>
             <div className="PriceVariationContainer">
@@ -422,13 +418,13 @@ export default function MintModal(props) {
               {(() => {
                 switch (txtTransaction) {
                   case 'REVIEW':
-                    return <><p><img src={process.env.PUBLIC_URL + "/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p></>;
+                    return <><p><img src={"/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p></>;
                   case 'PENDING':
-                    return <><p><img src={process.env.PUBLIC_URL + "/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
+                    return <><p><img src={"/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
                   case 'SUCCESSFUL':
-                    return <><p><img width={50} height={50} src={process.env.PUBLIC_URL + "/global/status-success.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_successful'}>{t('global.Operation_successful')}</p></>;
+                    return <><p><img width={50} height={50} src={"/global/status-success.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_successful'}>{t('global.Operation_successful')}</p></>;
                   default:
-                    return <><p><img width={50} height={50} src={process.env.PUBLIC_URL + "/global/status-error.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_failed'}>{t('global.Operation_failed')}</p></>;
+                    return <><p><img width={50} height={50} src={"/global/status-error.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_failed'}>{t('global.Operation_failed')}</p></>;
                 }
               })()}
             </div>
@@ -445,7 +441,7 @@ export default function MintModal(props) {
         </>}
       </div>
       <Modal visible={confirmModal} footer={null} width={450}>
-        <img className={'img-campana'} width={27} height={30} src={process.env.PUBLIC_URL + "/global/campana.png"}/>
+        <img className={'img-campana'} width={27} height={30} src={"/global/campana.png"}/>
         <div className={'div-txt'}>
         <p className={'color-08374F'}>Copy the transaction ID before closing since the information about this operation will not be available in the APP until successful.</p>
         <div>

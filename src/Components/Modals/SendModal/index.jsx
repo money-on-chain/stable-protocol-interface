@@ -42,9 +42,11 @@ export default function SendModal(props) {
   const auth = useContext(AuthenticateContext);
 
   const [showTransaction, setShowTransaction] = useState(false);
+  const [showTransactionModal, setShowTransactionModal] = useState(false);
   const [currentHash, setCurrentHash] = useState(null);
   const [txType, setTxType] = useState('');
   const [txtTransaction, setTxtTransaction] = useState('');
+  const [confirmModal, setConfirmModal] = useState(false);
 
   const getDefaultState = () => {
     setVisible(false);
@@ -127,15 +129,38 @@ export default function SendModal(props) {
   }, 1000);
 
   const cancelFull = () => {
+    if(confirmModal==false){
+      if( showTransactionModal ){
+        if( txtTransaction!= 'SUCCESSFUL' && txtTransaction!= 'REVIEW' ){
+          setConfirmModal(true)
+        }else{
+          setTxtTransaction('PENDING')
+          partClose()
+        }
+      }else{
+        partClose()
+      }
+    }else{
+      partClose()
+      setConfirmModal(false)
+    }
+  };
+
+  const partClose=()=>{
+    setCurrentHash(null);
+    setShowTransactionModal(false)
     setTimeout(function(){
       setVisible(false);
     }, 200);
     setStatusScreen(false)
-  };
+  }
 
-  const changeContent= () => {
-    setStatusScreen(1)
-    setShowTransaction(true);
+  const changeContent= (value) => {
+    if( value!=1 ){
+      setShowTransaction(true);
+      setStatusScreen(1)
+    }
+    setConfirmModal(false)
   };
 
   const isAmountOverMaxAllowed = (amount, maxAvailable, currencyCode) => {
@@ -155,13 +180,14 @@ export default function SendModal(props) {
     console.log(transactionHash);
     setCurrentHash(transactionHash);
     setStatusScreen(3)
+    setShowTransactionModal(true);
   };
 
   const onReceipt = async (receipt) => {
     auth.loadContractsStatusAndUserBalance();
     setTimeout(function(){
       if (typeof window.renderTable !== "undefined") {
-          window.renderTable(1)
+        window.renderTable(1)
       }
     }, 10000);
     setStatusScreen(4)
@@ -192,140 +218,163 @@ export default function SendModal(props) {
   const [statusScreen, setStatusScreen] = useState(false);
 
   return (
-    <>
-      <Button
-        type="primary"
-        onClick={showModal}
-        style={{ width: 90, fontFamily: 'Montserrat,sans-serif', fontSize: '1em', fontWeight: view === 'moc' ? 700 : 500, marginTop: view === 'moc' && '5.9em'  }}
-      >{t('MoC.wallet.send', { ns: 'moc' })}
-      </Button>
-      <Modal
-        title={t("MoC.wallet.send", { ns: 'moc' })}
-        visible={visible}
-        onCancel={handleCancel}
-        footer={null}
-      >
-        <div>
-          {visibleAlertInvalidAddress && <AlertLabel />}
-          {(statusScreen!=1 && statusScreen!=2 && statusScreen!=3 && statusScreen!=4) &&
-          <>
-          <InputAddress
-            title={t("MoC.wallets.receiverAddress", { ns: 'moc' })}
-            value={address}
-            onChange={(event) => onChangeInputAddress(event)}
-            className="separation"
-            isValidChecksumAddress={auth && auth.isCheckSumAddress}
-          />
-          <InputWithCurrencySelector
-            validate
-            title={t("global.ModalSend_EnterTheAmount")}
-            currencyOptions={tokensToSend}
-            currencySelected={tokenToSend}
-            onCurrencySelect={onTokenToSendSelect}
-            inputValueInWei={amountToSend}
-            onInputValueChange={onAmountToSendChange}
-            maxValueAllowedInWei={maxtoSend}
-            showMaxValueAllowed
-            onValidationStatusChange={onInputValidityChange}
-            className="separation"
-          />
-          <Row style={{ marginTop: '2em' }}>
-            <Col span={24} style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-              <Button onClick={() => handleCancel()}>Cancel</Button>
-              <Button type="primary" onClick={() => changeContent()}>Confirm</Button>
-            </Col>
-          </Row>
-          </>
-          }
-          {statusScreen == 1 &&
-          <>
-            <div className={'div-txt'}>
-              <div>
-                {showTransaction &&
-                <>
-                  <div style={{ width: '100%','display':'inline-block' }}>
-                    <p className={'Transaction_ID'} style={{'float':'left'}}>Transfer</p>
-                    <div style={{'float':'right'}}>
-                      <p className={'copy-txt'}>{formatVisibleValue(amountToSend, tokenToSend, formatLocalMap2['en'])}&nbsp;&nbsp;&nbsp;<span>{changeValueYouAddTotal()}</span></p>
+      <>
+        <Button
+            type="primary"
+            onClick={showModal}
+            style={{ width: 90, fontFamily: 'Montserrat,sans-serif', fontSize: '1em', fontWeight: view === 'moc' ? 700 : 500, marginTop: view === 'moc' && '5.9em'  }}
+        >{t('MoC.wallet.send', { ns: 'moc' })}
+        </Button>
+        <Modal
+            title={t("MoC.wallet.send", { ns: 'moc' })}
+            visible={visible}
+            onCancel={handleCancel}
+            footer={null}
+        >
+          <div>
+            {visibleAlertInvalidAddress && <AlertLabel />}
+            {(statusScreen!=1 && statusScreen!=2 && statusScreen!=3 && statusScreen!=4) &&
+            <>
+              <InputAddress
+                  title={t("MoC.wallets.receiverAddress", { ns: 'moc' })}
+                  value={address}
+                  onChange={(event) => onChangeInputAddress(event)}
+                  className="separation"
+                  isValidChecksumAddress={auth && auth.isCheckSumAddress}
+              />
+              <InputWithCurrencySelector
+                  validate
+                  title={t("global.ModalSend_Amount")}
+                  currencyOptions={tokensToSend}
+                  currencySelected={tokenToSend}
+                  onCurrencySelect={onTokenToSendSelect}
+                  inputValueInWei={amountToSend}
+                  onInputValueChange={onAmountToSendChange}
+                  maxValueAllowedInWei={maxtoSend}
+                  showMaxValueAllowed
+                  onValidationStatusChange={onInputValidityChange}
+                  className="separation"
+              />
+              <Row style={{ marginTop: '2em' }}>
+                <Col span={24} style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                  <Button onClick={() => handleCancel()} className={'width-140'}>Cancel</Button>
+                  <Button type="primary" onClick={() => changeContent(0)} className={'width-140'}>Confirm</Button>
+                </Col>
+              </Row>
+            </>
+            }
+            {statusScreen == 1 &&
+            <>
+              <div className={'div-txt'}>
+                <div>
+                  {showTransaction &&
+                  <>
+                    <div style={{ width: '100%','display':'inline-block' }}>
+                      <p className={'Transaction_ID'} style={{'float':'left'}}>Transfer</p>
+                      <div style={{'float':'right'}}>
+                        <p className={'copy-txt'}>{formatVisibleValue(amountToSend, tokenToSend, formatLocalMap2['en'])}&nbsp;&nbsp;&nbsp;<span>{changeValueYouAddTotal()}</span></p>
+                      </div>
                     </div>
-                  </div>
-                  <br/>
-                  <div style={{ width: '100%','display':'inline-block' }}>
-                    <p className={'Transaction_ID'}  style={{'float':'left'}}>To</p>
-                    <div style={{ float: 'right' }}>
-                      <Copy textToShow={address?.slice(0, 5)+'...'+ address?.slice(-4)} textToCopy={address} />
+                    <br/>
+                    <div style={{ width: '100%','display':'inline-block' }}>
+                      <p className={'Transaction_ID'}  style={{'float':'left'}}>To</p>
+                      <div style={{ float: 'right' }}>
+                        <Copy textToShow={address?.slice(0, 5)+'...'+ address?.slice(-4)} textToCopy={address} />
+                      </div>
                     </div>
-                  </div>
-                  <br/>
-                </>
-                }
+                    <br/>
+                  </>
+                  }
+                </div>
+                <br/>
+                <div>
+                  <Button type="default" onClick={() => cancelFull()} className={'width-140'} >{"Cancel"}</Button>
+                  <Button type="primary" onClick={() => handleOk()} className={'float-right width-140'}>{"Confirm"}</Button>
+                </div>
               </div>
-              <br/>
-              <div>
-                <Button type="default" onClick={() => cancelFull()} className={'width-140'} >{"Cancel"}</Button>
-                <Button type="primary" onClick={() => handleOk()} className={'float-right width-140'}>{"Confirm"}</Button>
-              </div>
-            </div>
-          </>
-          }
-          { statusScreen == 2 &&
-          <>
+            </>
+            }
+            { statusScreen == 2 &&
+            <>
               <div style={{'textAlign':'center'}}>
-                <img src={process.env.PUBLIC_URL + "/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>
+                <img src={"/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>
                 <br/>
                 <br/>
                 <p className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p>
                 <br/>
                 <Button type="primary" onClick={() => cancelFull()} className={'width-140'}>{"Close"}</Button>
               </div>
-          </>
-          }
-          {(statusScreen == 3 || statusScreen == 4 ) &&
-          <>
+            </>
+            }
+            {(statusScreen == 3 || statusScreen == 4 ) &&
+            <>
+              <div className={'div-txt'}>
+                <div>
+                  {showTransaction &&
+                  <>
+                    <div style={{ width: '100%','display':'inline-block' }}>
+                      <p className={'Transaction_ID'}   style={{'float':'left'}}>Transaction ID</p>
+                      <div style={{ float: 'right' }}>
+                        <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash} typeUrl={'tx'}/>
+                      </div>
+                    </div>
+                    <div style={{'textAlign':'center'}}>
+                      {(() => {
+                        switch (statusScreen) {
+                          case 3:
+                            return <img src={"/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>;
+                          case 4:
+                            return <img width={50} height={50} src={"/global/status-success.png"} alt="ssa" className={'img-status'}/>;
+                        }
+                      })()}
+                    </div>
+
+                    <div style={{'textAlign':'center'}}>
+                      <br/>
+                      {(() => {
+                        switch (statusScreen) {
+                          case 3:
+                            return <p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation', {ns: 'global'})}</p>;
+                          case 4:
+                            return <p className={'Operation_successful'}>{t('global.Operation_successful')}</p>;
+
+                        }
+                      })()}
+
+                      <br/>
+                      <Button type="primary" className={'width-140'} onClick={() => cancelFull()} >{"Close"}</Button>
+                    </div>
+                  </>
+                  }
+                </div>
+              </div>
+            </>
+            }
+          </div>
+          <Modal visible={confirmModal} footer={null} width={450}>
+            <img className={'img-campana'} width={27} height={30} src={"/global/campana.png"}/>
             <div className={'div-txt'}>
+              <p className={'color-08374F'}>{t('global.ModalSend_CopyTx')}</p>
               <div>
-                {showTransaction &&
+                {showTransactionModal &&
                 <>
                   <div style={{ width: '100%','display':'inline-block' }}>
-                    <p className={'Transaction_ID'}   style={{'float':'left'}}>Transaction ID</p>
-                    <div style={{ float: 'right' }}>
+                    <div>
+                      <p className={'Transaction_ID'}   style={{'float':'left'}}>{t('global.Transaction_ID')}</p>
+                      <div style={{ float: 'right' }}>
                         <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash} typeUrl={'tx'}/>
+                      </div>
                     </div>
-                  </div>
-                  <div style={{'textAlign':'center'}}>
-                  {(() => {
-                    switch (statusScreen) {
-                      case 3:
-                        return <img src={process.env.PUBLIC_URL + "/global/status-pending.png"} width={50} height={50} className='img-status rotate'/>;
-                      case 4:
-                        return <img width={50} height={50} src={process.env.PUBLIC_URL + "/global/status-success.png"} alt="ssa" className={'img-status'}/>;
-                    }
-                  })()}
-                  </div>
-
-                  <div style={{'textAlign':'center'}}>
-                    <br/>
-                    {(() => {
-                      switch (statusScreen) {
-                        case 3:
-                          return <p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation', {ns: 'global'})}</p>;
-                        case 4:
-                          return <p className={'Operation_successful'}>{t('global.Operation_successful')}</p>;
-
-                      }
-                    })()}
-
-                    <br/>
-                    <Button type="primary" className={'width-140'} onClick={() => cancelFull()} >{"Close"}</Button>
                   </div>
                 </>
                 }
               </div>
+              <br/>
+              <Button type="default" onClick={() => cancelFull()} className={'width-140'} >{"Close"}</Button>
+              <Button type="primary" onClick={() => changeContent(1)} className={'float-right width-140'}>{"Return"}</Button>
             </div>
-          </>
-          }
-        </div>
-      </Modal>
-    </>
+          </Modal>
+        </Modal>
+      </>
   )
 }

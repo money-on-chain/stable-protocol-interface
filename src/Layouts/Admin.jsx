@@ -81,46 +81,46 @@ export default function Admin() {
                     <Menu.Item
                         key="home"
                         onClick={() => navigate('/')}
-                        icon={<HomeFilled />}
+                        icon={<p className={`set-icon-home-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='home' ? "active" : ""}`}></p>}
                     >{t('MoC.menu-sidebar.home', { ns: 'moc' })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-stable"
                         onClick={() => navigate('/wallet/stable')}
-                        icon={<span className="icon-icon-stable"></span>}
+                        icon={<p className={`set-icon-stable-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='mint-stable' ? "active" : ""}`}></p>}
                     >{t('MoC.menu-sidebar.STABLEWallet', { ns: 'moc' })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-pro"
                         onClick={() => navigate('/wallet/pro')}
-                        icon={<span className="icon-icon-riskpro"></span>}
+                        icon={<p className={`set-icon-riskpro-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='mint-pro' ? "active" : ""}`}></p>}
                     >{t('MoC.menu-sidebar.RISKPROWallet', { ns: 'moc' })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-leveraged"
                         onClick={() => navigate('/wallet/leveraged')}
-                        icon={<span className="icon-icon-riskprox"></span>}
+                        icon={<p className={`set-icon-leveraged-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='mint-leveraged' ? "active" : ""}`}></p>}
                     >{t('MoC.menu-sidebar.RISKPROXWallet', { ns: 'moc' })}
                     </Menu.Item>
                     <Menu.Item
                         key="rewards"
                         onClick={() => navigate('/rewards')}
-                        icon={<span className="icon-icon-moc"></span>}
+                        icon={<p className={`set-icon-rewards-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='rewards' ? "active" : ""}`}></p>}
                     >{t('MoC.menu-sidebar.rewards', { ns: 'moc' })}
                     </Menu.Item>
                     <Menu.Item
                         key="getRBTC"
                         onClick={() => navigate('/getRBTC')}
-                        icon={<span className="icon-icon-btc"></span>}
+                        icon={<p className={`set-icon-rbtc-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='getRBTC' ? "active" : ""}`}></p>}
                     >{t('MoC.menu-sidebar.getRBTC', { ns: 'moc' })}
                     </Menu.Item>
                     <Menu.Item
                         key="metrics"
                         onClick={() => navigate('/metrics')}
-                        icon={<PieChartFilled />}
+                        icon={<p className={`set-icon-chart-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='metrics' ? "active" : ""}`}></p>}
                     >{t('MoC.menu-sidebar.metrics', { ns: 'moc' })}
                     </Menu.Item>
-                    <SubMenu key="information" title="Profile" icon={<InfoCircleFilled />} theme={'light'}>
+                    <SubMenu key="information" title="Profile" icon={<p className={`set-icon-information-solid`}></p>} theme={'light'}>
                         <Menu.Item key="contract_repository" onClick={() => window.open('https://github.com/money-on-chain/main-RBTC-contract', '_self')}>{t('MoC.info-button.contract-repository', { ns: 'moc' })}</Menu.Item>
                         <Menu.Item key="webapp_repository" onClick={() => window.open('https://github.com/money-on-chain/webapp-stable-ipfs', '_self')}>{t('MoC.info-button.webapp-repository', { ns: 'moc' })}</Menu.Item>
                         <Menu.Item key="help_center" onClick={() => window.open('https://wiki.moneyonchain.com/', '_self')}>{t('MoC.menu-sidebar.faqs', { ns: 'moc' })}</Menu.Item>
@@ -129,7 +129,7 @@ export default function Admin() {
             </Sider>
             <Layout>
                 <Header className="Header" style={{ paddingLeft: 18 }}>
-                    <img src={process.env.PUBLIC_URL + "/global/logo.svg"} className='header-logo'/>
+                    <img src={"/global/logo.svg"} className='header-logo'/>
                     <div className="MiddleSide">
                         <HeaderCoins tokenName="stable" image={'icon-rbtclogo.svg'} />
                         <HeaderCoins tokenName="riskpro" image={'BPROIcon.svg'} />

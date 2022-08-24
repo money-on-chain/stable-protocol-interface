@@ -9,9 +9,9 @@ export default function BtcToRbtc(props) {
 
     async function loadAssets() {
         try {
-            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+
                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-            }
+
         } catch (error) {
             console.log(`Ocurrió un error al cargar imgs: ${error}`);
         }
@@ -43,7 +43,7 @@ export default function BtcToRbtc(props) {
                 <Col xs={8}>
                     <div className='text-center'>
                         <img className="logo-img" width="111"
-                             src={process.env.PUBLIC_URL + '/icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-btc_to_rbtc.svg'}
+                             src={'/icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-btc_to_rbtc.svg'}
                              alt=""/>
                     </div>
                 </Col>

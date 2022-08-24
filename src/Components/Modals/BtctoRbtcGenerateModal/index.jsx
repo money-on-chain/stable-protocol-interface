@@ -19,9 +19,9 @@ export default function BtcToRbtcGenerateModal(props) {
 
     async function loadAssets() {
         try {
-            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+
                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-            }
+
         } catch (error) {
             console.log(`Ocurrió un error al cargar imgs: ${error}`);
         }
@@ -105,7 +105,7 @@ export default function BtcToRbtcGenerateModal(props) {
   const getModalTitle = () => (
     <div className="ModalHeaderTitle">
       <div className="CardLogo">
-        <img width="32" src={process.env.PUBLIC_URL + '/icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-sovryn_fastbtc.svg'} alt=""/>
+        <img width="32" src={'/icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-sovryn_fastbtc.svg'} alt=""/>
         <h1>Sovryn<br/>FastBTC</h1>
       </div>
       <div className="title">
@@ -117,7 +117,7 @@ export default function BtcToRbtcGenerateModal(props) {
   const ModalFooter = () => {
     return (
       <div className="AlertWarning" type="warning" icon="" >
-        <img src={process.env.PUBLIC_URL + "/global/icon-atention.svg"} alt=""/>
+        <img src={"/global/icon-atention.svg"} alt=""/>
         <div>{t('MoC.fastbtc.topUpWalletModal.footer', {ns: 'moc'})}</div>
       </div>
     )
