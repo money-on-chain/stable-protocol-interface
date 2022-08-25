@@ -83,7 +83,7 @@ function Step2(props) {
                         return <Fragment>
                             <div className="alert-message-modal">
                                 <div className="alert-message">
-                                    <img src={"/global/icon-atention.svg"} alt="" />
+                                    <img src={"global/icon-atention.svg"} alt="" />
                                     <p>Double check that you are entering the correct BTC destination address.</p>
                                 </div>
                             </div>

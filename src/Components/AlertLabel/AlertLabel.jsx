@@ -18,7 +18,7 @@ function AlertLabel(props) {
     const [t, i18n] = useTranslation(["global", 'moc'])
     return (
         <div className="AlertLabel">
-            <img src={"/global/icon-alert.svg"} alt="Alert Icon" />
+            <img src={"global/icon-alert.svg"} alt="Alert Icon" />
             <div className="AlertText">
                 <p>
                     <strong>{t('MoC.modal-send.beCareful', {ns: 'moc'})}</strong>
