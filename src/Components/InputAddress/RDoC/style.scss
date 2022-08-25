@@ -2,7 +2,7 @@
 
 .InputAddressContainer {
   .InputAddressLabel {
-    @include primary-text(1em, $grey, 400);
+    @include primary-text(1em, $blue, 400);
     margin-bottom: 5px;
     }
   width: 100%;

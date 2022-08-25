@@ -15,9 +15,9 @@ export default function AmountCard(props) {
 
     async function loadAssets() {
         try {
-            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+
                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-            }
+
         } catch (error) {
             console.log(`Ocurrió un error al cargar imgs: ${error}`);
         }
@@ -97,7 +97,7 @@ export default function AmountCard(props) {
                     <Col>
                         <img
                             width={56}
-                            src={process.env.PUBLIC_URL + `/Moc/icon-${tokenName.toLowerCase()}.svg`}
+                            src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+`/icon-${tokenName.toLowerCase()}.svg`}
                             alt="icon-wallet"
                         />
                     </Col>

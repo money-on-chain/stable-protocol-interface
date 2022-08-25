@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from 'react';
 import 'antd/dist/antd.css';
-import './style.scss';
 import { Table } from 'antd';
 import data_json from '../../../services/fatbts_pegout.json';
 import Moment from 'react-moment';
@@ -16,6 +15,18 @@ import api from "../../../services/api";
 import {config} from "../../../Config/config";
 
 export default function FastBtcPegOut(props) {
+
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
 
     const [current, setCurrent] = useState(1);
     const [bordered, setBordered] = useState(false);
