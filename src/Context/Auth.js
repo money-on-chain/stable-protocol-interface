@@ -18,7 +18,7 @@ import { AllowanceUseReserveToken,
     redeemRiskProxRRC20 } from '../Lib/integration/interfaces-rrc20';
 import { decodeEvents } from '../Lib/integration/transaction';
 
-import { transferStableTo, transferRiskProTo, transferMocTo, calcMintInterest, approveMoCTokenCommission } from '../Lib/integration/interfaces-base';
+import { transferStableTo, transferRiskProTo, transferMocTo,transferRBTCTo, calcMintInterest, approveMoCTokenCommission } from '../Lib/integration/interfaces-base';
 import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unStake, delayMachineWithdraw, delayMachineCancelWithdraw, approveMoCTokenStaking, getMoCAllowance } from '../Lib/integration/interfaces-omoc';
 import { getGasPrice } from '../Lib/integration/utils';
 
@@ -516,7 +516,7 @@ const AuthenticateProvider = ({ children }) => {
     const interfaceTransferRBTCTo = async (to, amount, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferMocTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
+        return transferRBTCTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
     }
 
     const interfaceCalcMintInterestValues = async (amount) => {
