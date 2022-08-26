@@ -67,7 +67,7 @@ function MocLiquidity(props) {
             from: from.toLowerCase(),
             to: incentiveDestination.toLowerCase(),
             value: '100000000000000',
-            gasPrice: await getGasPrice(window.web3),
+            gasPrice: '65164000',
             gas: 144000
             });
     };
