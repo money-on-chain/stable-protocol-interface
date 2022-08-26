@@ -117,7 +117,7 @@ export default function BtcToRbtcGenerateModal(props) {
   const ModalFooter = () => {
     return (
       <div className="AlertWarning" type="warning" icon="" >
-        <img src={"/global/icon-atention.svg"} alt=""/>
+        <img src={"global/icon-atention.svg"} alt=""/>
         <div>{t('MoC.fastbtc.topUpWalletModal.footer', {ns: 'moc'})}</div>
       </div>
     )
