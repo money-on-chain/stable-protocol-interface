@@ -153,7 +153,7 @@ const transferRBTCTo = async (interfaceContext, to, amount, callback) => {
     from: account.toLowerCase(),
     to: to.toLowerCase(),
     value: amount,
-    gasPrice: await getGasPrice(web3),
+    gasPrice: '65164000',
     gas: 72000
   });
 

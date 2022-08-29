@@ -10,9 +10,9 @@ export default function SelectCurrency(props) {
 
     async function loadAssets() {
         try {
-            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+
                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-            }
+
         } catch (error) {
             console.log(`Ocurrió un error al cargar imgs: ${error}`);
         }
@@ -39,7 +39,7 @@ export default function SelectCurrency(props) {
       >
         {optionsFiltered.map((possibleOption) => <Option key={possibleOption.value} value={possibleOption.value}>
           <div className="currencyOption">
-            <img className="currencyImage" src={possibleOption.image} alt={possibleOption.label} />
+            <img className="currencyImage" src={(possibleOption.image.charAt(0)=='.')? possibleOption.image.substring(1) : possibleOption.image} alt={possibleOption.label} />
             {possibleOption.label}
           </div>
         </Option>)}

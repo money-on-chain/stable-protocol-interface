@@ -13,10 +13,9 @@ export default function Rewards(props) {
 
     async function loadAssets() {
         try {
-            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
                 let css2= await import('./../Home/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-            }
+
         } catch (error) {
             console.log(`Ocurrió un error al cargar imgs: ${error}`);
         }
@@ -54,7 +53,7 @@ export default function Rewards(props) {
                     <YourAddressCard
                         height="100%"
                         tokenToSend="MOC"
-                        iconWallet={process.env.PUBLIC_URL + "/Moc/icon-moc.svg" }
+                        iconWallet={process.env.PUBLIC_URL + process.env.REACT_APP_ENVIRONMENT_APP_PROJECT + "/icon-moc.svg" }
                         view={'moc'}
                     // currencyOptions={['RESERVE', 'MOC']}
                     />

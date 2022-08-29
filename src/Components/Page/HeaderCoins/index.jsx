@@ -13,9 +13,9 @@ function HeaderCoins(props) {
 
   async function loadAssets() {
     try {
-      if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+
         let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-      }
+
     } catch (error) {
       console.log(`Ocurrió un error al cargar imgs: ${error}`);
     }
@@ -136,7 +136,7 @@ function HeaderCoins(props) {
     <>{
       <div className={'mrl-25 div_coin'}>
         {/*<img src={image} alt="arrow" height={38}/>*/}
-        <img src={process.env.PUBLIC_URL + "/global/"+image}  alt="arrow" height={38}/>
+        <img src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+"/"+image}  alt="arrow" height={38}/>
         <div className={'div_values'}>
           <span className="value_usd1">
             <LargeNumber {...{ amount: getBalanceUSD(), currencyCode: 'USDPrice', includeCurrency: true }} />

@@ -40,9 +40,9 @@ export default function InputWithCurrencySelector(props) {
 
     async function loadAssets() {
         try {
-            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
+
                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-            }
+
         } catch (error) {
             console.log(`Ocurrió un error al cargar imgs: ${error}`);
         }
@@ -64,11 +64,12 @@ export default function InputWithCurrencySelector(props) {
   useEffect(
     () => {
       if (validate && dirty) {
+          let inputValueInWeiCopy = inputValueInWei
           let val_res= validateValue(inputValueInWei, maxValueAllowedInWei)
           if( val_res.validateStatus=='error' ){
-              setInputValidation(validateValue(inputValueInWei, maxValueAllowedInWei));
+              setInputValidation(val_res);
           }else{
-              setInputValidation({validateStatus: "success", errorMsg: getUSD(currencySelected,inputValueInWei,auth,i18n)+" USD"});
+              setInputValidation({validateStatus: "success", errorMsg: getUSD(currencySelected,inputValueInWeiCopy,auth,i18n)+" USD"});
           }
       }
     },

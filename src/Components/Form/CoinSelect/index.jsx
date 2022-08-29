@@ -18,9 +18,8 @@ export default function CoinSelect(props) {
 
     async function loadAssets() {
         try {
-            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-            }
+
         } catch (error) {
             console.log(`Ocurrió un error al cargar imgs: ${error}`);
         }
@@ -168,7 +167,7 @@ export default function CoinSelect(props) {
                                         <div className="currencyOption">
                                             <img
                                                 className="currencyImage"
-                                                src={option.image}
+                                                src={(option.image.charAt(0)=='.')? option.image.substring(1) : option.image}
                                                 alt={option.value}
                                                 width={30}
                                             />

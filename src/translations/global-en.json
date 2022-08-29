@@ -205,6 +205,8 @@
         "TokenSummary_Amount": "{{tokenName}} Amount",
 
         "ModalSend_EnterTheAmount": "Enter the amount",
+        "ModalSend_Amount": "Amount",
+        "ModalSend_CopyTx":"Copy the transaction ID before closing since the information about this operation will not be available in the APP.",
         "ModalSend_pegout_EnterTheAmount": "Enter rBTC amount to send",
         "ModalSend_AddAComment": "Add a comment (optional)",
 

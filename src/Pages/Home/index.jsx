@@ -1,6 +1,5 @@
 import TokenSummaryCard from '../../Components/Cards/TokenSummaryCard';
 
-
 import React, { Fragment, useEffect } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../Context/Auth';
@@ -17,9 +16,8 @@ function Home(props) {
 
     async function loadAssets() {
         try {
-            if( process.env.PUBLIC_URL=='' && process.env.REACT_APP_ENVIRONMENT_APP_PROJECT!='' ){
                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-            }
+
         } catch (error) {
             console.log(`Ocurrió un error al cargar imgs: ${error}`);
         }
