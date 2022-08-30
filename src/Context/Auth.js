@@ -111,8 +111,6 @@ const AuthenticateProvider = ({ children }) => {
         }
     });
 
-    window.ethereum.on('chainChanged', (_chainId) => window.location.reload());
-
     const disableLogin = () => {
         document.querySelectorAll('.rlogin-modal-hitbox')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
         loadCss()
@@ -148,6 +146,10 @@ const AuthenticateProvider = ({ children }) => {
                     window.location.reload()
                 }*/
             });
+            provider.on('chainChanged', function (accounts) {
+                disconnect();
+                window.location.reload();
+            })
 
             setweb3(web3);
             window.web3 = web3;
