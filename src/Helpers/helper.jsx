@@ -479,15 +479,15 @@ export function getUSD(coin,value,auth,i18n=null){
     if (auth.contractStatusData) {
         switch (coin) {
             case 'STABLE':
-                return  setToLocaleString(new BigNumber(1 * web3.utils.fromWei(setNumber(value))).toFixed(2),2,i18n)
+                return  setToLocaleString(new BigNumber(1 * web3.utils.fromWei(setNumber(value))),2,i18n)
             case 'RISKPRO':
-                return  setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * web3.utils.fromWei(setNumber(value))).toFixed(2),2,i18n)
+                return  setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * web3.utils.fromWei(setNumber(value))),2,i18n)
             case 'MOC':
-                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['mocPrice']) * web3.utils.fromWei(setNumber(value))).toFixed(2),2,i18n)
+                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['mocPrice']) * web3.utils.fromWei(setNumber(value))),2,i18n)
             case 'RESERVE':
-                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * web3.utils.fromWei(setNumber(value))).toFixed(2),2,i18n)
+                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * web3.utils.fromWei(setNumber(value))),2,i18n)
             case 'RISKPROX':
-                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice, 'ether') * web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'], 'ether') * web3.utils.fromWei(setNumber(value))).toFixed(2),2,i18n)
+                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice, 'ether') * web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'], 'ether') * web3.utils.fromWei(setNumber(value))),2,i18n)
 
         }
     }else{
