@@ -105,7 +105,7 @@ export default function BtcToRbtcGenerateModal(props) {
   const getModalTitle = () => (
     <div className="ModalHeaderTitle">
       <div className="CardLogo">
-        <img width="32" src={'icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-sovryn_fastbtc.svg'} alt=""/>
+        <img width="32" src={auth.urlBaseFull+'icons/icon-sovryn_fastbtc.svg'} alt=""/>
         <h1>Sovryn<br/>FastBTC</h1>
       </div>
       <div className="title">
@@ -117,7 +117,7 @@ export default function BtcToRbtcGenerateModal(props) {
   const ModalFooter = () => {
     return (
       <div className="AlertWarning" type="warning" icon="" >
-        <img src={"global/icon-atention.svg"} alt=""/>
+          <img src={auth.urlBase+"global/icon-atention.svg"} alt=""/>
         <div>{t('MoC.fastbtc.topUpWalletModal.footer', {ns: 'moc'})}</div>
       </div>
     )

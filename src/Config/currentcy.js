@@ -40,12 +40,12 @@ const getMaxAvailableOfCurrencyCode = (mocState, currencyCode, isRedeem) => {
 };
 
 const currencies = [
-  { value: 'RESERVE',     image: process.env.PUBLIC_URL + process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-reserve.svg" },
-  { value: 'STABLE',      image: process.env.PUBLIC_URL + process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-stable.svg" },
-  { value: 'RISKPRO',     image: process.env.PUBLIC_URL + process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-riskpro.svg" },
-  { value: 'RISKPROX',    image: process.env.PUBLIC_URL + process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-riskprox.svg" },
-  { value: 'MOC',         image: process.env.PUBLIC_URL + process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg" },
-  { value: 'RBTC',         image: process.env.PUBLIC_URL + process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg" },
+  { value: 'RESERVE',     image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-reserve.svg" },
+  { value: 'STABLE',      image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-stable.svg" },
+  { value: 'RISKPRO',     image: process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-riskpro.svg" },
+  { value: 'RISKPROX',    image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-riskprox.svg" },
+  { value: 'MOC',         image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg" },
+  { value: 'RBTC',         image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg" },
 ].map(it => ({
   ...it,
   longNameKey: `MoC.Tokens_${it.value}_code`,

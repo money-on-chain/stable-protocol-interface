@@ -18,6 +18,7 @@ export default function BtcToRbtc(props) {
     }
     loadAssets()
 
+    const auth = useContext(AuthenticateContext);
     const [t, i18n]= useTranslation(["global",'moc'])
     const{
         title = 'BTC to rBTC Peg In',
@@ -43,7 +44,7 @@ export default function BtcToRbtc(props) {
                 <Col xs={8}>
                     <div className='text-center'>
                         <img className="logo-img" width="111"
-                             src={'icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-btc_to_rbtc.svg'}
+                             src={auth.urlBaseFull+'icons/icon-btc_to_rbtc.svg'}
                              alt=""/>
                     </div>
                 </Col>

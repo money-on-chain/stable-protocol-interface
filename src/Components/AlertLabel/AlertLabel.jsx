@@ -7,7 +7,7 @@ function AlertLabel(props) {
     async function loadAssets() {
         try {
 
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
 
         } catch (error) {
             console.log(`Ocurrió un error al cargar imgs: ${error}`);
@@ -18,7 +18,7 @@ function AlertLabel(props) {
     const [t, i18n] = useTranslation(["global", 'moc'])
     return (
         <div className="AlertLabel">
-            <img src={"global/icon-alert.svg"} alt="Alert Icon" />
+            <img src={process.env.REACT_APP_PUBLIC_URL+"global/icon-alert.svg"} alt="Alert Icon" />
             <div className="AlertText">
                 <p>
                     <strong>{t('MoC.modal-send.beCareful', {ns: 'moc'})}</strong>

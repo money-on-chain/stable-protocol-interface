@@ -167,7 +167,7 @@ export default function CoinSelect(props) {
                                         <div className="currencyOption">
                                             <img
                                                 className="currencyImage"
-                                                src={(option.image.charAt(0)=='.')? option.image.substring(1) : option.image}
+                                                src={(option.image.charAt(0)=='.')? auth.urlBase+option.image.substring(1) : auth.urlBase+option.image}
                                                 alt={option.value}
                                                 width={30}
                                             />
