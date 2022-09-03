@@ -56,6 +56,7 @@ export default function ListOperations(props) {
 
     const [loadingSke, setLoadingSke] = useState(true);
     const timeSke= 1500
+    const appMode = config.environment.AppMode;
 
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke)
@@ -292,7 +293,7 @@ export default function ListOperations(props) {
             data.push({
                 key: element.key,
                 info: '',
-                event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
+                event: <span className={classnames('event-action', `${appMode}-${asset[0].color}`)}>{element.event}</span>,
                 asset: <img className="uk-preserve-width uk-border-circle" src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/" + asset[0].image} alt="avatar" width={32} />,
                 // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                 platform: <span className="display-inline CurrencyTx">{element.platform}</span>,

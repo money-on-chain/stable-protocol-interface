@@ -1,5 +1,15 @@
 @import "src/assets/css/general_styling";
+@import "src/assets/css/config_styling.scss";
 
+.RRC20-STABLE {
+  color: $color-roc-stable;
+}
+.RRC20-RIKSPRO {
+  color: $color-roc-riskpro;
+}
+.RRC20-RISKPROX {
+  color: $color-roc-riskprox;
+}
 .WalletCurrencyPrice {
   .item {
     margin-bottom: 0.8em;
