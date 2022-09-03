@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
-import './style.scss';
+
 import { Row, Col, Tabs } from 'antd';
 import { useTranslation } from "react-i18next";
 
 export default function PerformanceChart(props) {
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
     const [percent, setPercent] = useState(0);
     const [t, i18n] = useTranslation(["global", 'moc'])
 

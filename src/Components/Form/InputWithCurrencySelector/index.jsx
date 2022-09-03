@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
+import {useContext, useEffect, useState} from 'react';
 import { Form, Tooltip, Radio } from 'antd';
 import { DebounceInput } from 'react-debounce-input';
 import SelectCurrency from '../../SelectCurrency';
@@ -12,9 +12,10 @@ import {
   formatValueWithContractPrecision,
   formatLocalMap2
 } from '../../../Lib/Formats';
-import './style.scss';
 import { useTranslation } from "react-i18next";
 import BigNumber from "bignumber.js";
+import {AuthenticateContext} from "../../../Context/Auth";
+import {getUSD} from "../../../Helpers/helper";
 
 export default function InputWithCurrencySelector(props) {
   const {
@@ -37,11 +38,24 @@ export default function InputWithCurrencySelector(props) {
     onValueChange = () => {}
 } = props;
 
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
   const [t, i18n]= useTranslation(["global",'moc'])
 
   const [inputValidation, setInputValidation] = useState({ validateStatus: 'success' });
   const [dirty, setDirty] = useState(false);
   const [percent, setPercent] = useState(0);
+
+    const auth = useContext(AuthenticateContext);
 
   useEffect(() => {
     setDirty(false);
@@ -50,7 +64,13 @@ export default function InputWithCurrencySelector(props) {
   useEffect(
     () => {
       if (validate && dirty) {
-        setInputValidation(validateValue(inputValueInWei, maxValueAllowedInWei));
+          let inputValueInWeiCopy = inputValueInWei
+          let val_res= validateValue(inputValueInWei, maxValueAllowedInWei)
+          if( val_res.validateStatus=='error' ){
+              setInputValidation(val_res);
+          }else{
+              setInputValidation({validateStatus: "success", errorMsg: getUSD(currencySelected,inputValueInWeiCopy,auth,i18n)+" USD"});
+          }
       }
     },
     [inputValueInWei, maxValueAllowedInWei, currencySelected, dirty]
@@ -127,6 +147,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
       ],
       value
   );
+
   return result;
 };
 

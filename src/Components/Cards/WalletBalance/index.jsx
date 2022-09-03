@@ -1,4 +1,3 @@
-import './style.scss'
 import React, {Fragment, useEffect, useState} from 'react';
 import { useContext } from 'react'
 import {Button, Skeleton} from 'antd';
@@ -10,6 +9,17 @@ import SendModal from '../../Modals/SendModal';
 
 
 function WalletBalance(props) {
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
 
     const auth= useContext(AuthenticateContext);
     const { accountData = {} } = auth;
@@ -36,7 +46,7 @@ function WalletBalance(props) {
                         </div>
                     </div>
                     <div>
-                        <SendModal userState={auth} tokensToSend={['RISKPRO', 'STABLE']}/>
+                        <SendModal userState={auth} tokensToSend={['RISKPRO', 'STABLE', 'RESERVE']}/>
                     </div>
                 </div>}
             </div>

@@ -31,6 +31,7 @@ const formatMap = {
     USDPrice: precisions.PriceUSDPrecision,
     RESERVE: precisions.RBTCPrecision,
     MOC: precisions.mocPrecision,
+    MOCMetrics: precisions.COVPrecision,
     REWARD: precisions.REWARDPrecision,
     COV: precisions.COVPrecision,
     LEV: precisions.COVPrecision,

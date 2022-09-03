@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import './style.scss';
 import PropTypes from 'prop-types';
 import QRCode from 'react-qr-code';
 import {useTranslation} from "react-i18next";
@@ -7,6 +6,18 @@ import Copy from '../Page/Copy';
 import {AuthenticateContext} from "../../Context/Auth";
 
 const AddressContainer = ({ address, accountData, view }) => {
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
     const auth = useContext(AuthenticateContext);
     let addressToShow = '0x0000000000000000000000000000000';
     if (address) addressToShow = auth.toCheckSumAddress(address);

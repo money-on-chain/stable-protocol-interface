@@ -1,4 +1,4 @@
-import './style.scss';
+
 import React, {Fragment, useContext} from 'react';
 import { Tooltip } from 'antd';
 import {
@@ -17,6 +17,18 @@ import {LargeNumber} from "../LargeNumber";
 import {LargeNumberF3} from "../LargeNumberF3";
 
 export default function PriceVariation(props) {
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
    // if (!props.priceVariation) return null;
 
     const auth = useContext(AuthenticateContext);
@@ -59,7 +71,7 @@ export default function PriceVariation(props) {
     // const formattedRefValue = formatVisibleValue(interestRate, 'USDPrice', formatLocalMap2[i18n.languages[0]]);
 
     const isPositive = priceVariation.current > priceVariation.day;
-    const arrow = `Moc/${isPositive ? 'icon-arrow-up2' : 'icon-arrow-down2'}.svg`;
+    const arrow = process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+`/${isPositive ? 'icon-arrow-up2' : 'icon-arrow-down2'}.svg`;
     const sign = isPositive ? '+' : '';
     const color = isPositive ? '#3fcb97' : '#f2316a';
     const formattedVar = formatValueVariation((priceVariation.current - priceVariation.day), i18n.languages[0]);
@@ -96,7 +108,7 @@ export default function PriceVariation(props) {
             <div className={'div_crypto'}>
                 <Fragment>
                     <Tooltip placement="topLeft" title={tooltip} mouseEnterDelay={0.5}>
-                        <img className={'crypto_img'} src={process.env.PUBLIC_URL + '/' +arrow} alt="arrow" height={11}/>
+                        <img className={'crypto_img'} src={arrow} alt="arrow" height={11}/>
                         <span className={'crypto_value'} style={{color: `${color}`}}>{variationText}</span>
                     </Tooltip>
                 </Fragment>

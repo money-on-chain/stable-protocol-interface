@@ -17,7 +17,7 @@ console.log(`Starting app version: ${process.env.REACT_APP_VERSION}`);
 
 async function loadTranslations() {
     try {
-        const strmoc= config.environment.AppMode
+        const strmoc= config.environment.AppProject
         let moc_es= await import('./translations/'+strmoc+'/es/moc.json');
         let moc_en= await import('./translations/'+strmoc+'/en/moc.json');
         let global_es= await import('./translations/global-es.json')
@@ -49,7 +49,7 @@ ReactDOM.render(
             <AuthenticateProvider>
                 <HashRouter>
                     {/*<React.Suspense fallback={ <span>Loading...</span> }>*/}
-                    <React.Suspense fallback={ <img style={{'position':'fixed','left': '50%','top':'50%','transform':'translateX(-50%) translateY(-50%)'}} width={50} height={50} src={process.env.PUBLIC_URL + "/global/status-pending.png"} alt="ssa" className={'img-status rotate'}/> }>
+                    <React.Suspense fallback={ <img style={{'position':'fixed','left': '50%','top':'50%','transform':'translateX(-50%) translateY(-50%)'}} width={50} height={50} src={"global/status-pending.png"} alt="ssa" className={'img-status rotate'}/> }>
                         <Router />
                     </React.Suspense>
                 </HashRouter>
@@ -62,7 +62,7 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.register();
+serviceWorkerRegistration.unregister();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

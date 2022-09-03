@@ -4,10 +4,22 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { LargeNumber } from '../../LargeNumber';
 import { AuthenticateContext } from '../../../Context/Auth';
 import Web3 from 'web3';
-import './style.scss';
+
 import {useTranslation} from "react-i18next";
 
 export default function StakingOptionsModal(props) {
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
     const { mode, onClose, visible, amount, onConfirm, withdrawalId, setBlockedWithdrawals } = props;
@@ -44,8 +56,9 @@ export default function StakingOptionsModal(props) {
     };
 
     const depositMoCs = async () => {
-        onClose();
+        setStep(99);
         await auth.interfaceStakingDeposit(amountInEth, accountData.Wallet, (error, txHash) => {
+            onClose();
             if (error) {
                 return error;
             }
@@ -197,6 +210,17 @@ export default function StakingOptionsModal(props) {
                         </div>
                     </>
                 );
+            },
+            '99': () => {
+                return (
+                    <>
+                        <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_ReviewYourWallet')}</h1>
+                        <div className="StakingOptionsModal_Content AllowanceLoading">
+                            <Spin indicator={<LoadingOutlined />} />
+                            <p>{t('global.StakingOptionsModal_ReviewYourWalletDescription')}</p>
+                        </div>
+                    </>
+                )
             }
         }
 

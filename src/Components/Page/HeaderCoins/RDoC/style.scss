@@ -1,0 +1,62 @@
+.MiddleSide {
+  //display: flex;
+  //flex-grow: 1;
+  //align-items: center;
+  //justify-items: center;
+  //justify-content: center;
+  //@media (max-width: 800px) {
+  //  display: none;
+  //}
+
+  .div_coin{
+    display:flex;
+    align-items: center;
+    justify-items: center
+  }
+
+  .div_values{
+    display:flex;
+    flex-grow: 1;
+    flex-direction:column;
+    margin-left:7px;
+    .div_values-coin{
+      //position:relative;
+      //top:-54px;
+      //left:82px;
+      font-size:12px;
+    }
+  }
+
+  .value_usd1{
+    flex-grow: 0;
+    color:white;
+    height:15px;
+    .number-label{
+      font-size: 12px;
+    }
+  }
+
+  .div_crypto{
+    flex-grow: 1;
+    flex-direction:row;
+    margin-top:8px;
+
+    .crypto_img{
+      flex-grow: 0;
+      margin-right:4px;
+    }
+
+    .crypto_value{
+      flex-grow: 1;
+      font-weight: 600;
+    }
+  }
+
+}
+
+.PriceVariation {
+  display: flex;
+  flex-flow: row;
+  align-items: baseline;
+  box-sizing: border-box;
+}

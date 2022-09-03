@@ -115,7 +115,7 @@ function Reserve(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={process.env.PUBLIC_URL + "/Moc/icon-reserve.svg"}
+                    src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+"/icon-reserve.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t('MoC.Tokens_RESERVE_name', { ns: 'moc' })}

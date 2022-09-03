@@ -5,7 +5,6 @@ import WarningOutlined from '@ant-design/icons/WarningOutlined';
 import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import { AuthenticateContext } from '../../../Context/Auth';
 import Copy from '../../../Components/Page/Copy';
-import './style.scss';
 import Web3 from "web3";
 import FastBtcBridge from "../../../Contracts/coinbase/FastBtcBridge.json";
 import { toNumberFormat, btcInSatoshis, DYNAMIC_FEE_DIVISOR, toWei, weiToNumberFormat } from '../../../Helpers/math-helpers';
@@ -14,6 +13,17 @@ import Step2 from "./step2";
 import { config } from '../../../Config/config';
 
 export default function RbtcToBtcGenerateModal(props) {
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
 
     // let checkLoginFirstTime = true;
     const [account, setAccount] = useState(null);
@@ -108,7 +118,7 @@ export default function RbtcToBtcGenerateModal(props) {
     const titleModal = (
         <div className='title'>
             <div className="CardLogo">
-                <img width="32" src={process.env.PUBLIC_URL + '/icons/icon-sovryn_fastbtc.svg'} alt="" />
+                <img width="32" src={'icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-sovryn_fastbtc.svg'} alt="" />
                 <h1>Sovryn <br />FastBTC</h1>
                 <div className='title-text'>
                     <h1>{title}</h1>

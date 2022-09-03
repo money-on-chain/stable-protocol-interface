@@ -1,6 +1,5 @@
 /* eslint-disable default-case */
 import { Row, Col, Switch } from 'antd';
-import './style.scss';
 import React, { useEffect, useState, useContext } from 'react';
 import { Button, Popover } from 'antd';
 import CoinSelect from '../../Form/CoinSelect';
@@ -10,6 +9,17 @@ import {formatLocalMap2} from '../../../Lib/Formats';
 import { AuthenticateContext } from '../../../Context/Auth';
 
 export default function MintCard(props) {
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
 
   const auth = useContext(AuthenticateContext);
   const { token = '', color = '' } = props;
@@ -145,8 +155,8 @@ export default function MintCard(props) {
         userState,
         convertToken,
       });
-  
-  
+
+
       const commissionRateVisible = formatVisibleValue(
           commissionRate * 100,
           'commissionRate',
@@ -171,16 +181,16 @@ export default function MintCard(props) {
 
     /* const renderComissionCurrencySwitch = () => {
       const { enoughMOCBalance } =  false //commission;
-  
+
       if (commissionSwitch !== commission.currencyCode) {
         setCommissionSwitch(commission.currencyCode);
         setLoadingSwitch(false);
       }
-  
+
       let tooltip = enoughMOCBalance
           ? contentFee('payWithMocToken')
           : contentFee('notEnoughMocToken');
-  
+
       return (
           <div className="CommissionCurrencySwitch">
             <p>{t("global.MintOrRedeemToken_Fee", {ns: 'global', feePercent: '0.00' })}</p>

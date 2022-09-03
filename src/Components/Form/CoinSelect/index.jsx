@@ -8,15 +8,24 @@ import {
     formatLocalMap2
 } from '../../../Lib/Formats';
 import { Row, Col, Button, Tooltip } from 'antd';
-import './style.scss';
 import { Select, Input } from 'antd';
 import { currencies as currenciesDetail } from '../../../Config/currentcy';
 import { useTranslation } from "react-i18next";
-import './style.scss';
 const BigNumber = require('bignumber.js');
 const { Option } = Select;
 
 export default function CoinSelect(props) {
+
+    async function loadAssets() {
+        try {
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
     const auth = useContext(AuthenticateContext);
     const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = auth.UserBalanceData ? auth.UserBalanceData : {};
     const { inputValueInWei = '0.0001', onInputValueChange = () => { }, validate, className, title } = props;
@@ -108,7 +117,7 @@ export default function CoinSelect(props) {
         onInputValueChange(parseFloat(maxAmount()));
     };
 
-    
+
 
     const [t, i18n] = useTranslation(["global", 'moc'])
 
@@ -158,7 +167,7 @@ export default function CoinSelect(props) {
                                         <div className="currencyOption">
                                             <img
                                                 className="currencyImage"
-                                                src={option.image}
+                                                src={(option.image.charAt(0)=='.')? option.image.substring(1) : option.image}
                                                 alt={option.value}
                                                 width={30}
                                             />

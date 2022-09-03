@@ -155,14 +155,14 @@ export default function TransactionScreen({ state, setState }) {
           <div className="transaction-details mrb-4">
             <h3 className="transaction-btc-title font-size-12">{t('MoC.fastbtc.topUpWalletModal.transaction1DetailsTitle', {ns: 'moc'})}</h3>
             <TransactionInfo txId={TxId.DEPOSIT} txName="BTC" state={state} />
-              <img className="logo-img img-set1" width={128} src={process.env.PUBLIC_URL + "/global/icon-btclogo.svg"} alt=""/>
+              <img className="logo-img img-set1" width={128} src={"global/icon-btclogo.svg"} alt=""/>
           </div>
           <hr />
           <div className='transaction-details mrb-35 mrt-25'>
               <h3 className="transaction-btc-title font-size-12">{t('MoC.fastbtc.topUpWalletModal.transaction2DetailsTitle', {ns: 'moc'})}</h3>
             <TransactionInfo txId={TxId.TRANSFER} txName="RBTC" state={state} />
-              <img className="logo-img img-reload" width={17} src={process.env.PUBLIC_URL + "/global/greenreload.svg"} alt=""/>
-              <img className="logo-img img-set2" width={128} src={process.env.PUBLIC_URL + "/global/icon-rbtclogo.svg"} alt=""/>
+              <img className="logo-img img-reload" width={17} src={"global/greenreload.svg"} alt=""/>
+              <img className="logo-img img-set2" width={128} src={"global/icon-rbtclogo.svg"} alt=""/>
           </div>
         </div>
       )}

@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from 'react';
 import 'antd/dist/antd.css';
-import './style.scss';
 import { Table } from 'antd';
 import data_json from '../../../services/fatbts_pegout.json';
 import Moment from 'react-moment';
@@ -16,6 +15,18 @@ import api from "../../../services/api";
 import {config} from "../../../Config/config";
 
 export default function FastBtcPegOut(props) {
+
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
 
     const [current, setCurrent] = useState(1);
     const [bordered, setBordered] = useState(false);
@@ -147,13 +158,13 @@ export default function FastBtcPegOut(props) {
             json_end.forEach((data_j) => {
                 const datas_response = readJsonTableFastBtcPegOut(data_j)
                     const detail = {
-                        status: <span style={{color:'#478210'}}>{datas_response['status']}</span>
+                        status: <span className={datas_response['statusColor']}>{datas_response['status']}</span>
                         ,btcAmount: datas_response['btcAmount']
                         ,btcFee: datas_response['btcFee']
                         ,btcAddress: <Copy textToShow={datas_response['btcAddressCut']} textToCopy={datas_response['btcAddress']} />
                         ,date: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['date']}</Moment></span>
                         ,timestamp: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['timestamp']}</Moment></span>
-                        ,transactionHash: <Copy textToShow={datas_response['transactionHashCut']} textToCopy={datas_response['transactionHash']} />
+                        ,transactionHash: <Copy textToShow={datas_response['transactionHashCut']} textToCopy={datas_response['transactionHash']} typeUrl={'tx'}/>
                         ,transId: <Copy textToShow={datas_response['hash_id_cut']} textToCopy={datas_response['hashId']} />
                         ,blockNumber: datas_response['blockNumber']
                         ,rskAddress: <Copy textToShow={datas_response['rskAddressCut']} textToCopy={datas_response['rskAddress']} />
@@ -164,7 +175,7 @@ export default function FastBtcPegOut(props) {
                     data_row_coins2.push({
                         key: datas_response['hashId']
                         ,hashId: <Copy textToShow={datas_response['transactionHashCut']} textToCopy={datas_response['transactionHash']} />
-                        ,status: <span style={{color:'#478210'}}>{datas_response['status']}</span>
+                        ,status: <span className={datas_response['statusColor']}>{datas_response['status']}</span>
                         ,btcAmount: datas_response['btcAmount']
                         ,btcFee: datas_response['btcFee']
                         ,btcAddress: <Copy textToShow={datas_response['btcAddressCut']} textToCopy={datas_response['btcAddress']} />

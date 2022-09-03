@@ -140,6 +140,8 @@
         "StakingOptions_Withdraw": "Withdraw",
 
         "StakingOptionsModal_SetAllowance": "Set Allowance",
+        "StakingOptionsModal_ReviewYourWallet": "Wallet",
+        "StakingOptionsModal_ReviewYourWalletDescription": "Please review your wallet",
         "StakingOptionsModal_Authorize": "Authorize",
         "StakingOptionsModal_AllowanceDescription": "Before continuing with the staking you must set the allowance so that the staking system can access the tokens. This has to be done only once and it doesn't lock any tokens from your wallet.",
         "StakingOptionsModal_ProccessingAllowance": "Processing Allowance, please wait.",
@@ -203,6 +205,8 @@
         "TokenSummary_Amount": "{{tokenName}} Amount",
 
         "ModalSend_EnterTheAmount": "Enter the amount",
+        "ModalSend_Amount": "Amount",
+        "ModalSend_CopyTx":"Copy the transaction ID before closing since the information about this operation will not be available in the APP.",
         "ModalSend_pegout_EnterTheAmount": "Enter rBTC amount to send",
         "ModalSend_AddAComment": "Add a comment (optional)",
 

@@ -1,12 +1,22 @@
 import React, { useState, useContext } from 'react';
 import { Form } from "antd";
-import './style.scss';
 import { AuthenticateContext } from "../../Context/Auth";
 import addressHelper from '../../Lib/addressHelper';
 import { DebounceInput } from 'react-debounce-input';
 import { config } from '../../Config/config';
 
 export default function InputAddress(props) {
+
+  async function loadAssets() {
+    try {
+
+        let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+    } catch (error) {
+      console.log(`Ocurrió un error al cargar imgs: ${error}`);
+    }
+  }
+  loadAssets()
 
   const auth = useContext(AuthenticateContext);
   const {web3} = auth;

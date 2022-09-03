@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-import './style.scss';
+
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import PriceVariation from '../../PriceVariation';
@@ -10,6 +10,18 @@ import {setNumber, setToLocaleString} from "../../../Helpers/helper";
 import {useTranslation} from "react-i18next";
 
 function HeaderCoins(props) {
+
+  async function loadAssets() {
+    try {
+
+        let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+    } catch (error) {
+      console.log(`Ocurrió un error al cargar imgs: ${error}`);
+    }
+  }
+  loadAssets()
+
   const auth = useContext(AuthenticateContext);
   const { accountData = {} } = auth;
   const { image, arrow, color, tokenName } = props;
@@ -124,7 +136,7 @@ function HeaderCoins(props) {
     <>{
       <div className={'mrl-25 div_coin'}>
         {/*<img src={image} alt="arrow" height={38}/>*/}
-        <img src={process.env.PUBLIC_URL + "/global/"+image}  alt="arrow" height={38}/>
+        <img src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+"/"+image}  alt="arrow" height={38}/>
         <div className={'div_values'}>
           <span className="value_usd1">
             <LargeNumber {...{ amount: getBalanceUSD(), currencyCode: 'USDPrice', includeCurrency: true }} />

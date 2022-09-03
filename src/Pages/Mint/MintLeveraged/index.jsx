@@ -10,12 +10,24 @@ import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../Context/Auth';
 import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedeemToken';
-import './style.scss'
+
 import {getDatasMetrics} from "../../../Helpers/helper";
 import {getInrateToSettlement} from "../../../Helpers/mocStateHelper";
 import {LargeNumber} from "../../../Components/LargeNumber";
 
 export default function Mint(props) {
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
     const [daysHours, setDaysHours] = useState(null);
     const auth = useContext(AuthenticateContext);
 

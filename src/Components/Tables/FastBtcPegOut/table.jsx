@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import { Tabs, Tooltip, Button, Skeleton } from 'antd';
 import React, { useEffect, useContext, useState } from 'react';
 import FastBtcPegOut from "./index";
@@ -5,6 +6,7 @@ import { Table as TableAntd } from 'antd';
 import { AuthenticateContext } from '../../../Context/Auth';
 import {useTranslation} from "react-i18next";
 import { getDepositHistory } from "../../../Lib/fastBTC/fastBTCMethods";
+import { config } from '../../../Config/config';
 import moment from 'moment';
 import SatoshiToBTC from 'satoshi-bitcoin';
 const { TabPane } = Tabs;
@@ -84,7 +86,7 @@ const Table = ({ accountData }) => {
       title: t('MoC.fastbtc.history.columns_headers.status', {ns: 'moc'}),
       key: 'status',
       dataIndex: 'status',
-      render: text => t('MoC.fastbtc.history.columns.status_' + text, {ns: 'moc'})
+      render: text => <span className={setStatus(text)}>{t('MoC.fastbtc.history.columns.status_' + text, {ns: 'moc'})}</span>
     },
     {
       title: t('MoC.fastbtc.history.columns_headers.valueBtc', {ns: 'moc'}),
@@ -110,7 +112,7 @@ const Table = ({ accountData }) => {
               size="small"
               onClick={() =>
                 window.open(
-                  `${record.type === 'deposit' ? window.btcExplorer : window.explorerUrl}/tx/${
+                  `${record.type === 'deposit' ? config.btcExplorer : config.explorerUrl}/tx/${
                     record.txHash
                   }`
                 )
@@ -124,6 +126,33 @@ const Table = ({ accountData }) => {
       }
     }
   ];
+
+  const setStatus = (status) => {
+    let colorClass = '';
+    switch (status) {
+        case 'Initializing': {
+            colorClass = "color-default";
+            break;
+        }
+        case 'Validating': {
+            colorClass = "color-default"
+            break;
+        }
+        case 'Pending': {
+            colorClass = "color-pending";
+            break;
+        }
+        case 'Confirmed': {
+            colorClass = "color-confirmed";
+            break;
+        }
+        case 'Refunded': {
+            colorClass = "color-failed";
+            break;
+        }
+    }
+    return colorClass;
+};
 
   const locale = {
     emptyText: loading ? <Skeleton active /> : t('MoC.operations.empty', {ns: 'moc'}),

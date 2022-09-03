@@ -8,8 +8,6 @@ import {
     Card,
     Switch, Skeleton
 } from 'antd';
-
-import './style.scss';
 // import ArrowRightOutlined from '@ant-design/icons/ArrowRightOutlined';
 import { LoadingOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import {
@@ -45,6 +43,18 @@ import { AuthenticateContext } from '../../Context/Auth';
 
 
 const MintOrRedeemToken = (props) => {
+
+    async function loadAssets() {
+        try {
+
+                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
   const [t, i18n]= useTranslation(["global",'moc'])
   const auth = useContext(AuthenticateContext);
   const {web3} = auth;
@@ -356,7 +366,6 @@ const MintOrRedeemToken = (props) => {
     const onTransactionAllowance = (transactionHash) => {
       setLoadingSwitch(true);
       msgAllowanceTx(transactionHash);
-      msgAllowanceSend();
     };
 
     const onReceiptAllowance = async (receipt) => {
@@ -365,6 +374,7 @@ const MintOrRedeemToken = (props) => {
       setDoneSwitch(allowanceEnabled);
     };
 
+    msgAllowanceSend();
     await auth.interfaceApproveMoCTokenCommission(allowanceEnabled, onTransactionAllowance, onReceiptAllowance).catch(e => {
       console.error(e);
       setFailSwitch();
@@ -378,7 +388,7 @@ const MintOrRedeemToken = (props) => {
       description: t(
         'global.ReserveAllowanceModal_allowanceSendDescription'
       ),
-      duration: 10
+      duration: 20
     });
   };
 
@@ -386,7 +396,7 @@ const MintOrRedeemToken = (props) => {
     notification['warning']({
       message: t('MoC.exchange.allowance.allowanceSendTitle', {ns: 'moc'}),
       description: t('MoC.exchange.allowance.allowanceSendDescription', {ns: 'moc'}),
-      duration: 10
+      duration: 20
     });
   };
 
@@ -409,7 +419,7 @@ const MintOrRedeemToken = (props) => {
       description: t('MoC.exchange.allowance.allowanceTxDescription', {ns: 'moc'}),
       btn,
       key,
-      duration: 20
+      duration: 35
     });
   };
 
@@ -434,7 +444,7 @@ const MintOrRedeemToken = (props) => {
     // Mint BTCX slippage (user tolerance)
     // take in care user tolerance
     //if (actionIsMint && currencyYouReceive === 'RISKPROX') {
-    if (actionIsMint) {
+    if (actionIsMint && currencyYouReceive !== 'STABLE') {
       const userToleranceAmount = new BigNumber(tolerance).multipliedBy(totalYouExchange).div(100).toFixed();
       totalYouExchange = totalYouExchange.plus(userToleranceAmount);
     }
@@ -635,9 +645,11 @@ const MintOrRedeemToken = (props) => {
   return (<>
       {!loading ?
     <Card
-      title={
-          style
-      }
+        title={
+            actionIsMint
+                ? t('global.MintOrRedeemToken_Mint')
+                : t('global.MintOrRedeemToken_Redeem')
+        }
       // loading={loading}
       className="Card MintOrRedeemToken"
       style={(style=='minHeight')? {'minHeight':'375px'}: {'height':'100%'}}

@@ -1,10 +1,20 @@
 import { config } from '../Config/config';
-const getRLogin = () => {
+const getRLogin = (port) => {
 
-    const rpcUrls = {
-        30: 'https://public-node.rsk.co',
-        31: 'https://public-node.testnet.rsk.co'
-    };
+    let rpcUrls= {}
+
+    if( port==31 ){
+        rpcUrls = {
+            31: 'https://public-node.testnet.rsk.co'
+        };
+    }
+    if( port==30 ){
+        rpcUrls = {
+            30: 'https://public-node.rsk.co'
+        };
+    }
+
+
 
     const chainId = config.chainId;
     var selectedNetwork = {};

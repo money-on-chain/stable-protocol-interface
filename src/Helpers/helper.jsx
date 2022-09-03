@@ -157,7 +157,7 @@ export function readJsonTable(data_j,t, i18n){
         i18n:i18n
     })
     const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
-    const truncate_address= (data_j.otherAddress)? data_j.otherAddress.substring(0, 6) + '...' + data_j.otherAddress.substring(data_j.otherAddress.length - 4, data_j.otherAddress.length) : '--'
+    const truncate_address= (data_j.address)? data_j.address.substring(0, 6) + '...' + data_j.address.substring(data_j.address.length - 4, data_j.address.length) : '--'
     const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
 
     // const lastUpdatedAt= data_j.lastUpdatedAt
@@ -186,7 +186,7 @@ export function readJsonTable(data_j,t, i18n){
         i18n:i18n
     })
     const confirmationTime= data_j.confirmationTime
-    const address= data_j.otherAddress ? data_j.otherAddress : '--'
+    const address= (data_j.address !='')? data_j.address : '--'
     const amount=  DetailedLargeNumber({
         amount: data_j.amount,
         currencyCode: data_j.tokenInvolved,
@@ -320,6 +320,7 @@ const setStatus = (status) => {
     let text = '';
     let colorClass = '';
     switch (status) {
+        case '':
         case 0: {
             text = "Initializing";
             colorClass = "color-default";
@@ -332,7 +333,7 @@ const setStatus = (status) => {
         }
         case 2: {
             text = "Pending";
-            colorClass = "color-default";
+            colorClass = "color-pending";
             break;
         }
         case 3: {
@@ -454,6 +455,7 @@ const StatusReward = ({ state, result }) => {
 };
 
 export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro, end_block_dt){
+    if (!daily_moc) return {toGetToday: 0.0, toGetNow: 0.0, time_left: 0}
     const set_daily_moc= new BigNumber(web3.utils.fromWei(daily_moc.toString()))
     const set_user_balance_bproBalance= new BigNumber(web3.utils.fromWei(user_balance_bproBalance.toString()))
     const set_total_bpro= new BigNumber(web3.utils.fromWei(total_bpro.toString()))
@@ -471,4 +473,24 @@ export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro
     let toGetNow  = toGetToday.multipliedBy((timediff-time_left)/(timediff));
 
     return {toGetToday, toGetNow, time_left}
+}
+
+export function getUSD(coin,value,auth,i18n=null){
+    if (auth.contractStatusData) {
+        switch (coin) {
+            case 'STABLE':
+                return  setToLocaleString(new BigNumber(1 * web3.utils.fromWei(setNumber(value))),2,i18n)
+            case 'RISKPRO':
+                return  setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * web3.utils.fromWei(setNumber(value))),2,i18n)
+            case 'MOC':
+                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['mocPrice']) * web3.utils.fromWei(setNumber(value))),2,i18n)
+            case 'RESERVE':
+                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * web3.utils.fromWei(setNumber(value))),2,i18n)
+            case 'RISKPROX':
+                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice, 'ether') * web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'], 'ether') * web3.utils.fromWei(setNumber(value))),2,i18n)
+
+        }
+    }else{
+        return 0
+    }
 }
