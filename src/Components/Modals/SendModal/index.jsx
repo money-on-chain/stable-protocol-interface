@@ -273,7 +273,7 @@ export default function SendModal(props) {
                   {showTransaction &&
                   <>
                     <div style={{ width: '100%','display':'inline-block' }}>
-                      <p className={'Transaction_ID'} style={{'float':'left'}}>Transfer</p>
+                      <p className={'Transaction_ID'} style={{'float':'left'}}>Send</p>
                       <div style={{'float':'right'}}>
                         <p className={'copy-txt'}>{formatVisibleValue(amountToSend, tokenToSend, formatLocalMap2['en'])}&nbsp;&nbsp;&nbsp;<span>{changeValueYouAddTotal(tokenToSend)}</span></p>
                       </div>
@@ -282,7 +282,7 @@ export default function SendModal(props) {
                     <div style={{ width: '100%','display':'inline-block' }}>
                       <p className={'Transaction_ID'}  style={{'float':'left'}}>To</p>
                       <div style={{ float: 'right' }}>
-                        <Copy textToShow={address?.slice(0, 5)+'...'+ address?.slice(-4)} textToCopy={address} />
+                        <Copy textToShow={address} />
                       </div>
                     </div>
                     <br/>
