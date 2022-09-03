@@ -7,8 +7,10 @@ import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
 import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../../Lib/Formats';
 import BigNumber from 'bignumber.js';
+import { config } from '../../../../Config/config';
 
-const COLORS = ['#00a651','#ef8a13'];
+const appMode = config.environment.AppMode;
+const COLORS = appMode === 'MoC' ? ['#00a651','#ef8a13'] : ['#0083ff','#0061bb'];
 
 function Reserve(props) {
     const auth = useContext(AuthenticateContext);
