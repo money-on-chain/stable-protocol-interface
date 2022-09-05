@@ -181,7 +181,7 @@
         "ConfirmTransactionModal_Exchanging": "Exchanging",
         "ConfirmTransactionModal_Receiving": "Receiving",
         "ConfirmTransactionModal_MOCFee": "Fee",
-        "ConfirmTransactionModal_MOCFee_Disclaimer": "This fee will be deduced from the transaction value transferred",
+        "ConfirmTransactionModal_MOCFee_Disclaimer": "This fee will be deducted from the transaction value transferred",
         "ConfirmTransactionModal_Comment": "Add a comment (optional)",
         "ConfirmTransactionModal_Comment_Placeholder": "Type a comment",
         "ConfirmTransactionModal_AmountMayDifferDisclaimer": "Amounts may be different at transaction confirmation",
@@ -206,7 +206,8 @@
 
         "ModalSend_EnterTheAmount": "Enter the amount",
         "ModalSend_Amount": "Amount",
-        "ModalSend_CopyTx":"Copy the transaction ID before closing since the information about this operation will not be available in the APP.",
+        "ModalSend_CopyTx":"Copy the transaction ID before closing since the information about this operation will not be available in the dAPP.",
+        "ModalMind_CopyTx":"Copy the transaction ID before closing since the information about this operation will not be available in the dAPP until successful.",
         "ModalSend_pegout_EnterTheAmount": "Enter rBTC amount to send",
         "ModalSend_AddAComment": "Add a comment (optional)",
 
@@ -239,7 +240,7 @@
         "ReserveAllowanceModal_ProccessingAllowance": "Processing Allowance, please wait. When it finished we are going to send the operation to the wallet",
         "ReserveAllowanceModal_allowanceSendTitle": "Allowance",
         "ReserveAllowanceModal_allowanceSendDescription": "Please approve tx in your wallet to use MoC Token in the platform",
-        "CustomizePrize_VariationToleranceSettingsTitle": "Customize Price Varitation Tolerance",
+        "CustomizePrize_VariationToleranceSettingsTitle": "Customize Price Variation Tolerance",
         "CustomizePrize_VariationToleranceTitle": "Price Variation Tolerance",
         "Connected_Wallet": "Connected Wallet",
         "Disconnect": "Disconnect"

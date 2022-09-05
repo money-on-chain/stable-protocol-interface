@@ -18,17 +18,6 @@ import {LargeNumberF3} from "../LargeNumberF3";
 
 export default function PriceVariation(props) {
 
-    async function loadAssets() {
-        try {
-
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
    // if (!props.priceVariation) return null;
 
     const auth = useContext(AuthenticateContext);

@@ -16,16 +16,6 @@ const { Option } = Select;
 
 export default function CoinSelect(props) {
 
-    async function loadAssets() {
-        try {
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
     const auth = useContext(AuthenticateContext);
     const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = auth.UserBalanceData ? auth.UserBalanceData : {};
     const { inputValueInWei = '0.0001', onInputValueChange = () => { }, validate, className, title } = props;

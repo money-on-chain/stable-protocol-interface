@@ -261,7 +261,7 @@ export default function SendModal(props) {
               <Row style={{ marginTop: '2em' }}>
                 <Col span={24} style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                   <Button onClick={() => handleCancel()} className={'width-140'}>Cancel</Button>
-                  <Button type="primary" onClick={() => changeContent(0)} className={'width-140'}>Confirm</Button>
+                  <Button type="primary" onClick={() => changeContent(0)} className={'width-140'} disabled={address==''}>Confirm</Button>
                 </Col>
               </Row>
             </>

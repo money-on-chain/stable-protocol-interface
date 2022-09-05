@@ -10,17 +10,6 @@ import { AuthenticateContext } from '../../../Context/Auth';
 
 export default function MintCard(props) {
 
-    async function loadAssets() {
-        try {
-
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
   const auth = useContext(AuthenticateContext);
   const { token = '', color = '' } = props;
 

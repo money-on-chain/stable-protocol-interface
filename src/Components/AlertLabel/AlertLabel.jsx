@@ -4,17 +4,6 @@ import {useTranslation} from "react-i18next";
 
 function AlertLabel(props) {
 
-    async function loadAssets() {
-        try {
-
-                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
     const [t, i18n] = useTranslation(["global", 'moc'])
     return (
         <div className="AlertLabel">

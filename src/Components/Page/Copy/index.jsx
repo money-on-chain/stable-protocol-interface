@@ -23,7 +23,7 @@ export default function Copy(props) {
     }
 
     return (
-        <><div style={{display:"flex"}}>
+        <><div>
             <img onClick={onClick}
                  width={17}
                  height={17}

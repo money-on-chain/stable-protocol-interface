@@ -427,6 +427,10 @@ a {
   margin-top: 0px;
 }
 
+.mt-40{
+  margin-top: 40px !important;
+}
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);
@@ -1003,6 +1007,4 @@ a {
 
 .ant-form-item-explain-success{
   color: black;
-
-
 }

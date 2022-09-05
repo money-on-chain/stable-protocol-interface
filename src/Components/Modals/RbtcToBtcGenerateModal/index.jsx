@@ -14,17 +14,6 @@ import { config } from '../../../Config/config';
 
 export default function RbtcToBtcGenerateModal(props) {
 
-    async function loadAssets() {
-        try {
-
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
     // let checkLoginFirstTime = true;
     const [account, setAccount] = useState(null);
     const [limits, setLimits] = useState(null);
