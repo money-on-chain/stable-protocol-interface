@@ -135,7 +135,7 @@ export default function ListOperations(props) {
 
     const changeStatus= (percent,txt) =>{
         if( width<=768 ){
-            return (<Progress type="circle" percent={percent} width={30}/>)
+            return (<Progress type="circle" percent={percent ? percent : txt === 'confirmed' ? 100 : 0} width={30}/>)
         }else{
             return (<><Progress percent={percent} /><br /><span className={txt === 'confirmed' ? 'color-confirmed conf_title' : 'color-confirming conf_title'}>{txt}</span></>);
         }
