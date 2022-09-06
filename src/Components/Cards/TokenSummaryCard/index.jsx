@@ -98,7 +98,7 @@ export default function TokenSummaryCard(props) {
                     >
                         <img
                             height={45}
-                            src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT + `/icon-${tokenName}.svg` }
+                            src={auth.urlBaseFull+`icon-${tokenName}.svg` }
                             alt="icon-wallet"
                         />
                     </Col>

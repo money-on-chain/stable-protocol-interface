@@ -6,6 +6,7 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_ENVIRONMENT_APP_PROJECT) DefaultConfig.environment.AppProject = process.env.REACT_APP_ENVIRONMENT_APP_PROJECT;
     if (process.env.REACT_APP_ENVIRONMENT_MOC) DefaultConfig.environment.MoC = process.env.REACT_APP_ENVIRONMENT_MOC;
     if (process.env.REACT_APP_ENVIRONMENT_MULTICALL2) DefaultConfig.environment.Multicall2 = process.env.REACT_APP_ENVIRONMENT_MULTICALL2;
+    if (process.env.REACT_APP_PUBLIC_URL) DefaultConfig.environment.PublicUrl = process.env.REACT_APP_PUBLIC_URL;
     if (process.env.REACT_APP_ENVIRONMENT_IREGISTRY) DefaultConfig.environment.IRegistry = process.env.REACT_APP_ENVIRONMENT_IREGISTRY;
     if (process.env.REACT_APP_ENVIRONMENT_FASTBTC_BRIDGE_ADDRESS) DefaultConfig.environment.fastBtcBridgeAddress = process.env.REACT_APP_ENVIRONMENT_FASTBTC_BRIDGE_ADDRESS;
     if (process.env.REACT_APP_API_OPERATIONS) DefaultConfig.api.operations = process.env.REACT_APP_API_OPERATIONS;

@@ -3,6 +3,7 @@ import Web3 from 'web3';
 
 import { calcCommission } from './multicall';
 import {toContractPrecision, BUCKET_X2, BUCKET_C0, getGasPrice} from './utils';
+import {setNumber} from "../../Helpers/helper";
 
 
 const addCommissions = async (interfaceContext, reserveAmount, token, action) => {
@@ -103,6 +104,9 @@ const transferRiskProTo = async (interfaceContext, to, amount, onTransaction, on
     .estimateGas({ from: account })
 
   // Send tx
+    console.log('Send tx');
+    console.log(amount);
+    console.log('Send tx');
   const receipt = riskprotoken.methods
     .transfer(to, toContractPrecision(amount))
     .send({
@@ -146,16 +150,17 @@ const transferMocTo = async (interfaceContext, to, amount, onTransaction, onRece
   return receipt
 }
 
-const transferRBTCTo = async (interfaceContext, to, amount, callback) => {
+const transferRBTCTo = async (interfaceContext, to, amount, onTransaction, onReceipt) => {
   const { web3, account } = interfaceContext;
+  let tokens = web3.utils.toWei(amount.toString(), 'ether')
   const receipt = await web3.eth.sendTransaction(
   {
     from: account.toLowerCase(),
     to: to.toLowerCase(),
-    value: amount,
+    value: web3.utils.toBN(tokens),
     gasPrice: '65164000',
     gas: 72000
-  });
+  }).on('transactionHash', onTransaction).on('receipt', onReceipt);
 
   return receipt;
 }
