@@ -23,14 +23,14 @@ export default function Copy(props) {
     }
 
     return (
-        <><div>
-            <img onClick={onClick}
+        <><div style={{display:"flex"}}>
+            {textToCopy && <img onClick={onClick}
                  width={17}
                  height={17}
                  src={process.env.REACT_APP_PUBLIC_URL+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/copy2.png'}
                  alt=""
                  style={{marginRight: 10, cursor: 'pointer','flexGrow':'0','marginTop':'3px'}}
-            />
+            />}
             <span style={{ display: fastBTC && 'flex','fontSize':'12px'}}>
                 <a style={{ color:'#09c199',flexGrow:'1', fontweight:'bold'}} href={url_set} target="_blank">
                     {textToShow}
