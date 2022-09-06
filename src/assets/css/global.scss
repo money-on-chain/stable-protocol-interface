@@ -5,6 +5,7 @@
 @import './icons';
 @import './icons-custom';
 @import './responsive';
+@import './config_styling.scss';
 
 body, html {
   font-family: "Montserrat", sans-serif;
@@ -52,8 +53,23 @@ a {
   font-family: Montserrat,sans-serif;
   font-size: 20px;
   font-weight: 600;
-  &.Doc {
-    color: #00a651;
+  &.MoC-stable {
+    color: $color-moc-stable;
+  }
+  &.MoC-riskpro {
+    color: $color-moc-riskpro;
+  }
+  &.MoC-riskprox {
+    color: $color-moc-riskprox;
+  }
+  &.RRC20-stable {
+    color: $color-roc-stable;
+  }
+  &.RRC20-riskpro {
+    color: $color-roc-riskpro;
+  }
+  &.RRC20-riskprox {
+    color: $color-roc-riskprox;
   }
   &.Few {
     font-size: 15px;
