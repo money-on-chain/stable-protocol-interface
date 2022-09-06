@@ -72,17 +72,6 @@ export default function MintModal(props) {
   let userComment = '';
   let userTolerance = '';
 
-  async function loadAssets() {
-    try {
-
-        let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-    } catch (error) {
-      console.log(`Ocurrió un error al cargar imgs: ${error}`);
-    }
-  }
-  loadAssets()
-
   useEffect(
     () => {
       setComment('');
@@ -245,12 +234,14 @@ export default function MintModal(props) {
   };
 
   const [confirmModal, setConfirmModal] = useState(false);
+  const [buttonClose, setButtonClose] = useState(true);
 
   const cancelButton = () => {
     if(confirmModal==false){
       if( showTransaction ){
         if( txtTransaction!= 'SUCCESSFUL' && txtTransaction!= 'REVIEW' ){
           setConfirmModal(true)
+          setButtonClose(false)
         }else{
           setTxtTransaction('PENDING')
           partClose()
@@ -261,6 +252,7 @@ export default function MintModal(props) {
     }else{
       partClose()
       setConfirmModal(false)
+      setButtonClose(true)
     }
   };
 
@@ -273,10 +265,12 @@ export default function MintModal(props) {
       onCancel();
     }, 200);
     setConfirmModal(false)
+    setButtonClose(true)
   };
 
   const changeContent= () => {
     setConfirmModal(false)
+    setButtonClose(true)
   };
 
   const markStyle = {
@@ -310,7 +304,7 @@ export default function MintModal(props) {
         {renderAmount(t('global.ConfirmTransactionModal_Exchanging'), exchanging, 'AmountExchanging')}
         <LargeNumber tooltip="topLeft" currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
         {showError && renderError()}
-        <div className={'text-align-center'}><img width={30} height={30} src={"global/d-arrow.png"} alt="ssa"/></div>
+        <div className={'text-align-center'}><img width={30} height={30} src={auth.urlBase+"global/d-arrow.png"} alt="ssa"/></div>
         {renderAmount(t('global.ConfirmTransactionModal_Receiving'), receiving, 'AmountReceiving')}
         <LargeNumber tooltip="topLeft" currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
         <hr style={{ border: '1px solid #08374F','opacity':'0.5' }} />
@@ -359,7 +353,7 @@ export default function MintModal(props) {
         {!showTransaction &&<div className={'div-price-v'}>
         <Collapse className="CollapseTolerance">
           <Collapse.Panel showArrow={false} header={<div className="PriceVariationSetting">
-            <img width={17} height={17} src={"global/torq.png"} alt="ssa"/>
+            <img width={17} height={17} src={auth.urlBase+"global/torq.png"} alt="ssa"/>
             <span className="SliderText color-08374F font-size-12">{t("global.CustomizePrize_VariationToleranceSettingsTitle")}</span>
           </div>}>
             <div className="PriceVariationContainer">
@@ -383,54 +377,53 @@ export default function MintModal(props) {
           style={{ alignItems: 'start'}}
         >
           <div className="Name">
-          {/*  {interests &&*/}
-          {/*    interests?.interestValue &&*/}
-          {/*    interests?.interestValue.gt(0) && (*/}
-          {/*      <div className="MOCFee">*/}
-          {/*        <div className={`AlignedAndCentered Amount 333333333333`}>*/}
-          {/*          <span className="Name">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>*/}
-          {/*          <span className={`Value ${appMode}`}>*/}
-          {/*            <LargeNumber*/}
-          {/*              currencyCode={'RESERVE' }*/}
-          {/*              amount={interests.interestValue}*/}
-          {/*              includeCurrency*/}
-          {/*            />*/}
-          {/*          </span>*/}
-          {/*        </div>*/}
-          {/*      </div>*/}
-          {/*)}*/}
           </div>
-          {/*<span className="Value">0.00 MOC</span>*/}
         </div>
       </div>
+
+        {showTransaction
+            &&
+              <div className={'div-c1 mt-40'}>
+                <div style={{ width: '100%' }}>
+                  <div>
+                    { currentHash!=null && <><p className={'Transaction_ID'}>{t('global.Transaction_ID')}</p>
+                      <div style={{ textAlign: 'right' }}>
+                        <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash} typeUrl={'tx'} />
+                      </div></>
+                    }
+                  </div>
+                </div>
+              </div>
+        }
 
       <div className={'div-c1'}>
         {showTransaction
           ? <div style={{ width: '100%' }}>
-              <div>
-                { currentHash!=null && <><p className={'Transaction_ID'}>{t('global.Transaction_ID')}</p>
-                <div style={{ textAlign: 'right' }}>
-                  <Copy textToShow={currentHash?.slice(0, 5)+'...'+ currentHash?.slice(-4)} textToCopy={currentHash} typeUrl={'tx'} />
-                </div></>
-              }
-              </div>
             <div className={'imgRotate'} style={{'textAlign':'center'}}>
               {(() => {
                 switch (txtTransaction) {
                   case 'REVIEW':
-                    return <><p><img src={"global/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p></>;
+                    if( currentHash!=null && currentHash!='') {
+                      return <><p className={'text-align-center'}><img src={auth.urlBase + "global/status-pending.png"} width={50} height={50}
+                                       className='img-status rotate'/>.</p><p
+                          className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p></>;
+                    }else {
+                      return <p className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p>
+                    }
                   case 'PENDING':
-                    return <><p><img src={"global/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
+                      return <><p className={'text-align-center'}><img src={auth.urlBase+"global/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
                   case 'SUCCESSFUL':
-                    return <><p><img width={50} height={50} src={"global/status-success.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_successful'}>{t('global.Operation_successful')}</p></>;
+                    return <><p className={'text-align-center'}><img width={50} height={50} src={auth.urlBase+"global/status-success.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_successful'}>{t('global.Operation_successful')}</p></>;
                   default:
-                    return <><p><img width={50} height={50} src={"global/status-error.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_failed'}>{t('global.Operation_failed')}</p></>;
+                    return <><p className={'text-align-center'}><img width={50} height={50} src={auth.urlBase+"global/status-error.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_failed'}>{t('global.Operation_failed')}</p></>;
                 }
               })()}
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center'}}>
-              <Button className={'width-120'} type="primary" onClick={() => {cancelButton(); setCurrentHash(null); setShowTransaction(false)}}>Close</Button>
-            </div>
+              {buttonClose== true &&
+              <div style={{ display: 'flex', justifyContent: 'center'}}>
+                <Button className={'width-120'} type="primary" onClick={() => {cancelButton(); }}>Close</Button>
+              </div>
+              }
           </div>
           : <>
             <Button
@@ -441,9 +434,9 @@ export default function MintModal(props) {
         </>}
       </div>
       <Modal visible={confirmModal} footer={null} width={450}>
-        <img className={'img-campana'} width={27} height={30} src={"global/campana.png"}/>
+        <img className={'img-campana'} width={27} height={30} src={auth.urlBase+"global/campana.png"}/>
         <div className={'div-txt'}>
-        <p className={'color-08374F'}>Copy the transaction ID before closing since the information about this operation will not be available in the APP until successful.</p>
+        <p className={'color-08374F'}>{t('global.ModalMind_CopyTx')}</p>
         <div>
           {showTransaction &&
           <> <div style={{ width: '100%' }}>

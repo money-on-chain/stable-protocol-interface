@@ -7,7 +7,7 @@ import { t } from '../../../../api/helpers/i18nHelper'
 
 const AlertLabelSettings = () => (
   <div className="AlertLabel">
-    <img src={"global/icon-alert.svg"} alt="Alert Icon" />
+    <img src={process.env.REACT_APP_PUBLIC_URL+"global/icon-alert.svg"} alt="Alert Icon" />
     <div className="AlertText">
       <p>
         <strong>{t('settings.beCareful')}</strong>

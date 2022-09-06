@@ -35,6 +35,8 @@ const AuthenticateContext = createContext({
     userBalanceData: null,
     contractStatusData: null,
     web3: null,
+    urlBaseFull:null,
+    urlBase:null,
     connect: () => {},
     interfaceExchangeMethod: async (sourceCurrency, targetCurrency, amount, slippage, onTransaction, onReceipt) => {},
     interfaceMintRiskPro: async (amount, slippage, onTransaction, onReceipt) => {},
@@ -80,6 +82,8 @@ const AuthenticateProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [account, setAccount] = useState(null);
     const [userBalanceData, setUserBalanceData] = useState(null);
+    const [urlBaseFull, setUrlBaseFull] = useState(process.env.REACT_APP_PUBLIC_URL+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/');
+    const [urlBase, setUrlBase] = useState(process.env.REACT_APP_PUBLIC_URL);
     const [accountData, setAccountData] = useState({
         Wallet: '',
         Owner: '',
@@ -619,6 +623,8 @@ const AuthenticateProvider = ({ children }) => {
                 contractStatusData,
                 isLoggedIn,
                 web3,
+                urlBaseFull,
+                urlBase,
                 connect,
                 disconnect,
                 interfaceExchangeMethod,
