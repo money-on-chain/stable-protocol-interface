@@ -13,17 +13,6 @@ const BigNumber = require('bignumber.js');
 
 export default function AmountCard(props) {
 
-    async function loadAssets() {
-        try {
-
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
     const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;
@@ -97,7 +86,7 @@ export default function AmountCard(props) {
                     <Col>
                         <img
                             width={56}
-                            src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+`/icon-${tokenName.toLowerCase()}.svg`}
+                            src={auth.urlBaseFull+`icon-${tokenName.toLowerCase()}.svg`}
                             alt="icon-wallet"
                         />
                     </Col>

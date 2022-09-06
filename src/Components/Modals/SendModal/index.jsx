@@ -261,7 +261,7 @@ export default function SendModal(props) {
               <Row style={{ marginTop: '2em' }}>
                 <Col span={24} style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                   <Button onClick={() => handleCancel()} className={'width-140'}>Cancel</Button>
-                  <Button type="primary" onClick={() => changeContent(0)} className={'width-140'}>Confirm</Button>
+                  <Button type="primary" onClick={() => changeContent(0)} className={'width-140'} disabled={address==''}>Confirm</Button>
                 </Col>
               </Row>
             </>
@@ -300,7 +300,7 @@ export default function SendModal(props) {
             { statusScreen == 2 &&
             <>
               <div style={{'textAlign':'center'}}>
-                <img src={"global/status-pending.png"} width={50} height={50} className='img-status rotate'/>
+                <img src={auth.urlBase+"global/status-pending.png"} width={50} height={50} className='img-status rotate'/>
                 <br/>
                 <br/>
                 <p className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p>
@@ -325,9 +325,9 @@ export default function SendModal(props) {
                       {(() => {
                         switch (statusScreen) {
                           case 3:
-                            return <img src={"global/status-pending.png"} width={50} height={50} className='img-status rotate'/>;
+                            return <img src={auth.urlBase+"global/status-pending.png"} width={50} height={50} className='img-status rotate'/>;
                           case 4:
-                            return <img width={50} height={50} src={"global/status-success.png"} alt="ssa" className={'img-status'}/>;
+                            return <img width={50} height={50} src={auth.urlBase+"global/status-success.png"} alt="ssa" className={'img-status'}/>;
                         }
                       })()}
                     </div>
@@ -355,7 +355,7 @@ export default function SendModal(props) {
             }
           </div>
           <Modal visible={confirmModal} footer={null} width={450}>
-            <img className={'img-campana'} width={27} height={30} src={"global/campana.png"}/>
+            <img className={'img-campana'} width={27} height={30} src={auth.urlBase+"global/campana.png"}/>
             <div className={'div-txt'}>
               <p className={'color-08374F'}>{t('global.ModalSend_CopyTx')}</p>
               <div>

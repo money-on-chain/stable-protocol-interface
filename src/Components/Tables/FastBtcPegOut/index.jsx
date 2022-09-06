@@ -16,18 +16,6 @@ import {config} from "../../../Config/config";
 
 export default function FastBtcPegOut(props) {
 
-
-    async function loadAssets() {
-        try {
-
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
     const [current, setCurrent] = useState(1);
     const [bordered, setBordered] = useState(false);
     const [loading, setLoading] = useState(false);

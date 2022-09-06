@@ -27,7 +27,7 @@ export default function Copy(props) {
             {textToCopy && <img onClick={onClick}
                  width={17}
                  height={17}
-                 src={process.env.PUBLIC_URL + '/MoC/copy2.png'}
+                 src={process.env.REACT_APP_PUBLIC_URL+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/copy2.png'}
                  alt=""
                  style={{marginRight: 10, cursor: 'pointer','flexGrow':'0','marginTop':'3px'}}
             />}

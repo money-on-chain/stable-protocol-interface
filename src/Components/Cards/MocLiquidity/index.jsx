@@ -23,17 +23,6 @@ function MocLiquidity(props) {
     const [incentiveState, setIncentiveState] = useState(null);
     const { account, accountData, userBalanceData } = auth;
 
-    async function loadAssets() {
-        try {
-
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
     const agent= () => {
         if(auth.isLoggedIn) {
             setTimeout(() => {

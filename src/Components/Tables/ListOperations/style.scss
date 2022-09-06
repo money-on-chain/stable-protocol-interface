@@ -1,3 +1,5 @@
+@import '../../../assets/css/config_styling.scss';
+
 .Card.WalletOperations .title {
   padding: 0;
   margin-bottom: 0;
@@ -15,16 +17,28 @@
   text-transform: uppercase !important;
 }
 
-.color-token-stable {
-  color: #00a651;
+.MoC-color-token-stable {
+  color: $color-moc-stable;
 }
 
-.color-token-riskprox {
-  color: #ed1b32;
+.MoC-color-token-riskprox {
+  color: $color-moc-riskprox;
 }
 
-.color-token-riskpro {
-  color: #ff9415;
+.MoC-color-token-riskpro {
+  color: $color-moc-riskpro;
+}
+
+.RRC20-color-token-stable {
+  color: $color-roc-stable;
+}
+
+.RRC20-color-token-riskprox {
+  color: $color-roc-riskprox;
+}
+
+.RRC20-color-token-riskpro {
+  color: $color-roc-riskpro;
 }
 
 .event-action {

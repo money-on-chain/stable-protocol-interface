@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import 'antd/dist/antd.css';
 import './style.scss';
 import { Table, Progress, Result } from 'antd';
@@ -9,6 +9,7 @@ import Moment from 'react-moment';
 import { readJsonTable, setNumber } from '../../../Helpers/helper'
 import Copy from "../../Page/Copy";
 import {useTranslation} from "react-i18next";
+import {AuthenticateContext} from "../../../Context/Auth";
 
 const columns = [
     {
@@ -47,6 +48,7 @@ const showHeader = true;
 const pagination = { position: 'bottom' };
 const BigNumber = require('bignumber.js');
 const [t, i18n]= useTranslation(["global",'moc'])
+const auth = useContext(AuthenticateContext);
 
 class ListOperations extends React.Component {
 
@@ -258,7 +260,7 @@ class ListOperations extends React.Component {
                         key: element.key,
                         info: '',
                         event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
-                        asset: <img className="uk-preserve-width uk-border-circle" src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/" + asset[0].image} alt="avatar" width={32} />,
+                        asset: <img className="uk-preserve-width uk-border-circle" src={auth.urlBaseFull+ "/" + asset[0].image} alt="avatar" width={32} />,
                         // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                         platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                         wallet: <span className="display-inline ">{element.wallet} </span>,

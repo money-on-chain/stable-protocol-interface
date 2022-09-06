@@ -7,8 +7,10 @@ import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
 import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../../Lib/Formats';
 import BigNumber from 'bignumber.js';
+import { config } from '../../../../Config/config';
 
-const COLORS = ['#00a651','#ef8a13'];
+const appMode = config.environment.AppMode;
+const COLORS = appMode === 'MoC' ? ['#00a651','#ef8a13'] : ['#0083ff','#0061bb'];
 
 function Reserve(props) {
     const auth = useContext(AuthenticateContext);
@@ -113,7 +115,7 @@ function Reserve(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+"/icon-reserve.svg"}
+                    src={auth.urlBaseFull+"icon-reserve.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t('MoC.Tokens_RESERVE_name', { ns: 'moc' })}

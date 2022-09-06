@@ -16,7 +16,7 @@ function Home(props) {
 
     async function loadAssets() {
         try {
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+                 let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
 
         } catch (error) {
             console.log(`Ocurrió un error al cargar imgs: ${error}`);
@@ -78,7 +78,7 @@ function Home(props) {
                     <div className={'container-b'} style={{height: '100%'}}>
                         <TokenSummaryCard
                             tokenName="stable"
-                            color="#00a651"
+                            // color="#00a651"
                             page="/wallet/stable"
                             balance={docBalance}
                             labelCoin={t(`MoC.Tokens_RESERVE_code`, {ns: 'moc'})}
@@ -86,7 +86,7 @@ function Home(props) {
                         />
                         <TokenSummaryCard
                             tokenName="riskpro"
-                            color="#ef8a13"
+                            // color="#ef8a13"
                             page="/wallet/pro"
                             balance={bproBalance}
                             labelCoin={t(`MoC.Tokens_RESERVE_code`, {ns: 'moc'})}
@@ -94,7 +94,7 @@ function Home(props) {
                         />
                         <TokenSummaryCard
                             tokenName="riskprox"
-                            color="#ed1c24"
+                            // color="#ed1c24"
                             page="/wallet/leveraged"
                             balance={bprox2Balance}
                             labelCoin={t(`MoC.Tokens_RESERVE_code`, {ns: 'moc'})}

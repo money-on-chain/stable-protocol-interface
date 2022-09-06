@@ -141,6 +141,7 @@
 
         "StakingOptionsModal_SetAllowance": "Autorizar Allowance",
         "StakingOptionsModal_Authorize": "Autorizar",
+        "StakingOptionsModal_ReviewYourWalletDescription": "Por favor revise su billetera",
         "StakingOptionsModal_AllowanceDescription": "Antes de continuar con el staking deberás permitir el \"allowance\" para que el sistema pueda acceder a los tokens. Esto solo debe hacerse la primera vez y no bloquea ningún token de tu billetera.",
         "StakingOptionsModal_ProccessingAllowance": "Procesando Allowance, por favor espera",
         "StakingOptionsModal_StakingDescription": "Los MoCs stakeados recibirán recompensas del Programa de Recompensas de Staking de MoC. Puedes retirar tus MoC's cuando quieras, el proceso de retiro tomará 30 días",
@@ -205,7 +206,8 @@
 
         "ModalSend_EnterTheAmount": "Ingresa el valor",
         "ModalSend_Amount": "Valor",
-        "ModalSend_CopyTx":"Copie el ID de la transacción antes de cerrar ya que la información sobre esta operación no estará disponible en la APP.",
+        "ModalSend_CopyTx":"Copie el ID de la transacción antes de cerrar ya que la información sobre esta operación no estará disponible en la dAPP.",
+        "ModalMind_CopyTx":"Copie el ID de la transacción antes de cerrar, ya que la información sobre esta operación no estará disponible en el dAPP hasta que se realice correctamente.",
         "ModalSend_pegout_EnterTheAmount": "Ingresa el valor de rBTC a enviar",
         "ModalSend_AddAComment": "Agregar un comentario (opcional)",
 

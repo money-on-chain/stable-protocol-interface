@@ -10,6 +10,7 @@ import { LargeNumber } from "../../LargeNumber";
 import { useTranslation } from "react-i18next";
 import InformationModal from '../../Modals/InformationModal';
 import {setToLocaleString} from "../../../Helpers/helper";
+import { config } from "../../../Config/config";
 
 const BigNumber = require('bignumber.js');
 
@@ -23,7 +24,7 @@ export default function TokenSummaryCard(props) {
     const navigate = useNavigate();
     const {
         tokenName = '',
-        color = '#000',
+        // color = '#000',
         page = '',
         balance = '0',
         labelCoin = '',
@@ -70,9 +71,10 @@ export default function TokenSummaryCard(props) {
 
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
+    const appMode = config.environment.AppMode;
 
     useEffect(() => {
-        setTimeout(() => setLoading(false), timeSke)
+        setTimeout(() => setLoading(false), timeSke);
     },[auth]);
 
     return (
@@ -98,7 +100,7 @@ export default function TokenSummaryCard(props) {
                     >
                         <img
                             height={45}
-                            src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT + `/icon-${tokenName}.svg` }
+                            src={auth.urlBaseFull+`icon-${tokenName}.svg` }
                             alt="icon-wallet"
                         />
                     </Col>
@@ -110,7 +112,7 @@ export default function TokenSummaryCard(props) {
                             textAlign: 'right'
                         }}
                     >
-                        <span className="Number" style={{ color }}>
+                        <span className={`Number ${appMode}-${tokenName}`}> {/* style={{ color }}> */}
                             <LargeNumber className="WithdrawalAmount__" amount={balance} currencyCode={currencyCode} />
                         </span>
                     </Col>
