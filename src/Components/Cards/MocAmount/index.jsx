@@ -11,17 +11,6 @@ const BigNumber = require('bignumber.js');
 
 function MocAmount() {
 
-    async function loadAssets() {
-        try {
-
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
     const auth = useContext(AuthenticateContext);
 
     const set_moc_balance_usd = () => {
@@ -48,7 +37,7 @@ function MocAmount() {
                             <InformationModal currencyCode={'MOC'}/>
                         </div>
                         <div className="LogoAndAmount">
-                            <img className="MocLogo" srcSet={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg"}/>
+                            <img className="MocLogo" srcSet={auth.urlBaseFull+ "icon-moc.svg"}/>
                             <div className="TotalAmountContainer">
                                 <h2>{t("global.RewardsBalance_MocsTokens", {ns: 'global'})}</h2>
                                 <div className="BalanceItemCard TotalAmount">

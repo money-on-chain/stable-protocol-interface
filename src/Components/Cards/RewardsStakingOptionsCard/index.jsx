@@ -52,17 +52,6 @@ const getColumns = (renderActionsFunction, t) => [
 
 export default function RewardsStakingOptions(props) {
 
-    async function loadAssets() {
-        try {
-
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
     const auth = useContext(AuthenticateContext);
     // falta los SETS
     const [stakingAmountInputValue, setStakingAmountInputValue] = useState("0.00");

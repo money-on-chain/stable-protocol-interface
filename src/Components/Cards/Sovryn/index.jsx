@@ -12,17 +12,6 @@ export default function Sovryn(props) {
         color = '',
         titleName = '' } = props;
 
-    async function loadAssets() {
-        try {
-
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc']);
 
@@ -56,7 +45,7 @@ export default function Sovryn(props) {
                 {/*<Col span={22}>*/}
                 <div className="title">
                     <div className="CardLogo">
-                        <img width="32" src={'icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-sovryn_fastbtc.svg'} alt="" />
+                        <img width="32" src={auth.urlBaseFull+'icons/icon-sovryn_fastbtc.svg'} alt="" />
                         <h1>Sovryn <br />FastBTC</h1>
                     </div>
                 </div>
@@ -64,7 +53,7 @@ export default function Sovryn(props) {
             </Row>
             <Row>
                 <div className="content-container"><img className="logo-img" width="111"
-                    src={'icons/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/icon-rbtclogo.svg'}
+                    src={auth.urlBaseFull+'icons/icon-rbtclogo.svg'}
                     alt="" />
                     <div className="FastBTCLeftPanel"><b>{t('MoC.fastbtc.leftPannel.header', { ns: 'moc' })}</b>
                         <ul>

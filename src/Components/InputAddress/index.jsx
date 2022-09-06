@@ -7,17 +7,6 @@ import { config } from '../../Config/config';
 
 export default function InputAddress(props) {
 
-  async function loadAssets() {
-    try {
-
-        let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-    } catch (error) {
-      console.log(`Ocurrió un error al cargar imgs: ${error}`);
-    }
-  }
-  loadAssets()
-
   const auth = useContext(AuthenticateContext);
   const {web3} = auth;
   const {
@@ -44,9 +33,8 @@ export default function InputAddress(props) {
   const addressOrRNSIsValid = (addressOrRNS) => {
     const isHexadecimal = addressOrRNS.startsWith("0x");
     const isValidChecksum = (addressOrRNS === undefined) ? false : helper.isValidAddressChecksum(addressOrRNS);
-
     if (!isValidChecksum && isHexadecimal) {
-      return onResolutionCompleted(false, 'Double check if it is the right address and continue.', addressOrRNS);
+      return onResolutionCompleted(false, '', addressOrRNS);
     }
     if (isHexadecimal && isValidChecksum) {
       return onResolutionCompleted(true, '', addressOrRNS);

@@ -7,17 +7,6 @@ import { config } from '../../../Config/config';
 
 const OperationStatusModal = ({ className, visible, onCancel, title, operationStatus, txHash }) => {
 
-    async function loadAssets() {
-        try {
-
-                let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-        } catch (error) {
-            console.log(`Ocurrió un error al cargar imgs: ${error}`);
-        }
-    }
-    loadAssets()
-
   const [t, i18n]= useTranslation(["global",'moc'])
     return (
         <Modal

@@ -135,7 +135,7 @@ export default function ListOperations(props) {
 
     const changeStatus= (percent,txt) =>{
         if( width<=768 ){
-            return (<Progress type="circle" percent={percent} width={30}/>)
+            return (<Progress type="circle" percent={percent ? percent : txt === 'confirmed' ? 100 : 0} width={30}/>)
         }else{
             return (<><Progress percent={percent} /><br /><span className={txt === 'confirmed' ? 'color-confirmed conf_title' : 'color-confirming conf_title'}>{txt}</span></>);
         }
@@ -293,7 +293,7 @@ export default function ListOperations(props) {
                 key: element.key,
                 info: '',
                 event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
-                asset: <img className="uk-preserve-width uk-border-circle" src={process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/" + asset[0].image} alt="avatar" width={32} />,
+                asset: <img className="uk-preserve-width uk-border-circle" src={auth.urlBaseFull+ asset[0].image} alt="avatar" width={32} />,
                 // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                 platform: <span className="display-inline CurrencyTx">{element.platform}</span>,
                 wallet: <span className="display-inline ">{element.wallet} </span>,
