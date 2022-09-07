@@ -67,7 +67,9 @@ export default function MintModal(props) {
   const [comment, setComment] = useState('');
   const [showError, setShowError] = useState(false);
   const [t, i18n]= useTranslation(["global",'moc'])
-  const { appMode } = 'Moc';
+  // const { appMode } = 'Moc';
+  const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
+  const appMode = config.environment.AppMode;
 
   let userComment = '';
   let userTolerance = '';
@@ -406,9 +408,9 @@ export default function MintModal(props) {
                     if( currentHash!=null && currentHash!='') {
                       return <><p className={'text-align-center'}><img src={auth.urlBase + "global/status-pending.png"} width={50} height={50}
                                        className='img-status rotate'/>.</p><p
-                          className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p></>;
+                          className={'Transaction_confirmation'}>{t(`${appMode}.PleaseReviewYourWallet`, {ns: ns})}</p></>;
                     }else {
-                      return <p className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p>
+                      return <p className={'Transaction_confirmation'}>{t(`${appMode}.PleaseReviewYourWallet`, {ns: ns})}</p>
                     }
                   case 'PENDING':
                       return <><p className={'text-align-center'}><img src={auth.urlBase+"global/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;

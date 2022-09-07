@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { useTranslation } from "react-i18next";
+import { config} from '../../../Config/config';
 const BigNumber = require('bignumber.js');
 
 export default function Sovryn(props) {
@@ -13,7 +14,9 @@ export default function Sovryn(props) {
         titleName = '' } = props;
 
     const auth = useContext(AuthenticateContext);
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
+    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
+    const appMode = config.environment.AppMode;
 
     const getBalance = () => {
         if (auth.userBalanceData) {
@@ -55,13 +58,13 @@ export default function Sovryn(props) {
                 <div className="content-container"><img className="logo-img" width="111"
                     src={auth.urlBaseFull+'icons/icon-rbtclogo.svg'}
                     alt="" />
-                    <div className="FastBTCLeftPanel"><b>{t('MoC.fastbtc.leftPannel.header', { ns: 'moc' })}</b>
+                    <div className="FastBTCLeftPanel"><b>{t(`${appMode}.fastbtc.leftPannel.header`, { ns: ns })}</b>
                         <ul>
-                            <li className="instruction-item">{t('MoC.fastbtc.leftPannel.items.0', { ns: 'moc' })}</li>
-                            <li className="instruction-item">{t('MoC.fastbtc.leftPannel.items.1', { ns: 'moc' })}</li>
-                            <li className="instruction-item">{t('MoC.fastbtc.leftPannel.items.2', { ns: 'moc' })}</li>
+                            <li className="instruction-item">{t(`${appMode}.fastbtc.leftPannel.items.0`, { ns: ns })}</li>
+                            <li className="instruction-item">{t(`${appMode}.fastbtc.leftPannel.items.1`, { ns: ns })}</li>
+                            <li className="instruction-item">{t(`${appMode}.fastbtc.leftPannel.items.2`, { ns: ns })}</li>
                         </ul>
-                        <a href="https://www.rsk.co/rbtc/" target="_blank" rel="noopener noreferrer">&gt; {t('MoC.fastbtc.leftPannel.learnMore', { ns: 'moc' })}</a></div>
+                        <a href="https://www.rsk.co/rbtc/" target="_blank" rel="noopener noreferrer">&gt; {t(`${appMode}.fastbtc.leftPannel.learnMore`, { ns: ns })}</a></div>
                 </div>
             </Row>
 

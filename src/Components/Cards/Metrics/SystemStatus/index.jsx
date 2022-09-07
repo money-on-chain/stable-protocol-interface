@@ -6,6 +6,7 @@ import { formatValueToContract } from '../../../../Lib/Formats';
 import SystemOperations from "./operations";
 import { useTranslation } from "react-i18next";
 import { Skeleton, Tooltip } from 'antd';
+import {config} from '../../../../Config/config';
 
 const BigNumber = require('bignumber.js');
 
@@ -14,7 +15,9 @@ function SystemStatus(props) {
     const auth = useContext(AuthenticateContext);
 
     const getDatas = getDatasMetrics(auth)
-    const [t, i18n] = useTranslation(["global", 'moc'])
+    const [t, i18n] = useTranslation(["global", 'moc']);
+    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
+    const appMode = config.environment.AppMode;
 
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
@@ -26,8 +29,8 @@ function SystemStatus(props) {
 
     const configStatusGreen = {
         className: 'statusGreen',
-        title: t('MoC.metrics.statusGreen.title', {ns: 'moc'}),
-        subtitle: t('MoC.metrics.statusGreen.subtitle', {ns: 'moc'}),
+        title: t(`${appMode}.metrics.statusGreen.title`, {ns: ns}),
+        subtitle: t(`${appMode}.metrics.statusGreen.subtitle`, {ns: ns}),
         operationsAvailable: [
             "mintSTABLE",
             "redeemSTABLEOnSettlement",
@@ -41,8 +44,8 @@ function SystemStatus(props) {
 
     const configStatusYellow = {
         className: 'statusYellow',
-        title: t('MoC.metrics.statusYellow.title', {ns: 'moc'}),
-        subtitle: t('MoC.metrics.statusYellow.subtitle', {ns: 'moc'}),
+        title: t(`${appMode}.metrics.statusYellow.title`, {ns: ns}),
+        subtitle: t(`${appMode}.metrics.statusYellow.subtitle`, {ns: ns}),
         operationsAvailable: [
             "redeemSTABLEOnSettlement",
             "mintRISKPRO",
@@ -53,8 +56,8 @@ function SystemStatus(props) {
 
     const configStatusOrange = {
         className: 'statusOrange',
-        title: t('MoC.metrics.statusOrange.title', {ns: 'moc'}),
-        subtitle: t('MoC.metrics.statusOrange.subtitle', {ns: 'moc'}),
+        title: t(`${appMode}.metrics.statusOrange.title`, {ns: ns}),
+        subtitle: t(`${appMode}.metrics.statusOrange.subtitle`, {ns: ns}),
         operationsAvailable: [
             "mintRISKPRO",
             "mintRISKPROX",
@@ -64,8 +67,8 @@ function SystemStatus(props) {
 
     const configStatusRed = {
         className: 'statusRed',
-        title: t('MoC.metrics.statusRed.title', {ns: 'moc'}),
-        subtitle: t('MoC.metrics.statusRed.subtitle', {ns: 'moc'}),
+        title: t(`${appMode}.metrics.statusRed.title`, {ns: ns}),
+        subtitle: t(`${appMode}.metrics.statusRed.subtitle`, {ns: ns}),
         operationsAvailable: [
             "mintRISKPROX",
             "redeemRISKPROX"
@@ -139,9 +142,9 @@ function SystemStatus(props) {
                     ? <><div>
                             <div className="CardMetricContent" style={{ alignItems: 'center', justifyItems: 'center', marginTop: 0 }}>
                                 <CheckCircleFilled style={{ marginLeft: 5, fontSize: 30 }} className={className} />
-                                <div className={className} style={{ fontWeight: 500, marginLeft: 10, fontSize: '19.6px' }} dangerouslySetInnerHTML={{ __html: customTitle(t("MoC.metrics.".concat(className.concat('.title')), { ns: 'moc' })) }}></div>
+                                <div className={className} style={{ fontWeight: 500, marginLeft: 10, fontSize: '19.6px' }} dangerouslySetInnerHTML={{ __html: customTitle(t(`${appMode}.metrics.`.concat(className.concat('.title')), { ns: ns })) }}></div>
                             </div>
-                            <h5 style={{ marginLeft: 35 }}> {t("MoC.metrics.".concat(className.concat('.subtitle')), { ns: 'moc' })} </h5>
+                            <h5 style={{ marginLeft: 35 }}> {t(`${appMode}.metrics.`.concat(className.concat('.subtitle')), { ns: ns })} </h5>
                         </div>
                         <div>
                             <h5>{t('global.Metrics_globalCoverage', { ns: 'global' })}</h5>
@@ -154,7 +157,7 @@ function SystemStatus(props) {
                     </> : <Skeleton active={true} />
                 }
             </div>
-            <h3 className="CardTitle" style={{ marginTop: 50 }}>{t('MoC.metrics.systemOperations.title', { ns: 'moc' })}</h3>
+            <h3 className="CardTitle" style={{ marginTop: 50 }}>{t(`${appMode}.metrics.systemOperations.title`, { ns: ns })}</h3>
             <div className="CardMetricContent" style={{ marginTop: 10 }}>
                 {!loading
                    ? <SystemOperations statusClassName={className} operationsAvailable={operationsAvailable} />

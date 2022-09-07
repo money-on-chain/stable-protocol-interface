@@ -22,7 +22,9 @@ const Table = ({ accountData }) => {
   }, []);
   const [operations, setOperations] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [t, i18n]= useTranslation(["global",'moc']);
+  const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
+  const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
+  const appMode = config.environment.AppMode;
 
   const address = accountData?.Owner;
   const socket = auth.socket;
@@ -60,19 +62,19 @@ const Table = ({ accountData }) => {
 
   const columns = [
     {
-      title: t('MoC.fastbtc.history.columns_headers.step', {ns: 'moc'}),
+      title: t(`${appMode}.fastbtc.history.columns_headers.step`, {ns: ns}),
       dataIndex: 'step',
       key: 'step'
     },
     {
-      title: t('MoC.fastbtc.history.columns_headers.type', {ns: 'moc'}),
+      title: t(`${appMode}.fastbtc.history.columns_headers.type`, {ns: ns}),
       dataIndex: 'type',
       key: 'type',
-      render: text => t('MoC.fastbtc.history.columns.type_' + text, {ns: 'moc'}),
+      render: text => t(`${appMode}.fastbtc.history.columns.type_` + text, {ns: ns}),
       responsive: ['md']
     },
     {
-      title: t('MoC.fastbtc.history.columns_headers.dateAdded', {ns: 'moc'}),
+      title: t(`${appMode}.fastbtc.history.columns_headers.dateAdded`, {ns: ns}),
       dataIndex: 'dateAdded',
       key: 'dateAdded',
       responsive: ['md'],
@@ -80,28 +82,28 @@ const Table = ({ accountData }) => {
       defaultSortOrder: 'descend',
       sorter: dateAddedSort,
       render: text =>
-        text ? moment(text).format(t('MoC.fastbtc.history.columns.dateAddedFormat', {ns: 'moc'})) : '--'
+        text ? moment(text).format(t(`${appMode}.fastbtc.history.columns.dateAddedFormat`, {ns: ns})) : '--'
     },
     {
-      title: t('MoC.fastbtc.history.columns_headers.status', {ns: 'moc'}),
+      title: t(`${appMode}.fastbtc.history.columns_headers.status`, {ns: ns}),
       key: 'status',
       dataIndex: 'status',
-      render: text => <span className={setStatus(text)}>{t('MoC.fastbtc.history.columns.status_' + text, {ns: 'moc'})}</span>
+      render: text => <span className={setStatus(text)}>{t(`${appMode}.fastbtc.history.columns.status_` + text, {ns: ns})}</span>
     },
     {
-      title: t('MoC.fastbtc.history.columns_headers.valueBtc', {ns: 'moc'}),
+      title: t(`${appMode}.fastbtc.history.columns_headers.valueBtc`, {ns: ns}),
       key: 'valueBtc',
       dataIndex: 'valueBtc',
       render: (text, record) => {
         const value = SatoshiToBTC.toBitcoin(text);
         return record.type === 'deposit'
-          ? t('MoC.fastbtc.history.columns.valueBTC', {ns: 'moc', value})
-          : t('MoC.fastbtc.history.columns.valueRBTC', {ns: 'moc', value});
+          ? t(`${appMode}.fastbtc.history.columns.valueBTC`, {ns: ns, value})
+          : t(`${appMode}.fastbtc.history.columns.valueRBTC`, {ns: ns, value});
       },
       responsive: ['sm']
     },
     {
-      title: t('MoC.fastbtc.history.columns_headers.txHash', {ns: 'moc'}),
+      title: t(`${appMode}.fastbtc.history.columns_headers.txHash`, {ns: ns}),
       key: 'txHash',
       dataIndex: 'txHash',
       render: (text, record) => {
@@ -155,9 +157,9 @@ const Table = ({ accountData }) => {
 };
 
   const locale = {
-    emptyText: loading ? <Skeleton active /> : t('MoC.operations.empty', {ns: 'moc'}),
-    triggerDesc: t('MoC.fastbtc.history.table.triggerDesc', {ns: 'moc'}),
-    triggerAsc: t('MoC.fastbtc.history.table.triggerAsc', {ns: 'moc'})
+    emptyText: loading ? <Skeleton active /> : t(`${appMode}.operations.empty`, {ns: ns}),
+    triggerDesc: t(`${appMode}.fastbtc.history.table.triggerDesc`, {ns: ns}),
+    triggerAsc: t(`${appMode}.fastbtc.history.table.triggerAsc`, {ns: ns})
   };
 
   return (
@@ -172,8 +174,8 @@ const Table = ({ accountData }) => {
               const item = result;
               item.step =
                 item.type === 'deposit'
-                  ? t('MoC.fastbtc.history.columns.step_1', {ns: 'moc'})
-                  : t('MoC.fastbtc.history.columns.step_2', {ns: 'moc'});
+                  ? t(`${appMode}.fastbtc.history.columns.step_1`, {ns: ns})
+                  : t(`${appMode}.fastbtc.history.columns.step_2`, {ns: ns});
               return item;
             })
             .sort((a, b) => dateAddedSort(a, b) * -1)}

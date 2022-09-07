@@ -6,13 +6,15 @@ import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import MocAmount from "../../Components/Cards/MocAmount";
 import { AuthenticateContext } from '../../Context/Auth';
 import { useTranslation } from "react-i18next";
-
 import Claims from "../../Components/Tables/Claims";
+import { config } from './../../Config/config';
 
 export default function Rewards(props) {
 
     const auth = useContext(AuthenticateContext);
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
+    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
+    const appMode = config.environment.AppMode;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
 
@@ -29,8 +31,8 @@ export default function Rewards(props) {
                 showIcon
                 className="AlertNoConnection"
             />}
-            <h1 className="PageTitle">{t('MoC.wallets.MOC.title', { ns: 'moc' })}</h1>
-            <h3 className="PageSubTitle">{t('MoC.wallets.MOC.subtitle', { ns: 'moc' })}</h3>
+            <h1 className="PageTitle">{t(`${appMode}.wallets.MOC.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${appMode}.wallets.MOC.subtitle`, { ns: ns })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <div className="ContainerMocAmountDatas">

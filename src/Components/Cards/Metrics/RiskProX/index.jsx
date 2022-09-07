@@ -3,11 +3,14 @@ import { AuthenticateContext } from '../../../../Context/Auth';
 import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
 import { Skeleton } from 'antd';
+import {config} from '../../../../Config/config';
 
 function RiskProX(props) {
     const auth = useContext(AuthenticateContext);
 
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
+    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
+    const appMode = config.environment.AppMode;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
 
@@ -23,32 +26,32 @@ function RiskProX(props) {
                     src={auth.urlBaseFull+'icon-riskprox.svg'}
                     alt=""
                     style={{ marginRight: 10 }}
-                /> {t('MoC.wallets.RISKPROX.title', { ns: 'moc' })}
+                /> {t(`${appMode}.wallets.RISKPROX.title`, { ns: ns })}
             </h3>
 
             <div className="CardMetricContent BProxThemeMetric">
                 {!loading
                     ? <>
                         <div>
-                            <h5>{t('MoC.metrics.RISKPROX.usd', { ns: 'moc' })}</h5>
+                            <h5>{t(`${appMode}.metrics.RISKPROX.usd`, { ns: ns })}</h5>
                             <span>
                                 <LargeNumber amount={props.usdValue} currencyCode={'USDPrice'} />
                             </span>
-                            <h5 style={{ marginTop: '2em' }}>{t('MoC.metrics.RISKPROX.total', { ns: 'moc' })}</h5>
+                            <h5 style={{ marginTop: '2em' }}>{t(`${appMode}.metrics.RISKPROX.total`, { ns: ns })}</h5>
                             <span className={'red space'}>
                                 <LargeNumber amount={props.total} currencyCode="RISKPROX" />
                             </span>
-                            <h5>{t('MoC.metrics.RISKPROX.availableMint', { ns: 'moc' })}</h5>
+                            <h5>{t(`${appMode}.metrics.RISKPROX.availableMint`, { ns: ns })}</h5>
                             <span className={'red'}>
                                 <LargeNumber amount={props.availableMint} currencyCode="RISKPROX" />
                             </span>
                         </div>
                         <div className="separator" /><div>
-                            <h5>{t('MoC.metrics.RISKPROX.leverage', { ns: 'moc' })}</h5>
+                            <h5>{t(`${appMode}.metrics.RISKPROX.leverage`, { ns: ns })}</h5>
                             <span className={'space'}>
                                 <LargeNumber amount={props.leverage} currencyCode="RISKPROX" />
                             </span>
-                            <h5>{t('MoC.metrics.RISKPROX.coverage', { ns: 'moc' })}</h5>
+                            <h5>{t(`${appMode}.metrics.RISKPROX.coverage`, { ns: ns })}</h5>
                             <LargeNumber amount={props.coverage} currencyCode="RISKPROX" />
                         </div></>
                 : <Skeleton active={true} />}

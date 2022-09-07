@@ -6,6 +6,8 @@ import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber"
 import moment from 'moment';
 import {formatLocalMap2} from "../Lib/Formats";
 const BigNumber = require('bignumber.js');
+const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
+const appMode = config.environment.AppMode;
 
 export function setNumber(number){
     if(number.indexOf(".")!==-1){
@@ -181,7 +183,7 @@ export function readJsonTable(data_j,t, i18n){
             i18n:i18n
         }),
         status: data_j.status,
-        token_involved: t(`MoC.Tokens_${data_j.tokenInvolved}_code`, { ns: 'moc' }),
+        token_involved: t(`${appMode}Tokens_${data_j.tokenInvolved}_code`, { ns: ns }),
         t: t,
         i18n:i18n
     })

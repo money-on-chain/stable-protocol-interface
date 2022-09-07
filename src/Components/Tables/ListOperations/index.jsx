@@ -37,7 +37,9 @@ export default function ListOperations(props) {
     const [yScroll, setYScroll] = useState(undefined);
     const [xScroll, setXScroll] = useState(undefined);
 
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
+    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
+    const appMode = config.environment.AppMode;
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
     const [currencyCode, setCurrencyCode]=  useState('MOC');
@@ -148,32 +150,32 @@ export default function ListOperations(props) {
         },
 
         {
-            title: t('MoC.operations.columns.event', { ns: 'moc' }),
+            title: t(`${appMode}.operations.columns.event`, { ns: ns }),
             dataIndex: 'event',
             hidden:eventHidden
         },
         {
-            title: t('MoC.operations.columns.type', { ns: 'moc' }),
+            title: t(`${appMode}.operations.columns.type`, { ns: ns }),
             dataIndex: 'asset',
             hidden:assetHidden
         },
         {
-            title: t('MoC.operations.columns.amount', { ns: 'moc' }),
+            title: t(`${appMode}.operations.columns.amount`, { ns: ns }),
             dataIndex: 'platform',
             hidden:platformHidden
         },
         {
-            title: t('MoC.operations.columns.totalBtc', { ns: 'moc' }),
+            title: t(`${appMode}.operations.columns.totalBtc`, { ns: ns }),
             dataIndex: 'wallet',
             hidden:walletHidden
         },
         {
-            title: t('MoC.operations.columns.date', { ns: 'moc' }),
+            title: t(`${appMode}.operations.columns.date`, { ns: ns }),
             dataIndex: 'date',
             hidden:dateHidden
         },
         {
-            title: (!statusLabelHidden)? t('MoC.operations.columns.status', { ns: 'moc' }): '',
+            title: (!statusLabelHidden)? t(`${appMode}.operations.columns.status`, { ns: ns }): '',
             dataIndex: 'status',
             hidden:statusHidden
         },
@@ -273,26 +275,26 @@ export default function ListOperations(props) {
             switch (element.asset) {
                 case 'STABLE':
                     asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
-                    data_row_coins2[index].detail.asset = t('MoC.Tokens_STABLE_code', { ns: 'moc' });
+                    data_row_coins2[index].detail.asset = t(`${appMode}.Tokens_STABLE_code`, { ns: ns });
                     break;
                 case 'RISKPRO':
                     asset.push({ 'image': 'icon-riskpro.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
-                    data_row_coins2[index].detail.asset = t('MoC.Tokens_RISKPRO_code', { ns: 'moc' });
+                    data_row_coins2[index].detail.asset = t(`${appMode}.Tokens_RISKPRO_code`, { ns: ns });
                     break;
                 case 'RISKPROX':
                     asset.push({ 'image': 'icon-riskprox.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
-                    data_row_coins2[index].detail.asset = t('MoC.Tokens_RISKPROX_code', { ns: 'moc' });
+                    data_row_coins2[index].detail.asset = t(`${appMode}.Tokens_RISKPROX_code`, { ns: ns });
                     break;
                 default:
                     asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
-                    data_row_coins2[index].detail.asset = t('MoC.Tokens_STABLE_code', { ns: 'moc' });
+                    data_row_coins2[index].detail.asset = t(`${appMode}.Tokens_STABLE_code`, { ns: ns });
                     break;
             }
 
             data.push({
                 key: element.key,
                 info: '',
-                event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
+                event: <span className={classnames('event-action', `${appMode}-${asset[0].color}`)}>{element.event}</span>,
                 asset: <img className="uk-preserve-width uk-border-circle" src={auth.urlBaseFull+ asset[0].image} alt="avatar" width={32} />,
                 // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                 platform: <span className="display-inline CurrencyTx">{element.platform}</span>,
@@ -351,8 +353,8 @@ export default function ListOperations(props) {
     return (
         <>
             <div className="title">
-                <h1>{t('MoC.operations.title', { ns: 'moc' })}</h1>
-                <Tooltip color={'#404040'} placement="topLeft" title={t("MoC.operations.tooltip.text", { ns: 'moc' })} className='Tooltip'>
+                <h1>{t(`${appMode}.operations.title`, { ns: ns })}</h1>
+                <Tooltip color={'#404040'} placement="topLeft" title={t(`${appMode}.operations.tooltip.text`, { ns: ns })} className='Tooltip'>
                     <InfoCircleOutlined className="Icon" />
                 </Tooltip>
             </div>

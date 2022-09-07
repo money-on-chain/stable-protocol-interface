@@ -6,13 +6,16 @@ import Copy from "../../Page/Copy";
 import { AuthenticateContext } from "../../../Context/Auth";
 import { useTranslation } from "react-i18next";
 import SendModal from '../../Modals/SendModal';
+import { config } from '../../../Config/config';
 
 
 function WalletBalance(props) {
 
     const auth= useContext(AuthenticateContext);
     const { accountData = {} } = auth;
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
+    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
+    const appMode = config.environment.AppMode;
     const [loading, setLoading] = useState(true);
 
     const timeSke= 1500
@@ -29,7 +32,7 @@ function WalletBalance(props) {
                 {auth.isLoggedIn &&
                 <div className="TotalBalanceBottom justify-content-initial">
                     <div className="CopyableText ">
-                        <span className="title">{t('MoC.operations.columns_detailed.address', {ns: 'moc'})}</span>
+                        <span className="title">{t(`${appMode}.operations.columns_detailed.address`, {ns: ns})}</span>
                         <div>
                             <Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Wallet}/>
                         </div>

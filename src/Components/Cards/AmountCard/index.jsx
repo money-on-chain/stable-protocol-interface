@@ -9,11 +9,14 @@ import { useTranslation } from "react-i18next";
 import BalanceItem from '../../BalanceItem/BalanceItem';
 import InformationModal from '../../Modals/InformationModal';
 import { formatLocalMap2 } from '../../../Lib/Formats';
+import { config } from './../../../Config/config';
 const BigNumber = require('bignumber.js');
 
 export default function AmountCard(props) {
 
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
+    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
+    const appMode = config.environment.AppMode;
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;
     const [loading, setLoading] = useState(true);
@@ -68,7 +71,7 @@ export default function AmountCard(props) {
     const convertTo = convertToCurrency => convertToken(tokenName, convertToCurrency, getBalance());
     // const converToUSD = convertToCurrency => ConvertToken(tokenName, convertToCurrency, getBalanceUSD());
 
-    const pre_label = t(`MoC.Tokens_${tokenName.toUpperCase()}_name`, { ns: 'moc' })
+    const pre_label = t(`${appMode}.Tokens_${tokenName.toUpperCase()}_name`, { ns: ns })
 
     return (
         <Fragment>
@@ -94,7 +97,7 @@ export default function AmountCard(props) {
                 <Row className="tokenAndBalance">
                     <div className="priceContainer">
                         <Tooltip title={Number(getBalance())?.toLocaleString(formatLocalMap2[i18n.languages[0]])}>
-                            <div>
+                            <div className={`color-price-${tokenName}`}>
                             <LargeNumber {...{ amount: getBalance(), currencyCode: tokenName }} />
                             </div>
                         </Tooltip>
