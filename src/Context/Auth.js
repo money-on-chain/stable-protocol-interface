@@ -37,6 +37,7 @@ const AuthenticateContext = createContext({
     web3: null,
     urlBaseFull:null,
     urlBase:null,
+    getAppMode:null,
     connect: () => {},
     interfaceExchangeMethod: async (sourceCurrency, targetCurrency, amount, slippage, onTransaction, onReceipt) => {},
     interfaceMintRiskPro: async (amount, slippage, onTransaction, onReceipt) => {},
@@ -84,6 +85,7 @@ const AuthenticateProvider = ({ children }) => {
     const [userBalanceData, setUserBalanceData] = useState(null);
     const [urlBaseFull, setUrlBaseFull] = useState(process.env.REACT_APP_PUBLIC_URL+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/');
     const [urlBase, setUrlBase] = useState(process.env.REACT_APP_PUBLIC_URL);
+    const [getAppMode, seGetAppMode] = useState(config.environment.AppMode);
     const [accountData, setAccountData] = useState({
         Wallet: '',
         Owner: '',
@@ -418,12 +420,30 @@ const AuthenticateProvider = ({ children }) => {
 
     const getSpendableBalance = async (address) => {
         const from = address || account;
-        return await web3.eth.getBalance(from);
+        const dContracts = window.integration;
+        const appMode = config.environment.AppMode;
+
+        if (appMode === 'RRC20') {
+            const reservetoken = dContracts.contracts.reservetoken;
+            return reservetoken.methods.balanceOf(from).call();
+        } else {
+            return await web3.eth.getBalance(from);
+        }
+
     }
 
     const getReserveAllowance = async (address) => {
         const from = address || account;
-        return await web3.eth.getBalance(from);
+        const dContracts = window.integration;
+        const appMode = config.environment.AppMode;
+
+        if (appMode === 'RRC20') {
+            const reservetoken = dContracts.contracts.reservetoken;
+            return reservetoken.methods.allowance(from, dContracts.contracts.moc._address).call();
+        } else {
+            return await web3.eth.getBalance(from);
+        }
+
     }
 
     const getTransactionReceipt = async (hash, callback) => {
@@ -625,6 +645,7 @@ const AuthenticateProvider = ({ children }) => {
                 web3,
                 urlBaseFull,
                 urlBase,
+                getAppMode,
                 connect,
                 disconnect,
                 interfaceExchangeMethod,
