@@ -127,15 +127,15 @@ export default function MintModal(props) {
     userComment = comment;
     userTolerance = uTolerance;
 
-    /* const { appMode } = window;
     // In rrc20 mode show allowance when need it
     if (appMode === 'RRC20') {
-      const userAllowance = await window.nodeManager.getReserveAllowance(window.address);
+      const userAllowance = await auth.getReserveAllowance(window.address);
       if (valueYouExchange > userAllowance) {
-        allowanceReserveModalShow(true);
+        //allowanceReserveModalShow(true);
+        console.log("Need allowance... Display allowance form");
         return;
       }
-    } */
+    }
     onConfirmTransactionFinish();
 
   };
