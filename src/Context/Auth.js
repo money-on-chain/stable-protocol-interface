@@ -420,12 +420,30 @@ const AuthenticateProvider = ({ children }) => {
 
     const getSpendableBalance = async (address) => {
         const from = address || account;
-        return await web3.eth.getBalance(from);
+        const dContracts = window.integration;
+        const appMode = config.environment.AppMode;
+
+        if (appMode === 'RRC20') {
+            const reservetoken = dContracts.contracts.reservetoken;
+            return reservetoken.methods.balanceOf(from).call();
+        } else {
+            return await web3.eth.getBalance(from);
+        }
+
     }
 
     const getReserveAllowance = async (address) => {
         const from = address || account;
-        return await web3.eth.getBalance(from);
+        const dContracts = window.integration;
+        const appMode = config.environment.AppMode;
+
+        if (appMode === 'RRC20') {
+            const reservetoken = dContracts.contracts.reservetoken;
+            return reservetoken.methods.allowance(from, dContracts.contracts.moc._address).call();
+        } else {
+            return await web3.eth.getBalance(from);
+        }
+
     }
 
     const getTransactionReceipt = async (hash, callback) => {
