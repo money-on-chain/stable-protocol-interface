@@ -123,13 +123,8 @@ export default function Admin() {
                     </Menu.Item>
                     <SubMenu key="information" title="Profile" icon={<p className={`set-icon-information-solid-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT}`}></p>} theme={'light'}>
                         { auth.getAppMode=='MoC' &&
-<<<<<<< HEAD
-                        <><Menu.Item key="contract_repository"
-                                     onClick={() => window.open('https://github.com/money-on-chain/main-RBTC-contract', '_self')}>{t('MoC.info-button.contract-repository', {ns: 'moc'})}</Menu.Item>
-=======
                             <><Menu.Item key="contract_repository"
                                        onClick={() => window.open('https://github.com/money-on-chain/main-RBTC-contract', '_self')}>{t('MoC.info-button.contract-repository', {ns: 'moc'})}</Menu.Item>
->>>>>>> dev
                             <Menu.Item key="webapp_repository"
                                        onClick={() => window.open('https://github.com/money-on-chain/webapp-stable-ipfs', '_self')}>{t('MoC.info-button.webapp-repository', {ns: 'moc'})}</Menu.Item>
                             <Menu.Item key="help_center"
