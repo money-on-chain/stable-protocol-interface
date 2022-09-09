@@ -73,7 +73,8 @@ const AuthenticateContext = createContext({
     interfaceApproveReserve: async (address) => {},
     convertToken: async (from, to, amount) => {},
     getSpendableBalance: async (address) => {},
-    loadContractsStatusAndUserBalance: async (address) => {}
+    loadContractsStatusAndUserBalance: async (address) => {},
+    getReserveAllowance: async (address) => {}
 });
 
 const AuthenticateProvider = ({ children }) => {
@@ -681,6 +682,7 @@ const AuthenticateProvider = ({ children }) => {
                 socket,
                 convertToken,
                 getSpendableBalance,
+                getReserveAllowance,
                 interfaceDecodeEvents,
                 loadContractsStatusAndUserBalance
             }}

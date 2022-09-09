@@ -81,6 +81,37 @@ a {
   }
 }
 
+.MoC-stable {
+  color: $color-moc-stable;
+}
+.MoC-riskpro {
+  color: $color-moc-riskpro;
+}
+.MoC-riskprox {
+  color: $color-moc-riskprox;
+}
+.RRC20-stable {
+  color: $color-roc-stable;
+}
+.RRC20-riskpro {
+  color: $color-roc-riskpro;
+}
+.RRC20-riskprox {
+  color: $color-roc-riskprox;
+}
+.RRC20-RISKPRO {
+  color: $color-roc-riskpro;
+}
+.Few {
+  font-size: 15px;
+  font-weight: 500;
+  color: #707070;
+}
+.RRC20-RESERVE {
+  color: $color-roc-reserve;
+}
+
+
 .Numbers {
   &.Left {
     text-align: left;
@@ -1026,4 +1057,16 @@ a {
 
 .ant-form-item-explain-success{
   color: black;
+}
+
+.success{
+  color: $primary-color;
+}
+
+.pending {
+  color: $color-pending;
+}
+
+.error {
+  color: $red;
 }

@@ -1,7 +1,7 @@
 /* eslint-disable default-case */
 /* eslint-disable react/jsx-no-target-blank */
-import { Button, Collapse, Slider } from 'antd';
-import { SettingFilled } from '@ant-design/icons';
+import {Button, Collapse, Slider, Spin} from 'antd';
+import {LoadingOutlined, SettingFilled} from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
 import './RDoC/style.scss';
 import React, {useState, useContext, useEffect, Fragment} from 'react';
@@ -66,11 +66,23 @@ export default function MintModal(props) {
   const [currentHash, setCurrentHash] = useState(null);
   const [comment, setComment] = useState('');
   const [showError, setShowError] = useState(false);
+  const [ShowModalAllowanceReserve, setShowModalAllowanceReserve] = useState(false);
+  const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] = useState('Confirm');
   const [t, i18n]= useTranslation(["global",'moc'])
   const { appMode } = 'Moc';
 
   let userComment = '';
   let userTolerance = '';
+
+  async function loadAssets() {
+    try {
+      // let css1= await import('../../Modals/StakingOptionsModal/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+    } catch (error) {
+      console.log(`Ocurrió un error al cargar imgs: ${error}`);
+    }
+  }
+  loadAssets()
 
   useEffect(
     () => {
@@ -88,13 +100,14 @@ export default function MintModal(props) {
   /* View */
   const renderAmount = (name, amountAndCurrencyCode, classElement) => {
     return (
-      <div className={`AlignedAndCentered Amount mrb-0 color-08374F ${classElement}`} style={{'display':'flex'}}>
+      <div className={`AlignedAndCentered Amount mrb-0 ${classElement} ${auth.getAppMode}-${amountAndCurrencyCode.currencyCode}`} style={{'display':'flex'}}>
         {/*<span className="Name">{name}</span>*/}
-        <span className={`Value  ${appMode}`}>
+        <span className={`Value ${appMode} RRC20-stable`}>
           <LargeNumberF2
             currencyCode={amountAndCurrencyCode.currencyCode}
             amount={amountAndCurrencyCode.value}
             includeCurrency
+            auth={auth}
           />
         </span>
       </div>
@@ -127,8 +140,9 @@ export default function MintModal(props) {
     userComment = comment;
     userTolerance = uTolerance;
 
+    const { appMode } = window;
     // In rrc20 mode show allowance when need it
-    if (appMode === 'RRC20') {
+    if (auth.getAppMode === 'RRC20') {
       const userAllowance = await auth.getReserveAllowance(window.address);
       if (valueYouExchange > userAllowance) {
         //allowanceReserveModalShow(true);
@@ -137,8 +151,131 @@ export default function MintModal(props) {
       }
     }
     onConfirmTransactionFinish();
-
   };
+
+  const allowanceReserveModalClose = async () => {
+    setShowModalAllowanceReserve(false);
+  };
+
+  const allowanceReserveModalShow = async () => {
+    setShowModalAllowanceReserve(true);
+  };
+
+
+  const renderAllowanceReserveModalConfirm = () => {
+    return (
+        <>
+          <h1 className="AllowanceModal_Title">
+            {t('global.ReserveAllowanceModal_SetAllowance')}
+          </h1>
+          <div className="AllowanceModal_Content">
+            <p>
+              {t('global.ReserveAllowanceModal_AllowanceDescription')}
+            </p>
+            <div className={'text-align-center'}>
+              <Button
+                  className={'bttn-confirm'}
+                  type="primary"
+                  onClick={setAllowanceReserve}
+              >
+                {t('global.ReserveAllowanceModal_Authorize')}
+              </Button>
+            </div>
+          </div>
+        </>
+    );
+  };
+
+  const renderAllowanceReserveModalLoading = () => {
+    return (
+        <>
+          <h1 className="ReserveAllowanceModal_Title">
+            {t('global.ReserveAllowanceModal_SetAllowance')}
+          </h1>
+          <div className="ReserveAllowanceModal_Content AllowanceLoading">
+            <Spin indicator={<LoadingOutlined />} />
+            <p>
+              {t('global.ReserveAllowanceModal_ProccessingAllowance')}
+            </p>
+          </div>
+        </>
+    );
+  };
+
+  const renderAllowanceReserveModal = () => {
+    var renderContent = '';
+    if (ModalAllowanceReserveMode === 'Confirm') {
+      renderContent = renderAllowanceReserveModalConfirm();
+    } else {
+      renderContent = renderAllowanceReserveModalLoading();
+    }
+
+    return (
+        <Modal
+            className="ReserveAllowanceModal OptionsModalAllowence"
+            visible={ShowModalAllowanceReserve}
+            onCancel={allowanceReserveModalClose}
+            footer={null}
+        >
+          {renderContent}
+        </Modal>
+    );
+  };
+
+  const setAllowanceReserve = () => {
+    setModalAllowanceReserveMode('Waiting');
+    const result = auth.interfaceApproveReserve(null, (a, _txHash) => {
+      msgAllowanceTx(_txHash);
+    });
+    result.then(() => setDoneAllowanceReserve()).catch(() => setFailAllowanceReserve());
+    msgAllowanceReserveSend();
+  };
+
+
+  const setDoneAllowanceReserve = () => {
+    setModalAllowanceReserveMode('Confirm');
+    allowanceReserveModalClose();
+    // onConfirmTransactionFinish();
+  };
+
+  const setFailAllowanceReserve = () => {
+    setModalAllowanceReserveMode('Confirm');
+    allowanceReserveModalClose();
+  };
+
+  const msgAllowanceTx = (txHash) => {
+    const key = `open${Date.now()}`;
+    const onClick = `${window.explorerUrl}/tx/${txHash}`;
+    const btn = (
+        <Button
+            type="primary"
+            size="small"
+            onClick={() =>
+                window.open(`${window.explorerUrl}/tx/${txHash}`)
+            }
+        >
+          Explorer TX
+        </Button>
+    );
+    notification['warning']({
+      message: t('MoC.exchange.allowance.allowanceTxTitle', {ns: 'moc'}),
+      description: t('MoC.exchange.allowance.allowanceTxDescription', {ns: 'moc'}),
+      btn,
+      key,
+      duration: 35
+    });
+  };
+
+  const msgAllowanceReserveSend = () => {
+    notification['warning']({
+      message: t('global.ReserveAllowanceModal_allowanceSendTitle'),
+      description: t(
+          'global.ReserveAllowanceModal_allowanceSendDescription'
+      ),
+      duration: 20
+    });
+  };
+
 
   const onConfirmTransactionFinish = async () => {
     const exchangeMethod = getExchangeMethod(
@@ -455,6 +592,7 @@ export default function MintModal(props) {
         <Button type="primary" onClick={() => changeContent(1)} className={'float-right width-140'}>{"Return"}</Button>
         </div>
       </Modal>
+      <div className={'StakingOptionsModal'}>{renderAllowanceReserveModal()}</div>
     </Modal>
   );
 }

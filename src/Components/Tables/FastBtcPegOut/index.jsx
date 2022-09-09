@@ -227,6 +227,13 @@ export default function FastBtcPegOut(props) {
         xScroll,
     }
 
+    let divi= document.querySelectorAll('.ant-table-tbody')
+    divi.forEach(function(userItem) {
+        if( userItem.offsetHeight!=0 ){
+            document.querySelector('.FastBTCHistory').style.height=userItem.offsetHeight+265+'px'
+        }
+    });
+
     return (
         <>
             <Table

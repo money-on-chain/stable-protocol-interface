@@ -21,10 +21,12 @@ $yellow:#E9BF4A;
 $color-moc-riskpro: #ef8a13;
 $color-moc-riskprox: #ed1c24;
 $color-moc-stable: #00a651;
+$color-moc-reserve: #08374F;
 
 $color-roc-riskpro: #0061bb;
 $color-roc-stable: #0083ff;
 $color-roc-riskprox: #67b8ff;
+$color-roc-reserve: #08374F;
 
 $color-moc: #68cdc6;
 
@@ -41,6 +43,8 @@ $theme-color-total-balance: linear-gradient(to right, rgba(5, 54, 79, 1), rgba(9
 $theme-color-incentives: linear-gradient(to right, rgba(0, 165, 152, 1), rgba(0, 213, 196, 0.7));
 $theme-color-pending: linear-gradient(to right, rgba(140, 165, 0, 1), rgba(213, 114, 0, 0.7));
 $theme-color-sent: linear-gradient(to right, rgba(0, 135, 182, 1), rgba(0, 183, 226, 0.7));
+
+$red: #ed1c24;
 
 // Configurable Font
 

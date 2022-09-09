@@ -252,3 +252,61 @@
 }
 
 
+.OptionsModalAllowence{
+  button {
+    color: rgb(0 0 0 / 85%);
+  }
+
+  .bttn-confirm{
+      width:130px;
+      text-transform: capitalize;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgb(9 193 153 / 20%), 0 2px 4px rgb(9 193 153 / 20%);
+    margin-top: 10px;
+  }
+
+  .AllowanceModal_Title {
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    color: #707070;
+    position: absolute;
+    top: 15px;
+  }
+
+  .AllowanceModal_Content {
+    margin: 3em 1em 0em 1em;
+    &.AllowanceLoading {
+      text-align: center;
+    }
+    .ant-spin {
+      span[role="img"] {
+        font-size: 72px;
+        margin: 2rem 0;
+        color: #09c199;
+      }
+    }
+
+    p {
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color emoji;
+    }
+  }
+
+  .InfoContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    .value {
+      &.amount {
+        color: #09c199;
+        display: flex;
+        span {
+          margin-left: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
