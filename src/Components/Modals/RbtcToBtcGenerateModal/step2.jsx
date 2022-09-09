@@ -116,7 +116,8 @@ function Step2(props) {
                             <div className={'inputAmount'}>
                                 <input type="number" ref={amountInput}  onBlur={handleChangeAmount} onMouseLeave={handleChangeAmount} placeholder="Enter rBTC amount to send" className="valueInput"/>
                                 <div>
-                                    <img src={auth.urlBaseFull+"/icon-reserve.svg"} alt={'img'} width={30}/>
+                                    {auth.getAppMode=='RRC20' && <img src={auth.urlBaseFull+"icon-reserve2.svg"} alt={'img'} width={30}/> }
+                                    {auth.getAppMode=='MoC' && <img src={auth.urlBaseFull+"icon-reserve.svg"} alt={'img'} width={30}/> }
                                     <span>RBTC </span>
                                 </div>
                             </div>

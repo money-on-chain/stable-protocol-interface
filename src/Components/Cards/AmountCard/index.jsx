@@ -94,7 +94,7 @@ export default function AmountCard(props) {
                 <Row className="tokenAndBalance">
                     <div className="priceContainer">
                         <Tooltip title={Number(getBalance())?.toLocaleString(formatLocalMap2[i18n.languages[0]])}>
-                            <div className={`111 1 Number ${auth.getAppMode}-${tokenName}`}>
+                            <div className={`Number ${auth.getAppMode}-${tokenName}`}>
                             <LargeNumber {...{ amount: getBalance(), currencyCode: tokenName }} />
                             </div>
                         </Tooltip>

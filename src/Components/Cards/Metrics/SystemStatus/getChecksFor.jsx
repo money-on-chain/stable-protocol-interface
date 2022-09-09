@@ -9,7 +9,7 @@ function GetChecksFor(props) {
     const [t, i18n] = useTranslation(["global", 'moc'])
 
     const isAvailable = (operation) => props.operationsAvailable.find(element => element === operation);
-    return (<div className="InfoColumn___">
+    return (<div>
         {props.operations.map(operation =>
             <div key={operation} className={`datas-opera ${isAvailable(operation) ? 'isAvailable' : ''}`} style={{'margin-left':0}}>
                 {isAvailable(operation) ? <CheckOutlined style={{color: iconCheckColor}} /> : <CloseOutlined  style={{color: iconCheckColorCloseOutlined}}/> }

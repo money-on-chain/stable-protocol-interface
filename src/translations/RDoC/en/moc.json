@@ -4,14 +4,14 @@
       "name": "Money on Chain",
       "code": "MoC"
     },
-    "Tokens_STABLE_code": "DOC",
-    "Tokens_STABLE_name": "DoC",
-    "Tokens_RISKPRO_code": "BPRO",
-    "Tokens_RISKPRO_name": "BPro",
-    "Tokens_RISKPROX_code": "BTCX",
-    "Tokens_RISKPROX_name": "BTCx",
-    "Tokens_RESERVE_code": "RBTC",
-    "Tokens_RESERVE_name": "rBTC",
+    "Tokens_STABLE_code": "RDOC",
+    "Tokens_STABLE_name": "RDoC",
+    "Tokens_RISKPRO_code": "RIFP",
+    "Tokens_RISKPRO_name": "RIFP",
+    "Tokens_RISKPROX_code": "RIFX",
+    "Tokens_RISKPROX_name": "RIFx",
+    "Tokens_RESERVE_code": "RIF",
+    "Tokens_RESERVE_name": "RIF",
     "Tokens_USD_code": "USD",
     "Tokens_USD_name": "Dollar",
     "Tokens_MOC_code": "MOC",
@@ -171,16 +171,16 @@
       "receiverAddress": "Receiver address or domain",
       "ownAddressLabel": "Your address",
       "RISKPRO": {
-        "title": "BPro",
-        "subtitle": "Manage your BPros"
+        "title": "RIFpro",
+        "subtitle": "Manage your RIFpro"
       },
       "RISKPROX": {
-        "title": "BTCx",
-        "subtitle": "Manage your BTCxs Position"
+        "title": "RIFX",
+        "subtitle": "Manage your RIFX position"
       },
       "STABLE": {
-        "title": "DoC",
-        "subtitle": "Manage your DoCs"
+        "title": "RDOC",
+        "subtitle": "Manage your RDOC"
       },
       "MOC": {
         "title": "MoC",
@@ -234,22 +234,22 @@
         "availableRedeem": "Available to redeem",
         "availableMint": "Available to Mint"
       },
-      "RISKPRO": {
-        "title": "BPro",
-        "usd": "BPro USD",
-        "availableRedeem": "Available to redeem",
-        "availableMint": "Available to Mint",
-        "leverage": "Current Leverage",
-        "total": "Total in the system",
-        "bproDiscountPriceUsd": "Discount price"
+      "RISKPRO":{
+        "title":"RIFpro",
+        "usd":"RIFpro USD",
+        "availableRedeem":"Available to redeem",
+        "availableMint":"Available to Mint",
+        "leverage":"Current Leverage",
+        "total":"Total in the system",
+        "bproDiscountPriceUsd":"Discount price"
       },
-      "RISKPROX": {
-        "title": "BTCx",
-        "usd": "BTCx USD",
-        "availableMint": "Available to Mint",
-        "coverage": "Spot Coverage",
-        "leverage": "Leverage",
-        "total": "Total in the system"
+      "RISKPROX":{
+        "title":"RIFX",
+        "usd":"RIFX USD",
+        "availableMint":"Available to Mint",
+        "coverage":"Spot Coverage",
+        "leverage":"Leverage",
+        "total":"Total in the system"
       },
       "statusGreen": {
         "title": "Fully Operational",
@@ -279,26 +279,26 @@
         "title": "No active price being received",
         "subtitle": "No operations allowed"
       },
-      "systemOperations": {
-        "title": "System Operations",
-        "mintSTABLE": "Mint DoC",
-        "redeemSTABLEOnSettlement": "Redeem DoC on Settlement",
-        "redeemSTABLEOutsideOfSettlement": "Redeem DoC",
-        "mintRISKPRO": "Mint BPro",
-        "redeemRISKPRO": "Redeem BPro",
-        "mintRISKPROX": "Mint BTCx",
-        "redeemRISKPROX": "Redeem BTCx"
+      "systemOperations":{
+        "title":"System Operations",
+        "mintSTABLE":"Mint RDOC",
+        "redeemSTABLEOnSettlement":"Redeem RDOC on Settlement",
+        "redeemSTABLEOutsideOfSettlement":"Redeem RDOC",
+        "mintRISKPRO":"Mint RIFP",
+        "redeemRISKPRO":"Redeem RIFP",
+        "mintRISKPROX":"Mint RIFX",
+        "redeemRISKPROX":"Redeem RIFX"
       },
       "bucketsInTokens": {
         "title": "Liquidity",
         "total": "Total"
       },
-      "infoRBTC": {
-        "title": "Total rBTC in the system",
-        "priceRBTC": "rBTC USD",
-        "interest": "rBTC in interest bag",
-        "EMA": "rBTC EMA 120",
-        "targetCoverage": "Target coverage"
+      "infoRBTC":{
+        "title":"Total RIF in the system",
+        "priceRBTC":"RIF USD",
+        "interest":"RIF in interest bag",
+        "EMA":"RIF EMA 120",
+        "targetCoverage":"Target coverage"
       },
       "BtcInBucket0": {
         "title": "Tokens in BitPro",
@@ -329,9 +329,9 @@
         "blockSettlement": "Settlement will happen on block",
         "lastUpdateHeight": "Current indexed block"
       },
-      "Moc": {
-        "title": "MoC",
-        "price": "Current price"
+      "Moc":{
+        "title":"MoC",
+        "price": "Current price in USD"
       }
     },
     "settlement": {
