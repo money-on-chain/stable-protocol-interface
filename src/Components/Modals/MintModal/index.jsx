@@ -21,6 +21,8 @@ import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";
 import { config } from '../../../Config/config';
+import web3 from "web3";
+import {setNumber} from "../../../Helpers/helper";
 
 export default function MintModal(props) {
   const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
@@ -144,8 +146,8 @@ export default function MintModal(props) {
     // In rrc20 mode show allowance when need it
     if (auth.getAppMode === 'RRC20') {
       const userAllowance = await auth.getReserveAllowance(window.address);
-      if (valueYouExchange > userAllowance) {
-        //allowanceReserveModalShow(true);
+      if (Number(valueYouExchange) > Number(auth.web3.utils.fromWei(setNumber(userAllowance), 'ether'))) {
+        allowanceReserveModalShow(true);
         console.log("Need allowance... Display allowance form");
         return;
       }
@@ -224,7 +226,7 @@ export default function MintModal(props) {
 
   const setAllowanceReserve = () => {
     setModalAllowanceReserveMode('Waiting');
-    const result = auth.interfaceApproveReserve(null, (a, _txHash) => {
+    const result = auth.interfaceApproveReserve(window.address, (a, _txHash) => {
       msgAllowanceTx(_txHash);
     });
     result.then(() => setDoneAllowanceReserve()).catch(() => setFailAllowanceReserve());

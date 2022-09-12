@@ -135,12 +135,12 @@
       "faqs": "Help Center",
       "rewards": "MoC Tokens",
       "language": "Language",
-      "RISKPROWallet": "BPro Token",
-      "RISKPROXWallet": "BTCx Position",
-      "STABLEWallet": "DoC Token",
-      "getRBTC": "Convert BTC to RBTC",
-      "wiki-url": "https://wiki.moneyonchain.com/",
-      "repository-url": "https://github.com/money-on-chain/main-RBTC-contract"
+      "RISKPROWallet":"RIFP Tokens",
+      "RISKPROXWallet":"RIFX Positions",
+      "STABLEWallet":"RDOC Tokens",
+      "getRBTC":"BTC Peg in / Peg out",
+      "wiki-url": "https://wiki.rifonchain.com/",
+      "repository-url": "https://github.com/money-on-chain/RDOC-Contract"
     },
     "menu-drawer": {
       "home": "Home",

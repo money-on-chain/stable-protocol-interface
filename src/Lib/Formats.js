@@ -89,10 +89,10 @@ const formatVisibleValue = (amount, currencyCode, language, decimals) => {
     return num;
 };
 
-const formatValueVariation = (amount, language) => {
+const formatValueVariation = (amount, language, auth) => {
     if (!amount) return '-';
     const fd = formatMap['valueVariation'];
-    const num = formatValueFromMap(amount, fd, formatLocalMap[language]);
+    const num = formatValueFromMap(amount, fd, formatLocalMap[language],(auth.getAppMode=='MoC')? 2:4);
     return num;
 };
 

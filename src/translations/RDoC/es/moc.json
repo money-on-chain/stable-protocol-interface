@@ -132,15 +132,15 @@
       "preferences": "Preferencias",
       "notifications": "Notificaciones",
       "information": "Información",
-      "faqs": "Wiki",
-      "rewards": "Token MoC",
+      "faqs": "Ayuda",
+      "rewards": "Recompensas MOC",
       "language": "Idioma",
-      "RISKPROWallet": "Token BPro",
-      "RISKPROXWallet": "Posición BTCx",
-      "STABLEWallet": "Token DoC",
-      "getRBTC": "Convierte BTC a RBTC",
-      "wiki-url": "https://wiki.moneyonchain.com/v/espanol",
-      "repository-url": "https://github.com/money-on-chain/main-RBTC-contract"
+      "RISKPROWallet":"Tokens RIFP",
+      "RISKPROXWallet":"Posiciones RIFX",
+      "STABLEWallet":"Tokens RDOC",
+      "getRBTC":"Convierte BTC a RBTC",
+      "wiki-url": "https://wiki.rifonchain.com/v/espanol",
+      "repository-url": "https://github.com/money-on-chain/RDOC-Contract"
     },
     "menu-drawer": {
       "home": "Inicio",
