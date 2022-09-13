@@ -43,7 +43,7 @@ function WalletBalancePie(props) {
 
 
     const set_moc_balance_usd = () =>{
-        if ((auth.userBalanceData && accountData.Balance) || balanceRbtc) {
+        if (auth.userBalanceData && accountData.Balance) {
             // const moc_balance= (Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4);
             // const moc_balance_usd= Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)
             const moc_balance= (Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000)/auth.contractStatusData.bitcoinPrice).toFixed(6);
@@ -52,28 +52,28 @@ function WalletBalancePie(props) {
         }
     };
     const set_rbtc_main_usd = () =>{
-        if ((auth.userBalanceData && accountData.Balance) || balanceRbtc) {
+        if (auth.userBalanceData && accountData.Balance) {
             const rbtc_main_usd= (new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc).toFixed(4))*auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)
             const rbtc_main= new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc).toFixed(4)
             return {'normal':rbtc_main,'usd':rbtc_main_usd}
         }
     };
     const set_doc_usd= () =>{
-        if ((auth.userBalanceData && accountData.Balance) || balanceRbtc) {
+        if (auth.userBalanceData && accountData.Balance) {
             const doc_usd= new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['docBalance']));
             const doc= (auth.web3.utils.fromWei(auth.userBalanceData['docBalance'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6);
             return {'normal':doc,'usd':doc_usd}
         }
     };
     const set_bpro_usd= () =>{
-        if ((auth.userBalanceData && accountData.Balance) || balanceRbtc) {
+        if (auth.userBalanceData && accountData.Balance) {
             const bpro_usd= new BigNumber(auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd'])*auth.web3.utils.fromWei(auth.userBalanceData['bproBalance'])).toFixed(2)
             const bpro= ((auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd'])*auth.web3.utils.fromWei(auth.userBalanceData['bproBalance']))/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
             return {'normal':bpro,'usd':bpro_usd}
         }
     };
     const set_btc_usd = () =>{
-        if ((auth.userBalanceData && accountData.Balance) || balanceRbtc) {
+        if (auth.userBalanceData && accountData.Balance) {
             const btc_usd= new BigNumber(auth.web3.utils.fromWei(auth.contractStatusData['bitcoinPrice']) * auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(4)
             // const btc_usd= new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4)
             const btc= auth.userBalanceData['bprox2Balance'];
@@ -82,7 +82,7 @@ function WalletBalancePie(props) {
     };
 
     const getBalanceUSD = () => {
-        if ((auth.userBalanceData && accountData.Balance) || balanceRbtc) {
+        if (auth.userBalanceData && accountData.Balance) {
             const rbtc_main_usd= set_rbtc_main_usd()['usd']
             const doc_usd= set_doc_usd()['usd']
             const bpro_usd= set_bpro_usd()['usd']
@@ -99,7 +99,7 @@ function WalletBalancePie(props) {
     };
 
     const getBalance = () => {
-        if ((auth.userBalanceData && accountData.Balance) || balanceRbtc) {
+        if (auth.userBalanceData && accountData.Balance) {
             const rbtc_main= (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
             const doc= ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4)
             const bpro= (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
@@ -111,7 +111,7 @@ function WalletBalancePie(props) {
     };
 
     const getPie = () => {
-        if ((auth.userBalanceData && accountData.Balance) || balanceRbtc) {
+        if (auth.userBalanceData && accountData.Balance) {
             const data = [
                 {
                     name: 'Group A',

@@ -17,6 +17,7 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_MINIMUM_BALANCE_TO_OPERATE) DefaultConfig.minimumUserBalanceToOperate = process.env.REACT_APP_MINIMUM_BALANCE_TO_OPERATE;
     if (process.env.REACT_APP_EXPLORER_URL) DefaultConfig.explorerUrl = process.env.REACT_APP_EXPLORER_URL;
     if (process.env.REACT_APP_BTC_EXPLORER) DefaultConfig.btcExplorer = process.env.REACT_APP_BTC_EXPLORER;
+    if (process.env.REACT_APP_CONTRACT_URL) DefaultConfig.contractUrl = process.env.REACT_APP_CONTRACT_URL;
 
     return DefaultConfig
 }
