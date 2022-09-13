@@ -18,16 +18,17 @@ export default function Admin() {
     const auth = useContext(AuthenticateContext);
     const navigate = useNavigate();
     const location = useLocation();
-    const { accountData } = useContext(AuthenticateContext);
+    const { accountData, balanceRbtc } = useContext(AuthenticateContext);
     const [drawerVisible, setDrawerVisible] = useState(false);
 
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
     const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
     const AppProject = config.environment.AppProject;
+    const AppMode = config.environment.AppMode;
     const loginButtonSettings = accountData.Wallet
         ? {
             title: accountData.truncatedAddress,
-            subtitle: new BigNumber(accountData.Balance).toFixed(4) + ' ' +  t(`${AppProject}.Tokens_RESERVE_code`, { ns: ns }),
+            subtitle: new BigNumber(AppMode === 'Moc' ? accountData.Balance : balanceRbtc).toFixed(4) + ' ' +  t(`${AppProject}.Tokens_RESERVE_code`, { ns: ns }),
             status: 'Active'
         }
         : { title: 'Connect' };

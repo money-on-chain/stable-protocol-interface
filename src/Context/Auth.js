@@ -33,6 +33,7 @@ const AuthenticateContext = createContext({
     isLoggedIn: false,
     account: null,
     userBalanceData: null,
+    balanceRbtc: null,
     contractStatusData: null,
     web3: null,
     urlBaseFull:null,
@@ -83,6 +84,7 @@ const AuthenticateProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [account, setAccount] = useState(null);
     const [userBalanceData, setUserBalanceData] = useState(null);
+    const [balanceRbtc, setBalanceRbtc] = useState(null);
     const [urlBaseFull, setUrlBaseFull] = useState(process.env.REACT_APP_PUBLIC_URL+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/');
     const [urlBase, setUrlBase] = useState(process.env.REACT_APP_PUBLIC_URL);
     const [getAppMode, seGetAppMode] = useState(config.environment.AppMode);
@@ -95,6 +97,7 @@ const AuthenticateProvider = ({ children }) => {
         GasPrice: 0,
         truncatedAddress: ''
     });
+    let balanceData;
     // const [transactionReceipt, setTransactionReceipt] = useState(null);
 
     // Fast BTC socket
@@ -182,6 +185,7 @@ const AuthenticateProvider = ({ children }) => {
             truncatedAddress: ''
         });
         setUserBalanceData(null);
+        setBalanceRbtc(null);
         setIsLoggedIn(false);
         await window.rLoginDisconnect();
         connect();
@@ -193,6 +197,7 @@ const AuthenticateProvider = ({ children }) => {
             web3,
             contractStatusData,
             userBalanceData,
+            balanceRbtc,
             config,
             account,
             vendorAddress: config.vendor.address
@@ -360,6 +365,7 @@ const AuthenticateProvider = ({ children }) => {
 
         setContractStatusData(dataContractStatus);
         setUserBalanceData(accountBalance);
+        setBalanceRbtc(web3.utils.fromWei(accountBalance?.rbtcBalance));
 
         const contracts = {
             bproToken: window.integration.contracts.riskprotoken,
@@ -405,7 +411,7 @@ const AuthenticateProvider = ({ children }) => {
         try {
             let balance = await web3.eth.getBalance(address);
             balance = web3.utils.fromWei(balance);
-            return balance;
+            console.log('balance', balance);
         } catch (e) {
             console.log(e);
         }
@@ -640,6 +646,7 @@ const AuthenticateProvider = ({ children }) => {
                 account,
                 accountData,
                 userBalanceData,
+                balanceRbtc,
                 contractStatusData,
                 isLoggedIn,
                 web3,
