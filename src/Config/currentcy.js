@@ -48,7 +48,7 @@ const currencies = [
   { value: 'RBTC',         image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg" },
 ].map(it => ({
   ...it,
-  longNameKey: `${process.env.REACT_APP_ENVIRONMENT_APP_MODE}.Tokens_${it.value}_code`,
+  longNameKey: `${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT}.Tokens_${it.value}_code`,
 }));
 
 const getCurrenciesDetail = () => currencies;

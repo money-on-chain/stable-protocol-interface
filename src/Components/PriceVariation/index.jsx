@@ -23,8 +23,8 @@ export default function PriceVariation(props) {
 
     const auth = useContext(AuthenticateContext);
     const [t, i18n]= useTranslation(["global",'moc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
 
     const getBalanceUSD = (tokenName) => {
         if (auth.contractStatusData) {
@@ -72,24 +72,24 @@ export default function PriceVariation(props) {
 
     const tooltip = (
          <div className="PriceVariationTooltip">
-             <p>{t(`${appMode}.general.priceVariation.tooltip.titleDaily`, { ns: ns })}</p>
+             <p>{t(`${AppProject}.general.priceVariation.tooltip.titleDaily`, { ns: ns })}</p>
              {auth.contractStatusData.blockHeight >= 0 && (
                  <p>
-                     <b>{t(`${appMode}.general.priceVariation.tooltip.currentBlock`, { ns: ns })}:</b> {auth.contractStatusData.blockHeight}
+                     <b>{t(`${AppProject}.general.priceVariation.tooltip.currentBlock`, { ns: ns })}:</b> {auth.contractStatusData.blockHeight}
                  </p>
              )}
              <p>
-                 <b>{t(`${appMode}.general.priceVariation.tooltip.currentValue`, { ns: ns })}:</b>{' '}
+                 <b>{t(`${AppProject}.general.priceVariation.tooltip.currentValue`, { ns: ns })}:</b>{' '}
                  <LargeNumberF3 {...{ amount: getBalanceUSD(props.tokenName), currencyCode: 'USDPrice', includeCurrency: true }} />
              </p>
              {auth.contractStatusData.historic.blockHeight >= 0 && (
                  <p>
-                     <b>{t(`${appMode}.general.priceVariation.tooltip.referenceBlock`, { ns: ns })}:</b>
+                     <b>{t(`${AppProject}.general.priceVariation.tooltip.referenceBlock`, { ns: ns })}:</b>
                      {' '}{auth.contractStatusData.historic.blockHeight}
                  </p>
              )}
              <p>
-                 <b>{t(`${appMode}.general.priceVariation.tooltip.referenceValue`, { ns: ns })}:</b>
+                 <b>{t(`${AppProject}.general.priceVariation.tooltip.referenceValue`, { ns: ns })}:</b>
                  {' '}{parseFloat(web3.utils.fromWei(auth.contractStatusData.historic.bitcoinPrice, 'ether')).toFixed(2)}{' USD'}
              </p>
          </div>

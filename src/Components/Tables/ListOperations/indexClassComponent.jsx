@@ -48,7 +48,7 @@ const showHeader = true;
 const pagination = { position: 'bottom' };
 const BigNumber = require('bignumber.js');
 const [t, i18n]= useTranslation(["global",'moc']);
-const appMode = config.environment.AppMode;
+const AppProject = config.environment.AppProject;
 
 class ListOperations extends React.Component {
 
@@ -296,7 +296,7 @@ class ListOperations extends React.Component {
 
         return (
             <>
-                <div className="title"><h1>{t(`${appMode}.perations.title`, {ns: 'mocfastBtcBridgeAddress'})}</h1></div>
+                <div className="title"><h1>{t(`${AppProject}.perations.title`, {ns: 'mocfastBtcBridgeAddress'})}</h1></div>
                 <Table
                     {...this.state}
                     pagination={{ position: [this.state.top, this.state.bottom], defaultCurrent: 1, onChange: (current) => setCurrent(current), total: Object.keys(data_json.transactions).length }}

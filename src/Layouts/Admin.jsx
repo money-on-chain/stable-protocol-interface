@@ -22,12 +22,12 @@ export default function Admin() {
     const [drawerVisible, setDrawerVisible] = useState(false);
 
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const loginButtonSettings = accountData.Wallet
         ? {
             title: accountData.truncatedAddress,
-            subtitle: new BigNumber(accountData.Balance).toFixed(4) + ' ' +  t(`${appMode}.Tokens_RESERVE_code`, { ns: ns }),
+            subtitle: new BigNumber(accountData.Balance).toFixed(4) + ' ' +  t(`${AppProject}.Tokens_RESERVE_code`, { ns: ns }),
             status: 'Active'
         }
         : { title: 'Connect' };
@@ -86,48 +86,48 @@ export default function Admin() {
                         key="home"
                         onClick={() => navigate('/')}
                         icon={<p className={`set-icon-home-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='home' ? "active" : ""}`}></p>}
-                    >{t(`${appMode}.menu-sidebar.home`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.home`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-stable"
                         onClick={() => navigate('/wallet/stable')}
                         icon={<p className={`set-icon-stable-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='mint-stable' ? "active" : ""}`}></p>}
-                    >{t(`${appMode}.menu-sidebar.STABLEWallet`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.STABLEWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-pro"
                         onClick={() => navigate('/wallet/pro')}
                         icon={<p className={`set-icon-riskpro-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='mint-pro' ? "active" : ""}`}></p>}
-                    >{t(`${appMode}.menu-sidebar.RISKPROWallet`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.RISKPROWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-leveraged"
                         onClick={() => navigate('/wallet/leveraged')}
                         icon={<p className={`set-icon-leveraged-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='mint-leveraged' ? "active" : ""}`}></p>}
-                    >{t(`${appMode}.menu-sidebar.RISKPROXWallet`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.RISKPROXWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="rewards"
                         onClick={() => navigate('/rewards')}
                         icon={<p className={`set-icon-rewards-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='rewards' ? "active" : ""}`}></p>}
-                    >{t(`${appMode}.menu-sidebar.rewards`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.rewards`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="getRBTC"
                         onClick={() => navigate('/getRBTC')}
                         icon={<p className={`set-icon-rbtc-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='getRBTC' ? "active" : ""}`}></p>}
-                    >{t(`${appMode}.menu-sidebar.getRBTC`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.getRBTC`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="metrics"
                         onClick={() => navigate('/metrics')}
                         icon={<p className={`set-icon-chart-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu=='metrics' ? "active" : ""}`}></p>}
-                    >{t(`${appMode}.menu-sidebar.metrics`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.metrics`, { ns: ns })}
                     </Menu.Item>
                     <SubMenu key="information" title="Profile" icon={<p className={`set-icon-information-solid-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT}`}></p>} theme={'light'}>
-                        <Menu.Item key="contract_repository" onClick={() => window.open(config.contractUrl, '_self')}>{t(`${appMode}.info-button.contract-repository`, { ns: ns })}</Menu.Item>
-                        <Menu.Item key="webapp_repository" onClick={() => window.open('https://github.com/money-on-chain/webapp-stable-ipfs', '_self')}>{t(`${appMode}.info-button.webapp-repository`, { ns: ns })}</Menu.Item>
-                        <Menu.Item key="help_center" onClick={() => window.open('https://wiki.moneyonchain.com/', '_self')}>{t(`${appMode}.menu-sidebar.faqs`, { ns: ns })}</Menu.Item>
+                        <Menu.Item key="contract_repository" onClick={() => window.open(config.contractUrl, '_self')}>{t(`${AppProject}.info-button.contract-repository`, { ns: ns })}</Menu.Item>
+                        <Menu.Item key="webapp_repository" onClick={() => window.open('https://github.com/money-on-chain/webapp-stable-ipfs', '_self')}>{t(`${AppProject}.info-button.webapp-repository`, { ns: ns })}</Menu.Item>
+                        <Menu.Item key="help_center" onClick={() => window.open('https://wiki.moneyonchain.com/', '_self')}>{t(`${AppProject}.menu-sidebar.faqs`, { ns: ns })}</Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>
@@ -168,42 +168,42 @@ export default function Admin() {
                         onClick={() => navigate('/')}
                         icon={<HomeFilled style={{ fontSize: 30 }} />}
                     >
-                        {t(`${appMode}.menu-drawer.home`, { ns: ns })}
+                        {t(`${AppProject}.menu-drawer.home`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-stable"
                         onClick={() => navigate('/wallet/stable')}
                         icon={<span className="icon-icon-stable"></span>}
                     >
-                        {t(`${appMode}.menu-drawer.STABLEWallet`, { ns: ns })}
+                        {t(`${AppProject}.menu-drawer.STABLEWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-pro"
                         onClick={() => navigate('/wallet/pro')}
                         icon={<span className="icon-icon-riskpro"></span>}
                     >
-                        {t(`${appMode}.menu-drawer.RISKPROWallet`, { ns: ns })}
+                        {t(`${AppProject}.menu-drawer.RISKPROWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-leveraged"
                         onClick={() => navigate('/wallet/leveraged')}
                         icon={<span className="icon-icon-riskprox"></span>}
                     >
-                        {t(`${appMode}.menu-drawer.RISKPROXWallet`, { ns: ns })}
+                        {t(`${AppProject}.menu-drawer.RISKPROXWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="rewards"
                         onClick={() => navigate('/rewards')}
                         icon={<span className="icon-icon-moc"></span>}
                     >
-                        {t(`${appMode}.menu-drawer.rewards`, { ns: ns })}
+                        {t(`${AppProject}.menu-drawer.rewards`, { ns: ns })}
                     </Menu.Item>
 
                     <Menu.Item
                         key="getRBTC"
                         onClick={() => navigate('/getRBTC')}
                         icon={<span className="icon-icon-btc"></span>}
-                    >{t(`${appMode}.menu-sidebar.getRBTC`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.getRBTC`, { ns: ns })}
                     </Menu.Item>
 
                     <Menu.Item
@@ -211,7 +211,7 @@ export default function Admin() {
                         onClick={() => navigate('/metrics')}
                         icon={<PieChartFilled  style={{ fontSize: 30 }} />}
                     >
-                        {t(`${appMode}.menu-drawer.Metrics`, { ns: ns })}
+                        {t(`${AppProject}.menu-drawer.Metrics`, { ns: ns })}
                     </Menu.Item>
 
                 </Menu>

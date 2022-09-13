@@ -26,8 +26,8 @@ function Home(props) {
     loadAssets()
 
     const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
     const data_row_coins2= [];
@@ -68,8 +68,8 @@ function Home(props) {
             />}
 
 
-            <h1 className="PageTitle">{t(`${appMode}.home.title`, { ns: ns })}</h1>
-            <h3 className="PageSubTitle">{t(`${appMode}.home.subtitle`, { ns: ns })}</h3>
+            <h1 className="PageTitle">{t(`${AppProject}.home.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${AppProject}.home.subtitle`, { ns: ns })}</h3>
             <Row gutter={16}>
                 {/*<Col flex="300px" className={'WalletBalance-mb'}>*/}
                 <div  className={'sec-1'}>
@@ -83,7 +83,7 @@ function Home(props) {
                             // color="#00a651"
                             page="/wallet/stable"
                             balance={docBalance}
-                            labelCoin={t(`${appMode}.Tokens_RESERVE_code`, {ns: ns})}
+                            labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
                             currencyCode={'STABLE'}
                         />
                         <TokenSummaryCard
@@ -91,7 +91,7 @@ function Home(props) {
                             // color="#ef8a13"
                             page="/wallet/pro"
                             balance={bproBalance}
-                            labelCoin={t(`${appMode}.Tokens_RESERVE_code`, {ns: ns})}
+                            labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
                             currencyCode={'RISKPRO'}
                         />
                         <TokenSummaryCard
@@ -99,7 +99,7 @@ function Home(props) {
                             // color="#ed1c24"
                             page="/wallet/leveraged"
                             balance={bprox2Balance}
-                            labelCoin={t(`${appMode}.Tokens_RESERVE_code`, {ns: ns })}
+                            labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns })}
                             currencyCode={'RISKPROX'}
                         />
                     </div>

@@ -8,8 +8,8 @@ import { config} from '../../../../Config/config';
 function RiskPro(props) {
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
 
@@ -25,28 +25,28 @@ function RiskPro(props) {
                     src={auth.urlBaseFull+"icon-riskpro.svg" }
                     alt=""
                     style={{ marginRight: 10 }}
-                /> {t(`${appMode}.wallets.RISKPRO.title`, { ns: ns })}
+                /> {t(`${AppProject}.wallets.RISKPRO.title`, { ns: ns })}
             </h3>
 
             <div className="CardMetricContent BProThemeMetric">
                 {!loading
                     ? <>
                         <div>
-                            <h5>{t(`${appMode}.metrics.RISKPRO.usd`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.RISKPRO.usd`, { ns: ns })}</h5>
                             <span className={'space'}>
                                 <LargeNumber amount={props.usdValue} currencyCode={'USDPrice'} />
                             </span>
-                            <h5>{t(`${appMode}.metrics.RISKPRO.leverage`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.RISKPRO.leverage`, { ns: ns })}</h5>
                             <span className={'space'}>
                                 <LargeNumber amount={props.leverage} currencyCode="RISKPRO" />
                             </span>
                         </div>
                         <div className="separator" /><div>
-                            <h5>{t(`${appMode}.metrics.RISKPRO.total`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.RISKPRO.total`, { ns: ns })}</h5>
                             <LargeNumber amount={props.total} currencyCode="RISKPRO" />
-                            <h5>{t(`${appMode}.metrics.RISKPRO.availableRedeem`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.RISKPRO.availableRedeem`, { ns: ns })}</h5>
                             <LargeNumber amount={props.availableRedeem} currencyCode="RISKPRO" />
-                            <h5>{t(`${appMode}.metrics.RISKPRO.bproDiscountPriceUsd`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.RISKPRO.bproDiscountPriceUsd`, { ns: ns })}</h5>
                             <LargeNumber amount={props.bproDiscountPriceUsd} currencyCode={'USDPrice'} />
                         </div></>
                 : <Skeleton />}

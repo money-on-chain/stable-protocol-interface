@@ -23,8 +23,8 @@ const Table = ({ accountData }) => {
   const [operations, setOperations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-  const appMode = config.environment.AppMode;
+  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const AppProject = config.environment.AppProject;
 
   const address = accountData?.Owner;
   const socket = auth.socket;
@@ -62,19 +62,19 @@ const Table = ({ accountData }) => {
 
   const columns = [
     {
-      title: t(`${appMode}.fastbtc.history.columns_headers.step`, {ns: ns}),
+      title: t(`${AppProject}.fastbtc.history.columns_headers.step`, {ns: ns}),
       dataIndex: 'step',
       key: 'step'
     },
     {
-      title: t(`${appMode}.fastbtc.history.columns_headers.type`, {ns: ns}),
+      title: t(`${AppProject}.fastbtc.history.columns_headers.type`, {ns: ns}),
       dataIndex: 'type',
       key: 'type',
-      render: text => t(`${appMode}.fastbtc.history.columns.type_` + text, {ns: ns}),
+      render: text => t(`${AppProject}.fastbtc.history.columns.type_` + text, {ns: ns}),
       responsive: ['md']
     },
     {
-      title: t(`${appMode}.fastbtc.history.columns_headers.dateAdded`, {ns: ns}),
+      title: t(`${AppProject}.fastbtc.history.columns_headers.dateAdded`, {ns: ns}),
       dataIndex: 'dateAdded',
       key: 'dateAdded',
       responsive: ['md'],
@@ -82,28 +82,28 @@ const Table = ({ accountData }) => {
       defaultSortOrder: 'descend',
       sorter: dateAddedSort,
       render: text =>
-        text ? moment(text).format(t(`${appMode}.fastbtc.history.columns.dateAddedFormat`, {ns: ns})) : '--'
+        text ? moment(text).format(t(`${AppProject}.fastbtc.history.columns.dateAddedFormat`, {ns: ns})) : '--'
     },
     {
-      title: t(`${appMode}.fastbtc.history.columns_headers.status`, {ns: ns}),
+      title: t(`${AppProject}.fastbtc.history.columns_headers.status`, {ns: ns}),
       key: 'status',
       dataIndex: 'status',
-      render: text => <span className={setStatus(text)}>{t(`${appMode}.fastbtc.history.columns.status_` + text, {ns: ns})}</span>
+      render: text => <span className={setStatus(text)}>{t(`${AppProject}.fastbtc.history.columns.status_` + text, {ns: ns})}</span>
     },
     {
-      title: t(`${appMode}.fastbtc.history.columns_headers.valueBtc`, {ns: ns}),
+      title: t(`${AppProject}.fastbtc.history.columns_headers.valueBtc`, {ns: ns}),
       key: 'valueBtc',
       dataIndex: 'valueBtc',
       render: (text, record) => {
         const value = SatoshiToBTC.toBitcoin(text);
         return record.type === 'deposit'
-          ? t(`${appMode}.fastbtc.history.columns.valueBTC`, {ns: ns, value})
-          : t(`${appMode}.fastbtc.history.columns.valueRBTC`, {ns: ns, value});
+          ? t(`${AppProject}.fastbtc.history.columns.valueBTC`, {ns: ns, value})
+          : t(`${AppProject}.fastbtc.history.columns.valueRBTC`, {ns: ns, value});
       },
       responsive: ['sm']
     },
     {
-      title: t(`${appMode}.fastbtc.history.columns_headers.txHash`, {ns: ns}),
+      title: t(`${AppProject}.fastbtc.history.columns_headers.txHash`, {ns: ns}),
       key: 'txHash',
       dataIndex: 'txHash',
       render: (text, record) => {
@@ -157,9 +157,9 @@ const Table = ({ accountData }) => {
 };
 
   const locale = {
-    emptyText: loading ? <Skeleton active /> : t(`${appMode}.operations.empty`, {ns: ns}),
-    triggerDesc: t(`${appMode}.fastbtc.history.table.triggerDesc`, {ns: ns}),
-    triggerAsc: t(`${appMode}.fastbtc.history.table.triggerAsc`, {ns: ns})
+    emptyText: loading ? <Skeleton active /> : t(`${AppProject}.operations.empty`, {ns: ns}),
+    triggerDesc: t(`${AppProject}.fastbtc.history.table.triggerDesc`, {ns: ns}),
+    triggerAsc: t(`${AppProject}.fastbtc.history.table.triggerAsc`, {ns: ns})
   };
 
   return (
@@ -174,8 +174,8 @@ const Table = ({ accountData }) => {
               const item = result;
               item.step =
                 item.type === 'deposit'
-                  ? t(`${appMode}.fastbtc.history.columns.step_1`, {ns: ns})
-                  : t(`${appMode}.fastbtc.history.columns.step_2`, {ns: ns});
+                  ? t(`${AppProject}.fastbtc.history.columns.step_1`, {ns: ns})
+                  : t(`${AppProject}.fastbtc.history.columns.step_2`, {ns: ns});
               return item;
             })
             .sort((a, b) => dateAddedSort(a, b) * -1)}

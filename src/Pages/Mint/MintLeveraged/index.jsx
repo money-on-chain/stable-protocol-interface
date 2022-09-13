@@ -79,8 +79,8 @@ export default function Mint(props) {
     });
 
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
 
@@ -92,8 +92,8 @@ export default function Mint(props) {
 
     return (
         <Fragment>
-            <h1 className="PageTitle">{t(`${appMode}.wallets.RISKPROX.title`, { ns: ns })}</h1>
-            <h3 className="PageSubTitle">{t(`${appMode}.wallets.RISKPROX.subtitle`, { ns: ns })}</h3>
+            <h1 className="PageTitle">{t(`${AppProject}.wallets.RISKPROX.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.RISKPROX.subtitle`, { ns: ns })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <AmountCard
@@ -110,10 +110,10 @@ export default function Mint(props) {
                                 {auth.isLoggedIn &&
                                     <>{!loading ?
                                         <Row>
-                                            <h2>{ t(`${appMode}.settlement.remainingDays`, { ns: ns, days:daysHours?.days, hours:daysHours?.hours}) }</h2>
+                                            <h2>{ t(`${AppProject}.settlement.remainingDays`, { ns: ns, days:daysHours?.days, hours:daysHours?.hours}) }</h2>
                                             <div className="CaptionDateSettlement">{daysHours?.date}</div>
                                             <div>
-                                                <span className="SettlementTitle">{t(`${appMode}.settlement.remainingBlocks`, { ns: ns })}: </span>
+                                                <span className="SettlementTitle">{t(`${AppProject}.settlement.remainingBlocks`, { ns: ns })}: </span>
                                                 {auth.contractStatusData?.blocksToSettlement}
                                                 <Tooltip placement="top" title={auth.contractStatusData?.blockHeight}>
                                                     <InfoCircleOutlined className="Icon" />
@@ -131,7 +131,7 @@ export default function Mint(props) {
 
                             <div className="Card MintCard Bprox2Metrix">
                                 {!loading ? <>
-                                <h3 className="CardTitle">{t(`${appMode}.general.x2Leverage`, { ns: ns })}</h3>
+                                <h3 className="CardTitle">{t(`${AppProject}.general.x2Leverage`, { ns: ns })}</h3>
                                 <div>
                                     <span>{getBtcx['x2Leverage']}</span>
                                 </div>

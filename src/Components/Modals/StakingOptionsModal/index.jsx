@@ -17,8 +17,8 @@ export default function StakingOptionsModal(props) {
 
    const amountInEth = Web3.utils.fromWei(amount);
    const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-   const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+   const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
 
     useEffect(() => {
         (async () => {
@@ -184,7 +184,7 @@ export default function StakingOptionsModal(props) {
                                 <span className="title">{t('global.StakingOptionsModal_AmountToStake')}</span>
                                 <span className="value amount">
                                     <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                                    <span>{t(`${appMode}.Tokens_MOC_code`, {ns: ns})}</span>
+                                    <span>{t(`${AppProject}.Tokens_MOC_code`, {ns: ns})}</span>
                                 </span>
                             </div>
                             <p>{t('global.StakingOptionsModal_StakingDescription')}</p>
@@ -228,7 +228,7 @@ export default function StakingOptionsModal(props) {
                         <span className="title">{t('global.StakingOptionsModal_AmountToUnstake')}</span>
                         <span className="value amount">
                             <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                            <span>{t(`${appMode}.Tokens_MOC_code`, {ns: ns})}</span>
+                            <span>{t(`${AppProject}.Tokens_MOC_code`, {ns: ns})}</span>
                         </span>
                     </div>
                     <p>{t('global.StakingOptionsModal_UnstakingDescription')}</p>
@@ -257,7 +257,7 @@ export default function StakingOptionsModal(props) {
                         <span className="title">{t('global.StakingOptionsModal_AmountToWithdraw')}</span>
                         <span className="value amount">
                             <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                            <span>{t(`${appMode}.Tokens_MOC_code`, {ns: ns})}</span>
+                            <span>{t(`${AppProject}.Tokens_MOC_code`, {ns: ns})}</span>
                         </span>
                     </div>
                     <p>{t('global.StakingOptionsModal_WithdrawDescription')}</p>
@@ -286,7 +286,7 @@ export default function StakingOptionsModal(props) {
                         <span className="title">{t('global.StakingOptionsModal_AmountToRestake')}</span>
                         <span className="value amount">
                             <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                            <span>{t(`${appMode}.Tokens_MOC_code`, {ns: ns})}</span>
+                            <span>{t(`${AppProject}.Tokens_MOC_code`, {ns: ns})}</span>
                         </span>
                     </div>
                     <p>{t('global.StakingOptionsModal_RestakeDescription')}</p>

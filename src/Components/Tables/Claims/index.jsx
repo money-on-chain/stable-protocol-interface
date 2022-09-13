@@ -39,8 +39,8 @@ export default function Claims(props) {
     const [xScroll, setXScroll] = useState(undefined);
 
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
     const [currencyCode, setCurrencyCode]=  useState('MOC');
@@ -86,23 +86,23 @@ export default function Claims(props) {
         },
 
         {
-            title: t(`${appMode}.operations.columns.event`, { ns: ns }),
+            title: t(`${AppProject}.operations.columns.event`, { ns: ns }),
             dataIndex: 'event',
         },
         {
-            title: t(`${appMode}.operations.columns.type`, { ns: ns }),
+            title: t(`${AppProject}.operations.columns.type`, { ns: ns }),
             dataIndex: 'asset',
         },
         {
-            title: t(`${appMode}.operations.columns.mocAmount`, { ns: ns }),
+            title: t(`${AppProject}.operations.columns.mocAmount`, { ns: ns }),
             dataIndex: 'amount',
         },
         {
-            title: t(`${appMode}.operations.columns.date`, { ns: ns }),
+            title: t(`${AppProject}.operations.columns.date`, { ns: ns }),
             dataIndex: 'date',
         },
         {
-            title: t(`${appMode}.operations.columns.status`, { ns: ns }),
+            title: t(`${AppProject}.operations.columns.status`, { ns: ns }),
             dataIndex: 'status',
         },
     ];
@@ -244,8 +244,8 @@ export default function Claims(props) {
     return (
         <>
             <div className="title">
-                <h1>{t(`${appMode}.operations.title`, { ns: ns })}</h1>
-                <Tooltip color={'#404040'} placement="topLeft" title={t(`${appMode}.operations.tooltip.text`, { ns: ns })} className='Tooltip'>
+                <h1>{t(`${AppProject}.operations.title`, { ns: ns })}</h1>
+                <Tooltip color={'#404040'} placement="topLeft" title={t(`${AppProject}.operations.tooltip.text`, { ns: ns })} className='Tooltip'>
                     <InfoCircleOutlined className="Icon" />
                 </Tooltip>
             </div>

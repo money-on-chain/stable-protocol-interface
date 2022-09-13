@@ -50,8 +50,8 @@ const showHeader = true;
 const pagination = { position: 'bottom' };
 const BigNumber = require('bignumber.js');
 const [t, i18n]= useTranslation(["global",,'rdoc']);
-const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-const appMode = config.environment.AppMode;
+const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+const AppProject = config.environment.AppProject;
 const auth = useContext(AuthenticateContext);
 
 class ListOperations extends React.Component {
@@ -244,19 +244,19 @@ class ListOperations extends React.Component {
                     switch (element.asset) {
                         case 'STABLE':
                             asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
-                            data_row_coins2[index].detail.asset = t(`${appMode}.Tokens_STABLE_code`, { ns: ns });
+                            data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_STABLE_code`, { ns: ns });
                             break;
                         case 'RISKPRO':
                             asset.push({ 'image': 'icon-riskpro.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
-                            data_row_coins2[index].detail.asset = t(`${appMode}.Tokens_RISKPRO_code`, { ns: ns });
+                            data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_RISKPRO_code`, { ns: ns });
                             break;
                         case 'RISKPROX':
                             asset.push({ 'image': 'icon-riskprox.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
-                            data_row_coins2[index].detail.asset = t(`${appMode}.Tokens_RISKPROX_code`, { ns: ns });
+                            data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_RISKPROX_code`, { ns: ns });
                             break;
                         default:
                             asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
-                            data_row_coins2[index].detail.asset = t(`${appMode}.Tokens_STABLE_code`, { ns: ns });
+                            data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_STABLE_code`, { ns: ns });
                             break;
                     }
 
@@ -300,7 +300,7 @@ class ListOperations extends React.Component {
 
         return (
             <>
-                <div className="title"><h1>{t(`${appMode}.operations.title`, {ns: 'mocfastBtcBridgeAddress'})}</h1></div>
+                <div className="title"><h1>{t(`${AppProject}.operations.title`, {ns: 'mocfastBtcBridgeAddress'})}</h1></div>
                 <Table
                     {...this.state}
                     pagination={{ position: [this.state.top, this.state.bottom], defaultCurrent: 1, onChange: (current) => setCurrent(current), total: Object.keys(data_json.transactions).length }}

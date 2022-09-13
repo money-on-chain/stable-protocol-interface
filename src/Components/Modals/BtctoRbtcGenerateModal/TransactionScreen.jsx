@@ -9,8 +9,8 @@ import { config } from '../../../Config/config';
 
 const TransactionInfo = ({ txId, txName, state}) => {
 const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-const appMode = config.environment.AppMode;
+const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+const AppProject = config.environment.AppProject;
 const tx = txId === TxId.DEPOSIT ? state.depositTx : state.transferTx;
   const txBtn = (
     <Tooltip title={tx.txHash}>
@@ -39,7 +39,7 @@ const tx = txId === TxId.DEPOSIT ? state.depositTx : state.transferTx;
       {txId === TxId.DEPOSIT && (
         <p className="transaction-btc-sections-p font-size-12">
           {t(
-            `${appMode}.fastbtc.topUpWalletModal.transactionInfo.status_` +
+            `${AppProject}.fastbtc.topUpWalletModal.transactionInfo.status_` +
               (txId === TxId.DEPOSIT ? state.depositTx : state.transferTx).status,
             {
               ns: ns,
@@ -54,7 +54,7 @@ const tx = txId === TxId.DEPOSIT ? state.depositTx : state.transferTx;
         {txId === TxId.TRANSFER && (
             <p className="transaction-btc-sections-p font-size-12">
                 {t(
-                    `${appMode}.fastbtc.topUpWalletModal.transactionInfo.status_` +
+                    `${AppProject}.fastbtc.topUpWalletModal.transactionInfo.status_` +
                     (txId === TxId.TRANSFER ? state.depositTx : state.transferTx).status,
                     {
                       ns: ns,
@@ -64,22 +64,22 @@ const tx = txId === TxId.DEPOSIT ? state.depositTx : state.transferTx;
             </p>
         )}
       <p className="transaction-btc-sections-p font-size-12">
-        {t(`${appMode}.fastbtc.topUpWalletModal.transactionInfo.valueDeposited`, {
+        {t(`${AppProject}.fastbtc.topUpWalletModal.transactionInfo.valueDeposited`, {
           ns: ns,
           value:
             txId === TxId.DEPOSIT
-              ? t(`${appMode}.fastbtc.topUpWalletModal.valueBTC`, {
+              ? t(`${AppProject}.fastbtc.topUpWalletModal.valueBTC`, {
                   ns: ns,
                   value: (txId === TxId.DEPOSIT ? state.depositTx : state.transferTx).value
                 })
-              : t(`${appMode}.fastbtc.topUpWalletModal.valueRBTC`, {
+              : t(`${AppProject}.fastbtc.topUpWalletModal.valueRBTC`, {
                   ns: ns,
                   value: (txId === TxId.DEPOSIT ? state.depositTx : state.transferTx).value
                 })
         })}
       </p>
         <p className="transaction-btc-sections-p font-size-12">
-            {t(`${appMode}.fastbtc.topUpWalletModal.transactionInfo.fromLabel`, {
+            {t(`${AppProject}.fastbtc.topUpWalletModal.transactionInfo.fromLabel`, {
                 ns: ns,
                 value:
                     txId === TxId.DEPOSIT
@@ -96,7 +96,7 @@ const tx = txId === TxId.DEPOSIT ? state.depositTx : state.transferTx;
           {/*<TransactionArrow />*/}
 
           <p className="transaction-btc-sections-p font-size-12">
-            {t(`${appMode}.fastbtc.topUpWalletModal.transactionInfo.toLabel`, { ns: ns })}{' '}
+            {t(`${AppProject}.fastbtc.topUpWalletModal.transactionInfo.toLabel`, { ns: ns })}{' '}
             {(txId === TxId.DEPOSIT ? state.deposit.address : state.deposit.receiver)
               .slice(0, 6)
               .concat( (txId === TxId.DEPOSIT ? state.deposit.address : state.deposit.receiver).slice(-4) )}
@@ -104,7 +104,7 @@ const tx = txId === TxId.DEPOSIT ? state.depositTx : state.transferTx;
         </span>
       )}
       <p className="transaction-btc-sections-p font-size-12">
-        {t(`${appMode}.fastbtc.topUpWalletModal.transactionInfo.txHashLabel`, {ns: ns})} {txBtn}
+        {t(`${AppProject}.fastbtc.topUpWalletModal.transactionInfo.txHashLabel`, {ns: ns})} {txBtn}
       </p>
     </div>
   );
@@ -112,8 +112,8 @@ const tx = txId === TxId.DEPOSIT ? state.depositTx : state.transferTx;
 
 export default function TransactionScreen({ state, setState }) {
   const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-  const appMode = config.environment.AppMode;
+  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
   const mockBtcDeposit = () => {
     console.log('Reloading state');
@@ -160,13 +160,13 @@ export default function TransactionScreen({ state, setState }) {
       ) : (
         <div className="transactions-details-container">
           <div className="transaction-details mrb-4">
-            <h3 className="transaction-btc-title font-size-12">{t(`${appMode}.fastbtc.topUpWalletModal.transaction1DetailsTitle`, {ns: ns})}</h3>
+            <h3 className="transaction-btc-title font-size-12">{t(`${AppProject}.fastbtc.topUpWalletModal.transaction1DetailsTitle`, {ns: ns})}</h3>
             <TransactionInfo txId={TxId.DEPOSIT} txName="BTC" state={state} />
               <img className="logo-img img-set1" width={128} src={auth.urlBase+"global/icon-btclogo.svg"} alt=""/>
           </div>
           <hr />
           <div className='transaction-details mrb-35 mrt-25'>
-              <h3 className="transaction-btc-title font-size-12">{t(`${appMode}.fastbtc.topUpWalletModal.transaction2DetailsTitle`, {ns: ns})}</h3>
+              <h3 className="transaction-btc-title font-size-12">{t(`${AppProject}.fastbtc.topUpWalletModal.transaction2DetailsTitle`, {ns: ns})}</h3>
             <TransactionInfo txId={TxId.TRANSFER} txName="RBTC" state={state} />
               <img className="logo-img img-reload" width={17} src={auth.urlBase+"global/greenreload.svg"} alt=""/>
               <img className="logo-img img-set2" width={128} src={auth.urlBase+"global/icon-rbtclogo.svg"} alt=""/>

@@ -10,8 +10,8 @@ function MOC(props) {
     const { accountData } = auth;
 
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
 
@@ -27,13 +27,13 @@ function MOC(props) {
                     src={auth.urlBaseFull+"icon-moc.svg" }
                     alt=""
                     style={{ marginRight: 10 }}
-                /> {t(`${appMode}.metrics.Moc.title`, { ns: ns })}
+                /> {t(`${AppProject}.metrics.Moc.title`, { ns: ns })}
             </h3>
 
             <div className="CardMetricContent MocThemeMetric">
                 {!loading
                     ? <div>
-                        <h5>{t(`${appMode}.metrics.Moc.price`, { ns: ns })}</h5>
+                        <h5>{t(`${AppProject}.metrics.Moc.price`, { ns: ns })}</h5>
                         <LargeNumber amount={props.mocPrice} currencyCode="MOCMetrics" tooltip="topLeft"/>
                     </div>
                 : <Skeleton active={true} />}

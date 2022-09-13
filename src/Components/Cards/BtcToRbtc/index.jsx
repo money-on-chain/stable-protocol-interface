@@ -10,11 +10,11 @@ export default function BtcToRbtc(props) {
 
     const auth = useContext(AuthenticateContext);
     const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const{
         title = 'BTC to rBTC Peg In',
-        description = t(`${appMode}.fastbtc.getRBTC_description`, {ns: ns}),
+        description = t(`${AppProject}.fastbtc.getRBTC_description`, {ns: ns}),
         btnAction = ()=>{},
         btnText = 'Convert rBTC to BTC'
     } = props;

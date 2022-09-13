@@ -12,8 +12,8 @@ import { config } from './../../../Config/config';
 export default function Mint(props) {
 
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
 
     return (
@@ -25,8 +25,8 @@ export default function Mint(props) {
                 showIcon
                 className="AlertNoConnection"
             />}
-            <h1 className="PageTitle">{t(`${appMode}.wallets.RISKPRO.title`, { ns: ns })}</h1>
-            <h3 className="PageSubTitle">{t(`${appMode}.wallets.RISKPRO.subtitle`, { ns: ns })}</h3>
+            <h1 className="PageTitle">{t(`${AppProject}.wallets.RISKPRO.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.RISKPRO.subtitle`, { ns: ns })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <AmountCard

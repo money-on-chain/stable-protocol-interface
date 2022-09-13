@@ -15,8 +15,8 @@ export default function Sovryn(props) {
 
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
 
     const getBalance = () => {
         if (auth.userBalanceData) {
@@ -58,13 +58,13 @@ export default function Sovryn(props) {
                 <div className="content-container"><img className="logo-img" width="111"
                     src={auth.urlBaseFull+'icons/icon-rbtclogo.svg'}
                     alt="" />
-                    <div className="FastBTCLeftPanel"><b>{t(`${appMode}.fastbtc.leftPannel.header`, { ns: ns })}</b>
+                    <div className="FastBTCLeftPanel"><b>{t(`${AppProject}.fastbtc.leftPannel.header`, { ns: ns })}</b>
                         <ul>
-                            <li className="instruction-item">{t(`${appMode}.fastbtc.leftPannel.items.0`, { ns: ns })}</li>
-                            <li className="instruction-item">{t(`${appMode}.fastbtc.leftPannel.items.1`, { ns: ns })}</li>
-                            <li className="instruction-item">{t(`${appMode}.fastbtc.leftPannel.items.2`, { ns: ns })}</li>
+                            <li className="instruction-item">{t(`${AppProject}.fastbtc.leftPannel.items.0`, { ns: ns })}</li>
+                            <li className="instruction-item">{t(`${AppProject}.fastbtc.leftPannel.items.1`, { ns: ns })}</li>
+                            <li className="instruction-item">{t(`${AppProject}.fastbtc.leftPannel.items.2`, { ns: ns })}</li>
                         </ul>
-                        <a href="https://www.rsk.co/rbtc/" target="_blank" rel="noopener noreferrer">&gt; {t(`${appMode}.fastbtc.leftPannel.learnMore`, { ns: ns })}</a></div>
+                        <a href="https://www.rsk.co/rbtc/" target="_blank" rel="noopener noreferrer">&gt; {t(`${AppProject}.fastbtc.leftPannel.learnMore`, { ns: ns })}</a></div>
                 </div>
             </Row>
 

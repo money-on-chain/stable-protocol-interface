@@ -8,8 +8,8 @@ import {config} from '../../../../Config/config';
 function Stable(props) {
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
 
@@ -25,17 +25,17 @@ function Stable(props) {
                     src={auth.urlBaseFull +"icon-stable.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
-                /> {t(`${appMode}.wallets.STABLE.title`, { ns: ns })}
+                /> {t(`${AppProject}.wallets.STABLE.title`, { ns: ns })}
             </h3>
 
             <div className="CardMetricContent StableThemeMetric">
                 {!loading
                     ? <div>
-                        <h5>{t(`${appMode}.metrics.STABLE.total`, { ns: ns })}</h5>
+                        <h5>{t(`${AppProject}.metrics.STABLE.total`, { ns: ns })}</h5>
                         <span className={'space green'}><LargeNumber amount={props.total} currencyCode="STABLE" /></span>
-                        <h5>{t(`${appMode}.metrics.STABLE.availableRedeem`, { ns: ns })}</h5>
+                        <h5>{t(`${AppProject}.metrics.STABLE.availableRedeem`, { ns: ns })}</h5>
                         <span className={'green'}><LargeNumber amount={props.availableRedeem} currencyCode="STABLE" /></span>
-                        <h5>{t(`${appMode}.metrics.STABLE.availableMint`, { ns: ns })}</h5>
+                        <h5>{t(`${AppProject}.metrics.STABLE.availableMint`, { ns: ns })}</h5>
                         <span className={'green'}><LargeNumber amount={props.availableMint} currencyCode="STABLE" /></span>
                     </div>
                 : <Skeleton active={true} />}

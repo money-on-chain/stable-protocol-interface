@@ -24,8 +24,8 @@ export default function BtcToRbtcGenerateModal(props) {
   }, []);
   const {visible = false, handleClose = () => {}, accountData} = props;
   const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-  const appMode = config.environment.AppMode;
+  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const AppProject = config.environment.AppProject;
   const [stateFBtc, setStateFBtc] = useState(initialState);
   const [underMaintenance, setUnderMaintenance] = useState(false);
 
@@ -110,7 +110,7 @@ export default function BtcToRbtcGenerateModal(props) {
     return (
       <div className="AlertWarning" type="warning" icon="" >
           <img src={auth.urlBase+"global/icon-atention.svg"} alt=""/>
-        <div>{t(`${appMode}.fastbtc.topUpWalletModal.footer`, {ns: ns})}</div>
+        <div>{t(`${AppProject}.fastbtc.topUpWalletModal.footer`, {ns: ns})}</div>
       </div>
     )
    };
@@ -132,21 +132,21 @@ export default function BtcToRbtcGenerateModal(props) {
           {stateFBtc.step === Step.MAIN || stateFBtc.step === Step.WALLET ? (
             <div className="">
               <div className="ModalTopUpTitle">
-                <p className="subtitle">{t(`${appMode}.fastbtc.topUpWalletModal.subtitle`, {ns: ns})}</p>
+                <p className="subtitle">{t(`${AppProject}.fastbtc.topUpWalletModal.subtitle`, {ns: ns})}</p>
               </div>
               <div className="ModalTopUpContent">
                 <div className="TxLimits">
                   <div className="BlueSection">
-                    <b>{t(`${appMode}.fastbtc.topUpWalletModal.limits.header`, { ns: ns })}</b>
+                    <b>{t(`${AppProject}.fastbtc.topUpWalletModal.limits.header`, { ns: ns })}</b>
                     <ul>
                       <li>
-                      {t(`${appMode}.fastbtc.topUpWalletModal.limits.min`, {
+                      {t(`${AppProject}.fastbtc.topUpWalletModal.limits.min`, {
                           ns: ns,
                           minValue: parseFloat(stateFBtc.limits.min.toFixed(4))
                         })}
                       </li>
                       <li>
-                        {t(`${appMode}.fastbtc.topUpWalletModal.limits.max`, {
+                        {t(`${AppProject}.fastbtc.topUpWalletModal.limits.max`, {
                           ns: ns,
                           maxValue: parseFloat(stateFBtc.limits.max.toFixed(4))
                         })}
@@ -156,12 +156,12 @@ export default function BtcToRbtcGenerateModal(props) {
                       </li>
                     </ul>
                   </div>
-                  <b className="section-title">{t(`${appMode}.fastbtc.topUpWalletModal.instructions.header`, {ns: ns})}</b>
+                  <b className="section-title">{t(`${AppProject}.fastbtc.topUpWalletModal.instructions.header`, {ns: ns})}</b>
                   <div className="TopUpInstructions">
                     <ul>
-                      <li>{t(`${appMode}.fastbtc.topUpWalletModal.instructions.items.0`, { ns: ns })}</li>
-                      <li>{t(`${appMode}.fastbtc.topUpWalletModal.instructions.items.1`, { ns: ns })}</li>
-                      <li>{t(`${appMode}.fastbtc.topUpWalletModal.instructions.items.2`, { ns: ns })}</li>
+                      <li>{t(`${AppProject}.fastbtc.topUpWalletModal.instructions.items.0`, { ns: ns })}</li>
+                      <li>{t(`${AppProject}.fastbtc.topUpWalletModal.instructions.items.1`, { ns: ns })}</li>
+                      <li>{t(`${AppProject}.fastbtc.topUpWalletModal.instructions.items.2`, { ns: ns })}</li>
                       <li>If rBTC is not visible in your destination wallet after 60 mins, open a<a href='https://sovryn.freshdesk.com/support/tickets/new'><strong> support ticket</strong></a> at Sovryn.</li>
                     </ul>
                   </div>
@@ -196,8 +196,8 @@ export default function BtcToRbtcGenerateModal(props) {
 
 const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
   const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-  const appMode = config.environment.AppMode;
+  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const AppProject = config.environment.AppProject;
   useEffect(
     () => {
       if (!address) console.log('--- USER IS NOT LOGGED IN ----');
@@ -234,7 +234,7 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
       {state.step === Step.WALLET && state.deposit.address !== '' ? (
         <div className="AddressQrCode">
           <div className="tw-text-lg tw-ml-8 tw-mb-2.5">
-            <b className="AddressTitle">{t(`${appMode}.fastbtc.topUpWalletModal.txactions.sendBTCTitle`, {ns: ns})}</b>
+            <b className="AddressTitle">{t(`${AppProject}.fastbtc.topUpWalletModal.txactions.sendBTCTitle`, {ns: ns})}</b>
             <Copy
               textToShow={state.deposit.address.substring(0, 6) + '...' + state.deposit.address.substring(state.deposit.address.length - 4, state.deposit.address.lenght)}
               textToCopy={state.deposit.address} fastBTC={true}

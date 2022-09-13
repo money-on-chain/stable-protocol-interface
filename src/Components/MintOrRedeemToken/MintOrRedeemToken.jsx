@@ -46,8 +46,8 @@ import { config } from './../../Config/config';
 const MintOrRedeemToken = (props) => {
 
   const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-  const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-  const appMode = config.environment.AppMode;
+  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const AppProject = config.environment.AppProject;
   const auth = useContext(AuthenticateContext);
   const {web3} = auth;
 
@@ -386,8 +386,8 @@ const MintOrRedeemToken = (props) => {
 
   const msgAllowanceSend = () => {
     notification['warning']({
-      message: t(`${appMode}.exchange.allowance.allowanceSendTitle`, {ns: ns}),
-      description: t(`${appMode}.exchange.allowance.allowanceSendDescription`, {ns: ns}),
+      message: t(`${AppProject}.exchange.allowance.allowanceSendTitle`, {ns: ns}),
+      description: t(`${AppProject}.exchange.allowance.allowanceSendDescription`, {ns: ns}),
       duration: 20
     });
   };
@@ -407,8 +407,8 @@ const MintOrRedeemToken = (props) => {
       </Button>
     );
     notification['warning']({
-      message: t(`${appMode}.exchange.allowance.allowanceTxTitle`, {ns: ns}),
-      description: t(`${appMode}.exchange.allowance.allowanceTxDescription`, {ns: ns}),
+      message: t(`${AppProject}.exchange.allowance.allowanceTxTitle`, {ns: ns}),
+      description: t(`${AppProject}.exchange.allowance.allowanceTxDescription`, {ns: ns}),
       btn,
       key,
       duration: 35
@@ -423,8 +423,8 @@ const MintOrRedeemToken = (props) => {
     setLoadingSwitch(false);
 
     notification['error']({
-      message: t(`${appMode}.exchange.allowance.allowanceSendErrorTitle`, {ns:ns}),
-      description: t(`${appMode}.exchange.allowance.allowanceSendErrorDescription`, {ns: ns}),
+      message: t(`${AppProject}.exchange.allowance.allowanceSendErrorTitle`, {ns:ns}),
+      description: t(`${AppProject}.exchange.allowance.allowanceSendErrorDescription`, {ns: ns}),
       duration: 10
     });
   };
@@ -508,7 +508,7 @@ const MintOrRedeemToken = (props) => {
       <div className="MintOrRedeemTokenFooter AlignedAndCentered">
         <div className="ReserveInUSD">
           <span className={`Conversion ${window.appMode}`}>
-            1 {t(`${appMode}.Tokens_RESERVE_code`, {ns: ns})} ={' '}
+            1 {t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})} ={' '}
                 {auth.isLoggedIn && <>&nbsp;<LargeNumber amount={auth.contractStatusData['bitcoinPrice']} {...{ currencyCode }} />
                   <span>&nbsp;USD</span></>
               }
@@ -575,8 +575,8 @@ const MintOrRedeemToken = (props) => {
 
   const contentFee = (type) => (
     <div className="TooltipContent">
-      <h4>{t(`${appMode}.exchange.summary.${type}Title`, {ns: ns})}</h4>
-      <p>{t(`${appMode}.exchange.summary.${type}TooltipText`, {ns: ns})}</p>
+      <h4>{t(`${AppProject}.exchange.summary.${type}Title`, {ns: ns})}</h4>
+      <p>{t(`${AppProject}.exchange.summary.${type}TooltipText`, {ns: ns})}</p>
     </div>
   );
 

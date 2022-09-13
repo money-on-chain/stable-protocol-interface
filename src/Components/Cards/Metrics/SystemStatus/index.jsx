@@ -16,8 +16,8 @@ function SystemStatus(props) {
 
     const getDatas = getDatasMetrics(auth)
     const [t, i18n] = useTranslation(["global", 'moc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
 
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
@@ -29,8 +29,8 @@ function SystemStatus(props) {
 
     const configStatusGreen = {
         className: 'statusGreen',
-        title: t(`${appMode}.metrics.statusGreen.title`, {ns: ns}),
-        subtitle: t(`${appMode}.metrics.statusGreen.subtitle`, {ns: ns}),
+        title: t(`${AppProject}.metrics.statusGreen.title`, {ns: ns}),
+        subtitle: t(`${AppProject}.metrics.statusGreen.subtitle`, {ns: ns}),
         operationsAvailable: [
             "mintSTABLE",
             "redeemSTABLEOnSettlement",
@@ -44,8 +44,8 @@ function SystemStatus(props) {
 
     const configStatusYellow = {
         className: 'statusYellow',
-        title: t(`${appMode}.metrics.statusYellow.title`, {ns: ns}),
-        subtitle: t(`${appMode}.metrics.statusYellow.subtitle`, {ns: ns}),
+        title: t(`${AppProject}.metrics.statusYellow.title`, {ns: ns}),
+        subtitle: t(`${AppProject}.metrics.statusYellow.subtitle`, {ns: ns}),
         operationsAvailable: [
             "redeemSTABLEOnSettlement",
             "mintRISKPRO",
@@ -56,8 +56,8 @@ function SystemStatus(props) {
 
     const configStatusOrange = {
         className: 'statusOrange',
-        title: t(`${appMode}.metrics.statusOrange.title`, {ns: ns}),
-        subtitle: t(`${appMode}.metrics.statusOrange.subtitle`, {ns: ns}),
+        title: t(`${AppProject}.metrics.statusOrange.title`, {ns: ns}),
+        subtitle: t(`${AppProject}.metrics.statusOrange.subtitle`, {ns: ns}),
         operationsAvailable: [
             "mintRISKPRO",
             "mintRISKPROX",
@@ -67,8 +67,8 @@ function SystemStatus(props) {
 
     const configStatusRed = {
         className: 'statusRed',
-        title: t(`${appMode}.metrics.statusRed.title`, {ns: ns}),
-        subtitle: t(`${appMode}.metrics.statusRed.subtitle`, {ns: ns}),
+        title: t(`${AppProject}.metrics.statusRed.title`, {ns: ns}),
+        subtitle: t(`${AppProject}.metrics.statusRed.subtitle`, {ns: ns}),
         operationsAvailable: [
             "mintRISKPROX",
             "redeemRISKPROX"
@@ -142,9 +142,9 @@ function SystemStatus(props) {
                     ? <><div>
                             <div className="CardMetricContent" style={{ alignItems: 'center', justifyItems: 'center', marginTop: 0 }}>
                                 <CheckCircleFilled style={{ marginLeft: 5, fontSize: 30 }} className={className} />
-                                <div className={className} style={{ fontWeight: 500, marginLeft: 10, fontSize: '19.6px' }} dangerouslySetInnerHTML={{ __html: customTitle(t(`${appMode}.metrics.`.concat(className.concat('.title')), { ns: ns })) }}></div>
+                                <div className={className} style={{ fontWeight: 500, marginLeft: 10, fontSize: '19.6px' }} dangerouslySetInnerHTML={{ __html: customTitle(t(`${AppProject}.metrics.`.concat(className.concat('.title')), { ns: ns })) }}></div>
                             </div>
-                            <h5 style={{ marginLeft: 35 }}> {t(`${appMode}.metrics.`.concat(className.concat('.subtitle')), { ns: ns })} </h5>
+                            <h5 style={{ marginLeft: 35 }}> {t(`${AppProject}.metrics.`.concat(className.concat('.subtitle')), { ns: ns })} </h5>
                         </div>
                         <div>
                             <h5>{t('global.Metrics_globalCoverage', { ns: 'global' })}</h5>
@@ -157,7 +157,7 @@ function SystemStatus(props) {
                     </> : <Skeleton active={true} />
                 }
             </div>
-            <h3 className="CardTitle" style={{ marginTop: 50 }}>{t(`${appMode}.metrics.systemOperations.title`, { ns: ns })}</h3>
+            <h3 className="CardTitle" style={{ marginTop: 50 }}>{t(`${AppProject}.metrics.systemOperations.title`, { ns: ns })}</h3>
             <div className="CardMetricContent" style={{ marginTop: 10 }}>
                 {!loading
                    ? <SystemOperations statusClassName={className} operationsAvailable={operationsAvailable} />

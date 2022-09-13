@@ -73,8 +73,8 @@ export default function RewardsStakingOptions(props) {
 
     const [withdrawalId, setWithdrawalId] = useState("0");
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
 
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
@@ -175,13 +175,13 @@ export default function RewardsStakingOptions(props) {
                                 <div>
                                     {t("global.RewardsOptions_AvailableToStake", { ns: 'global' })}
                                     <h3 className="amount">
-                                        <LargeNumber amount={mocBalance} currencyCode="REWARD" /> {t(`${appMode}.Tokens_MOC_code`, { ns: ns })}
+                                        <LargeNumber amount={mocBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_MOC_code`, { ns: ns })}
                                     </h3>
                                 </div>
                                 <div style={{ textAlign: 'right' }}>
                                     {t("global.RewardsOptions_Staked", { ns: 'global' })}
                                     <h3 className="amount">
-                                        <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t(`${appMode}.Tokens_MOC_code`, { ns: ns })}
+                                        <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_MOC_code`, { ns: ns })}
                                     </h3>
                                 </div>
                             </Row>
@@ -257,14 +257,14 @@ export default function RewardsStakingOptions(props) {
                             <div>
                                 {t('global.RewardsOptions_AvailableToUnstake', { ns: 'global' })}
                                 <h3 className="amount">
-                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t(`${appMode}.Tokens_MOC_code`, { ns: ns })}
+                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_MOC_code`, { ns: ns })}
                                 </h3>
                             </div>
                             {parseFloat(lockedBalance) > 0 && (
                                 <div>
                                     {t('global.RewardsOptions_Locked', { ns: 'global' })}
                                     <h3 className="amount">
-                                        <LargeNumber amount={lockedBalance} currencyCode="REWARD" /> {t(`${appMode}.Tokens_MOC_code`, { ns: ns })}
+                                        <LargeNumber amount={lockedBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_MOC_code`, { ns: ns })}
                                     </h3>
                                 </div>
                             )}

@@ -10,8 +10,8 @@ import { config } from './../../Config/config';
 const LargeNumberF2 = ({ amount, currencyCode, includeCurrency, numericLabelParams, className }) => {
 
   const [t, i18n]= useTranslation(["global",'moc']);
-  const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-  const appMode = config.environment.AppMode;
+  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const AppProject = config.environment.AppProject;
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);
     const params = Object.assign(
@@ -34,15 +34,15 @@ const LargeNumberF2 = ({ amount, currencyCode, includeCurrency, numericLabelPara
           <Tooltip placement="topLeft" title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
               <div className={className} style={{'display':'flex'}}>
                   <NumericLabel style={{'flexGrow':'0'}} {... {params }}>{value.toString()}</NumericLabel>
-                  <span className={'number-label color-08374F'} style={{'flexGrow':'1'}}>{includeCurrency && ` ${t(`${appMode}.Tokens_${currencyCode}_code`, {ns: ns })}`}</span>
+                  <span className={'number-label color-08374F'} style={{'flexGrow':'1'}}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: ns })}`}</span>
               </div>
           </Tooltip>}</>
   );
   }
 
   return (
-    <Tooltip title={t(`${appMode}.general.invalidValueDescription`, {ns: ns})}>
-      {t(`${appMode}.general.invalidValuePlaceholder`, {ns: ns})}
+    <Tooltip title={t(`${AppProject}.general.invalidValueDescription`, {ns: ns})}>
+      {t(`${AppProject}.general.invalidValuePlaceholder`, {ns: ns})}
     </Tooltip>
   )
 };

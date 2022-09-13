@@ -14,8 +14,8 @@ function WalletBalance(props) {
     const auth= useContext(AuthenticateContext);
     const { accountData = {} } = auth;
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
 
     const timeSke= 1500
@@ -32,7 +32,7 @@ function WalletBalance(props) {
                 {auth.isLoggedIn &&
                 <div className="TotalBalanceBottom justify-content-initial">
                     <div className="CopyableText ">
-                        <span className="title">{t(`${appMode}.operations.columns_detailed.address`, {ns: ns})}</span>
+                        <span className="title">{t(`${AppProject}.operations.columns_detailed.address`, {ns: ns})}</span>
                         <div>
                             <Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Wallet}/>
                         </div>

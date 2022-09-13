@@ -12,15 +12,15 @@ const AddressContainer = ({ address, accountData, view }) => {
     let addressToShow = '0x0000000000000000000000000000000';
     if (address) addressToShow = auth.toCheckSumAddress(address);
     const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     return (
         <div className="AddressContainer" style={{ marginTop: view === 'moc' && '5em'}}>
           <QRCode value={accountData.Wallet} size="128" alt="qrCode"  />
             {auth.isLoggedIn && <><br/><Copy textToShow={accountData.truncatedAddress} textToCopy={accountData.Wallet}/></>}
             {!auth.isLoggedIn && <><br/><Copy textToShow={'0x0000...0000'} textToCopy={'0x0000...0000'}/></>}
           <a className="RNSLink" href={window.rnsUrl} target="_blank" rel="noopener noreferrer">
-            {t(`${appMode}.rns.register`, {ns: ns})}
+            {t(`${AppProject}.rns.register`, {ns: ns})}
          </a>
         </div>
     );

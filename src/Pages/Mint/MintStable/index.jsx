@@ -15,8 +15,8 @@ export default function Mint(props) {
 
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
 
     return (
         <Fragment>
@@ -27,8 +27,8 @@ export default function Mint(props) {
                 showIcon
                 className="AlertNoConnection"
             />}
-            <h1 className="PageTitle">{t(`${appMode}.wallets.STABLE.title`, { ns: ns })}</h1>
-            <h3 className="PageSubTitle">{t(`${appMode}.wallets.STABLE.subtitle`, { ns: ns })}</h3>
+            <h1 className="PageTitle">{t(`${AppProject}.wallets.STABLE.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.STABLE.subtitle`, { ns: ns })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <AmountCard tokenName="STABLE" titleName="DoC"

@@ -15,8 +15,8 @@ const BigNumber = require('bignumber.js');
 export default function AmountCard(props) {
 
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppMode === 'MoC' ? 'moc' : 'rdoc';
-    const appMode = config.environment.AppMode;
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;
     const [loading, setLoading] = useState(true);
@@ -71,7 +71,7 @@ export default function AmountCard(props) {
     const convertTo = convertToCurrency => convertToken(tokenName, convertToCurrency, getBalance());
     // const converToUSD = convertToCurrency => ConvertToken(tokenName, convertToCurrency, getBalanceUSD());
 
-    const pre_label = t(`${appMode}.Tokens_${tokenName.toUpperCase()}_name`, { ns: ns })
+    const pre_label = t(`${AppProject}.Tokens_${tokenName.toUpperCase()}_name`, { ns: ns })
 
     return (
         <Fragment>
