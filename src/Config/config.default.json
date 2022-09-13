@@ -26,38 +26,46 @@
   },
   "explorerUrl": "https://explorer.testnet.rsk.co",
   "btcExplorer": "https://live.blockcypher.com/btc-testnet",
-  "contractUrl":"https://github.com/money-on-chain/main-RBTC-contract",
   "environment": {
     "AppMode": "MoC",
     "AppProject": "MoC",
     "MoC": "0x01AD6f8E884ed4DDC089fA3efC075E9ba45C9039",
+    "PublicUrl": "http://localhost:3000/",
     "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8",
     "IRegistry": "0x2c4b59ede1998229a9509ec7d15d206e91a246f1",
     "fastBtcBridgeAddress": "0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A",
     "tokens": {
       "COINBASE": {
-          "name": "RBTC",
-          "decimals": "6"
+        "name": "RBTC",
+        "decimals": "6"
       },
       "RESERVE": {
-          "name": "RBTC",
-          "decimals": "6"
+        "name": "RBTC",
+        "decimals": "6"
       },
       "STABLE": {
-          "name": "DOC",
-          "decimals": "2"
+        "name": "DOC",
+        "decimals": "6"
       },
       "RISKPRO": {
-          "name": "BPRO",
-          "decimals": "6"
+        "name": "BPRO",
+        "decimals": "6"
       },
       "RISKPROX": {
-          "name": "BTCX",
-          "decimals": "6"
+        "name": "BTCX",
+        "decimals": "6"
       },
       "MOC": {
-          "name": "MOC",
-          "decimals": "2"
+        "name": "MOC",
+        "decimals": "2"
+      },
+      "USDPrice": {
+        "name": "USD",
+        "decimals": "2"
+      },
+      "USD": {
+        "name": "USD",
+        "decimals": "2"
       }
     },
     "Precisions": {

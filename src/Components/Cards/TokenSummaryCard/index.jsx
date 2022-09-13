@@ -9,7 +9,7 @@ import { currencies as currenciesDetail, getCurrencyDetail } from '../../../Conf
 import { LargeNumber } from "../../LargeNumber";
 import { useTranslation } from "react-i18next";
 import InformationModal from '../../Modals/InformationModal';
-import {setToLocaleString} from "../../../Helpers/helper";
+import {getCoinName, setToLocaleString} from "../../../Helpers/helper";
 import { config } from "../../../Config/config";
 
 const BigNumber = require('bignumber.js');
@@ -38,11 +38,11 @@ export default function TokenSummaryCard(props) {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return setToLocaleString((auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(!tooltip ? 6 : 20),!tooltip ? 6 : 20,i18n)
+                    return setToLocaleString((auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(!tooltip ? config.environment.tokens.STABLE.decimals : 20),!tooltip ? config.environment.tokens.STABLE.decimals : 20,i18n)
                 case 'riskpro':
-                    return setToLocaleString(((auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * auth.web3.utils.fromWei(auth.userBalanceData['bproBalance'])) / auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(!tooltip ? 6 : 20),!tooltip ? 6 : 20,i18n)
+                    return setToLocaleString(((auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * auth.web3.utils.fromWei(auth.userBalanceData['bproBalance'])) / auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(!tooltip ? config.environment.tokens.RISKPRO.decimals : 20),!tooltip ? config.environment.tokens.RISKPRO.decimals : 20,i18n)
                 case 'riskprox':
-                    return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(!tooltip ? 6 : 20),!tooltip ? 6 : 20,i18n)
+                    return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(!tooltip ? parseInt(config.environment.tokens.RISKPROX.decimals) : 20),!tooltip ? parseInt(config.environment.tokens.RISKPROX.decimals) : 20,i18n)
             }
         } else {
             return (0).toFixed(6)
@@ -86,8 +86,9 @@ export default function TokenSummaryCard(props) {
                 // span={7}
                 style={{
                     ...styleCentered,
-                    textAlign: 'right'
-                    ,'flexGrow':'0'
+                    textAlign: 'right',
+                    'flexGrow':'0',
+                    width:'160px'
                 }}
             >
                 <Row className="ArrowHomeIndicators arrow-center-values">
@@ -113,7 +114,7 @@ export default function TokenSummaryCard(props) {
                         }}
                     >
                         <span className={`Number ${AppProject}-${tokenName}`}> {/* style={{ color }}> */}
-                            <LargeNumber className="WithdrawalAmount__" amount={balance} currencyCode={currencyCode} />
+                        <LargeNumber amount={balance} currencyCode={currencyCode} />
                         </span>
                     </Col>
                 </Row>
@@ -132,7 +133,8 @@ export default function TokenSummaryCard(props) {
                     <Tooltip placement="top" title={getBalance(true)}>
                         <div className="Number Few">
                             {getBalance()}{' '}
-                            {labelCoin}
+                            {/*{labelCoin}*/}
+                            {getCoinName('COINBASE')}
                         </div>
                     </Tooltip>
                     <Tooltip placement="top" title={getBalanceUSD(true)}>

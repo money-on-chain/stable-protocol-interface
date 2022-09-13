@@ -6,6 +6,7 @@ import {useTranslation} from "react-i18next";
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { formatLocalMap2 } from '../../Lib/Formats';
 import { config } from './../../Config/config';
+import {getCoinName} from "../../Helpers/helper";
 const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
 const AppProject = config.environment.AppProject;
 
@@ -14,6 +15,9 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
   const [t, i18n]= useTranslation(["global",'moc','rdoc']);
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);
+    console.log('valuecccccccccccccccccccccc')
+    console.log(value)
+    console.log('valuecccccccccccccccccccccc')
     const params = Object.assign(
       {
           commafy: true,
@@ -31,14 +35,14 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
 
     {/* <Tooltip title={Number(amount)?.toLocaleString(formatLocalMap2[i18n.languages[0]])}>>
     <NumericLabel {... {params }}>{value.toString()}</NumericLabel> */}
-
   return (<>
           { !isNaN(value) &&
           <Tooltip placement={tooltip ? tooltip : 'top'} title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
               <div className={className}>
                   {/* <NumericLabel {... {params }}>{amount?.toString()}</NumericLabel> */}
                   <NumericLabel {... {params }}>{value.toString()}</NumericLabel>
-                  <span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: ns })}`}</span>
+                  {/*<span className={'number-label'}>{includeCurrency && ` ${t(`MoC.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>*/}
+                  <span className={'number-label'}>{includeCurrency && ` ${getCoinName(currencyCode)}`}</span>
               </div>
           </Tooltip>}</>
   );

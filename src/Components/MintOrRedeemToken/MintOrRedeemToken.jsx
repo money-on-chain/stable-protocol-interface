@@ -507,7 +507,7 @@ const MintOrRedeemToken = (props) => {
     return (
       <div className="MintOrRedeemTokenFooter AlignedAndCentered">
         <div className="ReserveInUSD">
-          <span className={`Conversion ${window.appMode}`}>
+          <span className={`Conversion ${window.appMode} ${currencyCode}`}>
             1 {t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})} ={' '}
                 {auth.isLoggedIn && <>&nbsp;<LargeNumber amount={auth.contractStatusData['bitcoinPrice']} {...{ currencyCode }} />
                   <span>&nbsp;USD</span></>

@@ -63,10 +63,10 @@ export default function PriceVariation(props) {
     // const formattedRefValue = formatVisibleValue(interestRate, 'USDPrice', formatLocalMap2[i18n.languages[0]]);
 
     const isPositive = priceVariation.current > priceVariation.day;
-    const arrow = auth.urlBaseFull+`/${isPositive ? 'icon-arrow-up2' : 'icon-arrow-down2'}.svg`;
+    const arrow = auth.urlBaseFull+`${isPositive ? 'icon-arrow-up2' : 'icon-arrow-down2'}.svg`;
     const sign = isPositive ? '+' : '';
     const color = isPositive ? '#3fcb97' : '#f2316a';
-    const formattedVar = formatValueVariation((priceVariation.current - priceVariation.day), i18n.languages[0]);
+    const formattedVar = formatValueVariation((priceVariation.current - priceVariation.day), i18n.languages[0],auth);
     const formattedPerc = parseFloat(((priceVariation.current - priceVariation.day)/priceVariation.day)*100).toLocaleString(i18n.languages[0], {minimumFractionDigits:2, maximumFractionDigits:2});
     const variationText = `${sign}${formattedVar} (${formattedPerc}%)`;
 

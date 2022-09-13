@@ -7,6 +7,7 @@ import { AuthenticateContext } from "../../../Context/Auth";
 import { useTranslation } from "react-i18next";
 import SendModal from '../../Modals/SendModal';
 import { config } from '../../../Config/config';
+import {getSelectCoins} from "../../../Helpers/helper";
 
 
 function WalletBalance(props) {
@@ -38,7 +39,7 @@ function WalletBalance(props) {
                         </div>
                     </div>
                     <div>
-                        <SendModal userState={auth} tokensToSend={['RISKPRO', 'STABLE', 'RESERVE']}/>
+                        <SendModal userState={auth} tokensToSend={getSelectCoins(auth.getAppMode)}/>
                     </div>
                 </div>}
             </div>

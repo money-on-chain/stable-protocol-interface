@@ -1,4 +1,5 @@
 import { config } from '../Config/config';
+import {getDecimals} from "../Helpers/helper";
 const BigNumber = require('bignumber.js');
 const precisions = config.environment.Precisions;
 
@@ -48,13 +49,20 @@ const precision = ({ contractDecimals }) =>
 
 const formatValue = (amount, currencyCode, format, decimals) => {
     const fd = formatMap[currencyCode];
-    return formatValueFromMap(amount, fd, format, decimals);
+    return formatValueFromMap(amount, fd, format, getDecimals(currencyCode));
 };
 
 const formatValueFromMap = (amount, mapEntry, format, decimals) => {
-    return BigNumber(amount)
-        .div(precision(mapEntry))
-        .toFormat(decimals || mapEntry.decimals, BigNumber.ROUND_DOWN, format);
+    if(decimals!==undefined){
+        return BigNumber(amount)
+            .div(precision(mapEntry))
+            .toFormat(parseInt(decimals), BigNumber.ROUND_DOWN, format);
+    }else{
+        return BigNumber(amount)
+            .div(precision(mapEntry))
+            .toFormat(decimals || mapEntry.decimals, BigNumber.ROUND_DOWN, format);
+    }
+
 };
 
 const adjustPrecision = (amount, currencyCode) => {
@@ -64,7 +72,8 @@ const adjustPrecision = (amount, currencyCode) => {
     return fd
         ? {
               value: new BigNumber(amount).div(precision(fd)),
-              decimals: fd.decimals
+              // decimals: fd.decimals
+              decimals: getDecimals(currencyCode)
           }
         : { value: new BigNumber(amount), decimals: 2 };
 };
@@ -80,10 +89,10 @@ const formatVisibleValue = (amount, currencyCode, language, decimals) => {
     return num;
 };
 
-const formatValueVariation = (amount, language) => {
+const formatValueVariation = (amount, language, auth) => {
     if (!amount) return '-';
     const fd = formatMap['valueVariation'];
-    const num = formatValueFromMap(amount, fd, formatLocalMap[language]);
+    const num = formatValueFromMap(amount, fd, formatLocalMap[language],(auth.getAppMode=='MoC')? 2:4);
     return num;
 };
 

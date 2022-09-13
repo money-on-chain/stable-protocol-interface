@@ -181,7 +181,9 @@ function WalletBalancePie(props) {
                     <Tooltip content={<CustomTooltip />} overlayStyle={{fontSize: '12px'}}/>
                 </PieChart>
             </ResponsiveContainer>
-            <span className={'money-RBTC'}> <LargeNumber {...{ amount: web3.utils.toWei(getBalance(), 'ether'), currencyCode: 'RESERVE', includeCurrency: true}} /></span>
+            <span className={'money-RBTC'}>
+                <LargeNumber {...{ amount: web3.utils.toWei(getBalance(), 'ether'), currencyCode: 'RESERVE', includeCurrency: true}} />
+            </span>
             <span className={'money-USD'}>{getBalanceUSD()} USD</span>
         </div>
 

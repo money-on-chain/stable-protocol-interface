@@ -84,7 +84,7 @@ function Home(props) {
                             page="/wallet/stable"
                             balance={docBalance}
                             labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
-                            currencyCode={'STABLE'}
+                            currencyCode={(auth.getAppMode=='MoC')? 'USD': 'STABLE'}
                         />
                         <TokenSummaryCard
                             tokenName="riskpro"
@@ -93,6 +93,7 @@ function Home(props) {
                             balance={bproBalance}
                             labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
                             currencyCode={'RISKPRO'}
+                            currencyCodeNumber={'RISKPRO'}
                         />
                         <TokenSummaryCard
                             tokenName="riskprox"
@@ -101,6 +102,7 @@ function Home(props) {
                             balance={bprox2Balance}
                             labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns })}
                             currencyCode={'RISKPROX'}
+                            currencyCodeNumber={'RISKPROX'}
                         />
                     </div>
                 </div>

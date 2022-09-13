@@ -157,7 +157,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
             <Tooltip title={formatValueWithContractPrecision(inputValueInWei, currencySelected)}>
               <DebounceInput
                 placeholder={placeholder}
-                value={formatVisibleValue(inputValueInWei, currencySelected, formatLocalMap2['en'])}
+                value={formatVisibleValue(inputValueInWei, (currencySelected=='STABLE' && auth.getAppMode=='MoC')? 'USD': currencySelected, formatLocalMap2['en'])}
                 debounceTimeout={1000}
                 onChange={event => handleValueChange(event.target.value)}
                 className={`valueInput ${
@@ -182,7 +182,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
           </span>
           <div className="text-align-right">
             <LargeNumber
-                currencyCode={currencySelected}
+                currencyCode={(currencySelected=='STABLE' && auth.getAppMode=='MoC')? 'USD': currencySelected}
                 amount={maxValueAllowedInWei}
                 includeCurrency
             />

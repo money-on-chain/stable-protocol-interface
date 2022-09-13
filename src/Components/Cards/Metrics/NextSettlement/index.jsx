@@ -81,7 +81,7 @@ function NextSettlement() {
             {/*<h2>{position}</h2>*/}
 
             <div className="CardMetricContent BProThemeMetric">
-               {!loading 
+               {!loading
                 ? <>
                     <div>
                         <h5>{t(`${AppProject}.metrics.Settlement.date`, { ns: ns })}</h5>

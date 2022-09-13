@@ -496,3 +496,46 @@ export function getUSD(coin,value,auth,i18n=null){
         return 0
     }
 }
+
+export function getCoinName(coin){
+
+    let currencies= {
+        'COINBASE':config.environment.tokens.COINBASE.name,
+        'STABLE':config.environment.tokens.STABLE.name,
+        'RISKPRO':config.environment.tokens.RISKPRO.name,
+        'RISKPROX':config.environment.tokens.RISKPROX.name,
+        'RESERVE':config.environment.tokens.RESERVE.name,
+        'USDPrice':config.environment.tokens.USDPrice.name,
+        'MOC':config.environment.tokens.MOC.name,
+        'USD':config.environment.tokens.USD.name,
+    }
+
+    return currencies[coin]
+}
+
+export function getDecimals(coin){
+    let decimals= {
+        'STABLE':config.environment.tokens.STABLE.decimals,
+        'RISKPRO':config.environment.tokens.RISKPRO.decimals,
+        'RISKPROX':config.environment.tokens.RISKPROX.decimals,
+        'USDPrice':config.environment.tokens.USDPrice.decimals,
+        'RESERVE':config.environment.tokens.RESERVE.decimals,
+        'USD':2,
+    }
+
+    return decimals[coin]
+
+}
+
+export function getSelectCoins(appMode){
+    switch (appMode) {
+        case 'RRC20':
+            return ['RISKPRO', 'STABLE']
+        case 'MoC':
+            return ['RISKPRO', 'STABLE', 'RESERVE']
+        default:
+            return ['RISKPRO', 'STABLE', 'RESERVE']
+    }
+
+}
+
