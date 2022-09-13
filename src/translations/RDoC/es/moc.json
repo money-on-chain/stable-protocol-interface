@@ -4,14 +4,14 @@
       "name": "Money on Chain",
       "code": "MoC"
     },
-    "Tokens_STABLE_code": "DOC",
-    "Tokens_STABLE_name": "DoC",
-    "Tokens_RISKPRO_code": "BPRO",
-    "Tokens_RISKPRO_name": "BPro",
-    "Tokens_RISKPROX_code": "BTCX",
-    "Tokens_RISKPROX_name": "BTCx",
-    "Tokens_RESERVE_code": "RBTC",
-    "Tokens_RESERVE_name": "rBTC",
+    "Tokens_STABLE_code": "RDOC",
+    "Tokens_STABLE_name": "RDoC",
+    "Tokens_RISKPRO_code": "RIFP",
+    "Tokens_RISKPRO_name": "RIFP",
+    "Tokens_RISKPROX_code": "RIFX",
+    "Tokens_RISKPROX_name": "RIFx",
+    "Tokens_RESERVE_code": "RIF",
+    "Tokens_RESERVE_name": "RIF",
     "Tokens_USD_code": "USD",
     "Tokens_USD_name": "Dollar",
     "Tokens_MOC_code": "MOC",
@@ -132,15 +132,15 @@
       "preferences": "Preferencias",
       "notifications": "Notificaciones",
       "information": "Información",
-      "faqs": "Wiki",
-      "rewards": "Token MoC",
+      "faqs": "Ayuda",
+      "rewards": "Recompensas MOC",
       "language": "Idioma",
-      "RISKPROWallet": "Token BPro",
-      "RISKPROXWallet": "Posición BTCx",
-      "STABLEWallet": "Token DoC",
-      "getRBTC": "Convierte BTC a RBTC",
-      "wiki-url": "https://wiki.moneyonchain.com/v/espanol",
-      "repository-url": "https://github.com/money-on-chain/main-RBTC-contract"
+      "RISKPROWallet":"Tokens RIFP",
+      "RISKPROXWallet":"Posiciones RIFX",
+      "STABLEWallet":"Tokens RDOC",
+      "getRBTC":"Convierte BTC a RBTC",
+      "wiki-url": "https://wiki.rifonchain.com/v/espanol",
+      "repository-url": "https://github.com/money-on-chain/RDOC-Contract"
     },
     "menu-drawer": {
       "home": "Inicio",
@@ -171,16 +171,16 @@
       "receiverAddress": "Dirección o dominio del Receptor",
       "ownAddressLabel": "Su dirección",
       "RISKPRO": {
-        "title": "BPro",
-        "subtitle": "Administra tus Tokens BPro"
+        "title": "RIFpro",
+        "subtitle": "Administra tus Tokens RIFpro"
       },
       "RISKPROX": {
-        "title": "BTCx",
-        "subtitle": "Administra tus posiciones BTCx"
+        "title": "RIFX",
+        "subtitle": "Administra tus posiciones RIFX"
       },
       "STABLE": {
-        "title": "DOC",
-        "subtitle": "Administre sus DOCs"
+        "title": "RDOC",
+        "subtitle": "Administre sus RDOC"
       },
       "MOC": {
         "title": "MOC",
@@ -234,22 +234,22 @@
         "availableRedeem": "Disponibles para redimir",
         "availableMint": "Disponibles para emitir"
       },
-      "RISKPRO": {
-        "title": "BPro",
-        "usd": "BPro USD",
-        "availableRedeem": "Disponibles para redimir",
-        "availableMint": "Disponibles para emitir",
-        "leverage": "Apalancamiento actual",
-        "total": "Total en el sistema",
-        "bproDiscountPriceUsd": "Precio descuento"
+      "RISKPRO":{
+        "title":"RIFpro",
+        "usd":"RIFP USD",
+        "availableRedeem":"Disponibles para redimir",
+        "availableMint":"Disponibles para emitir",
+        "leverage":"Apalancamiento actual",
+        "total":"Total en el sistema",
+        "bproDiscountPriceUsd":"Precio descuento"
       },
-      "RISKPROX": {
-        "title": "BTCx",
-        "usd": "BTCx USD",
-        "availableMint": "Disponibles para emitir",
-        "coverage": "Cobertura máxima",
-        "leverage": "Apalancamiento",
-        "total": "Total en el sistema"
+      "RISKPROX":{
+        "title":"RIFX",
+        "usd":"RIFX USD",
+        "availableMint":"Disponibles para emitir",
+        "coverage":"Cobertura máxima",
+        "leverage":"Apalancamiento",
+        "total":"Total en el sistema"
       },
       "statusGreen": {
         "title": "Completamente operativo",
@@ -279,26 +279,26 @@
         "title": "No hay precio activo",
         "subtitle": "No se permite ninguna operación"
       },
-      "systemOperations": {
-        "title": "Operaciones del sistema",
-        "mintSTABLE": "Emitir DoC",
-        "redeemSTABLEOnSettlement": "Redimir DoC en Settlement",
-        "redeemSTABLEOutsideOfSettlement": "Redimir DoC",
-        "mintRISKPRO": "Emitir BPro",
-        "redeemRISKPRO": "Redimir BPro",
-        "mintRISKPROX": "Emitir BTCx si está disponible",
-        "redeemRISKPROX": "Redimir BTCx si está disponible"
+      "systemOperations":{
+        "title":"Operaciones del sistema",
+        "mintSTABLE":"Emitir RDOC",
+        "redeemSTABLEOnSettlement":"Redimir RDOC en Settlement",
+        "redeemSTABLEOutsideOfSettlement":"Redimir RDOC",
+        "mintRISKPRO":"Emitir RIFpro",
+        "redeemRISKPRO":"Redimir RIFpro",
+        "mintRISKPROX":"Emitir RIFX si está disponible",
+        "redeemRISKPROX":"Redimir RIFX si está disponible"
       },
       "bucketsInTokens": {
         "title": "Liquidez",
         "total": "Total"
       },
-      "infoRBTC": {
-        "title": "Total de rBTC en el sistema",
-        "priceRBTC": "rBTC USD",
-        "interest": "rBTC en bolsa de intereses",
-        "EMA": "rBTC EMA 120",
-        "targetCoverage": "Target coverage"
+      "infoRBTC":{
+        "title":"Total de RIF en el sistema",
+        "priceRBTC":"RIF USD",
+        "interest":"RIF en Bolsa de Intereses",
+        "EMA":"RIF EMA 120",
+        "targetCoverage":"Cobertura objetivo"
       },
       "BtcInBucket0": {
         "title": "Tokens en BitPRO",
@@ -329,9 +329,9 @@
         "blockSettlement": "El próximo Settlement ocurrirá en el bloque",
         "lastUpdateHeight": "Bloque indexado"
       },
-      "Moc": {
-        "title": "MoC",
-        "price": "Precio actual"
+      "Moc":{
+        "title":"MoC",
+        "price": "Precio actual en USD"
       }
     },
     "settlement": {

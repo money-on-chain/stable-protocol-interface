@@ -45,7 +45,7 @@
       },
       "STABLE": {
         "name": "DOC",
-        "decimals": "2"
+        "decimals": "6"
       },
       "RISKPRO": {
         "name": "BPRO",
@@ -57,6 +57,14 @@
       },
       "MOC": {
         "name": "MOC",
+        "decimals": "2"
+      },
+      "USDPrice": {
+        "name": "USD",
+        "decimals": "2"
+      },
+      "USD": {
+        "name": "USD",
         "decimals": "2"
       }
     },

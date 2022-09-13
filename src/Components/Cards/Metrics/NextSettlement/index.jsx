@@ -78,7 +78,7 @@ function NextSettlement() {
             {/*<h2>{position}</h2>*/}
 
             <div className="CardMetricContent BProThemeMetric">
-               {!loading 
+               {!loading
                 ? <>
                     <div>
                         <h5>{t('MoC.metrics.Settlement.date', { ns: 'moc' })}</h5>

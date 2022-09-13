@@ -10,6 +10,16 @@ import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedee
 
 export default function Mint(props) {
 
+    async function loadAssets() {
+        try {
+            let css1= await import('./'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+
+        } catch (error) {
+            console.log(`Ocurrió un error al cargar imgs: ${error}`);
+        }
+    }
+    loadAssets()
+
     const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);
 
