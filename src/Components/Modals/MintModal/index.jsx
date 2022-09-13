@@ -23,6 +23,7 @@ import {LargeNumberF2} from "../../LargeNumberF2";
 import { config } from '../../../Config/config';
 import web3 from "web3";
 import {setNumber} from "../../../Helpers/helper";
+import Web3 from "web3";
 
 export default function MintModal(props) {
   const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
@@ -75,16 +76,6 @@ export default function MintModal(props) {
 
   let userComment = '';
   let userTolerance = '';
-
-  async function loadAssets() {
-    try {
-      // let css1= await import('../../Modals/StakingOptionsModal/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
-
-    } catch (error) {
-      console.log(`Ocurrió un error al cargar imgs: ${error}`);
-    }
-  }
-  loadAssets()
 
   useEffect(
     () => {
@@ -146,7 +137,9 @@ export default function MintModal(props) {
     // In rrc20 mode show allowance when need it
     if (auth.getAppMode === 'RRC20') {
       const userAllowance = await auth.getReserveAllowance(window.address);
-      if (Number(valueYouExchange) > Number(auth.web3.utils.fromWei(setNumber(userAllowance), 'ether'))) {
+      let value_user_allowance= setNumber(web3.utils.fromWei(setNumber(web3.utils.fromWei(userAllowance, 'ether')),'ether'))
+      // if (valueYouExchange > userAllowance) {
+      if (Number(valueYouExchange) > Number(value_user_allowance)) {
         allowanceReserveModalShow(true);
         console.log("Need allowance... Display allowance form");
         return;
@@ -237,7 +230,7 @@ export default function MintModal(props) {
   const setDoneAllowanceReserve = () => {
     setModalAllowanceReserveMode('Confirm');
     allowanceReserveModalClose();
-    // onConfirmTransactionFinish();
+    onConfirmTransactionFinish();
   };
 
   const setFailAllowanceReserve = () => {

@@ -437,7 +437,6 @@ const AuthenticateProvider = ({ children }) => {
         const from = address || account;
         const dContracts = window.integration;
         const appMode = config.environment.AppMode;
-
         if (appMode === 'RRC20') {
             const reservetoken = dContracts.contracts.reservetoken;
             return reservetoken.methods.allowance(from, dContracts.contracts.moc._address).call();
@@ -555,7 +554,7 @@ const AuthenticateProvider = ({ children }) => {
 
     const interfaceApproveReserve = (address, callback) => {
         const interfaceContext = buildInterfaceContext();
-        AllowanceUseReserveToken(interfaceContext, true, callback);
+        return AllowanceUseReserveToken(interfaceContext, true, callback);
     };
 
     const convertToken = (from, to, amount) => {
