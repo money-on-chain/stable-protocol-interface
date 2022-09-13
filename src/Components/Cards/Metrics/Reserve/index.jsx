@@ -9,13 +9,15 @@ import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../.
 import BigNumber from 'bignumber.js';
 import { config } from '../../../../Config/config';
 
-const appMode = config.environment.AppMode;
-const COLORS = appMode === 'MoC' ? ['#00a651','#ef8a13'] : ['#0083ff','#0061bb'];
+const AppProject = config.environment.AppProject;
+const COLORS = AppProject === 'MoC' ? ['#00a651','#ef8a13'] : ['#0083ff','#0061bb'];
 
 function Reserve(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData, convertToken } = auth;
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500;
     const totalRISKPROInUSD = convertToken("RISKPRO", "USD", props.totalRISKPRO);
@@ -98,11 +100,11 @@ function Reserve(props) {
         return (<div className="pieChartTooltip">
             {data.payload.currencyCode !== "EMPTY" ? <>
             <div>
-            {data.payload.reserveValue.toFixed(6)} {t(`MoC.Tokens_RESERVE_code`, {ns: 'moc'})}
+            {data.payload.reserveValue.toFixed(6)} {t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
             </div>
-            <div className={data.payload.currencyCode}>
-            {formatVisibleValue(data.payload.balance, data.payload.currencyCode, formatLocalMap2[i18n.languages[0]])}
-            {t(`MoC.Tokens_${data.payload.currencyCode}_code`, {ns: 'moc'})}
+            <div className={`${data.payload.currencyCode}-${AppProject}`}>
+            {formatVisibleValue(data.payload.balance, data.payload.currencyCode, formatLocalMap2[i18n.languages[0]])}{' '}
+            {t(`${AppProject}.Tokens_${data.payload.currencyCode}_code`, {ns: ns})}
             </div> </>
             : <div>{t(`global.TotalBalanceCard_noFunds`)}</div>
             }
@@ -118,14 +120,14 @@ function Reserve(props) {
                     src={auth.urlBaseFull+"icon-reserve.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
-                /> {t('MoC.Tokens_RESERVE_name', { ns: 'moc' })}
+                /> {t(`${AppProject}.Tokens_RESERVE_name`, { ns: ns })}
             </h3>
 
             <div className="CardMetricContent">
                 {!loading
                     ? <>
                         <div>
-                            <h3 style={{ textAlign: 'center' }}>{t('MoC.metrics.infoRBTC.title', { ns: 'moc' })}</h3>
+                            <h3 style={{ textAlign: 'center' }}>{t(`${AppProject}.metrics.infoRBTC.title`, { ns: ns })}</h3>
                             <div style={{ height: 180, width: 180, margin: '0 auto' }} className="PieChart">
                                 <ResponsiveContainer style={{ marginLeft: '0 !important' }}>
                                     <PieChart>
@@ -137,7 +139,7 @@ function Reserve(props) {
                                             paddingAngle={1}
                                             dataKey="reserveValue"
                                         >
-                                            {balancesData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} className={`piePiece ${entry.currencyCode}`}/>)}
+                                            {balancesData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`}/>)}
                                         </Pie>
                                         <TooltipRecharts content={<CustomTooltip />} />
                                     </PieChart>
@@ -152,13 +154,13 @@ function Reserve(props) {
                         </div>
                         <div className="separator" style={{ height: 220 }} />
                         <div style={{ marginLeft: 30 }}>
-                        <h3>{t('MoC.metrics.infoRBTC.priceRBTC', { ns: 'moc' })}</h3>
+                        <h3>{t(`${AppProject}.metrics.infoRBTC.priceRBTC`, { ns: ns })}</h3>
                         <LargeNumber amount={props.rbtcPrice} currencyCode={"USDPrice"} includeCurrency={true} />
-                        <h3>{t('MoC.metrics.infoRBTC.interest', { ns: 'moc' })}</h3>
+                        <h3>{t(`${AppProject}.metrics.infoRBTC.interest`, { ns: ns })}</h3>
                         <LargeNumber amount={props.b0BTCInrateBag} currencyCode={"RESERVE"} includeCurrency={true} />
-                        <h3>{t('MoC.metrics.infoRBTC.EMA', { ns: 'moc' })}</h3>
+                        <h3>{t(`${AppProject}.metrics.infoRBTC.EMA`, { ns: ns })}</h3>
                         <LargeNumber amount={props.EMA} currencyCode={"USDPrice"} includeCurrency={true} />
-                        <h3>{t('MoC.metrics.infoRBTC.targetCoverage', { ns: 'moc' })}</h3>
+                        <h3>{t(`${AppProject}.metrics.infoRBTC.targetCoverage`, { ns: ns })}</h3>
                         <LargeNumber amount={props.targetCoverage} currencyCode={"RESERVE"} includeCurrency={false} />
                         </div></>
                     : <Skeleton active={true} />}

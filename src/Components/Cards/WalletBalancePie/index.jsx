@@ -5,6 +5,7 @@ import { adjustPrecision, formatLocalMap, formatLocalMap2 } from '../../../Lib/F
 import {useTranslation} from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
 import web3 from 'web3';
+import { config } from './../../../Config/config';
 
 const BigNumber = require('bignumber.js');
 // const COLORS = ['#00a651', '#ef8a13','#68cdc6','#808080' ];
@@ -25,7 +26,9 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 function WalletBalancePie(props) {
-    const [t, i18n]= useTranslation(["global",'moc'])
+    const [t, i18n]= useTranslation(["global",'moc','rdoc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const [colors, setColors] = useState(['#ccc']);
     // static demoUrl = 'https://codesandbox.io/s/pie-chart-with-padding-angle-7ux0o';
     const auth = useContext(AuthenticateContext);
@@ -112,24 +115,24 @@ function WalletBalancePie(props) {
                 {
                     name: 'Group A',
                     value: Number((set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
-                    set1: (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' '+ t('MoC.Tokens_RESERVE_code', {ns: 'moc'}),
-                    set2: (set_doc_usd()['usd']).toFormat(2, formatLocalMap[i18n.languages[0]]) +' '+ t('MoC.Tokens_STABLE_code', {ns: 'moc'}),
+                    set1: (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: (set_doc_usd()['usd']).toFormat(2, formatLocalMap[i18n.languages[0]]) +' '+ t(`${AppProject}.Tokens_STABLE_code`, {ns: ns}),
                     class: 'STABLE'
                 },
                 {
                     name: 'Group B',
                     value: Number(((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
-                    set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4) +' '+ t('MoC.Tokens_RESERVE_code', {ns: 'moc'}),
-                    set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed(6) +' '+ t('MoC.Tokens_RISKPRO_code', {ns: 'moc'}), class: 'RISKPRO'
+                    set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed(6) +' '+ t(`${AppProject}.Tokens_RISKPRO_code`, {ns: ns}), class: 'RISKPRO'
                 },
                 {
                     name: 'Group C',
                     value: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)),
-                    set1: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' '+ t('MoC.Tokens_RESERVE_code', {ns: 'moc'}),
+                    set1: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
                     set2: (set_moc_balance_usd()['usd']).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
-                    }) +' '+ t('MoC.Tokens_MOC_code', {ns: 'moc'}),
+                    }) +' '+ t(`${AppProject}.Tokens_MOC_code`, {ns: ns}),
                     class: 'RISKPROX'
                 },
                 {
@@ -138,11 +141,11 @@ function WalletBalancePie(props) {
                     set1: (Number(new BigNumber(accountData.Balance))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 6,
                         maximumFractionDigits: 6
-                    })+' '+ t('MoC.Tokens_RESERVE_code', {ns: 'moc'}),
+                    })+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
                     set2: (Number(new BigNumber(accountData.Balance))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 6,
                         maximumFractionDigits: 6
-                    })+' '+ t('MoC.Tokens_RESERVE_code', {ns: 'moc'}),
+                    })+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
                     class: 'RBTC_MAIN'
                 }
 
@@ -156,7 +159,7 @@ function WalletBalancePie(props) {
     };
 
     return (
-        <div style={{ height: 250}}>
+        <div style={{ height: 250}} className="PieChart">
             <ResponsiveContainer>
                 <PieChart>
                     <Pie
@@ -170,7 +173,7 @@ function WalletBalancePie(props) {
                         {getPie() !== undefined &&
 
                         getPie().map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={colors[index % colors.length]}/>
+                            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`} />
                         ))
 
                         }

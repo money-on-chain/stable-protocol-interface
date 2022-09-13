@@ -5,10 +5,13 @@ import i18n from 'i18next';
 import {useTranslation} from "react-i18next";
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { formatLocalMap2 } from '../../Lib/Formats';
+import { config } from '../../Config/config';
 
 const LargeNumberF3 = ({ amount, currencyCode, includeCurrency, numericLabelParams, className }) => {
 
-  const [t, i18n]= useTranslation(["global",'moc']);
+  const [t, i18n]= useTranslation(["global",'moc','rdoc']);
+  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);
     const params = Object.assign(
@@ -32,15 +35,15 @@ const LargeNumberF3 = ({ amount, currencyCode, includeCurrency, numericLabelPara
               { !isNaN(value) &&
 
               <><NumericLabel {... {params }}>{value.toString()}</NumericLabel>
-                  <span className={'number-label'}>{includeCurrency && ` ${t(`MoC.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span></>
+                  <span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: ns })}`}</span></>
 
               }</>
       );
   }
 
   return (
-    <Tooltip title={t('MoC.general.invalidValueDescription', {ns: 'moc'})}>
-      {t('MoC.general.invalidValuePlaceholder', {ns: 'moc'})}
+    <Tooltip title={t(`${AppProject}.general.invalidValueDescription`, {ns: ns})}>
+      {t(`${AppProject}.general.invalidValuePlaceholder`, {ns: ns})}
     </Tooltip>
   )
 };

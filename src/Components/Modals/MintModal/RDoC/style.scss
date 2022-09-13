@@ -29,19 +29,19 @@
       @include primary-text(1.2em, black, 600);
       &.STABLE {
         color: $color-moc-stable;
-        &.RRC20 {
+        &.RDoC {
           color: $color-roc-stable;
         }
       }
       &.RISKPROX {
         color: $color-moc-riskprox;
-        &.RRC20 {
+        &.RDoC {
           color: $color-roc-riskprox;
         }
       }
       &.RISKPRO {
         color: $color-moc-riskpro;
-        &.RRC20 {
+        &.RDoC {
           color: $color-roc-riskpro;
         }
       }

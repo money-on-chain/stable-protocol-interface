@@ -15,13 +15,16 @@ import {setNumber} from "../../Helpers/helper";
 import {useTranslation} from "react-i18next";
 import {LargeNumber} from "../LargeNumber";
 import {LargeNumberF3} from "../LargeNumberF3";
+import { config } from '../../Config/config';
 
 export default function PriceVariation(props) {
 
    // if (!props.priceVariation) return null;
 
     const auth = useContext(AuthenticateContext);
-    const [t, i18n]= useTranslation(["global",'moc'])
+    const [t, i18n]= useTranslation(["global",'moc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
 
     const getBalanceUSD = (tokenName) => {
         if (auth.contractStatusData) {
@@ -69,24 +72,24 @@ export default function PriceVariation(props) {
 
     const tooltip = (
          <div className="PriceVariationTooltip">
-             <p>{t('MoC.general.priceVariation.tooltip.titleDaily', { ns: 'moc' })}</p>
+             <p>{t(`${AppProject}.general.priceVariation.tooltip.titleDaily`, { ns: ns })}</p>
              {auth.contractStatusData.blockHeight >= 0 && (
                  <p>
-                     <b>{t('MoC.general.priceVariation.tooltip.currentBlock', { ns: 'moc' })}:</b> {auth.contractStatusData.blockHeight}
+                     <b>{t(`${AppProject}.general.priceVariation.tooltip.currentBlock`, { ns: ns })}:</b> {auth.contractStatusData.blockHeight}
                  </p>
              )}
              <p>
-                 <b>{t('MoC.general.priceVariation.tooltip.currentValue', { ns: 'moc' })}:</b>{' '}
+                 <b>{t(`${AppProject}.general.priceVariation.tooltip.currentValue`, { ns: ns })}:</b>{' '}
                  <LargeNumberF3 {...{ amount: getBalanceUSD(props.tokenName), currencyCode: 'USDPrice', includeCurrency: true }} />
              </p>
              {auth.contractStatusData.historic.blockHeight >= 0 && (
                  <p>
-                     <b>{t('MoC.general.priceVariation.tooltip.referenceBlock', { ns: 'moc' })}:</b>
+                     <b>{t(`${AppProject}.general.priceVariation.tooltip.referenceBlock`, { ns: ns })}:</b>
                      {' '}{auth.contractStatusData.historic.blockHeight}
                  </p>
              )}
              <p>
-                 <b>{t('MoC.general.priceVariation.tooltip.referenceValue', { ns: 'moc' })}:</b>
+                 <b>{t(`${AppProject}.general.priceVariation.tooltip.referenceValue`, { ns: ns })}:</b>
                  {' '}{parseFloat(web3.utils.fromWei(auth.contractStatusData.historic.bitcoinPrice, 'ether')).toFixed(2)}{' USD'}
              </p>
          </div>

@@ -4,13 +4,16 @@ import moment from "moment";
 import { getDatasMetrics } from '../../../../Helpers/helper';
 import { useTranslation } from "react-i18next";
 import { Skeleton } from 'antd';
+import {config} from '../../../../Config/config';
 
 function NextSettlement() {
     const auth = useContext(AuthenticateContext);
     const { accountData } = auth;
     const [daysHours, setDaysHours] = useState(null);
     const [crono, setCrono] = useState(2);
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
 
     const decimaltoHour = (dayBlockSpan, blocksToSettlement) => {
         const result = {};
@@ -73,7 +76,7 @@ function NextSettlement() {
     return (
         <div className="Card CardSystemStatus">
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
-                {t('MoC.metrics.Settlement.title', { ns: 'moc' })}
+                {t(`${AppProject}.metrics.Settlement.title`, { ns: ns })}
             </h3>
             {/*<h2>{position}</h2>*/}
 
@@ -81,19 +84,19 @@ function NextSettlement() {
                {!loading
                 ? <>
                     <div>
-                        <h5>{t('MoC.metrics.Settlement.date', { ns: 'moc' })}</h5>
+                        <h5>{t(`${AppProject}.metrics.Settlement.date`, { ns: ns })}</h5>
                         {daysHours?.date} <br /> {daysHours?.date_time}
-                        <h5>{t('MoC.metrics.Settlement.remainingDaysTitle', { ns: 'moc' })}</h5>
+                        <h5>{t(`${AppProject}.metrics.Settlement.remainingDaysTitle`, { ns: ns })}</h5>
                         {daysHours?.time}
-                        <h5>{t('MoC.metrics.Settlement.lastUpdateHeight', { ns: 'moc' })}</h5>
+                        <h5>{t(`${AppProject}.metrics.Settlement.lastUpdateHeight`, { ns: ns })}</h5>
                         {blockHeight}
                     </div>
                     <div className="separator" /><div>
                         {/*<h5>Blocks to <br /> settlement</h5>*/}
-                        <h5>{t('MoC.metrics.Settlement.blocksToSettlement', { ns: 'moc' })}</h5>
+                        <h5>{t(`${AppProject}.metrics.Settlement.blocksToSettlement`, { ns: ns })}</h5>
                         {blocksToSettlement}
                         {/*<h5>Settlement will <br /> happen on block</h5>*/}
-                        <h5>{t('MoC.metrics.Settlement.blockSettlement', { ns: 'moc' })}</h5>
+                        <h5>{t(`${AppProject}.metrics.Settlement.blockSettlement`, { ns: ns })}</h5>
                         {settlementBlock}
                     </div></>
             : <Skeleton active={true} />}

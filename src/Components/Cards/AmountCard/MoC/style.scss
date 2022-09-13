@@ -9,7 +9,7 @@
     .MoC & {
       @include primary-text(1em, $secondary-dark-color, 400);
     }
-    .RRC20 & {
+    .RDoC & {
       @include primary-text(1em, $accent-color, 500);
     }
   }

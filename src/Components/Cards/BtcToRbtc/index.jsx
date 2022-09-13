@@ -3,15 +3,18 @@ import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import {useTranslation} from "react-i18next";
-const BigNumber = require('bignumber.js');
+import { config } from '../../../Config/config';
+// const BigNumber = require('bignumber.js');
 
 export default function BtcToRbtc(props) {
 
     const auth = useContext(AuthenticateContext);
-    const [t, i18n]= useTranslation(["global",'moc'])
+    const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const{
         title = 'BTC to rBTC Peg In',
-        description = t('MoC.fastbtc.getRBTC_description', {ns: 'moc'}),
+        description = t(`${AppProject}.fastbtc.getRBTC_description`, {ns: ns}),
         btnAction = ()=>{},
         btnText = 'Convert rBTC to BTC'
     } = props;

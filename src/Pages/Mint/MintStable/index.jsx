@@ -6,6 +6,7 @@ import React, {Fragment, useContext, useEffect} from 'react';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../Context/Auth';
+import { config } from './../../../Config/config';
 
 
 import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedeemToken';
@@ -23,7 +24,9 @@ export default function Mint(props) {
     loadAssets()
 
     const auth = useContext(AuthenticateContext);
-    const [t, i18n] = useTranslation(["global", 'moc'])
+    const [t, i18n] = useTranslation(["global", 'moc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
 
     return (
         <Fragment>
@@ -34,8 +37,8 @@ export default function Mint(props) {
                 showIcon
                 className="AlertNoConnection"
             />}
-            <h1 className="PageTitle">{t("MoC.wallets.STABLE.title", { ns: 'moc' })}</h1>
-            <h3 className="PageSubTitle">{t("MoC.wallets.STABLE.subtitle", { ns: 'moc' })}</h3>
+            <h1 className="PageTitle">{t(`${AppProject}.wallets.STABLE.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.STABLE.subtitle`, { ns: ns })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <AmountCard tokenName="STABLE" titleName="DoC"

@@ -1,11 +1,13 @@
 import React, { useContext} from 'react';
 import { Button } from 'antd';
 import {useTranslation} from "react-i18next";
-
+import {config} from '../../../../Config/config';
 import { AuthenticateContext } from '../../../../Context/Auth';
 
 export function BTCButton({ onClick, underMaintenance }) {
-  const [t, i18n]= useTranslation(["global",'moc'])
+  const [t, i18n]= useTranslation(["global",'moc']);
+  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const AppProject = config.environment.AppProject;
   const auth = useContext(AuthenticateContext);
   const {web3} = auth
   const socketConnected = true; // auth === true;
@@ -24,10 +26,10 @@ export function BTCButton({ onClick, underMaintenance }) {
 
   function getButtonText() {
     if (underMaintenance) {
-      return t('MoC.fastbtc.topUpWalletModal.getBTCAddressButtonUnderMaintenance', {ns: 'moc'});
+      return t(`${AppProject}.fastbtc.topUpWalletModal.getBTCAddressButtonUnderMaintenance`, {ns: ns});
     }
     return socketConnected === false
-      ? t('MoC.fastbtc.topUpWalletModal.getBTCAddressButtonConnecting', {ns: 'moc'})
-      : t('MoC.fastbtc.topUpWalletModal.getBTCAddressButton', {ns: 'moc'});
+      ? t(`${AppProject}.fastbtc.topUpWalletModal.getBTCAddressButtonConnecting`, {ns: ns})
+      : t(`${AppProject}.fastbtc.topUpWalletModal.getBTCAddressButton`, {ns: ns});
   }
 }

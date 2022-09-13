@@ -5,11 +5,14 @@ import i18n from 'i18next';
 import {useTranslation} from "react-i18next";
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { formatLocalMap2 } from '../../Lib/Formats';
+import { config } from './../../Config/config';
 import {getCoinName} from "../../Helpers/helper";
+const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+const AppProject = config.environment.AppProject;
 
 const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams, className, tooltip }) => {
 
-  const [t, i18n]= useTranslation(["global",'moc']);
+  const [t, i18n]= useTranslation(["global",'moc','rdoc']);
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);
     console.log('valuecccccccccccccccccccccc')
@@ -46,8 +49,8 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
   }
 
   return (
-    <Tooltip title={t('MoC.general.invalidValueDescription', {ns: 'moc'})}>
-      {t('MoC.general.invalidValuePlaceholder', {ns: 'moc'})}
+    <Tooltip title={t(`${AppProject}.general.invalidValueDescription`, {ns: ns})}>
+      {t(`${AppProject}.general.invalidValuePlaceholder`, {ns: ns})}
     </Tooltip>
   )
 };
@@ -97,12 +100,12 @@ const USDValueLargeNumber = ({amountUSD, showUSD, numericLabelParams}) => {
 }
 
 const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive, showSign, showUSD, amountUSD, numericLabelParams, infoDescription, showFlat,t, i18n  }) => {
-
+    
     if (currencyCode == 'RBTC') {
         var displayCurrencyCode = 'RBTC';
         currencyCode = 'RESERVE';
     } else {
-        var displayCurrencyCode = t(`MoC.Tokens_${currencyCode}_code`, { ns: 'moc' });
+        var displayCurrencyCode = t(`${AppProject}.Tokens_${currencyCode}_code`, { ns: ns });
     }
 
     if (amount !== null && amount !== '' && !Number.isNaN(Number(amount))) {
@@ -157,8 +160,8 @@ const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive,
     }
 
     return (
-        <Tooltip title={t('MoC.general.invalidValueDescription', {ns: 'moc' })}>
-            {t(`MoC.general.invalidValuePlaceholder`, {ns: 'moc' })}
+        <Tooltip title={t(`${AppProject}.general.invalidValueDescription`, {ns: ns })}>
+            {t(`${AppProject}.general.invalidValuePlaceholder`, {ns: ns })}
         </Tooltip>
     );
 };
@@ -179,57 +182,57 @@ const getExplainByEvent = ({ event, amount, amount_rbtc, status, token_involved,
     const map = {
         RiskProMint: (
             <div class="">
-                {t('MoC.operations.explain.RiskProMint', { ns: 'moc' })} {amount}
+                {t(`${AppProject}.operations.explain.RiskProMint`, { ns: ns })} {amount}
             </div>
         ),
         RiskProRedeem: (
             <div class="">
-                {t('MoC.operations.explain.RiskProRedeem', { ns: 'moc' })} {amount_rbtc}
+                {t(`${AppProject}.operations.explain.RiskProRedeem`, { ns: ns })} {amount_rbtc}
             </div>
         ),
         StableTokenMint: (
             <div class="">
-                {t('MoC.operations.explain.StableTokenMint', { ns: 'moc' })} {amount}
+                {t(`${AppProject}.operations.explain.StableTokenMint`, { ns: ns })} {amount}
             </div>
         ),
         StableTokenRedeem: (
             <span class="">
-                {t('MoC.operations.explain.StableTokenRedeem', { ns: 'moc' })} {amount_rbtc}
+                {t(`${AppProject}.operations.explain.StableTokenRedeem`, { ns: ns })} {amount_rbtc}
             </span>
         ),
         FreeStableTokenRedeem: (
             <span class="">
-                {t('MoC.operations.explain.FreeStableTokenRedeem', { ns: 'moc' })} {amount_rbtc}
+                {t(`${AppProject}.operations.explain.FreeStableTokenRedeem`, { ns: ns })} {amount_rbtc}
             </span>
         ),
         RiskProxMint: (
             <span class="">
-                {t('MoC.operations.explain.RiskProxMint', { ns: 'moc' })} {amount}
+                {t(`${AppProject}.operations.explain.RiskProxMint`, { ns: ns })} {amount}
             </span>
         ),
         RiskProxRedeem: (
             <span class="">
-                {t('MoC.operations.explain.RiskProxRedeem', { ns: 'moc' })} {amount_rbtc}
+                {t(`${AppProject}.operations.explain.RiskProxRedeem`, { ns: ns })} {amount_rbtc}
             </span>
         ),
         SettlementDeleveraging: (
             <span class="">
-                {t('MoC.operations.explain.SettlementDeleveraging', { ns: 'moc' })} {amount_rbtc}
+                {t(`${AppProject}.operations.explain.SettlementDeleveraging`, { ns: ns })} {amount_rbtc}
             </span>
         ),
         RedeemRequestAlter: (
             <span class="">
-                {t('MoC.operations.explain.RedeemRequestAlter', { ns: 'moc' })} {amount}
+                {t(`${AppProject}.operations.explain.RedeemRequestAlter`, { ns: ns })} {amount}
             </span>
         ),
         Transfer: (
             <span class="">
-                {t('MoC.operations.explain.Transfer_positive', { ns: 'moc' })} {amount}
+                {t(`${AppProject}.operations.explain.Transfer_positive`, { ns: ns })} {amount}
             </span>
         ),
         BucketLiquidation: (
             <span class="">
-                {t('MoC.operations.explain.BucketLiquidation', { ns: 'moc' })} {amount}
+                {t(`${AppProject}.operations.explain.BucketLiquidation`, { ns: ns })} {amount}
             </span>
         )
     };

@@ -5,10 +5,13 @@ import i18n from 'i18next';
 import {useTranslation} from "react-i18next";
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { formatLocalMap2 } from '../../Lib/Formats';
+import { config } from './../../Config/config';
 
 const LargeNumberF2 = ({ amount, currencyCode, includeCurrency, numericLabelParams, className, auth }) => {
 
   const [t, i18n]= useTranslation(["global",'moc']);
+  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const AppProject = config.environment.AppProject;
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);
     const params = Object.assign(
@@ -38,8 +41,8 @@ const LargeNumberF2 = ({ amount, currencyCode, includeCurrency, numericLabelPara
   }
 
   return (
-    <Tooltip title={t('MoC.general.invalidValueDescription', {ns: 'moc'})}>
-      {t('MoC.general.invalidValuePlaceholder', {ns: 'moc'})}
+    <Tooltip title={t(`${AppProject}.general.invalidValueDescription`, {ns: ns})}>
+      {t(`${AppProject}.general.invalidValuePlaceholder`, {ns: ns})}
     </Tooltip>
   )
 };

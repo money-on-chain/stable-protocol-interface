@@ -71,7 +71,7 @@ export default function TokenSummaryCard(props) {
 
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
-    const appMode = config.environment.AppMode;
+    const AppProject = config.environment.AppProject;
 
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke);
@@ -113,7 +113,7 @@ export default function TokenSummaryCard(props) {
                             textAlign: 'right'
                         }}
                     >
-                        <span className={`Number ${appMode}-${tokenName}`}> {/* style={{ color }}> */}
+                        <span className={`Number ${AppProject}-${tokenName}`}> {/* style={{ color }}> */}
                         <LargeNumber amount={balance} currencyCode={currencyCode} />
                         </span>
                     </Col>

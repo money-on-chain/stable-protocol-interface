@@ -10,6 +10,7 @@ import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import ListOperations from "../../Components/Tables/ListOperations";
 import data_json from "../../services/webapp_transactions_list.json";
 import {useTranslation} from "react-i18next";
+import { config } from './../../Config/config';
 
 
 function Home(props) {
@@ -24,8 +25,9 @@ function Home(props) {
     }
     loadAssets()
 
-    const [t, i18n]= useTranslation(["global",'moc'])
-
+    const [t, i18n]= useTranslation(["global",'moc','rdoc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
     const data_row_coins2= [];
@@ -66,8 +68,8 @@ function Home(props) {
             />}
 
 
-            <h1 className="PageTitle">{t('MoC.home.title', { ns: 'moc' })}</h1>
-            <h3 className="PageSubTitle">{t("MoC.home.subtitle", { ns: 'moc' })}</h3>
+            <h1 className="PageTitle">{t(`${AppProject}.home.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${AppProject}.home.subtitle`, { ns: ns })}</h3>
             <Row gutter={16}>
                 {/*<Col flex="300px" className={'WalletBalance-mb'}>*/}
                 <div  className={'sec-1'}>
@@ -81,7 +83,7 @@ function Home(props) {
                             // color="#00a651"
                             page="/wallet/stable"
                             balance={docBalance}
-                            labelCoin={t(`MoC.Tokens_RESERVE_code`, {ns: 'moc'})}
+                            labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
                             currencyCode={(auth.getAppMode=='MoC')? 'USD': 'STABLE'}
                         />
                         <TokenSummaryCard
@@ -89,7 +91,7 @@ function Home(props) {
                             // color="#ef8a13"
                             page="/wallet/pro"
                             balance={bproBalance}
-                            labelCoin={t(`MoC.Tokens_RESERVE_code`, {ns: 'moc'})}
+                            labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
                             currencyCode={'RISKPRO'}
                             currencyCodeNumber={'RISKPRO'}
                         />
@@ -98,7 +100,7 @@ function Home(props) {
                             // color="#ed1c24"
                             page="/wallet/leveraged"
                             balance={bprox2Balance}
-                            labelCoin={t(`MoC.Tokens_RESERVE_code`, {ns: 'moc'})}
+                            labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns })}
                             currencyCode={'RISKPROX'}
                             currencyCodeNumber={'RISKPROX'}
                         />

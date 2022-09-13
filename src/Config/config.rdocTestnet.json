@@ -26,6 +26,7 @@
   },
   "explorerUrl": "https://explorer.testnet.rsk.co",
   "btcExplorer": "https://live.blockcypher.com/btc-testnet",
+  "contractUrl": "https://github.com/money-on-chain/RDOC-Contract",
   "environment": {
     "AppMode": "RRC20",
     "AppProject": "RDoC",

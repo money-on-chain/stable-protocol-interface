@@ -1,24 +1,29 @@
 {
-  "MoC": {
+  "RDoC": {
     "app": {
-      "name": "Money on Chain",
-      "code": "MoC"
+      "name": "RDOC Money on Chain",
+      "code": "RRC20"
     },
+
+    "MetamaskTutorial_connectWithMetamask_text": "Regresa a la pestaña de Money On Chain. Haga clic en siguiente en la ventana de Metamask.",
+
     "Tokens_STABLE_code": "RDOC",
-    "Tokens_STABLE_name": "RDoC",
+    "Tokens_STABLE_name": "RIF" ,
     "Tokens_RISKPRO_code": "RIFP",
-    "Tokens_RISKPRO_name": "RIFP",
+    "Tokens_RISKPRO_name": "RIFpro" ,
     "Tokens_RISKPROX_code": "RIFX",
-    "Tokens_RISKPROX_name": "RIFx",
+    "Tokens_RISKPROX_name": "RIFX" ,
     "Tokens_RESERVE_code": "RIF",
-    "Tokens_RESERVE_name": "RIF",
+    "Tokens_RESERVE_name": "RIF" ,
     "Tokens_USD_code": "USD",
-    "Tokens_USD_name": "Dollar",
-    "Tokens_MOC_code": "MOC",
-    "Tokens_MOC_name": "MoC",
+    "Tokens_USD_name": "Dollar" ,
+    "Tokens_MOC_code": "MoC",
+    "Tokens_MOC_name": "MoC" ,
     "Tokens_USDPrice_code": "USD",
     "Tokens_USDPrice_name": "Dollar",
-    "MetamaskTutorial_connectWithMetamask_text": "Regresa a la pestaña de Money On Chain. Haga clic en siguiente en la ventana de Metamask.",
+    "Tokens_RBTC_code": "RBTC",
+    "Tokens_RBTC_name": "rBTC",
+
     "termsAndConditions": {
       "warning": "ADVERTENCIA",
       "disclaimer": "Por favor lee nuestros términos y condiciones así como restricciones de Nacionalidad previo a usa la plataforma. Cerrando este mensaje las aceptas automáticamente. ADVERTENCIA: Money On Chain es un protocolo sofisticado con probada robustez. Sin embargo, sigue siendo software experimental. Opera con cuidado y a tu propio riesgo.  ",
@@ -40,77 +45,77 @@
         "sc-version": "Versión del Smart Contract:"
       },
       "text": {
-        "partOne": "¡Hola! Si tiene preguntas o cualquier inquietud y, a través de esta página, no encontró la respuesta que estaba buscando, simplemente envíenos un correo electrónico a info@moneyonchain.com ",
+        "partOne": "¡Hola! Si tienes preguntas o cualquier inquietud y has encontrado la respuesta que estabas buscando en esta página, envíanos un correo electrónico a ",
         "partTwo": ". Queremos ayudarte y responder todas tus preguntas."
       },
       "questions": {
         "1": {
-          "question": "¿Qué es DoC?",
-          "answer": "El Dólar on Chain es nuestra primer moneda estable. Sigue el precio del dólar estadounidense."
+          "question": "¿Qué es RDOC?",
+          "answer": "El RIF Dólar on Chain es nuestra primera moneda estable. Sigue el precio del dólar estadounidense."
         },
         "2": {
           "question": "¿Cómo se garantiza el peg con el dólar estadounidense?",
-          "answer": "La estabilización es garantizada por el smart contract, las reglas e incentivos están alineados de tal manera que los DoCs siempre puedan ser canjeado por la misma cantidad de dólares en rBTC. Para mayor detalle puede revisar nuestro whitepaper."
+          "answer": "La estabilización es garantizada por el smart contract, las reglas e incentivos están alineados de tal manera que RDOC's siempre pueda ser canjeado por la misma cantidad de dólares en RIF. Para mayor detalle puede revisar nuestro whitepaper."
         },
         "3": {
-          "question": "¿Cuánto cuesta emitir o canjear un DoC?",
-          "answer": "Tienes que pagar una comisión de 0.1% para emitir o canjear DoCs, en la siguiente versión podrás tener un descuento de 50% en el pago del fee con MOC tokens."
+          "question": "¿Cuánto cuesta emitir o canjear un RDOC?",
+          "answer": "Tienes que pagar una comisión de 0.1% para emitir o canjear RDOCs, en la siguiente versión podrás tener un descuento de 50% en el pago del fee con MoC tokens."
         },
         "4": {
-          "question": "¿Cuánto cuesta transferir DoCs?",
-          "answer": "Es gratis, una vez que los DoC son emitidos, Money On Chain no cobra por las transacciones que hagas con tus tokens."
+          "question": "¿Cuánto cuesta transferir RDOCs?",
+          "answer": "Es gratis, una vez que los RDOC son emitidos, Money On Chain no cobra por las transacciones que hagas con tus tokens."
         },
         "5": {
-          "question": "¿Puedo guardar mis DoC/BPro/MOC en mi TREZOR o mi wallet?",
+          "question": "¿Puedo guardar mis RDOC/RIFPro/MOC en mi TREZOR o mi wallet?",
           "answer": "Sí, solo tienes que conectar tu wallet física con Metamask o Nifty."
         },
         "6": {
-          "question": "¿Qué es el BPro?",
-          "answer": "Un BPro es como un Bitcoin con esteroides, de hecho su valor proviene de la cantidad de bitcoins representada en los smart contracts de Money on Chain, los bitcoins representados por BPros están literalmente atrapados dentro de los smart contracts. El BPro esta pensado para personas que mantienen bitcoins a largo plazo. El BPro paga un ingreso pasivo en bitcoins y tiene un poco de apalancamiento gratuito, el apalancamiento gratuito significa que cuando el precio de bitcoin sube, aumenta un poco más la cantidad de bitcoin que tienes, y cuando el precio de bitcoin baja, la cantidad de bitcoins baja un poco más. Sin embargo, esta caida puede verse disminuida por los ingresos pasivos. Además de esto, una parte de los tokens MOC se entregarán a los tenedores de BPro cada mes para premiar su aporte de colateral al protocolo."
+          "question": "¿Qué es el RIFPro?",
+          "answer": "Un RIFPro es como un smart contract con esteroides, de hecho su valor proviene de la cantidad de RIFs representada en los smart contracts de Money on Chain, los RIFs representados por RIFPro están literalmente atrapados dentro de los smart contracts. El RIFPro esta pensado para personas que mantienen RIF a largo plazo. El RIFPro paga un ingreso pasivo en RIFs y tiene un poco de apalancamiento gratuito, el apalancamiento gratuito significa que cuando el precio de RIF sube, aumenta un poco más la cantidad de RIF que tienes, y cuando el precio de RIF baja, la cantidad de RIF baja un poco más. Sin embargo, esta caida puede verse disminuida por los ingresos pasivos. Además de esto, una parte de los tokens MoC se entregarán a los tenedores de RIFPro cada mes para premiar su aporte de colateral al protocolo."
         },
         "7": {
-          "question": "¿Son los BPro libres de riesgo?",
-          "answer": "No, los incentivos están alineados, de modo que cuando el precio de Bitcoin baja significativamente, se agrega más respaldo al sistema para evitar que la liquidación y los tenedores de BPro no pierdan su dinero con una liquidación. El sistema está diseñado para hacer que el BTCx tome la mayor parte el riesgo, sin embargo, en un caso de cisne negro, el sistema podría entrar en liquidación y los tenedores de BPro podrían perder sus bitcoins."
+          "question": "¿Son los RIFPro libres de riesgo?",
+          "answer": "No, los incentivos están alineados, de modo que cuando el precio de RIF baja significativamente, se agrega más respaldo al sistema para evitar que la liquidación y los tenedores de RIFPro pierdan dinero, el sistema está diseñado para hacer que el RIFX tome la mayor parte el riesgo, sin embargo, en un caso de cisne negro, el sistema podría entrar en liquidación y los tenedores de RIFPro podrían perder sus RIF."
         },
         "8": {
-          "question": "¿Se va a poder canjear los BPro en cualquier momento?",
-          "answer": "No, pero normalmente podrás canjear su BPro por Bitcoins a través del protocolo. Existen algunas condiciones de mercado en las que el colateral no se puede retirar del sistema. En este escenario, podrá vender sus BPro por SmartBitcoins o DoCs en la plataforma intercambio descentralizado."
+          "question": "¿Se va a poder canjear los RIFPro en cualquier momento?",
+          "answer": "No, pero normalmente podrás canjear su RIFPro por RIF a través del smart contract. Existen algunas condiciones de mercado en las que el respaldo no se puede retirar del sistema. En este escenario, podrá vender sus RIFPro por RIFs o RDOC en la plataforma intercambio descentralizado."
         },
         "9": {
-          "question": "¿Cuánto cuesta emitir o canjear BPro?",
-          "answer": "Debe pagar una comisión de 0.1% para emitir o canjear BPro. En la próxima versión puede obtener un 50% de descuento en las tarifa que pagan al usar los tokens MOC para el pago."
+          "question": "¿Cuánto cuesta emitir o canjear RIFPro?",
+          "answer": "Debe pagar una comisión de 0.1% para emitir o canjear RIFPro. En la próxima versión puede obtener un 50% de descuento en las tarifa que pagan al usar los tokens MoC para el pago."
         },
         "10": {
-          "question": "¿Qué es el BTCx?",
-          "answer": "Es una posición apalancada en Bitcoin. Cuando el precio de bitcoin sube, el precio de BTCx sube más y cuando el precio baja, baja también. BTCx es un producto de alto riesgo y usted puede perder el 100% de sus bitcoins en condiciones desfavorables del mercado."
+          "question": "¿Qué es el RIFX?",
+          "answer": "Es una posición apalancada en RIF. Cuando el precio de RIF sube, el precio de RIFX sube más y cuando el precio baja, baja también. RIFX es un producto de alto riesgo y usted puede perder el 100% de sus RIF en condiciones desfavorables del mercado."
         },
         "11": {
-          "question": "¿Se puede canjear BTCx en cualquier momento?",
-          "answer": "Sí, BTCx se puede canjear en cualquier momento sin importar las condiciones del mercado."
+          "question": "¿Se puede canjear RIFX en cualquier momento?",
+          "answer": "Sí, RIFX se puede canjear en cualquier momento sin importar las condiciones del mercado."
         },
         "12": {
-          "question": "¿BTCx es un contrato a futuro?",
-          "answer": "BTCx funciona como un contrato de futuros, expira cada 30 días, pero no utiliza order books. El intercambio se realiza contra un fondo de liquidez formado por todos los tenedores de DoCs en el sistema."
+          "question": "¿RIFX es un contrato a futuro?",
+          "answer": "RIFX funciona/actúa como un contrato de futuros, expira cada 30 días, pero no utiliza order books. El intercambio se realiza contra un fondo de liquidez formado por todos los tenedores de RDOC en el sistema."
         },
         "13": {
-          "question": "¿Tiene BTCx un apalancamiento fijo?",
-          "answer": "No, cuando el período comienza el apalancamiento es 2, cuando el apalancamiento fluctúa con el precio, usted fija su apalancamiento cuando realiza su operación. Sin embargo, el apalancamiento para los nuevos compradores dependerá del precio actual y del precio con el que inició el contrato.<br>Un ejemplo: <ul><li>El precio del bitcoin es 10k, el apalancamiento actual es 2x. Tu compras 1 bitcoin en BTCx. Una semana después el precio de bitcoin es 40k. Ahora tienes 80k.</li></ul>"
+          "question": "¿Tiene RIFX tiene un apalancamiento fijo?",
+          "answer": "No, cuando el período comienza el apalancamiento es 2, cuando el apalancamiento fluctúa con el precio, usted fija su apalancamiento cuando realiza su operación. Sin embargo, apalancamiento para los nuevos compradores dependerá del precio actual y del precio con el que inició el contrato.<br>Un ejemplo: <ul><li>El precio del RIF es 10k, el apalancamiento actual es 2x. Tu compras 1 RIF en RIFX Una semana después el precio de RIF es 40k. Ahora tienes 80k.</li></ul>"
         },
         "14": {
-          "question": "¿Cómo se calcula el interés del BTCx?",
-          "answer": "Respuesta corta: depende de la cantidad de BTCx emitida; cuanto mayor sea la cantidad, mayor será la tasa; para más detalles, consulte nuestro whitepaper."
+          "question": "¿Cómo se calcula el interés del RIFX?",
+          "answer": "Respuesta corta: depende de la cantidad de RIFX emitida; cuanto mayor sea la cantidad, mayor será la tasa; para más detalles, consulte nuestro whitepaper."
         },
         "15": {
-          "question": "¿Cómo se paga el interés por el BTCx?",
-          "answer": "El interés se paga en su totalidad hasta la fecha del Settlement y se fija al interés actual. Si canjea sus BTCx, obtendrá una devolución proporcional de ese interés. Dependiendo de las condiciones del mercado, podría ser más o menos de lo que pagó. Consulte nuestro whitepaper para más detalles."
+          "question": "¿Cómo se paga el interés por el RIFX?",
+          "answer": "El interés se paga en su totalidad hasta la fecha del Settlement y se fija al interés actual. Si canjea sus RIFX, obtendrá una devolución proporcional de ese interés. Dependiendo de las condiciones del mercado, podría ser más o menos de lo que pagó. Consulte nuestro whitepaper para más detalles."
         }
       }
     },
     "home": {
       "title": "Inicio",
-      "subtitle": "Sus tenencias y operaciones recientes.",
+      "subtitle": "Tus tenencias y operaciones recientes.",
       "more-button": {
-        "description": "Ir a su billetera",
+        "description": "Ir a tu billetera",
         "alt-description": "Más"
       }
     },
@@ -119,9 +124,9 @@
       "contract-repository": "Repositorio de contratos",
       "webapp-repository": "Repositorio Webapp",
       "help-center": "Centro de ayuda",
-      "help-center-subtitle": "¿Necesitas respuestas? Encuéntralos aquí!",
+      "help-center-subtitle": "¿Necesitas respuestas? Encuéntralas aquí!",
       "terms-and-conditions": "Términos y Condiciones",
-      "terms-and-conditions-link": "https://moneyonchain.com/es/descargo-de-responsabilidad"
+      "terms-and-conditions-link": "https://moneyonchain.com/disclaimer/"
     },
     "menu-sidebar": {
       "home": "Inicio",
@@ -138,7 +143,7 @@
       "RISKPROWallet":"Tokens RIFP",
       "RISKPROXWallet":"Posiciones RIFX",
       "STABLEWallet":"Tokens RDOC",
-      "getRBTC":"Convierte BTC a RBTC",
+      "getRBTC":"BTC Peg in / Peg out",
       "wiki-url": "https://wiki.rifonchain.com/v/espanol",
       "repository-url": "https://github.com/money-on-chain/RDOC-Contract"
     },
@@ -151,14 +156,13 @@
       "preferences": "Preferencias",
       "notifications": "Notificaciones",
       "information": "Información",
-      "faqs": "Wiki",
-      "rewards": "MoC",
+      "faqs": "Ayuda",
+      "rewards": "Recompensas MOC",
       "language": "Idioma",
-      "RISKPROWallet": "BPro",
-      "RISKPROXWallet": "BTCx",
-      "Metrics": "Métricas",
-      "STABLEWallet": "DoC",
-      "getRBTC": "BTC a RBTC"
+      "RISKPROWallet":"RIFP",
+      "RISKPROXWallet":"RIFX",
+      "STABLEWallet":"RDOC",
+      "getRBTC":"BTC Peg in / Peg out"
     },
     "drawer-allowance": {
       "title": "Setear Autorización",
@@ -167,24 +171,24 @@
     },
     "wallets": {
       "title": "Billeteras",
-      "subtitle": "Su billetera activa",
+      "subtitle": "Tu billetera activa",
       "receiverAddress": "Dirección o dominio del Receptor",
-      "ownAddressLabel": "Su dirección",
-      "RISKPRO": {
-        "title": "RIFpro",
-        "subtitle": "Administra tus Tokens RIFpro"
+      "ownAddressLabel": "Tu dirección",
+      "RISKPRO":{
+        "title":"RIFpro",
+        "subtitle":"Administra tus Tokens RIFpro"
       },
-      "RISKPROX": {
-        "title": "RIFX",
-        "subtitle": "Administra tus posiciones RIFX"
+      "RISKPROX":{
+        "title":"RIFX",
+        "subtitle":"Administra tus posiciones RIFX"
       },
-      "STABLE": {
-        "title": "RDOC",
-        "subtitle": "Administre sus RDOC"
+      "STABLE":{
+        "title":"RDOC",
+        "subtitle":"Administra tus Tokens RIF Dollar"
       },
-      "MOC": {
-        "title": "MOC",
-        "subtitle": "Administre sus MOCs"
+      "MOC":{
+        "title":"MOC",
+        "subtitle":"Administra tus Tokens MoC"
       }
     },
     "exchange": {
@@ -194,7 +198,7 @@
         "confirm": "confirmar",
         "clear": "limpiar"
       },
-      "metamaskBalance": "Saldo total de wallet",
+      "metamaskBalance": "Saldo total RIF on Chain",
       "spendableBalance": "Saldo disponible para gastar",
       "totalAvailable": "Total disponible",
       "saleWithDiscount": {
@@ -202,37 +206,37 @@
         "available": "disponible"
       },
       "summary": {
-        "sourceTitle": "Usted está intercambiando",
-        "targetTitle": "Usted está recibiendo",
+        "sourceTitle": "Estás intercambiando",
+        "targetTitle": "Estás recibiendo",
         "InterestRate": "La tasa de interés",
         "systemFeeTitle": "Comisión de MoC",
-        "payWithMocTokenTitle": "Pague la comisión con MoC Token",
-        "payWithMocTokenTooltipText": "Pagando con MoC Token obtendrá un gran descuento!",
-        "notEnoughMocTokenTitle": "No tienes suficientes MoC Tokens para pagar esta comisión",
+        "payWithMocTokenTitle": "Pagá la comisión con Tokens MoC",
+        "payWithMocTokenTooltipText": "Pagando con Tokens MoC obtendrás un gran descuento!",
+        "notEnoughMocTokenTitle": "No tienes suficientes Tokens MoC para pagar esta comisión",
         "notEnoughMocTokenTooltipText": "",
         "systemFeeTooltipText": "Esta comisión se deduce del valor a transferir",
         "inrateTitle": "la Tasa de Interés",
         "inrateTooltipText": "La tasa de interés que se muestra es absoluta, depende de los días restantes hasta el Settlement, y serán descontados de la cantidad a comprar.",
         "freeDocRateTitle": "Tasa de redención libre",
-        "freeDocRateTooltipText": "Los DoCs redimidos antes de la liquidación pagaran un interés, puede encolar su solicitud de redención para el próximo settlement y así evitar pagarlo.",
+        "freeDocRateTooltipText": "Los RIF Dollar (RIFD) redimidos antes de la liquidación pagarán un interés, puedes encolar tu solicitud de redención para el próximo settlement y así evitar pagarlo.",
         "amountDisclaimer": "*Los montos pueden diferir cuando la transacción sea procesada",
         "isCreditInterest": "**Crédito"
       },
       "allowance": {
         "allowanceSendTitle": "Aprobar uso",
-        "allowanceSendDescription": "Por favor apruebe el uso del token MOC en su wallet.",
+        "allowanceSendDescription": "Por favor aprueba el uso del Token MoC en tu wallet.",
         "allowanceTxTitle": "Aprobar uso",
-        "allowanceTxDescription": "Aprobar uso enviado! Por favor espere confirmación. Puede ver en el explorer el estado de su transacción. ",
+        "allowanceTxDescription": "Aprobación enviada! Por favor espera la confirmación. Puedes ver en el explorer el estado de tu transacción. ",
         "allowanceSendErrorTitle": "Aprobar uso",
-        "allowanceSendErrorDescription": "Algo ocurrió al enviar la aprobación del token MOC para usar en la plataforma!"
+        "allowanceSendErrorDescription": "Algo ocurrió al enviar la aprobación del Token MoC!"
       }
     },
     "metrics": {
-      "STABLE": {
-        "title": "DoC",
-        "total": "Total en el sistema",
-        "availableRedeem": "Disponibles para redimir",
-        "availableMint": "Disponibles para emitir"
+      "STABLE":{
+        "title":"RIF Dollar",
+        "total":"Total RDOC en el sistema",
+        "availableRedeem":"RDOC disponibles para redimir",
+        "availableMint":"RDOC disponibles para emitir"
       },
       "RISKPRO":{
         "title":"RIFpro",
@@ -251,31 +255,31 @@
         "leverage":"Apalancamiento",
         "total":"Total en el sistema"
       },
-      "statusGreen": {
-        "title": "Completamente operativo",
-        "subtitle": "El sistema se encuentra en estado óptimo"
+      "statusGreen":{
+        "title":"Completamente operativo",
+        "subtitle":"El sistema se encuentra en estado óptimo"
       },
-      "statusYellow": {
-        "title": "Parcialmente Operativo",
-        "subtitle": "No puedes Redimir BPro ni Emitir DoC"
+      "statusYellow":{
+        "title":"Parcialmente Operativo",
+        "subtitle":"No puedes Redimir RIFpro ni Emitir RDOC"
       },
-      "statusOrange": {
-        "title": "BPro con descuento",
-        "subtitle": "BPro a precio de descuento!"
+      "statusOrange":{
+        "title":"RIFpro con descuento",
+        "subtitle": "RIFpro a precio de descuento!"
       },
-      "statusRed": {
+      "statusRed":{
         "title": "Estado protegido",
         "subtitle": "No se permite ninguna operación"
       },
-      "statusPaused": {
+      "statusPaused":{
         "title": "Modo pausado",
         "subtitle": "No se permite ninguna operación"
       },
-      "statusSettlement": {
+      "statusSettlement":{
         "title": "Settlement en progreso",
         "subtitle": "No se permite ninguna operación"
       },
-      "statusNoPrice": {
+      "statusNoPrice":{
         "title": "No hay precio activo",
         "subtitle": "No se permite ninguna operación"
       },
@@ -290,7 +294,7 @@
         "redeemRISKPROX":"Redimir RIFX si está disponible"
       },
       "bucketsInTokens": {
-        "title": "Liquidez",
+        "title":"Liquidez",
         "total": "Total"
       },
       "infoRBTC":{
@@ -301,29 +305,29 @@
         "targetCoverage":"Cobertura objetivo"
       },
       "BtcInBucket0": {
-        "title": "Tokens en BitPRO",
+        "title": "Tokens en RIFP",
         "totalBtc": "Total de {{tokenName}}s",
         "totalDoc": "Total de {{tokenName}}s",
         "totalBitPro": "Total de {{tokenName}}s",
         "tooltip": {
-          "title": "Tokens en BitPro",
-          "subtitle": "- Total de DoCs: Cantidad de DoC que brindan apalancamiento gratuito a BPro.\n- Total de rBTCs: La suma de lo anterior expresado en rBTC\n - Total de BitPros: Número de BPro emitidos por el sistema\n"
+          "title": "Tokens en RIFP",
+          "subtitle": "- Total de RIF Dollar en cadena: la cantidad de RDOC que proporciona apalancamiento gratuito a RIFpro. - Total RIFpro: Número de RIFpro emitidos por el sistema - Total de RIF tokens: la suma de lo anterior expresado en RIF\n"
         }
       },
       "BtcInBucket2": {
-        "title": "Tokens en BTCx",
-        "totalBtc": "Total de __tokenName__s",
-        "totalDoc": "Total de __tokenName__s",
-        "totalBitPro": "Total de __tokenName__s",
+        "title": "Tokens en RIFX",
+        "totalBtc": "Total de {{tokenName}}s",
+        "totalDoc": "Total de {{tokenName}}s",
+        "totalBitPro": "Total de {{tokenName}}s",
         "tooltip": {
-          "title": "Tokens en BTCx",
-          "subtitle": "- Total de DoCs: Cantidfad de DoC que se utilizan como colateral de las operaciones BTCx\n- Total de rBTCs: la suma de lo anterior expresada en rBTC\n- Total de BTCXs: la cantidad de BTCx emitida por el sistema"
+          "title": "Tokens en RIFX",
+          "subtitle": "- RIF total en dólares en cadena: Número de RDOC que se utiliza como contraparte de las operaciones RIFX - Total RIFX: la cantidad de RIFX emitida por el sistema - Total de RIF tokens: la suma de lo anterior expresado en RIF"
         }
       },
-      "Settlement": {
-        "title": "Settlement",
+      "Settlement":{
+        "title":"Settlement",
         "remainingDaysTitle": "Días faltantes",
-        "remainingDays": "En __days__ días __hours__ horas",
+        "remainingDays": "En {{days}} días {{hours}} horas",
         "date": "Fecha",
         "blocksToSettlement": "Bloques al settlement",
         "blockSettlement": "El próximo Settlement ocurrirá en el bloque",
@@ -337,43 +341,43 @@
     "settlement": {
       "title": "Settlement",
       "subtitle": "Manteniendo todo en orden desde el bloque génesis.",
-      "redeemQueue": "Cola de solicitudes de redención de __tokenName__",
+      "redeemQueue": "Cola de solicitudes de redención de {{tokenName}}",
       "remainingDays": "En {{days}} días {{hours}} horas",
       "remainingBlocks": "Bloques faltantes",
-      "infoText": "Estas redenciones serán efectivas en el próximo settlement. Si desea canjear su tenencia de DoC hoy, debe marcar en la casilla de la derecha los tokens DISPONIBLES PARA CANJEAR DOC. Si ese valor es cero, eso significa que no hay DOCs disponibles para canjear ahora."
+      "infoText": "Estos canjes serán efectivos en el próximo acuerdo. Si deseas canjear tu tenencia de RDOC hoy, debes marcar en la casilla de la derecha los tokens RDOC DISPONIBLES PARA CANJEAR. Si ese valor es cero, eso significa que ningún RDOC está disponible para canjear ahora."
     },
     "banner-settlement": {
       "title": "¡Settlement en Proceso!",
-      "description": "Mientras el settlement esté en proceso no va a poder realizar solicitudes de redención de DoC o Emitir/Redimir BTCx. Por favor aguarde a que esto finalice.",
-      "btc-price": "Precio de __tokenName__:",
-      "btcx-price": "Precio de __tokenName__:",
-      "doc-redeem-count": "Cantidad de solicitudes de redencion de Docs:",
-      "accounts-to-redeem": "Cantidad de cuentas que redimen __tokenCode__:",
+      "description": "Mientras el settlement esté en proceso no vas a poder realizar solicitudes de redención de RDOC o Emitir/Redimir RIFX. Por favor aguardá a que esto finalice.",
+      "btc-price": "Precio de {{tokenName}}:",
+      "btcx-price": "Precio de {{tokenName}}:",
+      "doc-redeem-count": "Cantidad de solicitudes de redención de RDOC:",
+      "accounts-to-redeem": "Cantidad de cuentas que redimen {{tokenCode}}:",
       "go-to-faq": {
-        "question": "¿Tiene dudas sobre esto?",
-        "link": "¡Visite el Centro de ayuda!"
+        "question": "¿Tienes dudas sobre esto?",
+        "link": "¡Visita el Centro de ayuda!"
       }
     },
     "banner-paused": {
       "title": "El contrato de Money on Chain está pausado",
-      "description": "Mientras el contrato esté pausado no podrá realizar ninguna transaccion.",
+      "description": "Mientras el contrato esté pausado no podrás realizar ninguna transaccion.",
       "go-to-faq": {
-        "question": "¿Tiene dudas sobre esto?",
-        "link": "¡Visite el Centro de ayuda!"
+        "question": "¿Tienes dudas sobre esto?",
+        "link": "¡Visita el Centro de ayuda!"
       }
     },
     "settings": {
       "title": "Configuración",
-      "subtitle": "Configurar sus preferencias personales",
+      "subtitle": "Configurar tus preferencias personales",
       "burnoutAddressButton": "configurar burnout address",
-      "beCareful": "Tenga cuidado",
-      "alertAddress": "Verifique si es correcta la dirección y continúe.",
+      "beCareful": "Ten cuidado",
+      "alertAddress": "Verifica si es correcta la dirección y continúa.",
       "alertMaxAmountExceeded": "El monto ingresado supera el máximo permitido",
-      "alertMaxAmountExceededLongDescription": "El monto ingresado supera el máximo permitido. Puede modificarlo o continuar bajo su propio riesgo haciendo click en confirmar"
+      "alertMaxAmountExceededLongDescription": "El monto ingresado supera el máximo permitido. Puedes modificarlo o continuar bajo tu propio riesgo haciendo click en confirmar"
     },
     "advanced": {
       "title": "Opciones avanzadas",
-      "subtitle": "El Smart contract de MoC es una aplicación descentralizada, todos los métodos administrativos son públicos.",
+      "subtitle": "El Smart contract de MOC es una aplicación descentralizada, todos los métodos administrativos son públicos.",
       "settlement": {
         "title": "Settlement",
         "description": "Se ejecuta sólo si se cumplió el tiempo para el settlement.",
@@ -382,12 +386,12 @@
       "payDailyInRate": {
         "title": "Tasa de interés diaria de pago",
         "description": "Se ejecuta sólo si se cumplió el tiempo diario.",
-        "buttonText": "Ejecución De La Tarifa Diaria De Pago"
+        "buttonText": "Ejecución De La Tarifa diaria de pago"
       },
       "payBitProHoldersInterest": {
         "title": "Pago diario de la tasa de interés",
         "description": "Se ejecuta sólo si se cumplió el tiempo semanal.",
-        "buttonText": "Ejecutar el pago semanal de __tokenName__"
+        "buttonText": "Ejecutar el pago semanal de {{tokenName}}"
       }
     },
     "onBoardingSteps": {
@@ -396,50 +400,50 @@
         "next": "Siguiente",
         "done": "Hecho"
       },
-      "showNoMoreCheckbox": "No volver a mostrar",
+      "showNoMoreCheckbox": "No mostrar nuevamente",
       "welcome": {
-        "title": "Bienvenido a Money on Chain",
-        "descStep1": "Money on Chain quiere resolver la principal necesidad del mundo crypto. Se resuelve el problema de la volatilidad con un sistema tripartito.",
-        "descStep2": "La volatilidad del precio del rBTC se dividirá en dos tokens, un token pensado para Bitcoin Holder y posiciones apalancadas de rBTC."
+        "title": "Bienvenido a RIF On Chain",
+        "descStep1": "RIF On Chain es una solución resistente a la censura, auto contenida en la blockchain para una era de Economías Colaborativas Descentralizadas.",
+        "descStep2": "RIF On Chain trae al ecosistema RIF una stablecoin para uso cotidiano con una paridad 1:1 con el USD, un token potenciado para los HODLers de RIF y una posición de apalancamiento para los traders. Todas las posibilidades cripto en un protocolo robusto y seguro."
       },
       "tokens": {
-        "title": "Los diferentes tokens",
-        "descStep1": "Dependiendo de sus preferencias, preferirá alguno o todos nuestros tokens",
-        "descStep2": "Vamos a introducir brevemente los diferentes tokens."
+        "title": "Sobre RIF On Chain",
+        "descStep1": "Dependiendo de tu aversión al riesgo, puede que prefieras alguno o todos los Tokens de RIF On Chain.",
+        "descStep2": "Veamos brevemente de qué Tokens se trata."
       },
       "docToken": {
-        "title": "Token DoC",
-        "descStep1": "El Dollar on Chain, o DoC es la moneda estable con colateral en rBTC y una relación 1:1 con el precio del dólar estadounidense. Recomendada para evitar la volatilidad y para ahorro. Es el token ideal si no quieres asumir riesgos."
+        "title": "Token RDOC",
+        "descStep1": "El RIF Dollar, o {{tokenNameHTML}}, es la moneda estable con colateral en RIF y una relación 1:1 con el precio del dólar estadounidense. Recomendada para evitar la volatilidad y para ahorro. Es el Token ideal si no quieres asumir riesgos."
       },
       "BProToken": {
-        "title": "Token BPro",
-        "descStep1": "BPro es un token para \"HODl and Earn\", es decir para aquellos que son tenedores de rBTC y buscan obtener un ingreso pasivo en rBTC  y apalancamiento gratuito. Esto implica que cuando el rBTC sube, el token BPro sube aún más. Mientras  lo \"holdeas\" además, recibirás una recompensa en tokens MoC por proporcionar colateral en el sistema."
+        "title": "Token RIFP",
+        "descStep1": "{{tokenNameHTML}} (RIFP) es un Token para \"HODL and Earn\", es decir para aquellos que son tenedores de RIF y buscan obtener un ingreso pasivo en RIF y apalancamiento gratuito. Esto implica que cuando el RIF sube, el Token RIFP sube aún más."
       },
       "Btc2X": {
-        "title": "Posición BTCx",
-        "descStep1": "Diseñada para \"traders\" y para aquellos que buscan el riesgo y la obtención de un mayor beneficio de la volatilidad del precio del rBTC, establecida sólo entre el Usuario y el Contrato Inteligente",
-        "descStep2": ""
+        "title": "Posición RIFX",
+        "descStep1": "{{tokenNameHTML}} Diseñada para \"traders\" y para aquellos que buscan el riesgo y la obtención de un mayor beneficio de la volatilidad del precio del RIF, establecida sólo entre el Usuario y el Contrato Inteligente."
       },
       "gettingStarted": {
         "title": "Introducción",
-        "descStep1": "Dirígete a la sección Inicio para obtener una visión global del saldo de tus billeteras, últimos movimientos y balance de MoC. ",
-        "homeInfo": "Saldo de sus Billeteras, últimos movimientos",
-        "buy": "Emitir"
+        "descStep1": "Dirígete a la sección {{homeHTML}} para obtener una visión global de tu {{homeInfoHTML}} y un acceso directo a {{buyHTML}}, últimos movimientos y balance de RIF On Chain.",
+        "home": "Inicio",
+        "homeInfo": "Saldo de tus billeteras, últimos movimientos",
+        "buy": "Comprar"
       },
       "buySell": {
         "title": "Emitir y Redimir",
-        "descStep1": "Puedes emitir o redimir cualquiera de los tokens en un solo click de manera fácil y directa en la sección correspondiente."
+        "descStep1": "Puedes emitir o redimir cualquiera de los Tokens en un solo clic de manera fácil y directa en la sección correspondiente."
       },
       "metrics": {
-        "title": "La plataforma de Métricas",
-        "descStep1": "En Money on Chain puede __systemHealthHTML__, y para ello se proporciona una interfaz con indicadores para la cobertura global, el apalancamiento, todos los tokens activos en el sistema, y las fechas del settlement",
-        "systemHealth": "comprobar el estado del sistema en cualquier momento"
+        "title": "Métricas de la Plataforma",
+        "descStep1": "En RIF On Chain puedes {{systemHealthHTML}}, y para ello provee un tablero global con indicadores en vivo de la cobertura global, el apalancamiento, todo el colateral en el sistema y las fechas de settlement para el exchange descentralizado de apalancamiento.",
+        "systemHealth": "chequear el estado del sistema en cualquier momento"
       },
       "end": {
         "title": "¿Listo? ¡Comencemos!",
-        "descStep1": "Puedes navegar nuestra Wiki en moneyonchain.com si es tu primera vez por aquí.",
-        "descStep2": "Puedes utilizar la extensión de navegador de Nifty para operar Money On Chain. Para descargarla desde Chrome Store, cliquea en el botón debajo. ",
-        "disclaimer": "La plataforma también es compatible con Metamask, Liquiality y otras billeteras.",
+        "descStep1": "Para más información, hemos recopilado una lista de {{faqsHTML}} que está disponible en nuestro sitio web.",
+        "descStep2": "Para utilizar RIF On Chain, la extensión {{metamaskHTML}} es necesaria. Si no la tienes instalada, puedes {{downloadHTML}} ahora desde Chrome Store",
+        "disclaimer": "Puedes también utilizar la extensión de Metamask pero bajo tu propio riesgo",
         "disclaimerMetamaskUrl": "https://metamask.io/",
         "faqs": "Preguntas Frecuentes",
         "download": "descargar",
@@ -454,30 +458,30 @@
       "empty": "No hay nuevas notificaciones",
       "contractStates": {
         "Liquidated": "liquidado",
-        "BproDiscount": "venta de BPro con descuento",
+        "BproDiscount": "venta de RIFpro con descuento",
         "BelowCobj": "por debajo de la cobertura objetivo",
         "AboveCobj": "por encima de la cobertura objetivo"
       },
       "events": {
         "SettlementRedeemStableToken": {
           "title": "Settlement",
-          "desc": "Ejecutado con __reserveToken__ a  __reservePrice__ __fiatCode__"
+          "desc": "Ejecutado con {{reserveToken}} a  {{reservePrice}} {{fiatCode}}"
         },
         "InrateDailyPay": {
-          "title": "Pago diario de Interés",
-          "desc": "__reserveAmount__ __reserveToken__ pagados"
+          "title": "Pago diario de interés",
+          "desc": "{{reserveAmount}} {{reserveToken}} pagados"
         },
         "StateTransition": {
           "title": "Transición de estado del contrato",
-          "desc": "El nuevo estado es: __newState__"
+          "desc": "El nuevo estado es: {{newState}}"
         },
         "RiskProHoldersInterestPay": {
           "title": "Pago semanal de interés",
-          "desc": "__reserveAmount__ __reserveToken__ pagados"
+          "desc": "{{reserveAmount}} {{reserveToken}} pagados"
         },
         "BucketLiquidation": {
           "title": "Liquidación de bucket",
-          "desc": "Bucket __bucket__ liquidado"
+          "desc": "Bucket {{bucket}} liquidado"
         }
       }
     },
@@ -485,27 +489,27 @@
       "web3": {
         "not_connected": {
           "message": "No conectado",
-          "description": "Por favor habilite el plugin nifty/metamask en su navegador"
+          "description": "Por favor habilita el plugin Nifty/Metamask en tu navegador"
         },
         "change": {
           "message": "Cuenta",
-          "description": "Cambiando a la cuenta __truncate_address__"
+          "description": "Cambiando a la cuenta {{truncate_address}}"
         }
       },
       "userAccount": {
         "signin": {
           "message": "Conectando a la billetera...",
-          "description": "Metamask/Nifty le va a preguntar para firmar un mensaje para probar que ud. es el dueño de la misma"
+          "description": "Nifty/Metamask le va a preguntar para firmar un mensaje para probar que Tu eres el dueño de la misma"
         },
         "connected": {
           "message": "Conectado a la cuenta!",
-          "description": "Usando la cuenta: __truncate_address__"
+          "description": "Usando la cuenta: {{truncate_address}}"
         }
       }
     },
     "no-connection": {
       "knowMore": "Conoce más sobre",
-      "platform": "la plataforma Money on Chain",
+      "platform": "la plataforma Rif on Chain",
       "downloadExtension": "Descargar Extensión",
       "downloadExtensionUrl": "https://chrome.google.com/webstore/detail/nifty-wallet/jbdaocneiiinmjbjlgalhcelgbejmnid?hl=es",
       "goToMetrics": "Ir a Métricas y obtener información general sobre el sistema",
@@ -514,16 +518,16 @@
     "modal-send": {
       "confirm": "Confirmar",
       "cancel": "Cancelar",
-      "beCareful": "Tenga cuidado",
-      "alertAddress": "Verifique si es correcta la dirección y continúe."
+      "beCareful": "Ten cuidado",
+      "alertAddress": "Verifica si es correcta la dirección y continúe."
     },
     "modal-redeem": {
-      "title": "Solicitud de redención de __tokenName__",
+      "title": "Solicitud de redención de {{tokenName}}",
       "confirm": "Confirmar",
       "cancel": "Cancelar"
     },
     "modal-cancel-redeem-request": {
-      "title": "Cancelar la solicitud de redención de __tokenName__",
+      "title": "Cancelar la solicitud de redención de {{tokenName}}",
       "confirm": "Enviar",
       "cancel": "Volver"
     },
@@ -552,7 +556,7 @@
     },
     "bprox2-wallet": {
       "current-rate": "tasa de interés actual (%)",
-      "info-text": "The BTCx is a leveraged decentralized long position on the price of BTC.",
+      "info-text": "El RIFX es una posición larga descentralizada apalancada en el precio de RIF (RIFX).",
       "currency-card": {
         "subtitle": "Disponible para emitir"
       }
@@ -573,15 +577,15 @@
       "activeWallets": "Billetera(s) activas",
       "globalCoverage": {
         "title": "Cobertura global",
-        "tooltip": "la Cobertura representa el monto de los fondos reservados para la emisión de __tokenCode__s"
+        "tooltip": "la Cobertura representa el monto de los fondos reservados para la emisión de {{tokenCode}}s"
       },
       "x2Coverage": {
-        "title": "Cobertura máxima del BTCx",
-        "tooltip": "L BTCx se han fijado las coberturas objetivo, 2 X2,. Spot de cobertura representa el monto de los fondos reservados para mantener esa relación."
+        "title": "Cobertura maxima del Bucket X2",
+        "tooltip": "L Buckets se han fijado las coberturas objetivo, 2 X2,. Spot de cobertura representa el monto de los fondos reservados en este bucket para mantener esa relación."
       },
-      "x2Leverage": "Apalancamiento del BTCx",
-      "b0Leverage": "Apalancamiento del BitPRO",
-      "redeemDoc": "Redimir __tokenCode__",
+      "x2Leverage": "Apalancamiento del RIFX",
+      "b0Leverage": "Apalancamiento del RIFP",
+      "redeemDoc": "Redimir {{tokenCode}}",
       "redeemDocButton": "Agregar",
       "redeemDocCancel": "Cancelar solicitud",
       "redeemDocCancelButton": "Quitar",
@@ -590,13 +594,13 @@
       "invalidValuePlaceholder": "--",
       "contractLiquidation": {
         "title": "Contrato Liquidado",
-        "desc": "Este contrato ha sido liquidado, la única operación disponible es la redención de DoCs.",
-        "buttonText": "Canjear mis DoCs"
+        "desc": "Este contrato ha sido liquidado, la única operación disponible es la redención de RDOC.",
+        "buttonText": "Canjear mis RDOC"
       },
       "priceVariation": {
         "tooltip": {
           "title": "Variación diaria",
-          "titleFromSettlement": "Dìa de settlement",
+          "titleFromSettlement": "Día de settlement",
           "currentBlock": "Bloque actual #",
           "currentValue": "Valor actual",
           "referenceBlock": "Bloque de referencia #",
@@ -612,26 +616,26 @@
       }
     },
     "rateGraphicCard": {
-      "title": "Porcentaje base del BitPRO pagado",
-      "yLabel": "% base del BitPRO (ajustado anual)",
+      "title": "Porcentaje base del RIFP pagado",
+      "yLabel": "% base del RIFP (ajustado anual)",
       "tooltipTitle": "pagos de tasa de Interés",
-      "tooltipComment": "La línea del gráfico muestra la proporción del volumen total de la base del BitPRO que se transfiere como un pago de intereses cada día.\nEl número a la derecha es el valor esperado que se devuelve por la tenencia de bitpro en un año, suponiendo que el estado del sistema no cambia",
+      "tooltipComment": "La línea del gráfico muestra la proporción del volumen total de la base del RIFP que se transfiere como un pago de intereses cada día.\nEl número a la derecha es el valor esperado que se devuelve por la tenencia de RIFPro en un año, suponiendo que el estado del sistema no cambia",
       "yearlyInrate": "Último pago %",
       "yearlyInrateComment": " (ajustado anual)"
     },
     "operations": {
-      "title": "Últimas Operaciones Confirmadas",
+      "title": "Últimas Operaciones",
       "tooltip": {
-        "text": "Listando operaciones con al menos 1 bloque confirmado.\nConfirmando: transacción con al menos una confirmación y menos de 10.\nConfirmada: Transacción con más de 10 confirmaciones.\nAbierta: Transacción confirmada, la transacción se puso en cola correctamente para procesarse en el siguiente elemento.\nSettled: Transacción ejecutada en el último acuerdo."
+        "text": "Pendiente: Transacción en espera de confirmación. En confirmación: Transacción con al menos una confirmación y menos de 10. Confirmada: Transacción con más de 10 confirmaciones. Abierta: Transacción confirmada, transacción en cola exitosamente procesada en el siguiente elemento. Liquidada: Transacción ejecutada en la última liquidación."
       },
       "empty": "Sin operaciones",
       "explain": {
-        "RiskProMint": "Has recibido en tu plataforma",
+        "RiskProMint": "Has recibido en la plataforma",
         "RiskProRedeem": "Has recibido en tu billetera",
-        "StableTokenMint": "Has recibido en tu plataforma",
+        "StableTokenMint": "Has recibido en la plataforma",
         "StableTokenRedeem": "Has recibido en tu billetera por redimir en el settlement",
         "FreeStableTokenRedeem": "Has recibido en tu billetera",
-        "RiskProxMint": "Has recibido en tu plataforma",
+        "RiskProxMint": "Has recibido en la plataforma",
         "RiskProxRedeem": "Has recibido en tu billetera",
         "SettlementDeleveraging": "Has recibido en tu billetera por el evento del settlement: deleveraging",
         "RedeemRequestAlter": "Encolaste para redimir en el settlement",
@@ -643,19 +647,19 @@
         "edit": "Escribe tu comentario y presiona intro para guardarlo"
       },
       "headers": {
-        "amountReserve": "Este monto incluye la comisión, el gas y los intereses si aplican"
+        "amountReserve": "Este monto incluye la comisión, el gas y los intereses (si aplican)"
       },
       "columns": {
         "event": "Evento",
         "type": "Tipo",
         "amount": "Plataforma",
         "totalBtc": "Billetera",
-        "platformFee": "comisión de plataforma",
-        "rbtcCommission": "comisión de __app__",
+        "platformFee": "comisión de la plataforma",
+        "rbtcCommission": "comisión de {{app}}",
         "totalUsd": "Total en USD",
         "yieldUsd": "USD yield",
-        "yieldBtc": "BTC yield",
-        "rbtcInterests": "Intereses en __tokenCode__",
+        "yieldBtc": "RIF yield",
+        "rbtcInterests": "Intereses en {{tokenCode}}",
         "date": "Fecha",
         "status": "Estado",
         "leverage": "Apalancamiento",
@@ -679,13 +683,13 @@
         "gas": "Comisiones Gas",
         "memo": "Comentarios",
         "reserve_price": "Precio Reserva",
-        "txRequest": "TX Solicitud",
-        "txSent": "TX Enviada",
-        "status": "Estado",
-        "amount": "Cantidad",
-        "gasCost": "Costo de Gas",
-        "transaction": "Transacción",
-        "mocPrice": "Precio de Moc"
+        "txRequest":"TX Solicitud",
+        "txSent":"TX Enviada",
+        "status":"Estado",
+        "amount":"Cantidad",
+        "gasCost":"Costo de Gas",
+        "transaction":"Transacción",
+        "mocPrice":"Precio de MoC"
       },
       "status": {
         "open": "Abierta",
@@ -698,7 +702,7 @@
     },
     "error": {
       "numericField": "Este valor debe ser numérico",
-      "separateDecimals": "Use punto para separar decimales",
+      "separateDecimals": "Usa punto para separar decimales",
       "numberTooSmall": "El número es demasiado chico",
       "maxExceeded": "El número supera el máximo permitido"
     },
@@ -706,56 +710,57 @@
       "staleTransaction": "La transacción estuvo demasiado tiempo en el mempool."
     },
     "mocBalance": {
-      "title": "SALDO TOTAL MOC",
+      "title": "SALDO TOTAL MoC",
       "tooltip": {
-        "title": "Recomenpensas MoC",
-        "subtitle": "El protocolo de Money On Chain recompensa a los tenedores de BitPRO con Tokens MOC. Aqui puedes ver cuantos Tokens MoC has ganado hasta el momento."
+        "title": "Recomenpensas MOC",
+        "subtitle": "El protocolo de Money On Chain recompensa a los tenedores de BPro con Tokens MoC. Aqui puedes ver cuántos Tokens MoC has ganado hasta el momento."
       },
-      "bProHoldIncentive": "Por cada día de BPro tenido obtienes "
+      "bProHoldIncentive": "Por cada día holdeando BPro obtienes "
     },
-    "tokenInformationTooltip": "Información acerca de ",
+    "tokenInformationTooltip": "Información acerca de",
     "TokenInformationContent": {
       "STABLE": {
-        "factSheet": "DoC Fact Sheet",
-        "title": "Dollar on Chain (DoC) es una moneda estable con rBTC de colateral que sigue 1:1 el valor del dólar estadounidense. Sus principales características son:",
+        "factSheet": "RDOC Fact Sheet ",
+        "title": "El RIF Dollar (RDOC) es una moneda estable con RIF de colateral que sigue 1:1 el valor del dólar estadounidense. Sus principales características son:",
         "characteristics": {
           "left": [
             "Relación 1:1 con el dólar estadounidense.",
-            "La estabilidad está garantizada por el Contrato Inteligente y los DoC son redimibles por rBTC. "
+            "La estabilidad está garantizada por el Contrato Inteligente y los RDOC son redimibles por RIF."
           ],
           "right": [
-            "Puede ser transferida libremente, en cualquier momento. ",
+            "Puede ser transferida libremente, en cualquier momento.",
             "Aceptada por una variedad de billeteras."
           ]
         }
       },
       "RISKPRO": {
-        "factSheet": "BPro Fact Sheet",
-        "title": "El token BPro mantiene la volatilidad del bitcoin y añade la combinación de un ingreso pasivo y apalancamiento gratuito. Es un token adecuado para HODLers propensos al riesgo medio y el perfecto balance entre beneficios y riesgo.:",
+        "factSheet": "RIFP Fact Sheet",
+        "title": "El Token RIFpro (RIFP) sigue la volatilidad del RIF y añade la combinación de un ingreso pasivo y apalancamiento gratuito. Es un Token adecuado para HODLers propensos al riesgo medio y el perfecto balance entre beneficios y riesgo.",
         "characteristics": {
           "left": [
-            "Recibe ingresos pasivos en rBTC ",
-            "Recibe parte de los fees del protocolo aumentando el valor de tus BPro.",
-            "Recibe los beneficios de MOC Liquidity Mining Program."
+            "Recibe ingresos pasivos en RIF.",
+            "Recibe parte de los fees del protocolo aumentando el valor de tus RIF."
           ],
           "right": [
-            "Cuando el precio del bitcoin sube, el BPro subirá un poco más,  así que definitivamente sobrepasará a bitcoin en el próximo \"bull run\".",
-            "BPro puede ser intercambiado o redimido por rBTC contra el contrato inteligente."
+            "Cuando el precio del RIF suba, el RIFP subirá un poco más.",
+            "Puedes redimir RIFP por RIF contra el contrato inteligente o intercambiarlo en un exchange descentralizado."
           ]
         }
       },
       "RISKPROX": {
-        "factSheet": "BTCx Fact Sheet",
-        "title": "El BTCx es un apalancamiento LONG descentralizado sobre el precio del bitcoin sin riesgo de contraparte.<br><br>Si no has entendido la línea superior, este token no es para tí y posiblemente perderás tus fondos al proceder con la operación sin haber adquirido el conocimiento suficiente respecto a \"trading\". Por favor dirígete a <a href=\"https://moneyonchain.com/btcx-long-leveraged-bitcoin/\" target=\"_blank\">https://moneyonchain.com/btcx-long-leveraged-bitcoin/</a> o a nuestra Wiki para aprender más acerca de BTCx.\n",
+        "factSheet": "RIFX Fact Sheet",
+        "title": "El RIFX es un apalancamiento LONG descentralizado sobre el precio del RIF sin riesgo de contraparte. Si no has entendido la línea superior, este Token no es para tí y posiblemente perderás tus fondos al proceder con la operación sin haber adquirido el conocimiento suficiente respecto a trading. Por favor dirígete a https://rifonchain.com/es/ o a nuestra Wiki para aprender más acerca de RIFX.",
         "characteristics": {
           "left": [
-            "El apalancamiento puede variar con el precio del BTC pero es fijo una vez que lo adquieres.",
-            "El apalancamiento se resetea a 2 cada 30 días una vez que el contrato expira.",
-            "El precio del apalancamiento es fijo y se paga una vez que inicias la posición."
+            "El apalancamiento puede variar con el precio del RIF pero es fijo una vez que lo adquieres.",
+            "El apalancamiento se resetea a X cada 30 días una vez que el contrato expira.",
+            "El precio del apalancamiento es fijo y se paga una vez que inicias la posición.",
+            "No hay \"margin call\" y tus fondos pueden ser liquidados si el RIF baja.",
+            "Si no has comprendido alguna de las líneas de arriba, este Token no es para tí."
           ],
           "right": [
-            "No hay \"margin call\" y tus fondos pueden ser liquidados si el bitcoin baja.",
-            "Si no has comprendido alguna de las líneas de arriba, este token no es para tí. NO INICIES LA POSICIÓN A MENOS QUE ESTÉS COMPLETAMENTE SEGURO DE LO QUE ESTÁS POR HACER."
+            "NO INICIES LA POSICIÓN A MENOS QUE ESTÉS COMPLETAMENTE SEGURO DE LO QUE ESTÁS POR HACER.",
+            ""
           ]
         }
       },
@@ -775,10 +780,10 @@
       }
     },
     "amountItem": {
-      "bproMintingWarning": "La compra de BitPro se encuentra limitada por razones de seguridad"
+      "bproMintingWarning": "La compra de RIFpro se encuentra limitada por razones de seguridad"
     },
     "rns": {
-      "register": "Registre su dominio",
+      "register": "Registra tu dominio",
       "address": "Dirección",
       "noAddress": "Dirección no encontrada"
     },
@@ -786,15 +791,15 @@
       "mocRewarded": {
         "title": "Recompensas MOC",
         "tooltip": {
-          "title": "Recompensas MOC",
-          "text": "Todos los días que mantengas tus BitPro te vamos a recompensar con MOCs. Recompensa MoC despliega los MOCs que ya han sido asignados a tu cuenta por haber mantenido tus BitPro anteriormente. Calculamos esto diariamente."
+          "title":"Recompensas MOC",
+          "text": "Todos los días que mantengas tus BPro te vamos a recompensar con MoC. Recompensas MOC despliega los MoC que ya han sido asignados a tu cuenta por haber mantenido tus BPro anteriormente. Calculamos esto diariamente."
         }
       },
       "mocToday": {
-        "title": "MOCs ganados hoy",
+        "title": "MoC ganados hoy",
         "tooltip": {
-          "title": "MOCs ganados hoy",
-          "text": "Los MOCs que ganarás hoy es una estimación de los MOCS que el sistema te asignará por mantener tus  BitPro. Es una estimación porque el cálculo se hace diariamente, no en linea."
+          "title":"MoC ganados hoy",
+          "text": "Los MoC que ganarás hoy es una estimación de los MoC que el sistema te asignará por mantener tus BPro. Es una estimación porque el cálculo se hace diariamente, no en linea."
         }
       }
     },
@@ -804,79 +809,67 @@
       "signButton": "Haz click aquí para inicar sesión"
     },
     "login": "Conectarse",
-    "fastbtc": {
+    "fastbtc":{
       "title": "FastBTC",
-      "titleCard_pegin": "BTC to rBTC Peg In",
       "getRBTC": "Convierte BTC a rBTC",
-      "getRBTC_description": "Convierta BTC de la red Bitcoin a rBTC Smart Bitcoins utilizando el FastBTC integrado de Sovryn.",
-      "titleCard_pegout": "BTC to rBTC Peg Out",
-      "getBTC": "Convierte rBTC a BTC",
-      "getBTC_description": "Convierta rBTC Smart Bitcoins a BTC utilizando el FastBTC integrado de Sovryn.",
+      "getBTC": "Convierte rBTC to BTC",
       "subTitle": "Integracion de Sovryn FastBTC",
-      "history": {
-        "title": "Ultimas operaciones de FastBTC",
-        "columns_headers": {
-          "id": "Id",
-          "step": "Paso",
-          "type": "Tipo de Operacion",
-          "dateAdded": "Fecha añadida",
-          "status": "Estado",
-          "valueBtc": "Valor (BTC)",
-          "btcadr": "Direccion de BTC",
-          "web3adr": "Direccion de RSK",
-          "txHash": "Tx hash",
-          "btcAmount": "Monto de BTC",
-          "transferId": "Id de Transferencia",
-          "blockN": "Nº de Bloque",
-          "feebtc": "Tarifa de BTC",
-          "txLastUpdated": "Última actualización TX",
-          "dateLastUpdated": "Fecha de última actualización"
-        },
-        "columns": {
-          "valueBTC": "{{value}} BTC",
-          "valueRBTC": "{{value}} rBTC",
-          "step_1": "1/2",
-          "step_2": "2/2",
-          "type_deposit": "Depósito de BTC",
-          "type_transfer": "Recepción de rBTC",
-          "status_pending": "Pendiente",
-          "status_confirmed": "Confirmado",
-          "dateAddedFormat": "YYYY-MM-DD HH:mm:SS"
-        },
-        "upperSummary_1": "Si el rBTC no se encuentra visible en su billetera después de 60 minutos abra un ",
-        "upperSummary_2": "ticket de soporte",
-        "upperSummary_3":" en Sovryn",
-        "table": {
-          "triggerDesc": "Ordenear descendentemente",
-          "triggerAsc": "Ordenar ascendentemente"
-        },
-        "underMaintenance": {
-          "spinTip": "El servicio FastBTC de Sovryn momentáneamente no está disponible",
-          "spinAlertTitle": "FastBTC de Sovryn no está disponible",
-          "spinAlertDescription": "El servicio FastBTC de Sovryn momentáneamente no está disponible. Por favor, reintenta más tarde."
-        }
+      "history":{
+          "title":"Ultimas operaciones de FastBTC",
+          "columns_headers": {
+            "id":"Id",
+            "step":"Paso",
+            "type":"Tipo de Operacion",
+            "dateAdded":"Fecha añadida",
+            "status":"Estado",
+            "valueBtc":"Valor (BTC)",
+            "btcadr":"Direccion de BTC",
+            "web3adr":"Direccion de RSK",
+            "txHash":"Tx hash"
+          },
+          "columns":{
+            "valueBTC":"{{value}} BTC",
+            "valueRBTC":"{{value}} rBTC",
+            "step_1":"1/2",
+            "step_2":"2/2",
+            "type_deposit":"Depósito de BTC",
+            "type_transfer":"Recepción de rBTC",
+            "status_pending":"Pendiente",
+            "status_confirmed":"Confirmado",
+            "dateAddedFormat":"YYYY-MM-DD HH:mm:SS"
+          },
+          "upperSummary":"Si el rBTC no se encuentra visible en su billetera después de 90 minutos abra un <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>ticket de soporte</a> en Sovryn",
+          "table":{
+            "triggerDesc": "Ordenear descendentemente",
+            "triggerAsc": "Ordenar ascendentemente"
+          },
+          "underMaintenance":{
+            "spinTip":"El servicio FastBTC de Sovryn momentáneamente no está disponible",
+            "spinAlertTitle":"FastBTC de Sovryn no está disponible",
+            "spinAlertDescription":"El servicio FastBTC de Sovryn momentáneamente no está disponible. Por favor, reintenta más tarde."
+          }
       },
-      "newsModal": {
-        "title": "FastBTC",
-        "line1": "Vas a necesitar rBTC en tu billetera para poder comprar DOC, BPro y pagar las tarifas de gas en la red de RSK.",
-        "line2": "Ahora puedes obtener rBTC de una forma fácil y simple a través de nuestra integración del servicio FastBTC de Sovryn.",
-        "line3": {
-          "preIconText": "Ve a ",
-          "postIconPreLinkText": " en el menú lateral izquierdo de tu pantalla o clickea",
-          "linkText": "aquí",
-          "postLinkText": "."
+      "newsModal":{
+        "title":"FastBTC",
+        "line1":"Vas a necesitar rBTC en tu billetera para poder comprar DOC, BPro y pagar las tarifas de gas en la red de RSK.",
+        "line2":"Ahora puedes obtener rBTC de una forma fácil y simple a través de nuestra integración del servicio FastBTC de Sovryn.",
+        "line3":{
+          "preIconText":"Ve a ",
+          "postIconPreLinkText":" en el menú lateral izquierdo de tu pantalla o clickea",
+          "linkText":"aquí",
+          "postLinkText":"."
         },
-        "line4": {
-          "preLinkText": "Haz click ",
-          "linkText": "aquí",
-          "postLinkText": " para obtener más información sobre el servicio de FastBTC de Sovryn."
+        "line4":{
+          "preLinkText":"Haz click ",
+          "linkText":"aquí",
+          "postLinkText":" para obtener más información sobre el servicio de FastBTC de Sovryn."
         },
-        "checkboxText": "No mostrar nuevamente"
+        "checkboxText":"No mostrar nuevamente"
       },
-      "topUpWalletModal": {
+      "topUpWalletModal":{
         "title": "FastBTC",
         "subtitle": "Deposita BTC para recibir rBTC en tu billetera",
-        "subtitle_pegout": "Por favor, revise los límites de conversión antes de proceder con la conversión de rBTC a BTC.",
+        "subtitle_pegout":"Por favor, revise los límites de conversión antes de proceder con la conversión de rBTC a BTC.",
         "info": "Vas a necesitar rBTC en tu billetera para poder comprar DOC y pagar las tarifas de gas en la red de RSK",
         "help": "Conoce acerca de rBTC en RSK",
         "getBTCAddressButton": "Generar dirección de depósito de BTC",
@@ -891,36 +884,36 @@
         "valueRBTC": "{{value}}",
         "transaction1DetailsTitle": "Paso 1/2: TRANSACCIÓN BTC",
         "transaction2DetailsTitle": "Paso 2/2: TRANSACCIÓN rBTC",
-        "transactionInfo": {
+        "transactionInfo":{
           "step": "PASO {{step}}: Transacción {{txName}}",
-          "status_pending": "Estado {{statusIndex}}/2 pendiente",
-          "status_confirmed": "Estado {{statusIndex}}/2 confirmado",
+          "status_pending":"Estado {{statusIndex}}/2 pendiente",
+          "status_confirmed":"Estado {{statusIndex}}/2 confirmado",
           "valueDeposited": "Valor depositado: {{value}}",
-          "toLabel": "Para TX:",
-          "txHashLabel": "Tx hash:",
-          "fromLabel": "De TX:"
+          "toLabel":"Para TX:",
+          "txHashLabel":"Tx hash:",
+          "fromLabel":"De TX:"
         },
-        "limits": {
+        "limits":{
           "header": "Límites de Conversion",
-          "min": "Mínimo: {{minValue}} BTC",
-          "max": "Máximo: {{maxValue}} BTC"
+          "min":"Mínimo: {{minValue}} BTC",
+          "max":"Máximo: {{maxValue}} BTC"
         },
-        "limits_pegout": {
+        "limits_pegout":{
           "header": "Límites de Conversion",
-          "min": "Mínimo: {{minValue}} BTC",
-          "max": "Máximo: {{maxValue}} BTC",
+          "min":"Mínimo: {{minValue}} BTC",
+          "max":"Máximo: {{maxValue}} BTC",
           "fee": "Fee: {{feeValue}}"
         },
-        "instructions": {
-          "header": "Instrucciones",
-          "items": [
-            "No deposites ningún activo que no sea BTC",
-            "No envíes más BTC del límite máximo",
-            "Espera 60 minutos para que la transacción sea procesada",
-            "Si el rBTC no se encuentra visible en su billetera después de 60 minutos abra un <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>ticket de soporte</a> en Sovryn"
-          ]
+        "instructions":{
+            "header": "Instrucciones",
+            "items": [
+              "No deposites ningún activo que no sea BTC",
+              "No envíes más BTC del límite máximo",
+              "Espera 60 minutos para que la transacción sea procesada",
+              "Si el rBTC no se encuentra visible en su billetera después de 60 minutos abra un <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>ticket de soporte</a> en Sovryn"
+            ]
         },
-        "instructions_pegout": {
+        "instructions_pegout":{
           "header": "Instrucciones",
           "items": [
             "Verifique y confirme que la dirección a la que está enviando es una dirección BTC.",
@@ -930,26 +923,24 @@
             "Si BTC no está visible en su billetera de destino después de 90 minutos, abra un <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>ticket de soporte</a> en Sovryn."
           ]
         },
-        "txactions": {
-          "sendBTCTitle": "Envie BTC a esta dirección",
-          "copyableBTCAddressLabel": "Dirección"
+        "txactions":{
+          "sendBTCTitle":"Envie BTC a esta dirección",
+          "copyableBTCAddressLabel":"Dirección"
         },
-        "underMaintenance": {
+        "underMaintenance":{
           "alertDescription": "El servicio FastBTC de Sovryn momentáneamente no está disponible. Por favor, reintenta más tarde."
         }
       },
-      "leftPannel": {
+      "leftPannel":{
         "header": "Vas a necesitar rBTC en tu billetera para:",
-        "items": [
-          "Mintear DoC y BPro",
-          "Fijar posición de BTCx",
+        "items":[
+          
           "Pagar tarifas de gas en la red RSK"
         ],
-        "learnMore": "Conoce más acerca de rBTC"
+        "learnMore":"Conoce más acerca de rBTC"
       }
     },
     "staking": "Staking",
-    "Staking_AnnualizedPerformanceTitle": "MoC Staking Annualized Performance",
-    "PleaseReviewYourWallet": "Firme la transacción en su billetera."
+    "Staking_AnnualizedPerformanceTitle": "MoC Staking Annualized Performance"
   }
 }

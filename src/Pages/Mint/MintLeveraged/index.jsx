@@ -10,6 +10,7 @@ import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../Context/Auth';
 import MintOrRedeemToken from '../../../Components/MintOrRedeemToken/MintOrRedeemToken';
+import { config } from './../../../Config/config';
 
 import {getDatasMetrics} from "../../../Helpers/helper";
 import {getInrateToSettlement} from "../../../Helpers/mocStateHelper";
@@ -87,7 +88,9 @@ export default function Mint(props) {
         status: { txt: 'Confirmed', percent: 100 },
     });
 
-    const [t, i18n] = useTranslation(["global", 'moc'])
+    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
 
@@ -99,8 +102,8 @@ export default function Mint(props) {
 
     return (
         <Fragment>
-            <h1 className="PageTitle">{t('MoC.wallets.RISKPROX.title', { ns: 'moc' })}</h1>
-            <h3 className="PageSubTitle">{t('MoC.wallets.RISKPROX.subtitle', { ns: 'moc' })}</h3>
+            <h1 className="PageTitle">{t(`${AppProject}.wallets.RISKPROX.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.RISKPROX.subtitle`, { ns: ns })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <AmountCard
@@ -117,10 +120,10 @@ export default function Mint(props) {
                                 {auth.isLoggedIn &&
                                     <>{!loading ?
                                         <Row>
-                                            <h2>{ t('MoC.settlement.remainingDays', { ns: 'moc' ,days:daysHours?.days, hours:daysHours?.hours}) }</h2>
+                                            <h2>{ t(`${AppProject}.settlement.remainingDays`, { ns: ns, days:daysHours?.days, hours:daysHours?.hours}) }</h2>
                                             <div className="CaptionDateSettlement">{daysHours?.date}</div>
                                             <div>
-                                                <span className="SettlementTitle">{t('MoC.settlement.remainingBlocks', { ns: 'moc' })}: </span>
+                                                <span className="SettlementTitle">{t(`${AppProject}.settlement.remainingBlocks`, { ns: ns })}: </span>
                                                 {auth.contractStatusData?.blocksToSettlement}
                                                 <Tooltip placement="top" title={auth.contractStatusData?.blockHeight}>
                                                     <InfoCircleOutlined className="Icon" />
@@ -138,7 +141,7 @@ export default function Mint(props) {
 
                             <div className="Card MintCard Bprox2Metrix">
                                 {!loading ? <>
-                                <h3 className="CardTitle">{t('MoC.general.x2Leverage', { ns: 'moc' })}</h3>
+                                <h3 className="CardTitle">{t(`${AppProject}.general.x2Leverage`, { ns: ns })}</h3>
                                 <div>
                                     <span>{getBtcx['x2Leverage']}</span>
                                 </div>
