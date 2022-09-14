@@ -8,7 +8,8 @@ import web3 from 'web3';
 import { config } from './../../../Config/config';
 
 const BigNumber = require('bignumber.js');
-// const COLORS = ['#00a651', '#ef8a13','#68cdc6','#808080' ];
+const AppProject = config.environment.AppProject;
+const COLORS = AppProject === 'MoC' ? ['#00a651','#ef8a13'] : ['#68cdc6','#808080'];
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -29,14 +30,14 @@ function WalletBalancePie(props) {
     const [t, i18n]= useTranslation(["global",'moc','rdoc']);
     const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
     const AppProject = config.environment.AppProject;
-    const [colors, setColors] = useState(['#ccc']);
+    // const [colors, setColors] = useState(['#ccc']);
     // static demoUrl = 'https://codesandbox.io/s/pie-chart-with-padding-angle-7ux0o';
     const auth = useContext(AuthenticateContext);
-    const { accountData } = useContext(AuthenticateContext);
+    const { accountData, balanceRbtc } = useContext(AuthenticateContext);
 
     useEffect(() => {
         if(auth.isLoggedIn){
-            setColors(['#00a651', '#ef8a13','#68cdc6','#808080' ])
+            // setColors(['#00a651', '#ef8a13','#68cdc6','#808080' ])
         }
     }, [auth]);
 
@@ -52,8 +53,8 @@ function WalletBalancePie(props) {
     };
     const set_rbtc_main_usd = () =>{
         if (auth.userBalanceData && accountData.Balance) {
-            const rbtc_main_usd= (new BigNumber(accountData.Balance).toFixed(4))*auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)
-            const rbtc_main= new BigNumber(accountData.Balance).toFixed(4)
+            const rbtc_main_usd= (new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc).toFixed(4))*auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)
+            const rbtc_main= new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc).toFixed(4)
             return {'normal':rbtc_main,'usd':rbtc_main_usd}
         }
     };
@@ -102,7 +103,7 @@ function WalletBalancePie(props) {
             const rbtc_main= (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
             const doc= ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4)
             const bpro= (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
-            const btc= Number(new BigNumber(accountData.Balance))
+            const btc= Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))
             return new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) )).toFixed(6)
         }else{
             return (0).toFixed(6)
@@ -137,12 +138,12 @@ function WalletBalancePie(props) {
                 },
                 {
                     name: 'Group d',
-                    value: Number(new BigNumber(accountData.Balance)),
-                    set1: (Number(new BigNumber(accountData.Balance))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                    value: Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc)),
+                    set1: (Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 6,
                         maximumFractionDigits: 6
                     })+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: (Number(new BigNumber(accountData.Balance))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                    set2: (Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 6,
                         maximumFractionDigits: 6
                     })+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
@@ -173,7 +174,7 @@ function WalletBalancePie(props) {
                         {getPie() !== undefined &&
 
                         getPie().map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`} />
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`} />
                         ))
 
                         }

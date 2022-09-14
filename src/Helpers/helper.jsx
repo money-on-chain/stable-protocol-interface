@@ -322,7 +322,6 @@ const setStatus = (status) => {
     let text = '';
     let colorClass = '';
     switch (status) {
-        case '':
         case 0: {
             text = "Initializing";
             colorClass = "color-default";
@@ -359,7 +358,7 @@ export function readJsonTableFastBtcPegOut(data_j){
     const hash_id= (data_j.transferId!==undefined)? data_j.transferId : '--'
     const hash_id_cut= (data_j.transferId!==undefined)? data_j.transferId?.slice(0, 5)+'...'+ data_j.transferId?.slice(-4) : '--'
     // const status= (data_j.status!==undefined)? (data_j.status===3)? 'Confirmed' : 'Failed' : '--'
-    const status = data_j.status ? setStatus(data_j.status) : '--'
+    const status = setStatus(data_j.status)
     // const btcAmount= (data_j.amountSatoshi!==undefined)? data_j.amountSatoshi : '--'
     const btcAmount= (data_j.amountSatoshi!==undefined)? parseFloat(data_j.amountSatoshi/100000000).toFixed(6) : 0
     // const btcFee= (data_j.feeSatoshi!==undefined)? data_j.feeSatoshi : '--'
