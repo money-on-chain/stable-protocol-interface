@@ -603,7 +603,7 @@ const MintOrRedeemToken = (props) => {
             <LargeNumber
                 includeCurrency
                 amount={commission.value}
-                currencyCode={commission.currencyCode}
+                currencyCode={'MOC'}
             />}
         <Popover content={tooltip} placement="top">
           <div className="PayWithMocToken">

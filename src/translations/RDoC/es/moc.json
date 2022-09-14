@@ -941,6 +941,7 @@
       }
     },
     "staking": "Staking",
-    "Staking_AnnualizedPerformanceTitle": "MoC Staking Annualized Performance"
+    "Staking_AnnualizedPerformanceTitle": "MoC Staking Annualized Performance",
+    "PleaseReviewYourWallet": "Firme la transacción en su billetera."
   }
 }
