@@ -139,11 +139,12 @@ export default function MintModal(props) {
     // In rrc20 mode show allowance when need it
     if (auth.getAppMode === 'RRC20') {
       const userAllowance = await auth.getReserveAllowance(window.address);
-      let value_user_allowance= setNumber(web3.utils.fromWei(setNumber(web3.utils.fromWei(userAllowance, 'ether')),'ether'))
-      // if (valueYouExchange > userAllowance) {
-      if (Number(valueYouExchange) > Number(value_user_allowance)) {
+      const userAllowanceNumber = new BigNumber(userAllowance);
+      const valueYouExchangeNumber = new BigNumber(valueYouExchange);
+      console.log("User Allowance: ", userAllowanceNumber.toString())
+      console.log("Value Exchange: ", valueYouExchangeNumber.toString())
+      if (valueYouExchangeNumber.gt(userAllowanceNumber)) {
         allowanceReserveModalShow(true);
-        console.log("Need allowance... Display allowance form");
         return;
       }
     }
