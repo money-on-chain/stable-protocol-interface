@@ -12,6 +12,9 @@ COPY .env ./
 COPY .env.mocTestnetAlpha ./
 COPY .env.mocTestnet ./
 COPY .env.mocMainnet2 ./
+COPY .env.rdocTestnetAlpha ./
+COPY .env.rdocTestnet ./
+COPY .env.rdocMainnet ./
 
 # build script target
 COPY build_target.sh ./
