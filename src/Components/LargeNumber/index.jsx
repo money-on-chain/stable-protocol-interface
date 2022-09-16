@@ -100,7 +100,6 @@ const USDValueLargeNumber = ({amountUSD, showUSD, numericLabelParams}) => {
 }
 
 const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive, showSign, showUSD, amountUSD, numericLabelParams, infoDescription, showFlat,t, i18n  }) => {
-    
     if (currencyCode == 'RBTC') {
         var displayCurrencyCode = 'RBTC';
         currencyCode = 'RESERVE';
