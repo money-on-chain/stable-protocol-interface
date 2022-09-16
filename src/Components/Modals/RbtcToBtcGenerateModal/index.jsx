@@ -19,7 +19,9 @@ export default function RbtcToBtcGenerateModal(props) {
     const [limits, setLimits] = useState(null);
     const auth = useContext(AuthenticateContext);
     const { web3 } = auth
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
 
     useEffect(() => {
         // if (checkLoginFirstTime) {
@@ -135,9 +137,9 @@ export default function RbtcToBtcGenerateModal(props) {
         >
             {currentStep == 1 && (
                 <Fragment>
-                    <p className="main-p">{t('MoC.fastbtc.topUpWalletModal.subtitle_pegout', { ns: 'moc' })}</p>
+                    <p className="main-p">{t(`${AppProject}.fastbtc.topUpWalletModal.subtitle_pegout`, { ns: ns })}</p>
                     <div className='conversion-limits'>
-                        <b>{t('MoC.fastbtc.topUpWalletModal.limits_pegout.header', { ns: 'moc' })}</b>
+                        <b>{t(`${AppProject}.fastbtc.topUpWalletModal.limits_pegout.header`, { ns: ns })}</b>
                         {limits != null &&
                             <p> Min: {toNumberFormat(limits.min / btcInSatoshis, 8)} BTC</p>
                         }
@@ -149,12 +151,12 @@ export default function RbtcToBtcGenerateModal(props) {
                         }
                     </div>
 
-                    <p className="instructions"><strong>{t('MoC.fastbtc.topUpWalletModal.instructions_pegout.header', { ns: 'moc' })}</strong></p>
+                    <p className="instructions"><strong>{t(`${AppProject}.fastbtc.topUpWalletModal.instructions_pegout.header`, { ns: ns })}</strong></p>
                     <ul className="instructions">
-                        <li>{t('MoC.fastbtc.topUpWalletModal.instructions_pegout.items.0', { ns: 'moc' })}</li>
-                        <li>{t('MoC.fastbtc.topUpWalletModal.instructions_pegout.items.1', { ns: 'moc' })}</li>
-                        <li>{t('MoC.fastbtc.topUpWalletModal.instructions_pegout.items.2', { ns: 'moc' })}</li>
-                        <li>{t('MoC.fastbtc.topUpWalletModal.instructions_pegout.items.3', { ns: 'moc' })}</li>
+                        <li>{t(`${AppProject}.fastbtc.topUpWalletModal.instructions_pegout.items.0`, { ns: ns })}</li>
+                        <li>{t(`${AppProject}.fastbtc.topUpWalletModal.instructions_pegout.items.1`, { ns: ns })}</li>
+                        <li>{t(`${AppProject}.fastbtc.topUpWalletModal.instructions_pegout.items.2`, { ns: ns })}</li>
+                        <li>{t(`${AppProject}.fastbtc.topUpWalletModal.instructions_pegout.items.3`, { ns: ns })}</li>
                         <li>If BTC is not visible in your destination wallet after 90 mins, open a<a href='https://sovryn.freshdesk.com/support/tickets/new'><strong> support ticket</strong></a> at Sovryn.</li>
                     </ul>
 

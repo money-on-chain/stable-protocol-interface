@@ -16,6 +16,7 @@ import {formatLocalMap2, formatVisibleValue} from "../../../Lib/Formats";
 import { AuthenticateContext } from "../../../Context/Auth";
 import AlertLabel from "../../AlertLabel/AlertLabel";
 import Copy from "../../Page/Copy";
+import { config } from './../../../Config/config';
 
 const BigNumber = require('bignumber.js');
 
@@ -37,7 +38,9 @@ export default function SendModal(props) {
   const [tokenToSend, setTokenToSend] = useState(props.tokensToSend && props.tokensToSend[0]);
   const [inputIsValid, setInputIsValid] = useState(true);
 
-  const [t, i18n] = useTranslation(["global", 'moc']);
+  const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
+  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const AppProject = config.environment.AppProject;
   const helper = addressHelper(web3);
   const auth = useContext(AuthenticateContext);
 
@@ -226,10 +229,10 @@ export default function SendModal(props) {
             type="primary"
             onClick={showModal}
             style={{ width: 90, fontFamily: 'Montserrat,sans-serif', fontSize: '1em', fontWeight: view === 'moc' ? 700 : 500, marginTop: view === 'moc' && '5.9em'  }}
-        >{t('MoC.wallet.send', { ns: 'moc' })}
+        >{t(`${AppProject}.wallet.send`, { ns: ns })}
         </Button>
         <Modal
-            title={t("MoC.wallet.send", { ns: 'moc' })}
+            title={t(`${AppProject}.wallet.send`, { ns: ns })}
             visible={visible}
             onCancel={handleCancel}
             footer={null}
@@ -239,7 +242,7 @@ export default function SendModal(props) {
             {(statusScreen!=1 && statusScreen!=2 && statusScreen!=3 && statusScreen!=4) &&
             <>
               <InputAddress
-                  title={t("MoC.wallets.receiverAddress", { ns: 'moc' })}
+                  title={t(`${AppProject}.wallets.receiverAddress`, { ns: ns })}
                   value={address}
                   onChange={(event) => onChangeInputAddress(event)}
                   className="separation"
@@ -279,8 +282,8 @@ export default function SendModal(props) {
                       </div>
                     </div>
                     <br/>
-                    <div style={{ width: '100%','display':'inline-block' }}>
-                      <p className={'Transaction_ID'}  style={{'float':'left'}}>To</p>
+                    <div style={{ width: '100%','display':'flex' }}>
+                      <p className={'Transaction_ID'}  style={{marginRight: '1em'}}>To</p>
                       <div style={{ float: 'right' }}>
                         <Copy textToShow={address} />
                       </div>
@@ -303,7 +306,7 @@ export default function SendModal(props) {
                 <img src={auth.urlBase+"global/status-pending.png"} width={50} height={50} className='img-status rotate'/>
                 <br/>
                 <br/>
-                <p className={'Transaction_confirmation'}>{t('MoC.PleaseReviewYourWallet', {ns: 'moc'})}</p>
+                <p className={'Transaction_confirmation'}>{t(`${AppProject}.PleaseReviewYourWallet`, {ns: ns})}</p>
                 <br/>
                 <Button type="primary" onClick={() => cancelFull()} className={'width-140'}>{"Close"}</Button>
               </div>

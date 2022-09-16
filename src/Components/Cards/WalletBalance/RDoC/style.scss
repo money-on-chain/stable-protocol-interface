@@ -189,19 +189,19 @@
   .piePiece{
       &.STABLE {
           fill: $color-moc-stable;
-          .RRC20 & {
+          .RDoC & {
               fill: $color-roc-stable;
           }
       }
       &.RISKPRO {
           fill: $color-moc-riskpro;
-          .RRC20 & {
+          .RDoC & {
               fill: $color-roc-riskpro;
           }
       }
       &.RISKPROX {
           fill: $color-moc-riskprox;
-          .RRC20 & {
+          .RDoC & {
               fill: $color-roc-riskprox;
           }
       }
@@ -232,21 +232,21 @@
       @include primary-text(1em, white, 400);
       .STABLE {
           color: $color-moc-stable;
-          .RRC20 & {
+          .RDoC & {
               color: $color-roc-stable;
           }
           font-weight: 700;
       }
       .RISKPRO {
           color: $color-moc-riskpro;
-          .RRC20 & {
+          .RDoC & {
               color: $color-roc-riskpro;
           }
           font-weight: 700;
       }
       .RISKPROX {
           color: $color-moc-riskprox;
-          .RRC20 & {
+          .RDoC & {
               color: $color-roc-riskprox;
           }
           font-weight: 700;

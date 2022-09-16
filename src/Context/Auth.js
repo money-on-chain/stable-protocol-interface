@@ -33,10 +33,12 @@ const AuthenticateContext = createContext({
     isLoggedIn: false,
     account: null,
     userBalanceData: null,
+    balanceRbtc: null,
     contractStatusData: null,
     web3: null,
     urlBaseFull:null,
     urlBase:null,
+    getAppMode:null,
     connect: () => {},
     interfaceExchangeMethod: async (sourceCurrency, targetCurrency, amount, slippage, onTransaction, onReceipt) => {},
     interfaceMintRiskPro: async (amount, slippage, onTransaction, onReceipt) => {},
@@ -72,7 +74,8 @@ const AuthenticateContext = createContext({
     interfaceApproveReserve: async (address) => {},
     convertToken: async (from, to, amount) => {},
     getSpendableBalance: async (address) => {},
-    loadContractsStatusAndUserBalance: async (address) => {}
+    loadContractsStatusAndUserBalance: async (address) => {},
+    getReserveAllowance: async (address) => {}
 });
 
 const AuthenticateProvider = ({ children }) => {
@@ -82,8 +85,10 @@ const AuthenticateProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [account, setAccount] = useState(null);
     const [userBalanceData, setUserBalanceData] = useState(null);
+    const [balanceRbtc, setBalanceRbtc] = useState(null);
     const [urlBaseFull, setUrlBaseFull] = useState(process.env.REACT_APP_PUBLIC_URL+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/');
     const [urlBase, setUrlBase] = useState(process.env.REACT_APP_PUBLIC_URL);
+    const [getAppMode, seGetAppMode] = useState(config.environment.AppMode);
     const [accountData, setAccountData] = useState({
         Wallet: '',
         Owner: '',
@@ -93,6 +98,7 @@ const AuthenticateProvider = ({ children }) => {
         GasPrice: 0,
         truncatedAddress: ''
     });
+    let balanceData;
     // const [transactionReceipt, setTransactionReceipt] = useState(null);
 
     // Fast BTC socket
@@ -180,6 +186,7 @@ const AuthenticateProvider = ({ children }) => {
             truncatedAddress: ''
         });
         setUserBalanceData(null);
+        setBalanceRbtc(null);
         setIsLoggedIn(false);
         await window.rLoginDisconnect();
         connect();
@@ -191,6 +198,7 @@ const AuthenticateProvider = ({ children }) => {
             web3,
             contractStatusData,
             userBalanceData,
+            balanceRbtc,
             config,
             account,
             vendorAddress: config.vendor.address
@@ -358,6 +366,7 @@ const AuthenticateProvider = ({ children }) => {
 
         setContractStatusData(dataContractStatus);
         setUserBalanceData(accountBalance);
+        setBalanceRbtc(web3.utils.fromWei(accountBalance?.rbtcBalance));
 
         const contracts = {
             bproToken: window.integration.contracts.riskprotoken,
@@ -403,7 +412,7 @@ const AuthenticateProvider = ({ children }) => {
         try {
             let balance = await web3.eth.getBalance(address);
             balance = web3.utils.fromWei(balance);
-            return balance;
+            console.log('balance', balance);
         } catch (e) {
             console.log(e);
         }
@@ -418,12 +427,29 @@ const AuthenticateProvider = ({ children }) => {
 
     const getSpendableBalance = async (address) => {
         const from = address || account;
-        return await web3.eth.getBalance(from);
+        const dContracts = window.integration;
+        const appMode = config.environment.AppMode;
+
+        if (appMode === 'RRC20') {
+            const reservetoken = dContracts.contracts.reservetoken;
+            return reservetoken.methods.balanceOf(from).call();
+        } else {
+            return await web3.eth.getBalance(from);
+        }
+
     }
 
     const getReserveAllowance = async (address) => {
         const from = address || account;
-        return await web3.eth.getBalance(from);
+        const dContracts = window.integration;
+        const appMode = config.environment.AppMode;
+        if (appMode === 'RRC20') {
+            const reservetoken = dContracts.contracts.reservetoken;
+            return reservetoken.methods.allowance(from, dContracts.contracts.moc._address).call();
+        } else {
+            return await web3.eth.getBalance(from);
+        }
+
     }
 
     const getTransactionReceipt = async (hash, callback) => {
@@ -534,7 +560,7 @@ const AuthenticateProvider = ({ children }) => {
 
     const interfaceApproveReserve = (address, callback) => {
         const interfaceContext = buildInterfaceContext();
-        AllowanceUseReserveToken(interfaceContext, true, callback);
+        return AllowanceUseReserveToken(interfaceContext, true, callback);
     };
 
     const convertToken = (from, to, amount) => {
@@ -620,11 +646,13 @@ const AuthenticateProvider = ({ children }) => {
                 account,
                 accountData,
                 userBalanceData,
+                balanceRbtc,
                 contractStatusData,
                 isLoggedIn,
                 web3,
                 urlBaseFull,
                 urlBase,
+                getAppMode,
                 connect,
                 disconnect,
                 interfaceExchangeMethod,
@@ -660,6 +688,7 @@ const AuthenticateProvider = ({ children }) => {
                 socket,
                 convertToken,
                 getSpendableBalance,
+                getReserveAllowance,
                 interfaceDecodeEvents,
                 loadContractsStatusAndUserBalance
             }}

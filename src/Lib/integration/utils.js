@@ -2,6 +2,7 @@
 
 import BigNumber from 'bignumber.js';
 import Web3 from 'web3';
+import {setNumber} from "../../Helpers/helper";
 
 BigNumber.config({
   ROUNDING_MODE: BigNumber.ROUND_DOWN,
@@ -22,7 +23,7 @@ const getGasPrice = async (web3) => {
 }
 
 const toContractPrecision = (amount) => {
-  return Web3.utils.toWei(amount.toFormat(18, BigNumber.ROUND_DOWN), 'ether')
+  return Web3.utils.toWei(BigNumber(amount).toFormat(18, BigNumber.ROUND_DOWN), 'ether')
 }
 
 const getAppMode = () => {

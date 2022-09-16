@@ -1,4 +1,6 @@
 @import 'src/assets/css/general_styling';
+@import 'src/assets/css/config_styling.scss';
+
 .WalletBalance {
   padding: 1.6em;
   border-radius: 6px;
@@ -187,29 +189,32 @@
 
 .PieChart{
   .piePiece{
-      &.STABLE {
-          fill: $color-moc-stable;
-          .RRC20 & {
-              fill: $color-roc-stable;
-          }
+      &.STABLE-MoC {
+          fill: $color-moc-stable; 
       }
-      &.RISKPRO {
+      &.STABLE-RDoC & {
+        fill: $color-roc-stable;
+      }
+      &.RISKPRO-MoC {
           fill: $color-moc-riskpro;
-          .RRC20 & {
-              fill: $color-roc-riskpro;
-          }
       }
-      &.RISKPROX {
-          fill: $color-moc-riskprox;
-          .RRC20 & {
-              fill: $color-roc-riskprox;
-          }
+      &.RISKPRO-RDoC & {
+        fill: $color-roc-riskpro;
       }
+      &.RISKPROX-MoC {
+        fill: $color-moc-riskprox;
+      }
+      &.RISKPROX-RDoC & {
+        fill: $color-roc-riskprox;
+    }
       &.MOC {
           fill: $color-moc;
       }
       &.EMPTY {
           fill: $low-grey;
+      }
+      &.RDoC {
+        // fill: $color-roc
       }
   }
   .chart-inner-text {
@@ -230,30 +235,37 @@
       padding: 10px;
       text-align: center;
       @include primary-text(1em, white, 400);
-      .STABLE {
-          color: $color-moc-stable;
-          .RRC20 & {
-              color: $color-roc-stable;
-          }
-          font-weight: 700;
+      .STABLE-MoC {
+        color: $color-moc-stable;
+        font-weight: 700;
       }
-      .RISKPRO {
-          color: $color-moc-riskpro;
-          .RRC20 & {
-              color: $color-roc-riskpro;
-          }
-          font-weight: 700;
+      .STABLE-RDoC & {
+        color: $color-roc-stable;
+        font-weight: 700;
+      }
+      .RISKPRO-MoC {
+        color: $color-moc-riskpro;
+        font-weight: 700;
+      }
+      .RISKPRO-RDoC & {
+        color: $color-roc-riskpro;
+        font-weight: 700;
       }
       .RISKPROX {
-          color: $color-moc-riskprox;
-          .RRC20 & {
-              color: $color-roc-riskprox;
-          }
-          font-weight: 700;
+        color: $color-moc-riskprox;
+        font-weight: 700;
+      }
+      .RISKPROX-RDoC & {
+        color: $color-roc-riskprox;
+        font-weight: 700;
       }
       .MOC {
-          color: $color-moc;
-          font-weight: 700;
+        color: $color-moc;
+        font-weight: 700;
+      }
+      .RDoC {
+        // color: $color-roc;
+        font-weight: 700;
       }
   }
 }

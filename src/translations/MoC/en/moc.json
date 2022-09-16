@@ -323,7 +323,7 @@
       "Settlement": {
         "title": "Next Settlement",
         "remainingDaysTitle": "Remaining days",
-        "remainingDays": "In __days__ days __hours__ hours",
+        "remainingDays": "In {{days}} days {{hours}} hours",
         "date": "Date",
         "blocksToSettlement": "Blocks to settlement",
         "blockSettlement": "Settlement will happen on block",

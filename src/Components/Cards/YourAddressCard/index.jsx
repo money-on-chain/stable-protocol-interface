@@ -5,12 +5,15 @@ import {AuthenticateContext} from "../../../Context/Auth";
 import SendModal from '../../Modals/SendModal';
 import AddressContainer from '../../AddressContainer/AddressContainer';
 import {useTranslation} from "react-i18next";
+import { config } from './../../../Config/config';
 
 export default function YourAddressCard(props) {
     const { height = '', iconWallet, tokenToSend, className, view } = props;
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
-    const [t, i18n]= useTranslation(["global",'moc'])
+    const [t, i18n]= useTranslation(["global",'moc','rdoc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const isLoggedIn = auth?.userBalanceData;
 
     var { address = '' } = auth.userBalanceData || {};
@@ -30,7 +33,7 @@ export default function YourAddressCard(props) {
     return (
         <div className="Card SendTokenContainer" style={{ height: height, display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
             {!loading ? <>
-            <h3 className={"CardTitle margin-bottom-10"}>{t('MoC.wallets.ownAddressLabel', {ns: 'moc'})} </h3>
+            <h3 className={"CardTitle margin-bottom-10"}>{t(`${AppProject}.wallets.ownAddressLabel`, {ns: ns})} </h3>
             <div className={classname}>
                 <AddressContainer {...{ address }} accountData={accountData} view={view} />
             </div>

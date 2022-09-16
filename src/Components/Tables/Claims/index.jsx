@@ -20,7 +20,6 @@ import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import moment from 'moment';
 
-
 export default function Claims(props) {
 
     const [current, setCurrent] = useState(1);
@@ -39,7 +38,9 @@ export default function Claims(props) {
     const [yScroll, setYScroll] = useState(undefined);
     const [xScroll, setXScroll] = useState(undefined);
 
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
     const [currencyCode, setCurrencyCode]=  useState('MOC');
@@ -85,23 +86,23 @@ export default function Claims(props) {
         },
 
         {
-            title: t('MoC.operations.columns.event', { ns: 'moc' }),
+            title: t(`${AppProject}.operations.columns.event`, { ns: ns }),
             dataIndex: 'event',
         },
         {
-            title: t('MoC.operations.columns.type', { ns: 'moc' }),
+            title: t(`${AppProject}.operations.columns.type`, { ns: ns }),
             dataIndex: 'asset',
         },
         {
-            title: t('MoC.operations.columns.mocAmount', { ns: 'moc' }),
+            title: t(`${AppProject}.operations.columns.mocAmount`, { ns: ns }),
             dataIndex: 'amount',
         },
         {
-            title: t('MoC.operations.columns.date', { ns: 'moc' }),
+            title: t(`${AppProject}.operations.columns.date`, { ns: ns }),
             dataIndex: 'date',
         },
         {
-            title: t('MoC.operations.columns.status', { ns: 'moc' }),
+            title: t(`${AppProject}.operations.columns.status`, { ns: ns }),
             dataIndex: 'status',
         },
     ];
@@ -243,8 +244,8 @@ export default function Claims(props) {
     return (
         <>
             <div className="title">
-                <h1>{t('MoC.operations.title', { ns: 'moc' })}</h1>
-                <Tooltip color={'#404040'} placement="topLeft" title={t("MoC.operations.tooltip.text", { ns: 'moc' })} className='Tooltip'>
+                <h1>{t(`${AppProject}.operations.title`, { ns: ns })}</h1>
+                <Tooltip color={'#404040'} placement="topLeft" title={t(`${AppProject}.operations.tooltip.text`, { ns: ns })} className='Tooltip'>
                     <InfoCircleOutlined className="Icon" />
                 </Tooltip>
             </div>

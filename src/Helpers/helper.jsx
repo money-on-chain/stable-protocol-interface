@@ -6,6 +6,8 @@ import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber"
 import moment from 'moment';
 import {formatLocalMap2} from "../Lib/Formats";
 const BigNumber = require('bignumber.js');
+const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+const AppProject = config.environment.AppProject;
 
 export function setNumber(number){
     if(number.indexOf(".")!==-1){
@@ -181,7 +183,7 @@ export function readJsonTable(data_j,t, i18n){
             i18n:i18n
         }),
         status: data_j.status,
-        token_involved: t(`MoC.Tokens_${data_j.tokenInvolved}_code`, { ns: 'moc' }),
+        token_involved: t(`${AppProject}Tokens_${data_j.tokenInvolved}_code`, { ns: ns }),
         t: t,
         i18n:i18n
     })
@@ -320,7 +322,6 @@ const setStatus = (status) => {
     let text = '';
     let colorClass = '';
     switch (status) {
-        case '':
         case 0: {
             text = "Initializing";
             colorClass = "color-default";
@@ -357,7 +358,7 @@ export function readJsonTableFastBtcPegOut(data_j){
     const hash_id= (data_j.transferId!==undefined)? data_j.transferId : '--'
     const hash_id_cut= (data_j.transferId!==undefined)? data_j.transferId?.slice(0, 5)+'...'+ data_j.transferId?.slice(-4) : '--'
     // const status= (data_j.status!==undefined)? (data_j.status===3)? 'Confirmed' : 'Failed' : '--'
-    const status = data_j.status ? setStatus(data_j.status) : '--'
+    const status = setStatus(data_j.status)
     // const btcAmount= (data_j.amountSatoshi!==undefined)? data_j.amountSatoshi : '--'
     const btcAmount= (data_j.amountSatoshi!==undefined)? parseFloat(data_j.amountSatoshi/100000000).toFixed(6) : 0
     // const btcFee= (data_j.feeSatoshi!==undefined)? data_j.feeSatoshi : '--'
@@ -494,3 +495,46 @@ export function getUSD(coin,value,auth,i18n=null){
         return 0
     }
 }
+
+export function getCoinName(coin){
+
+    let currencies= {
+        'COINBASE':config.environment.tokens.COINBASE.name,
+        'STABLE':config.environment.tokens.STABLE.name,
+        'RISKPRO':config.environment.tokens.RISKPRO.name,
+        'RISKPROX':config.environment.tokens.RISKPROX.name,
+        'RESERVE':config.environment.tokens.RESERVE.name,
+        'USDPrice':config.environment.tokens.USDPrice.name,
+        'MOC':config.environment.tokens.MOC.name,
+        'USD':config.environment.tokens.USD.name,
+    }
+
+    return currencies[coin]
+}
+
+export function getDecimals(coin){
+    let decimals= {
+        'STABLE':config.environment.tokens.STABLE.decimals,
+        'RISKPRO':config.environment.tokens.RISKPRO.decimals,
+        'RISKPROX':config.environment.tokens.RISKPROX.decimals,
+        'USDPrice':config.environment.tokens.USDPrice.decimals,
+        'RESERVE':config.environment.tokens.RESERVE.decimals,
+        'USD':2,
+    }
+
+    return decimals[coin]
+
+}
+
+export function getSelectCoins(appMode){
+    switch (appMode) {
+        case 'RRC20':
+            return ['RISKPRO', 'STABLE']
+        case 'MoC':
+            return ['RISKPRO', 'STABLE', 'RESERVE']
+        default:
+            return ['RISKPRO', 'STABLE', 'RESERVE']
+    }
+
+}
+

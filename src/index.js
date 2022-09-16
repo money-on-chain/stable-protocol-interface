@@ -20,6 +20,8 @@ async function loadTranslations() {
         const strmoc= config.environment.AppProject
         let moc_es= await import('./translations/'+strmoc+'/es/moc.json');
         let moc_en= await import('./translations/'+strmoc+'/en/moc.json');
+        let rdoc_es = await import ('./translations/'+strmoc+'/es/moc.json')
+        let rdoc_en = await import ('./translations/'+strmoc+'/en/moc.json')
         let global_es= await import('./translations/global-es.json')
         let global_en= await import('./translations/global-en.json')
 
@@ -31,11 +33,13 @@ async function loadTranslations() {
             resources: {
                 es: {
                     global: global_es,
-                    moc: moc_es
+                    moc: moc_es,
+                    rdoc: rdoc_es
                 },
                 en: {
                     global: global_en,
-                    moc: moc_en
+                    moc: moc_en,
+                    rdoc: rdoc_en
                 },
             }
         })

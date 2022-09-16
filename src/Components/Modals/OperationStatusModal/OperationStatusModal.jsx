@@ -18,13 +18,15 @@ const OperationStatusModal = ({ className, visible, onCancel, title, operationSt
             {<h1>{title || t('global.RewardsClaimButton_Modal_Title')}</h1>}
             <div className="InfoContainer" style={{ padding: 45,'paddingLeft':'0','paddingRight':'0','paddingBottom':'15px'}}>
                 <span className="title">{t('global.RewardsClaimButton_Modal_TxStatus')}</span>
-                <span className={`value ${operationStatus}`}>
+                <span className={`value ${operationStatus} float-right`}>
                     {t(`global.RewardsClaimButton_Modal_TxStatus_${operationStatus}`)}
                 </span>
             </div>
             <div className="InfoContainer">
                 <span className="title">{t('global.RewardsClaimButton_Modal_Hash')}</span>
-                <Copy textToShow={txHash !== undefined ? txHash?.substring(0, 6) + '...' + txHash?.substring(txHash?.length-4, txHash?.length) : 'No Hash'} textToCopy={txHash}/>
+                <div className={'float-right'}>
+                    <Copy typeUrl={'tx'} textToShow={txHash !== undefined ? txHash?.substring(0, 6) + '...' + txHash?.substring(txHash?.length-4, txHash?.length) : 'No Hash'} textToCopy={txHash}/>
+                </div>
             </div>
             <a href={`${config.explorerUrl}/tx/${txHash}`} target="_blank">
                 {t('global.RewardsClaimButton_Modal_ViewOnExplorer')}
