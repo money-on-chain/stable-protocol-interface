@@ -23,13 +23,13 @@ export default function PerformanceChart(props) {
                     <div className="ChartColumn">
                         <div className="Bar Percent Hidden" style={{ height }} />
                         <div className="Bar">
-                            <div>{t(`${AppProject}.app.code`, { ns: ns })}</div>
+                            <div>MOC</div>
                         </div>
                     </div>
                     <div className="ChartColumn">
                         <div className="Bar Percent Gray" style={{ height }} />
                         <div className="Bar">
-                            <div>{t(`${AppProject}.app.code`, { ns: ns })}<br />+<br />{t(`${AppProject}.staking`, { ns: ns })}</div>
+                            <div>MOC<br />+<br />{t(`${AppProject}.staking`, { ns: ns })}</div>
                         </div>
                     </div>
                 </div>
