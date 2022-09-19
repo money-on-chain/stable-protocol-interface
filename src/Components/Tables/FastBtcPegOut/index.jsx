@@ -140,7 +140,6 @@ export default function FastBtcPegOut(props) {
 
         /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
         data = [];
-        console.log('json_end', json_end);
 
         if(json_end!==undefined){
             json_end.forEach((data_j) => {

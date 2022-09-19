@@ -170,29 +170,16 @@ class ListOperations extends React.Component {
             while (data.length > 0) {
                 data.pop();
             }
-            // console.log("1212");
-            // console.log(set_current);
-            // console.log("1212");
 
 
             /*******************************setear el json para manejar limit y skip***********************************/
             const limit = 10;
             if (set_current == 1) {
-                console.log("===========================11111111111111111111111111");
-                console.log(set_current - 1);
-                console.log((set_current + limit) - 1);
-                // console.log(data);
-                console.log("===========================11111111111111111111111111");
                 json_end = pre_datas.slice(set_current - 1, (set_current + limit) - 1);
             }
 
             if (set_current > 1) {
                 json_end = pre_datas.slice((set_current * 10) - 10, (set_current * 10));
-                console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>11111111111111111111111111");
-                console.log((set_current * 10) - 10);
-                console.log((set_current * 10));
-                // console.log(data);
-                console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>11111111111111111111111111");
             }
             /*******************************end setear el json para manejar limit y skip***********************************/
 

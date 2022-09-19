@@ -30,9 +30,6 @@ export default function Step3(props) {
     const {auth}= props;
     const {web3}= auth;
     const { accountData } = auth;
-    console.log('accountData.Owner');
-    console.log(accountData.Owner);
-    console.log('accountData.Owner');
     const [account, setAccount] = useState(null);
 
     useEffect(() => {
@@ -45,7 +42,6 @@ export default function Step3(props) {
 
     useEffect(() => {
         if (completed === false && intervalBTCCheck !== 0) {
-            console.log("clearInterval", intervalBTCCheck);
             clearInterval(intervalBTCCheck);
             setIntervalBTCCheck(0);
         }
@@ -57,9 +53,6 @@ export default function Step3(props) {
 
     const currentFeeData = async () => {
         const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
-        console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
-        console.log(Web3.utils.toWei(props.rbtcAmount, 'ether'))
-        console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         if(web3!=null){
             const fastBtcBridge = new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
             const calculateCurrentFee = () => {
@@ -83,7 +76,6 @@ export default function Step3(props) {
     };
 
     const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
-    console.log('sendTransaction: Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
     const fastBtcBridge = new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
 
     const sendTransaction= async () => {
@@ -107,7 +99,6 @@ export default function Step3(props) {
                         }).then(response => {
                         web3.eth.getTransactionReceipt(response.transactionHash)
                             .then(responseRSKTopics => {
-                                console.log(responseRSKTopics);
                                 setlabelTrx('Waiting')
                                 setCompleted(true);
                                 setIsVisible(true)

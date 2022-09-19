@@ -95,17 +95,14 @@ function SystemStatus(props) {
     const getConfigByCoverage = (coverage, paused, blocksToSettlement, price_active) => {
 
         if (!price_active) {
-            console.log("11111111111111111111111")
             return configStatusNoPrice;
         }
 
         if (paused) {
-            console.log("22222222222222222222")
             return configStatusPaused;
         }
 
         if (blocksToSettlement < 1) {
-            console.log("33333333333333333")
             return configStatusSettlement;
         }
 

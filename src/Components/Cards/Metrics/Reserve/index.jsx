@@ -90,7 +90,6 @@ function Reserve(props) {
         });
     }
 
-    console.log('balancesData', balancesData);
 
     const CustomTooltip = ({payload}) => {
         const data = payload && payload[0];

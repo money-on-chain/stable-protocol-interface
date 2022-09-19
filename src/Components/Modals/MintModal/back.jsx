@@ -255,9 +255,6 @@ export default function MintModal(props) {
     const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
     const styleReceive = tokenNameReceive === receiving.currencyCode ? { color } : {};
 
-    console.log('vvvvvvvvvvvvvvvvvv')
-    console.log(visible)
-    console.log('vvvvvvvvvvvvvvvvvv')
 
     return (
         <Modal

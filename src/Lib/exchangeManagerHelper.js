@@ -22,9 +22,6 @@ const convertAmount2222 = (source, target, amount, convertToken) => {
   //   convertToken(source, target, formatValueToContract(amount, source)),
   //   target
   // );
-  console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww11111111111111111111111111')
-  console.log(convertToken(source, target, formatValueToContract(amount, source)))
-  console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww11111111111111111111111111')
   const convertedAmount = formatValueWithContractPrecision(
       convertToken(source, target, formatValueToContract(amount, source)),
       target
