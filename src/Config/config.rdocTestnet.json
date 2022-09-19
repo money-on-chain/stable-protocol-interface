@@ -5,8 +5,8 @@
   },
   "chainId": 31,
   "api": {
-    "operations": "https://api-operations.moneyonchain.com/api/v1/",
-    "incentives": "https://moc-incentives.moneyonchain.com/"
+    "operations": "https://api-operations-testnet.rifonchain.com/api/v1/",
+    "incentives": "https://moc-incentives-testnet.moneyonchain.com/"
   },
   "minimumUserBalanceToOperate": "0",
   "transfer": [
