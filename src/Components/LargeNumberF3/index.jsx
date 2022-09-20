@@ -24,7 +24,7 @@ const LargeNumberF3 = ({ amount, currencyCode, includeCurrency, numericLabelPara
           shortFormatMinValue: 1000000,
           shortFormatPrecision: decimals,
           title: "",
-          cssClass:['value_usd22']
+          cssClass:['value_usd']
       },
       numericLabelParams
     );

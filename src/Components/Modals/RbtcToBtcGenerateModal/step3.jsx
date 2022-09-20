@@ -30,9 +30,6 @@ export default function Step3(props) {
     const {auth}= props;
     const {web3}= auth;
     const { accountData } = auth;
-    console.log('accountData.Owner');
-    console.log(accountData.Owner);
-    console.log('accountData.Owner');
     const [account, setAccount] = useState(null);
 
     useEffect(() => {

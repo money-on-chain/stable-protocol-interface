@@ -14,10 +14,7 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
 
   const [t, i18n]= useTranslation(["global",'moc','rdoc']);
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
-    const { value, decimals } = adjustPrecision(amount, currencyCode);
-    console.log('valuecccccccccccccccccccccc')
-    console.log(value)
-    console.log('valuecccccccccccccccccccccc')
+    const { value, decimals } = adjustPrecision(amount, currencyCode,AppProject);
     const params = Object.assign(
       {
           commafy: true,
@@ -108,7 +105,7 @@ const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive,
     }
 
     if (amount !== null && amount !== '' && !Number.isNaN(Number(amount))) {
-        const { value, decimals } = adjustPrecision(amount, currencyCode);
+        const { value, decimals } = adjustPrecision(amount, currencyCode,AppProject);
         const params = Object.assign(
             {
                 shortFormat: true,

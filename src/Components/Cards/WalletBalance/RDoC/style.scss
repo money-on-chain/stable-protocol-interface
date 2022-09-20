@@ -188,13 +188,13 @@
 .PieChart{
   .piePiece{
       &.STABLE {
-          fill: $color-moc-stable;
+          fill: $color-roc-stable;
           .RDoC & {
               fill: $color-roc-stable;
           }
       }
       &.RISKPRO {
-          fill: $color-moc-riskpro;
+          fill: $color-roc-riskpro;
           .RDoC & {
               fill: $color-roc-riskpro;
           }
@@ -231,14 +231,14 @@
       text-align: center;
       @include primary-text(1em, white, 400);
       .STABLE {
-          color: $color-moc-stable;
+          color: $color-roc-stable;
           .RDoC & {
               color: $color-roc-stable;
           }
           font-weight: 700;
       }
       .RISKPRO {
-          color: $color-moc-riskpro;
+          color: $color-roc-riskpro;
           .RDoC & {
               color: $color-roc-riskpro;
           }
