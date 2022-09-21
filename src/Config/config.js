@@ -24,7 +24,6 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_RISKPROX_DECIMALS) DefaultConfig.environment.tokens.RISKPROX.decimals = process.env.REACT_APP_RISKPROX_DECIMALS;
     if (process.env.REACT_APP_MOC_NAME) DefaultConfig.environment.tokens.MOC.name = process.env.REACT_APP_MOC_NAME;
     if (process.env.REACT_APP_MOC_DECIMALS) DefaultConfig.environment.tokens.MOC.decimals = process.env.REACT_APP_MOC_DECIMALS;
-<<<<<<< HEAD
     if (process.env.REACT_APP_RESERVE_NAME) DefaultConfig.environment.tokens.RESERVE.name = process.env.REACT_APP_RESERVE_NAME;
     if (process.env.REACT_APP_RESERVE_DECIMALS) DefaultConfig.environment.tokens.RESERVE.decimals = process.env.REACT_APP_RESERVE_DECIMALS;
     if (process.env.REACT_APP_COINBASE_NAME) DefaultConfig.environment.tokens.COINBASE.name = process.env.REACT_APP_COINBASE_NAME;
@@ -32,12 +31,6 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_STABLE_DECIMALS) DefaultConfig.environment.tokens.STABLE.decimals = process.env.REACT_APP_STABLE_DECIMALS;
     if (process.env.REACT_APP_REWARDPrecision_DECIMALS) DefaultConfig.environment.Precisions.REWARDPrecision.decimals = process.env.REACT_APP_REWARDPrecision_DECIMALS;
     if (process.env.REACT_APP_RISKPROXInterest_DECIMALS) DefaultConfig.environment.Precisions.RISKPROXInterest.decimals = process.env.REACT_APP_RISKPROXInterest_DECIMALS;
-    // if (process.env.REACT_APP_USDPrice_NAME) DefaultConfig.environment.tokens.USDPrice.name = process.env.REACT_APP_USDPrice_NAME;
-    // if (process.env.REACT_APP_USDPrice_DECIMALS) DefaultConfig.environment.tokens.USDPrice.decimals = process.env.REACT_APP_USDPrice_DECIMALS;
-=======
-    if (process.env.REACT_APP_USDPrice_NAME) DefaultConfig.environment.tokens.USDPrice.name = process.env.REACT_APP_USDPrice_NAME;
-    if (process.env.REACT_APP_USDPrice_DECIMALS) DefaultConfig.environment.tokens.USDPrice.decimals = process.env.REACT_APP_USDPrice_DECIMALS;
->>>>>>> 7689d24e268b258b306203b3b4c34b64c2de6527
 
     return DefaultConfig
 }
