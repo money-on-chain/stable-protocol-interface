@@ -35,7 +35,11 @@ const LargeNumberF2 = ({ amount, currencyCode, includeCurrency, numericLabelPara
           <Tooltip placement="topLeft" title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
               <div className={className} style={{'display':'flex'}}>
                   <NumericLabel style={{'flexGrow':'0'}} {... {params }}>{value.toString()}</NumericLabel>
+<<<<<<< HEAD
+                  <span className={`number-label ${auth.getAppMode}-${currencyCode}`} style={{'flexGrow':'1'}}>{includeCurrency && ` ${getCoinName(currencyCode)}`}</span>
+=======
                   <span className={`number-label ${auth.getAppMode}-${currencyCode}`} style={{'flexGrow':'1'}}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>
+>>>>>>> 7689d24e268b258b306203b3b4c34b64c2de6527
               </div>
           </Tooltip>}</>
   );
