@@ -29,7 +29,7 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_COINBASE_NAME) DefaultConfig.environment.tokens.COINBASE.name = process.env.REACT_APP_COINBASE_NAME;
     if (process.env.REACT_APP_COINBASE_DECIMALS) DefaultConfig.environment.tokens.COINBASE.decimals = process.env.REACT_APP_COINBASE_DECIMALS;
     if (process.env.REACT_APP_STABLE_DECIMALS) DefaultConfig.environment.tokens.STABLE.decimals = process.env.REACT_APP_STABLE_DECIMALS;
-    if (process.env.REACT_APP_REWARDPrecision_DECIMALS) DefaultConfig.environment.Precisions.REWARDPrecision.decimals = process.env.REACT_APP_REWARDPrecision_DECIMALS;
+    if (process.env.REACT_APP_REWARDPRECISION_DECIMALS) DefaultConfig.environment.Precisions.REWARDPrecision.decimals = process.env.REACT_APP_REWARDPRECISION_DECIMALS;
     if (process.env.REACT_APP_RISKPROXInterest_DECIMALS) DefaultConfig.environment.Precisions.RISKPROXInterest.decimals = process.env.REACT_APP_RISKPROXInterest_DECIMALS;
 
     return DefaultConfig
