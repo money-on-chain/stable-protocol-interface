@@ -554,8 +554,7 @@ const AuthenticateProvider = ({ children }) => {
     const interfaceCalcMintInterestValues = async (amount) => {
         const interfaceContext = buildInterfaceContext();
         const mintInterest = await calcMintInterest(interfaceContext, amount);
-        const formattedValue = new BigNumber(Web3.utils.fromWei(mintInterest));
-        return formattedValue;
+        return mintInterest;
     };
 
     const interfaceApproveReserve = (address, callback) => {
