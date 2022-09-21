@@ -56,7 +56,7 @@ const calcMintInterest = async (interfaceContext, amount) => {
   amount = new BigNumber(amount);
 
   const mocinrate = dContracts.contracts.mocinrate
-  const calcMintInterest = await mocinrate.methods.calcMintInterestValues(BUCKET_X2, toContractPrecision(amount)).call()
+  const calcMintInterest = await mocinrate.methods.calcMintInterestValues(BUCKET_X2, amount).call()
   return calcMintInterest
 }
 

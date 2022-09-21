@@ -66,7 +66,7 @@ const MintOrRedeemToken = (props) => {
   const [youExchangeIsValid, onYouExchangeValidityChange] = useState(false);
   const [youReceiveIsValid, onYouReceiveValidityChange] = useState(false);
   const [confirmingTransaction, setConfirmingTransaction] = useState(false);
-  const [interests, setInterests] = useState({ interestRate: '0', interestValue: BigNumber('0') });
+  const [interests, setInterests] = useState({ interestRate: '0', interestValue: '0' });
   const actionIsMint = currencyYouExchange === 'RESERVE';
   const [loadingSwitch, setLoadingSwitch] = useState(false);
   const [commissionSwitch, setCommissionSwitch] = useState('RESERVE');
@@ -200,15 +200,13 @@ const MintOrRedeemToken = (props) => {
 
   const calcInterests = async newValueYouExchange => {
     let interestRate = '0',
-      interestValue = BigNumber('0');
+      interestValue = '0';
     if (actionIsMint && currencyYouReceive === 'RISKPROX') {
       interestValue = await auth.interfaceCalcMintInterestValues(
         BigNumber(newValueYouExchange)
           .toFixed(0)
           .toString()
       );
-      interestValue = new BigNumber(interestValue);
-      //interestValue = new BigNumber(0.01).multipliedBy(interestValue).plus(interestValue);
 
       interestRate = formatValueToContract(
         new BigNumber(interestValue)
@@ -651,8 +649,8 @@ const MintOrRedeemToken = (props) => {
           {renderExchangeInputs()}
           {renderComissionCurrencySwitch()}
           {interests &&
-            interests.interestValue &&
-            interests.interestValue.gt(0) &&
+            new BigNumber(interests.interestValue) &&
+            new BigNumber(interests.interestValue).gt(0) &&
             renderInterests()}
           {renderFooter()}
           {renderConfirmTransactionModal()}
