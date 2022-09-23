@@ -15,7 +15,7 @@ const OperationStatusModal = ({ className, visible, onCancel, title, operationSt
             visible={visible}
             onCancel={onCancel}
         >
-            {<h1>{title || t('global.RewardsClaimButton_Modal_Title')}</h1>}
+            {<h1 class={'StakingOptionsModal_Title'}>{title || t('global.RewardsClaimButton_Modal_Title')}</h1>}
             <div className="InfoContainer" style={{ padding: 45,'paddingLeft':'0','paddingRight':'0','paddingBottom':'15px'}}>
                 <span className="title">{t('global.RewardsClaimButton_Modal_TxStatus')}</span>
                 <span className={`value ${operationStatus} float-right`}>

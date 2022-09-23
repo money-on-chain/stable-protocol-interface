@@ -412,7 +412,8 @@ const AuthenticateProvider = ({ children }) => {
         try {
             let balance = await web3.eth.getBalance(address);
             balance = web3.utils.fromWei(balance);
-            console.log('balance', balance);
+            // console.log('balance', balance);
+            return balance
         } catch (e) {
             console.log(e);
         }

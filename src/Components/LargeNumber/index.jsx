@@ -38,8 +38,8 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
               <div className={className}>
                   {/* <NumericLabel {... {params }}>{amount?.toString()}</NumericLabel> */}
                   <NumericLabel {... {params }}>{value.toString()}</NumericLabel>
-                  <span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>
-                  {/*<span className={'number-label'}>{includeCurrency && ` ${getCoinName(currencyCode)}`}</span>*/}
+                  {/*<span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>*/}
+                  <span className={'number-label'}>{includeCurrency && ` ${getCoinName(currencyCode)}`}</span>
               </div>
           </Tooltip>}</>
   );
