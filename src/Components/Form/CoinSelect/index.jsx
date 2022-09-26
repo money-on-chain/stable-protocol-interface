@@ -91,7 +91,6 @@ export default function CoinSelect(props) {
         }
     };
     const handleValueChange = (newValueInEther) => {
-        console.log(auth.accountData);
         /* if (
             auth.accountData.Balance < newValueInEther &&
             props.value === 'RESERVE'

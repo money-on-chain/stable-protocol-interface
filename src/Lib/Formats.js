@@ -65,15 +65,14 @@ const formatValueFromMap = (amount, mapEntry, format, decimals) => {
 
 };
 
-const adjustPrecision = (amount, currencyCode) => {
-    // console.log('qqqqqqqqqqqqqqqqqqq')
+const adjustPrecision = (amount, currencyCode,AppProject) => {
     // return false
     const fd = formatMap[currencyCode];
     return fd
         ? {
               value: new BigNumber(amount).div(precision(fd)),
               // decimals: fd.decimals
-              decimals: getDecimals(currencyCode)
+              decimals: getDecimals(currencyCode,AppProject)
           }
         : { value: new BigNumber(amount), decimals: 2 };
 };

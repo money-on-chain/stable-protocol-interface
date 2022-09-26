@@ -38,7 +38,8 @@ export default function TokenSummaryCard(props) {
         if (auth.userBalanceData) {
             switch (tokenName) {
                 case 'stable':
-                    return setToLocaleString((auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(!tooltip ? config.environment.tokens.STABLE.decimals : 20),!tooltip ? config.environment.tokens.STABLE.decimals : 20,i18n)
+                    let var_stable=(auth.getAppMode=='MoC')? 6: config.environment.tokens.STABLE.decimals
+                    return setToLocaleString((auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(!tooltip ? var_stable : 20),!tooltip ? var_stable : 20,i18n)
                 case 'riskpro':
                     return setToLocaleString(((auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * auth.web3.utils.fromWei(auth.userBalanceData['bproBalance'])) / auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(!tooltip ? config.environment.tokens.RISKPRO.decimals : 20),!tooltip ? config.environment.tokens.RISKPRO.decimals : 20,i18n)
                 case 'riskprox':

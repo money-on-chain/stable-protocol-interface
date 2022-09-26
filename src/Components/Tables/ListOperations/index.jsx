@@ -73,14 +73,12 @@ export default function ListOperations(props) {
                     api('get', `${config.api.operations}`+'webapp/transactions/list/', datas)
                         .then(response => {
                             setDataJson(response);
-                            console.log(response);
                             setTotalTable(response.total)
                             if(call_table){
                                 setCallTable(call_table)
                             }
                         })
                         .catch((response) => {
-                            console.log(response);
                             if(call_table){
                                 setCallTable(call_table)
                             }

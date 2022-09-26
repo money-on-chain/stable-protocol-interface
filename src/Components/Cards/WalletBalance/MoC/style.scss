@@ -33,6 +33,8 @@
     font-size: 24px;
     font-weight: 600;
     color: #575756;
+    width: 90%;
+    margin-left: 10px;
   }
   .money-USD{
     position:relative;
@@ -44,6 +46,8 @@
     font-size: 14px;
     font-weight: 400;
     color: #878787;
+    width: 90%;
+    margin-left: 10px;
   }
 
   .TotalBalanceBottom {
@@ -190,7 +194,7 @@
 .PieChart{
   .piePiece{
       &.STABLE-MoC {
-          fill: $color-moc-stable; 
+          fill: $color-moc-stable;
       }
       &.STABLE-RDoC & {
         fill: $color-roc-stable;

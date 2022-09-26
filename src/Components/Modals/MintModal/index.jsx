@@ -141,8 +141,6 @@ export default function MintModal(props) {
       const userAllowance = await auth.getReserveAllowance(window.address);
       const userAllowanceNumber = new BigNumber(userAllowance);
       const valueYouExchangeNumber = new BigNumber(valueYouExchange);
-      console.log("User Allowance: ", userAllowanceNumber.toString())
-      console.log("Value Exchange: ", valueYouExchangeNumber.toString())
       if (valueYouExchangeNumber.gt(userAllowanceNumber)) {
         allowanceReserveModalShow(true);
         return;

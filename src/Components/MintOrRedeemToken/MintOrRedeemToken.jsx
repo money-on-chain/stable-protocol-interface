@@ -500,7 +500,7 @@ const MintOrRedeemToken = (props) => {
     );
   };
 
-  const [currencyCode, setCurrencyCode]=  useState('USDPrice');
+  const [currencyCode, setCurrencyCode]=  useState('USD');
   const renderFooter = () => {
     return (
       <div className="MintOrRedeemTokenFooter AlignedAndCentered">

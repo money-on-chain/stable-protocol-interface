@@ -31,6 +31,8 @@
     font-size: 24px;
     font-weight: 600;
     color: #575756;
+    width: 90%;
+    margin-left: 10px;
   }
   .money-USD{
     position:relative;
@@ -42,6 +44,8 @@
     font-size: 14px;
     font-weight: 400;
     color: #878787;
+    width: 90%;
+    margin-left: 10px;
   }
 
   .TotalBalanceBottom {
@@ -158,7 +162,7 @@
     margin-bottom: 0;
   }
   .RBTC_MAIN {
-    color: #808080;
+    color: white;
     margin-bottom: 0;
   }
 
@@ -188,13 +192,13 @@
 .PieChart{
   .piePiece{
       &.STABLE {
-          fill: $color-moc-stable;
+          fill: $color-roc-stable;
           .RDoC & {
               fill: $color-roc-stable;
           }
       }
       &.RISKPRO {
-          fill: $color-moc-riskpro;
+          fill: $color-roc-riskpro;
           .RDoC & {
               fill: $color-roc-riskpro;
           }
@@ -231,14 +235,14 @@
       text-align: center;
       @include primary-text(1em, white, 400);
       .STABLE {
-          color: $color-moc-stable;
+          color: $color-roc-stable;
           .RDoC & {
               color: $color-roc-stable;
           }
           font-weight: 700;
       }
       .RISKPRO {
-          color: $color-moc-riskpro;
+          color: $color-roc-riskpro;
           .RDoC & {
               color: $color-roc-riskpro;
           }
