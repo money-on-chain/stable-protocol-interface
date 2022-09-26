@@ -85,7 +85,6 @@ export default function ListOperations(props) {
                         });
                 } catch (error) {
                     console.error({ error });
-                    console.log(error);
                 }
             }, 500);
         }

@@ -448,7 +448,7 @@ export default function MintModal(props) {
               <span className={`Value ${appMode}`}>
                   {auth.isLoggedIn &&
                   <LargeNumber
-                      currencyCode={fee?.currencyCode}
+                      currencyCode="MOC"
                       amount={fee?.value}
                       includeCurrency
                       className="color-08374F"

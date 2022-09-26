@@ -34,8 +34,6 @@ const Table = ({ accountData }) => {
       setLoading(true);
       getDepositHistory(socket, address)
         .then(result => {
-          console.info('Got history');
-          console.info(result);
           setOperations(result);
           setLoading(false);
           return result;

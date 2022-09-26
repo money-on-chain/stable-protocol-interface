@@ -257,7 +257,6 @@ const MintOrRedeemToken = (props) => {
   }; */
 
   /* const callback = (error, transactionHash) => {
-    console.log(transactionHash);
     setCurrentHash(transactionHash);
   }; */
 

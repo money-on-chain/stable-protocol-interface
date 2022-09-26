@@ -170,9 +170,6 @@ class ListOperations extends React.Component {
             while (data.length > 0) {
                 data.pop();
             }
-            // console.log("1212");
-            // console.log(set_current);
-            // console.log("1212");
 
 
             /*******************************setear el json para manejar limit y skip***********************************/

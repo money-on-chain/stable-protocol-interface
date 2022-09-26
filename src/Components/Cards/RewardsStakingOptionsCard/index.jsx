@@ -131,12 +131,10 @@ export default function RewardsStakingOptions(props) {
     };
 
     const onValueStakingChange = (newValueStakingChange) => {
-        console.log('newValueStakingChange',newValueStakingChange);
         setStakingAmountInputValue(newValueStakingChange);
     };
 
     const onStakingInputValueChange = value => {
-        console.log('newValueStakingChange',value);
         setStakingAmountInputValue(value);
       };
 
@@ -145,7 +143,6 @@ export default function RewardsStakingOptions(props) {
       };
 
     const clickButtonStake = (amountInputValue) => {
-        console.log(amountInputValue);
         if (amountInputValue > 0) {
           setModalAmount(amountInputValue);
           setModalMode("staking");
