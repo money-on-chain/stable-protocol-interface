@@ -141,8 +141,6 @@ export default function MintModal(props) {
       const userAllowance = await auth.getReserveAllowance(window.address);
       const userAllowanceNumber = new BigNumber(userAllowance);
       const valueYouExchangeNumber = new BigNumber(valueYouExchange);
-      console.log("User Allowance: ", userAllowanceNumber.toString())
-      console.log("Value Exchange: ", valueYouExchangeNumber.toString())
       if (valueYouExchangeNumber.gt(userAllowanceNumber)) {
         allowanceReserveModalShow(true);
         return;
@@ -461,8 +459,8 @@ export default function MintModal(props) {
             </div>
           </div>
           { interests &&
-          interests?.interestValue &&
-          interests?.interestValue.gt(0) &&
+          new BigNumber(interests?.interestValue) &&
+          new BigNumber(interests?.interestValue).gt(0) &&
             <><div className="MOCFee mrb-0">
               <div className={`AlignedAndCentered Amount mrb-0 mrt-0`}>
                 <span className="Name color-08374F">{`${t('global.ConfirmTransactionModal_Interests')} (${interests?.interestRate}%)`}</span>

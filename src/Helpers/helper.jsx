@@ -504,22 +504,27 @@ export function getCoinName(coin){
         'RISKPRO':config.environment.tokens.RISKPRO.name,
         'RISKPROX':config.environment.tokens.RISKPROX.name,
         'RESERVE':config.environment.tokens.RESERVE.name,
-        'USDPrice':config.environment.tokens.USDPrice.name,
+        'USDPrice':'USD',
         'MOC':config.environment.tokens.MOC.name,
-        'USD':config.environment.tokens.USD.name,
+        'USD':'USD',
     }
 
     return currencies[coin]
 }
 
-export function getDecimals(coin){
+export function getDecimals(coin,AppProject){
     let decimals= {
+        'COINBASE':config.environment.tokens.COINBASE.decimals,
         'STABLE':config.environment.tokens.STABLE.decimals,
         'RISKPRO':config.environment.tokens.RISKPRO.decimals,
         'RISKPROX':config.environment.tokens.RISKPROX.decimals,
-        'USDPrice':config.environment.tokens.USDPrice.decimals,
+        'MOC':config.environment.tokens.MOC.decimals,
+        'USDPrice': (AppProject=='MoC')? 2 : 4,
         'RESERVE':config.environment.tokens.RESERVE.decimals,
         'USD':2,
+        'REWARD':config.environment.Precisions.REWARDPrecision.decimals,
+        'DOC':2,
+        'RISKPROXInterest':config.environment.Precisions.RISKPROXInterest.decimals
     }
 
     return decimals[coin]
@@ -529,7 +534,7 @@ export function getDecimals(coin){
 export function getSelectCoins(appMode){
     switch (appMode) {
         case 'RRC20':
-            return ['RISKPRO', 'STABLE']
+            return ['RISKPRO', 'STABLE', 'RESERVE']
         case 'MoC':
             return ['RISKPRO', 'STABLE', 'RESERVE']
         default:

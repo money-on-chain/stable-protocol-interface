@@ -90,8 +90,6 @@ function Reserve(props) {
         });
     }
 
-    console.log('balancesData', balancesData);
-
     const CustomTooltip = ({payload}) => {
         const data = payload && payload[0];
         if(!data) {
@@ -102,7 +100,7 @@ function Reserve(props) {
             <div>
             {data.payload.reserveValue.toFixed(6)} {t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
             </div>
-            <div className={`${data.payload.currencyCode}-${AppProject}`}>
+            <div className={`${data.payload.currencyCode}`}>
             {formatVisibleValue(data.payload.balance, data.payload.currencyCode, formatLocalMap2[i18n.languages[0]])}{' '}
             {t(`${AppProject}.Tokens_${data.payload.currencyCode}_code`, {ns: ns})}
             </div> </>
@@ -139,7 +137,7 @@ function Reserve(props) {
                                             paddingAngle={1}
                                             dataKey="reserveValue"
                                         >
-                                            {balancesData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`}/>)}
+                                            {balancesData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} className={`piePiece ${entry.currencyCode}`}/>)}
                                         </Pie>
                                         <TooltipRecharts content={<CustomTooltip />} />
                                     </PieChart>
