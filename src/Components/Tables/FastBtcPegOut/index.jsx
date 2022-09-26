@@ -51,7 +51,6 @@ export default function FastBtcPegOut(props) {
                     api('get', `${config.api.operations}` + 'webapp/fastbtc/pegout/', {address: accountData.Owner})
                         .then(response => {
                             setDataJson(response);
-                            console.log('dataJson', response);
                             setTotalTable(response.total)
                             if (call_table) {
                                 setCallTable(call_table)

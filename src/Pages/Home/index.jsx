@@ -84,7 +84,7 @@ function Home(props) {
                             page="/wallet/stable"
                             balance={docBalance}
                             labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
-                            currencyCode={(auth.getAppMode=='MoC')? 'USD': 'STABLE'}
+                            currencyCode={'STABLE'}
                         />
                         <TokenSummaryCard
                             tokenName="riskpro"

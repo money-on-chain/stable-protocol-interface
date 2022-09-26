@@ -54,7 +54,7 @@ const Table = ({ accountData }) => {
     };
   }, []);
 
-  
+
   const dateAddedSort = (a, b) => moment(a.dateAdded).diff(moment(b.dateAdded));
 
   const columns = [
@@ -166,7 +166,7 @@ const Table = ({ accountData }) => {
           columns={columns}
           rowKey={record => record.txHash}
           locale={locale}
-          dataSource={operations.length > 0 && 
+          dataSource={operations.length > 0 &&
             operations.map(result => {
               const item = result;
               item.step =

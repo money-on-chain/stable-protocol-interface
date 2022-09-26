@@ -34,7 +34,7 @@ function MOC(props) {
                 {!loading
                     ? <div>
                         <h5>{t(`${AppProject}.metrics.Moc.price`, { ns: ns })}</h5>
-                        <LargeNumber amount={props.mocPrice} currencyCode="MOCMetrics" tooltip="topLeft"/>
+                        <LargeNumber amount={props.mocPrice} currencyCode="USDPrice" tooltip="topLeft"/>
                     </div>
                 : <Skeleton active={true} />}
             </div>

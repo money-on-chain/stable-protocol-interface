@@ -26,12 +26,9 @@ const convertAmount2222 = (source, target, amount, convertToken) => {
       convertToken(source, target, formatValueToContract(amount, source)),
       target
   );
-  console.log('convertedAmount', convertedAmount);
+
   const replacedDot = convertedAmount.replace(/\./g, '');
-  console.log('replacedDot', replacedDot.replace(/\./g, ''))
   const replacedComma = replacedDot.replace(/,/g, '');
-  console.log('replacedComma', replacedComma)
-  console.log(isNaN(replacedComma))
   return isNaN(replacedComma) ? '' : replacedComma.toString();
   // console.log(isNaN(convertAmount));
   // return isNaN(convertedAmount) ? '' : convertedAmount.toString();
@@ -140,7 +137,7 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
     commissionRates = {}
   } = mocState || {};
   if(!convertToken) return {};
-  
+
   // const vendor = { address: "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076", markup: "500000000000000" };
   const vendor = config.vendor;
 

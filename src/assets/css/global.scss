@@ -74,6 +74,16 @@ a {
   &.RDoC-RISKPRO {
     color: $color-roc-riskpro;
   }
+  &.RDoC-STABLE {
+    color: $color-roc-stable;
+  }
+  &.RRC20-STABLE {
+    color: $color-roc-stable;
+  }
+  &.RRC20-RISKPROX {
+    color: $color-roc-riskprox;
+  }
+  //RISKPRO-RDoC
   &.Few {
     font-size: 15px;
     font-weight: 500;
@@ -596,10 +606,10 @@ a {
 //  border-radius: 0 0 0 0;
 //}
 
-.ant-modal-title, .ant-modal-close{
-  color: white;
-  text-align: center;
-}
+//.ant-modal-title, .ant-modal-close{
+//  color: white;
+//  text-align: center;
+//}
 
 .ant-modal-title{
   font-size: 19px;

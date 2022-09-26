@@ -20,6 +20,7 @@
 @import 'src/Components/Modals/MintModal/MoC/style';
 @import 'src/Components/Modals/RbtcToBtcGenerateModal/MoC/style';
 @import 'src/Components/Modals/StakingOptionsModal/MoC/style';
+@import 'src/Components/Modals/OperationStatusModal/MoC/style';
 @import 'src/Components/Page/HeaderCoins/MoC/style';
 @import 'src/Components/PerformanceChart/MoC/style';
 @import 'src/Components/PriceVariation/MoC/style';
@@ -55,4 +56,9 @@
 
 .ant-modal-content{
   border: 4px solid #08374F !important;
+}
+
+.ant-modal-title, .ant-modal-close{
+  color: white  !important;
+  text-align: center  !important;
 }

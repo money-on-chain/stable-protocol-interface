@@ -18,6 +18,19 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_EXPLORER_URL) DefaultConfig.explorerUrl = process.env.REACT_APP_EXPLORER_URL;
     if (process.env.REACT_APP_BTC_EXPLORER) DefaultConfig.btcExplorer = process.env.REACT_APP_BTC_EXPLORER;
     if (process.env.REACT_APP_CONTRACT_URL) DefaultConfig.contractUrl = process.env.REACT_APP_CONTRACT_URL;
+    if (process.env.REACT_APP_RISKPRO_NAME) DefaultConfig.environment.tokens.RISKPRO.name = process.env.REACT_APP_RISKPRO_NAME;
+    if (process.env.REACT_APP_RISKPRO_DECIMALS) DefaultConfig.environment.tokens.RISKPRO.decimals = process.env.REACT_APP_RISKPRO_DECIMALS;
+    if (process.env.REACT_APP_RISKPROX_NAME) DefaultConfig.environment.tokens.RISKPROX.name = process.env.REACT_APP_RISKPROX_NAME;
+    if (process.env.REACT_APP_RISKPROX_DECIMALS) DefaultConfig.environment.tokens.RISKPROX.decimals = process.env.REACT_APP_RISKPROX_DECIMALS;
+    if (process.env.REACT_APP_MOC_NAME) DefaultConfig.environment.tokens.MOC.name = process.env.REACT_APP_MOC_NAME;
+    if (process.env.REACT_APP_MOC_DECIMALS) DefaultConfig.environment.tokens.MOC.decimals = process.env.REACT_APP_MOC_DECIMALS;
+    if (process.env.REACT_APP_RESERVE_NAME) DefaultConfig.environment.tokens.RESERVE.name = process.env.REACT_APP_RESERVE_NAME;
+    if (process.env.REACT_APP_RESERVE_DECIMALS) DefaultConfig.environment.tokens.RESERVE.decimals = process.env.REACT_APP_RESERVE_DECIMALS;
+    if (process.env.REACT_APP_COINBASE_NAME) DefaultConfig.environment.tokens.COINBASE.name = process.env.REACT_APP_COINBASE_NAME;
+    if (process.env.REACT_APP_COINBASE_DECIMALS) DefaultConfig.environment.tokens.COINBASE.decimals = process.env.REACT_APP_COINBASE_DECIMALS;
+    if (process.env.REACT_APP_STABLE_DECIMALS) DefaultConfig.environment.tokens.STABLE.decimals = process.env.REACT_APP_STABLE_DECIMALS;
+    if (process.env.REACT_APP_REWARDPRECISION_DECIMALS) DefaultConfig.environment.Precisions.REWARDPrecision.decimals = process.env.REACT_APP_REWARDPRECISION_DECIMALS;
+    if (process.env.REACT_APP_RISKPROXINTEREST_DECIMALS) DefaultConfig.environment.Precisions.RISKPROXInterest.decimals = process.env.REACT_APP_RISKPROXINTEREST_DECIMALS;
 
     return DefaultConfig
 }

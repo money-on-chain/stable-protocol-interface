@@ -14,7 +14,7 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
 
   const [t, i18n]= useTranslation(["global",'moc','rdoc']);
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
-    const { value, decimals } = adjustPrecision(amount, currencyCode);
+    const { value, decimals } = adjustPrecision(amount, currencyCode,AppProject);
     const params = Object.assign(
       {
           commafy: true,
@@ -38,8 +38,8 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
               <div className={className}>
                   {/* <NumericLabel {... {params }}>{amount?.toString()}</NumericLabel> */}
                   <NumericLabel {... {params }}>{value.toString()}</NumericLabel>
-                  <span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>
-                  {/*<span className={'number-label'}>{includeCurrency && ` ${getCoinName(currencyCode)}`}</span>*/}
+                  {/*<span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>*/}
+                  <span className={'number-label'}>{includeCurrency && ` ${getCoinName(currencyCode)}`}</span>
               </div>
           </Tooltip>}</>
   );
@@ -97,7 +97,6 @@ const USDValueLargeNumber = ({amountUSD, showUSD, numericLabelParams}) => {
 }
 
 const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive, showSign, showUSD, amountUSD, numericLabelParams, infoDescription, showFlat,t, i18n  }) => {
-    
     if (currencyCode == 'RBTC') {
         var displayCurrencyCode = 'RBTC';
         currencyCode = 'RESERVE';
@@ -106,7 +105,7 @@ const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive,
     }
 
     if (amount !== null && amount !== '' && !Number.isNaN(Number(amount))) {
-        const { value, decimals } = adjustPrecision(amount, currencyCode);
+        const { value, decimals } = adjustPrecision(amount, currencyCode,AppProject);
         const params = Object.assign(
             {
                 shortFormat: true,

@@ -118,7 +118,8 @@ export default function SendModal(props) {
     // setAddress(amountToSend)
     // setAddress(address)
     const methodTransferTo = getMethodTransferTo();
-    const isCheckSumAddress = (address === undefined) ? false : helper.isValidAddressChecksum(address);
+    //const isCheckSumAddress = (address === undefined) ? false : helper.isValidAddressChecksum(address);
+    const isCheckSumAddress = true
     if (isCheckSumAddress) {
       if (isAmountOverMaxAllowed(amountToSend, getMaxToSend(), tokenToSend)) {
         showAlertAmountMessage(maxExceededRetries + 1);

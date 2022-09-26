@@ -6,6 +6,7 @@ import {useTranslation} from "react-i18next";
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { formatLocalMap2 } from '../../Lib/Formats';
 import { config } from './../../Config/config';
+import {getCoinName} from "../../Helpers/helper";
 
 const LargeNumberF2 = ({ amount, currencyCode, includeCurrency, numericLabelParams, className, auth }) => {
 
@@ -34,7 +35,7 @@ const LargeNumberF2 = ({ amount, currencyCode, includeCurrency, numericLabelPara
           <Tooltip placement="topLeft" title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
               <div className={className} style={{'display':'flex'}}>
                   <NumericLabel style={{'flexGrow':'0'}} {... {params }}>{value.toString()}</NumericLabel>
-                  <span className={`number-label ${auth.getAppMode}-${currencyCode}`} style={{'flexGrow':'1'}}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>
+                  <span className={`number-label ${auth.getAppMode}-${currencyCode}`} style={{'flexGrow':'1'}}>{includeCurrency && ` ${getCoinName(currencyCode)}`}</span>
               </div>
           </Tooltip>}</>
   );

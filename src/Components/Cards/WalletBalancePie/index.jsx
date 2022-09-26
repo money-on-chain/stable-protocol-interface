@@ -6,10 +6,11 @@ import {useTranslation} from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
 import web3 from 'web3';
 import { config } from './../../../Config/config';
+import {getDecimals} from "../../../Helpers/helper";
 
 const BigNumber = require('bignumber.js');
 const AppProject = config.environment.AppProject;
-const COLORS = AppProject === 'MoC' ? ['#00a651','#ef8a13'] : ['#68cdc6','#808080'];
+const COLORS = AppProject === 'MoC' ? ['#00a651','#ef8a13'] : ['#808080','#0062b7','green','#808080'];
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -99,20 +100,32 @@ function WalletBalancePie(props) {
     };
 
     const getBalance = () => {
-
-        console.log(auth.userBalanceData, accountData.Balance);
         if (auth.userBalanceData && accountData.Balance) {
+
             const rbtc_main= (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
+
             const doc= ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4)
+
             const bpro= (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
+
             const btc= Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))
-            return new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) )).toFixed(6)
+            console.log(new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) )).toFixed(6))
+                        console.log('000000000000000000000000000000000iiiiiiiiiiiiiiiiiiiiiiiiii')
+            console.log(getDecimals("RESERVE",AppProject))
+            console.log(AppProject)
+            console.log('000000000000000000000000000000000iiiiiiiiiiiiiiiiiiiiiiiiii')
+            return new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) )).toFixed(Number(getDecimals("RESERVE",AppProject)))
         }else{
             return (0).toFixed(6)
         }
     };
 
     const getPie = () => {
+        console.log('ddddddddddddddd00000000')
+        console.log(auth.userBalanceData)
+        console.log(accountData)
+        console.log(accountData.Balance)
+        console.log('ddddddddddddddd********')
         if (auth.userBalanceData && accountData.Balance) {
             const data = [
                 {
@@ -126,7 +139,7 @@ function WalletBalancePie(props) {
                     name: 'Group B',
                     value: Number(((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
                     set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed(6) +' '+ t(`${AppProject}.Tokens_RISKPRO_code`, {ns: ns}), class: 'RISKPRO'
+                    set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed((AppProject === 'MoC')? 6 : 2) +' '+ t(`${AppProject}.Tokens_RISKPRO_code`, {ns: ns}), class: 'RISKPRO'
                 },
                 {
                     name: 'Group C',
@@ -146,14 +159,17 @@ function WalletBalancePie(props) {
                         maximumFractionDigits: 6
                     })+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
                     set2: (Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                        minimumFractionDigits: 6,
-                        maximumFractionDigits: 6
+                        minimumFractionDigits: (AppProject === 'MoC')? 6 : 2,
+                        maximumFractionDigits: (AppProject === 'MoC')? 6 : 2
                     })+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
                     class: 'RBTC_MAIN'
                 }
 
             ];
 
+            console.log('data------------')
+            console.log(data)
+            console.log('data------------')
             return data;
         }
         else{
@@ -185,7 +201,10 @@ function WalletBalancePie(props) {
                 </PieChart>
             </ResponsiveContainer>
             <span className={'money-RBTC'}>
-                <LargeNumber {...{ amount: web3.utils.toWei(getBalance(), 'ether'), currencyCode: 'RESERVE', includeCurrency: true}} />
+                {AppProject == 'MoC' &&
+                    <LargeNumber {...{ amount: web3.utils.toWei(getBalance(), 'ether'), currencyCode: 'RESERVE', includeCurrency: true}} />
+                }
+                {AppProject != 'MoC' && <LargeNumber {...{ amount: getBalance()*1000000000000000000, currencyCode: 'RESERVE', includeCurrency: true}} />}
             </span>
             <span className={'money-USD'}>{getBalanceUSD()} USD</span>
         </div>
