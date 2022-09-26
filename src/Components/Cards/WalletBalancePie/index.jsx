@@ -46,8 +46,8 @@ function WalletBalancePie(props) {
         if (auth.userBalanceData && accountData.Balance) {
             // const moc_balance= (Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4);
             // const moc_balance_usd= Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)
-            const moc_balance= (Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000)/auth.contractStatusData.bitcoinPrice).toFixed(6);
-            const moc_balance_usd= Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000)
+            const moc_balance= (Number(new BigNumber(AppProject === 'MoC' ? auth.userBalanceData['mocBalance'] : auth.userBalanceData['rbtcBalance']).c[0]/10000)/auth.contractStatusData.bitcoinPrice).toFixed(6);
+            const moc_balance_usd= Number(new BigNumber(AppProject === 'MoC' ? auth.userBalanceData['mocBalance'] : auth.userBalanceData['rbtcBalance']).c[0]/10000)
             return {'normal':moc_balance,'usd':moc_balance_usd}
         }
     };
@@ -99,6 +99,8 @@ function WalletBalancePie(props) {
     };
 
     const getBalance = () => {
+
+        console.log(auth.userBalanceData, accountData.Balance);
         if (auth.userBalanceData && accountData.Balance) {
             const rbtc_main= (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
             const doc= ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4)

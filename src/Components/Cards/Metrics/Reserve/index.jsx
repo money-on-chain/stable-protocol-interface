@@ -10,7 +10,7 @@ import BigNumber from 'bignumber.js';
 import { config } from '../../../../Config/config';
 
 const AppProject = config.environment.AppProject;
-const COLORS = AppProject === 'MoC' ? ['#00a651','#ef8a13'] : ['#0083ff','#0061bb'];
+const COLORS = AppProject !== 'MoC' ? ['#0083ff', '#0061bb'] :['#00a651','#ef8a13'];
 
 function Reserve(props) {
     const auth = useContext(AuthenticateContext);
@@ -134,7 +134,7 @@ function Reserve(props) {
                                             data={balancesData}
                                             innerRadius={40}
                                             outerRadius={90}
-                                            fill="#8884d8"
+                                            fill={['#fff']}
                                             paddingAngle={1}
                                             dataKey="reserveValue"
                                         >
