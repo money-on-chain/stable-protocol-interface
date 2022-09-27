@@ -108,12 +108,12 @@ function SystemStatus(props) {
 
         const coverageIsGreaterOrEqualThan = (numberInEther) => new BigNumber(coverage).gte(formatValueToContract(numberInEther, "COV"));
 
-        if (coverageIsGreaterOrEqualThan(4)) {
-            console.log(coverageIsGreaterOrEqualThan(4))
+        if (coverageIsGreaterOrEqualThan(config.globalCoverage.ok)) {
+            console.log(coverageIsGreaterOrEqualThan(config.globalCoverage.ok))
             return configStatusGreen;
-        } else if (coverageIsGreaterOrEqualThan(2)) {
+        } else if (coverageIsGreaterOrEqualThan(config.globalCoverage.warning)) {
             return configStatusYellow;
-        } else if (coverageIsGreaterOrEqualThan(1.5)) {
+        } else if (coverageIsGreaterOrEqualThan(config.globalCoverage.dangerous)) {
             return configStatusOrange;
         } else {
             return configStatusRed;
