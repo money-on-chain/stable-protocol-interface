@@ -10,7 +10,7 @@ export const priceCommonFields = {
   mocPrice: { type: String }
 };
   
-  export const getPriceFields = () =>
+export const getPriceFields = () =>
   Object.keys(priceCommonFields).reduce((accum, key) => {
     const result = { ...accum };
     result[key] = 1;

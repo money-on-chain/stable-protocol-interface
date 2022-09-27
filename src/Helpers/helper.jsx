@@ -1,5 +1,4 @@
 /* eslint-disable default-case */
-import web3 from "web3";
 import {config} from '../Config/config';
 import Web3 from "web3";
 import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber";
@@ -22,11 +21,11 @@ export function setNumber(number){
 export function getDatasMetrics(auth,i18n=null){
     if (auth.userBalanceData) {
         if (auth.userBalanceData) {
-            const globalCoverage= Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
-            const globalCoverageTooltip = Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether'));
+            const globalCoverage= Number(Web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
+            const globalCoverageTooltip = Number(Web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether'));
             const globalCoverageClean= Number(auth.contractStatusData['globalCoverage']).toFixed(4)
 
-            let btcx_x2Leverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage']), 'ether')).toFixed(6);
+            let btcx_x2Leverage= parseFloat(Web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage']), 'ether')).toFixed(6);
             if(i18n!=null){
                 btcx_x2Leverage= setToLocaleString(parseFloat(Web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage'])), 'ether'),4,i18n)
             }
@@ -456,9 +455,9 @@ const StatusReward = ({ state, result }) => {
 
 export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro, end_block_dt){
     if (!daily_moc) return {toGetToday: 0.0, toGetNow: 0.0, time_left: 0}
-    const set_daily_moc= new BigNumber(web3.utils.fromWei(daily_moc.toString()))
-    const set_user_balance_bproBalance= new BigNumber(web3.utils.fromWei(user_balance_bproBalance.toString()))
-    const set_total_bpro= new BigNumber(web3.utils.fromWei(total_bpro.toString()))
+    const set_daily_moc= new BigNumber(Web3.utils.fromWei(daily_moc.toString()))
+    const set_user_balance_bproBalance= new BigNumber(Web3.utils.fromWei(user_balance_bproBalance.toString()))
+    const set_total_bpro= new BigNumber(Web3.utils.fromWei(total_bpro.toString()))
 
     let start = new Date(end_block_dt);
     let now = new Date();
@@ -479,15 +478,15 @@ export function getUSD(coin,value,auth,i18n=null){
     if (auth.contractStatusData) {
         switch (coin) {
             case 'STABLE':
-                return  setToLocaleString(new BigNumber(1 * web3.utils.fromWei(setNumber(value))),2,i18n)
+                return  setToLocaleString(new BigNumber(1 * Web3.utils.fromWei(setNumber(value))),2,i18n)
             case 'RISKPRO':
-                return  setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * web3.utils.fromWei(setNumber(value))),2,i18n)
+                return  setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * Web3.utils.fromWei(setNumber(value))),2,i18n)
             case 'MOC':
-                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['mocPrice']) * web3.utils.fromWei(setNumber(value))),2,i18n)
+                return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData['mocPrice']) * Web3.utils.fromWei(setNumber(value))),2,i18n)
             case 'RESERVE':
-                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * web3.utils.fromWei(setNumber(value))),2,i18n)
+                return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * Web3.utils.fromWei(setNumber(value))),2,i18n)
             case 'RISKPROX':
-                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice, 'ether') * web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'], 'ether') * web3.utils.fromWei(setNumber(value))),2,i18n)
+                return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice, 'ether') * Web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'], 'ether') * Web3.utils.fromWei(setNumber(value))),2,i18n)
 
         }
     }else{
