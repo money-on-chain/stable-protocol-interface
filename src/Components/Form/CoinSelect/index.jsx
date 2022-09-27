@@ -9,7 +9,7 @@ import {
 } from '../../../Lib/Formats';
 import { Row, Col, Button, Tooltip } from 'antd';
 import { Select, Input } from 'antd';
-import { currencies as currenciesDetail } from '../../../Config/currentcy';
+import { currencies as currenciesDetail } from '../../../Config/currency';
 import { useTranslation } from "react-i18next";
 const BigNumber = require('bignumber.js');
 const { Option } = Select;

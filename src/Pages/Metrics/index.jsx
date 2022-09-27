@@ -11,7 +11,7 @@ import BigNumber from 'bignumber.js';
 import {Row, Col, Tooltip, Alert} from 'antd';
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../Context/Auth';
-import { getMaxAvailableOfCurrencyCode } from '../../Config/currentcy';
+import { getMaxAvailableOfCurrencyCode } from '../../Config/currency';
 
 function Metrics(props) {
 

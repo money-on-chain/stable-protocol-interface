@@ -14,7 +14,7 @@ import {
     formatValueWithContractPrecision,
 } from '../../../Lib/Formats';
 import Copy from "../../Page/Copy";
-import { currencies as currenciesDetail } from '../../../Config/currentcy';
+import { currencies as currenciesDetail } from '../../../Config/currency';
 import { LargeNumber } from '../../LargeNumber';
 import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";

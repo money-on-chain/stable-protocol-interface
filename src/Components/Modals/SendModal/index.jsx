@@ -8,7 +8,7 @@ import { Row, Col, Modal, Button } from 'antd';
 import CoinSelect from "../../Form/CoinSelect";
 import InputAddress from "../../InputAddress";
 import InputWithCurrencySelector from "../../Form/InputWithCurrencySelector";
-import { getBalanceAndTransferMethodOfTokenToSend } from '../../../Config/currentcy';
+import { getBalanceAndTransferMethodOfTokenToSend } from '../../../Config/currency';
 import { useTranslation } from "react-i18next";
 import addressHelper from '../../../Lib/addressHelper';
 import { toBigNumber } from "../../../Lib/numberHelper";

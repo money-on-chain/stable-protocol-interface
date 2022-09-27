@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticateContext } from '../../../Context/Auth';
-import { currencies as currenciesDetail, getCurrencyDetail } from '../../../Config/currentcy';
+import { currencies as currenciesDetail, getCurrencyDetail } from '../../../Config/currency';
 import { LargeNumber } from "../../LargeNumber";
 import { useTranslation } from "react-i18next";
 import InformationModal from '../../Modals/InformationModal';
