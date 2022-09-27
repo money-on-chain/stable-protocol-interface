@@ -4,6 +4,8 @@
     "markup": ""
   },
   "chainId": 31,
+  "forceChecksumAddressInput": true,
+  "forceRskIp60Addresses": true,
   "api": {
     "operations": "",
     "incentives": ""

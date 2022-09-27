@@ -1,6 +1,7 @@
 const rskUtils = require('rskjs-util');
+import {config} from "../Config/config";
 
-const { forceChecksumAddressInput, forceRskIp60Addresses, chainId } = Meteor.settings.public;
+const { forceChecksumAddressInput, forceRskIp60Addresses, chainId } = config;
 
 const toWeb3CheckSumAddress = web3 => address => {
   return web3.utils.toChecksumAddress(address);
