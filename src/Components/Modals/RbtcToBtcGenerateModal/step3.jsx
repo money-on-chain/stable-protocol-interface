@@ -6,7 +6,7 @@ import FastBtcBridge from "../../../Contracts/coinbase/FastBtcBridge.json";
 import { toContract } from '../../../Lib/numberHelper';
 import Copy from "../../Page/Copy";
 import { config } from '../../../Config/config';
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 
 export default function Step3(props) {

@@ -7,8 +7,7 @@ import SystemOperations from "./operations";
 import { useTranslation } from "react-i18next";
 import { Skeleton, Tooltip } from 'antd';
 import {config} from '../../../../Config/config';
-
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 function SystemStatus(props) {
 

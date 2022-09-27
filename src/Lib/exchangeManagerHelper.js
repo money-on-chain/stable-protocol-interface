@@ -7,7 +7,7 @@ import { toBigNumber, minimum } from './numberHelper';
 import { getTransactionType } from './exchangeHelper';
 import { config } from '../Config/config';
 
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 const RBTCPrecision = config.environment.Precisions.RBTCPrecision;
 
 const convertAmount2222 = (source, target, amount, convertToken) => {

@@ -17,8 +17,7 @@ import { AuthenticateContext } from "../../../Context/Auth";
 import AlertLabel from "../../AlertLabel/AlertLabel";
 import Copy from "../../Page/Copy";
 import { config } from './../../../Config/config';
-
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 export default function SendModal(props) {
   const { token = '', tokensToSend, userState, view } = props;

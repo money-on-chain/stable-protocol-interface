@@ -13,6 +13,7 @@ import RowDetailPegOut from "./RowDetailPegOut";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import api from "../../../services/api";
 import {config} from "../../../Config/config";
+import BigNumber from "bignumber.js";
 
 export default function FastBtcPegOut(props) {
 
@@ -32,7 +33,6 @@ export default function FastBtcPegOut(props) {
 
     const [yScroll, setYScroll] = useState(undefined);
     const [xScroll, setXScroll] = useState(undefined);
-    const BigNumber = require('bignumber.js');
 
     const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);

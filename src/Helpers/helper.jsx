@@ -4,7 +4,7 @@ import Web3 from "web3";
 import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber";
 import moment from 'moment';
 import {formatLocalMap2} from "../Lib/Formats";
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
 const AppProject = config.environment.AppProject;
 

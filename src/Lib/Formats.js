@@ -1,6 +1,6 @@
 import { config } from '../Config/config';
 import {getDecimals} from "../Helpers/helper";
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 const precisions = config.environment.Precisions;
 
 const formatLocalMap = {

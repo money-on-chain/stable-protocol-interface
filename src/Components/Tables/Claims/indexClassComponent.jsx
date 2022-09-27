@@ -11,6 +11,7 @@ import Copy from "../../Page/Copy";
 import {useTranslation} from "react-i18next";
 import {AuthenticateContext} from "../../../Context/Auth";
 import { config } from './../../../Config/config';
+import BigNumber from "bignumber.js";
 
 
 const columns = [
@@ -48,7 +49,6 @@ const expandable = { expandedRowRender: record => <p>{record.description}</p> };
 const title = () => 'Here is title';
 const showHeader = true;
 const pagination = { position: 'bottom' };
-const BigNumber = require('bignumber.js');
 const [t, i18n]= useTranslation(["global",,'rdoc']);
 const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
 const AppProject = config.environment.AppProject;

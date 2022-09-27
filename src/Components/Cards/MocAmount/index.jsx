@@ -6,8 +6,7 @@ import {Skeleton, Tooltip} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import InformationModal from '../../Modals/InformationModal';
 import BalanceItemCard from "../BalanceItemCard/BalanceItemCard";
-
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 function MocAmount() {
 

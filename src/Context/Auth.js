@@ -21,10 +21,9 @@ import { decodeEvents } from '../Lib/integration/transaction';
 import { transferStableTo, transferRiskProTo, transferMocTo,transferRBTCTo, calcMintInterest, approveMoCTokenCommission } from '../Lib/integration/interfaces-base';
 import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unStake, delayMachineWithdraw, delayMachineCancelWithdraw, approveMoCTokenStaking, getMoCAllowance } from '../Lib/integration/interfaces-omoc';
 import { getGasPrice } from '../Lib/integration/utils';
-
+import BigNumber from "bignumber.js";
 //import createNodeManager from '../Lib/nodeManagerFactory';
 
-const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
 
 BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });

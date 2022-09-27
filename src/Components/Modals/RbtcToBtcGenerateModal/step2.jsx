@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import { AuthenticateContext } from '../../../Context/Auth';
 import React, {Fragment, useContext, useState,useRef} from "react";
 import Step3 from "./step3";
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 
 function Step2(props) {

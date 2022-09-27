@@ -12,7 +12,7 @@ import InformationModal from '../../Modals/InformationModal';
 import {getCoinName, setToLocaleString} from "../../../Helpers/helper";
 import { config } from "../../../Config/config";
 
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 const styleCentered = {
     display: 'flex',

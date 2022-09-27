@@ -46,7 +46,7 @@ const expandable = { expandedRowRender: record => <p>{record.description}</p> };
 const title = () => 'Here is title';
 const showHeader = true;
 const pagination = { position: 'bottom' };
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 const [t, i18n]= useTranslation(["global",'moc']);
 const AppProject = config.environment.AppProject;
 

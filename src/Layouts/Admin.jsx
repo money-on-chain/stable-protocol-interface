@@ -10,7 +10,7 @@ import { formatVisibleValue } from '../Lib/Formats';
 import HeaderCoins from "../Components/Page/HeaderCoins";
 import { useTranslation } from "react-i18next";
 import { config } from '../Config/config';
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 

@@ -8,7 +8,7 @@ import web3 from 'web3';
 import { config } from './../../../Config/config';
 import {getDecimals} from "../../../Helpers/helper";
 
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 const AppProject = config.environment.AppProject;
 const COLORS = AppProject === 'MoC' ? ['#00a651','#ef8a13'] : ['#808080','#0062b7','green','#808080'];
 

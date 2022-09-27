@@ -11,7 +11,7 @@ import { Row, Col, Button, Tooltip } from 'antd';
 import { Select, Input } from 'antd';
 import { currencies as currenciesDetail } from '../../../Config/currency';
 import { useTranslation } from "react-i18next";
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 const { Option } = Select;
 
 export default function CoinSelect(props) {

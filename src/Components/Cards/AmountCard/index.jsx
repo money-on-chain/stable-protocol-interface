@@ -10,7 +10,7 @@ import BalanceItem from '../../BalanceItem/BalanceItem';
 import InformationModal from '../../Modals/InformationModal';
 import { formatLocalMap2 } from '../../../Lib/Formats';
 import { config } from './../../../Config/config';
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 export default function AmountCard(props) {
 

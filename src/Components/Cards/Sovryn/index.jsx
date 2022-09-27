@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { useTranslation } from "react-i18next";
 import { config} from '../../../Config/config';
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 export default function Sovryn(props) {
     const {
