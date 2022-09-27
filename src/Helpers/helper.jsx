@@ -20,7 +20,6 @@ export function setNumber(number){
 }
 
 export function getDatasMetrics(auth,i18n=null){
-    const coin_usd= config.coin_usd
     if (auth.userBalanceData) {
         if (auth.userBalanceData) {
             const globalCoverage= Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)

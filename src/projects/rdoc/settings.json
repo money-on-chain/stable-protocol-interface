@@ -1,14 +1,14 @@
 {
   "vendor": {
-    "address": "0xdda74880d638451e6d2c8d3fc19987526a7af730",
-    "markup": "500000000000000"
+    "address": "",
+    "markup": ""
   },
   "chainId": 31,
   "api": {
-    "operations": "https://api-operations-alpha-testnet.moneyonchain.com/api/v1/",
-    "incentives": "https://moc-incentives-alpha.moneyonchain.com/"
+    "operations": "",
+    "incentives": ""
   },
-  "minimumUserBalanceToOperate": "120000000000000",
+  "minimumUserBalanceToOperate": "0",
   "transfer": [
     {
       "address": "0xA066d6e20e122deB1139FA3Ae3e96d04578c67B5",
@@ -16,7 +16,7 @@
     }
   ],
   "globalCoverage": {
-    "ok": 4,
+    "ok": 5.5,
     "warning": 2,
     "dangerous": 1.5
   },
@@ -24,40 +24,49 @@
     "url": "https://testnet.manager.rns.rifos.org",
     "address": "0x7d284aaac6e925aad802a53c0c69efe3764597b8"
   },
-  "explorerUrl": "https://explorer.testnet.rsk.co",
-  "btcExplorer": "https://live.blockcypher.com/btc-testnet",
-  "contractUrl":"https://github.com/money-on-chain/main-RBTC-contract",
+  "explorerUrl": "",
+  "btcExplorer": "",
+  "contractUrl": "https://github.com/money-on-chain/RDOC-Contract",
   "environment": {
-    "AppMode": "MoC",
-    "AppProject": "MoC",
-    "MoC": "0x01AD6f8E884ed4DDC089fA3efC075E9ba45C9039",
-    "Multicall2": "0xaf7be1ef9537018feda5397d9e3bb9a1e4e27ac8",
-    "IRegistry": "0x2c4b59ede1998229a9509ec7d15d206e91a246f1",
-    "fastBtcBridgeAddress": "0x10C848e9495a32acA95F6c23C92eCA2b2bE9903A",
+    "AppMode": "RRC20",
+    "AppProject": "RDoC",
+    "MoC": "",
+    "Multicall2": "",
+    "BProToken": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
+    "IRegistry": "",
+    "fastBtcBridgeAddress": "",
     "tokens": {
       "COINBASE": {
-          "name": "RBTC",
-          "decimals": "6"
+        "name": "RBTC",
+        "decimals": "6"
       },
       "RESERVE": {
-          "name": "RBTC",
-          "decimals": "6"
+        "name": "RIF",
+        "decimals": "2"
       },
       "STABLE": {
-          "name": "DOC",
-          "decimals": "2"
+        "name": "RDOC",
+        "decimals": "2"
       },
       "RISKPRO": {
-          "name": "BPRO",
-          "decimals": "6"
+        "name": "RIFP",
+        "decimals": "2"
       },
       "RISKPROX": {
-          "name": "BTCX",
-          "decimals": "6"
+        "name": "RIFX",
+        "decimals": "2"
       },
       "MOC": {
-          "name": "MOC",
-          "decimals": "2"
+        "name": "MOC",
+        "decimals": "2"
+      },
+      "USDPrice": {
+        "name": "USD",
+        "decimals": "4"
+      },
+      "USD": {
+        "name": "USD",
+        "decimals": "2"
       }
     },
     "Precisions": {
@@ -110,6 +119,5 @@
         "decimals": 2
       }
     }
-  },
-  "coin_usd": 48275.86
+  }
 }

@@ -18,12 +18,12 @@ console.log(`Starting app version: ${process.env.REACT_APP_VERSION}`);
 async function loadTranslations() {
     try {
         const strmoc= config.environment.AppProject
-        let moc_es= await import('./translations/'+strmoc+'/es/moc.json');
-        let moc_en= await import('./translations/'+strmoc+'/en/moc.json');
-        let rdoc_es = await import ('./translations/'+strmoc+'/es/moc.json')
-        let rdoc_en = await import ('./translations/'+strmoc+'/en/moc.json')
-        let global_es= await import('./translations/global-es.json')
-        let global_en= await import('./translations/global-en.json')
+        let moc_es= await import('./projects/'+strmoc.toLowerCase()+'/es/moc.json');
+        let moc_en= await import('./projects/'+strmoc.toLowerCase()+'/en/moc.json');
+        let rdoc_es = await import ('./projects/'+strmoc.toLowerCase()+'/es/moc.json')
+        let rdoc_en = await import ('./projects/'+strmoc.toLowerCase()+'/en/moc.json')
+        let global_es= await import('./projects/global-es.json')
+        let global_en= await import('./projects/global-en.json')
 
         let css1= await import('./assets/css/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
 
