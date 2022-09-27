@@ -18,6 +18,8 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_VENDOR_MARKUP) projSettings.vendor.markup = process.env.REACT_APP_VENDOR_MARKUP;
     if (process.env.REACT_APP_EXPLORER_URL) projSettings.explorerUrl = process.env.REACT_APP_EXPLORER_URL;
     if (process.env.REACT_APP_BTC_EXPLORER) projSettings.btcExplorer = process.env.REACT_APP_BTC_EXPLORER;
+    if (process.env.REACT_APP_RNS_ADDRESS) projSettings.rns.address = process.env.REACT_APP_RNS_ADDRESS;
+    if (process.env.REACT_APP_RNS_URL) projSettings.rns.url = process.env.REACT_APP_RNS_URL;
 
     return projSettings
 }
