@@ -21,7 +21,6 @@ import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";
 import { config } from '../../../Config/config';
-import web3 from "web3";
 import {setNumber} from "../../../Helpers/helper";
 import Web3 from "web3";
 
@@ -288,7 +287,7 @@ export default function MintModal(props) {
       'RESERVE'
     );
     if( fee.enoughMOCBalance==true ){
-      userAmount= userAmount - window.web3.utils.fromWei(((fee.percentage)*100).toString(), 'ether')
+      userAmount= userAmount - Web3.utils.fromWei(((fee.percentage)*100).toString(), 'ether')
     }
     const userToleranceFormat = new BigNumber(userTolerance).toFixed();
     //exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))

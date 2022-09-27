@@ -383,8 +383,6 @@ const AuthenticateProvider = ({ children }) => {
 
     }
 
-    window.updateMulticall = loadContractsStatusAndUserBalance;
-
     const loadAccountData = async () => {
         const owner = await getAccount();
         const truncate_address =
