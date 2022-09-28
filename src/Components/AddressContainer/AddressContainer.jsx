@@ -9,8 +9,6 @@ import { config } from './../../Config/config';
 const AddressContainer = ({ address, accountData, view }) => {
 
     const auth = useContext(AuthenticateContext);
-    let addressToShow = '0x0000000000000000000000000000000';
-    if (address) addressToShow = auth.toCheckSumAddress(address);
     const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
     const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
     const AppProject = config.environment.AppProject;

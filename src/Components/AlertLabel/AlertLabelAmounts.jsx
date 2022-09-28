@@ -1,5 +1,4 @@
 import React from 'react';
-import { TAPi18n } from 'meteor/tap:i18n';
 import './_style.scss';
 
 import { t } from '../../../../api/helpers/i18nHelper'
