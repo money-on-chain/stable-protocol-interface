@@ -19,7 +19,7 @@ const CustomTooltip = ({ active, payload, label }) => {
                 {/*<p className="label">{`${label} : ${payload[0].value}`}</p>*/}
                 {/*<p className="intro">{getIntroOfPage(label)}</p>*/}
                 <p className="value-1" style={{ fontSize: 14 }}>{`${payload[0].payload.set1}`}</p>
-                <p className={`${payload[0].payload.class}`} style={{ fontSize: 14 }}>{`${payload[0].payload.set2}`}</p>
+                <p className={`${payload[0].payload.class}-${AppProject}`} style={{ fontSize: 14 }}>{`${payload[0].payload.set2}`}</p>
             </div>
         );
     }
@@ -109,6 +109,8 @@ function WalletBalancePie(props) {
             const bpro= (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
 
             const btc= Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))
+            console.log(auth.userBalanceData);
+            console.log(rbtc_main, doc, bpro, btc);
             console.log(new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) )).toFixed(6))
                         console.log('000000000000000000000000000000000iiiiiiiiiiiiiiiiiiiiiiiiii')
             console.log(getDecimals("RESERVE",AppProject))
@@ -139,7 +141,8 @@ function WalletBalancePie(props) {
                     name: 'Group B',
                     value: Number(((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
                     set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed((AppProject === 'MoC')? 6 : 2) +' '+ t(`${AppProject}.Tokens_RISKPRO_code`, {ns: ns}), class: 'RISKPRO'
+                    set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed((AppProject === 'MoC')? 6 : 2) +' '+ t(`${AppProject}.Tokens_RISKPRO_code`, {ns: ns}),
+                    class: 'RISKPRO'
                 },
                 {
                     name: 'Group C',
@@ -148,7 +151,7 @@ function WalletBalancePie(props) {
                     set2: (set_moc_balance_usd()['usd']).toLocaleString(formatLocalMap2[i18n.languages[0]], {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
-                    }) +' '+ t(`${AppProject}.Tokens_MOC_code`, {ns: ns}),
+                    }) +' '+ t(`${AppProject}.Tokens_${AppProject === 'MoC' ? 'MOC' : 'RISKPRO'}_code`, {ns: ns}),
                     class: 'RISKPROX'
                 },
                 {
