@@ -7,7 +7,6 @@ import {AuthenticateContext} from "../../Context/Auth";
 import { config } from './../../Config/config';
 
 const AddressContainer = ({ address, accountData, view }) => {
-
     const auth = useContext(AuthenticateContext);
     const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
     const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';

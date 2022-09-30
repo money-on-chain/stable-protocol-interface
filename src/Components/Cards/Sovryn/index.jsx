@@ -21,8 +21,8 @@ const ThemeSelector = ({ children }) => {
   )
 }
 
-const ThemeRender = () => {
-    return (<ThemeSelector><Sovryn /></ThemeSelector>)
+const ThemeRender = (params) => {
+    return (<ThemeSelector><Sovryn { ...params } /></ThemeSelector>)
 }
 
 export default ThemeRender;

@@ -21,8 +21,8 @@ const ThemeSelector = ({ children }) => {
   )
 }
 
-const ThemeRender = () => {
-    return (<ThemeSelector><MocLiquidity /></ThemeSelector>)
+const ThemeRender = (params) => {
+    return (<ThemeSelector><MocLiquidity { ...params } /></ThemeSelector>)
 }
 
 export default ThemeRender;

@@ -21,8 +21,8 @@ const ThemeSelector = ({ children }) => {
   )
 }
 
-const ThemeRender = () => {
-    return (<ThemeSelector><BalanceItem /></ThemeSelector>)
+const ThemeRender = (params) => {
+    return (<ThemeSelector><BalanceItem { ...params } /></ThemeSelector>)
 }
 
 export default ThemeRender;

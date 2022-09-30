@@ -21,8 +21,8 @@ const ThemeSelector = ({ children }) => {
   )
 }
 
-const ThemeRender = () => {
-    return (<ThemeSelector><MocAmount /></ThemeSelector>)
+const ThemeRender = (params) => {
+    return (<ThemeSelector><MocAmount { ...params } /></ThemeSelector>)
 }
 
 export default ThemeRender;

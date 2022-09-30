@@ -21,8 +21,8 @@ const ThemeSelector = ({ children }) => {
   )
 }
 
-const ThemeRender = () => {
-    return (<ThemeSelector><BtcToRbtc /></ThemeSelector>)
+const ThemeRender = (params) => {
+    return (<ThemeSelector><BtcToRbtc { ...params } /></ThemeSelector>)
 }
 
 export default ThemeRender;

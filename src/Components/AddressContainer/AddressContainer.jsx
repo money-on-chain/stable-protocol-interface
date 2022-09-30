@@ -21,8 +21,8 @@ const ThemeSelector = ({ children }) => {
   )
 }
 
-const ThemeRender = () => {
-    return (<ThemeSelector><AddressContainer /></ThemeSelector>)
+const ThemeRender = ( params ) => {
+    return (<ThemeSelector><AddressContainer { ...params } /></ThemeSelector>)
 }
 
 export default ThemeRender;

@@ -21,8 +21,8 @@ const ThemeSelector = ({ children }) => {
   )
 }
 
-const ThemeRender = () => {
-    return (<ThemeSelector><RewardsStakingOptions /></ThemeSelector>)
+const ThemeRender = (params) => {
+    return (<ThemeSelector><RewardsStakingOptions { ...params } /></ThemeSelector>)
 }
 
 export default ThemeRender;

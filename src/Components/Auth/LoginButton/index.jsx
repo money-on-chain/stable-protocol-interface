@@ -21,8 +21,8 @@ const ThemeSelector = ({ children }) => {
   )
 }
 
-const ThemeRender = () => {
-    return (<ThemeSelector><LoginButton /></ThemeSelector>)
+const ThemeRender = (params) => {
+    return (<ThemeSelector><LoginButton { ...params } /></ThemeSelector>)
 }
 
 export default ThemeRender;

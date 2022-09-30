@@ -21,8 +21,8 @@ const ThemeSelector = ({ children }) => {
   )
 }
 
-const ThemeRender = () => {
-    return (<ThemeSelector><MintCard /></ThemeSelector>)
+const ThemeRender = (params) => {
+    return (<ThemeSelector><MintCard { ...params } /></ThemeSelector>)
 }
 
 export default ThemeRender;
