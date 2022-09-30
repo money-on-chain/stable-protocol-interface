@@ -10,7 +10,7 @@ import BigNumber from 'bignumber.js';
 import { config } from '../../../../Config/config';
 
 const AppProject = config.environment.AppProject;
-const COLORS = AppProject !== 'MoC' ? ['#0083ff', '#0061bb'] : ['#00a651','#ef8a13'];
+const COLORS = AppProject !== 'MoC' ? ['#0083ff', '#0061bb'] :['#ef8a13','#68cdc6','#00a651','#808080'];
 
 function Reserve(props) {
     const auth = useContext(AuthenticateContext);

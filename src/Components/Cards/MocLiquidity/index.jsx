@@ -65,7 +65,6 @@ function MocLiquidity(props) {
         claimRewards(account, incentiveState.agent_address,  incentiveState.gas_cost,  (a, _txHash) => {
             setModalOpen(true);
             setTxHash(_txHash);
-            console.log('_txHash', _txHash);
             })
             .then( () => setOperationStatus("success"))
             .catch(() => setOperationStatus("error"))

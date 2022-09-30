@@ -43,7 +43,6 @@ const FastRbtcProvider = ({ children }) => {
 
     const loadData = async () => {
         const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
-        console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         const fastBtcBridge= new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
         const fastBtcBridgeGetFees = () => {
             return new Promise((resolve, reject) => {

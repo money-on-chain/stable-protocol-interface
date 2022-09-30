@@ -13,7 +13,6 @@ import {I18nextProvider} from "react-i18next";
 import i18next from "i18next";
 import {config} from "./Config/config";
 
-console.log(`Starting app version: ${process.env.REACT_APP_VERSION}`);
 
 async function loadTranslations() {
     try {

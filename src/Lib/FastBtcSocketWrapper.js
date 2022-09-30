@@ -62,7 +62,6 @@ export default class FastBtcSocketWrapper {
     ];
     this._socket = createSocketConnection();
     this._socket.on('connect', () => {
-      console.log('-------------- SOCKET CONNECTED -------------');
       listenToSocketEvents(this._socket);
       fastBTCEvents.forEach(eventName => {
         this._socket.on(eventName, res => this._trigger(eventName, res));
@@ -71,7 +70,6 @@ export default class FastBtcSocketWrapper {
       this._trigger(FastBtcSocketWrapper.INITIALIZED_EVENT_NAME);
     });
     this._socket.on('error', error => {
-      console.log('-------------- SOCKET ERROR -------------');
       console.error(error);
     });
   }
@@ -88,7 +86,6 @@ export default class FastBtcSocketWrapper {
     if (!event) {
       event = new DispatcherEvent(eventName);
       this.events[eventName] = event;
-      console.log(this.events);
     }
     event.registerCallback(callbackListener);
   }

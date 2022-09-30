@@ -59,8 +59,6 @@ export default function BtcToRbtcGenerateModal(props) {
     () => {
       if (socket) {
         const updateStateBTCtx = tx => {
-          console.log('-----DETECTED DEPOSIT TX from ModalTopUp ------');
-          console.log(tx);
           setStateFBtc(prevState => ({
             ...prevState,
             step: Step.TRANSACTION,
@@ -69,8 +67,6 @@ export default function BtcToRbtcGenerateModal(props) {
           }));
         };
         const updateStateRBTCtx = tx => {
-          console.log('-----DETECTED TRANSFER TX from ModalTopUp ------');
-          console.log(tx);
           setStateFBtc(prevState => ({
             ...prevState,
             step: Step.TRANSACTION,
@@ -80,9 +76,7 @@ export default function BtcToRbtcGenerateModal(props) {
         };
         socket.on('depositTx', updateStateBTCtx);
         socket.on('transferTx', updateStateRBTCtx);
-        console.log('Subscribed to socket from fastBTC modal');
         return function cleanup() {
-          console.log('Cleaning up socket subscription from fastBTC modal');
           if (socket === undefined) {
             return;
           }
@@ -208,7 +202,6 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
             console.log('----- ERROR ----');
             console.log(res.error);
           }
-          console.log('------ EVERYTHING OK -------');
           const result = res.res;
           setState(prevState => ({
             ...prevState,

@@ -124,7 +124,6 @@ export default function Step3(props) {
                                 setIsVisible(true)
                                 setButtonCompleted('Close')
                                 setlabelTxid(error['transactionHash']);
-                                console.log("fail", error);
                             });
                         resolve(response);
                     })
@@ -176,7 +175,6 @@ export default function Step3(props) {
                         break;
                     }
                     case "4": {
-                        console.log(responseBTC.status)
                         setLabelColor("red");
                         setlabelTrx("Refunded");
                         clearInterval(intervalBTCCheck);
@@ -184,7 +182,6 @@ export default function Step3(props) {
                         break;
                     }
                 }
-                console.log(responseBTC);
             })
             .catch(error => {
                 console.log(error);

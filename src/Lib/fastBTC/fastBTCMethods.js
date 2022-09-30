@@ -23,8 +23,6 @@ export const urlBtcExplorer = new URL(btcExplorer[currentChainId]);
 export const urlExplorerUrl = explorerNetworks[parseInt(31)];
 
 export const listenToSocketEvents = socket => {
-  console.log('LISTENING TO SOCKET EVENTS');
-  console.log(socket);
   socket.on('txAmount', limits => {
     console.log('-----DETECTED NEW LIMITS ------');
     console.log(limits);
