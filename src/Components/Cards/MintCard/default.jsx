@@ -57,10 +57,6 @@ export default function MintCard(props) {
     };
 
     const onValueYouExchangeChange = (newValueYouExchange) => {
-      console.log('newValueYouExchange', newValueYouExchange);
-      console.log('currencyYouReceive', currencyYouReceive);
-      console.log('currencyYouExchange', currencyYouExchange);
-      console.log('bitconprice', bitcoinPrice);
         const reservePrice = bitcoinPrice;
         switch (currencyYouReceive) {
             case 'STABLE':

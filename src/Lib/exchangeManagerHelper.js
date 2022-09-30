@@ -11,7 +11,6 @@ import BigNumber from "bignumber.js";
 const RBTCPrecision = config.environment.Precisions.RBTCPrecision;
 
 const convertAmount2222 = (source, target, amount, convertToken) => {
-  console.log(source, target, amount);
   if (amount === '') {
     return '';
   }

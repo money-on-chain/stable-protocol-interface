@@ -116,7 +116,6 @@ export default function TransactionScreen({ state, setState }) {
   const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
   const mockBtcDeposit = () => {
-    console.log('Reloading state');
     setState(prevState => ({
       ...prevState,
       depositTx: {
@@ -127,7 +126,6 @@ export default function TransactionScreen({ state, setState }) {
     }));
   };
   const mockBtcDepositConfirmed = () => {
-    console.log('Reloading state');
     setState(prevState => ({
       ...prevState,
       depositTx: {

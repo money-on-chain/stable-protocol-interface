@@ -45,10 +45,6 @@ export default function MintModal(props) {
     } = props;
     /* Disabled confirm button when not connected */
     const { address } = true; //window;
-    console.log('export default function MintModal(props) {');
-    console.log(fee);
-    console.log(valueYouExchange);
-    console.log('export default function MintModal(props) {');
     var btnDisable = false;
     if (!address || !isLoggedIn) {
         btnDisable = true;

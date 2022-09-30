@@ -232,8 +232,9 @@ const mintRiskProx = async (interfaceContext, reserveAmount, mintSlippage, onTra
   let valueToSend = await addCommissions(interfaceContext, reserveAmount, 'BTCX', 'MINT')
 
   // Calc Interest to mint RISKPROX
-  const mintInterest = await calcMintInterest(interfaceContext, reserveAmount)
+  const mintInterest = await calcMintInterest(interfaceContext, toContractPrecision(reserveAmount))
 
+  //valueToSend = new BigNumber(valueToSend).plus(new BigNumber(Web3.utils.fromWei(mintInterest)))
   valueToSend = new BigNumber(valueToSend).plus(new BigNumber(Web3.utils.fromWei(mintInterest)))
 
   console.log(`Mint RISKPROX Interest ${mintInterest}`)

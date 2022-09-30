@@ -283,7 +283,7 @@ const mintRiskProxRRC20 = async (interfaceContext, reserveAmount, mintSlippage, 
   let valueToSend = await addCommissions(interfaceContext, reserveAmount, 'RISKPROX', 'MINT')
 
   // Calc Interest to mint RISKPROx
-  const mintInterest = await calcMintInterest(dContracts, reserveAmount)
+  const mintInterest = await calcMintInterest(dContracts, toContractPrecision(reserveAmount))
 
   valueToSend = new BigNumber(valueToSend).plus(new BigNumber(Web3.utils.fromWei(mintInterest)))
 

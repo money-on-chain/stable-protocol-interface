@@ -55,7 +55,8 @@ const calcMintInterest = async (interfaceContext, amount) => {
 
   amount = new BigNumber(amount);
 
-  const mocinrate = dContracts.contracts.mocinrate
+  const mocinrate = dContracts.contracts.mocinrate;
+
   const calcMintInterest = await mocinrate.methods.calcMintInterestValues(BUCKET_X2, amount).call()
   return calcMintInterest
 }
@@ -104,9 +105,6 @@ const transferRiskProTo = async (interfaceContext, to, amount, onTransaction, on
     .estimateGas({ from: account })
 
   // Send tx
-    console.log('Send tx');
-    console.log(amount);
-    console.log('Send tx');
   const receipt = riskprotoken.methods
     .transfer(to, toContractPrecision(amount))
     .send({

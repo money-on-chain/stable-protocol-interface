@@ -1,7 +1,10 @@
 .RewardsStakingOptions {
-    min-height: 32.4em;
+    //min-height: 32.4em;
+    height: 100%;
+    @media screen and (min-width: 100px) and (max-width: 1199px){
+        margin-top: 10px;
+    }
 }
-
 .WithdrawalAmount {
     display: inline;
   }

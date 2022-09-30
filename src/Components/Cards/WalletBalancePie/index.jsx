@@ -10,7 +10,7 @@ import {getDecimals} from "../../../Helpers/helper";
 
 import BigNumber from "bignumber.js";
 const AppProject = config.environment.AppProject;
-const COLORS = AppProject === 'MoC' ? ['#00a651','#ef8a13'] : ['#808080','#0062b7','green','#808080'];
+const COLORS = AppProject === 'MoC' ? ['#00a651', '#ef8a13','#68cdc6','#808080' ] :['#808080','#0062b7','#0062b7','#808080'];
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -45,10 +45,15 @@ function WalletBalancePie(props) {
 
     const set_moc_balance_usd = () =>{
         if (auth.userBalanceData && accountData.Balance) {
-            // const moc_balance= (Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4);
-            // const moc_balance_usd= Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)
-            const moc_balance= (Number(new BigNumber(AppProject === 'MoC' ? auth.userBalanceData['mocBalance'] : auth.userBalanceData['rbtcBalance']).c[0]/10000)/auth.contractStatusData.bitcoinPrice).toFixed(6);
-            const moc_balance_usd= Number(new BigNumber(AppProject === 'MoC' ? auth.userBalanceData['mocBalance'] : auth.userBalanceData['rbtcBalance']).c[0]/10000)
+            const moc_balance= (Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4);
+            let moc_balance_usd=null
+            if(AppProject != 'MoC'){
+                moc_balance_usd= Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)
+            }else{
+                moc_balance_usd= Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000)
+            }
+            // const moc_balance= (Number(new BigNumber(AppProject === 'MoC' ? auth.userBalanceData['mocBalance'] : auth.userBalanceData['rbtcBalance']).c[0]/10000)/auth.contractStatusData.bitcoinPrice).toFixed(6);
+            // const moc_balance_usd= Number(new BigNumber(AppProject === 'MoC' ? auth.userBalanceData['mocBalance'] : auth.userBalanceData['rbtcBalance']).c[0]/10000)
             return {'normal':moc_balance,'usd':moc_balance_usd}
         }
     };
@@ -89,11 +94,19 @@ function WalletBalancePie(props) {
             const bpro_usd= set_bpro_usd()['usd']
             const btc_usd= set_btc_usd()['usd']
             const moc_balance_usd= set_moc_balance_usd()['usd']
-            return (Number(rbtc_main_usd)+Number(doc_usd)+Number(bpro_usd)+Number(btc_usd)+Number(moc_balance_usd)).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              }
-            );
+            if (AppProject != 'MoC'){
+                return (Number(rbtc_main_usd)).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+            } else {
+                return (Number(rbtc_main_usd)+Number(doc_usd)+Number(bpro_usd)+Number(btc_usd)+Number(moc_balance_usd)).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+            }
         }else{
             return (0).toFixed(2)
         }
@@ -102,32 +115,19 @@ function WalletBalancePie(props) {
     const getBalance = () => {
         if (auth.userBalanceData && accountData.Balance) {
 
-            const rbtc_main= (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
+            const rbtc_main= new BigNumber(set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice))
+            const doc= new BigNumber((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice))
+            const bpro= new BigNumber(set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice))
+            const btc= new BigNumber(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))
+            let aum_all=BigNumber.sum(rbtc_main,doc,bpro,btc)
+            return new BigNumber(aum_all).toFixed(Number(getDecimals("RESERVE",AppProject)))
 
-            const doc= ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4)
-
-            const bpro= (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
-
-            const btc= Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))
-            console.log(auth.userBalanceData);
-            console.log(rbtc_main, doc, bpro, btc);
-            console.log(new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) )).toFixed(6))
-                        console.log('000000000000000000000000000000000iiiiiiiiiiiiiiiiiiiiiiiiii')
-            console.log(getDecimals("RESERVE",AppProject))
-            console.log(AppProject)
-            console.log('000000000000000000000000000000000iiiiiiiiiiiiiiiiiiiiiiiiii')
-            return new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) )).toFixed(Number(getDecimals("RESERVE",AppProject)))
         }else{
             return (0).toFixed(6)
         }
     };
 
     const getPie = () => {
-        console.log('ddddddddddddddd00000000')
-        console.log(auth.userBalanceData)
-        console.log(accountData)
-        console.log(accountData.Balance)
-        console.log('ddddddddddddddd********')
         if (auth.userBalanceData && accountData.Balance) {
             const data = [
                 {
@@ -170,9 +170,6 @@ function WalletBalancePie(props) {
 
             ];
 
-            console.log('data------------')
-            console.log(data)
-            console.log('data------------')
             return data;
         }
         else{
