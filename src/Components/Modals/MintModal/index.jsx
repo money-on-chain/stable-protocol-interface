@@ -3,7 +3,7 @@
 import {Button, Collapse, Slider, Spin} from 'antd';
 import {LoadingOutlined, SettingFilled} from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
-import './RDoC/style.scss';
+
 import React, {useState, useContext, useEffect, Fragment} from 'react';
 import { Modal, notification } from 'antd';
 
@@ -23,6 +23,8 @@ import {LargeNumberF2} from "../../LargeNumberF2";
 import { config } from '../../../Config/config';
 import {setNumber} from "../../../Helpers/helper";
 import Web3 from "web3";
+
+import './style.scss';
 
 export default function MintModal(props) {
   const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
