@@ -16,6 +16,7 @@ import {useTranslation} from "react-i18next";
 import {LargeNumber} from "../LargeNumber";
 import {LargeNumberF3} from "../LargeNumberF3";
 import { config } from '../../Config/config';
+import './style.scss';
 
 export default function PriceVariation(props) {
 

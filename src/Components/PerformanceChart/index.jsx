@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Row, Col, Tabs } from 'antd';
 import { useTranslation } from "react-i18next";
 import { config } from '../../Config/config';
+import './style.scss';
 
 export default function PerformanceChart(props) {
 
