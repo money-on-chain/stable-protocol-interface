@@ -15,6 +15,7 @@ import { getBtcAddress } from '../../../Lib/fastBTC/fastBTCMethods';
 import { AuthenticateContext } from '../../../Context/Auth';
 import TransactionScreen from './TransactionScreen';
 import { config } from '../../../Config/config';
+import './style.scss';
 
 export default function BtcToRbtcGenerateModal(props) {
 
