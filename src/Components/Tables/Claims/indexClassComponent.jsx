@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import 'antd/dist/antd.css';
-import './style.scss';
 import { Table, Progress, Result } from 'antd';
 import RowDetail from "../RowDetail";
 import classnames from 'classnames';
@@ -13,6 +12,7 @@ import {AuthenticateContext} from "../../../Context/Auth";
 import { config } from './../../../Config/config';
 import BigNumber from "bignumber.js";
 
+import './style.scss';
 
 const columns = [
     {

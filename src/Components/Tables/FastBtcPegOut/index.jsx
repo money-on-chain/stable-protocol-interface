@@ -15,6 +15,8 @@ import api from "../../../services/api";
 import {config} from "../../../Config/config";
 import BigNumber from "bignumber.js";
 
+import './style.scss';
+
 export default function FastBtcPegOut(props) {
 
     const [current, setCurrent] = useState(1);

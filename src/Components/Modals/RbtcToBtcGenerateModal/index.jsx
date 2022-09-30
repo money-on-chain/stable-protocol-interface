@@ -11,6 +11,7 @@ import { toNumberFormat, btcInSatoshis, DYNAMIC_FEE_DIVISOR, toWei, weiToNumberF
 import { useTranslation } from "react-i18next";
 import Step2 from "./step2";
 import { config } from '../../../Config/config';
+import './style.scss';
 
 export default function RbtcToBtcGenerateModal(props) {
 

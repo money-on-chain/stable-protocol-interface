@@ -344,7 +344,6 @@ const AuthenticateProvider = ({ children }) => {
     }
 
     const loadContractsStatusAndUserBalance = async () => {
-        console.log("Update Status and balance");
         if (!window.integration) return;
         const appMode = config.environment.AppMode;
 
@@ -409,7 +408,6 @@ const AuthenticateProvider = ({ children }) => {
         try {
             let balance = await web3.eth.getBalance(address);
             balance = web3.utils.fromWei(balance);
-            console.log('balance', balance);
             return balance
         } catch (e) {
             console.log(e);

@@ -15,6 +15,7 @@ import { getBtcAddress } from '../../../Lib/fastBTC/fastBTCMethods';
 import { AuthenticateContext } from '../../../Context/Auth';
 import TransactionScreen from './TransactionScreen';
 import { config } from '../../../Config/config';
+import './style.scss';
 
 export default function BtcToRbtcGenerateModal(props) {
 
@@ -80,7 +81,6 @@ export default function BtcToRbtcGenerateModal(props) {
         };
         socket.on('depositTx', updateStateBTCtx);
         socket.on('transferTx', updateStateRBTCtx);
-        console.log('Subscribed to socket from fastBTC modal');
         return function cleanup() {
           console.log('Cleaning up socket subscription from fastBTC modal');
           if (socket === undefined) {

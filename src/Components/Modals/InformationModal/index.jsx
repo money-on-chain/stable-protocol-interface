@@ -3,7 +3,7 @@ import { Row, Col, Tooltip, Modal } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from "react-i18next";
 import { config } from './../../../Config/config';
-import './MoC/style.scss'
+import './style.scss'
 
 import { getKeyThenIncreaseKey } from 'antd/lib/message';
 

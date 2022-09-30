@@ -8,6 +8,7 @@ import web3 from "web3";
 import {Alert} from "antd";
 import {setNumber, setToLocaleString} from "../../../Helpers/helper";
 import {useTranslation} from "react-i18next";
+import './style.scss';
 
 function HeaderCoins(props) {
 

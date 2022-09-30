@@ -182,8 +182,6 @@ export default function SendModal(props) {
   };
 
   const onTransaction = (transactionHash) => {
-    console.log("On sent transaction");
-    console.log(transactionHash);
     setCurrentHash(transactionHash);
     setStatusScreen(3)
     setShowTransactionModal(true);

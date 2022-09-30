@@ -16,6 +16,7 @@ import {useTranslation} from "react-i18next";
 import {LargeNumber} from "../LargeNumber";
 import {LargeNumberF3} from "../LargeNumberF3";
 import { config } from '../../Config/config';
+import './style.scss';
 
 export default function PriceVariation(props) {
 
@@ -68,8 +69,6 @@ export default function PriceVariation(props) {
     const color = isPositive ? '#3fcb97' : '#f2316a';
     const formattedVar = formatValueVariation((priceVariation.current - priceVariation.day), i18n.languages[0],auth);
     const formattedPerc = parseFloat(((priceVariation.current - priceVariation.day)/priceVariation.day)*100).toLocaleString(i18n.languages[0], {minimumFractionDigits:2, maximumFractionDigits:2});
-    console.log('formattedPerc', formattedPerc);
-    console.log('priceVariation', priceVariation);
     const variationText = `${sign}${formattedVar} (${formattedPerc}%)`;
 
     const tooltip = (

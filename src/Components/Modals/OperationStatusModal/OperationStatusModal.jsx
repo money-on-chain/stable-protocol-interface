@@ -4,6 +4,8 @@ import {Button} from 'antd';
 import {useTranslation} from "react-i18next";
 import Copy from "../../Page/Copy";
 import { config } from '../../../Config/config';
+import './style.scss';
+
 
 const OperationStatusModal = ({ className, visible, onCancel, title, operationStatus, txHash }) => {
 

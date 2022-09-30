@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from 'react';
 import 'antd/dist/antd.css';
-import './style.scss';
 import { Table, Tooltip } from 'antd';
 import RowDetail from "../RowDetailClaim";
 import classnames from 'classnames';
@@ -19,6 +18,8 @@ import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import moment from 'moment';
+
+import './style.scss';
 
 export default function Claims(props) {
 

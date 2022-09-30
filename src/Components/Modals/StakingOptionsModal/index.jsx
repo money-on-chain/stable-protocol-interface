@@ -7,6 +7,7 @@ import Web3 from 'web3';
 
 import {useTranslation} from "react-i18next";
 import { config } from './../../../Config/config';
+import './style.scss';
 
 export default function StakingOptionsModal(props) {
 
