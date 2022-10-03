@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import WalletBalance from './default';
 import { config } from './../../../Config/config';
 
@@ -9,7 +8,7 @@ const ThemeRDoC = React.lazy(() => import('./themes/rdoc'));
 
 
 const ThemeSelector = ({ children }) => {
-  const CHOSEN_THEME = config.environment.AppProject;//process.env.REACT_APP_ENVIRONMENT_APP_PROJECT;
+  const CHOSEN_THEME = config.environment.AppProject;
   return (
     <>
       <React.Suspense fallback={<></>}>

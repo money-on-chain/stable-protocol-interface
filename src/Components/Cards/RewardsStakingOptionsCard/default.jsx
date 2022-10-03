@@ -3,7 +3,7 @@ import {Row, Col, Tabs, Button, Table, Alert, Skeleton} from 'antd';
 import moment from "moment";
 import PerformanceChart from '../../../Components/PerformanceChart';
 import { LargeNumber } from '../../LargeNumber';
-import CoinSelect from '../../Form/CoinSelect';
+//import CoinSelect from '../../Form/CoinSelect';
 import StakingOptionsModal from '../../Modals/StakingOptionsModal';
 import { AuthenticateContext } from '../../../Context/Auth';
 import BigNumber from "bignumber.js";
@@ -130,9 +130,10 @@ export default function RewardsStakingOptions(props) {
         setPendingWithdrawals(arrayDes);
     };
 
+    /*
     const onValueStakingChange = (newValueStakingChange) => {
         setStakingAmountInputValue(newValueStakingChange);
-    };
+    };*/
 
     const onStakingInputValueChange = value => {
         setStakingAmountInputValue(value);

@@ -1,19 +1,19 @@
 /* eslint-disable default-case */
 import { Row, Col, Switch } from 'antd';
 import React, { useEffect, useState, useContext } from 'react';
-import { Button, Popover } from 'antd';
+//import { Button, Popover } from 'antd';
 import CoinSelect from '../../Form/CoinSelect';
 import MintModal from '../../Modals/MintModal';
 import {useTranslation} from "react-i18next";
-import {formatLocalMap2} from '../../../Lib/Formats';
-import { AuthenticateContext } from '../../../Context/Auth';
+//import {formatLocalMap2} from '../../../Lib/Formats';
+//import { AuthenticateContext } from '../../../Context/Auth';
 
 export default function MintCard(props) {
 
-  const auth = useContext(AuthenticateContext);
+  //const auth = useContext(AuthenticateContext);
   const { token = '', color = '' } = props;
 
-  const { mocAllowance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
+  //const { mocAllowance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
   const { bitcoinPrice = 0 } = props.StatusData ? props.StatusData : {};
 
   const [currencyYouExchange, setCurrencyYouExchange] = useState(
@@ -27,8 +27,8 @@ export default function MintCard(props) {
   const [valueYouReceiveUSD, setValueYouReceiveUSD] = useState('0.0000');
   const [showMintModal, setShowMintModal] = useState(false);
   const [isMint, setIsMint] = useState(true);
-  const [commissionSwitch, setCommissionSwitch] = useState('RESERVE');
-  const [loadingSwitch, setLoadingSwitch] = useState(false);
+  //const [commissionSwitch, setCommissionSwitch] = useState('RESERVE');
+  //const [loadingSwitch, setLoadingSwitch] = useState(false);
 
   const onChangeCurrencyYouExchange = (newCurrencyYouExchange) => {
       setCurrencyYouExchange(newCurrencyYouExchange);
@@ -42,19 +42,21 @@ export default function MintCard(props) {
         setIsMint(youReceive === token);
     }, [currencyYouExchange]);
 
+    /*
     const checkShowMintModal = () => {
         setShowMintModal(true);
-    };
+    };*/
 
     const closeMintModal = () => {
         setShowMintModal(false);
     };
 
+    /*
     const onClear = () => {
         setCurrencyYouExchange(token);
         setValueYouExchange('0.0000');
         setValueYouReceive('0.0000');
-    };
+    };*/
 
     const onValueYouExchangeChange = (newValueYouExchange) => {
         const reservePrice = bitcoinPrice;
@@ -122,8 +124,9 @@ export default function MintCard(props) {
         setValueYouExchange(newValueYouExchange);
     };
 
+    /*
     const onFeeChange = (checked) => {
-    };
+    };*/
 
     /* const calcCommission = () => {
       if (!convertToken || !mocState || !currencyYouReceive || !currencyYouExchange || !valueYouExchange) return {};
