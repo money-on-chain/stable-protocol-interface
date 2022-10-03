@@ -8,7 +8,7 @@ import {getCoinName} from "../../Helpers/helper";
 const LargeNumberF2 = ({ amount, currencyCode, includeCurrency, numericLabelParams, className, auth }) => {
 
   const [t, i18n]= useTranslation(["global",'moc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);

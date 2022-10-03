@@ -7,7 +7,7 @@ import { config } from '../../Config/config';
 const LargeNumberF3 = ({ amount, currencyCode, includeCurrency, numericLabelParams, className }) => {
 
   const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);

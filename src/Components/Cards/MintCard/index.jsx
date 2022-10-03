@@ -9,7 +9,7 @@ const ThemeRDoC = React.lazy(() => import('./themes/rdoc'));
 
 
 const ThemeSelector = ({ children }) => {
-  const CHOSEN_THEME = config.environment.AppProject;//process.env.REACT_APP_ENVIRONMENT_APP_PROJECT;
+  const CHOSEN_THEME = config.environment.AppProject;
   return (
     <>
       <React.Suspense fallback={<></>}>

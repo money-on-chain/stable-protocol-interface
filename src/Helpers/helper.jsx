@@ -5,7 +5,7 @@ import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber"
 import moment from 'moment';
 import {formatLocalMap2} from "../Lib/Formats";
 import BigNumber from "bignumber.js";
-const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+const ns = config.environment.AppProject.toLowerCase();
 const AppProject = config.environment.AppProject;
 
 export function setNumber(number){

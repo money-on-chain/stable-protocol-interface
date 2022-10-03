@@ -15,7 +15,7 @@ export default function Mint(props) {
 
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     return (

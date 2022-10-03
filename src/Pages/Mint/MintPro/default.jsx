@@ -12,7 +12,7 @@ import { config } from './../../../Config/config';
 export default function Mint(props) {
 
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     const auth = useContext(AuthenticateContext);

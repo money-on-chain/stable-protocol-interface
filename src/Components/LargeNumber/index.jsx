@@ -6,7 +6,7 @@ import {useTranslation} from "react-i18next";
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { config } from './../../Config/config';
 import {getCoinName} from "../../Helpers/helper";
-const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+const ns = config.environment.AppProject.toLowerCase();
 const AppProject = config.environment.AppProject;
 
 const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams, className, tooltip }) => {

@@ -74,7 +74,7 @@ export default function MintModal(props) {
   const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] = useState('Confirm');
   const [t, i18n]= useTranslation(["global",'moc'])
   const { appMode } = config.environment.AppMode;
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
 
   let userComment = '';

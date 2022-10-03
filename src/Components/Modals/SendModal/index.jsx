@@ -38,7 +38,7 @@ export default function SendModal(props) {
   const [inputIsValid, setInputIsValid] = useState(true);
 
   const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
   const helper = addressHelper(web3);
   const auth = useContext(AuthenticateContext);

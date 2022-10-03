@@ -18,7 +18,7 @@ export default function StakingOptionsModal(props) {
 
    const amountInEth = Web3.utils.fromWei(amount);
    const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-   const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+   const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     useEffect(() => {

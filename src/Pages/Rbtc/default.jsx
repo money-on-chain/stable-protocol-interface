@@ -15,7 +15,7 @@ export default function Rbtc(props) {
 
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     const [rbtcGenVisible, setRbtcGenVisible] = useState(false);

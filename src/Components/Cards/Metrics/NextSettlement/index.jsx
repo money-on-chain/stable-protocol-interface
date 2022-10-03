@@ -12,7 +12,7 @@ function NextSettlement() {
     const [daysHours, setDaysHours] = useState(null);
     const [crono, setCrono] = useState(2);
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     const decimaltoHour = (dayBlockSpan, blocksToSettlement) => {

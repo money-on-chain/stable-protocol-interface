@@ -25,7 +25,7 @@ export default function BtcToRbtcGenerateModal(props) {
   }, []);
   const {visible = false, handleClose = () => {}, accountData} = props;
   const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
   const [stateFBtc, setStateFBtc] = useState(initialState);
   const [underMaintenance, setUnderMaintenance] = useState(false);
@@ -196,7 +196,7 @@ export default function BtcToRbtcGenerateModal(props) {
 
 const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
   const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
   useEffect(
     () => {

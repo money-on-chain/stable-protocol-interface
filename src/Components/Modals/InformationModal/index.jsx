@@ -10,7 +10,7 @@ import './style.scss'
 export default function InformationModal({ currencyCode }) {
 
   const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
   const [isModalVisible, setIsModalVisible] = useState(false);
 

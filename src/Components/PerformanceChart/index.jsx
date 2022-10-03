@@ -9,7 +9,7 @@ export default function PerformanceChart(props) {
 
     const [percent, setPercent] = useState(0);
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     let height = percent && percent > 0 ? percent * 190 / 100 : 0;

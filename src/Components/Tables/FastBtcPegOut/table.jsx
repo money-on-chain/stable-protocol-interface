@@ -23,7 +23,7 @@ const Table = ({ accountData }) => {
   const [operations, setOperations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
 
   const address = accountData?.Owner;
