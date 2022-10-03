@@ -8,7 +8,7 @@ import {Row, Col, Alert, Tooltip} from 'antd';
 import MocAmount from "../../Components/Cards/MocAmount";
 import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import ListOperations from "../../Components/Tables/ListOperations";
-import data_json from "../../services/webapp_transactions_list.json";
+//import data_json from "../../services/webapp_transactions_list.json";
 import {useTranslation} from "react-i18next";
 import { config } from './../../Config/config';
 

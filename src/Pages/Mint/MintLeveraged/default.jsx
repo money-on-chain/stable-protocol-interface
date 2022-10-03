@@ -1,10 +1,10 @@
-import MintCard from '../../../Components/Cards/MintCard';
+//import MintCard from '../../../Components/Cards/MintCard';
 import AmountCard from '../../../Components/Cards/AmountCard';
-import YourAddressCard from '../../../Components/Cards/YourAddressCard';
+//import YourAddressCard from '../../../Components/Cards/YourAddressCard';
 import {Row, Col, Tooltip, Alert, Card, Skeleton} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, Fragment, useContext } from 'react';
-import TokenSummaryCard from '../../../Components/Cards/TokenSummaryCard';
+//import TokenSummaryCard from '../../../Components/Cards/TokenSummaryCard';
 import moment from 'moment';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";

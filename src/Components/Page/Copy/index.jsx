@@ -20,6 +20,8 @@ export default function Copy(props) {
         case "tx":
             url_set=config.explorerUrl+'/tx/'+textToCopy
             break;
+        default:
+            throw new Error('Invalid typeUrl'); 
     }
 
     return (

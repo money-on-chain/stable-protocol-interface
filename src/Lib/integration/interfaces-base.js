@@ -3,7 +3,7 @@ import Web3 from 'web3';
 
 import { calcCommission } from './multicall';
 import {toContractPrecision, BUCKET_X2, BUCKET_C0, getGasPrice} from './utils';
-import {setNumber} from "../../Helpers/helper";
+//import {setNumber} from "../../Helpers/helper";
 
 
 const addCommissions = async (interfaceContext, reserveAmount, token, action) => {

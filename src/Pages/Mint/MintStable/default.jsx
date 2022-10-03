@@ -1,4 +1,4 @@
-import MintCard from '../../../Components/Cards/MintCard';
+//import MintCard from '../../../Components/Cards/MintCard';
 import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
 import {Row, Col, Switch, Alert} from 'antd';

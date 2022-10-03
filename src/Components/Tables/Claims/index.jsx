@@ -4,7 +4,7 @@ import { Table, Tooltip } from 'antd';
 import RowDetail from "../RowDetailClaim";
 import classnames from 'classnames';
 import api from '../../../services/api';
-import Moment from 'react-moment';
+//import Moment from 'react-moment';
 import { useState } from 'react'
 import {
     myParseDate,
@@ -13,7 +13,7 @@ import {
 } from '../../../Helpers/helper'
 import {config} from '../../../Config/config';
 import { useTranslation } from "react-i18next";
-import date from '../../../Config/date';
+//import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";

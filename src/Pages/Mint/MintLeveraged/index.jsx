@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import Mint from './default';
 import { config } from './../../../Config/config';
 

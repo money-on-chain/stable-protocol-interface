@@ -5,7 +5,7 @@ import { AuthenticateContext } from '../../../Context/Auth';
 import PriceVariation from '../../PriceVariation';
 import {LargeNumber} from "../../LargeNumber";
 import web3 from "web3";
-import {Alert} from "antd";
+//import {Alert} from "antd";
 import {setNumber, setToLocaleString} from "../../../Helpers/helper";
 import {useTranslation} from "react-i18next";
 import './style.scss';
@@ -13,7 +13,7 @@ import './style.scss';
 function HeaderCoins(props) {
 
   const auth = useContext(AuthenticateContext);
-  const { accountData = {} } = auth;
+  //const { accountData = {} } = auth;
   const { image, arrow, color, tokenName } = props;
   const [timeRefresh, setTimeRefresh] = useState(new Date());
 
@@ -120,7 +120,7 @@ function HeaderCoins(props) {
     }
   };
 
-  const [currencyCode, setCurrencyCode]=  useState('USDPrice');
+  //const [currencyCode, setCurrencyCode]=  useState('USDPrice');
 
   return (
     <>{

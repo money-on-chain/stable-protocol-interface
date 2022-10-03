@@ -10,7 +10,7 @@ import Copy from "../../Page/Copy";
 import {useTranslation} from "react-i18next";
 import {AuthenticateContext} from "../../../Context/Auth";
 import { config } from './../../../Config/config';
-import BigNumber from "bignumber.js";
+//import BigNumber from "bignumber.js";
 
 import './style.scss';
 

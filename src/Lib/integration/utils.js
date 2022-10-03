@@ -2,7 +2,7 @@
 
 import BigNumber from 'bignumber.js';
 import Web3 from 'web3';
-import {setNumber} from "../../Helpers/helper";
+//import {setNumber} from "../../Helpers/helper";
 
 BigNumber.config({
   ROUNDING_MODE: BigNumber.ROUND_DOWN,

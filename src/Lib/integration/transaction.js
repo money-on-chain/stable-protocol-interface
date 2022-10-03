@@ -1,6 +1,6 @@
 import abiDecoder from 'abi-decoder';
 import Web3 from 'web3';
-import { toContractPrecision, getAppMode } from './utils';
+//import { toContractPrecision, getAppMode } from './utils';
 
 const addABI = (abiContracts, appMode) => {
 

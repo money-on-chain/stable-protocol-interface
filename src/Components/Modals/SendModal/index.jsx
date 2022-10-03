@@ -5,7 +5,7 @@ import React, { useEffect, useState, useContext } from "react";
 import debounce from 'lodash.debounce';
 import web3 from 'web3';
 import { Row, Col, Modal, Button } from 'antd';
-import CoinSelect from "../../Form/CoinSelect";
+//import CoinSelect from "../../Form/CoinSelect";
 import InputAddress from "../../InputAddress";
 import InputWithCurrencySelector from "../../Form/InputWithCurrencySelector";
 import { getBalanceAndTransferMethodOfTokenToSend } from '../../../Config/currency';
@@ -17,11 +17,11 @@ import { AuthenticateContext } from "../../../Context/Auth";
 import AlertLabel from "../../AlertLabel/AlertLabel";
 import Copy from "../../Page/Copy";
 import { config } from './../../../Config/config';
-import BigNumber from "bignumber.js";
+//import BigNumber from "bignumber.js";
 
 export default function SendModal(props) {
   const { token = '', tokensToSend, userState, view } = props;
-  const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
+  //const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
   const [address, setAddress] = useState('');
   const [currencyYouReceive, setCurrencyYouReceive] = useState('');
   /* const [currencyYouExchange, setCurrencyYouExchange] = useState(
@@ -68,25 +68,23 @@ export default function SendModal(props) {
       switch (tokenToSend) {
         case 'STABLE':
           return 'DOC'
-          break;
         case 'RISKPRO':
-          return  'BPRO'
-          break;
+          return  'BPRO'          
         case 'RISKPROX':
           return 'BPROX'
         case 'MOC':
-          return 'MOC'
-          break;
+          return 'MOC'          
         default:
           return 'RBTC'
-              break;
       }
     }
   };
 
+  /*
   const setDefaultState = () => {
     getDefaultState();
   }
+  */
 
   const showModal = () => {
     setVisible(true);

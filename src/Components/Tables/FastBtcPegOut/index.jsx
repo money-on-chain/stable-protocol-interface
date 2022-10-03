@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import 'antd/dist/antd.css';
 import { Table } from 'antd';
-import data_json from '../../../services/fatbts_pegout.json';
+//import data_json from '../../../services/fatbts_pegout.json';
 import Moment from 'react-moment';
 import { useState } from 'react'
 import { myParseDate, readJsonTableFastBtcPegOut} from '../../../Helpers/helper'
@@ -13,7 +13,7 @@ import RowDetailPegOut from "./RowDetailPegOut";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import api from "../../../services/api";
 import {config} from "../../../Config/config";
-import BigNumber from "bignumber.js";
+//import BigNumber from "bignumber.js";
 
 import './style.scss';
 
