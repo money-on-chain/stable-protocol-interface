@@ -35,22 +35,44 @@ export function getDatasMetrics(auth,i18n=null){
             const paused= (auth.contractStatusData['paused']);
 
             return {
-                globalCoverage:globalCoverage,globalCoverageTooltip: globalCoverageTooltip,
-                x2Leverage:btcx_x2Leverage,blocksToSettlement:blocksToSettlement,blockHeight:blockHeight,paused:paused,
+                globalCoverage: globalCoverage,
+                globalCoverageTooltip: globalCoverageTooltip,
+                x2Leverage: btcx_x2Leverage,
+                blocksToSettlement: blocksToSettlement,
+                blockHeight: blockHeight,
+                paused: paused,
                 globalCoverageClean:globalCoverageClean
             };
         } else {
-            return {globalCoverage: 0,globalCoverageTooltip: 0,
-                    interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
-                    liquidity_interest:0,blocksToSettlement:0,blockHeight:0,paused:false,
-                    globalCoverageClean:0
+            return {
+                globalCoverage: 0,
+                globalCoverageTooltip: 0,
+                interest:0,
+                interestTooltip:0,
+                x2Leverage:0,
+                x2Coverage:0,
+                bprox2AvailableToMint:0,
+                liquidity_interest:0,
+                blocksToSettlement:0,
+                blockHeight:0,
+                paused:false,
+                globalCoverageClean:0
             };
         }
     }else{
-        return {globalCoverage:0,globalCoverageTooltip: 0,
-                interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
-                liquidity_interest:0,blocksToSettlement:0,blockHeight:0,paused:false,
-                globalCoverageClean:0
+        return {
+            globalCoverage:0,
+            globalCoverageTooltip: 0,
+            interest:0,
+            interestTooltip:0,
+            x2Leverage:0,
+            x2Coverage:0,
+            bprox2AvailableToMint:0,
+            liquidity_interest:0,
+            blocksToSettlement:0,
+            blockHeight:0,
+            paused:false,
+            globalCoverageClean:0
         };
     }
 }
@@ -276,15 +298,32 @@ export function readJsonTable(data_j,t, i18n){
         i18n:i18n
         })
 
-    return {set_event:set_event,set_asset:set_asset,set_status_txt:set_status_txt,set_status_percent:set_status_percent,
-        wallet_detail:wallet_detail,wallet_detail_usd:wallet_detail_usd,
-        paltform_detail_usd:paltform_detail_usd,paltform_detail:paltform_detail,
-        truncate_address:truncate_address,truncate_txhash:truncate_txhash,
-        lastUpdatedAt:lastUpdatedAt,RBTCAmount:RBTCAmount,confirmationTime:confirmationTime,
-        address:address,amount:amount,platform_fee_value:platform_fee_value,
-        blockNumber:blockNumber,wallet_value:wallet_value,interests:interests,
-        tx_hash_truncate:tx_hash_truncate,tx_hash:tx_hash,gas_fee:gas_fee,price:price,
-        wallet_value_main:wallet_value_main,leverage:leverage
+    return {
+        set_event:set_event,
+        set_asset:set_asset,
+        set_status_txt:set_status_txt,
+        set_status_percent:set_status_percent,
+        wallet_detail:wallet_detail,
+        wallet_detail_usd:wallet_detail_usd,
+        paltform_detail_usd:paltform_detail_usd,
+        paltform_detail:paltform_detail,
+        truncate_address:truncate_address,
+        truncate_txhash:truncate_txhash,
+        lastUpdatedAt:lastUpdatedAt,
+        RBTCAmount:RBTCAmount,
+        confirmationTime:confirmationTime,
+        address:address,
+        amount:amount,
+        platform_fee_value:platform_fee_value,
+        blockNumber:blockNumber,
+        wallet_value:wallet_value,
+        interests:interests,
+        tx_hash_truncate:tx_hash_truncate,
+        tx_hash:tx_hash,
+        gas_fee:gas_fee,
+        price:price,
+        wallet_value_main:wallet_value_main,
+        leverage:leverage
     }
 
 }
@@ -301,9 +340,9 @@ export const set_doc_usd= (auth) =>{
     if (auth.userBalanceData) {
         const doc_usd= new BigNumber(auth.userBalanceData['docBalance'])
         const doc= (auth.userBalanceData['docBalance']/auth.contractStatusData.bitcoinPrice).toFixed(6);
-        return {'normal':doc,'usd':doc_usd}
+        return {'normal':doc, 'usd':doc_usd}
     }else{
-        return {'normal':(0).toFixed(6),'usd':(0).toFixed(2)}
+        return {'normal':(0).toFixed(6), 'usd':(0).toFixed(2)}
     }
 };
 
@@ -373,9 +412,22 @@ export function readJsonTableFastBtcPegOut(data_j){
     const transactionHashLastUpdated = (data_j.transactionHashLastUpdated!==undefined)? data_j.transactionHashLastUpdated?.slice(0, 5)+'...'+ data_j.transactionHashLastUpdated?.slice(-4) : '--'
 
     return {
-        hashId:hash_id,status:status?.text, statusColor: status?.colorClass, btcAmount:btcAmount,btcFee:btcFee,timestamp:timestamp,
-        btcAddress:btcAddress,date:date,hash_id_cut:hash_id_cut,btcAddressCut:btcAddressCut,transactionHash:transactionHash,
-        transactionHashCut:transactionHashCut,blockNumber:blockNumber,rskAddress:rskAddress,rskAddressCut:rskAddressCut, transactionHashLastUpdated:transactionHashLastUpdated
+        hashId:hash_id,
+        status:status?.text,
+        statusColor: status?.colorClass,
+        btcAmount:btcAmount,
+        btcFee:btcFee,
+        timestamp:timestamp,
+        btcAddress:btcAddress,
+        date:date,
+        hash_id_cut:hash_id_cut,
+        btcAddressCut:btcAddressCut,
+        transactionHash:transactionHash,
+        transactionHashCut:transactionHashCut,
+        blockNumber:blockNumber,
+        rskAddress:rskAddress,
+        rskAddressCut:rskAddressCut,
+        transactionHashLastUpdated:transactionHashLastUpdated
     }
 
 }
@@ -419,10 +471,16 @@ export function readJsonClaims(data_j,t, i18n){
         i18n:i18n
     })
 
-    return {set_asset:set_asset,
-
-        mocs:mocs,creation:creation,state:state,sent_hash:sent_hash,truncate_sent_hash:truncate_sent_hash,
-        truncate_hash:truncate_hash,hash:hash,gas_cost:gas_cost
+    return {
+        set_asset:set_asset,
+        mocs:mocs,
+        creation:creation,
+        state:state,
+        sent_hash:sent_hash,
+        truncate_sent_hash:truncate_sent_hash,
+        truncate_hash:truncate_hash,
+        hash:hash,
+        gas_cost:gas_cost
     }
 
 }
