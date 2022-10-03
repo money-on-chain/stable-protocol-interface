@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
-import Admin from '../Layouts/Admin';
+import Skeleton from '../Layouts/Skeleton';
 import NotFound from '../Pages/NotFound';
 const Home = React.lazy(() => import('../Pages/Home/index'));
 const MintPro = React.lazy(() => import('../Pages/Mint/MintPro'));
@@ -16,7 +16,7 @@ export default function Router() {
     return useRoutes([
         {
             path: '/',
-            element: <Admin />,
+            element: <Skeleton />,
             children: [
                 {
                     path: '/',

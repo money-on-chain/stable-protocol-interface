@@ -14,7 +14,7 @@ import BigNumber from "bignumber.js";
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
-export default function Admin() {
+export default function Skeleton() {
     const auth = useContext(AuthenticateContext);
     const navigate = useNavigate();
     const location = useLocation();
