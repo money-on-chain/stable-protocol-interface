@@ -183,6 +183,8 @@ export default function Step3(props) {
                         setIntervalBTCCheck(null);
                         break;
                     }
+                    default:
+                        throw new Error('Invalid status'); 
                 }
                 console.log(responseBTC);
             })

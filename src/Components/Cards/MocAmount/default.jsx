@@ -3,10 +3,10 @@ import { useContext } from 'react'
 import { AuthenticateContext } from "../../../Context/Auth";
 import { useTranslation } from "react-i18next";
 import {Skeleton, Tooltip} from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
+//import { InfoCircleOutlined } from '@ant-design/icons';
 import InformationModal from '../../Modals/InformationModal';
 import BalanceItemCard from "../BalanceItemCard/BalanceItemCard";
-import BigNumber from "bignumber.js";
+//import BigNumber from "bignumber.js";
 
 function MocAmount() {
 

@@ -12,7 +12,7 @@ import api from "../../../services/api";
 import {config} from "../../../Config/config";
 import OperationStatusModal from "../../Modals/OperationStatusModal/OperationStatusModal";
 import moment from 'moment';
-import {getGasPrice} from "../../../Lib/integration/utils";
+//import {getGasPrice} from "../../../Lib/integration/utils";
 
 
 function MocLiquidity(props) {

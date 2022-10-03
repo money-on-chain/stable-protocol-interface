@@ -1,5 +1,4 @@
-import {Row, Col, Tooltip, Alert, Skeleton} from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
+import {Row, Col, Tooltip, Skeleton} from 'antd';
 import _ from 'lodash/core';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useContext } from 'react';
@@ -10,7 +9,7 @@ import BalanceItem from '../../BalanceItem/BalanceItem';
 import InformationModal from '../../Modals/InformationModal';
 import { formatLocalMap2 } from '../../../Lib/Formats';
 import { config } from './../../../Config/config';
-import BigNumber from "bignumber.js";
+
 
 export default function AmountCard(props) {
 
@@ -20,7 +19,7 @@ export default function AmountCard(props) {
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;
     const [loading, setLoading] = useState(true);
-    const [show, setShow] = useState('');
+    //const [show, setShow] = useState('');
     const timeSke= 2500
 
     useEffect(() => {
@@ -41,6 +40,8 @@ export default function AmountCard(props) {
                     return auth.userBalanceData['bproBalance'];
                 case 'RISKPROX':
                     return auth.userBalanceData['bprox2Balance'];
+                default:
+                    throw new Error('Invalid token name'); 
             }
         } else {
             switch (tokenName) {
@@ -50,9 +51,12 @@ export default function AmountCard(props) {
                     return (0).toFixed(6)
                 case 'riskprox':
                     return (0).toFixed(6)
+                default:
+                    throw new Error('Invalid token name'); 
             }
         }
     };
+    /*
     const getBalanceUSD = () => {
         if (auth.userBalanceData) {
             switch (tokenName) {
@@ -67,7 +71,7 @@ export default function AmountCard(props) {
         else {
             return (0).toFixed(2)
         }
-    };
+    };*/
     const convertTo = convertToCurrency => convertToken(tokenName, convertToCurrency, getBalance());
     // const converToUSD = convertToCurrency => ConvertToken(tokenName, convertToCurrency, getBalanceUSD());
 

@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from 'react';
 import getRLogin from '../Lib/rLogin';
 import Web3 from 'web3';
-import _ from 'lodash/core';
+//import _ from 'lodash/core';
 import addressHelper from '../Lib/addressHelper';
 import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
-import { getPriceFields } from '../Lib/price';
+//import { getPriceFields } from '../Lib/price';
 import { config } from '../Config/config';
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
@@ -97,7 +97,7 @@ const AuthenticateProvider = ({ children }) => {
         GasPrice: 0,
         truncatedAddress: ''
     });
-    let balanceData;
+    //let balanceData;
     // const [transactionReceipt, setTransactionReceipt] = useState(null);
 
     // Fast BTC socket

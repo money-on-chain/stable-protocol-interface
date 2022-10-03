@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { config } from './../../../Config/config';
 import './style.scss'
 
-import { getKeyThenIncreaseKey } from 'antd/lib/message';
+//import { getKeyThenIncreaseKey } from 'antd/lib/message';
 
 export default function InformationModal({ currencyCode }) {
 

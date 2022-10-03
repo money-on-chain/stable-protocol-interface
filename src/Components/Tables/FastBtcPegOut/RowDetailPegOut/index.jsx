@@ -3,8 +3,8 @@ import { useContext } from 'react'
 import { AuthenticateContext } from "../../../../Context/Auth";
 import { useTranslation } from "react-i18next";
 import { config } from '../../../../Config/config';
-import Web3 from 'web3'
-import BigNumber from "bignumber.js";
+//import Web3 from 'web3'
+//import BigNumber from "bignumber.js";
 
 
 function RowDetailPegOut(props) {

@@ -2,18 +2,18 @@
 import React, {Fragment, useContext} from 'react';
 import { Tooltip } from 'antd';
 import {
-    formatVisibleValue,
+    //formatVisibleValue,
     formatValueVariation,
-    formatPerc,
-    adjustPrecision,
-    formatLocalMap2
+    //formatPerc,
+    //adjustPrecision,
+    //formatLocalMap2
 } from '../../Lib/Formats';
-import i18n from "i18next";
+//import i18n from "i18next";
 import {AuthenticateContext} from "../../Context/Auth";
 import web3 from "web3";
 import {setNumber} from "../../Helpers/helper";
 import {useTranslation} from "react-i18next";
-import {LargeNumber} from "../LargeNumber";
+//import {LargeNumber} from "../LargeNumber";
 import {LargeNumberF3} from "../LargeNumberF3";
 import { config } from '../../Config/config';
 import './style.scss';
@@ -49,6 +49,8 @@ export default function PriceVariation(props) {
                     } else {
                         return 0;
                     }
+                default:
+                    throw new Error('Invalid token name'); 
             }
         }
     };

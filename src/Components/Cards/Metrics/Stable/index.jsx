@@ -4,9 +4,10 @@ import { useTranslation } from "react-i18next";
 import { Skeleton, Tooltip } from 'antd';
 import { LargeNumber } from '../../../LargeNumber';
 import {config} from '../../../../Config/config';
+/*
 import web3 from "web3";
 import {setNumber, setToLocaleString} from "../../../../Helpers/helper";
-import BigNumber from "bignumber.js";
+import BigNumber from "bignumber.js";*/
 
 function Stable(props) {
     const auth = useContext(AuthenticateContext);
