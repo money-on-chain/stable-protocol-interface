@@ -1,11 +1,11 @@
 import { Row, Col, Tooltip } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
+//import { InfoCircleOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { useTranslation } from "react-i18next";
 import { config} from '../../../Config/config';
-import BigNumber from "bignumber.js";
+//import BigNumber from "bignumber.js";
 
 export default function Sovryn(props) {
     const {
@@ -18,6 +18,7 @@ export default function Sovryn(props) {
     const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
     const AppProject = config.environment.AppProject;
 
+    /*
     const getBalance = () => {
         if (auth.userBalanceData) {
             switch (tokenName) {
@@ -27,9 +28,12 @@ export default function Sovryn(props) {
                     return auth.userBalanceData['bproBalance'];
                 case 'riskprox':
                     return auth.userBalanceData['bprox2Balance'];
+                default:
+                    throw new Error('Invalid token name'); 
             }
         }
-    };
+    };*/
+    /*
     const getBalanceUSD = () => {
         if (auth.userBalanceData) {
             switch (tokenName) {
@@ -39,9 +43,11 @@ export default function Sovryn(props) {
                     return auth.contractStatusData["bproPriceInUsd"];
                 case 'riskprox':
                     return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4);
+                default:
+                    throw new Error('Invalid token name'); 
             }
         }
-    };
+    };*/
     return (
         <div className="Card FastCard">
             <Row>

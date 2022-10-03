@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticateContext } from '../../../Context/Auth';
-import { currencies as currenciesDetail, getCurrencyDetail } from '../../../Config/currency';
+//import { currencies as currenciesDetail, getCurrencyDetail } from '../../../Config/currency';
 import { LargeNumber } from "../../LargeNumber";
 import { useTranslation } from "react-i18next";
 import InformationModal from '../../Modals/InformationModal';
@@ -44,6 +44,8 @@ export default function TokenSummaryCard(props) {
                     return setToLocaleString(((auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * auth.web3.utils.fromWei(auth.userBalanceData['bproBalance'])) / auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(!tooltip ? config.environment.tokens.RISKPRO.decimals : 20),!tooltip ? config.environment.tokens.RISKPRO.decimals : 20,i18n)
                 case 'riskprox':
                     return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(!tooltip ? parseInt(config.environment.tokens.RISKPROX.decimals) : 20),!tooltip ? parseInt(config.environment.tokens.RISKPROX.decimals) : 20,i18n)
+                default:
+                    throw new Error('Invalid token name'); 
             }
         } else {
             return (0).toFixed(6)
@@ -61,6 +63,8 @@ export default function TokenSummaryCard(props) {
                 case 'riskprox':
                     // return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2);
                     return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.contractStatusData['bitcoinPrice']) * auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(!tooltip ? 2 : 20),!tooltip ? 2 : 20,i18n)
+                default:
+                    throw new Error('Invalid token name'); 
             }
         } else {
             return (0).toFixed(2)
@@ -68,7 +72,7 @@ export default function TokenSummaryCard(props) {
     };
 
     const { convertToken } = auth;
-    const convertTo = convertToCurrency => convertToken(tokenName, convertToCurrency, 900114098986076075281);
+    //const convertTo = convertToCurrency => convertToken(tokenName, convertToCurrency, 900114098986076075281);
 
     const [loading, setLoading] = useState(true);
     const timeSke= 1500

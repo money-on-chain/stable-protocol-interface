@@ -72,7 +72,7 @@ function Metrics(props) {
         (convertToken && convertToken('RESERVE', 'USD', bproDiscountPriceRBTC)) || 0;
 
     const totalDocAmount = b0DocAmount.plus(x2DocAmount);
-    const totalDocInRBTC = (convertToken && convertToken('STABLE', 'RESERVE', totalDocAmount)) || 0;
+    //const totalDocInRBTC = (convertToken && convertToken('STABLE', 'RESERVE', totalDocAmount)) || 0;
     const totalBproInRBTC = b0BproAmount.multipliedBy(new BigNumber(bproPriceInRbtc).div(10 ** 18));
     const totalBpro = (convertToken && convertToken('RESERVE', 'RISKPRO', totalBproInRBTC)) || 0;
 
@@ -81,8 +81,8 @@ function Metrics(props) {
     ); //new BigNumber(x2BTCAmount);
     const totalBprox = (convertToken && convertToken('RESERVE', 'RISKPROX', totalBproxInRBTC)) || 0;
 
-    const totalBproInUSD = (convertToken && convertToken('RESERVE', 'USD', totalBproInRBTC)) || 0;
-    const totalBproxInUSD = (convertToken && convertToken('RESERVE', 'USD', totalBproxInRBTC)) || 0;
+    //const totalBproInUSD = (convertToken && convertToken('RESERVE', 'USD', totalBproInRBTC)) || 0;
+    //const totalBproxInUSD = (convertToken && convertToken('RESERVE', 'USD', totalBproxInRBTC)) || 0;
     const adjustedTargetCoverage = parseFloat(
         b0TargetCoverage * (bitcoinPrice / Math.min(bitcoinPrice, bitcoinMovingAverage))
     );

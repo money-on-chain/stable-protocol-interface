@@ -3,11 +3,11 @@ import BtcToRbtcGenerateModal from '../../Components/Modals/BtctoRbtcGenerateMod
 import BtcToRbtc from '../../Components/Cards/BtcToRbtc';
 import {Row, Col, Alert} from 'antd';
 import React, {Fragment, useState, useContext, useEffect} from 'react';
-import ListOperations from "../../Components/Tables/ListOperations";
+//import ListOperations from "../../Components/Tables/ListOperations";
 import Sovryn from "../../Components/Cards/Sovryn";
 import { AuthenticateContext } from '../../Context/Auth';
 import { useTranslation, Trans } from "react-i18next";
-import FastBtcPegOut from "../../Components/Tables/FastBtcPegOut";
+//import FastBtcPegOut from "../../Components/Tables/FastBtcPegOut";
 import Table from "../../Components/Tables/FastBtcPegOut/table";
 import { config } from './../../Config/config';
 

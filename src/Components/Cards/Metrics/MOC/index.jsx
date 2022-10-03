@@ -7,8 +7,7 @@ import {config} from '../../../../Config/config';
 
 function MOC(props) {
     const auth = useContext(AuthenticateContext);
-    const { accountData } = auth;
-
+    
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
     const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
     const AppProject = config.environment.AppProject;

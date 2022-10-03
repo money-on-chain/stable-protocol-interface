@@ -1,10 +1,10 @@
 import {useContext, useEffect, useState} from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
-import { DebounceInput } from 'react-debounce-input';
+//import { DebounceInput } from 'react-debounce-input';
 import {
-    formatVisibleValue,
-    formatValueToContract,
-    formatValueWithContractPrecision,
+    //formatVisibleValue,
+    //formatValueToContract,
+    //formatValueWithContractPrecision,
     formatLocalMap2
 } from '../../../Lib/Formats';
 import { Row, Col, Button, Tooltip } from 'antd';
@@ -171,10 +171,7 @@ export default function CoinSelect(props) {
             <Row style={{ marginTop: 20 }}>
                 <Col span={12}>
                     {disabled === false && (
-                        <a
-                            className="FormLabel Selectable"
-                            onClick={addTotalAvailable}
-                        >
+                        <a className="FormLabel Selectable" onClick={addTotalAvailable}>
                             {t('global.InputWithCurrencySelector_AddTotalAvailable', { ns: 'global' })}
                         </a>
                     )}

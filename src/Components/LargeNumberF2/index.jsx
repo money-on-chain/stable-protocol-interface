@@ -1,10 +1,7 @@
 import { Tooltip } from 'antd';
 import NumericLabel from 'react-pretty-numbers';
 import { adjustPrecision, formatLocalMap } from '../../Lib/Formats';
-import i18n from 'i18next';
 import {useTranslation} from "react-i18next";
-import DollarOutlined from '@ant-design/icons/DollarOutlined';
-import { formatLocalMap2 } from '../../Lib/Formats';
 import { config } from './../../Config/config';
 import {getCoinName} from "../../Helpers/helper";
 

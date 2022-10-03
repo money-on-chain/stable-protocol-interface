@@ -26,7 +26,7 @@ import InputWithCurrencySelector from '../Form/InputWithCurrencySelector';
 import {
   formatVisibleValue,
   formatValueToContract,
-  formatValueWithContractPrecision,
+  //formatValueWithContractPrecision,
   formatLocalMap2
 } from '../../Lib/Formats';
 // import { approveReserve } from '../../Lib/nodeManager/nodeManagerRRC20';
@@ -49,15 +49,17 @@ const MintOrRedeemToken = (props) => {
   const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
   const AppProject = config.environment.AppProject;
   const auth = useContext(AuthenticateContext);
-  const {web3} = auth;
+  //const {web3} = auth;
 
   /* Context props */
   const { token, mocState, userState,style } = props;
 
+  /*
   let reservePrice;
   if (mocState && mocState.bitcoinPrice) {
       reservePrice = mocState.bitcoinPrice;
   }
+  */
 
   /* State variable */
   const [currencyYouExchange, setCurrencyYouExchange] = useState('RESERVE');
@@ -221,6 +223,7 @@ const MintOrRedeemToken = (props) => {
     return { interestRate, interestValue };
   };
 
+  /*
   const onConfirmTransaction = async data => {
     userComment = data.comment;
     userTolerance = data.tolerance;
@@ -236,6 +239,7 @@ const MintOrRedeemToken = (props) => {
     }
     // onConfirmTransactionFinish();
   };
+  */
 
   /* const onConfirmTransactionFinish = async () => {
     const exchangeMethod = getExchangeMethod(
@@ -264,13 +268,17 @@ const MintOrRedeemToken = (props) => {
     setShowModalAllowanceReserve(false);
   };
 
+  /*
   const allowanceReserveModalShow = async () => {
     setShowModalAllowanceReserve(true);
   };
+  */
 
+  /*
   const allowanceReserveModalModeWaiting = async () => {
     setModalAllowanceReserveMode('Waiting');
   };
+  */
 
   const renderAllowanceReserveModalConfirm = () => {
     return (

@@ -29,6 +29,7 @@ function Reserve(props) {
         setTimeout(() => setLoading(false), timeSke)
     },[auth]);
 
+    /*
     const setRbtc = () => {
         if (auth.userBalanceData && accountData.Balance) {
             const b0BproAmount = (auth.contractStatusData['b0BproAmount'] / 1000000000000000000).toFixed(6);
@@ -37,8 +38,9 @@ function Reserve(props) {
         } else {
             return { b0BproAmount: 0, docAvailableToRedeem: 0 }
         }
-    };
+    };*/
 
+    /*
     const getPie = () => {
         if (auth.userBalanceData && accountData.Balance) {
             const data = [
@@ -48,7 +50,7 @@ function Reserve(props) {
 
             return data;
         }
-    };
+    };*/
 
     const toShow = ({ totalSTABLE, totalRISKPRO, totalRISKPROX }) => {
         return [

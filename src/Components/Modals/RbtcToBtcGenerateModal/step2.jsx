@@ -11,7 +11,7 @@ function Step2(props) {
 
     const amountInput = useRef();
     const {auth}= props;
-    const {web3}= auth;
+    //const {web3}= auth;
 
     const [currentStep, setCurrentStep]= useState(2);
     const [rbtcAmount, setRbtcAmount]= useState("");
@@ -184,6 +184,8 @@ function Step2(props) {
                         return <Fragment>
                             <Step3 auth={auth} handleClose={handleClose} rbtcAmount={rbtcAmount} rbtcAddress={rbtcAddress}></Step3>
                         </Fragment>
+                    default:
+                        return <Fragment>Invalid step</Fragment>
                 }
             })()}
         </div>

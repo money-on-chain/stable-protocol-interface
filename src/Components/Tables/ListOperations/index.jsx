@@ -15,7 +15,7 @@ import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
-import { LargeNumber } from '../../LargeNumber';
+//import { LargeNumber } from '../../LargeNumber';
 import RowColumn from "../RowDetail/RowColumn";
 
 
