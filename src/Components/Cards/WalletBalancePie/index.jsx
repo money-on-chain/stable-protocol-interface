@@ -177,40 +177,44 @@ function WalletBalancePie(props) {
 
             const userBalances = getUserBalances();
 
+            const projectDecimals = {}
+            projectDecimals['COLLATERAL'] = Number(getDecimals("RESERVE", AppProject));
+            projectDecimals['USD'] = Number(getDecimals("STABLE", AppProject));
+
             const data = [
                 {
                     name: 'Group A',
-                    value: Number(userBalances.doc.usd.toFixed()),
-                    set1: userBalances.doc.collateral.toFixed() +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: userBalances.doc.usd.toFixed() +' '+ t(`${AppProject}.Tokens_STABLE_code`, {ns: ns}),
+                    value: Number(userBalances.doc.usd.toFixed(projectDecimals.USD)),
+                    set1: userBalances.doc.collateral.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: userBalances.doc.usd.toFixed(projectDecimals.USD) +' '+ t(`${AppProject}.Tokens_STABLE_code`, {ns: ns}),
                     class: 'STABLE'
                 },
                 {
                     name: 'Group B',
-                    value: Number(userBalances.bpro.usd.toFixed()),
-                    set1: userBalances.bpro.collateral.toFixed() +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: userBalances.bpro.normal.toFixed() +' '+ t(`${AppProject}.Tokens_RISKPRO_code`, {ns: ns}),
+                    value: Number(userBalances.bpro.usd.toFixed(projectDecimals.USD)),
+                    set1: userBalances.bpro.collateral.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: userBalances.bpro.normal.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RISKPRO_code`, {ns: ns}),
                     class: 'RISKPRO'
                 },
                 {
                     name: 'Group C',
-                    value: Number(userBalances.btcx.usd.toFixed()),
-                    set1: userBalances.btcx.collateral.toFixed() +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: userBalances.btcx.normal.toFixed()  +' '+ t(`${AppProject}.Tokens_RISKPROX_code`, {ns: ns}),
+                    value: Number(userBalances.btcx.usd.toFixed(projectDecimals.USD)),
+                    set1: userBalances.btcx.collateral.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: userBalances.btcx.normal.toFixed(projectDecimals.COLLATERAL)  +' '+ t(`${AppProject}.Tokens_RISKPROX_code`, {ns: ns}),
                     class: 'RISKPROX'
                 },
                 {
                     name: 'Group D',
-                    value: Number(userBalances.moc.usd.toFixed()),
-                    set1: userBalances.moc.collateral.toFixed() + ' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: userBalances.moc.normal.toFixed()  +' '+ t(`${AppProject}.Tokens_MOC_code`, {ns: ns}),
+                    value: Number(userBalances.moc.usd.toFixed(projectDecimals.USD)),
+                    set1: userBalances.moc.collateral.toFixed(projectDecimals.COLLATERAL) + ' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: userBalances.moc.normal.toFixed(projectDecimals.USD)  +' '+ t(`${AppProject}.Tokens_MOC_code`, {ns: ns}),
                     class: 'MOC'
                 },
                 {
                     name: 'Group E',
-                    value: Number(userBalances.collateral.usd.toFixed()),
-                    set1: userBalances.collateral.collateral.toFixed() + ' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: userBalances.collateral.normal.toFixed() +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    value: Number(userBalances.collateral.usd.toFixed(projectDecimals.USD)),
+                    set1: userBalances.collateral.collateral.toFixed(projectDecimals.COLLATERAL) + ' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: userBalances.collateral.normal.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
                     class: 'RBTC_MAIN'
                 }
 
