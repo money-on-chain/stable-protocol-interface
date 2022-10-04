@@ -10,7 +10,8 @@ import {getDecimals} from "../../../Helpers/helper";
 
 import BigNumber from "bignumber.js";
 const AppProject = config.environment.AppProject;
-const COLORS = AppProject === 'MoC' ? ['#00a651', '#ef8a13','#68cdc6','#808080' ] :['#808080','#0062b7','#0062b7','#808080'];
+const BalancePieColors = config.home.walletBalancePie.colors;
+//const COLORS = AppProject === 'MoC' ? ['#00a651', '#ef8a13','#68cdc6','#808080' ] :['#808080','#0062b7','#0062b7','#808080'];
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -242,7 +243,7 @@ function WalletBalancePie(props) {
                         {getPie() !== undefined &&
 
                         getPie().map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`} />
+                            <Cell key={`cell-${index}`} fill={BalancePieColors[index % BalancePieColors.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`} />
                         ))
 
                         }
