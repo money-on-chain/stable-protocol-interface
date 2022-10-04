@@ -139,7 +139,7 @@ export default function TokenSummaryCard(props) {
                         <div className="Number Few">
                             {getBalance()}{' '}
                             {/*{labelCoin}*/}
-                            {getCoinName('COINBASE')}
+                            {getCoinName('RESERVE')}
                         </div>
                     </Tooltip>
                     <Tooltip placement="top" title={getBalanceUSD(true)}>

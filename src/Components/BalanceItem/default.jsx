@@ -6,8 +6,8 @@ import { config } from './../../Config/config';
 const BalanceItem = ({ theme, amount, currencyCode }) => {
 
   const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
-    const AppProject = config.environment.AppProject;
+  const ns = config.environment.AppProject.toLowerCase();
+  const AppProject = config.environment.AppProject;
   const classname = `BalanceItem ${theme}`;
   const currencyName = t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: ns});
   return (
