@@ -27,6 +27,11 @@
   "explorerUrl": "",
   "btcExplorer": "",
   "contractUrl": "https://github.com/money-on-chain/RDOC-Contract",
+  "home": {
+    "walletBalancePie": {
+      "colors": ["#0d84ff", "#1f99ea", "#66baff", "#66cfc8", "#808080"]
+    }
+  },
   "environment": {
     "AppMode": "RRC20",
     "AppProject": "RDoC",
