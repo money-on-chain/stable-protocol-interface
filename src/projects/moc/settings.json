@@ -31,7 +31,7 @@
   "contractUrl": "https://github.com/money-on-chain/main-RBTC-contract",
   "home": {
     "walletBalancePie": {
-      "colors": ["#00a651", "#ef8a13", "#68cdc6", "#66cfc8", "#808080"]
+      "colors": ["#00a651", "#ef8a13", "#ef0a28", "#66cfc8", "#808080"]
     }
   },
   "environment": {
