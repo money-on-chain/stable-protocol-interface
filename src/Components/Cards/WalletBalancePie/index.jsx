@@ -252,12 +252,11 @@ function WalletBalancePie(props) {
                 </PieChart>
             </ResponsiveContainer>
             <span className={'money-RBTC'}>
-                {AppProject == 'MoC' &&
-                    <LargeNumber {...{ amount: Web3.utils.toWei(getBalance(), 'ether'), currencyCode: 'RESERVE', includeCurrency: true}} />
-                }
-                {AppProject != 'MoC' && <LargeNumber {...{ amount: getBalance()*1000000000000000000, currencyCode: 'RESERVE', includeCurrency: true}} />}
+                <LargeNumber {...{ amount: Web3.utils.toWei(getBalance(), 'ether'), currencyCode: 'RESERVE', includeCurrency: true}} />
             </span>
-            <span className={'money-USD'}>{getBalanceUSD()} USD</span>
+            <span className={'money-USD'}>
+                {getBalanceUSD()} USD
+            </span>
         </div>
 
     );
