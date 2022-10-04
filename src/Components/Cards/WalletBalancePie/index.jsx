@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip} from 'recharts';
 import {AuthenticateContext} from "../../../Context/Auth";
-import { adjustPrecision, formatLocalMap, formatLocalMap2 } from '../../../Lib/Formats';
+import { formatLocalMap2 } from '../../../Lib/Formats';
 import {useTranslation} from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
 import Web3 from 'web3';
@@ -11,7 +11,7 @@ import {getDecimals} from "../../../Helpers/helper";
 import BigNumber from "bignumber.js";
 const AppProject = config.environment.AppProject;
 const BalancePieColors = config.home.walletBalancePie.colors;
-//const COLORS = AppProject === 'MoC' ? ['#00a651', '#ef8a13','#68cdc6','#808080' ] :['#808080','#0062b7','#0062b7','#808080'];
+
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -32,17 +32,9 @@ function WalletBalancePie(props) {
     const [t, i18n]= useTranslation(["global",'moc','rdoc']);
     const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
-    // const [colors, setColors] = useState(['#ccc']);
-    // static demoUrl = 'https://codesandbox.io/s/pie-chart-with-padding-angle-7ux0o';
+
     const auth = useContext(AuthenticateContext);
-    const { accountData, balanceRbtc } = useContext(AuthenticateContext);
-
-    useEffect(() => {
-        if(auth.isLoggedIn){
-            // setColors(['#00a651', '#ef8a13','#68cdc6','#808080' ])
-        }
-    }, [auth]);
-
+    const { accountData } = useContext(AuthenticateContext);
 
     const userMocBalance = () =>{
         if (auth.userBalanceData && accountData.Balance) {
