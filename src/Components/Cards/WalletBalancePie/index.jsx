@@ -7,6 +7,13 @@ import {LargeNumber} from "../../LargeNumber";
 import Web3 from 'web3';
 import { config } from './../../../Config/config';
 import {getDecimals} from "../../../Helpers/helper";
+import {
+    userDocBalance,
+    userBproBalance,
+    userBtcxBalance,
+    userMocBalance,
+    userCollateralBalance
+    } from "../../../Helpers/balances";
 
 import BigNumber from "bignumber.js";
 const AppProject = config.environment.AppProject;
@@ -34,83 +41,10 @@ function WalletBalancePie(props) {
     const AppProject = config.environment.AppProject;
 
     const auth = useContext(AuthenticateContext);
-    const { accountData } = useContext(AuthenticateContext);
-
-    const userMocBalance = () =>{
-        if (auth.userBalanceData && accountData.Balance) {
-
-            const mocBalance = new BigNumber(Web3.utils.fromWei(auth.userBalanceData.mocBalance));
-            const mocBalanceUsd = new BigNumber(Web3.utils.fromWei(auth.contractStatusData.mocPrice)).multipliedBy(mocBalance);
-            const mocBalanceCollateral = mocBalanceUsd.div(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)));
-
-            return {
-                'normal': mocBalance,
-                'usd': mocBalanceUsd,
-                'collateral': mocBalanceCollateral
-                }
-        }
-    };
-
-    const userCollateralBalance = () =>{
-        if (auth.userBalanceData && auth.contractStatusData) {
-
-            const collateralBalance = new BigNumber(Web3.utils.fromWei(auth.userBalanceData.rbtcBalance));
-            const collateralBalanceUsd = new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).multipliedBy(collateralBalance);
-            return {
-                'normal': collateralBalance,
-                'usd': collateralBalanceUsd,
-                'collateral': collateralBalance
-                }
-        }
-    };
-
-    const userDocBalance= () =>{
-        if (auth.userBalanceData && accountData.Balance) {
-
-            const docBalance= new BigNumber(Web3.utils.fromWei(auth.userBalanceData['docBalance']));
-            const docBalanceCollateral = docBalance.div(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)));
-            return {
-                'normal': docBalance,
-                'usd': docBalance,
-                'collateral': docBalanceCollateral
-                }
-        }
-    };
-
-    const userBproBalance = () =>{
-        if (auth.userBalanceData && accountData.Balance) {
-
-            const bproBalance = new BigNumber(Web3.utils.fromWei(auth.userBalanceData.bproBalance));
-            const bproBalanceUsd = new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bproPriceInUsd)).multipliedBy(bproBalance);
-            const bproBalanceCollateral = bproBalanceUsd.div(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)));
-
-            return {
-                'normal': bproBalance,
-                'usd': bproBalanceUsd,
-                'collateral': bproBalanceCollateral
-                }
-        }
-    };
-
-    const userBtcxBalance = () =>{
-        if (auth.userBalanceData && accountData.Balance) {
-
-            const btcxBalance = new BigNumber(Web3.utils.fromWei(auth.userBalanceData['bprox2Balance']));
-            const btcxBalanceCollateral = new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bprox2PriceInRbtc))
-                .multipliedBy(btcxBalance);
-            const btcxBalanceUsd = btcxBalanceCollateral
-                .multipliedBy(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)))
-
-            return {
-                'normal': btcxBalance,
-                'usd': btcxBalanceUsd,
-                'collateral': btcxBalanceCollateral
-                }
-        }
-    };
+    //const { accountData } = useContext(AuthenticateContext);
 
     const getBalanceUSD = () => {
-        if (auth.userBalanceData && accountData.Balance) {
+        if (auth.userBalanceData) {
 
             const userBalances = getUserBalances();
 
@@ -136,18 +70,18 @@ function WalletBalancePie(props) {
     const getUserBalances = () => {
 
         const userBalances = {}
-        userBalances['doc'] = userDocBalance();
-        userBalances['bpro'] = userBproBalance();
-        userBalances['moc'] = userMocBalance();
-        userBalances['btcx'] = userBtcxBalance();
-        userBalances['collateral'] = userCollateralBalance();
+        userBalances['doc'] = userDocBalance(auth);
+        userBalances['bpro'] = userBproBalance(auth);
+        userBalances['moc'] = userMocBalance(auth);
+        userBalances['btcx'] = userBtcxBalance(auth);
+        userBalances['collateral'] = userCollateralBalance(auth);
 
         return userBalances;
 
     }
 
     const getBalance = () => {
-        if (auth.userBalanceData && accountData.Balance) {
+        if (auth.userBalanceData) {
             const userBalances = getUserBalances();
 
             const totalBalances = BigNumber.sum(
@@ -166,7 +100,7 @@ function WalletBalancePie(props) {
     };
 
     const getPie = () => {
-        if (auth.userBalanceData && accountData.Balance) {
+        if (auth.userBalanceData) {
 
             const userBalances = getUserBalances();
 
