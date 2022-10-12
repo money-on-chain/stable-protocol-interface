@@ -336,6 +336,7 @@ export const toNumberFormat = (value, decimals = 0) => {
     });
 }
 
+/*
 export const set_doc_usd= (auth) =>{
     if (auth.userBalanceData) {
         const doc_usd= new BigNumber(auth.userBalanceData['docBalance'])
@@ -345,6 +346,7 @@ export const set_doc_usd= (auth) =>{
         return {'normal':(0).toFixed(6), 'usd':(0).toFixed(2)}
     }
 };
+*/
 
 export const myParseDate = date_string => {
     let [y,M,d,h,m,s] = date_string.split(/[- :T]/);
@@ -530,26 +532,6 @@ export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro
     let toGetNow  = toGetToday.multipliedBy((timediff-time_left)/(timediff));
 
     return {toGetToday, toGetNow, time_left}
-}
-
-export function getUSD(coin,value,auth,i18n=null){
-    if (auth.contractStatusData) {
-        switch (coin) {
-            case 'STABLE':
-                return  setToLocaleString(new BigNumber(1 * Web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'RISKPRO':
-                return  setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * Web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'MOC':
-                return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData['mocPrice']) * Web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'RESERVE':
-                return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * Web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'RISKPROX':
-                return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice, 'ether') * Web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'], 'ether') * Web3.utils.fromWei(setNumber(value))),2,i18n)
-
-        }
-    }else{
-        return 0
-    }
 }
 
 export function getCoinName(coin){

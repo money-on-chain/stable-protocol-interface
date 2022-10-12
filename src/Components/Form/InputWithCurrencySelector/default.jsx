@@ -14,7 +14,7 @@ import {
 import { useTranslation } from "react-i18next";
 import BigNumber from "bignumber.js";
 import {AuthenticateContext} from "../../../Context/Auth";
-import {getUSD} from "../../../Helpers/helper";
+import {getUSD} from "../../../Helpers/balances";
 
 export default function InputWithCurrencySelector(props) {
   const {
