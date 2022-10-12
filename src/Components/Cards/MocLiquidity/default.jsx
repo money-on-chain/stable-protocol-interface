@@ -86,7 +86,7 @@ function MocLiquidity(props) {
                                 toGetToday,
                                 toGetNow,
                                 time_left
-                            } = getRewardedToday(response.daily_moc, userBalanceData.bproBalance, response.total_bpro, response.end_block_dt)
+                            } = getRewardedToday(response.daily_moc, userBalanceData.liquidityCollateralToken, response.total_bpro, response.end_block_dt)
                             setRewardedToday({toGetToday: toGetToday, toGetNow: toGetNow, time_left: time_left});
                         })
                         .catch((response) => {

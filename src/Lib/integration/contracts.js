@@ -93,6 +93,17 @@ const readContracts = async (web3, environment) => {
   const riskprotoken = new web3.eth.Contract(RiskProToken.abi, riskproTokenAddress)
   dContracts.contracts.riskprotoken = riskprotoken
 
+  console.log("DEBUG");
+  console.log(environment.LiquidityCollateralToken)
+  if (environment.LiquidityCollateralToken) {
+    console.log('Reading Liquidity Collateral Token Contract... address: ', riskproTokenAddress)
+    const liquiditycollateraltoken = new web3.eth.Contract(RiskProToken.abi, environment.LiquidityCollateralToken)
+    dContracts.contracts.liquiditycollateraltoken = liquiditycollateraltoken
+  } else {
+    console.log('Using Collateral token as Liquidity Collateral Token Contract... address: ', riskproTokenAddress)
+    dContracts.contracts.liquiditycollateraltoken = riskprotoken
+  }
+
   if (appMode === 'RRC20') {
     console.log('Reading RESERVE Token Contract... address: ', reserveTokenAddress)
     const reservetoken = new web3.eth.Contract(ReserveToken.abi, reserveTokenAddress)

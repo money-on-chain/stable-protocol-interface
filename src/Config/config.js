@@ -20,6 +20,7 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_BTC_EXPLORER) projSettings.btcExplorer = process.env.REACT_APP_BTC_EXPLORER;
     if (process.env.REACT_APP_RNS_ADDRESS) projSettings.rns.address = process.env.REACT_APP_RNS_ADDRESS;
     if (process.env.REACT_APP_RNS_URL) projSettings.rns.url = process.env.REACT_APP_RNS_URL;
+    if (process.env.REACT_APP_LIQUIDITY_COLLATERAL_TOKEN) projSettings.environment.LiquidityCollateralToken = process.env.REACT_APP_LIQUIDITY_COLLATERAL_TOKEN;
 
     return projSettings
 }
