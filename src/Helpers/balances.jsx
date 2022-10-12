@@ -2,7 +2,7 @@ import Web3 from 'web3';
 import BigNumber from "bignumber.js";
 import { setToLocaleString, setNumber } from "./helper";
 import { config } from "../Config/config";
-import { precision } from "../Lib/Formats";
+import { precisionDecimals } from "../Lib/Formats";
 
 
 const userDocBalance= (auth) =>{
@@ -117,9 +117,9 @@ const getUserBalance = (auth, i18n, tokenName) => {
         result = {
             'normal': setToLocaleString(notFormatted.normal.toFixed(rDecimals), rDecimals, i18n),
             'normal_tooltip': setToLocaleString(notFormatted.normal.toFixed(12), 12, i18n),
-            'usd': setToLocaleString(notFormatted.usd.toFixed(rDecimals), rDecimals, i18n),
+            'usd': setToLocaleString(notFormatted.usd.toFixed(parseInt(config.tokens.STABLE.decimals)), parseInt(config.tokens.STABLE.decimals), i18n),
             'usd_tooltip': setToLocaleString(notFormatted.usd.toFixed(12), 12, i18n),
-            'collateral': setToLocaleString(notFormatted.collateral.toFixed(rDecimals), rDecimals, i18n),
+            'collateral': setToLocaleString(notFormatted.collateral.toFixed(parseInt(config.tokens.RESERVE.decimals)), parseInt(config.tokens.RESERVE.decimals), i18n),
             'collateral_tooltip': setToLocaleString(notFormatted.collateral.toFixed(12), 12, i18n),
             'raw': {
                 'normal': notFormatted.normal.multipliedBy(10**18),

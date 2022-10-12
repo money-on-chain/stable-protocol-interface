@@ -120,8 +120,7 @@ export default function TokenSummaryCard(props) {
                     type="primary"
                     shape="circle"
                     onClick={() => navigate(page)}
-                    icon={<ArrowRightOutlined
-                    />}
+                    icon={<ArrowRightOutlined />}
                 />
             </Col></>:
                 <Skeleton active={true}  paragraph={{ rows: 2 }}></Skeleton>
