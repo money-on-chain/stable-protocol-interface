@@ -8,10 +8,10 @@ import { AuthenticateContext } from '../../../Context/Auth';
 import { LargeNumber } from "../../LargeNumber";
 import { useTranslation } from "react-i18next";
 import InformationModal from '../../Modals/InformationModal';
-import {getCoinName, setToLocaleString} from "../../../Helpers/helper";
+import {getCoinName} from "../../../Helpers/helper";
 import { config } from "../../../Config/config";
 
-import { userDocBalance, userBproBalance, userBtcxBalance } from "../../../Helpers/balances";
+import { getUserBalance } from "../../../Helpers/balances";
 
 
 const styleCentered = {
@@ -33,51 +33,12 @@ export default function TokenSummaryCard(props) {
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc'])
 
-    const getUserBalance = () => {
 
-        let result = {
-            'normal': (0).toFixed(6),
-            'usd': (0).toFixed(6),
-            'usd_tooltip': (0).toFixed(12),
-            'collateral': (0).toFixed(6),
-            'collateral_tooltip': (0).toFixed(12)
-        }
-        if (auth.userBalanceData && auth.contractStatusData) {
-            let rDecimals;
-            let notFormatted;
-            switch (tokenName) {
-                case 'stable':
-                    rDecimals = parseInt(config.environment.tokens.STABLE.decimals);
-                    notFormatted = userDocBalance(auth);
-                    break;
-                case 'riskpro':
-                    rDecimals = parseInt(config.environment.tokens.RISKPRO.decimals);
-                    notFormatted = userBproBalance(auth);
-                    break;
-                case 'riskprox':
-                    rDecimals = parseInt(config.environment.tokens.RISKPROX.decimals);
-                    notFormatted = userBtcxBalance(auth);
-                    break;
-                default:
-                    throw new Error('Invalid token name');
-            }
-
-            result = {
-                'normal': setToLocaleString(notFormatted.normal.toFixed(rDecimals), rDecimals, i18n),
-                'usd': setToLocaleString(notFormatted.usd.toFixed(rDecimals), rDecimals, i18n),
-                'usd_tooltip': setToLocaleString(notFormatted.usd.toFixed(12), 12, i18n),
-                'collateral': setToLocaleString(notFormatted.collateral.toFixed(rDecimals), rDecimals, i18n),
-                'collateral_tooltip': setToLocaleString(notFormatted.collateral.toFixed(12), 12, i18n),
-            }
-        }
-        return result;
-    };
-    
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
     const AppProject = config.environment.AppProject;
 
-    const userBalance = getUserBalance();
+    const userBalance = getUserBalance(auth, i18n, tokenName);
 
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke);
