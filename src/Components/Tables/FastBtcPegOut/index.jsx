@@ -50,7 +50,7 @@ export default function FastBtcPegOut(props) {
         if(auth.isLoggedIn) {
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.operations}` + 'webapp/fastbtc/pegout/', {address: accountData.Owner})
+                    api('get', `${config.environment.api.operations}` + 'webapp/fastbtc/pegout/', {address: accountData.Owner})
                         .then(response => {
                             setDataJson(response);
                             setTotalTable(response.total)

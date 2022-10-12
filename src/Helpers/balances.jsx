@@ -99,15 +99,15 @@ const getUserBalance = (auth, i18n, tokenName) => {
         let notFormatted;
         switch (tokenName.toLowerCase()) {
             case 'stable':
-                rDecimals = parseInt(config.environment.tokens.STABLE.decimals);
+                rDecimals = parseInt(config.tokens.STABLE.decimals);
                 notFormatted = userDocBalance(auth);
                 break;
             case 'riskpro':
-                rDecimals = parseInt(config.environment.tokens.RISKPRO.decimals);
+                rDecimals = parseInt(config.tokens.RISKPRO.decimals);
                 notFormatted = userBproBalance(auth);
                 break;
             case 'riskprox':
-                rDecimals = parseInt(config.environment.tokens.RISKPROX.decimals);
+                rDecimals = parseInt(config.tokens.RISKPROX.decimals);
                 notFormatted = userBtcxBalance(auth);
                 break;
             default:

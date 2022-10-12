@@ -56,7 +56,7 @@ export default function Claims(props) {
             const datas = {address: accountData.Owner, limit: 20, skip: (((skip - 1) + (skip - 1)) * 10)}
             setTimeout(() => {
                 try {
-                    api('get', config.api.incentives + 'claims/' + accountData.Owner, datas)
+                    api('get', config.environment.api.incentives + 'claims/' + accountData.Owner, datas)
                         .then(response => {
                             setDataJson(response);
                             setTotalTable(response.total)

@@ -8,7 +8,7 @@ import { getTransactionType } from './exchangeHelper';
 import { config } from '../Config/config';
 
 import BigNumber from "bignumber.js";
-const RBTCPrecision = config.environment.Precisions.RBTCPrecision;
+const RBTCPrecision = config.Precisions.RBTCPrecision;
 
 const convertAmount2222 = (source, target, amount, convertToken) => {
   if (amount === '') {
@@ -138,7 +138,7 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
   if(!convertToken) return {};
 
   // const vendor = { address: "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076", markup: "500000000000000" };
-  const vendor = config.vendor;
+  const vendor = config.environment.vendor;
 
   const valueYouExchangeInRESERVE = convertToken(currencyYouExchange, "RESERVE", valueYouExchange);
   const valueYouExchangeInMOC = convertToken("RESERVE", "MOC", valueYouExchangeInRESERVE);

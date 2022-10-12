@@ -42,7 +42,7 @@ const mintStableRRC20 = async (interfaceContext, reserveAmount, mintSlippage, on
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
-  const { environment } = config;
+  const { environment, tokens } = config;
 
   // get bitcoin price from contract
   const bitcoinPrice = new BigNumber(Web3.utils.fromWei(contractStatusData.bitcoinPrice))
@@ -64,18 +64,18 @@ const mintStableRRC20 = async (interfaceContext, reserveAmount, mintSlippage, on
   // Verifications
 
   // User have suficient reserve to pay?
-  console.log(`To mint ${stableAmount} ${environment.tokens.STABLE.name} you need > ${valueToSend.toString()} ${environment.tokens.RESERVE.name} in your balance`)
+  console.log(`To mint ${stableAmount} ${tokens.STABLE.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your balance`)
   const userReserveBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.rbtcBalance))
   if (valueToSend.gt(userReserveBalance)) throw new Error('Insuficient reserve balance')
 
   // Allowance    reserveAllowance
-  console.log(`Allowance: To mint ${stableAmount} ${environment.tokens.STABLE.name} you need > ${valueToSend.toString()} ${environment.tokens.RESERVE.name} in your spendable balance`)
+  console.log(`Allowance: To mint ${stableAmount} ${tokens.STABLE.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your spendable balance`)
   const userSpendableBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.reserveAllowance))
   if (valueToSend.gt(userSpendableBalance)) throw new Error('Insuficient spendable balance... please make an allowance to the MoC contract')
 
   // There are suficient STABLE in the contracts to mint?
   const stableAvalaiblesToMint = new BigNumber(Web3.utils.fromWei(contractStatusData.docAvailableToMint))
-  if (new BigNumber(stableAmount).gt(stableAvalaiblesToMint)) throw new Error(`Insuficient ${environment.tokens.STABLE.name} avalaibles to mint`)
+  if (new BigNumber(stableAmount).gt(stableAvalaiblesToMint)) throw new Error(`Insuficient ${tokens.STABLE.name} avalaibles to mint`)
 
   // Mint STABLE RRC20 function... no values sent
   valueToSend = null
@@ -108,7 +108,7 @@ const redeemStableRRC20 = async (interfaceContext, stableAmount, mintSlippage, o
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
-  const { environment } = config;
+  const { environment, tokens } = config;
 
   // get bitcoin price from contract
   const bitcoinPrice = new BigNumber(Web3.utils.fromWei(contractStatusData.bitcoinPrice))
@@ -122,13 +122,13 @@ const redeemStableRRC20 = async (interfaceContext, stableAmount, mintSlippage, o
   // Verifications
 
   // User have suficient STABLE in balance?
-  console.log(`Redeeming ${stableAmount} ${environment.tokens.STABLE.name} ... getting aprox: ${reserveAmount} ${environment.tokens.RESERVE.name}... `)
+  console.log(`Redeeming ${stableAmount} ${tokens.STABLE.name} ... getting aprox: ${reserveAmount} ${tokens.RESERVE.name}... `)
   const userStableBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.docBalance))
-  if (new BigNumber(stableAmount).gt(userStableBalance)) throw new Error(`Insuficient ${environment.tokens.STABLE.name}  user balance`)
+  if (new BigNumber(stableAmount).gt(userStableBalance)) throw new Error(`Insuficient ${tokens.STABLE.name}  user balance`)
 
   // There are suficient Free Stable in the contracts to redeem?
   const stableAvalaiblesToRedeem = new BigNumber(Web3.utils.fromWei(contractStatusData.docAvailableToRedeem))
-  if (new BigNumber(stableAmount).gt(stableAvalaiblesToRedeem)) throw new Error(`Insuficient ${environment.tokens.STABLE.name}  avalaibles to redeem in contract`)
+  if (new BigNumber(stableAmount).gt(stableAvalaiblesToRedeem)) throw new Error(`Insuficient ${tokens.STABLE.name}  avalaibles to redeem in contract`)
 
   const moc = dContracts.contracts.moc
 
@@ -158,7 +158,7 @@ const mintRiskProRRC20 = async (interfaceContext, reserveAmount, mintSlippage, o
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
-  const { environment } = config;
+  const { environment, tokens } = config;
 
   // Price of RISKPRO in RESERVE
   const riskproPriceInReserve = new BigNumber(Web3.utils.fromWei(contractStatusData.bproPriceInRbtc))
@@ -181,12 +181,12 @@ const mintRiskProRRC20 = async (interfaceContext, reserveAmount, mintSlippage, o
   // Verifications
 
   // User have suficient reserve to pay?
-  console.log(`To mint ${riskproAmount} ${environment.tokens.RISKPRO.name} you need > ${valueToSend.toString()} ${environment.tokens.RESERVE.name} in your balance`)
+  console.log(`To mint ${riskproAmount} ${tokens.RISKPRO.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your balance`)
   const userReserveBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.rbtcBalance))
   if (valueToSend.gt(userReserveBalance)) throw new Error('Insuficient reserve balance')
 
   // Allowance    reserveAllowance
-  console.log(`Allowance: To mint ${riskproAmount} ${environment.tokens.RISKPRO.name} you need > ${valueToSend.toString()} ${environment.tokens.RESERVE.name} in your spendable balance`)
+  console.log(`Allowance: To mint ${riskproAmount} ${tokens.RISKPRO.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your spendable balance`)
   const userSpendableBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.reserveAllowance))
   if (valueToSend.gt(userSpendableBalance)) throw new Error('Insuficient spendable balance... please make an allowance to the MoC contract')
 
@@ -219,7 +219,7 @@ const redeemRiskProRRC20 = async (interfaceContext, riskproAmount, mintSlippage,
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
-  const { environment } = config;
+  const { environment, tokens } = config;
 
 
   // Price of RISKPRO in RESERVE
@@ -234,13 +234,13 @@ const redeemRiskProRRC20 = async (interfaceContext, riskproAmount, mintSlippage,
   // Verifications
 
   // User have suficient RISKPRO in balance?
-  console.log(`Redeeming ${riskproAmount} ${environment.tokens.RISKPRO.name} ... getting aprox: ${reserveAmount} ${environment.tokens.RESERVE.name}... `)
+  console.log(`Redeeming ${riskproAmount} ${tokens.RISKPRO.name} ... getting aprox: ${reserveAmount} ${tokens.RESERVE.name}... `)
   const userRiskproBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.bproBalance))
-  if (new BigNumber(riskproAmount).gt(userRiskproBalance)) throw new Error(`Insuficient ${environment.tokens.RISKPRO.name} user balance`)
+  if (new BigNumber(riskproAmount).gt(userRiskproBalance)) throw new Error(`Insuficient ${tokens.RISKPRO.name} user balance`)
 
   // There are suficient RISKPRO in the contracts to redeem?
   const riskproAvailableToRedeem = new BigNumber(Web3.utils.fromWei(contractStatusData.bproAvailableToRedeem))
-  if (new BigNumber(riskproAmount).gt(riskproAvailableToRedeem)) throw new Error(`Insuficient ${environment.tokens.RISKPRO.name} avalaibles to redeem in contract`)
+  if (new BigNumber(riskproAmount).gt(riskproAvailableToRedeem)) throw new Error(`Insuficient ${tokens.RISKPRO.name} avalaibles to redeem in contract`)
 
   const moc = dContracts.contracts.moc
 
@@ -270,7 +270,7 @@ const mintRiskProxRRC20 = async (interfaceContext, reserveAmount, mintSlippage, 
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
-  const { environment } = config;
+  const { environment, tokens } = config;
 
   // Price of Riskprox in coinbase
   const bprox2PriceInReserve = new BigNumber(Web3.utils.fromWei(contractStatusData.bprox2PriceInRbtc))
@@ -299,13 +299,13 @@ const mintRiskProxRRC20 = async (interfaceContext, reserveAmount, mintSlippage, 
   // Verifications
 
   // User have suficient reserve to pay?
-  console.log(`To mint ${riskproxAmount}  ${environment.tokens.RISKPROX.name} you need > ${valueToSend.toString()} ${environment.tokens.RESERVE.name} in your balance`)
+  console.log(`To mint ${riskproxAmount}  ${tokens.RISKPROX.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your balance`)
   const userReserveBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.rbtcBalance))
   if (valueToSend.gt(userReserveBalance)) throw new Error('Insuficient reserve balance')
 
   // There are suficient RISKPROX in the contracts to mint?
   const riskproxAvalaiblesToMint = new BigNumber(Web3.utils.fromWei(contractStatusData.bprox2AvailableToMint))
-  if (new BigNumber(riskproxAmount).gt(riskproxAvalaiblesToMint)) throw new Error(`Insuficient ${environment.tokens.RISKPROX.name} avalaibles to mint`)
+  if (new BigNumber(riskproxAmount).gt(riskproxAvalaiblesToMint)) throw new Error(`Insuficient ${tokens.RISKPROX.name} avalaibles to mint`)
 
   valueToSend = null
   const moc = dContracts.contracts.moc
@@ -336,7 +336,7 @@ const redeemRiskProxRRC20 = async (interfaceContext, riskproxAmount, mintSlippag
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
-  const { environment } = config;
+  const { environment, tokens } = config;
 
   // Price of Riskprox in RESERVE
   const riskproxPriceInReserve = new BigNumber(Web3.utils.fromWei(contractStatusData.bprox2PriceInRbtc))
@@ -350,9 +350,9 @@ const redeemRiskProxRRC20 = async (interfaceContext, riskproxAmount, mintSlippag
   // Verifications
 
   // User have suficient RISKPROx in balance?
-  console.log(`Redeeming ${riskproxAmount} ${environment.tokens.RISKPROX.name}  ... getting aprox: ${reserveAmount} ${environment.tokens.RESERVE.name} ... `)
+  console.log(`Redeeming ${riskproxAmount} ${tokens.RISKPROX.name}  ... getting aprox: ${reserveAmount} ${tokens.RESERVE.name} ... `)
   const userRiskproxBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.bprox2Balance))
-  if (new BigNumber(riskproxAmount).gt(userRiskproxBalance)) throw new Error(`Insuficient ${environment.tokens.RISKPROX.name}  user balance`)
+  if (new BigNumber(riskproxAmount).gt(userRiskproxBalance)) throw new Error(`Insuficient ${tokens.RISKPROX.name}  user balance`)
 
   const moc = dContracts.contracts.moc
 

@@ -27,7 +27,7 @@ function MocLiquidity(props) {
         if(auth.isLoggedIn) {
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.incentives}` + 'agent/', {})
+                    api('get', `${config.environment.api.incentives}` + 'agent/', {})
                         .then(response => {
                             setIncentiveState(response);
                         })
@@ -79,7 +79,7 @@ function MocLiquidity(props) {
         if(auth.isLoggedIn) {
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.incentives}balance/${accountData.Owner}`, {})
+                    api('get', `${config.environment.api.incentives}balance/${accountData.Owner}`, {})
                         .then(response => {
                             setClaimsValue(response);
                             const {
@@ -110,7 +110,7 @@ function MocLiquidity(props) {
         const datas = {address: accountData.Owner, limit: 20, skip: (((1 - 1) + (1 - 1)) * 10)}
         setTimeout(() => {
             try {
-                api('get', config.api.incentives + 'claims/' + accountData.Owner, datas)
+                api('get', config.environment.api.incentives + 'claims/' + accountData.Owner, datas)
                     .then(response => {
                         const disabled = response.some((e) => (moment.unix(e.creation).format("MM/DD/YYYY") === today));
                         setEnableButtonClaim(disabled);

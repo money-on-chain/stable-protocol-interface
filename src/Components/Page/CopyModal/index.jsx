@@ -17,7 +17,7 @@ export default function CopyModal(props) {
 
     return (
         <><span style={{ display: fastBTC && 'flex','fontSize':'12px'}} className={'copy-txt'}>
-            <a className="" href={`${config.explorerUrl}/address/${textToCopy}`} target="_blank">
+            <a className="" href={`${config.environment.explorerUrl}/address/${textToCopy}`} target="_blank">
                 {textToShow}
             </a>
         </span>

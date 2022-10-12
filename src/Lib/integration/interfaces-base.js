@@ -10,7 +10,7 @@ const addCommissions = async (interfaceContext, reserveAmount, token, action) =>
 
   const { web3, contractStatusData, userBalanceData, config, account, vendorAddress } = interfaceContext;
   const dContracts = window.integration;
-  const {environment} = config;
+  const {environment, tokens} = config;
 
   // get reserve price from contract
   const reservePrice = new BigNumber(Web3.utils.fromWei(contractStatusData.bitcoinPrice))

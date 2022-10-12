@@ -30,7 +30,7 @@ function RowDetail(props) {
                     <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">{props.detail.confirmation}   </td>
                     <th className="ant-descriptions-item-label-th ant-descriptions-border-bottom" colSpan="1">{t(`${AppProject}.operations.columns_detailed.txRequest`, { ns: ns })}</th>
                     <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">
-                        <a className="ant-descriptions-a" href={`${config.explorerUrl}/tx/${props.detail.hash}`} target="_blank">
+                        <a className="ant-descriptions-a" href={`${config.environment.explorerUrl}/tx/${props.detail.hash}`} target="_blank">
                             <span>{props.detail.truncate_hash}</span>
                         </a>
                     </td>
@@ -46,7 +46,7 @@ function RowDetail(props) {
                     </td>
                     <th className="ant-descriptions-item-label-th ant-descriptions-border-bottom" colSpan="1">{t(`${AppProject}.operations.columns_detailed.txSent`, { ns: ns })}</th>
                     <td className="ant-descriptions-item-content ant-descriptions-border-bottom" colSpan="1">
-                        <a className="ant-descriptions-a" href={`${config.explorerUrl}/tx/${props.detail.sent_hash}`} target="_blank">
+                        <a className="ant-descriptions-a" href={`${config.environment.explorerUrl}/tx/${props.detail.sent_hash}`} target="_blank">
                             <span>{props.detail.truncate_sent_hash}</span>
                         </a>
                     </td>
