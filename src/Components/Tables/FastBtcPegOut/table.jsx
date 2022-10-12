@@ -111,7 +111,7 @@ const Table = ({ accountData }) => {
               size="small"
               onClick={() =>
                 window.open(
-                  `${record.type === 'deposit' ? config.btcExplorer : config.explorerUrl}/tx/${
+                  `${record.type === 'deposit' ? config.environment.btcExplorer : config.environment.explorerUrl}/tx/${
                     record.txHash
                   }`
                 )

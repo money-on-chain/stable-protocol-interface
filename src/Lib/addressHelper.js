@@ -2,7 +2,8 @@
 import rskUtils from 'rskjs-util';
 import { config } from '../Config/config';
 
-const { forceChecksumAddressInput, forceRskIp60Addresses, chainId } = config;
+const { forceChecksumAddressInput, forceRskIp60Addresses } = config;
+const { chainId } = config.environment;
 
 const toWeb3CheckSumAddress = web3 => address => {
   return web3.utils.toChecksumAddress(address);

@@ -62,7 +62,7 @@ function RowColumn(props) {
             <tr className="ant-descriptions-row">
                 <th className="ant-descriptions-item-label-th" colSpan="1">{t(`${AppProject}.operations.columns_detailed.tx`, { ns: ns })}</th>
                 <td className="ant-descriptions-item-content" colSpan="1">
-                    <a className="ant-descriptions-a" href={`${config.explorerUrl}/tx/${props.detail.tx_hash}`} target="_blank">
+                    <a className="ant-descriptions-a" href={`${config.environment.explorerUrl}/tx/${props.detail.tx_hash}`} target="_blank">
                         <span>{props.detail.tx_hash_truncate}         </span>
                     </a>
                 </td>

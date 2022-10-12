@@ -200,7 +200,7 @@ const AuthenticateProvider = ({ children }) => {
             balanceRbtc,
             config,
             account,
-            vendorAddress: config.vendor.address
+            vendorAddress: config.environment.vendor.address
         }
 
     }

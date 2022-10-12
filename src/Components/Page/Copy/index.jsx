@@ -15,10 +15,10 @@ export default function Copy(props) {
         });
     };
 
-    let url_set=config.explorerUrl+'/address/'+textToCopy
+    let url_set=config.environment.explorerUrl+'/address/'+textToCopy
     switch (typeUrl){
         case "tx":
-            url_set=config.explorerUrl+'/tx/'+textToCopy
+            url_set=config.environment.explorerUrl+'/tx/'+textToCopy
             break;
         default:
             break;

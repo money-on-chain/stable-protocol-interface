@@ -16,7 +16,7 @@ const getRLogin = (port) => {
 
 
 
-    const chainId = config.chainId;
+    const chainId = config.environment.chainId;
     var selectedNetwork = {};
     selectedNetwork[parseInt(chainId)] = rpcUrls[parseInt(chainId)];
 

@@ -70,7 +70,7 @@ export default function ListOperations(props) {
             const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.operations}`+'webapp/transactions/list/', datas)
+                    api('get', `${config.environment.api.operations}`+'webapp/transactions/list/', datas)
                         .then(response => {
                             setDataJson(response);
                             setTotalTable(response.total)

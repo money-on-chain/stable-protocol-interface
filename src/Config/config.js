@@ -11,16 +11,16 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_ENVIRONMENT_MULTICALL2) projSettings.environment.Multicall2 = process.env.REACT_APP_ENVIRONMENT_MULTICALL2;
     if (process.env.REACT_APP_ENVIRONMENT_IREGISTRY) projSettings.environment.IRegistry = process.env.REACT_APP_ENVIRONMENT_IREGISTRY;
     if (process.env.REACT_APP_ENVIRONMENT_FASTBTC_BRIDGE_ADDRESS) projSettings.environment.fastBtcBridgeAddress = process.env.REACT_APP_ENVIRONMENT_FASTBTC_BRIDGE_ADDRESS;
-    if (process.env.REACT_APP_API_OPERATIONS) projSettings.api.operations = process.env.REACT_APP_API_OPERATIONS;
-    if (process.env.REACT_APP_API_INCENTIVES) projSettings.api.incentives = process.env.REACT_APP_API_INCENTIVES;
-    if (process.env.REACT_APP_CHAIN_ID) projSettings.chainId = process.env.REACT_APP_CHAIN_ID;
-    if (process.env.REACT_APP_VENDOR_ADDRESS) projSettings.vendor.address = process.env.REACT_APP_VENDOR_ADDRESS;
-    if (process.env.REACT_APP_VENDOR_MARKUP) projSettings.vendor.markup = process.env.REACT_APP_VENDOR_MARKUP;
-    if (process.env.REACT_APP_EXPLORER_URL) projSettings.explorerUrl = process.env.REACT_APP_EXPLORER_URL;
-    if (process.env.REACT_APP_BTC_EXPLORER) projSettings.btcExplorer = process.env.REACT_APP_BTC_EXPLORER;
-    if (process.env.REACT_APP_RNS_ADDRESS) projSettings.rns.address = process.env.REACT_APP_RNS_ADDRESS;
-    if (process.env.REACT_APP_RNS_URL) projSettings.rns.url = process.env.REACT_APP_RNS_URL;
-    if (process.env.REACT_APP_LIQUIDITY_COLLATERAL_TOKEN) projSettings.environment.LiquidityCollateralToken = process.env.REACT_APP_LIQUIDITY_COLLATERAL_TOKEN;
+    if (process.env.REACT_APP_ENVIRONMENT_API_OPERATIONS) projSettings.environment.api.operations = process.env.REACT_APP_ENVIRONMENT_API_OPERATIONS;
+    if (process.env.REACT_APP_ENVIRONMENT_API_INCENTIVES) projSettings.environment.api.incentives = process.env.REACT_APP_ENVIRONMENT_API_INCENTIVES;
+    if (process.env.REACT_APP_ENVIRONMENT_CHAIN_ID) projSettings.environment.chainId = process.env.REACT_APP_ENVIRONMENT_CHAIN_ID;
+    if (process.env.REACT_APP_ENVIRONMENT_VENDOR_ADDRESS) projSettings.environment.vendor.address = process.env.REACT_APP_ENVIRONMENT_VENDOR_ADDRESS;
+    if (process.env.REACT_APP_ENVIRONMENT_VENDOR_MARKUP) projSettings.environment.vendor.markup = process.env.REACT_APP_ENVIRONMENT_VENDOR_MARKUP;
+    if (process.env.REACT_APP_ENVIRONMENT_EXPLORER_URL) projSettings.environment.explorerUrl = process.env.REACT_APP_ENVIRONMENT_EXPLORER_URL;
+    if (process.env.REACT_APP_ENVIRONMENT_BTC_EXPLORER) projSettings.environment.btcExplorer = process.env.REACT_APP_ENVIRONMENT_BTC_EXPLORER;
+    if (process.env.REACT_APP_ENVIRONMENT_RNS_ADDRESS) projSettings.environment.rns.address = process.env.REACT_APP_ENVIRONMENT_RNS_ADDRESS;
+    if (process.env.REACT_APP_ENVIRONMENT_RNS_URL) projSettings.environment.rns.url = process.env.REACT_APP_ENVIRONMENT_RNS_URL;
+    if (process.env.REACT_APP_ENVIRONMENT_LIQUIDITY_COLLATERAL_TOKEN) projSettings.environment.LiquidityCollateralToken = process.env.REACT_APP_ENVIRONMENT_LIQUIDITY_COLLATERAL_TOKEN;
 
     return projSettings
 }

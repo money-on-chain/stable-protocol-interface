@@ -1,15 +1,6 @@
 {
-  "vendor": {
-    "address": "",
-    "markup": ""
-  },
-  "chainId": 31,
   "forceChecksumAddressInput": true,
   "forceRskIp60Addresses": true,
-  "api": {
-    "operations": "",
-    "incentives": ""
-  },
   "minimumUserBalanceToOperate": "120000000000000",
   "transfer": [
     {
@@ -22,27 +13,13 @@
     "warning": 2,
     "dangerous": 1.5
   },
-  "rns": {
-    "url": "",
-    "address": ""
-  },
-  "explorerUrl": "",
-  "btcExplorer": "",
   "contractUrl": "https://github.com/money-on-chain/main-RBTC-contract",
   "home": {
     "walletBalancePie": {
       "colors": ["#00a651", "#ef8a13", "#ef0a28", "#66cfc8", "#808080"]
     }
   },
-  "environment": {
-    "AppMode": "MoC",
-    "AppProject": "MoC",
-    "MoC": "",
-    "Multicall2": "",
-    "IRegistry": "",
-    "fastBtcBridgeAddress": "",
-    "LiquidityCollateralToken": "",
-    "tokens": {
+  "tokens": {
       "COINBASE": {
         "name": "RBTC",
         "decimals": "6"
@@ -76,7 +53,7 @@
         "decimals": "2"
       }
     },
-    "Precisions": {
+  "Precisions": {
       "REWARDPrecision": {
         "contractDecimals": 18,
         "decimals": 6
@@ -125,6 +102,29 @@
         "contractDecimals": 18,
         "decimals": 2
       }
-    }
+    },
+  "environment": {
+    "AppMode": "MoC",
+    "AppProject": "MoC",
+    "MoC": "",
+    "Multicall2": "",
+    "IRegistry": "",
+    "fastBtcBridgeAddress": "",
+    "LiquidityCollateralToken": "",
+    "vendor": {
+      "address": "",
+      "markup": ""
+    },
+    "rns": {
+      "url": "",
+      "address": ""
+    },
+    "api": {
+      "operations": "",
+      "incentives": ""
+    },
+    "chainId": 31,
+    "explorerUrl": "",
+    "btcExplorer": ""
   }
 }

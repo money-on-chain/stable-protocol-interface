@@ -1,13 +1,6 @@
 {
-  "vendor": {
-    "address": "",
-    "markup": ""
-  },
-  "chainId": 31,
-  "api": {
-    "operations": "",
-    "incentives": ""
-  },
+  "forceChecksumAddressInput": true,
+  "forceRskIp60Addresses": true,
   "minimumUserBalanceToOperate": "0",
   "transfer": [
     {
@@ -20,28 +13,13 @@
     "warning": 2,
     "dangerous": 1.5
   },
-  "rns": {
-    "url": "",
-    "address": ""
-  },
-  "explorerUrl": "",
-  "btcExplorer": "",
   "contractUrl": "https://github.com/money-on-chain/RDOC-Contract",
   "home": {
     "walletBalancePie": {
       "colors": ["#0d84ff", "#1f99ea", "#66baff", "#66cfc8", "#808080"]
     }
   },
-  "environment": {
-    "AppMode": "RRC20",
-    "AppProject": "RDoC",
-    "MoC": "",
-    "Multicall2": "",
-    "BProToken": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
-    "IRegistry": "",
-    "fastBtcBridgeAddress": "",
-    "LiquidityCollateralToken": "",
-    "tokens": {
+  "tokens": {
       "COINBASE": {
         "name": "RBTC",
         "decimals": "6"
@@ -75,7 +53,7 @@
         "decimals": "2"
       }
     },
-    "Precisions": {
+  "Precisions": {
       "REWARDPrecision": {
         "contractDecimals": 18,
         "decimals": 6
@@ -124,6 +102,30 @@
         "contractDecimals": 18,
         "decimals": 2
       }
-    }
+    },
+  "environment": {
+    "AppMode": "RRC20",
+    "AppProject": "RDoC",
+    "MoC": "",
+    "Multicall2": "",
+    "BProToken": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
+    "IRegistry": "",
+    "fastBtcBridgeAddress": "",
+    "LiquidityCollateralToken": "",
+    "rns": {
+      "url": "",
+      "address": ""
+    },
+    "vendor": {
+      "address": "",
+      "markup": ""
+    },
+    "chainId": 31,
+    "api": {
+      "operations": "",
+      "incentives": ""
+    },
+    "explorerUrl": "",
+    "btcExplorer": ""
   }
 }
