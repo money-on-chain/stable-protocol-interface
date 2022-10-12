@@ -47,6 +47,7 @@ function SystemStatus(props) {
         subtitle: t(`${AppProject}.metrics.statusYellow.subtitle`, {ns: ns}),
         operationsAvailable: [
             "redeemSTABLEOnSettlement",
+            "redeemSTABLEOutsideOfSettlement",
             "mintRISKPRO",
             "mintRISKPROX",
             "redeemRISKPROX"

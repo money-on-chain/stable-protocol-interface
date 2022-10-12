@@ -10,7 +10,7 @@ import BigNumber from 'bignumber.js';
 import { config } from '../../../../Config/config';
 
 const AppProject = config.environment.AppProject;
-const COLORS = AppProject !== 'MoC' ? ['#0083ff', '#0061bb'] :['#ef8a13','#68cdc6','#00a651','#808080'];
+const BalancePieColors = config.home.walletBalancePie.colors;
 
 function Reserve(props) {
     const auth = useContext(AuthenticateContext);
@@ -139,7 +139,7 @@ function Reserve(props) {
                                             paddingAngle={1}
                                             dataKey="reserveValue"
                                         >
-                                            {balancesData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`}/>)}
+                                            {balancesData.map((entry, index) => <Cell key={index} fill={BalancePieColors[index % BalancePieColors.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`}/>)}
                                         </Pie>
                                         <TooltipRecharts content={<CustomTooltip />} />
                                     </PieChart>
