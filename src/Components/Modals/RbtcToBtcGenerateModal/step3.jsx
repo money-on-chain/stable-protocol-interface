@@ -3,7 +3,6 @@ import React, {Fragment, useContext, useEffect, useState} from "react";
 import {weiToNumberFormat} from '../../../Helpers/math-helpers'
 import Web3 from "web3";
 import FastBtcBridge from "../../../Contracts/coinbase/FastBtcBridge.json";
-import { toContract } from '../../../Lib/numberHelper';
 import Copy from "../../Page/Copy";
 import { config } from '../../../Config/config';
 import BigNumber from "bignumber.js";
@@ -94,7 +93,7 @@ export default function Step3(props) {
                         [props.rbtcAddress],
                         {
                             from: accountData.Owner,
-                            value: toContract(web3.utils.toWei(`${parseFloat(props.rbtcAmount)}`, 'ether')),
+                            value: new BigNumber(web3.utils.toWei(`${parseFloat(props.rbtcAmount)}`, 'ether')).toFixed(0),
                             gas: 300000
                         }).then(response => {
                         web3.eth.getTransactionReceipt(response.transactionHash)

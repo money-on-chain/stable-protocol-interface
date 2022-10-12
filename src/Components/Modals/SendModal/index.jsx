@@ -11,13 +11,12 @@ import InputWithCurrencySelector from "../../Form/InputWithCurrencySelector";
 import { getBalanceAndTransferMethodOfTokenToSend } from '../../../Config/currency';
 import { useTranslation } from "react-i18next";
 import addressHelper from '../../../Lib/addressHelper';
-import { toBigNumber } from "../../../Lib/numberHelper";
 import {formatLocalMap2, formatVisibleValue} from "../../../Lib/Formats";
 import { AuthenticateContext } from "../../../Context/Auth";
 import AlertLabel from "../../AlertLabel/AlertLabel";
 import Copy from "../../Page/Copy";
 import { config } from './../../../Config/config';
-//import BigNumber from "bignumber.js";
+import BigNumber from "bignumber.js";
 
 export default function SendModal(props) {
   const { token = '', tokensToSend, userState, view } = props;
@@ -168,8 +167,8 @@ export default function SendModal(props) {
   };
 
   const isAmountOverMaxAllowed = (amount, maxAvailable, currencyCode) => {
-    const maxSourceAvailable = toBigNumber(maxAvailable);
-    const bdInputAmount = toBigNumber(amount);
+    const maxSourceAvailable = new BigNumber(maxAvailable);
+    const bdInputAmount = new BigNumber(amount);
     if (bdInputAmount.isNaN()) return false;
     if (maxSourceAvailable.isNaN()) return false;
     return bdInputAmount.isGreaterThan(maxSourceAvailable);

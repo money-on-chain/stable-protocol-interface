@@ -4,7 +4,6 @@ import { Form, Tooltip, Radio } from 'antd';
 import { DebounceInput } from 'react-debounce-input';
 import SelectCurrency from '../../SelectCurrency';
 import { LargeNumber } from '../../LargeNumber';
-import { toBigNumber } from '../../../Lib/numberHelper';
 import { amountIsTooSmall } from '../../../Lib/exchangeManagerHelper';
 import {
   formatValueToContract,
@@ -92,10 +91,10 @@ const handleCurrencySelect = newCurrencySelected => {
 };
 
 const checkBiggerThanMaxValueAllowed = (value, maxValueAllowedInWei) => {
-  const valueAsBigNumber = toBigNumber(value);
+  const valueAsBigNumber = new BigNumber(value);
   return (
       maxValueAllowedInWei &&
-      valueAsBigNumber.isGreaterThan(toBigNumber(maxValueAllowedInWei))
+      valueAsBigNumber.isGreaterThan(new BigNumber(maxValueAllowedInWei))
   );
 };
 
