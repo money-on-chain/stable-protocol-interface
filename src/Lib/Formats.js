@@ -95,8 +95,10 @@ const formatValueVariation = (amount, language, auth) => {
     return num;
 };
 
+/*
 const formatDecimalRatioAsPercent = (amount) =>
     Number.isNaN(amount) ? 0 : amount * 100;
+*/
 
 const formatValueWithContractPrecision = (amount, currencyCode) => {
     BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
@@ -111,6 +113,7 @@ const formatValueToContract = (amount, currencyCode) => {
         .multipliedBy(precision(formatMap[currencyCode]))
         .toFixed(0);
 };
+/*
 const formatPerc = (value, language) =>
     Number.isNaN(value)
         ? '-'
@@ -118,6 +121,7 @@ const formatPerc = (value, language) =>
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
           });
+*/
 
 export {
     formatValue,
@@ -125,8 +129,8 @@ export {
     formatValueVariation,
     formatValueToContract,
     formatValueWithContractPrecision,
-    formatPerc,
-    formatDecimalRatioAsPercent,
+    //formatPerc,
+    //formatDecimalRatioAsPercent,
     adjustPrecision,
     precision,
     formatLocalMap,

@@ -11,11 +11,13 @@ export const getInrateToSettlement = mocState => {
   return spotInrate * contractDaysToSettlement(mocState);
 };
 
+/*
 export const getBTCxRedeemInrateToSettlement = mocState => {
   const { spotInrate } = mocState;
 
   return spotInrate * (contractDaysToSettlement(mocState) - 1);
 };
+*/
 
 // Calculates rate to settlement using custom rate
 export const rateToSettlement = (mocState, dailyInrate) =>

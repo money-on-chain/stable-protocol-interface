@@ -9,6 +9,7 @@ import { config } from '../Config/config';
 import BigNumber from "bignumber.js";
 const RBTCPrecision = config.Precisions.RBTCPrecision;
 
+/*
 const convertAmount2222 = (source, target, amount, convertToken) => {
   if (amount === '') {
     return '';
@@ -32,6 +33,7 @@ const convertAmount2222 = (source, target, amount, convertToken) => {
   // return isNaN(convertedAmount) ? '' : convertedAmount.toString();
   // return isNaN(convertedAmount) ? '' : convertedAmount.toString();
 };
+*/
 
 const convertAmount = (source, target, amount, convertToken) => {
   if (amount === '') {
@@ -240,16 +242,18 @@ const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState) => {
   return response;
 }
 
+/*
 const isAmountBiggerThanMax = (amount, currency, maxAvailable) => {
   const bdInputAmount = new BigNumber(formatValueToContract(amount, currency));
   return !bdInputAmount.isNaN() && bdInputAmount.isGreaterThan(maxAvailable);
 };
-const isAmountZero = amount => amount.eq(BigNumber('0'));
+*/
+//const isAmountZero = amount => amount.eq(BigNumber('0'));
 
 export {
   convertAmount,
-  isAmountBiggerThanMax,
-  isAmountZero,
+  //isAmountBiggerThanMax,
+  //isAmountZero,
   getMaxMintableBalance,
   getMaxRedeemableBalance,
   amountIsTooSmall,

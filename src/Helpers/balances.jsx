@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import BigNumber from "bignumber.js";
-import { setToLocaleString } from "./helper";
+import { setToLocaleString, setNumber } from "./helper";
 import { config } from "../Config/config";
 import { precision } from "../Lib/Formats";
 
@@ -131,5 +131,35 @@ const getUserBalance = (auth, i18n, tokenName) => {
     return result;
 };
 
+/*function getUSD(coin,value,auth,i18n=null){*/
+const getUSD = (coin, value, auth, i18n=null) => {
+    if (auth.contractStatusData) {
+        switch (coin) {
+            case 'STABLE':
+                return  setToLocaleString(new BigNumber(1 * Web3.utils.fromWei(setNumber(value))),2,i18n)
+            case 'RISKPRO':
+                return  setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * Web3.utils.fromWei(setNumber(value))),2,i18n)
+            case 'MOC':
+                return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData['mocPrice']) * Web3.utils.fromWei(setNumber(value))),2,i18n)
+            case 'RESERVE':
+                return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * Web3.utils.fromWei(setNumber(value))),2,i18n)
+            case 'RISKPROX':
+                return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice, 'ether') * Web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'], 'ether') * Web3.utils.fromWei(setNumber(value))),2,i18n)
 
-export { userDocBalance, userBproBalance, userBtcxBalance, userMocBalance, userCollateralBalance, getUserBalance };
+        }
+    }else{
+        return 0
+    }
+}
+
+
+
+export {
+    userDocBalance,
+    userBproBalance,
+    userBtcxBalance,
+    userMocBalance,
+    userCollateralBalance,
+    getUserBalance,
+    getUSD
+    };

@@ -1,7 +1,7 @@
 import {
   createSocketConnection,
   listenToSocketEvents
-} from './fastBTC/fastBTCMethods';
+} from './fastBTCMethods';
 
 class DispatcherEvent {
   constructor(eventName) {

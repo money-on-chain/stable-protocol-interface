@@ -3,7 +3,7 @@ import getRLogin from '../Lib/rLogin';
 import Web3 from 'web3';
 //import _ from 'lodash/core';
 import addressHelper from '../Lib/addressHelper';
-import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
+import FastBtcSocketWrapper from '../Lib/fastBTC/FastBtcSocketWrapper';
 //import { getPriceFields } from '../Lib/price';
 import { config } from '../Config/config';
 import { readContracts } from '../Lib/integration/contracts';
