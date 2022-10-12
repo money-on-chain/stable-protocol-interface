@@ -5,14 +5,14 @@ import { useContext } from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticateContext } from '../../../Context/Auth';
-//import { currencies as currenciesDetail, getCurrencyDetail } from '../../../Config/currency';
 import { LargeNumber } from "../../LargeNumber";
 import { useTranslation } from "react-i18next";
 import InformationModal from '../../Modals/InformationModal';
-import {getCoinName, setToLocaleString} from "../../../Helpers/helper";
+import {getCoinName} from "../../../Helpers/helper";
 import { config } from "../../../Config/config";
 
-import BigNumber from "bignumber.js";
+import { getUserBalance } from "../../../Helpers/balances";
+
 
 const styleCentered = {
     display: 'flex',
@@ -27,63 +27,24 @@ export default function TokenSummaryCard(props) {
         // color = '#000',
         page = '',
         balance = '0',
-        labelCoin = '',
         currencyCode = ''
     } = props;
 
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc'])
 
-    const getBalance = (tooltip) => {
-        if (auth.userBalanceData) {
-            switch (tokenName) {
-                case 'stable':
-                    let var_stable=(auth.getAppMode=='MoC')? 6: config.environment.tokens.STABLE.decimals
-                    return setToLocaleString((auth.userBalanceData['docBalance'] / auth.contractStatusData.bitcoinPrice).toFixed(!tooltip ? var_stable : 20),!tooltip ? var_stable : 20,i18n)
-                case 'riskpro':
-                    return setToLocaleString(((auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * auth.web3.utils.fromWei(auth.userBalanceData['bproBalance'])) / auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(!tooltip ? config.environment.tokens.RISKPRO.decimals : 20),!tooltip ? config.environment.tokens.RISKPRO.decimals : 20,i18n)
-                case 'riskprox':
-                    return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(!tooltip ? parseInt(config.environment.tokens.RISKPROX.decimals) : 20),!tooltip ? parseInt(config.environment.tokens.RISKPROX.decimals) : 20,i18n)
-                default:
-                    throw new Error('Invalid token name'); 
-            }
-        } else {
-            return (0).toFixed(6)
-        }
-    };
-    const getBalanceUSD = (tooltip) => {
-        if (auth.userBalanceData) {
-            switch (tokenName) {
-                case 'stable':
-                    // return new BigNumber(auth.userBalanceData['docBalance']).toFixed(2)
-                    return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['docBalance'])).toFixed(!tooltip ? 2 : 20),!tooltip ? 2 : 20,i18n)
-                case 'riskpro':
-                    // return new BigNumber(auth.contractStatusData['bproPriceInUsd'] * auth.userBalanceData['bproBalance']).toFixed(2);
-                    return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * auth.web3.utils.fromWei(auth.userBalanceData['bproBalance'])).toFixed(!tooltip ? 2 : 20),!tooltip ? 2 : 20,i18n)
-                case 'riskprox':
-                    // return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(2);
-                    return setToLocaleString(new BigNumber(auth.web3.utils.fromWei(auth.contractStatusData['bitcoinPrice']) * auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(!tooltip ? 2 : 20),!tooltip ? 2 : 20,i18n)
-                default:
-                    throw new Error('Invalid token name'); 
-            }
-        } else {
-            return (0).toFixed(2)
-        }
-    };
-
-    const { convertToken } = auth;
-    //const convertTo = convertToCurrency => convertToken(tokenName, convertToCurrency, 900114098986076075281);
 
     const [loading, setLoading] = useState(true);
     const timeSke= 1500
     const AppProject = config.environment.AppProject;
+
+    const userBalance = getUserBalance(auth, i18n, tokenName);
 
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke);
     },[auth]);
 
     return (
-        // <Row className="Card TokenSummaryCard" style={{'height':'135px'}}>
         <Row className="Card TokenSummaryCard" style={{'height':'135px','display':'flex'}}>
             {!loading ? <>
             <InformationModal currencyCode={currencyCode} />
@@ -135,15 +96,15 @@ export default function TokenSummaryCard(props) {
                 }}
             >
                 <div className="Numbers Left">
-                    <Tooltip placement="top" title={getBalance(true)}>
+                    <Tooltip placement="top" title={userBalance.collateral_tooltip}>
                         <div className="Number Few">
-                            {getBalance()}{' '}
+                            {userBalance.collateral}{' '}
                             {/*{labelCoin}*/}
                             {getCoinName('RESERVE')}
                         </div>
                     </Tooltip>
-                    <Tooltip placement="top" title={getBalanceUSD(true)}>
-                        <div className="Number Few">{getBalanceUSD()} USD</div>
+                    <Tooltip placement="top" title={userBalance.usd_tooltip}>
+                        <div className="Number Few">{userBalance.usd} USD</div>
                     </Tooltip>
                 </div>
             </Col>
