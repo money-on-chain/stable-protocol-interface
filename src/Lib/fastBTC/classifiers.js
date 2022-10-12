@@ -5,7 +5,7 @@ mainnet: 30,
 testnet: 31
 };
 
-export const currentChainId = config.chainId;
+export const currentChainId = config.environment.chainId;
 
 export const blockExplorers = {
 30: 'https://explorer.rsk.co',

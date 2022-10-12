@@ -15,7 +15,7 @@ import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
-import { LargeNumber } from '../../LargeNumber';
+//import { LargeNumber } from '../../LargeNumber';
 import RowColumn from "../RowDetail/RowColumn";
 
 
@@ -38,7 +38,7 @@ export default function ListOperations(props) {
     const [xScroll, setXScroll] = useState(undefined);
 
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
@@ -70,7 +70,7 @@ export default function ListOperations(props) {
             const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.operations}`+'webapp/transactions/list/', datas)
+                    api('get', `${config.environment.api.operations}`+'webapp/transactions/list/', datas)
                         .then(response => {
                             setDataJson(response);
                             setTotalTable(response.total)
@@ -85,7 +85,6 @@ export default function ListOperations(props) {
                         });
                 } catch (error) {
                     console.error({ error });
-                    console.log(error);
                 }
             }, 500);
         }

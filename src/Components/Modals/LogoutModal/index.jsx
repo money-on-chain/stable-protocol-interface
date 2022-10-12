@@ -1,7 +1,7 @@
 import {Col, Modal, Row} from 'antd';
 import React, { useContext, useState } from 'react';
 import { Button } from 'antd';
-import { LogoutOutlined } from '@ant-design/icons';
+//import { LogoutOutlined } from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
 import CopyModal from "../../Page/CopyModal";
 import {useTranslation} from "react-i18next";

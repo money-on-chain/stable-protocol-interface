@@ -1,16 +1,24 @@
 import React, {useContext, useEffect, useState} from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip} from 'recharts';
 import {AuthenticateContext} from "../../../Context/Auth";
-import { adjustPrecision, formatLocalMap, formatLocalMap2 } from '../../../Lib/Formats';
+import { formatLocalMap2 } from '../../../Lib/Formats';
 import {useTranslation} from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
-import web3 from 'web3';
+import Web3 from 'web3';
 import { config } from './../../../Config/config';
 import {getDecimals} from "../../../Helpers/helper";
+import {
+    userDocBalance,
+    userBproBalance,
+    userBtcxBalance,
+    userMocBalance,
+    userCollateralBalance
+    } from "../../../Helpers/balances";
 
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 const AppProject = config.environment.AppProject;
-const COLORS = AppProject === 'MoC' ? ['#00a651','#ef8a13'] : ['#808080','#0062b7','green','#808080'];
+const BalancePieColors = config.home.walletBalancePie.colors;
+
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -19,7 +27,7 @@ const CustomTooltip = ({ active, payload, label }) => {
                 {/*<p className="label">{`${label} : ${payload[0].value}`}</p>*/}
                 {/*<p className="intro">{getIntroOfPage(label)}</p>*/}
                 <p className="value-1" style={{ fontSize: 14 }}>{`${payload[0].payload.set1}`}</p>
-                <p className={`${payload[0].payload.class}`} style={{ fontSize: 14 }}>{`${payload[0].payload.set2}`}</p>
+                <p className={`${payload[0].payload.class}-${AppProject}`} style={{ fontSize: 14 }}>{`${payload[0].payload.set2}`}</p>
             </div>
         );
     }
@@ -29,149 +37,116 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 function WalletBalancePie(props) {
     const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
-    // const [colors, setColors] = useState(['#ccc']);
-    // static demoUrl = 'https://codesandbox.io/s/pie-chart-with-padding-angle-7ux0o';
+
     const auth = useContext(AuthenticateContext);
-    const { accountData, balanceRbtc } = useContext(AuthenticateContext);
-
-    useEffect(() => {
-        if(auth.isLoggedIn){
-            // setColors(['#00a651', '#ef8a13','#68cdc6','#808080' ])
-        }
-    }, [auth]);
-
-
-    const set_moc_balance_usd = () =>{
-        if (auth.userBalanceData && accountData.Balance) {
-            // const moc_balance= (Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4);
-            // const moc_balance_usd= Number(new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['mocBalance'])).c[0]/10000)
-            const moc_balance= (Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000)/auth.contractStatusData.bitcoinPrice).toFixed(6);
-            const moc_balance_usd= Number(new BigNumber(auth.userBalanceData['mocBalance']).c[0]/10000)
-            return {'normal':moc_balance,'usd':moc_balance_usd}
-        }
-    };
-    const set_rbtc_main_usd = () =>{
-        if (auth.userBalanceData && accountData.Balance) {
-            const rbtc_main_usd= (new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc).toFixed(4))*auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)
-            const rbtc_main= new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc).toFixed(4)
-            return {'normal':rbtc_main,'usd':rbtc_main_usd}
-        }
-    };
-    const set_doc_usd= () =>{
-        if (auth.userBalanceData && accountData.Balance) {
-            const doc_usd= new BigNumber(auth.web3.utils.fromWei(auth.userBalanceData['docBalance']));
-            const doc= (auth.web3.utils.fromWei(auth.userBalanceData['docBalance'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6);
-            return {'normal':doc,'usd':doc_usd}
-        }
-    };
-    const set_bpro_usd= () =>{
-        if (auth.userBalanceData && accountData.Balance) {
-            const bpro_usd= new BigNumber(auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd'])*auth.web3.utils.fromWei(auth.userBalanceData['bproBalance'])).toFixed(2)
-            const bpro= ((auth.web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd'])*auth.web3.utils.fromWei(auth.userBalanceData['bproBalance']))/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
-            return {'normal':bpro,'usd':bpro_usd}
-        }
-    };
-    const set_btc_usd = () =>{
-        if (auth.userBalanceData && accountData.Balance) {
-            const btc_usd= new BigNumber(auth.web3.utils.fromWei(auth.contractStatusData['bitcoinPrice']) * auth.web3.utils.fromWei(auth.userBalanceData['bprox2Balance'])).toFixed(4)
-            // const btc_usd= new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4)
-            const btc= auth.userBalanceData['bprox2Balance'];
-            return {'normal':btc,'usd':btc_usd}
-        }
-    };
+    //const { accountData } = useContext(AuthenticateContext);
 
     const getBalanceUSD = () => {
-        if (auth.userBalanceData && accountData.Balance) {
-            const rbtc_main_usd= set_rbtc_main_usd()['usd']
-            const doc_usd= set_doc_usd()['usd']
-            const bpro_usd= set_bpro_usd()['usd']
-            const btc_usd= set_btc_usd()['usd']
-            const moc_balance_usd= set_moc_balance_usd()['usd']
-            return (Number(rbtc_main_usd)+Number(doc_usd)+Number(bpro_usd)+Number(btc_usd)+Number(moc_balance_usd)).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              }
+        if (auth.userBalanceData) {
+
+            const userBalances = getUserBalances();
+
+            const totalBalances = BigNumber.sum(
+                userBalances.doc.usd,
+                userBalances.bpro.usd,
+                userBalances.btcx.usd,
+                userBalances.moc.usd,
+                userBalances.collateral.usd,
+            )
+
+            return (Number(totalBalances.toFixed())).toLocaleString(formatLocalMap2[i18n.languages[0]], {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
             );
+
         }else{
             return (0).toFixed(2)
         }
     };
 
+    const getUserBalances = () => {
+
+        const userBalances = {}
+        userBalances['doc'] = userDocBalance(auth);
+        userBalances['bpro'] = userBproBalance(auth);
+        userBalances['moc'] = userMocBalance(auth);
+        userBalances['btcx'] = userBtcxBalance(auth);
+        userBalances['collateral'] = userCollateralBalance(auth);
+
+        return userBalances;
+
+    }
+
     const getBalance = () => {
-        // console.log(accountData.Balance)
-        // return false;
-        if (auth.userBalanceData && accountData.Balance) {
+        if (auth.userBalanceData) {
+            const userBalances = getUserBalances();
 
-            const rbtc_main= (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
+            const totalBalances = BigNumber.sum(
+                userBalances.doc.collateral,
+                userBalances.bpro.collateral,
+                userBalances.btcx.collateral,
+                userBalances.moc.collateral,
+                userBalances.collateral.collateral,
+                )
 
-            const doc= ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4)
+            return totalBalances.toFixed(Number(getDecimals("RESERVE", AppProject)))
 
-            const bpro= (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)
-
-            const btc= Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))
-            console.log(new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) )).toFixed(6))
-                        console.log('000000000000000000000000000000000iiiiiiiiiiiiiiiiiiiiiiiiii')
-            console.log(getDecimals("RESERVE",AppProject))
-            console.log(AppProject)
-            console.log('000000000000000000000000000000000iiiiiiiiiiiiiiiiiiiiiiiiii')
-            return new BigNumber((Number(rbtc_main) + Number(doc) + Number(bpro) + Number(btc) )).toFixed(Number(getDecimals("RESERVE",AppProject)))
         }else{
             return (0).toFixed(6)
         }
     };
 
     const getPie = () => {
-        console.log('ddddddddddddddd00000000')
-        console.log(auth.userBalanceData)
-        console.log(accountData)
-        console.log(accountData.Balance)
-        console.log('ddddddddddddddd********')
-        if (auth.userBalanceData && accountData.Balance) {
+        if (auth.userBalanceData) {
+
+            const userBalances = getUserBalances();
+
+            const projectDecimals = {}
+            projectDecimals['COLLATERAL'] = Number(getDecimals("RESERVE", AppProject));
+            projectDecimals['USD'] = Number(getDecimals("STABLE", AppProject));
+
             const data = [
                 {
                     name: 'Group A',
-                    value: Number((set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
-                    set1: (set_doc_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: (set_doc_usd()['usd']).toFormat(2, formatLocalMap[i18n.languages[0]]) +' '+ t(`${AppProject}.Tokens_STABLE_code`, {ns: ns}),
+                    value: Number(userBalances.doc.usd.toFixed(projectDecimals.USD)),
+                    set1: userBalances.doc.collateral.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: userBalances.doc.usd.toFixed(projectDecimals.USD) +' '+ t(`${AppProject}.Tokens_STABLE_code`, {ns: ns}),
                     class: 'STABLE'
                 },
                 {
                     name: 'Group B',
-                    value: Number(((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)),
-                    set1: ((set_bpro_usd()['usd'])/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(4) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: Number((auth.web3.utils.fromWei(auth.userBalanceData.bproBalance))).toFixed((AppProject === 'MoC')? 6 : 2) +' '+ t(`${AppProject}.Tokens_RISKPRO_code`, {ns: ns}), class: 'RISKPRO'
+                    value: Number(userBalances.bpro.usd.toFixed(projectDecimals.USD)),
+                    set1: userBalances.bpro.collateral.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: userBalances.bpro.normal.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RISKPRO_code`, {ns: ns}),
+                    class: 'RISKPRO'
                 },
                 {
                     name: 'Group C',
-                    value: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)),
-                    set1: (set_moc_balance_usd()['usd']/auth.web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)).toFixed(6)+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: (set_moc_balance_usd()['usd']).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    }) +' '+ t(`${AppProject}.Tokens_MOC_code`, {ns: ns}),
+                    value: Number(userBalances.btcx.usd.toFixed(projectDecimals.USD)),
+                    set1: userBalances.btcx.collateral.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: userBalances.btcx.normal.toFixed(projectDecimals.COLLATERAL)  +' '+ t(`${AppProject}.Tokens_RISKPROX_code`, {ns: ns}),
                     class: 'RISKPROX'
                 },
                 {
-                    name: 'Group d',
-                    value: Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc)),
-                    set1: (Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                        minimumFractionDigits: 6,
-                        maximumFractionDigits: 6
-                    })+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: (Number(new BigNumber(AppProject === 'MoC' ? accountData.Balance : balanceRbtc))).toLocaleString(formatLocalMap2[i18n.languages[0]], {
-                        minimumFractionDigits: (AppProject === 'MoC')? 6 : 2,
-                        maximumFractionDigits: (AppProject === 'MoC')? 6 : 2
-                    })+' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    name: 'Group D',
+                    value: Number(userBalances.moc.usd.toFixed(projectDecimals.USD)),
+                    set1: userBalances.moc.collateral.toFixed(projectDecimals.COLLATERAL) + ' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: userBalances.moc.normal.toFixed(projectDecimals.USD)  +' '+ t(`${AppProject}.Tokens_MOC_code`, {ns: ns}),
+                    class: 'MOC'
+                },
+                {
+                    name: 'Group E',
+                    value: Number(userBalances.collateral.usd.toFixed(projectDecimals.USD)),
+                    set1: userBalances.collateral.collateral.toFixed(projectDecimals.COLLATERAL) + ' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
+                    set2: userBalances.collateral.normal.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
                     class: 'RBTC_MAIN'
                 }
 
             ];
 
-            console.log('data------------')
-            console.log(data)
-            console.log('data------------')
             return data;
         }
         else{
@@ -194,7 +169,7 @@ function WalletBalancePie(props) {
                         {getPie() !== undefined &&
 
                         getPie().map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`} />
+                            <Cell key={`cell-${index}`} fill={BalancePieColors[index % BalancePieColors.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`} />
                         ))
 
                         }
@@ -203,12 +178,11 @@ function WalletBalancePie(props) {
                 </PieChart>
             </ResponsiveContainer>
             <span className={'money-RBTC'}>
-                {AppProject == 'MoC' &&
-                    <LargeNumber {...{ amount: web3.utils.toWei(getBalance(), 'ether'), currencyCode: 'RESERVE', includeCurrency: true}} />
-                }
-                {AppProject != 'MoC' && <LargeNumber {...{ amount: getBalance()*1000000000000000000, currencyCode: 'RESERVE', includeCurrency: true}} />}
+                <LargeNumber {...{ amount: Web3.utils.toWei(getBalance(), 'ether'), currencyCode: 'RESERVE', includeCurrency: true}} />
             </span>
-            <span className={'money-USD'}>{getBalanceUSD()} USD</span>
+            <span className={'money-USD'}>
+                {getBalanceUSD()} USD
+            </span>
         </div>
 
     );

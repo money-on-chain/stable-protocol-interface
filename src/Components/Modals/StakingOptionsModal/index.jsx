@@ -7,6 +7,7 @@ import Web3 from 'web3';
 
 import {useTranslation} from "react-i18next";
 import { config } from './../../../Config/config';
+import './style.scss';
 
 export default function StakingOptionsModal(props) {
 
@@ -17,7 +18,7 @@ export default function StakingOptionsModal(props) {
 
    const amountInEth = Web3.utils.fromWei(amount);
    const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-   const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+   const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     useEffect(() => {

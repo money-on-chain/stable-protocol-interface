@@ -1,16 +1,13 @@
 import { Tooltip } from 'antd';
 import NumericLabel from 'react-pretty-numbers';
 import { adjustPrecision, formatLocalMap } from '../../Lib/Formats';
-import i18n from 'i18next';
 import {useTranslation} from "react-i18next";
-import DollarOutlined from '@ant-design/icons/DollarOutlined';
-import { formatLocalMap2 } from '../../Lib/Formats';
 import { config } from '../../Config/config';
 
 const LargeNumberF3 = ({ amount, currencyCode, includeCurrency, numericLabelParams, className }) => {
 
   const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode);

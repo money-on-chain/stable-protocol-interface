@@ -1,23 +1,27 @@
-import React from 'react';
-import { LargeNumber } from '../LargeNumber';
-import {useTranslation} from "react-i18next";
+import React, { useEffect } from 'react';
+import BalanceItem from './default';
 import { config } from './../../Config/config';
 
-const BalanceItem = ({ theme, amount, currencyCode }) => {
 
-  const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
-    const AppProject = config.environment.AppProject;
-  const classname = `BalanceItem ${theme}`;
-  const currencyName = t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: ns});
+const ThemeMoC = React.lazy(() => import('./themes/moc'));
+const ThemeRDoC = React.lazy(() => import('./themes/rdoc'));
+
+
+const ThemeSelector = ({ children }) => {
+  const CHOSEN_THEME = config.environment.AppProject;
   return (
-    <div className={classname}>
-      <h1>
-        <LargeNumber {...{ amount, currencyCode }} />
-      </h1>
-      <h4> {currencyName} </h4>
-    </div>
-  );
-};
+    <>
+      <React.Suspense fallback={<></>}>
+        {(CHOSEN_THEME === 'MoC') && <ThemeMoC />}
+        {(CHOSEN_THEME === 'RDoC') && <ThemeRDoC />}
+      </React.Suspense>
+      {children}
+    </>
+  )
+}
 
-export default BalanceItem;
+const ThemeRender = (params) => {
+    return (<ThemeSelector><BalanceItem { ...params } /></ThemeSelector>)
+}
+
+export default ThemeRender;

@@ -9,7 +9,7 @@ import { config } from '../../../Config/config';
 
 const TransactionInfo = ({ txId, txName, state}) => {
 const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+const ns = config.environment.AppProject.toLowerCase();
 const AppProject = config.environment.AppProject;
 const tx = txId === TxId.DEPOSIT ? state.depositTx : state.transferTx;
   const txBtn = (
@@ -112,11 +112,10 @@ const tx = txId === TxId.DEPOSIT ? state.depositTx : state.transferTx;
 
 export default function TransactionScreen({ state, setState }) {
   const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
   const mockBtcDeposit = () => {
-    console.log('Reloading state');
     setState(prevState => ({
       ...prevState,
       depositTx: {
@@ -127,7 +126,6 @@ export default function TransactionScreen({ state, setState }) {
     }));
   };
   const mockBtcDepositConfirmed = () => {
-    console.log('Reloading state');
     setState(prevState => ({
       ...prevState,
       depositTx: {

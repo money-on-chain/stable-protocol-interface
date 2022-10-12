@@ -3,15 +3,14 @@ import {
   formatValueToContract,
   precision,
 } from './Formats';
-import { toBigNumber, minimum } from './numberHelper';
 import { getTransactionType } from './exchangeHelper';
 import { config } from '../Config/config';
 
-const BigNumber = require('bignumber.js');
-const RBTCPrecision = config.environment.Precisions.RBTCPrecision;
+import BigNumber from "bignumber.js";
+const RBTCPrecision = config.Precisions.RBTCPrecision;
 
+/*
 const convertAmount2222 = (source, target, amount, convertToken) => {
-  console.log(source, target, amount);
   if (amount === '') {
     return '';
   }
@@ -34,6 +33,7 @@ const convertAmount2222 = (source, target, amount, convertToken) => {
   // return isNaN(convertedAmount) ? '' : convertedAmount.toString();
   // return isNaN(convertedAmount) ? '' : convertedAmount.toString();
 };
+*/
 
 const convertAmount = (source, target, amount, convertToken) => {
   if (amount === '') {
@@ -51,7 +51,7 @@ const convertAmount = (source, target, amount, convertToken) => {
 
 const amountIsTooSmall = target => {
   const minorValue = BigNumber('0.0000000000000000001');
-  return minorValue.gt(toBigNumber(target));
+  return minorValue.gt(new BigNumber(target));
 };
 
 const calcCommissionValue = (rbtcBalance, commissionRate) =>
@@ -75,7 +75,7 @@ const getUsableReserveBalance = (
   );
 
   const reserveCommisionValue = calcCommissionValue(rbtcBalance, commission.commissionRate);
-  const spendableBalanceBn = toBigNumber(rbtcBalance);
+  const spendableBalanceBn = new BigNumber(rbtcBalance);
   const mintingGasEstimation = gasEstimation !== undefined ? gasEstimation : 0;
   let available = spendableBalanceBn.minus(reserveCommisionValue).minus(mintingGasEstimation);
   if (currencyToMint === 'RISKPROX') {
@@ -139,7 +139,7 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
   if(!convertToken) return {};
 
   // const vendor = { address: "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076", markup: "500000000000000" };
-  const vendor = config.vendor;
+  const vendor = config.environment.vendor;
 
   const valueYouExchangeInRESERVE = convertToken(currencyYouExchange, "RESERVE", valueYouExchange);
   const valueYouExchangeInMOC = convertToken("RESERVE", "MOC", valueYouExchangeInRESERVE);
@@ -180,7 +180,7 @@ const getMaxMintableBalance = (currencyToMint, userState, mocState, convertToken
   switch (currencyToMint) {
     case 'STABLE':
       response = {
-        value: minimum(docAvailableToMint,
+        value: BigNumber.minimum(docAvailableToMint,
                       usableReserveBalanceInCurrencyToMint),
         currency: "STABLE"
       };
@@ -193,7 +193,7 @@ const getMaxMintableBalance = (currencyToMint, userState, mocState, convertToken
       break;
     case 'RISKPROX':
       response = {
-        value: minimum(bprox2AvailableToMint,
+        value: BigNumber.minimum(bprox2AvailableToMint,
                       usableReserveBalanceInCurrencyToMint),
         currency: "RISKPROX"
       };
@@ -219,13 +219,13 @@ const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState) => {
   switch (currencyToRedeem) {
     case 'STABLE':
       response = {
-        value: minimum(docAvailableToRedeem, docBalance),
+        value: BigNumber.minimum(docAvailableToRedeem, docBalance),
         currency: "STABLE"
       };
       break;
     case 'RISKPRO':
       response = {
-        value: minimum(bproAvailableToRedeem, bproBalance),
+        value: BigNumber.minimum(bproAvailableToRedeem, bproBalance),
         currency: "RISKPRO"
       }
       break;
@@ -242,16 +242,18 @@ const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState) => {
   return response;
 }
 
+/*
 const isAmountBiggerThanMax = (amount, currency, maxAvailable) => {
-  const bdInputAmount = toBigNumber(formatValueToContract(amount, currency));
+  const bdInputAmount = new BigNumber(formatValueToContract(amount, currency));
   return !bdInputAmount.isNaN() && bdInputAmount.isGreaterThan(maxAvailable);
 };
-const isAmountZero = amount => amount.eq(BigNumber('0'));
+*/
+//const isAmountZero = amount => amount.eq(BigNumber('0'));
 
 export {
   convertAmount,
-  isAmountBiggerThanMax,
-  isAmountZero,
+  //isAmountBiggerThanMax,
+  //isAmountZero,
   getMaxMintableBalance,
   getMaxRedeemableBalance,
   amountIsTooSmall,

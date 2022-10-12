@@ -3,15 +3,15 @@ import { useContext } from 'react'
 import { AuthenticateContext } from "../../../../Context/Auth";
 import { useTranslation } from "react-i18next";
 import { config } from '../../../../Config/config';
-import Web3 from 'web3'
-const BigNumber = require('bignumber.js');
+//import Web3 from 'web3'
+//import BigNumber from "bignumber.js";
 
 
 function RowDetailPegOut(props) {
 
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     return (

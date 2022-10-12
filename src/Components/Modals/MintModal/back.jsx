@@ -1,7 +1,7 @@
 /* eslint-disable default-case */
 /* eslint-disable react/jsx-no-target-blank */
 import { Button, Collapse, Slider } from 'antd';
-import { SettingFilled } from '@ant-design/icons';
+//import { SettingFilled } from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
 import './RDoC/style.scss';
 import React, { useState, useContext, useEffect } from 'react';
@@ -14,9 +14,9 @@ import {
     formatValueWithContractPrecision,
 } from '../../../Lib/Formats';
 import Copy from "../../Page/Copy";
-import { currencies as currenciesDetail } from '../../../Config/currentcy';
+import { currencies as currenciesDetail } from '../../../Config/currency';
 import { LargeNumber } from '../../LargeNumber';
-import {formatLocalMap2} from '../../../Lib/Formats';
+//import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";
@@ -45,10 +45,6 @@ export default function MintModal(props) {
     } = props;
     /* Disabled confirm button when not connected */
     const { address } = true; //window;
-    console.log('export default function MintModal(props) {');
-    console.log(fee);
-    console.log(valueYouExchange);
-    console.log('export default function MintModal(props) {');
     var btnDisable = false;
     if (!address || !isLoggedIn) {
         btnDisable = true;
@@ -172,12 +168,14 @@ export default function MintModal(props) {
         auth.interfaceExchangeMethod(exchanging.currencyCode, receiving.currencyCode, userAmount, userToleranceFormat, onTransaction, onReceipt);
     };
 
+    /*
     const callback = (error, transactionHash) => {
         setLoading(false);
         setCurrentHash(transactionHash);
         setShowTransaction(true);
         getTransaction(transactionHash);
     };
+    */
 
     const onTransaction = (transactionHash) => {
         setLoading(false);
@@ -255,9 +253,6 @@ export default function MintModal(props) {
     const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
     const styleReceive = tokenNameReceive === receiving.currencyCode ? { color } : {};
 
-    console.log('vvvvvvvvvvvvvvvvvv')
-    console.log(visible)
-    console.log('vvvvvvvvvvvvvvvvvv')
 
     return (
         <Modal

@@ -5,24 +5,22 @@ import React, { useEffect, useState, useContext } from "react";
 import debounce from 'lodash.debounce';
 import web3 from 'web3';
 import { Row, Col, Modal, Button } from 'antd';
-import CoinSelect from "../../Form/CoinSelect";
+//import CoinSelect from "../../Form/CoinSelect";
 import InputAddress from "../../InputAddress";
 import InputWithCurrencySelector from "../../Form/InputWithCurrencySelector";
-import { getBalanceAndTransferMethodOfTokenToSend } from '../../../Config/currentcy';
+import { getBalanceAndTransferMethodOfTokenToSend } from '../../../Config/currency';
 import { useTranslation } from "react-i18next";
 import addressHelper from '../../../Lib/addressHelper';
-import { toBigNumber } from "../../../Lib/numberHelper";
 import {formatLocalMap2, formatVisibleValue} from "../../../Lib/Formats";
 import { AuthenticateContext } from "../../../Context/Auth";
 import AlertLabel from "../../AlertLabel/AlertLabel";
 import Copy from "../../Page/Copy";
 import { config } from './../../../Config/config';
-
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 export default function SendModal(props) {
   const { token = '', tokensToSend, userState, view } = props;
-  const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
+  //const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
   const [address, setAddress] = useState('');
   const [currencyYouReceive, setCurrencyYouReceive] = useState('');
   /* const [currencyYouExchange, setCurrencyYouExchange] = useState(
@@ -39,7 +37,7 @@ export default function SendModal(props) {
   const [inputIsValid, setInputIsValid] = useState(true);
 
   const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
   const helper = addressHelper(web3);
   const auth = useContext(AuthenticateContext);
@@ -69,25 +67,23 @@ export default function SendModal(props) {
       switch (tokenToSend) {
         case 'STABLE':
           return 'DOC'
-          break;
         case 'RISKPRO':
-          return  'BPRO'
-          break;
+          return  'BPRO'          
         case 'RISKPROX':
           return 'BPROX'
         case 'MOC':
-          return 'MOC'
-          break;
+          return 'MOC'          
         default:
           return 'RBTC'
-              break;
       }
     }
   };
 
+  /*
   const setDefaultState = () => {
     getDefaultState();
   }
+  */
 
   const showModal = () => {
     setVisible(true);
@@ -171,8 +167,8 @@ export default function SendModal(props) {
   };
 
   const isAmountOverMaxAllowed = (amount, maxAvailable, currencyCode) => {
-    const maxSourceAvailable = toBigNumber(maxAvailable);
-    const bdInputAmount = toBigNumber(amount);
+    const maxSourceAvailable = new BigNumber(maxAvailable);
+    const bdInputAmount = new BigNumber(amount);
     if (bdInputAmount.isNaN()) return false;
     if (maxSourceAvailable.isNaN()) return false;
     return bdInputAmount.isGreaterThan(maxSourceAvailable);
@@ -183,8 +179,6 @@ export default function SendModal(props) {
   };
 
   const onTransaction = (transactionHash) => {
-    console.log("On sent transaction");
-    console.log(transactionHash);
     setCurrentHash(transactionHash);
     setStatusScreen(3)
     setShowTransactionModal(true);

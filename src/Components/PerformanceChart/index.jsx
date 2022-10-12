@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import { Row, Col, Tabs } from 'antd';
 import { useTranslation } from "react-i18next";
 import { config } from '../../Config/config';
+import './style.scss';
 
 export default function PerformanceChart(props) {
 
     const [percent, setPercent] = useState(0);
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     let height = percent && percent > 0 ? percent * 190 / 100 : 0;
@@ -23,13 +24,13 @@ export default function PerformanceChart(props) {
                     <div className="ChartColumn">
                         <div className="Bar Percent Hidden" style={{ height }} />
                         <div className="Bar">
-                            <div>{t(`${AppProject}.app.code`, { ns: ns })}</div>
+                            <div>MOC</div>
                         </div>
                     </div>
                     <div className="ChartColumn">
                         <div className="Bar Percent Gray" style={{ height }} />
                         <div className="Bar">
-                            <div>{t(`${AppProject}.app.code`, { ns: ns })}<br />+<br />{t(`${AppProject}.staking`, { ns: ns })}</div>
+                            <div>MOC<br />+<br />{t(`${AppProject}.staking`, { ns: ns })}</div>
                         </div>
                     </div>
                 </div>

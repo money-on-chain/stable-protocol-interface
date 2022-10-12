@@ -1,0 +1,67 @@
+.RewardsStakingOptions {
+    //min-height: 32.4em;
+    height: 100%;
+    @media screen and (min-width: 100px) and (max-width: 1199px){
+        margin-top: 10px;
+    }
+}
+.WithdrawalAmount {
+    display: inline;
+  }
+.StakingTabContent {
+    color: #8c8c8c;
+
+    .RewardsOptionsOverview {
+        justify-content: space-between;
+        font-family: "Montserrat", sans-serif;
+        .amount {
+            color: #000000;
+            margin: 0;
+            font-weight: 400;
+            display: flex;
+            flex-flow: row;
+            align-items: baseline;
+            font-size: 14px;
+            div {
+              margin-right: 0.15em;
+            }
+          }
+    }
+
+    .StakingBtn {
+        margin: 1.5rem auto auto;
+    }
+}
+
+.WithdrawTabFooter {
+    min-height: calc(242px + -9rem);
+    .amount {
+        display: inline;
+    }
+    .bolder {
+        font-weight: 600;
+    }
+
+    .grey {
+        color: #707070;
+    }
+}
+
+.ant-table-tbody > tr > td {
+    border-bottom: none!important;
+}
+
+.ant-tabs-content {
+    // height: 26.4em;
+}
+
+.typography {
+    font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif!important;
+}
+
+.RewardsOptionsContainer .ant-table-content {
+    height: calc(180px + 1rem);
+    overflow: auto;
+}

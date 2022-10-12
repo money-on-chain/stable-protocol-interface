@@ -23,7 +23,7 @@ const Table = ({ accountData }) => {
   const [operations, setOperations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
 
   const address = accountData?.Owner;
@@ -34,8 +34,6 @@ const Table = ({ accountData }) => {
       setLoading(true);
       getDepositHistory(socket, address)
         .then(result => {
-          console.info('Got history');
-          console.info(result);
           setOperations(result);
           setLoading(false);
           return result;
@@ -113,7 +111,7 @@ const Table = ({ accountData }) => {
               size="small"
               onClick={() =>
                 window.open(
-                  `${record.type === 'deposit' ? config.btcExplorer : config.explorerUrl}/tx/${
+                  `${record.type === 'deposit' ? config.environment.btcExplorer : config.environment.explorerUrl}/tx/${
                     record.txHash
                   }`
                 )

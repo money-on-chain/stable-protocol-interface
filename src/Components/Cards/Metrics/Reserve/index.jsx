@@ -10,13 +10,13 @@ import BigNumber from 'bignumber.js';
 import { config } from '../../../../Config/config';
 
 const AppProject = config.environment.AppProject;
-const COLORS = AppProject === 'MoC' ? ['#00a651','#ef8a13'] : ['#0083ff','#0061bb'];
+const BalancePieColors = config.home.walletBalancePie.colors;
 
 function Reserve(props) {
     const auth = useContext(AuthenticateContext);
     const { accountData, convertToken } = auth;
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500;
@@ -29,6 +29,7 @@ function Reserve(props) {
         setTimeout(() => setLoading(false), timeSke)
     },[auth]);
 
+    /*
     const setRbtc = () => {
         if (auth.userBalanceData && accountData.Balance) {
             const b0BproAmount = (auth.contractStatusData['b0BproAmount'] / 1000000000000000000).toFixed(6);
@@ -37,8 +38,9 @@ function Reserve(props) {
         } else {
             return { b0BproAmount: 0, docAvailableToRedeem: 0 }
         }
-    };
+    };*/
 
+    /*
     const getPie = () => {
         if (auth.userBalanceData && accountData.Balance) {
             const data = [
@@ -48,7 +50,7 @@ function Reserve(props) {
 
             return data;
         }
-    };
+    };*/
 
     const toShow = ({ totalSTABLE, totalRISKPRO, totalRISKPROX }) => {
         return [
@@ -133,11 +135,11 @@ function Reserve(props) {
                                             data={balancesData}
                                             innerRadius={40}
                                             outerRadius={90}
-                                            fill="#8884d8"
+                                            fill={['#fff']}
                                             paddingAngle={1}
                                             dataKey="reserveValue"
                                         >
-                                            {balancesData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} className={`piePiece ${entry.currencyCode}`}/>)}
+                                            {balancesData.map((entry, index) => <Cell key={index} fill={BalancePieColors[index % BalancePieColors.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`}/>)}
                                         </Pie>
                                         <TooltipRecharts content={<CustomTooltip />} />
                                     </PieChart>

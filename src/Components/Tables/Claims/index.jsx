@@ -1,11 +1,10 @@
 import React, {useContext, useEffect} from 'react';
 import 'antd/dist/antd.css';
-import './style.scss';
 import { Table, Tooltip } from 'antd';
 import RowDetail from "../RowDetailClaim";
 import classnames from 'classnames';
 import api from '../../../services/api';
-import Moment from 'react-moment';
+//import Moment from 'react-moment';
 import { useState } from 'react'
 import {
     myParseDate,
@@ -14,11 +13,13 @@ import {
 } from '../../../Helpers/helper'
 import {config} from '../../../Config/config';
 import { useTranslation } from "react-i18next";
-import date from '../../../Config/date';
+//import date from '../../../Config/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import moment from 'moment';
+
+import './style.scss';
 
 export default function Claims(props) {
 
@@ -39,7 +40,7 @@ export default function Claims(props) {
     const [xScroll, setXScroll] = useState(undefined);
 
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
@@ -55,7 +56,7 @@ export default function Claims(props) {
             const datas = {address: accountData.Owner, limit: 20, skip: (((skip - 1) + (skip - 1)) * 10)}
             setTimeout(() => {
                 try {
-                    api('get', config.api.incentives + 'claims/' + accountData.Owner, datas)
+                    api('get', config.environment.api.incentives + 'claims/' + accountData.Owner, datas)
                         .then(response => {
                             setDataJson(response);
                             setTotalTable(response.total)

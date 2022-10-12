@@ -479,6 +479,7 @@ const userBalance = async (web3, dContracts, userAddress, appMode) => {
   const moctoken = dContracts.contracts.moctoken
   const riskprotoken = dContracts.contracts.riskprotoken
   const stabletoken = dContracts.contracts.stabletoken
+  const liquiditycollateraltoken = dContracts.contracts.liquiditycollateraltoken
 
   console.log(`Reading user balance ... account: ${userAddress}`)
 
@@ -502,6 +503,8 @@ const userBalance = async (web3, dContracts, userAddress, appMode) => {
     listMethods.push([reservetoken.options.address, reservetoken.methods.allowance(userAddress, dContracts.contracts.moc._address).encodeABI(), 'uint256']) // 7
   }
 
+  listMethods.push([liquiditycollateraltoken.options.address, liquiditycollateraltoken.methods.balanceOf(userAddress).encodeABI(), 'uint256']) // 8
+
   // Remove decode result parameter
   const cleanListMethods = listMethods.map(x => [x[0], x[1]])
   const multicallResult = await multicall.methods.tryBlockAndAggregate(false, cleanListMethods).call()
@@ -518,6 +521,7 @@ const userBalance = async (web3, dContracts, userAddress, appMode) => {
   userBalance.bprox2Balance = listReturnData[6]
   userBalance.spendableBalance = listReturnData[4]
   userBalance.reserveAllowance = listReturnData[7]
+  userBalance.liquidityCollateralToken = listReturnData[8]
   userBalance.potentialBprox2MaxInterest = '0'
   userBalance.bProHoldIncentive = '0'
   userBalance.estimateGasMintBpro = '2000000'

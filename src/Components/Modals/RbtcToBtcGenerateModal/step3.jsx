@@ -3,10 +3,9 @@ import React, {Fragment, useContext, useEffect, useState} from "react";
 import {weiToNumberFormat} from '../../../Helpers/math-helpers'
 import Web3 from "web3";
 import FastBtcBridge from "../../../Contracts/coinbase/FastBtcBridge.json";
-import { toContract } from '../../../Lib/numberHelper';
 import Copy from "../../Page/Copy";
 import { config } from '../../../Config/config';
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 
 export default function Step3(props) {
@@ -42,7 +41,6 @@ export default function Step3(props) {
 
     useEffect(() => {
         if (completed === false && intervalBTCCheck !== 0) {
-            console.log("clearInterval", intervalBTCCheck);
             clearInterval(intervalBTCCheck);
             setIntervalBTCCheck(0);
         }
@@ -54,9 +52,6 @@ export default function Step3(props) {
 
     const currentFeeData = async () => {
         const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
-        console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
-        console.log(Web3.utils.toWei(props.rbtcAmount, 'ether'))
-        console.log('Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
         if(web3!=null){
             const fastBtcBridge = new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
             const calculateCurrentFee = () => {
@@ -80,7 +75,6 @@ export default function Step3(props) {
     };
 
     const fastBtcBridgeAddress = config.environment.fastBtcBridgeAddress;
-    console.log('sendTransaction: Reading fastBtcBridge Contract... address: ', fastBtcBridgeAddress);
     const fastBtcBridge = new web3.eth.Contract(FastBtcBridge, fastBtcBridgeAddress);
 
     const sendTransaction= async () => {
@@ -99,12 +93,11 @@ export default function Step3(props) {
                         [props.rbtcAddress],
                         {
                             from: accountData.Owner,
-                            value: toContract(web3.utils.toWei(`${parseFloat(props.rbtcAmount)}`, 'ether')),
+                            value: new BigNumber(web3.utils.toWei(`${parseFloat(props.rbtcAmount)}`, 'ether')).toFixed(0),
                             gas: 300000
                         }).then(response => {
                         web3.eth.getTransactionReceipt(response.transactionHash)
                             .then(responseRSKTopics => {
-                                console.log(responseRSKTopics);
                                 setlabelTrx('Waiting')
                                 setCompleted(true);
                                 setIsVisible(true)
@@ -189,6 +182,8 @@ export default function Step3(props) {
                         setIntervalBTCCheck(null);
                         break;
                     }
+                    default:
+                        throw new Error('Invalid status'); 
                 }
                 console.log(responseBTC);
             })

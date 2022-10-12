@@ -3,7 +3,7 @@
 import {Button, Collapse, Slider, Spin} from 'antd';
 import {LoadingOutlined, SettingFilled} from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
-import './RDoC/style.scss';
+
 import React, {useState, useContext, useEffect, Fragment} from 'react';
 import { Modal, notification } from 'antd';
 
@@ -14,16 +14,17 @@ import {
   formatValueWithContractPrecision,
 } from '../../../Lib/Formats';
 import Copy from "../../Page/Copy";
-import { getCurrencyDetail } from '../../../Config/currentcy';
+import { getCurrencyDetail } from '../../../Config/currency';
 import { LargeNumber } from '../../LargeNumber';
-import {formatLocalMap2} from '../../../Lib/Formats';
+//import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";
 import { config } from '../../../Config/config';
-import web3 from "web3";
-import {setNumber} from "../../../Helpers/helper";
+//import {setNumber} from "../../../Helpers/helper";
 import Web3 from "web3";
+
+import './style.scss';
 
 export default function MintModal(props) {
   const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
@@ -73,7 +74,7 @@ export default function MintModal(props) {
   const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] = useState('Confirm');
   const [t, i18n]= useTranslation(["global",'moc'])
   const { appMode } = config.environment.AppMode;
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
 
   let userComment = '';
@@ -288,7 +289,7 @@ export default function MintModal(props) {
       'RESERVE'
     );
     if( fee.enoughMOCBalance==true ){
-      userAmount= userAmount - window.web3.utils.fromWei(((fee.percentage)*100).toString(), 'ether')
+      userAmount= userAmount - Web3.utils.fromWei(((fee.percentage)*100).toString(), 'ether')
     }
     const userToleranceFormat = new BigNumber(userTolerance).toFixed();
     //exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
@@ -296,12 +297,14 @@ export default function MintModal(props) {
     auth.interfaceExchangeMethod(exchanging.currencyCode, receiving.currencyCode, userAmount, userToleranceFormat, onTransaction, onReceipt);
   };
 
+  /*
   const callback = (error, transactionHash) => {
     setLoading(false);
     setCurrentHash(transactionHash);
     setShowTransaction(true);
     getTransaction(transactionHash);
   };
+  */
 
   const onTransaction = (transactionHash) => {
     setLoading(false);
@@ -421,8 +424,10 @@ export default function MintModal(props) {
     10: { ...markStyle, label: '10%' }
   };
 
+  /*
   const styleExchange = tokenNameExchange === exchanging.currencyCode ? { color } : {};
   const styleReceive = tokenNameReceive === receiving.currencyCode ? { color } : {};
+  */
 
   return (
     <Modal
@@ -448,7 +453,7 @@ export default function MintModal(props) {
               <span className={`Value ${appMode}`}>
                   {auth.isLoggedIn &&
                   <LargeNumber
-                      currencyCode={fee?.currencyCode}
+                      currencyCode="MOC"
                       amount={fee?.value}
                       includeCurrency
                       className="color-08374F"
@@ -538,7 +543,7 @@ export default function MintModal(props) {
                   case 'REVIEW':
                     if( currentHash!=null && currentHash!='') {
                       return <><p className={'text-align-center'}><img src={auth.urlBase + "global/status-pending.png"} width={50} height={50}
-                                       className='img-status rotate'/>.</p><p
+                                       className='img-status rotate' alt='pending'/>.</p><p
                           className={'Transaction_confirmation'}>{t(`${AppProject}.PleaseReviewYourWallet`, {ns: ns})}</p></>;
                     }else {
                       return <p className={'Transaction_confirmation'}>{t(`${AppProject}.PleaseReviewYourWallet`, {ns: ns})}</p>
@@ -567,7 +572,7 @@ export default function MintModal(props) {
         </>}
       </div>
       <Modal visible={confirmModal} footer={null} width={450}>
-        <img className={'img-campana'} width={27} height={30} src={auth.urlBase+"global/campana.png"}/>
+        <img className={'img-campana'} width={27} height={30} src={auth.urlBase+"global/campana.png"} alt='Info'/>
         <div className={'div-txt'}>
         <p className={'color-08374F'}>{t('global.ModalMind_CopyTx')}</p>
         <div>

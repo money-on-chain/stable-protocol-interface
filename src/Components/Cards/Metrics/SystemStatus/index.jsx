@@ -7,8 +7,7 @@ import SystemOperations from "./operations";
 import { useTranslation } from "react-i18next";
 import { Skeleton, Tooltip } from 'antd';
 import {config} from '../../../../Config/config';
-
-const BigNumber = require('bignumber.js');
+import BigNumber from "bignumber.js";
 
 function SystemStatus(props) {
 
@@ -16,7 +15,7 @@ function SystemStatus(props) {
 
     const getDatas = getDatasMetrics(auth)
     const [t, i18n] = useTranslation(["global", 'moc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     const [loading, setLoading] = useState(true);
@@ -48,6 +47,7 @@ function SystemStatus(props) {
         subtitle: t(`${AppProject}.metrics.statusYellow.subtitle`, {ns: ns}),
         operationsAvailable: [
             "redeemSTABLEOnSettlement",
+            "redeemSTABLEOutsideOfSettlement",
             "mintRISKPRO",
             "mintRISKPROX",
             "redeemRISKPROX"
@@ -108,12 +108,11 @@ function SystemStatus(props) {
 
         const coverageIsGreaterOrEqualThan = (numberInEther) => new BigNumber(coverage).gte(formatValueToContract(numberInEther, "COV"));
 
-        if (coverageIsGreaterOrEqualThan(4)) {
-            console.log(coverageIsGreaterOrEqualThan(4))
+        if (coverageIsGreaterOrEqualThan(config.globalCoverage.ok)) {
             return configStatusGreen;
-        } else if (coverageIsGreaterOrEqualThan(2)) {
+        } else if (coverageIsGreaterOrEqualThan(config.globalCoverage.warning)) {
             return configStatusYellow;
-        } else if (coverageIsGreaterOrEqualThan(1.5)) {
+        } else if (coverageIsGreaterOrEqualThan(config.globalCoverage.dangerous)) {
             return configStatusOrange;
         } else {
             return configStatusRed;

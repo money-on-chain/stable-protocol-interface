@@ -9,7 +9,6 @@ const explorerNetworks = {
 };
 
 export function createSocketConnection() {
-  console.log('----- ENTRO A CREATE SOCKET -----');
   const { origin, pathname } = new URL(fastBtcApis[currentChainId]);
   window.btcExplorer = new URL(btcExplorer[currentChainId]);
   const socket = io(`${origin}/`, {

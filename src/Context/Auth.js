@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from 'react';
 import getRLogin from '../Lib/rLogin';
 import Web3 from 'web3';
-import _ from 'lodash/core';
+//import _ from 'lodash/core';
 import addressHelper from '../Lib/addressHelper';
-import FastBtcSocketWrapper from '../Lib/FastBtcSocketWrapper';
-import { getPriceFields } from '../Lib/price';
+import FastBtcSocketWrapper from '../Lib/fastBTC/FastBtcSocketWrapper';
+//import { getPriceFields } from '../Lib/price';
 import { config } from '../Config/config';
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
@@ -21,10 +21,9 @@ import { decodeEvents } from '../Lib/integration/transaction';
 import { transferStableTo, transferRiskProTo, transferMocTo,transferRBTCTo, calcMintInterest, approveMoCTokenCommission } from '../Lib/integration/interfaces-base';
 import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unStake, delayMachineWithdraw, delayMachineCancelWithdraw, approveMoCTokenStaking, getMoCAllowance } from '../Lib/integration/interfaces-omoc';
 import { getGasPrice } from '../Lib/integration/utils';
-
+import BigNumber from "bignumber.js";
 //import createNodeManager from '../Lib/nodeManagerFactory';
 
-const BigNumber = require('bignumber.js');
 const helper = addressHelper(Web3);
 
 BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_DOWN });
@@ -98,7 +97,7 @@ const AuthenticateProvider = ({ children }) => {
         GasPrice: 0,
         truncatedAddress: ''
     });
-    let balanceData;
+    //let balanceData;
     // const [transactionReceipt, setTransactionReceipt] = useState(null);
 
     // Fast BTC socket
@@ -201,7 +200,7 @@ const AuthenticateProvider = ({ children }) => {
             balanceRbtc,
             config,
             account,
-            vendorAddress: config.vendor.address
+            vendorAddress: config.environment.vendor.address
         }
 
     }
@@ -345,7 +344,6 @@ const AuthenticateProvider = ({ children }) => {
     }
 
     const loadContractsStatusAndUserBalance = async () => {
-        console.log("Update Status and balance");
         if (!window.integration) return;
         const appMode = config.environment.AppMode;
 
@@ -383,8 +381,6 @@ const AuthenticateProvider = ({ children }) => {
 
     }
 
-    window.updateMulticall = loadContractsStatusAndUserBalance;
-
     const loadAccountData = async () => {
         const owner = await getAccount();
         const truncate_address =
@@ -412,7 +408,6 @@ const AuthenticateProvider = ({ children }) => {
         try {
             let balance = await web3.eth.getBalance(address);
             balance = web3.utils.fromWei(balance);
-            // console.log('balance', balance);
             return balance
         } catch (e) {
             console.log(e);

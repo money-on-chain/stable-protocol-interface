@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import 'antd/dist/antd.css';
 import { Table } from 'antd';
-import data_json from '../../../services/fatbts_pegout.json';
+//import data_json from '../../../services/fatbts_pegout.json';
 import Moment from 'react-moment';
 import { useState } from 'react'
 import { myParseDate, readJsonTableFastBtcPegOut} from '../../../Helpers/helper'
@@ -13,6 +13,9 @@ import RowDetailPegOut from "./RowDetailPegOut";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import api from "../../../services/api";
 import {config} from "../../../Config/config";
+//import BigNumber from "bignumber.js";
+
+import './style.scss';
 
 export default function FastBtcPegOut(props) {
 
@@ -32,7 +35,6 @@ export default function FastBtcPegOut(props) {
 
     const [yScroll, setYScroll] = useState(undefined);
     const [xScroll, setXScroll] = useState(undefined);
-    const BigNumber = require('bignumber.js');
 
     const [t, i18n] = useTranslation(["global", 'moc']);
     const auth = useContext(AuthenticateContext);
@@ -48,7 +50,7 @@ export default function FastBtcPegOut(props) {
         if(auth.isLoggedIn) {
             setTimeout(() => {
                 try {
-                    api('get', `${config.api.operations}` + 'webapp/fastbtc/pegout/', {address: accountData.Owner})
+                    api('get', `${config.environment.api.operations}` + 'webapp/fastbtc/pegout/', {address: accountData.Owner})
                         .then(response => {
                             setDataJson(response);
                             setTotalTable(response.total)

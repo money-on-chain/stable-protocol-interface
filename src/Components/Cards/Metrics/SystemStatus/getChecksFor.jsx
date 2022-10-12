@@ -8,7 +8,7 @@ function GetChecksFor(props) {
     const iconCheckColor = '#09c199';
     const iconCheckColorCloseOutlined = '#ed1c24';
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
 
     const isAvailable = (operation) => props.operationsAvailable.find(element => element === operation);

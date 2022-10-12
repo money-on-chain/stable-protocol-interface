@@ -3,13 +3,14 @@ import { Row, Col, Tooltip, Modal } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from "react-i18next";
 import { config } from './../../../Config/config';
+import './style.scss'
 
-import { getKeyThenIncreaseKey } from 'antd/lib/message';
+//import { getKeyThenIncreaseKey } from 'antd/lib/message';
 
 export default function InformationModal({ currencyCode }) {
 
   const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -37,7 +38,6 @@ export default function InformationModal({ currencyCode }) {
       <Col span={24}>
         <hr className='FactSheetLine' />
         <p className='FactSheet'>{`${t(`${AppProject}.TokenInformationContent.${token}.factSheet`, { ns: ns })}`}</p>
-          <p>{token}</p>
         <h4 className='FactSheetTitle' dangerouslySetInnerHTML={{ __html: t(`${AppProject}.TokenInformationContent.${token}.title`, { ns: ns, returnObjectTrees: false }) }} />
       </Col>
       <Col xs={24} sm={24} md={12}>

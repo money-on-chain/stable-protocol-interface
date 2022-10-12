@@ -1,12 +1,11 @@
 /* eslint-disable default-case */
-import web3 from "web3";
 import {config} from '../Config/config';
 import Web3 from "web3";
 import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber";
 import moment from 'moment';
 import {formatLocalMap2} from "../Lib/Formats";
-const BigNumber = require('bignumber.js');
-const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+import BigNumber from "bignumber.js";
+const ns = config.environment.AppProject.toLowerCase();
 const AppProject = config.environment.AppProject;
 
 export function setNumber(number){
@@ -20,14 +19,13 @@ export function setNumber(number){
 }
 
 export function getDatasMetrics(auth,i18n=null){
-    const coin_usd= config.coin_usd
     if (auth.userBalanceData) {
         if (auth.userBalanceData) {
-            const globalCoverage= Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
-            const globalCoverageTooltip = Number(web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether'));
+            const globalCoverage= Number(Web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether')).toFixed(4)
+            const globalCoverageTooltip = Number(Web3.utils.fromWei(setNumber(auth.contractStatusData['globalCoverage']), 'ether'));
             const globalCoverageClean= Number(auth.contractStatusData['globalCoverage']).toFixed(4)
 
-            let btcx_x2Leverage= parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage']), 'ether')).toFixed(6);
+            let btcx_x2Leverage= parseFloat(Web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage']), 'ether')).toFixed(6);
             if(i18n!=null){
                 btcx_x2Leverage= setToLocaleString(parseFloat(Web3.utils.fromWei(setNumber(auth.contractStatusData['x2Leverage'])), 'ether'),4,i18n)
             }
@@ -37,22 +35,44 @@ export function getDatasMetrics(auth,i18n=null){
             const paused= (auth.contractStatusData['paused']);
 
             return {
-                globalCoverage:globalCoverage,globalCoverageTooltip: globalCoverageTooltip,
-                x2Leverage:btcx_x2Leverage,blocksToSettlement:blocksToSettlement,blockHeight:blockHeight,paused:paused,
+                globalCoverage: globalCoverage,
+                globalCoverageTooltip: globalCoverageTooltip,
+                x2Leverage: btcx_x2Leverage,
+                blocksToSettlement: blocksToSettlement,
+                blockHeight: blockHeight,
+                paused: paused,
                 globalCoverageClean:globalCoverageClean
             };
         } else {
-            return {globalCoverage: 0,globalCoverageTooltip: 0,
-                    interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
-                    liquidity_interest:0,blocksToSettlement:0,blockHeight:0,paused:false,
-                    globalCoverageClean:0
+            return {
+                globalCoverage: 0,
+                globalCoverageTooltip: 0,
+                interest:0,
+                interestTooltip:0,
+                x2Leverage:0,
+                x2Coverage:0,
+                bprox2AvailableToMint:0,
+                liquidity_interest:0,
+                blocksToSettlement:0,
+                blockHeight:0,
+                paused:false,
+                globalCoverageClean:0
             };
         }
     }else{
-        return {globalCoverage:0,globalCoverageTooltip: 0,
-                interest:0,interestTooltip:0,x2Leverage:0,x2Coverage:0,bprox2AvailableToMint:0,
-                liquidity_interest:0,blocksToSettlement:0,blockHeight:0,paused:false,
-                globalCoverageClean:0
+        return {
+            globalCoverage:0,
+            globalCoverageTooltip: 0,
+            interest:0,
+            interestTooltip:0,
+            x2Leverage:0,
+            x2Coverage:0,
+            bprox2AvailableToMint:0,
+            liquidity_interest:0,
+            blocksToSettlement:0,
+            blockHeight:0,
+            paused:false,
+            globalCoverageClean:0
         };
     }
 }
@@ -278,15 +298,32 @@ export function readJsonTable(data_j,t, i18n){
         i18n:i18n
         })
 
-    return {set_event:set_event,set_asset:set_asset,set_status_txt:set_status_txt,set_status_percent:set_status_percent,
-        wallet_detail:wallet_detail,wallet_detail_usd:wallet_detail_usd,
-        paltform_detail_usd:paltform_detail_usd,paltform_detail:paltform_detail,
-        truncate_address:truncate_address,truncate_txhash:truncate_txhash,
-        lastUpdatedAt:lastUpdatedAt,RBTCAmount:RBTCAmount,confirmationTime:confirmationTime,
-        address:address,amount:amount,platform_fee_value:platform_fee_value,
-        blockNumber:blockNumber,wallet_value:wallet_value,interests:interests,
-        tx_hash_truncate:tx_hash_truncate,tx_hash:tx_hash,gas_fee:gas_fee,price:price,
-        wallet_value_main:wallet_value_main,leverage:leverage
+    return {
+        set_event:set_event,
+        set_asset:set_asset,
+        set_status_txt:set_status_txt,
+        set_status_percent:set_status_percent,
+        wallet_detail:wallet_detail,
+        wallet_detail_usd:wallet_detail_usd,
+        paltform_detail_usd:paltform_detail_usd,
+        paltform_detail:paltform_detail,
+        truncate_address:truncate_address,
+        truncate_txhash:truncate_txhash,
+        lastUpdatedAt:lastUpdatedAt,
+        RBTCAmount:RBTCAmount,
+        confirmationTime:confirmationTime,
+        address:address,
+        amount:amount,
+        platform_fee_value:platform_fee_value,
+        blockNumber:blockNumber,
+        wallet_value:wallet_value,
+        interests:interests,
+        tx_hash_truncate:tx_hash_truncate,
+        tx_hash:tx_hash,
+        gas_fee:gas_fee,
+        price:price,
+        wallet_value_main:wallet_value_main,
+        leverage:leverage
     }
 
 }
@@ -299,15 +336,17 @@ export const toNumberFormat = (value, decimals = 0) => {
     });
 }
 
+/*
 export const set_doc_usd= (auth) =>{
     if (auth.userBalanceData) {
         const doc_usd= new BigNumber(auth.userBalanceData['docBalance'])
         const doc= (auth.userBalanceData['docBalance']/auth.contractStatusData.bitcoinPrice).toFixed(6);
-        return {'normal':doc,'usd':doc_usd}
+        return {'normal':doc, 'usd':doc_usd}
     }else{
-        return {'normal':(0).toFixed(6),'usd':(0).toFixed(2)}
+        return {'normal':(0).toFixed(6), 'usd':(0).toFixed(2)}
     }
 };
+*/
 
 export const myParseDate = date_string => {
     let [y,M,d,h,m,s] = date_string.split(/[- :T]/);
@@ -375,9 +414,22 @@ export function readJsonTableFastBtcPegOut(data_j){
     const transactionHashLastUpdated = (data_j.transactionHashLastUpdated!==undefined)? data_j.transactionHashLastUpdated?.slice(0, 5)+'...'+ data_j.transactionHashLastUpdated?.slice(-4) : '--'
 
     return {
-        hashId:hash_id,status:status?.text, statusColor: status?.colorClass, btcAmount:btcAmount,btcFee:btcFee,timestamp:timestamp,
-        btcAddress:btcAddress,date:date,hash_id_cut:hash_id_cut,btcAddressCut:btcAddressCut,transactionHash:transactionHash,
-        transactionHashCut:transactionHashCut,blockNumber:blockNumber,rskAddress:rskAddress,rskAddressCut:rskAddressCut, transactionHashLastUpdated:transactionHashLastUpdated
+        hashId:hash_id,
+        status:status?.text,
+        statusColor: status?.colorClass,
+        btcAmount:btcAmount,
+        btcFee:btcFee,
+        timestamp:timestamp,
+        btcAddress:btcAddress,
+        date:date,
+        hash_id_cut:hash_id_cut,
+        btcAddressCut:btcAddressCut,
+        transactionHash:transactionHash,
+        transactionHashCut:transactionHashCut,
+        blockNumber:blockNumber,
+        rskAddress:rskAddress,
+        rskAddressCut:rskAddressCut,
+        transactionHashLastUpdated:transactionHashLastUpdated
     }
 
 }
@@ -421,10 +473,16 @@ export function readJsonClaims(data_j,t, i18n){
         i18n:i18n
     })
 
-    return {set_asset:set_asset,
-
-        mocs:mocs,creation:creation,state:state,sent_hash:sent_hash,truncate_sent_hash:truncate_sent_hash,
-        truncate_hash:truncate_hash,hash:hash,gas_cost:gas_cost
+    return {
+        set_asset:set_asset,
+        mocs:mocs,
+        creation:creation,
+        state:state,
+        sent_hash:sent_hash,
+        truncate_sent_hash:truncate_sent_hash,
+        truncate_hash:truncate_hash,
+        hash:hash,
+        gas_cost:gas_cost
     }
 
 }
@@ -457,9 +515,9 @@ const StatusReward = ({ state, result }) => {
 
 export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro, end_block_dt){
     if (!daily_moc) return {toGetToday: 0.0, toGetNow: 0.0, time_left: 0}
-    const set_daily_moc= new BigNumber(web3.utils.fromWei(daily_moc.toString()))
-    const set_user_balance_bproBalance= new BigNumber(web3.utils.fromWei(user_balance_bproBalance.toString()))
-    const set_total_bpro= new BigNumber(web3.utils.fromWei(total_bpro.toString()))
+    const set_daily_moc= new BigNumber(Web3.utils.fromWei(daily_moc.toString()))
+    const set_user_balance_bproBalance= new BigNumber(Web3.utils.fromWei(user_balance_bproBalance.toString()))
+    const set_total_bpro= new BigNumber(Web3.utils.fromWei(total_bpro.toString()))
 
     let start = new Date(end_block_dt);
     let now = new Date();
@@ -476,36 +534,16 @@ export function getRewardedToday(daily_moc, user_balance_bproBalance, total_bpro
     return {toGetToday, toGetNow, time_left}
 }
 
-export function getUSD(coin,value,auth,i18n=null){
-    if (auth.contractStatusData) {
-        switch (coin) {
-            case 'STABLE':
-                return  setToLocaleString(new BigNumber(1 * web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'RISKPRO':
-                return  setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'MOC':
-                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData['mocPrice']) * web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'RESERVE':
-                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'RISKPROX':
-                return setToLocaleString(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice, 'ether') * web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'], 'ether') * web3.utils.fromWei(setNumber(value))),2,i18n)
-
-        }
-    }else{
-        return 0
-    }
-}
-
 export function getCoinName(coin){
 
     let currencies= {
-        'COINBASE':config.environment.tokens.COINBASE.name,
-        'STABLE':config.environment.tokens.STABLE.name,
-        'RISKPRO':config.environment.tokens.RISKPRO.name,
-        'RISKPROX':config.environment.tokens.RISKPROX.name,
-        'RESERVE':config.environment.tokens.RESERVE.name,
+        'COINBASE':config.tokens.COINBASE.name,
+        'STABLE':config.tokens.STABLE.name,
+        'RISKPRO':config.tokens.RISKPRO.name,
+        'RISKPROX':config.tokens.RISKPROX.name,
+        'RESERVE':config.tokens.RESERVE.name,
         'USDPrice':'USD',
-        'MOC':config.environment.tokens.MOC.name,
+        'MOC':config.tokens.MOC.name,
         'USD':'USD',
     }
 
@@ -514,17 +552,17 @@ export function getCoinName(coin){
 
 export function getDecimals(coin,AppProject){
     let decimals= {
-        'COINBASE':config.environment.tokens.COINBASE.decimals,
-        'STABLE':config.environment.tokens.STABLE.decimals,
-        'RISKPRO':config.environment.tokens.RISKPRO.decimals,
-        'RISKPROX':config.environment.tokens.RISKPROX.decimals,
-        'MOC':config.environment.tokens.MOC.decimals,
+        'COINBASE':config.tokens.COINBASE.decimals,
+        'STABLE':config.tokens.STABLE.decimals,
+        'RISKPRO':config.tokens.RISKPRO.decimals,
+        'RISKPROX':config.tokens.RISKPROX.decimals,
+        'MOC':config.tokens.MOC.decimals,
         'USDPrice': (AppProject=='MoC')? 2 : 4,
-        'RESERVE':config.environment.tokens.RESERVE.decimals,
+        'RESERVE':config.tokens.RESERVE.decimals,
         'USD':2,
-        'REWARD':config.environment.Precisions.REWARDPrecision.decimals,
+        'REWARD':config.Precisions.REWARDPrecision.decimals,
         'DOC':2,
-        'RISKPROXInterest':config.environment.Precisions.RISKPROXInterest.decimals
+        'RISKPROXInterest':config.Precisions.RISKPROXInterest.decimals
     }
 
     return decimals[coin]
