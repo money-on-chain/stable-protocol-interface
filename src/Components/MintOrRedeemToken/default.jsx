@@ -624,20 +624,28 @@ const MintOrRedeemToken = (props) => {
     );
   };
 
-  const renderInterests = () => (
-    <div className="CommissionCurrencySwitch">
-      <p>
-        {t('global.MintOrRedeemToken_Interest', {
-          interestRate: interests.interestRate
-        })}
-      </p>
-      <LargeNumber
-        includeCurrency
-        amount={interests.interestValue}
-        currencyCode={'RESERVE'}
-      />
-    </div>
-  );
+  const renderInterests = () => {
+      console.log("DEBUG>>");
+      console.log(interests);
+      if (!interests) return;
+      if (!interests.interestValue) return;
+      if (new BigNumber(interests.interestValue).lte(0)) return;
+
+      return (
+        <div className="CommissionCurrencySwitch">
+          <p>
+            {t('global.MintOrRedeemToken_Interest', {
+              interestRate: interests.interestRate
+            })}
+          </p>
+          <LargeNumber
+            includeCurrency
+            amount={interests.interestValue}
+            currencyCode={'RESERVE'}
+          />
+        </div>
+      )
+  };
 
   return (<>
       {!loading ?
@@ -655,10 +663,7 @@ const MintOrRedeemToken = (props) => {
         <>
           {renderExchangeInputs()}
           {renderComissionCurrencySwitch()}
-          {interests &&
-            new BigNumber(interests.interestValue) &&
-            new BigNumber(interests.interestValue).gt(0) &&
-            renderInterests()}
+          {renderInterests()}
           {renderFooter()}
           {renderConfirmTransactionModal()}
           {renderAllowanceReserveModal()}
