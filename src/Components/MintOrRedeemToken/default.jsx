@@ -205,9 +205,6 @@ const MintOrRedeemToken = (props) => {
     let interestRate = '0',
       interestValue = '0';
     if (actionIsMint && currencyYouReceive === 'RISKPROX') {
-      console.log("DEBUG2>>>")
-      console.log(newValueYouExchange)
-      console.log(BigNumber(newValueYouExchange).div(10**18).toString())
       interestValue = await auth.interfaceCalcMintInterestValues(
         BigNumber(newValueYouExchange).div(10**18)
       );
@@ -627,8 +624,6 @@ const MintOrRedeemToken = (props) => {
   };
 
   const renderInterests = () => {
-      console.log("DEBUG>>");
-      console.log(interests);
       if (!interests) return;
       if (!interests.interestValue) return;
       if (new BigNumber(interests.interestValue).lte(0)) return;
