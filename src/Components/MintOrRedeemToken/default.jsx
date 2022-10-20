@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import Web3 from 'web3';
 import {
     notification,
     Popover,
@@ -204,10 +205,11 @@ const MintOrRedeemToken = (props) => {
     let interestRate = '0',
       interestValue = '0';
     if (actionIsMint && currencyYouReceive === 'RISKPROX') {
+      console.log("DEBUG2>>>")
+      console.log(newValueYouExchange)
+      console.log(BigNumber(newValueYouExchange).div(10**18).toString())
       interestValue = await auth.interfaceCalcMintInterestValues(
-        BigNumber(newValueYouExchange)
-          .toFixed(0)
-          .toString()
+        BigNumber(newValueYouExchange).div(10**18)
       );
 
       interestRate = formatValueToContract(
