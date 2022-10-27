@@ -109,7 +109,7 @@ const AuthenticateProvider = ({ children }) => {
 
     useEffect(() => {
         if (!window.rLogin) {
-            window.rLogin = getRLogin(process.env.REACT_APP_CHAIN_ID);
+            window.rLogin = getRLogin(process.env.REACT_APP_ENVIRONMENT_CHAIN_ID);
 
             if (window.rLogin.cachedProvider) {
                 connect();
