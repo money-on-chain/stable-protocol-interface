@@ -72,7 +72,7 @@ export default function MintModal(props) {
   const [showError, setShowError] = useState(false);
   const [ShowModalAllowanceReserve, setShowModalAllowanceReserve] = useState(false);
   const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] = useState('Confirm');
-  const [t, i18n]= useTranslation(["global",'moc'])
+  const [t, i18n]= useTranslation(['global', 'moc', 'rdoc'])
   const { appMode } = config.environment.AppMode;
   const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
@@ -114,9 +114,6 @@ export default function MintModal(props) {
     // Check if there are enough spendable balance to pay
     // take in care amount to pay gas fee
 
-    setTxtTransaction('REVIEW')
-    setShowTransaction(true)
-
     const minimumUserBalanceToOperate = config.minimumUserBalanceToOperate;
     const userSpendable = await auth.getSpendableBalance(window.address);
 
@@ -132,6 +129,11 @@ export default function MintModal(props) {
         setShowError(true);
         return;
     }
+
+    // Set review your transaction msg
+    setTxtTransaction('REVIEW')
+    setShowTransaction(true)
+
     // onConfirm({ comment, tolerance: uTolerance });
     userComment = comment;
     userTolerance = uTolerance;

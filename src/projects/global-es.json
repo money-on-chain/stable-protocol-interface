@@ -187,6 +187,7 @@
         "ConfirmTransactionModal_cancel": "Cancelar",
         "ConfirmTransactionModal_confirm": "Confirmar",
         "ConfirmTransactionModal_Interests": "Tasa de Interés",
+        "ConfirmTransactionModal_Error_not_enough": "Not enough user balance! Please review customize price variation tolerance.",
 
         "MintOrRedeemToken_YouExchange": "Cambias",
         "MintOrRedeemToken_YouReceive": "Recibes",
