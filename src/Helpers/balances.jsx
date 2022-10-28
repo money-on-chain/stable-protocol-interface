@@ -99,15 +99,15 @@ const getUserBalance = (auth, i18n, tokenName) => {
         let notFormatted;
         switch (tokenName.toLowerCase()) {
             case 'stable':
-                rDecimals = parseInt(config.tokens.STABLE.decimals);
+                rDecimals = parseInt(config.tokens.TP.decimals);
                 notFormatted = userDocBalance(auth);
                 break;
             case 'riskpro':
-                rDecimals = parseInt(config.tokens.RISKPRO.decimals);
+                rDecimals = parseInt(config.tokens.TC.decimals);
                 notFormatted = userBproBalance(auth);
                 break;
             case 'riskprox':
-                rDecimals = parseInt(config.tokens.RISKPROX.decimals);
+                rDecimals = parseInt(config.tokens.TX.decimals);
                 notFormatted = userBtcxBalance(auth);
                 break;
             default:
@@ -117,7 +117,7 @@ const getUserBalance = (auth, i18n, tokenName) => {
         result = {
             'normal': setToLocaleString(notFormatted.normal.toFixed(rDecimals), rDecimals, i18n),
             'normal_tooltip': setToLocaleString(notFormatted.normal.toFixed(12), 12, i18n),
-            'usd': setToLocaleString(notFormatted.usd.toFixed(parseInt(config.tokens.STABLE.decimals)), parseInt(config.tokens.STABLE.decimals), i18n),
+            'usd': setToLocaleString(notFormatted.usd.toFixed(parseInt(config.tokens.TP.decimals)), parseInt(config.tokens.TP.decimals), i18n),
             'usd_tooltip': setToLocaleString(notFormatted.usd.toFixed(12), 12, i18n),
             'collateral': setToLocaleString(notFormatted.collateral.toFixed(parseInt(config.tokens.RESERVE.decimals)), parseInt(config.tokens.RESERVE.decimals), i18n),
             'collateral_tooltip': setToLocaleString(notFormatted.collateral.toFixed(12), 12, i18n),

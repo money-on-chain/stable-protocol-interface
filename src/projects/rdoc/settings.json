@@ -28,19 +28,19 @@
         "name": "RIF",
         "decimals": "2"
       },
-      "STABLE": {
+      "TP": {
         "name": "RDOC",
         "decimals": "2"
       },
-      "RISKPRO": {
+      "TC": {
         "name": "RIFP",
         "decimals": "2"
       },
-      "RISKPROX": {
+      "TX": {
         "name": "RIFX",
         "decimals": "2"
       },
-      "MOC": {
+      "TG": {
         "name": "MOC",
         "decimals": "2"
       },

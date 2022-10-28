@@ -64,18 +64,18 @@ const mintTPRRC20 = async (interfaceContext, reserveAmount, mintSlippage, onTran
   // Verifications
 
   // User have sufficient reserve to pay?
-  console.log(`To mint ${tpAmount} ${tokens.STABLE.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your balance`)
+  console.log(`To mint ${tpAmount} ${tokens.TP.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your balance`)
   const userReserveBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.rbtcBalance))
   if (valueToSend.gt(userReserveBalance)) throw new Error('Insufficient reserve balance')
 
   // Allowance reserve
-  console.log(`Allowance: To mint ${tpAmount} ${tokens.STABLE.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your spendable balance`)
+  console.log(`Allowance: To mint ${tpAmount} ${tokens.TP.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your spendable balance`)
   const userSpendableBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.reserveAllowance))
   if (valueToSend.gt(userSpendableBalance)) throw new Error('Insufficient spendable balance... please make an allowance to the MoC contract')
 
   // There are sufficient TP in the contracts to mint?
   const tpAvailableToMint = new BigNumber(Web3.utils.fromWei(contractStatusData.docAvailableToMint))
-  if (new BigNumber(tpAmount).gt(tpAvailableToMint)) throw new Error(`Insufficient ${tokens.STABLE.name} available to mint`)
+  if (new BigNumber(tpAmount).gt(tpAvailableToMint)) throw new Error(`Insufficient ${tokens.TP.name} available to mint`)
 
   // Mint TP RRC20 function... no values sent
   valueToSend = null
@@ -122,13 +122,13 @@ const redeemTPRRC20 = async (interfaceContext, tpAmount, mintSlippage, onTransac
   // Verifications
 
   // User have sufficient TP in balance?
-  console.log(`Redeeming ${tpAmount} ${tokens.STABLE.name} ... getting approx: ${reserveAmount} ${tokens.RESERVE.name}... `)
+  console.log(`Redeeming ${tpAmount} ${tokens.TP.name} ... getting approx: ${reserveAmount} ${tokens.RESERVE.name}... `)
   const userTPBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.docBalance))
-  if (new BigNumber(tpAmount).gt(userTPBalance)) throw new Error(`Insufficient ${tokens.STABLE.name}  user balance`)
+  if (new BigNumber(tpAmount).gt(userTPBalance)) throw new Error(`Insufficient ${tokens.TP.name}  user balance`)
 
   // There are sufficient TP in the contracts to redeem?
   const tpAvailableToRedeem = new BigNumber(Web3.utils.fromWei(contractStatusData.docAvailableToRedeem))
-  if (new BigNumber(tpAmount).gt(tpAvailableToRedeem)) throw new Error(`Insufficient ${tokens.STABLE.name} available to redeem in contract`)
+  if (new BigNumber(tpAmount).gt(tpAvailableToRedeem)) throw new Error(`Insufficient ${tokens.TP.name} available to redeem in contract`)
 
   const moc = dContracts.contracts.moc
 
@@ -181,12 +181,12 @@ const mintTCRRC20 = async (interfaceContext, reserveAmount, mintSlippage, onTran
   // Verifications
 
   // User have sufficient reserve to pay?
-  console.log(`To mint ${tcAmount} ${tokens.RISKPRO.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your balance`)
+  console.log(`To mint ${tcAmount} ${tokens.TC.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your balance`)
   const userReserveBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.rbtcBalance))
   if (valueToSend.gt(userReserveBalance)) throw new Error('Insufficient reserve balance')
 
   // Allowance    reserveAllowance
-  console.log(`Allowance: To mint ${tcAmount} ${tokens.RISKPRO.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your spendable balance`)
+  console.log(`Allowance: To mint ${tcAmount} ${tokens.TC.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your spendable balance`)
   const userSpendableBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.reserveAllowance))
   if (valueToSend.gt(userSpendableBalance)) throw new Error('Insufficient spendable balance... please make an allowance to the MoC contract')
 
@@ -233,13 +233,13 @@ const redeemTCRRC20 = async (interfaceContext, tcAmount, mintSlippage, onTransac
   // Verifications
 
   // User have sufficient TC in balance?
-  console.log(`Redeeming ${tcAmount} ${tokens.RISKPRO.name} ... getting approx: ${reserveAmount} ${tokens.RESERVE.name}... `)
+  console.log(`Redeeming ${tcAmount} ${tokens.TC.name} ... getting approx: ${reserveAmount} ${tokens.RESERVE.name}... `)
   const userTCBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.bproBalance))
-  if (new BigNumber(tcAmount).gt(userTCBalance)) throw new Error(`Insufficient ${tokens.RISKPRO.name} user balance`)
+  if (new BigNumber(tcAmount).gt(userTCBalance)) throw new Error(`Insufficient ${tokens.TC.name} user balance`)
 
   // There are sufficient TC in the contracts to redeem?
   const tcAvailableToRedeem = new BigNumber(Web3.utils.fromWei(contractStatusData.bproAvailableToRedeem))
-  if (new BigNumber(tcAmount).gt(tcAvailableToRedeem)) throw new Error(`Insufficient ${tokens.RISKPRO.name} available to redeem in contract`)
+  if (new BigNumber(tcAmount).gt(tcAvailableToRedeem)) throw new Error(`Insufficient ${tokens.TC.name} available to redeem in contract`)
 
   const moc = dContracts.contracts.moc
 
@@ -298,13 +298,13 @@ const mintTXRRC20 = async (interfaceContext, reserveAmount, mintSlippage, onTran
   // Verifications
 
   // User have sufficient reserve to pay?
-  console.log(`To mint ${txAmount}  ${tokens.RISKPROX.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your balance`)
+  console.log(`To mint ${txAmount}  ${tokens.TX.name} you need > ${valueToSend.toString()} ${tokens.RESERVE.name} in your balance`)
   const userReserveBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.rbtcBalance))
   if (valueToSend.gt(userReserveBalance)) throw new Error('Insufficient reserve balance')
 
   // There are sufficient TX in the contracts to mint?
   const txAvailableToMint = new BigNumber(Web3.utils.fromWei(contractStatusData.bprox2AvailableToMint))
-  if (new BigNumber(txAmount).gt(txAvailableToMint)) throw new Error(`Insufficient ${tokens.RISKPROX.name} available to mint`)
+  if (new BigNumber(txAmount).gt(txAvailableToMint)) throw new Error(`Insufficient ${tokens.TX.name} available to mint`)
 
   valueToSend = null
   const moc = dContracts.contracts.moc
@@ -349,9 +349,9 @@ const redeemTXRRC20 = async (interfaceContext, txAmount, mintSlippage, onTransac
   // Verifications
 
   // User have sufficient TX in balance?
-  console.log(`Redeeming ${txAmount} ${tokens.RISKPROX.name}  ... getting approx: ${reserveAmount} ${tokens.RESERVE.name} ... `)
+  console.log(`Redeeming ${txAmount} ${tokens.TX.name}  ... getting approx: ${reserveAmount} ${tokens.RESERVE.name} ... `)
   const userTXBalance = new BigNumber(Web3.utils.fromWei(userBalanceData.bprox2Balance))
-  if (new BigNumber(txAmount).gt(userTXBalance)) throw new Error(`Insufficient ${tokens.RISKPROX.name}  user balance`)
+  if (new BigNumber(txAmount).gt(userTXBalance)) throw new Error(`Insufficient ${tokens.TX.name}  user balance`)
 
   const moc = dContracts.contracts.moc
 

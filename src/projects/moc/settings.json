@@ -28,19 +28,19 @@
         "name": "RBTC",
         "decimals": "6"
       },
-      "STABLE": {
+      "TP": {
         "name": "DOC",
         "decimals": "2"
       },
-      "RISKPRO": {
+      "TC": {
         "name": "BPRO",
         "decimals": "6"
       },
-      "RISKPROX": {
+      "TX": {
         "name": "BTCX",
         "decimals": "6"
       },
-      "MOC": {
+      "TG": {
         "name": "MOC",
         "decimals": "2"
       },

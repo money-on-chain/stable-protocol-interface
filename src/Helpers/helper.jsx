@@ -538,12 +538,12 @@ export function getCoinName(coin){
 
     let currencies= {
         'COINBASE':config.tokens.COINBASE.name,
-        'STABLE':config.tokens.STABLE.name,
-        'RISKPRO':config.tokens.RISKPRO.name,
-        'RISKPROX':config.tokens.RISKPROX.name,
+        'STABLE':config.tokens.TP.name,
+        'RISKPRO':config.tokens.TC.name,
+        'RISKPROX':config.tokens.TX.name,
         'RESERVE':config.tokens.RESERVE.name,
         'USDPrice':'USD',
-        'MOC':config.tokens.MOC.name,
+        'MOC':config.tokens.TG.name,
         'USD':'USD',
     }
 
@@ -553,10 +553,10 @@ export function getCoinName(coin){
 export function getDecimals(coin,AppProject){
     let decimals= {
         'COINBASE':config.tokens.COINBASE.decimals,
-        'STABLE':config.tokens.STABLE.decimals,
-        'RISKPRO':config.tokens.RISKPRO.decimals,
-        'RISKPROX':config.tokens.RISKPROX.decimals,
-        'MOC':config.tokens.MOC.decimals,
+        'STABLE':config.tokens.TP.decimals,
+        'RISKPRO':config.tokens.TC.decimals,
+        'RISKPROX':config.tokens.TX.decimals,
+        'MOC':config.tokens.TG.decimals,
         'USDPrice': (AppProject=='MoC')? 2 : 4,
         'RESERVE':config.tokens.RESERVE.decimals,
         'USD':2,

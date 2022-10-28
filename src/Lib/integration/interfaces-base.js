@@ -38,7 +38,7 @@ const addCommissions = async (interfaceContext, reserveAmount, token, action) =>
 
   if (enoughTGBalance && enoughTGAllowance) {
     valueToSend = reserveAmount
-    console.log(`Paying commission with ${tokens.MOC.name}: ${commissionInTG} ${tokens.MOC.name}`)
+    console.log(`Paying commission with ${tokens.TG.name}: ${commissionInTG} ${tokens.TG.name}`)
   } else {
     valueToSend = reserveAmount.plus(commissionInReserve)
     console.log(`Paying commission with ${tokens.RESERVE.name}: ${commissionInReserve} ${tokens.RESERVE.name}`)
