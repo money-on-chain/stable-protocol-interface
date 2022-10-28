@@ -22,9 +22,9 @@ const readContracts = async (web3, environment) => {
     MoCExchange,
     MoCInrate,
     MoCSettlement,
-    RiskProToken,
-    StableToken,
-    MoCToken,
+    TC,
+    TP,
+    TG,
     ReserveToken,
     MoCVendors
   } = baseAbis(appMode);
@@ -38,9 +38,9 @@ const readContracts = async (web3, environment) => {
   abiContracts.MoCExchange = MoCExchange
   abiContracts.MoCInrate = MoCInrate
   abiContracts.MoCSettlement = MoCSettlement
-  abiContracts.StableToken = StableToken
-  abiContracts.RiskProToken = RiskProToken
-  abiContracts.MoCToken = MoCToken
+  abiContracts.TP = TP
+  abiContracts.TC = TC
+  abiContracts.TG = TG
   abiContracts.ReserveToken = ReserveToken
   abiContracts.MoCVendors = MoCVendors
 
@@ -64,8 +64,8 @@ const readContracts = async (web3, environment) => {
     mocInrateAddress,
     mocExchangeAddress,
     mocSettlementAddress,
-    stableTokenAddress,
-    riskproTokenAddress,
+    tpTokenAddress,
+    tcTokenAddress,
     reserveTokenAddress
   ] = await connectorAddresses(web3, dContracts, appMode)
 
@@ -85,21 +85,21 @@ const readContracts = async (web3, environment) => {
   const mocsettlement = new web3.eth.Contract(MoCSettlement.abi, mocSettlementAddress)
   dContracts.contracts.mocsettlement = mocsettlement
 
-  console.log('Reading STABLE Token Contract... address: ', stableTokenAddress)
-  const stabletoken = new web3.eth.Contract(StableToken.abi, stableTokenAddress)
-  dContracts.contracts.stabletoken = stabletoken
+  console.log('Reading TP Contract... address: ', tpTokenAddress)
+  const tp = new web3.eth.Contract(TP.abi, tpTokenAddress)
+  dContracts.contracts.tp = tp
 
-  console.log('Reading RISKPRO Token Contract... address: ', riskproTokenAddress)
-  const riskprotoken = new web3.eth.Contract(RiskProToken.abi, riskproTokenAddress)
-  dContracts.contracts.riskprotoken = riskprotoken
+  console.log('Reading TC Token Contract... address: ', tcTokenAddress)
+  const tc = new web3.eth.Contract(TC.abi, tcTokenAddress)
+  dContracts.contracts.tc = tc
 
   if (environment.LiquidityCollateralToken) {
-    console.log('Reading Liquidity Collateral Token Contract... address: ', riskproTokenAddress)
+    console.log('Reading Liquidity Collateral Token Contract... address: ', environment.LiquidityCollateralToken)
     const liquiditycollateraltoken = new web3.eth.Contract(RiskProToken.abi, environment.LiquidityCollateralToken)
     dContracts.contracts.liquiditycollateraltoken = liquiditycollateraltoken
   } else {
-    console.log('Using Collateral token as Liquidity Collateral Token Contract... address: ', riskproTokenAddress)
-    dContracts.contracts.liquiditycollateraltoken = riskprotoken
+    console.log('Using Collateral token as Liquidity Collateral Token Contract... address: ', tcTokenAddress)
+    dContracts.contracts.liquiditycollateraltoken = tc
   }
 
   if (appMode === 'RRC20') {
@@ -108,12 +108,12 @@ const readContracts = async (web3, environment) => {
     dContracts.contracts.reservetoken = reservetoken
   }
 
-  const mocTokenAddress = await mocstate.methods.getMoCToken().call()
+  const tgTokenAddress = await mocstate.methods.getMoCToken().call()
   const mocVendorsAddress = await mocstate.methods.getMoCVendors().call()
 
-  console.log('Reading MoC Token Contract... address: ', mocTokenAddress)
-  const moctoken = new web3.eth.Contract(MoCToken.abi, mocTokenAddress)
-  dContracts.contracts.moctoken = moctoken
+  console.log('Reading TG Token Contract... address: ', tgTokenAddress)
+  const tg = new web3.eth.Contract(TG.abi, tgTokenAddress)
+  dContracts.contracts.tg = tg
 
   console.log('Reading MoC Vendors Contract... address: ', mocVendorsAddress)
   const mocvendors = new web3.eth.Contract(MoCVendors.abi, mocVendorsAddress)

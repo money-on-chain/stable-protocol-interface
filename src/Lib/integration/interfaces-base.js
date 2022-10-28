@@ -3,7 +3,6 @@ import Web3 from 'web3';
 
 import { calcCommission } from './multicall';
 import {toContractPrecision, BUCKET_X2, BUCKET_C0, getGasPrice} from './utils';
-//import {setNumber} from "../../Helpers/helper";
 
 
 const addCommissions = async (interfaceContext, reserveAmount, token, action) => {
@@ -22,27 +21,27 @@ const addCommissions = async (interfaceContext, reserveAmount, token, action) =>
   const commissionInReserve = new BigNumber(Web3.utils.fromWei(commissions.commission_reserve))
     .plus(new BigNumber(Web3.utils.fromWei(commissions.vendorMarkup)))
 
-  // Calculate commissions using MoC Token payment
-  const commissionInMoc = new BigNumber(Web3.utils.fromWei(commissions.commission_moc))
+  // Calculate commissions using TG Token payment
+  const commissionInTG = new BigNumber(Web3.utils.fromWei(commissions.commission_moc))
     .plus(new BigNumber(Web3.utils.fromWei(commissions.vendorMarkup)))
     .times(reservePrice).div(Web3.utils.fromWei(contractStatusData.mocPrice))
 
-  // Enough MoC to Pay commission with MoC Token
-  const enoughMOCBalance = BigNumber(Web3.utils.fromWei(userBalanceData.mocBalance)).gte(commissionInMoc)
+  // Enough TG to Pay commission with TG
+  const enoughTGBalance = BigNumber(Web3.utils.fromWei(userBalanceData.mocBalance)).gte(commissionInTG)
 
-  // Enough MoC allowance to Pay commission with MoC Token
-  const enoughMOCAllowance = BigNumber(Web3.utils.fromWei(userBalanceData.mocAllowance)).gt(0) &&
-      BigNumber(Web3.utils.fromWei(userBalanceData.mocAllowance)).gte(commissionInMoc)
+  // Enough TG allowance to Pay commission with TG Token
+  const enoughTGAllowance = BigNumber(Web3.utils.fromWei(userBalanceData.mocAllowance)).gt(0) &&
+      BigNumber(Web3.utils.fromWei(userBalanceData.mocAllowance)).gte(commissionInTG)
 
   // add commission to value send
   let valueToSend
 
-  if (enoughMOCBalance && enoughMOCAllowance) {
+  if (enoughTGBalance && enoughTGAllowance) {
     valueToSend = reserveAmount
-    console.log(`Paying commission with MoC Tokens: ${commissionInMoc} MOC`)
+    console.log(`Paying commission with ${tokens.MOC.name}: ${commissionInTG} ${tokens.MOC.name}`)
   } else {
     valueToSend = reserveAmount.plus(commissionInReserve)
-    console.log(`Paying commission with RBTC: ${commissionInReserve} RBTC`)
+    console.log(`Paying commission with ${tokens.RESERVE.name}: ${commissionInReserve} ${tokens.RESERVE.name}`)
   }
 
   return valueToSend
@@ -62,22 +61,22 @@ const calcMintInterest = async (interfaceContext, amount) => {
   return calcMintInterest
 }
 
-const transferStableTo = async (interfaceContext, to, amount, onTransaction, onReceipt) => {
+const transferTPTo = async (interfaceContext, to, amount, onTransaction, onReceipt) => {
 
   const { web3, account } = interfaceContext;
   const dContracts = window.integration;
 
-  const stabletoken = dContracts.contracts.stabletoken;
+  const tp = dContracts.contracts.tp;
 
   amount = new BigNumber(amount);
 
   // Calculate estimate gas cost
-  const estimateGas = await stabletoken.methods
+  const estimateGas = await tp.methods
     .transfer(to, toContractPrecision(amount))
     .estimateGas({ from: account });
 
   // Send tx
-  const receipt = stabletoken.methods
+  const receipt = tp.methods
     .transfer(to, toContractPrecision(amount))
     .send({
             from: account,
@@ -91,22 +90,22 @@ const transferStableTo = async (interfaceContext, to, amount, onTransaction, onR
   return receipt
 }
 
-const transferRiskProTo = async (interfaceContext, to, amount, onTransaction, onReceipt) => {
+const transferTCTo = async (interfaceContext, to, amount, onTransaction, onReceipt) => {
 
   const { web3, account } = interfaceContext;
   const dContracts = window.integration;
 
-  const riskprotoken = dContracts.contracts.riskprotoken
+  const tc = dContracts.contracts.tc
 
   amount = new BigNumber(amount);
 
   // Calculate estimate gas cost
-  const estimateGas = await riskprotoken.methods
+  const estimateGas = await tc.methods
     .transfer(to, toContractPrecision(amount))
     .estimateGas({ from: account })
 
   // Send tx
-  const receipt = riskprotoken.methods
+  const receipt = tc.methods
     .transfer(to, toContractPrecision(amount))
     .send({
             from: account,
@@ -120,22 +119,22 @@ const transferRiskProTo = async (interfaceContext, to, amount, onTransaction, on
   return receipt
 }
 
-const transferMocTo = async (interfaceContext, to, amount, onTransaction, onReceipt) => {
+const transferTGTo = async (interfaceContext, to, amount, onTransaction, onReceipt) => {
 
   const { web3, account } = interfaceContext;
   const dContracts = window.integration;
 
-  const moctoken = dContracts.contracts.moctoken
+  const tg = dContracts.contracts.tg
 
   amount = new BigNumber(amount);
 
   // Calculate estimate gas cost
-  const estimateGas = await moctoken.methods
+  const estimateGas = await tg.methods
     .transfer(to, toContractPrecision(amount))
     .estimateGas({ from: account })
 
   // Send tx
-  const receipt = moctoken.methods
+  const receipt = tg.methods
     .transfer(to, toContractPrecision(amount))
     .send({
             from: account,
@@ -149,7 +148,7 @@ const transferMocTo = async (interfaceContext, to, amount, onTransaction, onRece
   return receipt
 }
 
-const transferRBTCTo = async (interfaceContext, to, amount, onTransaction, onReceipt) => {
+const transferCoinbaseTo = async (interfaceContext, to, amount, onTransaction, onReceipt) => {
   const { web3, account } = interfaceContext;
   let tokens = web3.utils.toWei(amount.toString(), 'ether')
   const receipt = await web3.eth.sendTransaction(
@@ -165,25 +164,25 @@ const transferRBTCTo = async (interfaceContext, to, amount, onTransaction, onRec
 }
 
 
-const approveMoCTokenCommission = async (interfaceContext, enabled, onTransaction, onReceipt) => {
+const approveTGTokenCommission = async (interfaceContext, enabled, onTransaction, onReceipt) => {
 
   const { web3, account } = interfaceContext;
   const dContracts = window.integration;
 
   const mocAddress = dContracts.contracts.moc._address
-  const moctoken = dContracts.contracts.moctoken
+  const tg = dContracts.contracts.tg
 
   const newAllowance = enabled
         ? Web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString())
         : 0;
 
   // Calculate estimate gas cost
-  const estimateGas = await moctoken.methods
+  const estimateGas = await tg.methods
     .approve(mocAddress, newAllowance)
     .estimateGas({ from: account })
 
   // Send tx
-  const receipt = moctoken.methods
+  const receipt = tg.methods
     .approve(mocAddress, newAllowance)
     .send({
             from: account,
@@ -198,4 +197,12 @@ const approveMoCTokenCommission = async (interfaceContext, enabled, onTransactio
 }
 
 
-export { addCommissions, calcMintInterest, transferStableTo, transferRiskProTo, transferMocTo, transferRBTCTo, approveMoCTokenCommission };
+export {
+    addCommissions,
+    calcMintInterest,
+    transferTPTo,
+    transferTCTo,
+    transferTGTo,
+    transferCoinbaseTo,
+    approveTGTokenCommission
+    };

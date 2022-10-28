@@ -4,7 +4,7 @@ const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth)
     case 'RISKPRO':
       return {
         amount: userState?.bproBalance,
-        methodTransferTo: auth?.interfaceTransferRiskProTo,
+        methodTransferTo: auth?.interfaceTPTo,
       };
     case 'STABLE':
       return {
@@ -14,12 +14,12 @@ const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth)
     case 'MOC':
       return{
         amount:userState?.mocBalance,
-        methodTransferTo: auth?.interfaceTransferMocTo,
+        methodTransferTo: auth?.interfaceTransferTGTo,
       }
     case 'RESERVE':
       return {
         amount:userState?.rbtcBalance,
-        methodTransferTo: auth?.interfaceTransferRBTCTo,
+        methodTransferTo: auth?.interfaceTransferCoinbaseTo,
       }
     default:
       return {};

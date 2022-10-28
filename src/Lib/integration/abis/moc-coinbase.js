@@ -5,9 +5,9 @@ import MoCState from '../../../Contracts/coinbase/MoCState.json';
 import MoCExchange from '../../../Contracts/coinbase/MoCExchange.json';
 import MoCInrate from '../../../Contracts/coinbase/MoCInrate.json';
 import MoCSettlement from '../../../Contracts/coinbase/MoCSettlement.json';
-import StableToken from '../../../Contracts/coinbase/DocToken.json';
-import RiskProToken from '../../../Contracts/coinbase/BProToken.json';
-import MoCToken from '../../../Contracts/coinbase/MoCToken.json';
+import TP from '../../../Contracts/coinbase/DocToken.json';
+import TC from '../../../Contracts/coinbase/BProToken.json';
+import TG from '../../../Contracts/coinbase/MoCToken.json';
 import ReserveToken from '../../../Contracts/coinbase/ReserveToken.json';
 import MoCVendors from '../../../Contracts/coinbase/MoCVendors.json';
 
@@ -19,9 +19,9 @@ export default {
   MoCExchange,
   MoCInrate,
   MoCSettlement,
-  RiskProToken,
-  StableToken,
-  MoCToken,
+  TC,
+  TP,
+  TG,
   ReserveToken,
   MoCVendors
 };

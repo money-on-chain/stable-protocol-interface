@@ -5,9 +5,9 @@ import MoCState from '../../../Contracts/rrc20/MoCState.json';
 import MoCExchange from '../../../Contracts/rrc20/MoCExchange.json';
 import MoCInrate from '../../../Contracts/rrc20/MoCInrate.json';
 import MoCSettlement from '../../../Contracts/rrc20/MoCSettlement.json';
-import StableToken from '../../../Contracts/rrc20/DocToken.json';
-import RiskProToken from '../../../Contracts/rrc20/BProToken.json';
-import MoCToken from '../../../Contracts/rrc20/MoCToken.json';
+import TP from '../../../Contracts/rrc20/DocToken.json';
+import TC from '../../../Contracts/rrc20/BProToken.json';
+import TG from '../../../Contracts/rrc20/MoCToken.json';
 import ReserveToken from '../../../Contracts/rrc20/ReserveToken.json';
 import MoCVendors from '../../../Contracts/rrc20/MoCVendors.json';
 
@@ -19,9 +19,9 @@ export default {
   MoCExchange,
   MoCInrate,
   MoCSettlement,
-  RiskProToken,
-  StableToken,
-  MoCToken,
+  TC,
+  TP,
+  TG,
   ReserveToken,
   MoCVendors
 };

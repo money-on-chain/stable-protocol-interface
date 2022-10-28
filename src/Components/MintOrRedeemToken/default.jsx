@@ -371,7 +371,7 @@ const MintOrRedeemToken = (props) => {
     };
 
     msgAllowanceSend();
-    await auth.interfaceApproveMoCTokenCommission(allowanceEnabled, onTransactionAllowance, onReceiptAllowance).catch(e => {
+    await auth.interfaceApproveTGTokenCommission(allowanceEnabled, onTransactionAllowance, onReceiptAllowance).catch(e => {
       console.error(e);
       setFailSwitch();
     });
