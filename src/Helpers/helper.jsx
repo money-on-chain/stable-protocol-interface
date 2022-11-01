@@ -80,18 +80,37 @@ export function getDatasMetrics(auth,i18n=null){
 
 
 export function readJsonTable(data_j,t, i18n){
+
     var set_event= "TRANSFER";
     if(data_j.event.includes("Mint")){set_event='MINT'}
     if(data_j.event.includes("Settlement")){set_event='SETTLEMENT'}
     if(data_j.event.includes("Redeem")){set_event='REDEEM'}
 
-    const set_asset= data_j.tokenInvolved;
+    switch (data_j.tokenInvolved) {
+        case 'STABLE':
+            data_j.tokenInvolved = 'TP';
+            break;
+        case 'RISKPRO':
+            data_j.tokenInvolved = 'TC'
+            break;
+        case 'RISKPROX':
+            data_j.tokenInvolved = 'TX'
+            break;
+        default:
+            data_j.tokenInvolved = 'TP'
+            break;
+    }
 
+    const set_asset = data_j.tokenInvolved;
+
+    /*
     let fixed=2
     if( set_asset!='STABLE' && set_asset!='USD'){
         fixed= 6
-    }
+    }*/
 
+
+    /*
     let asset=''
     switch (set_asset) {
         case 'STABLE':
@@ -107,7 +126,8 @@ export function readJsonTable(data_j,t, i18n){
             asset = 'DOC'
             break;
     }
-
+    */
+    /*
     let asset_detail=''
     let asset_detail_fixed= 6
     switch (asset) {
@@ -161,6 +181,7 @@ export function readJsonTable(data_j,t, i18n){
             asset_detail= 'DOC'
             break;
     }
+    */
 
     const set_status_txt= data_j.status;
     const set_status_percent= data_j.confirmingPercent;
