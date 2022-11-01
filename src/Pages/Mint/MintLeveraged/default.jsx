@@ -141,7 +141,7 @@ export default function Mint(props) {
                                     <LargeNumber
                                         amount={formatDecimalRatioAsPercent(inrateToSettlement)}
                                         showCurrencyCode
-                                        currencyCode="RISKPROXInterest"
+                                        currencyCode="TXInterest"
                                     />
                                 </div></>: <Skeleton active={true} paragraph={{ rows: 2 }}></Skeleton>
                             }

@@ -1,16 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthenticateContext } from '../../../../Context/Auth';
 import { useTranslation } from "react-i18next";
-import { Skeleton, Tooltip } from 'antd';
+import { Skeleton } from 'antd';
 import { LargeNumber } from '../../../LargeNumber';
 import {config} from '../../../../Config/config';
-/*
-import web3 from "web3";
-import {setNumber, setToLocaleString} from "../../../../Helpers/helper";
-import BigNumber from "bignumber.js";*/
 
-function Stable(props) {
+function TG(props) {
     const auth = useContext(AuthenticateContext);
+    
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
     const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
@@ -26,21 +23,17 @@ function Stable(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={auth.urlBaseFull +"icon-tp.svg"}
+                    src={auth.urlBaseFull+"icon-tg.svg" }
                     alt=""
                     style={{ marginRight: 10 }}
-                /> {t(`${AppProject}.wallets.TP.title`, { ns: ns })}
+                /> {t(`${AppProject}.metrics.Moc.title`, { ns: ns })}
             </h3>
 
-            <div className="CardMetricContent StableThemeMetric">
+            <div className="CardMetricContent MocThemeMetric">
                 {!loading
                     ? <div>
-                        <h5>{t(`${AppProject}.metrics.TP.total`, { ns: ns })}</h5>
-                        <span className={'space green'}><LargeNumber amount={props.total} currencyCode="TP" /></span>
-                        <h5>{t(`${AppProject}.metrics.TP.availableRedeem`, { ns: ns })}</h5>
-                        <span className={'green'}><LargeNumber amount={props.availableRedeem} currencyCode="TP" /></span>
-                        <h5>{t(`${AppProject}.metrics.TP.availableMint`, { ns: ns })}</h5>
-                        <span className={'green'}><LargeNumber amount={props.availableMint} currencyCode="Tp" /></span>
+                        <h5>{t(`${AppProject}.metrics.Moc.price`, { ns: ns })}</h5>
+                        <LargeNumber amount={props.mocPrice} currencyCode="USDPrice" tooltip="topLeft"/>
                     </div>
                 : <Skeleton active={true} />}
             </div>
@@ -48,4 +41,4 @@ function Stable(props) {
     );
 }
 
-export default Stable;
+export default TG;

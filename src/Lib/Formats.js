@@ -38,7 +38,7 @@ const formatMap = {
     LEV: precisions.COVPrecision,
     percentage: precisions.percentagePrecision,
     visiblePercentage: precisions.visiblePercentage,
-    RISKPROXInterest: precisions.RISKPROXInterest,
+    TXInterest: precisions.TXInterest,
     FreeDocInterest: precisions.FreeDocInterest,
     commissionRate: precisions.commissionRate,
     valueVariation: precisions.valueVariation

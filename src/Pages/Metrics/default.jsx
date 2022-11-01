@@ -1,10 +1,10 @@
 import React, {Fragment, useContext, useEffect} from 'react';
 import SystemStatus from '../../Components/Cards/Metrics/SystemStatus'
 import Reserve from '../../Components/Cards/Metrics/Reserve'
-import MOC from '../../Components/Cards/Metrics/MOC'
-import RiskProX from '../../Components/Cards/Metrics/RiskProX'
-import Stable from '../../Components/Cards/Metrics/Stable'
-import RiskPro from '../../Components/Cards/Metrics/RiskPro'
+import TG from '../../Components/Cards/Metrics/TG'
+import TX from '../../Components/Cards/Metrics/TX'
+import TP from '../../Components/Cards/Metrics/TP'
+import TC from '../../Components/Cards/Metrics/TC'
 import Liquidity from '../../Components/Cards/Metrics/Liquidity'
 import NextSettlement from '../../Components/Cards/Metrics/NextSettlement'
 import BigNumber from 'bignumber.js';
@@ -117,14 +117,14 @@ function Metrics(props) {
 
             <Row style={{ marginTop: 15 }} gutter={15} className="MetricsCardsContainer">
                 <Col className={'MetricsCardsDOC'}>
-                    <Stable
+                    <TP
                         availableRedeem={maxStableRedeemAvailable}
                         availableMint={maxStableMintAvailable}
                         total={totalDocAmount}
                     />
                 </Col>
                 <Col className={'MetricsCardsBPRO'}>
-                    <RiskPro
+                    <TC
                         total={totalBpro}
                         availableRedeem={maxRiskproRedeemAvailable}
                         leverage={b0Leverage}
@@ -133,7 +133,7 @@ function Metrics(props) {
                     />
                 </Col>
                 <Col className={'MetricsCardsBTCX'}>
-                    <RiskProX
+                    <TX
                         leverage={x2Leverage}
                         coverage={x2Coverage}
                         availableMint={maxRiskproxMintAvailable}
@@ -145,7 +145,7 @@ function Metrics(props) {
 
             <Row style={{ marginTop: 15 }} gutter={15} className="MetricsCardsContainer">
                 <Col className={'MetricsCardsMOC'}>
-                    <MOC mocPrice={mocPriceUsd} />
+                    <TG mocPrice={mocPriceUsd} />
                 </Col>
                 <Col className={'MetricsCardsLiquidity'}>
                     <Liquidity

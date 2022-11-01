@@ -90,7 +90,7 @@
         "contractDecimals": 0,
         "decimals": 6
       },
-      "RISKPROXInterest": {
+      "TXInterest": {
         "contractDecimals": 18,
         "decimals": 6
       },

@@ -5,7 +5,7 @@ import { LargeNumber } from '../../../LargeNumber';
 import { Skeleton } from 'antd';
 import {config} from '../../../../Config/config';
 
-function RiskProX(props) {
+function TX(props) {
     const auth = useContext(AuthenticateContext);
 
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
@@ -60,4 +60,4 @@ function RiskProX(props) {
     );
 }
 
-export default RiskProX;
+export default TX;

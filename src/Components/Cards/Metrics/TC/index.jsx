@@ -5,7 +5,7 @@ import { LargeNumber } from '../../../LargeNumber';
 import { Skeleton } from 'antd';
 import { config} from '../../../../Config/config';
 
-function RiskPro(props) {
+function TC(props) {
     const auth = useContext(AuthenticateContext);
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
     const ns = config.environment.AppProject.toLowerCase();
@@ -55,4 +55,4 @@ function RiskPro(props) {
     );
 }
 
-export default RiskPro;
+export default TC;

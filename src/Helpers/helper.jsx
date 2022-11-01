@@ -583,7 +583,7 @@ export function getDecimals(coin,AppProject){
         'USD':2,
         'REWARD':config.Precisions.REWARDPrecision.decimals,
         'DOC':2,
-        'RISKPROXInterest':config.Precisions.RISKPROXInterest.decimals
+        'TXInterest':config.Precisions.TXInterest.decimals
     }
 
     return decimals[coin]
