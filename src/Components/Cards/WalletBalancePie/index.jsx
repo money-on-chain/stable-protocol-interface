@@ -134,7 +134,7 @@ function WalletBalancePie(props) {
                     name: 'Group D',
                     value: Number(userBalances.moc.usd.toFixed(projectDecimals.USD)),
                     set1: userBalances.moc.collateral.toFixed(projectDecimals.COLLATERAL) + ' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: userBalances.moc.normal.toFixed(projectDecimals.USD)  +' '+ t(`${AppProject}.Tokens_MOC_code`, {ns: ns}),
+                    set2: userBalances.moc.normal.toFixed(projectDecimals.USD)  +' '+ t(`${AppProject}.Tokens_TG_code`, {ns: ns}),
                     class: 'MOC'
                 },
                 {

@@ -173,13 +173,13 @@ export default function RewardsStakingOptions(props) {
                                 <div>
                                     {t("global.RewardsOptions_AvailableToStake", { ns: 'global' })}
                                     <h3 className="amount">
-                                        <LargeNumber amount={mocBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_MOC_code`, { ns: ns })}
+                                        <LargeNumber amount={mocBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_TG_code`, { ns: ns })}
                                     </h3>
                                 </div>
                                 <div style={{ textAlign: 'right' }}>
                                     {t("global.RewardsOptions_Staked", { ns: 'global' })}
                                     <h3 className="amount">
-                                        <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_MOC_code`, { ns: ns })}
+                                        <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_TG_code`, { ns: ns })}
                                     </h3>
                                 </div>
                             </Row>
@@ -198,7 +198,7 @@ export default function RewardsStakingOptions(props) {
                                     <InputWithCurrencySelector
                                         cleanInputCount={cleanInputCount}
                                         title={t("global.RewardsOptions_AmountToStakePlaceholder")}
-                                        currencySelected={'MOC'}
+                                        currencySelected={'TG'}
                                         onCurrencySelect={() => {
                                         }}
                                         // onCurrencySelect={onChangeCurrencyYouExchange}
@@ -255,14 +255,14 @@ export default function RewardsStakingOptions(props) {
                             <div>
                                 {t('global.RewardsOptions_AvailableToUnstake', { ns: 'global' })}
                                 <h3 className="amount">
-                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_MOC_code`, { ns: ns })}
+                                    <LargeNumber amount={stackedBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_TG_code`, { ns: ns })}
                                 </h3>
                             </div>
                             {parseFloat(lockedBalance) > 0 && (
                                 <div>
                                     {t('global.RewardsOptions_Locked', { ns: 'global' })}
                                     <h3 className="amount">
-                                        <LargeNumber amount={lockedBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_MOC_code`, { ns: ns })}
+                                        <LargeNumber amount={lockedBalance} currencyCode="REWARD" /> {t(`${AppProject}.Tokens_TG_code`, { ns: ns })}
                                     </h3>
                                 </div>
                             )}
@@ -272,7 +272,7 @@ export default function RewardsStakingOptions(props) {
                                 <InputWithCurrencySelector
                                     cleanInputCount={cleanInputCount}
                                     title={t("global.RewardsOptions_AmountToUnstakePlaceholder")}
-                                    currencySelected={'MOC'}
+                                    currencySelected={'TG'}
                                     onCurrencySelect={() => {
                                     }}
                                     // onCurrencySelect={onChangeCurrencyYouExchange}
