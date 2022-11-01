@@ -31,7 +31,7 @@ const TransactionTypeIdsRRC20 = {
 
 // TODO: pasar el txType por param.
 const buyCurrencyMap = {
-  TC: {
+  TX: {
     RESERVE: {
       MOC_COMMISSION: {
         APP_MODE_MoC: {

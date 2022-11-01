@@ -143,6 +143,13 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
 
   const valueYouExchangeInRESERVE = convertToken(currencyYouExchange, "RESERVE", valueYouExchange);
   const valueYouExchangeInMOC = convertToken("RESERVE", "TG", valueYouExchangeInRESERVE);
+
+  console.log("DEBUG")
+  console.log(valueYouExchangeInRESERVE)
+  console.log(valueYouExchangeInMOC)
+  console.log(currencyYouExchange)
+  console.log(currencyYouReceive)
+
   const commissionRateForMOC = BigNumber(
     commissionRates[getTransactionType(currencyYouExchange, currencyYouReceive, "MOC_COMMISSION")])
     .plus(vendor.markup);
