@@ -2,7 +2,7 @@ import Web3 from 'web3';
 import BigNumber from "bignumber.js";
 import { setToLocaleString, setNumber } from "./helper";
 import { config } from "../Config/config";
-import { precisionDecimals } from "../Lib/Formats";
+import { precisionDecimals } from "../Helpers/Formats";
 
 
 const userDocBalance= (auth) =>{

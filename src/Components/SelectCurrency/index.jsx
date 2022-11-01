@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { Select } from 'antd';
 
-import { currencies, getCurrenciesDetail } from '../../Config/currency';
+import { currencies, getCurrenciesDetail } from '../../Helpers/currency';
 import { useTranslation } from "react-i18next";
 import {AuthenticateContext} from "../../Context/Auth";
 import './style.scss';

@@ -11,7 +11,7 @@ import {readJsonTable, setNumber, myParseDate, getDatasMetrics} from '../../../H
 import {config} from '../../../Config/config';
 import Copy from "../../Page/Copy";
 import { useTranslation } from "react-i18next";
-import date from '../../../Config/date';
+import date from '../../../Helpers/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";

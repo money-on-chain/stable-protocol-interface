@@ -5,7 +5,7 @@ import { Tooltip as TooltipRecharts } from 'recharts';
 import { AuthenticateContext } from '../../../../Context/Auth';
 import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
-import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../../Lib/Formats';
+import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../../Helpers/Formats';
 import BigNumber from 'bignumber.js';
 import { config } from '../../../../Config/config';
 

@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import getRLogin from '../Lib/rLogin';
 import Web3 from 'web3';
-import addressHelper from '../Lib/addressHelper';
+import addressHelper from '../Helpers/addressHelper';
 import FastBtcSocketWrapper from '../Lib/fastBTC/FastBtcSocketWrapper';
 import { config } from '../Config/config';
 import { readContracts } from '../Lib/integration/contracts';

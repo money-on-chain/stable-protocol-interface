@@ -4,13 +4,13 @@ import { Form, Tooltip, Radio } from 'antd';
 import { DebounceInput } from 'react-debounce-input';
 import SelectCurrency from '../../SelectCurrency';
 import { LargeNumber } from '../../LargeNumber';
-import { amountIsTooSmall } from '../../../Lib/exchangeManagerHelper';
+import { amountIsTooSmall } from '../../../Helpers/exchangeManagerHelper';
 import {
   formatValueToContract,
   formatVisibleValue,
   formatValueWithContractPrecision,
   formatLocalMap2
-} from '../../../Lib/Formats';
+} from '../../../Helpers/Formats';
 import { useTranslation } from "react-i18next";
 import BigNumber from "bignumber.js";
 import {AuthenticateContext} from "../../../Context/Auth";

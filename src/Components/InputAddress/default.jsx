@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Form } from "antd";
 import { AuthenticateContext } from "../../Context/Auth";
-import addressHelper from '../../Lib/addressHelper';
+import addressHelper from '../../Helpers/addressHelper';
 import { DebounceInput } from 'react-debounce-input';
 import { config } from '../../Config/config';
 

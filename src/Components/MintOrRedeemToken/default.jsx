@@ -16,20 +16,20 @@ import {
     getMaxRedeemableBalance,
     getCommissionRateAndCurrency,
     convertAmount
-} from '../../Lib/exchangeManagerHelper';
+} from '../../Helpers/exchangeManagerHelper';
 import { LargeNumber } from '../LargeNumber';
 import InputWithCurrencySelector from '../Form/InputWithCurrencySelector';
 // import ButtonPrimary from '../../atoms/ButtonPrimary/ButtonPrimary';
 // import ButtonSecondary from '../../atoms/ButtonSecondary/ButtonSecondary';
 // import ConfirmTransactionModal from '../../molecules/ConfirmTransactionModal/ConfirmTransactionModal';
 // import { userAccountIsLoggedIn } from '../../../../api/helpers/userAccountHelper';
-//import { getExchangeMethod } from '../../Lib/exchangeHelper';
+//import { getExchangeMethod } from '../../Helpers/exchangeHelper';
 import {
   formatVisibleValue,
   formatValueToContract,
   //formatValueWithContractPrecision,
   formatLocalMap2
-} from '../../Lib/Formats';
+} from '../../Helpers/Formats';
 // import { approveReserve } from '../../Lib/nodeManager/nodeManagerRRC20';
 // import { approveMoCToken } from '../../Lib/nodeManager/nodeManagerBase';
 import BigNumber from 'bignumber.js';

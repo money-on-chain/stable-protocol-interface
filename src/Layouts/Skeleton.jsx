@@ -6,7 +6,7 @@ import LoginButton from '../Components/Auth/LoginButton/index';
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthenticateContext } from '../Context/Auth';
-//import { formatVisibleValue } from '../Lib/Formats';
+//import { formatVisibleValue } from '../Helpers/Formats';
 import HeaderCoins from "../Components/Page/HeaderCoins";
 import { useTranslation } from "react-i18next";
 import { config } from '../Config/config';

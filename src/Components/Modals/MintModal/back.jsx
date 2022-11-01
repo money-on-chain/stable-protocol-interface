@@ -7,16 +7,16 @@ import './RDoC/style.scss';
 import React, { useState, useContext, useEffect } from 'react';
 import { Modal, notification } from 'antd';
 
-import { convertAmount } from '../../../Lib/exchangeManagerHelper';
-import { getExchangeMethod } from '../../../Lib/exchangeHelper';
+import { convertAmount } from '../../../Helpers/exchangeManagerHelper';
+import { getExchangeMethod } from '../../../Helpers/exchangeHelper';
 import {
     formatValueToContract,
     formatValueWithContractPrecision,
-} from '../../../Lib/Formats';
+} from '../../../Helpers/Formats';
 import Copy from "../../Page/Copy";
-import { currencies as currenciesDetail } from '../../../Config/currency';
+import { currencies as currenciesDetail } from '../../../Helpers/currency';
 import { LargeNumber } from '../../LargeNumber';
-//import {formatLocalMap2} from '../../../Lib/Formats';
+//import {formatLocalMap2} from '../../../Helpers/Formats';
 import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";

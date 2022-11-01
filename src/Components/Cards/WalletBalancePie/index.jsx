@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip} from 'recharts';
 import {AuthenticateContext} from "../../../Context/Auth";
-import { formatLocalMap2 } from '../../../Lib/Formats';
+import { formatLocalMap2 } from '../../../Helpers/Formats';
 import {useTranslation} from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
 import Web3 from 'web3';

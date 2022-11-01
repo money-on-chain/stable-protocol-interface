@@ -7,7 +7,7 @@ import {
     //formatPerc,
     //adjustPrecision,
     //formatLocalMap2
-} from '../../Lib/Formats';
+} from '../../Helpers/Formats';
 //import i18n from "i18next";
 import {AuthenticateContext} from "../../Context/Auth";
 import web3 from "web3";
