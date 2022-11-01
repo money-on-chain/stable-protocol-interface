@@ -31,8 +31,8 @@ export default function Rewards(props) {
                 showIcon
                 className="AlertNoConnection"
             />}
-            <h1 className="PageTitle">{t(`${AppProject}.wallets.MOC.title`, { ns: ns })}</h1>
-            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.MOC.subtitle`, { ns: ns })}</h3>
+            <h1 className="PageTitle">{t(`${AppProject}.wallets.TG.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.TG.subtitle`, { ns: ns })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <div className="ContainerMocAmountDatas">

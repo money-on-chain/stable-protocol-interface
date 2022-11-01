@@ -29,17 +29,17 @@ function Stable(props) {
                     src={auth.urlBaseFull +"icon-tp.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
-                /> {t(`${AppProject}.wallets.STABLE.title`, { ns: ns })}
+                /> {t(`${AppProject}.wallets.TP.title`, { ns: ns })}
             </h3>
 
             <div className="CardMetricContent StableThemeMetric">
                 {!loading
                     ? <div>
-                        <h5>{t(`${AppProject}.metrics.STABLE.total`, { ns: ns })}</h5>
+                        <h5>{t(`${AppProject}.metrics.TP.total`, { ns: ns })}</h5>
                         <span className={'space green'}><LargeNumber amount={props.total} currencyCode="TP" /></span>
-                        <h5>{t(`${AppProject}.metrics.STABLE.availableRedeem`, { ns: ns })}</h5>
+                        <h5>{t(`${AppProject}.metrics.TP.availableRedeem`, { ns: ns })}</h5>
                         <span className={'green'}><LargeNumber amount={props.availableRedeem} currencyCode="TP" /></span>
-                        <h5>{t(`${AppProject}.metrics.STABLE.availableMint`, { ns: ns })}</h5>
+                        <h5>{t(`${AppProject}.metrics.TP.availableMint`, { ns: ns })}</h5>
                         <span className={'green'}><LargeNumber amount={props.availableMint} currencyCode="Tp" /></span>
                     </div>
                 : <Skeleton active={true} />}

@@ -170,19 +170,19 @@
       "subtitle": "Su billetera activa",
       "receiverAddress": "Dirección o dominio del Receptor",
       "ownAddressLabel": "Su dirección",
-      "RISKPRO": {
+      "TC": {
         "title": "BPro",
         "subtitle": "Administra tus Tokens BPro"
       },
-      "RISKPROX": {
+      "TX": {
         "title": "BTCx",
         "subtitle": "Administra tus posiciones BTCx"
       },
-      "STABLE": {
+      "TP": {
         "title": "DOC",
         "subtitle": "Administre sus DOCs"
       },
-      "MOC": {
+      "TG": {
         "title": "MOC",
         "subtitle": "Administre sus MOCs"
       }
@@ -228,13 +228,13 @@
       }
     },
     "metrics": {
-      "STABLE": {
+      "TP": {
         "title": "DoC",
         "total": "Total en el sistema",
         "availableRedeem": "Disponibles para redimir",
         "availableMint": "Disponibles para emitir"
       },
-      "RISKPRO": {
+      "TC": {
         "title": "BPro",
         "usd": "BPro USD",
         "availableRedeem": "Disponibles para redimir",
@@ -243,7 +243,7 @@
         "total": "Total en el sistema",
         "bproDiscountPriceUsd": "Precio descuento"
       },
-      "RISKPROX": {
+      "TX": {
         "title": "BTCx",
         "usd": "BTCx USD",
         "availableMint": "Disponibles para emitir",

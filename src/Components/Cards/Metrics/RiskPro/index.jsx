@@ -25,28 +25,28 @@ function RiskPro(props) {
                     src={auth.urlBaseFull+"icon-tc.svg" }
                     alt=""
                     style={{ marginRight: 10 }}
-                /> {t(`${AppProject}.wallets.RISKPRO.title`, { ns: ns })}
+                /> {t(`${AppProject}.wallets.TC.title`, { ns: ns })}
             </h3>
 
             <div className="CardMetricContent BProThemeMetric">
                 {!loading
                     ? <>
                         <div>
-                            <h5>{t(`${AppProject}.metrics.RISKPRO.usd`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.TC.usd`, { ns: ns })}</h5>
                             <span className={'space'}>
                                 <LargeNumber amount={props.usdValue} currencyCode={'USDPrice'} />
                             </span>
-                            <h5>{t(`${AppProject}.metrics.RISKPRO.leverage`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.TC.leverage`, { ns: ns })}</h5>
                             <span className={'space'}>
                                 <LargeNumber amount={props.leverage} currencyCode="TC" />
                             </span>
                         </div>
                         <div className="separator" /><div>
-                            <h5>{t(`${AppProject}.metrics.RISKPRO.total`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.TC.total`, { ns: ns })}</h5>
                             <LargeNumber amount={props.total} currencyCode="TC" />
-                            <h5>{t(`${AppProject}.metrics.RISKPRO.availableRedeem`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.TC.availableRedeem`, { ns: ns })}</h5>
                             <LargeNumber amount={props.availableRedeem} currencyCode="TC" />
-                            <h5>{t(`${AppProject}.metrics.RISKPRO.bproDiscountPriceUsd`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.TC.bproDiscountPriceUsd`, { ns: ns })}</h5>
                             <LargeNumber amount={props.bproDiscountPriceUsd} currencyCode={'USDPrice'} />
                         </div></>
                 : <Skeleton />}

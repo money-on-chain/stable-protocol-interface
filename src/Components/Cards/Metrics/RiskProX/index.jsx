@@ -26,32 +26,32 @@ function RiskProX(props) {
                     src={auth.urlBaseFull+'icon-tx.svg'}
                     alt=""
                     style={{ marginRight: 10 }}
-                /> {t(`${AppProject}.wallets.RISKPROX.title`, { ns: ns })}
+                /> {t(`${AppProject}.wallets.TX.title`, { ns: ns })}
             </h3>
 
             <div className="CardMetricContent BProxThemeMetric">
                 {!loading
                     ? <>
                         <div>
-                            <h5>{t(`${AppProject}.metrics.RISKPROX.usd`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.TX.usd`, { ns: ns })}</h5>
                             <span>
                                 <LargeNumber amount={props.usdValue} currencyCode={'USDPrice'} />
                             </span>
-                            <h5 style={{ marginTop: '2em' }}>{t(`${AppProject}.metrics.RISKPROX.total`, { ns: ns })}</h5>
+                            <h5 style={{ marginTop: '2em' }}>{t(`${AppProject}.metrics.TX.total`, { ns: ns })}</h5>
                             <span className={'red space'}>
                                 <LargeNumber amount={props.total} currencyCode="TX" />
                             </span>
-                            <h5>{t(`${AppProject}.metrics.RISKPROX.availableMint`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.TX.availableMint`, { ns: ns })}</h5>
                             <span className={'red'}>
                                 <LargeNumber amount={props.availableMint} currencyCode="TX" />
                             </span>
                         </div>
                         <div className="separator" /><div>
-                            <h5>{t(`${AppProject}.metrics.RISKPROX.leverage`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.TX.leverage`, { ns: ns })}</h5>
                             <span className={'space'}>
                                 <LargeNumber amount={props.leverage} currencyCode="TX" />
                             </span>
-                            <h5>{t(`${AppProject}.metrics.RISKPROX.coverage`, { ns: ns })}</h5>
+                            <h5>{t(`${AppProject}.metrics.TX.coverage`, { ns: ns })}</h5>
                             <LargeNumber amount={props.coverage} currencyCode="TX" />
                         </div></>
                 : <Skeleton active={true} />}

@@ -174,19 +174,19 @@
       "subtitle": "Tu billetera activa",
       "receiverAddress": "Dirección o dominio del Receptor",
       "ownAddressLabel": "Tu dirección",
-      "RISKPRO":{
+      "TC":{
         "title":"RIFpro",
         "subtitle":"Administra tus Tokens RIFpro"
       },
-      "RISKPROX":{
+      "TX":{
         "title":"RIFX",
         "subtitle":"Administra tus posiciones RIFX"
       },
-      "STABLE":{
+      "TP":{
         "title":"RDOC",
         "subtitle":"Administra tus Tokens RIF Dollar"
       },
-      "MOC":{
+      "TG":{
         "title":"MOC",
         "subtitle":"Administra tus Tokens MoC"
       }

@@ -26,8 +26,8 @@ export default function Mint(props) {
                 showIcon
                 className="AlertNoConnection"
             />}
-            <h1 className="PageTitle">{t(`${AppProject}.wallets.RISKPRO.title`, { ns: ns })}</h1>
-            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.RISKPRO.subtitle`, { ns: ns })}</h3>
+            <h1 className="PageTitle">{t(`${AppProject}.wallets.TC.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.TC.subtitle`, { ns: ns })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <AmountCard

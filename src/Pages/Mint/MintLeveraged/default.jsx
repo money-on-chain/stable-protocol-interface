@@ -92,8 +92,8 @@ export default function Mint(props) {
 
     return (
         <Fragment>
-            <h1 className="PageTitle">{t(`${AppProject}.wallets.RISKPROX.title`, { ns: ns })}</h1>
-            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.RISKPROX.subtitle`, { ns: ns })}</h3>
+            <h1 className="PageTitle">{t(`${AppProject}.wallets.TX.title`, { ns: ns })}</h1>
+            <h3 className="PageSubTitle">{t(`${AppProject}.wallets.TX.subtitle`, { ns: ns })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <AmountCard

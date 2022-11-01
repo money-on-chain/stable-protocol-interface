@@ -174,19 +174,19 @@
       "subtitle": "Your current active wallet holdings",
       "receiverAddress": "Receiver address or domain",
       "ownAddressLabel": "Your address",
-      "RISKPRO":{
+      "TC":{
         "title":"RIFpro",
         "subtitle":"Manage your RIFpro"
       },
-      "RISKPROX":{
+      "TX":{
         "title":"RIFX",
         "subtitle":"Manage your RIFX position"
       },
-      "STABLE":{
+      "TP":{
         "title":"RDOC",
         "subtitle":"Manage your RDOC"
       },
-      "MOC":{
+      "TG":{
         "title":"MOC",
         "subtitle":"Manage your MoC"
       }
@@ -232,13 +232,13 @@
       }
     },
     "metrics": {
-      "STABLE":{
+      "TP":{
         "title":"RDOC",
         "total":"Total in the system",
         "availableRedeem":"Available to redeem",
         "availableMint":"Available to Mint"
       },
-      "RISKPRO":{
+      "TC":{
         "title":"RIFpro",
         "usd":"RIFpro USD",
         "availableRedeem":"Available to redeem",
@@ -247,7 +247,7 @@
         "total":"Total in the system",
         "bproDiscountPriceUsd":"Discount price"
       },
-      "RISKPROX":{
+      "TX":{
         "title":"RIFX",
         "usd":"RIFX USD",
         "availableMint":"Available to Mint",
