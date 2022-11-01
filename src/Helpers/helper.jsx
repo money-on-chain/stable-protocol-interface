@@ -538,12 +538,12 @@ export function getCoinName(coin){
 
     let currencies= {
         'COINBASE':config.tokens.COINBASE.name,
-        'STABLE':config.tokens.TP.name,
-        'RISKPRO':config.tokens.TC.name,
-        'RISKPROX':config.tokens.TX.name,
+        'TP':config.tokens.TP.name,
+        'TC':config.tokens.TC.name,
+        'TX':config.tokens.TX.name,
         'RESERVE':config.tokens.RESERVE.name,
         'USDPrice':'USD',
-        'MOC':config.tokens.TG.name,
+        'TG':config.tokens.TG.name,
         'USD':'USD',
     }
 
@@ -553,10 +553,10 @@ export function getCoinName(coin){
 export function getDecimals(coin,AppProject){
     let decimals= {
         'COINBASE':config.tokens.COINBASE.decimals,
-        'STABLE':config.tokens.TP.decimals,
-        'RISKPRO':config.tokens.TC.decimals,
-        'RISKPROX':config.tokens.TX.decimals,
-        'MOC':config.tokens.TG.decimals,
+        'TP':config.tokens.TP.decimals,
+        'TC':config.tokens.TC.decimals,
+        'TX':config.tokens.TX.decimals,
+        'TG':config.tokens.TG.decimals,
         'USDPrice': (AppProject=='MoC')? 2 : 4,
         'RESERVE':config.tokens.RESERVE.decimals,
         'USD':2,
@@ -572,11 +572,11 @@ export function getDecimals(coin,AppProject){
 export function getSelectCoins(appMode){
     switch (appMode) {
         case 'RRC20':
-            return ['RISKPRO', 'STABLE', 'RESERVE']
+            return ['TC', 'TP', 'RESERVE']
         case 'MoC':
-            return ['RISKPRO', 'STABLE', 'RESERVE']
+            return ['TC', 'TP', 'RESERVE']
         default:
-            return ['RISKPRO', 'STABLE', 'RESERVE']
+            return ['TC', 'TP', 'RESERVE']
     }
 
 }

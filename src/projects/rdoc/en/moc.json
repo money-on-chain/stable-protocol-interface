@@ -7,12 +7,12 @@
 
     "MetamaskTutorial_connectWithMetamask_text": "Return to Money on Chain Tab. Click on Next on the Metamask Window",
 
-    "Tokens_STABLE_code": "RDOC",
-    "Tokens_STABLE_name": "RDOC",
-    "Tokens_RISKPRO_code": "RIFP",
-    "Tokens_RISKPRO_name": "RIFP",
-    "Tokens_RISKPROX_code": "RIFX",
-    "Tokens_RISKPROX_name": "RIFX",
+    "Tokens_TP_code": "RDOC",
+    "Tokens_TP_name": "RDOC",
+    "Tokens_TC_code": "RIFP",
+    "Tokens_TC_name": "RIFP",
+    "Tokens_TX_code": "RIFX",
+    "Tokens_TX_name": "RIFX",
     "Tokens_RESERVE_code": "RIF",
     "Tokens_RESERVE_name": "RIF",
     "Tokens_USD_code": "USD",

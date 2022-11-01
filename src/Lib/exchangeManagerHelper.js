@@ -78,7 +78,7 @@ const getUsableReserveBalance = (
   const spendableBalanceBn = new BigNumber(rbtcBalance);
   const mintingGasEstimation = gasEstimation !== undefined ? gasEstimation : 0;
   let available = spendableBalanceBn.minus(reserveCommisionValue).minus(mintingGasEstimation);
-  if (currencyToMint === 'RISKPROX') {
+  if (currencyToMint === 'TX') {
    available
       .minus(potentialBprox2MaxInterest);
   }
@@ -96,11 +96,11 @@ const gasMintingEstimation = (
   } = userState || {};
 
   switch (currencyToMint) {
-    case 'STABLE':
+    case 'TP':
       return estimateGasMintDoc;
-    case 'RISKPRO':
+    case 'TC':
       return estimateGasMintBpro;
-    case 'RISKPROX':
+    case 'TX':
       return estimateGasMintBprox2;
     default:
       return undefined;
@@ -142,7 +142,7 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
   const vendor = config.environment.vendor;
 
   const valueYouExchangeInRESERVE = convertToken(currencyYouExchange, "RESERVE", valueYouExchange);
-  const valueYouExchangeInMOC = convertToken("RESERVE", "MOC", valueYouExchangeInRESERVE);
+  const valueYouExchangeInMOC = convertToken("RESERVE", "TG", valueYouExchangeInRESERVE);
   const commissionRateForMOC = BigNumber(
     commissionRates[getTransactionType(currencyYouExchange, currencyYouReceive, "MOC_COMMISSION")])
     .plus(vendor.markup);
@@ -178,24 +178,24 @@ const getMaxMintableBalance = (currencyToMint, userState, mocState, convertToken
   const usableReserveBalanceInCurrencyToMint = convertToken("RESERVE", currencyToMint, usableReserveBalance);
   let response;
   switch (currencyToMint) {
-    case 'STABLE':
+    case 'TP':
       response = {
         value: BigNumber.minimum(docAvailableToMint,
                       usableReserveBalanceInCurrencyToMint),
-        currency: "STABLE"
+        currency: "TP"
       };
       break;
-    case 'RISKPRO':
+    case 'TC':
       response = {
         value: usableReserveBalanceInCurrencyToMint,
-        currency: "RISKPRO"
+        currency: "TC"
       };
       break;
-    case 'RISKPROX':
+    case 'TX':
       response = {
         value: BigNumber.minimum(bprox2AvailableToMint,
                       usableReserveBalanceInCurrencyToMint),
-        currency: "RISKPROX"
+        currency: "TX"
       };
       break;
     default:
@@ -217,22 +217,22 @@ const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState) => {
   } = mocState;
   let response;
   switch (currencyToRedeem) {
-    case 'STABLE':
+    case 'TP':
       response = {
         value: BigNumber.minimum(docAvailableToRedeem, docBalance),
-        currency: "STABLE"
+        currency: "TP"
       };
       break;
-    case 'RISKPRO':
+    case 'TC':
       response = {
         value: BigNumber.minimum(bproAvailableToRedeem, bproBalance),
-        currency: "RISKPRO"
+        currency: "TC"
       }
       break;
-    case 'RISKPROX':
+    case 'TX':
       response = {
         value: bprox2Balance,
-        currency: "RISKPROX"
+        currency: "TX"
       };
       break;
     default:

@@ -7,12 +7,12 @@
 
     "MetamaskTutorial_connectWithMetamask_text": "Regresa a la pestaña de Money On Chain. Haga clic en siguiente en la ventana de Metamask.",
 
-    "Tokens_STABLE_code": "RDOC",
-    "Tokens_STABLE_name": "RIF" ,
-    "Tokens_RISKPRO_code": "RIFP",
-    "Tokens_RISKPRO_name": "RIFpro" ,
-    "Tokens_RISKPROX_code": "RIFX",
-    "Tokens_RISKPROX_name": "RIFX" ,
+    "Tokens_TP_code": "RDOC",
+    "Tokens_TP_name": "RIF" ,
+    "Tokens_TC_code": "RIFP",
+    "Tokens_TC_name": "RIFpro" ,
+    "Tokens_TX_code": "RIFX",
+    "Tokens_TX_name": "RIFX" ,
     "Tokens_RESERVE_code": "RIF",
     "Tokens_RESERVE_name": "RIF" ,
     "Tokens_USD_code": "USD",

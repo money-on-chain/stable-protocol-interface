@@ -95,7 +95,7 @@ const readContracts = async (web3, environment) => {
 
   if (environment.LiquidityCollateralToken) {
     console.log('Reading Liquidity Collateral Token Contract... address: ', environment.LiquidityCollateralToken)
-    const liquiditycollateraltoken = new web3.eth.Contract(RiskProToken.abi, environment.LiquidityCollateralToken)
+    const liquiditycollateraltoken = new web3.eth.Contract(TC.abi, environment.LiquidityCollateralToken)
     dContracts.contracts.liquiditycollateraltoken = liquiditycollateraltoken
   } else {
     console.log('Using Collateral token as Liquidity Collateral Token Contract... address: ', tcTokenAddress)

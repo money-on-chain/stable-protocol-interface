@@ -23,7 +23,7 @@ function RiskProX(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={auth.urlBaseFull+'icon-riskprox.svg'}
+                    src={auth.urlBaseFull+'icon-tx.svg'}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.wallets.RISKPROX.title`, { ns: ns })}
@@ -39,20 +39,20 @@ function RiskProX(props) {
                             </span>
                             <h5 style={{ marginTop: '2em' }}>{t(`${AppProject}.metrics.RISKPROX.total`, { ns: ns })}</h5>
                             <span className={'red space'}>
-                                <LargeNumber amount={props.total} currencyCode="RISKPROX" />
+                                <LargeNumber amount={props.total} currencyCode="TX" />
                             </span>
                             <h5>{t(`${AppProject}.metrics.RISKPROX.availableMint`, { ns: ns })}</h5>
                             <span className={'red'}>
-                                <LargeNumber amount={props.availableMint} currencyCode="RISKPROX" />
+                                <LargeNumber amount={props.availableMint} currencyCode="TX" />
                             </span>
                         </div>
                         <div className="separator" /><div>
                             <h5>{t(`${AppProject}.metrics.RISKPROX.leverage`, { ns: ns })}</h5>
                             <span className={'space'}>
-                                <LargeNumber amount={props.leverage} currencyCode="RISKPROX" />
+                                <LargeNumber amount={props.leverage} currencyCode="TX" />
                             </span>
                             <h5>{t(`${AppProject}.metrics.RISKPROX.coverage`, { ns: ns })}</h5>
-                            <LargeNumber amount={props.coverage} currencyCode="RISKPROX" />
+                            <LargeNumber amount={props.coverage} currencyCode="TX" />
                         </div></>
                 : <Skeleton active={true} />}
             </div>

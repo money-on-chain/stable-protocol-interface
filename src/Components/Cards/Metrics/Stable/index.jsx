@@ -26,7 +26,7 @@ function Stable(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={auth.urlBaseFull +"icon-stable.svg"}
+                    src={auth.urlBaseFull +"icon-tp.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.wallets.STABLE.title`, { ns: ns })}
@@ -36,11 +36,11 @@ function Stable(props) {
                 {!loading
                     ? <div>
                         <h5>{t(`${AppProject}.metrics.STABLE.total`, { ns: ns })}</h5>
-                        <span className={'space green'}><LargeNumber amount={props.total} currencyCode="STABLE" /></span>
+                        <span className={'space green'}><LargeNumber amount={props.total} currencyCode="TP" /></span>
                         <h5>{t(`${AppProject}.metrics.STABLE.availableRedeem`, { ns: ns })}</h5>
-                        <span className={'green'}><LargeNumber amount={props.availableRedeem} currencyCode="STABLE" /></span>
+                        <span className={'green'}><LargeNumber amount={props.availableRedeem} currencyCode="TP" /></span>
                         <h5>{t(`${AppProject}.metrics.STABLE.availableMint`, { ns: ns })}</h5>
-                        <span className={'green'}><LargeNumber amount={props.availableMint} currencyCode="STABLE" /></span>
+                        <span className={'green'}><LargeNumber amount={props.availableMint} currencyCode="Tp" /></span>
                     </div>
                 : <Skeleton active={true} />}
             </div>

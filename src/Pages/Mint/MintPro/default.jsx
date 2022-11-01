@@ -31,13 +31,13 @@ export default function Mint(props) {
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <AmountCard
-                        tokenName="RISKPRO"
+                        tokenName="TC"
                         titleName="BPro"
                         StatusData={auth.contractStatusData}
                     />
                 </Col>
                 <Col xs={24} md={12} xl={5}>
-                    <YourAddressCard height="23.4em" tokenToSend="RISKPRO" currencyOptions={['RESERVE', 'RISKPRO']} />
+                    <YourAddressCard height="23.4em" tokenToSend="TC" currencyOptions={['RESERVE', 'TC']} />
                 </Col>
                 <Col xs={24} xl={14}>
                     {/* <MintCard
@@ -49,7 +49,7 @@ export default function Mint(props) {
                         color="#ef8a13"
                     /> */}
                     <MintOrRedeemToken
-                        token={'RISKPRO'}
+                        token={'TC'}
                         AccountData={auth.accountData}
                         userState={auth.userBalanceData}
                         mocState={auth.contractStatusData}

@@ -224,7 +224,7 @@ const AuthenticateProvider = ({ children }) => {
         const appModeString = `APP_MODE_${appMode}`;
 
         const exchangeCurrencyMap = {
-            RISKPROX: {
+            TX: {
                 RESERVE: {
                     APP_MODE_MoC: {
                         exchangeFunction: interfaceRedeemTX
@@ -244,7 +244,7 @@ const AuthenticateProvider = ({ children }) => {
                     }
                 }
             },
-            STABLE: {
+            TP: {
                 RESERVE: {
                     APP_MODE_MoC: {
                         exchangeFunction: interfaceRedeemTP
@@ -263,7 +263,7 @@ const AuthenticateProvider = ({ children }) => {
                         exchangeFunction: interfaceMintTCRRC20
                     }
                 },
-                STABLE: {
+                TP: {
                     APP_MODE_MoC: {
                         exchangeFunction: interfaceMintTP
                     },
@@ -271,7 +271,7 @@ const AuthenticateProvider = ({ children }) => {
                         exchangeFunction: interfaceMintTPRRC20
                     }
                 },
-                RISKPROX: {
+                TX: {
                     APP_MODE_MoC: {
                         exchangeFunction: interfaceMintTX
                     },
@@ -620,27 +620,27 @@ const AuthenticateProvider = ({ children }) => {
             convertRbtcToDoc(amount).div(mocPrice).times(reservePrecision);
 
         const convertMap = {
-            STABLE: { USD: convertDocToUsd, RESERVE: convertDocToRbtc },
-            RISKPRO: {
+            TP: { USD: convertDocToUsd, RESERVE: convertDocToRbtc },
+            TC: {
                 USD: convertBproToUsd,
                 RESERVE: convertBproToRbtc,
-                RISKPROX: convertBproToBprox2
+                TX: convertBproToBprox2
             },
-            RISKPROX: {
+            TX: {
                 RESERVE: convertBprox2ToRbtc,
-                RISKPRO: convertBprox2ToBpro,
+                TC: convertBprox2ToBpro,
                 USD: convertBprox2ToUsd
             },
-            MOC: {
+            TG: {
                 RESERVE: convertMoCTokenToRbtc,
                 USD: convertMoCTokenToUsd
             },
             RESERVE: {
                 USD: convertRbtcToUsd,
-                RISKPRO: convertRbtcToBpro,
-                STABLE: convertRbtcToDoc,
-                RISKPROX: convertRbtcToBprox2,
-                MOC: convertRbtcToMoCToken
+                TC: convertRbtcToBpro,
+                TP: convertRbtcToDoc,
+                TX: convertRbtcToBprox2,
+                TG: convertRbtcToMoCToken
             }
         };
 

@@ -46,30 +46,30 @@ function Home(props) {
                 <div  className={'sec-2'}>
                     <div className={'container-b'} style={{height: '100%'}}>
                         <TokenSummaryCard
-                            tokenName="stable"
+                            tokenName="tp"
                             // color="#00a651"
                             page="/wallet/stable"
                             balance={docBalance}
                             labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
-                            currencyCode={'STABLE'}
+                            currencyCode={'TP'}
                         />
                         <TokenSummaryCard
-                            tokenName="riskpro"
+                            tokenName="tc"
                             // color="#ef8a13"
                             page="/wallet/pro"
                             balance={bproBalance}
                             labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns})}
-                            currencyCode={'RISKPRO'}
-                            currencyCodeNumber={'RISKPRO'}
+                            currencyCode={'TC'}
+                            currencyCodeNumber={'TC'}
                         />
                         <TokenSummaryCard
-                            tokenName="riskprox"
+                            tokenName="tx"
                             // color="#ed1c24"
                             page="/wallet/leveraged"
                             balance={bprox2Balance}
                             labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns })}
-                            currencyCode={'RISKPROX'}
-                            currencyCodeNumber={'RISKPROX'}
+                            currencyCode={'TX'}
+                            currencyCodeNumber={'TX'}
                         />
                     </div>
                 </div>

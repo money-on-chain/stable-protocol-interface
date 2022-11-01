@@ -25,13 +25,13 @@ BigNumber.config({
 });
 
 const formatMap = {
-    RISKPROX: precisions.RBTCPrecision,
-    RISKPRO: precisions.RBTCPrecision,
-    STABLE: precisions.USDPrecision,
+    TX: precisions.RBTCPrecision,
+    TC: precisions.RBTCPrecision,
+    TP: precisions.USDPrecision,
     USD: precisions.USDPrecision,
     USDPrice: precisions.PriceUSDPrecision,
     RESERVE: precisions.RBTCPrecision,
-    MOC: precisions.mocPrecision,
+    TG: precisions.mocPrecision,
     MOCMetrics: precisions.COVPrecision,
     REWARD: precisions.REWARDPrecision,
     COV: precisions.COVPrecision,

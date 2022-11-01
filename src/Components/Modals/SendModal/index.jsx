@@ -65,13 +65,13 @@ export default function SendModal(props) {
       return  'MOC'
     }else{
       switch (tokenToSend) {
-        case 'STABLE':
+        case 'TP':
           return 'DOC'
-        case 'RISKPRO':
+        case 'TC':
           return  'BPRO'          
-        case 'RISKPROX':
+        case 'TX':
           return 'BPROX'
-        case 'MOC':
+        case 'TG':
           return 'MOC'          
         default:
           return 'RBTC'

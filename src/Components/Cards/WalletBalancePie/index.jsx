@@ -106,28 +106,28 @@ function WalletBalancePie(props) {
 
             const projectDecimals = {}
             projectDecimals['COLLATERAL'] = Number(getDecimals("RESERVE", AppProject));
-            projectDecimals['USD'] = Number(getDecimals("STABLE", AppProject));
+            projectDecimals['USD'] = Number(getDecimals("TP", AppProject));
 
             const data = [
                 {
                     name: 'Group A',
                     value: Number(userBalances.doc.usd.toFixed(projectDecimals.USD)),
                     set1: userBalances.doc.collateral.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: userBalances.doc.usd.toFixed(projectDecimals.USD) +' '+ t(`${AppProject}.Tokens_STABLE_code`, {ns: ns}),
+                    set2: userBalances.doc.usd.toFixed(projectDecimals.USD) +' '+ t(`${AppProject}.Tokens_TP_code`, {ns: ns}),
                     class: 'STABLE'
                 },
                 {
                     name: 'Group B',
                     value: Number(userBalances.bpro.usd.toFixed(projectDecimals.USD)),
                     set1: userBalances.bpro.collateral.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: userBalances.bpro.normal.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RISKPRO_code`, {ns: ns}),
+                    set2: userBalances.bpro.normal.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_TC_code`, {ns: ns}),
                     class: 'RISKPRO'
                 },
                 {
                     name: 'Group C',
                     value: Number(userBalances.btcx.usd.toFixed(projectDecimals.USD)),
                     set1: userBalances.btcx.collateral.toFixed(projectDecimals.COLLATERAL) +' '+ t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns}),
-                    set2: userBalances.btcx.normal.toFixed(projectDecimals.COLLATERAL)  +' '+ t(`${AppProject}.Tokens_RISKPROX_code`, {ns: ns}),
+                    set2: userBalances.btcx.normal.toFixed(projectDecimals.COLLATERAL)  +' '+ t(`${AppProject}.Tokens_TX_code`, {ns: ns}),
                     class: 'RISKPROX'
                 },
                 {

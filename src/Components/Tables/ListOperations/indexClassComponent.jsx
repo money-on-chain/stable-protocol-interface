@@ -229,19 +229,19 @@ class ListOperations extends React.Component {
                 if (element.wallet != '--' && element.wallet != 11) {
                     switch (element.asset) {
                         case 'STABLE':
-                            asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
+                            asset.push({ 'image': 'icon-tp.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
                             data_row_coins2[index].detail.asset = 'DOC';
                             break;
                         case 'RISKPRO':
-                            asset.push({ 'image': 'icon-riskpro.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
+                            asset.push({ 'image': 'icon-tc.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
                             data_row_coins2[index].detail.asset = 'BPRO'
                             break;
                         case 'RISKPROX':
-                            asset.push({ 'image': 'icon-riskprox.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
+                            asset.push({ 'image': 'icon-tx.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
                             data_row_coins2[index].detail.asset = 'BTCX'
                             break;
                         default:
-                            asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
+                            asset.push({ 'image': 'icon-tp.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
                             data_row_coins2[index].detail.asset = 'DOC'
                             break;
                     }

@@ -31,11 +31,11 @@ export default function Mint(props) {
             <h3 className="PageSubTitle">{t(`${AppProject}.wallets.STABLE.subtitle`, { ns: ns })}</h3>
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
-                    <AmountCard tokenName="STABLE" titleName="DoC"
+                    <AmountCard tokenName="TP" titleName="DoC"
                         StatusData={auth.contractStatusData} />
                 </Col>
                 <Col xs={24} md={12} xl={5}>
-                    <YourAddressCard height="23.4em" tokenToSend="STABLE" currencyOptions={['RESERVE', 'STABLE']} />
+                    <YourAddressCard height="23.4em" tokenToSend="TP" currencyOptions={['RESERVE', 'TP']} />
                 </Col>
                 <Col xs={24} xl={14}>
                     {/* <MintCard
@@ -47,7 +47,7 @@ export default function Mint(props) {
                         StatusData={auth.contractStatusData}
                     /> */}
                     <MintOrRedeemToken
-                        token={'STABLE'}
+                        token={'TP'}
                         AccountData={auth.accountData}
                         userState={auth.userBalanceData}
                         mocState={auth.contractStatusData}

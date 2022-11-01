@@ -1,17 +1,17 @@
 const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth) => {
   if(!userState) return {};
   switch (currencyCode) {
-    case 'RISKPRO':
+    case 'TC':
       return {
         amount: userState?.bproBalance,
-        methodTransferTo: auth?.interfaceTPTo,
+        methodTransferTo: auth?.interfaceTCTo,
       };
-    case 'STABLE':
+    case 'TP':
       return {
         amount: userState?.docBalance,
-        methodTransferTo: auth?.interfaceTransferStableTo,
+        methodTransferTo: auth?.interfaceTransferTPTo,
       };
-    case 'MOC':
+    case 'TG':
       return{
         amount:userState?.mocBalance,
         methodTransferTo: auth?.interfaceTransferTGTo,
@@ -28,11 +28,11 @@ const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth)
 
 const getMaxAvailableOfCurrencyCode = (mocState, currencyCode, isRedeem) => {
   switch (currencyCode) {
-    case 'RISKPRO':
+    case 'TC':
       return mocState.bproAvailableToRedeem;
-    case 'STABLE':
+    case 'TP':
       return isRedeem ? mocState.docAvailableToRedeem : mocState.docAvailableToMint;
-    case 'RISKPROX':
+    case 'TX':
       return mocState.bprox2AvailableToMint;
     default:
       return undefined;
@@ -41,10 +41,10 @@ const getMaxAvailableOfCurrencyCode = (mocState, currencyCode, isRedeem) => {
 
 const currencies = [
   { value: 'RESERVE',     image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-reserve.svg" },
-  { value: 'STABLE',      image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-stable.svg" },
-  { value: 'RISKPRO',     image: process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-riskpro.svg" },
-  { value: 'RISKPROX',    image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-riskprox.svg" },
-  { value: 'MOC',         image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg" },
+  { value: 'TP',      image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-tp.svg" },
+  { value: 'TC',     image: process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-tc.svg" },
+  { value: 'TX',    image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-tx.svg" },
+  { value: 'TG',         image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg" },
   { value: 'RBTC',         image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg" },
 ].map(it => ({
   ...it,

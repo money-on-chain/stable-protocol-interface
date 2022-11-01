@@ -97,7 +97,7 @@ export default function Mint(props) {
             <Row gutter={15}>
                 <Col xs={24} md={12} xl={5}>
                     <AmountCard
-                        tokenName="RISKPROX"
+                        tokenName="TX"
                         titleName="BTCx"
                         StatusData={auth.contractStatusData}
                     />
@@ -159,7 +159,7 @@ export default function Mint(props) {
                         color="#ed1c24"
                     /> */}
                     <MintOrRedeemToken
-                        token={'RISKPROX'}
+                        token={'TX'}
                         AccountData={auth.accountData}
                         userState={auth.userBalanceData}
                         mocState={auth.contractStatusData}
@@ -168,7 +168,7 @@ export default function Mint(props) {
                 </Col>
             </Row>
             <div className="Card WalletOperations">
-                <ListOperations token={'RISKPROX'}></ListOperations>
+                <ListOperations token={'TX'}></ListOperations>
             </div>
         </Fragment>
     );

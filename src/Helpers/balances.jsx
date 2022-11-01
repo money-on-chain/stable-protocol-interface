@@ -98,15 +98,15 @@ const getUserBalance = (auth, i18n, tokenName) => {
         let rDecimals;
         let notFormatted;
         switch (tokenName.toLowerCase()) {
-            case 'stable':
+            case 'tp':
                 rDecimals = parseInt(config.tokens.TP.decimals);
                 notFormatted = userDocBalance(auth);
                 break;
-            case 'riskpro':
+            case 'tc':
                 rDecimals = parseInt(config.tokens.TC.decimals);
                 notFormatted = userBproBalance(auth);
                 break;
-            case 'riskprox':
+            case 'tx':
                 rDecimals = parseInt(config.tokens.TX.decimals);
                 notFormatted = userBtcxBalance(auth);
                 break;
@@ -135,15 +135,15 @@ const getUserBalance = (auth, i18n, tokenName) => {
 const getUSD = (coin, value, auth, i18n=null) => {
     if (auth.contractStatusData) {
         switch (coin) {
-            case 'STABLE':
+            case 'TP':
                 return  setToLocaleString(new BigNumber(1 * Web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'RISKPRO':
+            case 'TC':
                 return  setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * Web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'MOC':
+            case 'TG':
                 return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData['mocPrice']) * Web3.utils.fromWei(setNumber(value))),2,i18n)
             case 'RESERVE':
                 return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * Web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'RISKPROX':
+            case 'TX':
                 return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice, 'ether') * Web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'], 'ether') * Web3.utils.fromWei(setNumber(value))),2,i18n)
 
         }

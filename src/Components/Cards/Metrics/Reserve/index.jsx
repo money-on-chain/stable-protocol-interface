@@ -55,15 +55,15 @@ function Reserve(props) {
     const toShow = ({ totalSTABLE, totalRISKPRO, totalRISKPROX }) => {
         return [
           {
-            currencyCode: "RISKPRO",
+            currencyCode: "TC",
             balance: totalRISKPRO,
           },
           {
-            currencyCode: "RISKPROX",
+            currencyCode: "TX",
             balance: totalRISKPROX
           },
           {
-            currencyCode: "STABLE",
+            currencyCode: "TP",
             balance: totalSTABLE
           }
         ]

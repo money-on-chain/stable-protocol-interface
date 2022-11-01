@@ -31,7 +31,7 @@ const TransactionTypeIdsRRC20 = {
 
 // TODO: pasar el txType por param.
 const buyCurrencyMap = {
-  RISKPROX: {
+  TC: {
     RESERVE: {
       MOC_COMMISSION: {
         APP_MODE_MoC: {
@@ -56,7 +56,7 @@ const buyCurrencyMap = {
       },
     }
   },
-  RISKPRO: {
+  TC: {
     RESERVE: {
       MOC_COMMISSION:{
         APP_MODE_MoC: {
@@ -82,7 +82,7 @@ const buyCurrencyMap = {
       }
     }
   },
-  STABLE: {
+  TP: {
     RESERVE: {
       MOC_COMMISSION:{
         APP_MODE_MoC: {
@@ -109,7 +109,7 @@ const buyCurrencyMap = {
     }
   },
   RESERVE: {
-    RISKPRO: {
+    TC: {
       MOC_COMMISSION:{
         APP_MODE_MoC: {
           exchangeFunction: null,
@@ -133,7 +133,7 @@ const buyCurrencyMap = {
         }
       }
     },
-    STABLE: {
+    TP: {
       MOC_COMMISSION:{
         APP_MODE_MoC: {
           exchangeFunction: null,
@@ -157,7 +157,7 @@ const buyCurrencyMap = {
         }
       }
     },
-    RISKPROX: {
+    TX: {
       MOC_COMMISSION:{
         APP_MODE_MoC: {
           exchangeFunction: null,

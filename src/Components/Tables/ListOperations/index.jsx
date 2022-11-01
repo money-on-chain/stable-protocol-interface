@@ -271,20 +271,20 @@ export default function ListOperations(props) {
 
             switch (element.asset) {
                 case 'STABLE':
-                    asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
-                    data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_STABLE_code`, { ns: ns });
+                    asset.push({ 'image': 'icon-tp.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
+                    data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TP_code`, { ns: ns });
                     break;
                 case 'RISKPRO':
-                    asset.push({ 'image': 'icon-riskpro.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
-                    data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_RISKPRO_code`, { ns: ns });
+                    asset.push({ 'image': 'icon-tc.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
+                    data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TC_code`, { ns: ns });
                     break;
                 case 'RISKPROX':
-                    asset.push({ 'image': 'icon-riskprox.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
-                    data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_RISKPROX_code`, { ns: ns });
+                    asset.push({ 'image': 'icon-tx.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
+                    data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TX_code`, { ns: ns });
                     break;
                 default:
-                    asset.push({ 'image': 'icon-stable.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
-                    data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_STABLE_code`, { ns: ns });
+                    asset.push({ 'image': 'icon-tp.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
+                    data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TP_code`, { ns: ns });
                     break;
             }
 
