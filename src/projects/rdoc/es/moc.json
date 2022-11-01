@@ -232,13 +232,13 @@
       }
     },
     "metrics": {
-      "STABLE":{
+      "TP":{
         "title":"RIF Dollar",
         "total":"Total RDOC en el sistema",
         "availableRedeem":"RDOC disponibles para redimir",
         "availableMint":"RDOC disponibles para emitir"
       },
-      "RISKPRO":{
+      "TC":{
         "title":"RIFpro",
         "usd":"RIFP USD",
         "availableRedeem":"Disponibles para redimir",
@@ -247,7 +247,7 @@
         "total":"Total en el sistema",
         "bproDiscountPriceUsd":"Precio descuento"
       },
-      "RISKPROX":{
+      "TX":{
         "title":"RIFX",
         "usd":"RIFX USD",
         "availableMint":"Disponibles para emitir",
@@ -333,7 +333,7 @@
         "blockSettlement": "El próximo Settlement ocurrirá en el bloque",
         "lastUpdateHeight": "Bloque indexado"
       },
-      "Moc":{
+      "TG":{
         "title":"MoC",
         "price": "Precio actual en USD"
       }

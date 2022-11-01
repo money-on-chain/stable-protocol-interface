@@ -333,7 +333,7 @@
         "blockSettlement": "Settlement will happen on block",
         "lastUpdateHeight": "Current indexed block"
       },
-      "Moc":{
+      "TG":{
         "title":"MoC",
         "price": "Current price in USD"
       }

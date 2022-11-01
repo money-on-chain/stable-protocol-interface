@@ -246,7 +246,7 @@ export function readJsonTable(data_j,t, i18n){
          amount: new BigNumber(data_j.rbtcCommission).gt(0)
              ? data_j.rbtcCommission
              : data_j.mocCommissionValue,
-         currencyCode: new BigNumber(data_j.rbtcCommission).gt(0) ? 'RESERVE' : 'MOC',
+         currencyCode: new BigNumber(data_j.rbtcCommission).gt(0) ? 'RESERVE' : 'TG',
          includeCurrency: true,
          amountUSD: data_j.USDCommission ? data_j.USDCommission : 0,
          showUSD: true,

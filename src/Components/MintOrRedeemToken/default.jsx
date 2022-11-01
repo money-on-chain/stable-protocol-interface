@@ -204,7 +204,7 @@ const MintOrRedeemToken = (props) => {
   const calcInterests = async newValueYouExchange => {
     let interestRate = '0',
       interestValue = '0';
-    if (actionIsMint && currencyYouReceive === 'RISKPROX') {
+    if (actionIsMint && currencyYouReceive === 'TX') {
       interestValue = await auth.interfaceCalcMintInterestValues(
         BigNumber(newValueYouExchange).div(10**18)
       );
@@ -440,7 +440,7 @@ const MintOrRedeemToken = (props) => {
     // Mint BTCX slippage (user tolerance)
     // take in care user tolerance
     //if (actionIsMint && currencyYouReceive === 'RISKPROX') {
-    if (actionIsMint && currencyYouReceive !== 'STABLE') {
+    if (actionIsMint && currencyYouReceive !== 'TP') {
       const userToleranceAmount = new BigNumber(tolerance).multipliedBy(totalYouExchange).div(100).toFixed();
       totalYouExchange = totalYouExchange.plus(userToleranceAmount);
     }
@@ -549,7 +549,7 @@ const MintOrRedeemToken = (props) => {
 
   const renderConfirmTransactionModal = () => {
     let defaultSliderValue = 0.1;
-    if (actionIsMint && currencyYouReceive === 'RISKPROX') { defaultSliderValue = 0.25; }
+    if (actionIsMint && currencyYouReceive === 'TX') { defaultSliderValue = 0.25; }
     return (
       <MintModal
         visible={confirmingTransaction}
@@ -607,13 +607,13 @@ const MintOrRedeemToken = (props) => {
             <LargeNumber
                 includeCurrency
                 amount={commission.value}
-                currencyCode={'MOC'}
+                currencyCode={'TG'}
             />}
         <Popover content={tooltip} placement="top">
           <div className="PayWithMocToken">
             <Switch
               disabled={!enoughMOCBalance}
-              checked={commission.currencyCode === 'MOC'}
+              checked={commission.currencyCode === 'TG'}
               onChange={setAllowance}
               loading={loadingSwitch}
             />

@@ -40,7 +40,7 @@ function TP(props) {
                         <h5>{t(`${AppProject}.metrics.TP.availableRedeem`, { ns: ns })}</h5>
                         <span className={'green'}><LargeNumber amount={props.availableRedeem} currencyCode="TP" /></span>
                         <h5>{t(`${AppProject}.metrics.TP.availableMint`, { ns: ns })}</h5>
-                        <span className={'green'}><LargeNumber amount={props.availableMint} currencyCode="Tp" /></span>
+                        <span className={'green'}><LargeNumber amount={props.availableMint} currencyCode="TP" /></span>
                     </div>
                 : <Skeleton active={true} />}
             </div>

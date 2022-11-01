@@ -26,13 +26,13 @@ function TG(props) {
                     src={auth.urlBaseFull+"icon-tg.svg" }
                     alt=""
                     style={{ marginRight: 10 }}
-                /> {t(`${AppProject}.metrics.Moc.title`, { ns: ns })}
+                /> {t(`${AppProject}.metrics.TG.title`, { ns: ns })}
             </h3>
 
             <div className="CardMetricContent MocThemeMetric">
                 {!loading
                     ? <div>
-                        <h5>{t(`${AppProject}.metrics.Moc.price`, { ns: ns })}</h5>
+                        <h5>{t(`${AppProject}.metrics.TG.price`, { ns: ns })}</h5>
                         <LargeNumber amount={props.mocPrice} currencyCode="USDPrice" tooltip="topLeft"/>
                     </div>
                 : <Skeleton active={true} />}

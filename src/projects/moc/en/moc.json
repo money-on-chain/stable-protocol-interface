@@ -228,13 +228,13 @@
       }
     },
     "metrics": {
-      "STABLE": {
+      "TP": {
         "title": "DoC",
         "total": "Total in the system",
         "availableRedeem": "Available to redeem",
         "availableMint": "Available to Mint"
       },
-      "RISKPRO": {
+      "TC": {
         "title": "BPro",
         "usd": "BPro USD",
         "availableRedeem": "Available to redeem",
@@ -243,7 +243,7 @@
         "total": "Total in the system",
         "bproDiscountPriceUsd": "Discount price"
       },
-      "RISKPROX": {
+      "TX": {
         "title": "BTCx",
         "usd": "BTCx USD",
         "availableMint": "Available to Mint",
@@ -329,7 +329,7 @@
         "blockSettlement": "Settlement will happen on block",
         "lastUpdateHeight": "Current indexed block"
       },
-      "Moc": {
+      "TG": {
         "title": "MoC",
         "price": "Current price"
       }
