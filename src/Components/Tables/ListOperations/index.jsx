@@ -143,10 +143,12 @@ export default function ListOperations(props) {
     }, [window.innerWidth]);
 
     const changeStatus= (percent,txt) =>{
-        if( width<=768 ){
+        if (width <= 768){
             return (<Progress type="circle" percent={percent ? percent : txt === 'confirmed' ? 100 : 0} width={30}/>)
-        }else{
-            return (<><Progress percent={percent} /><br /><span className={txt === 'confirmed' ? 'color-confirmed conf_title' : 'color-confirming conf_title'}>{txt}</span></>);
+        } else {
+            return (<><Progress percent={percent} /><br />
+                <span className={txt === 'confirmed' ? 'color-confirmed conf_title' : 'color-confirming conf_title'}>{txt}</span>
+                </>);
         }
     }
 
@@ -237,19 +239,24 @@ export default function ListOperations(props) {
         json_end = pre_datas
         /*******************************end set json group according to limits***********************************/
 
-        /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
         data = [];
 
         json_end.forEach((data_j) => {
             const datas_response = readJsonTable(data_j,t,i18n)
 
             const detail = {
-                event:  datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : datas_response['set_event']
-                , created: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
+                event:  datas_response['address'] === config.transfer[0].address ?
+                    config.transfer[0].title : datas_response['set_event']
+                , created: <span><Moment format={(i18n.language === "en") ?
+                    date.DATE_EN : date.DATE_ES}>{datas_response['lastUpdatedAt']}</Moment></span>
                 , details: datas_response['RBTCAmount']
                 , asset: datas_response['set_asset']
-                , confirmation: datas_response['confirmationTime'] ? (true) ? <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['confirmationTime']}</Moment></span> : <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span> : ''
-                , address: (datas_response['address']!='--')? <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} /> : '--'
+                , confirmation: datas_response['confirmationTime'] ? (true) ?
+                    <span><Moment format={(i18n.language === "en") ?
+                        date.DATE_EN : date.DATE_ES }>{datas_response['confirmationTime']}</Moment></span> :
+                            <span><Moment format="YYYY-MM-DD HH:MM:SS">{datas_response['confirmationTime']}</Moment></span> : ''
+                , address: (datas_response['address']!='--') ?
+                    <Copy textToShow={datas_response['truncate_address']} textToCopy={datas_response['address']} /> : '--'
                 , platform: datas_response['amount']
                 , platform_fee: datas_response['platform_fee_value']
                 , block: datas_response['blockNumber']
@@ -266,7 +273,8 @@ export default function ListOperations(props) {
             data_row_coins2.push({
                 key: data_j._id,
                 info: '',
-                event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : datas_response['set_event'],
+                event: datas_response['address'] === config.transfer[0].address ?
+                    config.transfer[0].title : datas_response['set_event'],
                 asset: datas_response['set_asset'],
                 platform: datas_response['platform_detail'],
                 wallet: datas_response['wallet_value_main'],
@@ -314,7 +322,7 @@ export default function ListOperations(props) {
             });
 
         })
-        /*******************************end extraer datos del json con el json seteado por limit y skip***********************************/
+
     }
 
     data_row(current)
@@ -361,7 +369,11 @@ export default function ListOperations(props) {
         <>
             <div className="title">
                 <h1>{t(`${AppProject}.operations.title`, { ns: ns })}</h1>
-                <Tooltip color={'#404040'} placement="topLeft" title={t(`${AppProject}.operations.tooltip.text`, { ns: ns })} className='Tooltip'>
+                <Tooltip
+                    color={'#404040'}
+                    placement="topLeft"
+                    title={t(`${AppProject}.operations.tooltip.text`, { ns: ns })}
+                    className='Tooltip'>
                     <InfoCircleOutlined className="Icon" />
                 </Tooltip>
             </div>
