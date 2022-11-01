@@ -30,20 +30,20 @@ export default function PriceVariation(props) {
     const getBalanceUSD = (tokenName) => {
         if (auth.contractStatusData) {
             switch (tokenName) {
-                case 'stable':
+                case 'TP':
                     if (auth.contractStatusData['bitcoinPrice']) {
                         return auth.contractStatusData['bitcoinPrice']
 
                     } else {
                         return 0;
                     }
-                case 'riskpro':
+                case 'TC':
                     if (auth.contractStatusData['bproPriceInUsd']) {
                         return auth.contractStatusData['bproPriceInUsd']
                     } else {
                         return 0;
                     }
-                case 'riskprox':
+                case 'TX':
                     if (auth.contractStatusData['bprox2PriceInRbtc']) {
                          return (auth.contractStatusData['bitcoinPrice'] * web3.utils.fromWei(setNumber(auth.contractStatusData['bprox2PriceInRbtc']), 'ether'))
                     } else {
