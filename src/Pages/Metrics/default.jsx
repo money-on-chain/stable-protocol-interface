@@ -49,13 +49,13 @@ function Metrics(props) {
     b0BTCInrateBag = new BigNumber(b0BTCInrateBag);
 
     const maxStableRedeemAvailable =
-        mocState && getMaxAvailableOfCurrencyCode(mocState, 'STABLE', true);
+        mocState && getMaxAvailableOfCurrencyCode(mocState, 'TP', true);
     const maxStableMintAvailable =
-        mocState && getMaxAvailableOfCurrencyCode(mocState, 'STABLE', false);
+        mocState && getMaxAvailableOfCurrencyCode(mocState, 'TP', false);
     const maxRiskproRedeemAvailable =
-        mocState && getMaxAvailableOfCurrencyCode(mocState, 'RISKPRO', true);
+        mocState && getMaxAvailableOfCurrencyCode(mocState, 'TC', true);
     const maxRiskproxMintAvailable =
-        mocState && getMaxAvailableOfCurrencyCode(mocState, 'RISKPROX', false);
+        mocState && getMaxAvailableOfCurrencyCode(mocState, 'TX', false);
 
     const {
         bproPriceInUsd,
@@ -74,12 +74,12 @@ function Metrics(props) {
     const totalDocAmount = b0DocAmount.plus(x2DocAmount);
     //const totalDocInRBTC = (convertToken && convertToken('STABLE', 'RESERVE', totalDocAmount)) || 0;
     const totalBproInRBTC = b0BproAmount.multipliedBy(new BigNumber(bproPriceInRbtc).div(10 ** 18));
-    const totalBpro = (convertToken && convertToken('RESERVE', 'RISKPRO', totalBproInRBTC)) || 0;
+    const totalBpro = (convertToken && convertToken('RESERVE', 'TC', totalBproInRBTC)) || 0;
 
     const totalBproxInRBTC = x2BproAmount.multipliedBy(
         new BigNumber(bprox2PriceInRbtc).div(10 ** 18)
     ); //new BigNumber(x2BTCAmount);
-    const totalBprox = (convertToken && convertToken('RESERVE', 'RISKPROX', totalBproxInRBTC)) || 0;
+    const totalBprox = (convertToken && convertToken('RESERVE', 'TX', totalBproxInRBTC)) || 0;
 
     //const totalBproInUSD = (convertToken && convertToken('RESERVE', 'USD', totalBproInRBTC)) || 0;
     //const totalBproxInUSD = (convertToken && convertToken('RESERVE', 'USD', totalBproxInRBTC)) || 0;

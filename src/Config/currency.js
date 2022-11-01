@@ -44,8 +44,8 @@ const currencies = [
   { value: 'TP',      image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-tp.svg" },
   { value: 'TC',     image: process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-tc.svg" },
   { value: 'TX',    image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-tx.svg" },
-  { value: 'TG',         image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg" },
-  { value: 'RBTC',         image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-moc.svg" },
+  { value: 'TG',         image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-tg.svg" },
+  { value: 'RBTC',         image:  process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+ "/icon-tg.svg" },
 ].map(it => ({
   ...it,
   longNameKey: `${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT}.Tokens_${it.value}_code`,

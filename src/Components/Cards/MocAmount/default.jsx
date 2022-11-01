@@ -36,7 +36,7 @@ function MocAmount() {
                             <InformationModal currencyCode={'MOC'}/>
                         </div>
                         <div className="LogoAndAmount">
-                            <img className="MocLogo" srcSet={auth.urlBaseFull+ "icon-moc.svg"}/>
+                            <img className="MocLogo" srcSet={auth.urlBaseFull+ "icon-tg.svg"}/>
                             <div className="TotalAmountContainer">
                                 <h2>{t("global.RewardsBalance_MocsTokens", {ns: 'global'})}</h2>
                                 <div className="BalanceItemCard TotalAmount">

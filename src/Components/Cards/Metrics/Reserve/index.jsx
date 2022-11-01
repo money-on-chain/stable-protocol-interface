@@ -20,10 +20,10 @@ function Reserve(props) {
     const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500;
-    const totalRISKPROInUSD = convertToken("RISKPRO", "USD", props.totalRISKPRO);
-    const totalRISKPROXInUSD = convertToken("RISKPROX", "USD", props.totalRISKPROX);
+    const totalRISKPROInUSD = convertToken("TC", "USD", props.totalRISKPRO);
+    const totalRISKPROXInUSD = convertToken("TX", "USD", props.totalRISKPROX);
     const totalUSD = totalRISKPROInUSD ? totalRISKPROInUSD?.plus(totalRISKPROXInUSD?.plus(props.totalSTABLE)) : 0;
-    const totalRBTC = convertToken("STABLE", "RESERVE", totalUSD);
+    const totalRBTC = convertToken("TP", "RESERVE", totalUSD);
 
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke)

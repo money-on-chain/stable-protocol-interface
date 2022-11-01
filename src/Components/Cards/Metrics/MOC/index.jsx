@@ -23,7 +23,7 @@ function MOC(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={auth.urlBaseFull+"icon-moc.svg" }
+                    src={auth.urlBaseFull+"icon-tg.svg" }
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.metrics.Moc.title`, { ns: ns })}

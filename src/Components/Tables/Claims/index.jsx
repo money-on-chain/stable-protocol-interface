@@ -191,7 +191,7 @@ export default function Claims(props) {
 
         });
         data_row_coins2.forEach((element, index) => {
-            const asset = [{ 'image': 'icon-moc.svg', 'color': '', 'txt': 'CLAIM' }]
+            const asset = [{ 'image': 'icon-tg.svg', 'color': '', 'txt': 'CLAIM' }]
             data_row_coins2[index].detail.asset = 'MOC'
 
             data.push({
