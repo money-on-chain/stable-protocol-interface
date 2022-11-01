@@ -51,12 +51,13 @@ export default function Mint(props) {
             }
     }, [auth]);
 
-    const data_row_coins = [];
+    //const data_row_coins = [];
 
     const mocState = auth.contractStatusData;
     const inrateToSettlement = mocState && getInrateToSettlement(mocState);
     const formatDecimalRatioAsPercent = amount => (Number.isNaN(amount) ? 0 : amount * 100);
 
+    /*
     data_row_coins.push({
         key: 0,
         info: '',
@@ -77,6 +78,7 @@ export default function Mint(props) {
         date: '2022-04-18 18:23',
         status: { txt: 'Confirmed', percent: 100 },
     });
+    */
 
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
     const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
@@ -150,14 +152,6 @@ export default function Mint(props) {
                     </Row>
                 </Col>
                 <Col xs={24} xl={14}>
-                    {/* <MintCard
-                        token={'RISKPROX'}
-                        AccountData={auth.accountData}
-                        UserBalanceData={auth.userBalanceData}
-                        StatusData={auth.contractStatusData}
-                        currencyOptions={['RESERVE', 'RISKPROX']}
-                        color="#ed1c24"
-                    /> */}
                     <MintOrRedeemToken
                         token={'TX'}
                         AccountData={auth.accountData}
