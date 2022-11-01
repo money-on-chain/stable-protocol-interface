@@ -33,7 +33,7 @@ function MocAmount() {
                     {!loading ? <>
                         <div className="title">
                             <h1>{t("global.RewardsBalance_MocAmount", {ns: 'global'})}</h1>
-                            <InformationModal currencyCode={'MOC'}/>
+                            <InformationModal currencyCode={'TG'}/>
                         </div>
                         <div className="LogoAndAmount">
                             <img className="MocLogo" srcSet={auth.urlBaseFull+ "icon-tg.svg"}/>
@@ -42,7 +42,7 @@ function MocAmount() {
                                 <div className="BalanceItemCard TotalAmount">
                                     <h4>
                                         <BalanceItemCard theme="TotalAmount" amount={set_moc_balance_usd()}
-                                                         currencyCode="MOC"/>
+                                                         currencyCode="TG"/>
                                     </h4>
                                 </div>
                             </div>

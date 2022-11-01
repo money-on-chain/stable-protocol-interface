@@ -26,7 +26,7 @@ const getColumns = (renderActionsFunction, t) => [
         dataIndex: "amount",
         key: "amount",
         render: amount => (
-            <><LargeNumber className="WithdrawalAmount" amount={amount} currencyCode="MOC" /> MOC</>
+            <><LargeNumber className="WithdrawalAmount" amount={amount} currencyCode="TG" /> MOC</>
         )
     },
     {
@@ -204,7 +204,7 @@ export default function RewardsStakingOptions(props) {
                                         // onCurrencySelect={onChangeCurrencyYouExchange}
                                         inputValueInWei={stakingAmountInputValue}
                                         onInputValueChange={onStakingInputValueChange}
-                                        currencyOptions={['MOC']}
+                                        currencyOptions={['TG']}
                                         // onValidationStatusChange={onYouExchangeValidityChange}
                                         onValidationStatusChange={() => {
                                         }}
@@ -278,7 +278,7 @@ export default function RewardsStakingOptions(props) {
                                     // onCurrencySelect={onChangeCurrencyYouExchange}
                                     inputValueInWei={unstakingAmountInputValue}
                                     onInputValueChange={onUnstakingInputValueChange /*() => setUnstakingAmountInputValue(stackedBalance)*/}
-                                    currencyOptions={['MOC']}
+                                    currencyOptions={['TG']}
                                     // onValidationStatusChange={onYouExchangeValidityChange}
                                     onValidationStatusChange={() => {
                                     }}
