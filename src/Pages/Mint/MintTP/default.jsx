@@ -56,7 +56,7 @@ export default function Mint(props) {
                 </Col>
             </Row>
             <div className="Card WalletOperations">
-                <ListOperations token={'STABLE'}></ListOperations>
+                <ListOperations token={'TP'}></ListOperations>
             </div>
         </Fragment>
     );

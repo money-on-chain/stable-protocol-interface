@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import api from '../../../services/api';
 import Moment from 'react-moment';
 import { useState } from 'react'
-import {readJsonTable, setNumber, myParseDate, getDatasMetrics} from '../../../Helpers/helper'
+import {readJsonTable, setNumber, myParseDate, getDatasMetrics, TokenNameNewToOld, TokenNameOldToNew} from '../../../Helpers/helper'
 import {config} from '../../../Config/config';
 import Copy from "../../Page/Copy";
 import { useTranslation } from "react-i18next";
@@ -21,6 +21,7 @@ import RowColumn from "../RowDetail/RowColumn";
 
 export default function ListOperations(props) {
     const { token } = props;
+
     const [current, setCurrent] = useState(1);
     const [bordered, setBordered] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -42,7 +43,7 @@ export default function ListOperations(props) {
     const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
-    const [currencyCode, setCurrencyCode]=  useState('MOC');
+    const [currencyCode, setCurrencyCode]=  useState('TG');
     const [dataJson, setDataJson]=  useState([]);
     const [callTable, setCallTable]=  useState(false);
     const [totalTable, setTotalTable]=  useState(0);
@@ -55,7 +56,6 @@ export default function ListOperations(props) {
     const [statusHidden, setStatusHidden] = useState(false);
     const [statusLabelHidden, setStatusLabelHidden] = useState(false);
 
-
     const [loadingSke, setLoadingSke] = useState(true);
     const timeSke= 1500
 
@@ -65,9 +65,19 @@ export default function ListOperations(props) {
 
     window["renderTable"] = function() {transactionsList(1)}
 
-        const transactionsList= (skip,call_table) => {
+    const transactionsList = (skip, call_table) => {
         if(auth.isLoggedIn){
-            const datas= (token!='all')?{address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10),token:token} : {address: accountData.Owner,limit:20,skip:(((skip-1)+(skip-1))*10)}
+            const datas= (token != 'all') ?
+                {
+                    address: accountData.Owner,
+                    limit:20,
+                    skip:(((skip-1)+(skip-1))*10),
+                    token: TokenNameNewToOld(token)
+                } : {
+                    address: accountData.Owner,
+                    limit:20,
+                    skip:(((skip-1)+(skip-1))*10)
+                }
             setTimeout(() => {
                 try {
                     api('get', `${config.environment.api.operations}`+'webapp/transactions/list/', datas)
@@ -218,7 +228,7 @@ export default function ListOperations(props) {
         var pre_datas = [];
         if(dataJson.transactions!==undefined){
             pre_datas= dataJson.transactions.filter(data_j => {
-                return (token !== 'all') ? data_j.tokenInvolved === token : true;
+                return (token !== 'all') ? TokenNameOldToNew(data_j.tokenInvolved) === token : true;
             });
         }
         /*******************************end filter by type (token)***********************************/
@@ -258,7 +268,7 @@ export default function ListOperations(props) {
                 info: '',
                 event: datas_response['address'] === config.transfer[0].address ? config.transfer[0].title : datas_response['set_event'],
                 asset: datas_response['set_asset'],
-                platform: datas_response['paltform_detail'],
+                platform: datas_response['platform_detail'],
                 wallet: datas_response['wallet_value_main'],
                 date: datas_response['lastUpdatedAt'],
                 status: { txt: datas_response['set_status_txt'], percent: datas_response['set_status_percent'] },
@@ -270,15 +280,15 @@ export default function ListOperations(props) {
             const asset = [];
 
             switch (element.asset) {
-                case 'STABLE':
+                case 'TP':
                     asset.push({ 'image': 'icon-tp.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TP_code`, { ns: ns });
                     break;
-                case 'RISKPRO':
+                case 'TC':
                     asset.push({ 'image': 'icon-tc.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TC_code`, { ns: ns });
                     break;
-                case 'RISKPROX':
+                case 'TX':
                     asset.push({ 'image': 'icon-tx.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TX_code`, { ns: ns });
                     break;

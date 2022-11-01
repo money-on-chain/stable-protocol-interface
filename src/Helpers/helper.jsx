@@ -77,6 +77,65 @@ export function getDatasMetrics(auth,i18n=null){
     }
 }
 
+export function TokenNameOldToNew(tokenName){
+    let token = ''
+    switch (tokenName) {
+        case 'STABLE':
+            token = 'TP';
+            break;
+        case 'RISKPRO':
+            token = 'TC'
+            break;
+        case 'RISKPROX':
+            token = 'TX'
+            break;
+        case 'MOC':
+            token = 'TG'
+            break;
+        case 'TP':
+            token = 'TP'
+            break;
+        case 'TC':
+            token = 'TC'
+            break;
+        case 'TX':
+            token = 'TX'
+            break;
+        case 'TG':
+            token = 'TG'
+            break;
+        default:
+            throw new Error('Invalid token name');
+    }
+
+    return token
+}
+
+export function TokenNameNewToOld(tokenName){
+    let token = ''
+    switch (tokenName) {
+        case 'TP':
+            token = 'STABLE';
+            break;
+        case 'TC':
+            token = 'RISKPRO'
+            break;
+        case 'TX':
+            token = 'RISKPROX'
+            break;
+        case 'TG':
+            token = 'MOC'
+            break;
+        case 'all':
+            token = 'all'
+            break;
+        default:
+            throw new Error('Invalid token name');
+    }
+
+    return token
+}
+
 
 
 export function readJsonTable(data_j,t, i18n){
@@ -86,109 +145,15 @@ export function readJsonTable(data_j,t, i18n){
     if(data_j.event.includes("Settlement")){set_event='SETTLEMENT'}
     if(data_j.event.includes("Redeem")){set_event='REDEEM'}
 
-    switch (data_j.tokenInvolved) {
-        case 'STABLE':
-            data_j.tokenInvolved = 'TP';
-            break;
-        case 'RISKPRO':
-            data_j.tokenInvolved = 'TC'
-            break;
-        case 'RISKPROX':
-            data_j.tokenInvolved = 'TX'
-            break;
-        default:
-            data_j.tokenInvolved = 'TP'
-            break;
-    }
-
+    data_j.tokenInvolved = TokenNameOldToNew(data_j.tokenInvolved)
     const set_asset = data_j.tokenInvolved;
-
-    /*
-    let fixed=2
-    if( set_asset!='STABLE' && set_asset!='USD'){
-        fixed= 6
-    }*/
-
-
-    /*
-    let asset=''
-    switch (set_asset) {
-        case 'STABLE':
-            asset = 'DOC';
-            break;
-        case 'RISKPRO':
-            asset = 'BPRO'
-            break;
-        case 'RISKPROX':
-            asset = 'BTCX'
-            break;
-        default:
-            asset = 'DOC'
-            break;
-    }
-    */
-    /*
-    let asset_detail=''
-    let asset_detail_fixed= 6
-    switch (asset) {
-        case 'BPRO':
-            if(data_j.event.includes("Redeem")){
-                asset_detail= 'RBTC'
-            }
-            if(data_j.event.includes("Settlement")){
-                asset_detail= 'BPRO'
-            }
-            if(data_j.event.includes("Mint")){
-                asset_detail= 'BPRO'
-            }
-            if(data_j.event.includes("Transfer")){
-                asset_detail= 'BPRO'
-            }
-
-            break;
-        case 'BTCX':
-            if(data_j.event.includes("Redeem")){
-                asset_detail= 'RBTC'
-            }
-            if(data_j.event.includes("Settlement")){
-                asset_detail= 'RBTC'
-            }
-            if(data_j.event.includes("Mint")){
-                asset_detail= 'BTCX'
-            }
-            if(data_j.event.includes("Transfer")){
-                asset_detail= 'BTCX'
-            }
-            break;
-        case 'DOC':
-            if(data_j.event.includes("Redeem")){
-                asset_detail= 'RBTC'
-            }
-            if(data_j.event.includes("Settlement")){
-                asset_detail= 'DOC'
-                asset_detail_fixed= 2
-            }
-            if(data_j.event.includes("Mint")){
-                asset_detail= 'DOC'
-                asset_detail_fixed= 2
-            }
-            if(data_j.event.includes("Transfer")){
-                asset_detail= 'DOC'
-                asset_detail_fixed= 2
-            }
-            break;
-        default:
-            asset_detail= 'DOC'
-            break;
-    }
-    */
 
     const set_status_txt= data_j.status;
     const set_status_percent= data_j.confirmingPercent;
 
     const wallet_detail= (data_j.userAmount!==undefined)? parseFloat(data_j.userAmount).toFixed(6)  : '--'
     const wallet_detail_usd= (wallet_detail * config.coin_usd).toFixed(2)
-    const paltform_detail= DetailedLargeNumber({
+    const platform_detail= DetailedLargeNumber({
         amount: data_j.amount,
         currencyCode: data_j.tokenInvolved,
         includeCurrency: true,
@@ -199,7 +164,7 @@ export function readJsonTable(data_j,t, i18n){
         t: t,
         i18n:i18n
     })
-    const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
+    const platform_detail_usd= (platform_detail * config.coin_usd).toFixed(2)
     const truncate_address= (data_j.address)? data_j.address.substring(0, 6) + '...' + data_j.address.substring(data_j.address.length - 4, data_j.address.length) : '--'
     const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
 
@@ -326,8 +291,8 @@ export function readJsonTable(data_j,t, i18n){
         set_status_percent:set_status_percent,
         wallet_detail:wallet_detail,
         wallet_detail_usd:wallet_detail_usd,
-        paltform_detail_usd:paltform_detail_usd,
-        paltform_detail:paltform_detail,
+        platform_detail_usd:platform_detail_usd,
+        platform_detail:platform_detail,
         truncate_address:truncate_address,
         truncate_txhash:truncate_txhash,
         lastUpdatedAt:lastUpdatedAt,
@@ -468,7 +433,7 @@ export function readJsonClaims(data_j,t, i18n){
     const set_asset= 'CLAIM';
     const mocs= DetailedLargeNumber({
         amount: data_j.mocs,
-        currencyCode: 'MOC',
+        currencyCode: 'TG',
         includeCurrency: true,
         // isPositive: data_j.event == 'RiskProxRedeem' ? false : true,
         isPositive: true,
