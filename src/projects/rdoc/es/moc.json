@@ -719,7 +719,7 @@
     },
     "tokenInformationTooltip": "Información acerca de",
     "TokenInformationContent": {
-      "STABLE": {
+      "TP": {
         "factSheet": "RDOC Fact Sheet ",
         "title": "El RIF Dollar (RDOC) es una moneda estable con RIF de colateral que sigue 1:1 el valor del dólar estadounidense. Sus principales características son:",
         "characteristics": {
@@ -733,7 +733,7 @@
           ]
         }
       },
-      "RISKPRO": {
+      "TC": {
         "factSheet": "RIFP Fact Sheet",
         "title": "El Token RIFpro (RIFP) sigue la volatilidad del RIF y añade la combinación de un ingreso pasivo y apalancamiento gratuito. Es un Token adecuado para HODLers propensos al riesgo medio y el perfecto balance entre beneficios y riesgo.",
         "characteristics": {
@@ -747,7 +747,7 @@
           ]
         }
       },
-      "RISKPROX": {
+      "TX": {
         "factSheet": "RIFX Fact Sheet",
         "title": "El RIFX es un apalancamiento LONG descentralizado sobre el precio del RIF sin riesgo de contraparte. Si no has entendido la línea superior, este Token no es para tí y posiblemente perderás tus fondos al proceder con la operación sin haber adquirido el conocimiento suficiente respecto a trading. Por favor dirígete a https://rifonchain.com/es/ o a nuestra Wiki para aprender más acerca de RIFX.",
         "characteristics": {
@@ -764,7 +764,7 @@
           ]
         }
       },
-      "MOC": {
+      "TG": {
         "factSheet": "MoC Fact Sheet",
         "title": "Para funcionar como un protocolo descentralizado, Money On Chain tiene su propio token para gobernar la plataforma. Se llama MoC (por Money On Chain) token.",
         "characteristics": {

@@ -715,7 +715,7 @@
     },
     "tokenInformationTooltip": "Información acerca de ",
     "TokenInformationContent": {
-      "STABLE": {
+      "TP": {
         "factSheet": "DoC Fact Sheet",
         "title": "Dollar on Chain (DoC) es una moneda estable con rBTC de colateral que sigue 1:1 el valor del dólar estadounidense. Sus principales características son:",
         "characteristics": {
@@ -729,7 +729,7 @@
           ]
         }
       },
-      "RISKPRO": {
+      "TC": {
         "factSheet": "BPro Fact Sheet",
         "title": "El token BPro mantiene la volatilidad del bitcoin y añade la combinación de un ingreso pasivo y apalancamiento gratuito. Es un token adecuado para HODLers propensos al riesgo medio y el perfecto balance entre beneficios y riesgo.:",
         "characteristics": {
@@ -744,7 +744,7 @@
           ]
         }
       },
-      "RISKPROX": {
+      "TX": {
         "factSheet": "BTCx Fact Sheet",
         "title": "El BTCx es un apalancamiento LONG descentralizado sobre el precio del bitcoin sin riesgo de contraparte.<br><br>Si no has entendido la línea superior, este token no es para tí y posiblemente perderás tus fondos al proceder con la operación sin haber adquirido el conocimiento suficiente respecto a \"trading\". Por favor dirígete a <a href=\"https://moneyonchain.com/btcx-long-leveraged-bitcoin/\" target=\"_blank\">https://moneyonchain.com/btcx-long-leveraged-bitcoin/</a> o a nuestra Wiki para aprender más acerca de BTCx.\n",
         "characteristics": {
@@ -759,7 +759,7 @@
           ]
         }
       },
-      "MOC": {
+      "TG": {
         "factSheet": "MoC Fact Sheet",
         "title": "Para funcionar como un protocolo descentralizado, Money On Chain tiene su propio token para gobernar la plataforma. Se llama MoC (por Money On Chain) token.",
         "characteristics": {

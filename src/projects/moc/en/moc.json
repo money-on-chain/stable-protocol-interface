@@ -170,19 +170,19 @@
       "subtitle": "Your current active wallet holdings",
       "receiverAddress": "Receiver address or domain",
       "ownAddressLabel": "Your address",
-      "RISKPRO": {
+      "TC": {
         "title": "BPro",
         "subtitle": "Manage your BPros"
       },
-      "RISKPROX": {
+      "TX": {
         "title": "BTCx",
         "subtitle": "Manage your BTCxs Position"
       },
-      "STABLE": {
+      "TP": {
         "title": "DoC",
         "subtitle": "Manage your DoCs"
       },
-      "MOC": {
+      "TG": {
         "title": "MoC",
         "subtitle": "Manage your MoCs"
       }
@@ -709,7 +709,7 @@
     },
     "tokenInformationTooltip": "Get information about ",
     "TokenInformationContent": {
-      "STABLE": {
+      "TP": {
         "factSheet": "DoC Fact Sheet",
         "title": "Dollar on Chain (DoC) is a stablecoin with a 1:1 peg to the US Dollar with rBTC collateral and its main features are:",
         "characteristics": {
@@ -723,7 +723,7 @@
           ]
         }
       },
-      "RISKPRO": {
+      "TC": {
         "factSheet": "BPro Fact Sheet",
         "title": "The BPro token maintains the bitcoin´s volatility and adds the combination of receiving a passive income and free leverage. This is a token suitable for medium risk-propense hodlers and the perfect balance between profit and risk.",
         "characteristics": {
@@ -738,7 +738,7 @@
           ]
         }
       },
-      "RISKPROX": {
+      "TX": {
         "factSheet": "BTCx Fact Sheet",
         "title": "The BTCx is a leveraged decentralized LONG position on the price of bitcoin with no counterparty risk. <br><br>If you did not understand the line above this token is not for you and you are very likely to lose your funds if you buy it without the proper trading knowledge. Please go to <a href=\"https://moneyonchain.com/btcx-long-leveraged-bitcoin/\" target=\"_blank\">https://moneyonchain.com/btcx-long-leveraged-bitcoin/</a> to learn more about it.  ",
         "characteristics": {
@@ -755,7 +755,7 @@
           ]
         }
       },
-      "MOC": {
+      "TG": {
         "factSheet": "MoC Fact Sheet",
         "title": "In order to work as a decentralized protocol, Money On Chain has its own token to govern the platform. This token is called MoC (for Money On Chain) Token.",
         "characteristics": {

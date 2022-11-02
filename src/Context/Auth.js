@@ -234,7 +234,7 @@ const AuthenticateProvider = ({ children }) => {
                     }
                 }
             },
-            RISKPRO: {
+            TC: {
                 RESERVE: {
                     APP_MODE_MoC: {
                         exchangeFunction: interfaceRedeemTC
@@ -255,7 +255,7 @@ const AuthenticateProvider = ({ children }) => {
                 }
             },
             RESERVE: {
-                RISKPRO: {
+                TC: {
                     APP_MODE_MoC: {
                         exchangeFunction: interfaceMintTC
                     },
