@@ -194,22 +194,22 @@
 .PieChart{
   .piePiece{
       &.STABLE-MoC {
-          fill: $color-moc-stable;
+          fill: $color-moc-tp;
       }
       &.STABLE-RDoC & {
-        fill: $color-roc-stable;
+        fill: $color-roc-tp;
       }
       &.RISKPRO-MoC {
-          fill: $color-moc-riskpro;
+          fill: $color-moc-tc;
       }
       &.RISKPRO-RDoC & {
-        fill: $color-roc-riskpro;
+        fill: $color-roc-tc;
       }
       &.RISKPROX-MoC {
-        fill: $color-moc-riskprox;
+        fill: $color-moc-tx;
       }
       &.RISKPROX-RDoC & {
-        fill: $color-roc-riskprox;
+        fill: $color-roc-tx;
     }
       &.MOC {
           fill: $color-moc;
@@ -240,27 +240,27 @@
       text-align: center;
       @include primary-text(1em, white, 400);
       .STABLE-MoC {
-        color: $color-moc-stable;
+        color: $color-moc-tp;
         font-weight: 700;
       }
       .STABLE-RDoC & {
-        color: $color-roc-stable;
+        color: $color-roc-tp;
         font-weight: 700;
       }
       .RISKPRO-MoC {
-        color: $color-moc-riskpro;
+        color: $color-moc-tc;
         font-weight: 700;
       }
       .RISKPRO-RDoC & {
-        color: $color-roc-riskpro;
+        color: $color-roc-tc;
         font-weight: 700;
       }
       .RISKPROX {
-        color: $color-moc-riskprox;
+        color: $color-moc-tx;
         font-weight: 700;
       }
       .RISKPROX-RDoC & {
-        color: $color-roc-riskprox;
+        color: $color-roc-tx;
         font-weight: 700;
       }
       .MOC {

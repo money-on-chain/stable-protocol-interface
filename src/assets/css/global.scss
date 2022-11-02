@@ -54,34 +54,34 @@ a {
   font-size: 20px;
   font-weight: 600;
   &.MoC-stable {
-    color: $color-moc-stable;
+    color: $color-moc-tp;
   }
   &.MoC-riskpro {
-    color: $color-moc-riskpro;
+    color: $color-moc-tc;
   }
   &.MoC-riskprox {
-    color: $color-moc-riskprox;
+    color: $color-moc-tx;
   }
   &.RDoC-stable {
-    color: $color-roc-stable;
+    color: $color-roc-tp;
   }
   &.RDoC-riskpro {
-    color: $color-roc-riskpro;
+    color: $color-roc-tc;
   }
   &.RDoC-riskprox {
-    color: $color-roc-riskprox;
+    color: $color-roc-tx;
   }
   &.RDoC-RISKPRO {
-    color: $color-roc-riskpro;
+    color: $color-roc-tc;
   }
   &.RDoC-STABLE {
-    color: $color-roc-stable;
+    color: $color-roc-tp;
   }
   &.RRC20-STABLE {
-    color: $color-roc-stable;
+    color: $color-roc-tp;
   }
   &.RRC20-RISKPROX {
-    color: $color-roc-riskprox;
+    color: $color-roc-tx;
   }
   //RISKPRO-RDoC
   &.Few {
@@ -92,25 +92,25 @@ a {
 }
 
 .MoC-stable {
-  color: $color-moc-stable;
+  color: $color-moc-tp;
 }
 .MoC-riskpro {
-  color: $color-moc-riskpro;
+  color: $color-moc-tc;
 }
 .MoC-riskprox {
-  color: $color-moc-riskprox;
+  color: $color-moc-tx;
 }
 .RRC20-stable {
-  color: $color-roc-stable;
+  color: $color-roc-tp;
 }
 .RRC20-riskpro {
-  color: $color-roc-riskpro;
+  color: $color-roc-tc;
 }
 .RRC20-riskprox {
-  color: $color-roc-riskprox;
+  color: $color-roc-tx;
 }
 .RRC20-RISKPRO {
-  color: $color-roc-riskpro;
+  color: $color-roc-tc;
 }
 .Few {
   font-size: 15px;

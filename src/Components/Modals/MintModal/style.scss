@@ -28,21 +28,21 @@
     .Value {
       @include primary-text(1.2em, black, 600);
       &.STABLE {
-        color: $color-moc-stable;
+        color: $color-moc-tp;
         &.RDoC {
-          color: $color-roc-stable;
+          color: $color-roc-tp;
         }
       }
       &.RISKPROX {
-        color: $color-moc-riskprox;
+        color: $color-moc-tx;
         &.RDoC {
-          color: $color-roc-riskprox;
+          color: $color-roc-tx;
         }
       }
       &.RISKPRO {
-        color: $color-moc-riskpro;
+        color: $color-moc-tc;
         &.RDoC {
-          color: $color-roc-riskpro;
+          color: $color-roc-tc;
         }
       }
     }
