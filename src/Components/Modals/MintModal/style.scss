@@ -27,19 +27,19 @@
     }
     .Value {
       @include primary-text(1.2em, black, 600);
-      &.STABLE {
+      &.TP {
         color: $color-moc-tp;
         &.RDoC {
           color: $color-roc-tp;
         }
       }
-      &.RISKPROX {
+      &.TX {
         color: $color-moc-tx;
         &.RDoC {
           color: $color-roc-tx;
         }
       }
-      &.RISKPRO {
+      &.TC {
         color: $color-moc-tc;
         &.RDoC {
           color: $color-roc-tc;

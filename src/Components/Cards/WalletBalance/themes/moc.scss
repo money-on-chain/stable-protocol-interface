@@ -151,15 +151,15 @@
   .value-1 {
     margin-bottom: 0;
   }
-  .STABLE {
+  .TP {
     color: #00a651;
     margin-bottom: 0;
   }
-  .RISKPRO {
+  .TC {
     color: #ef8a13;
     margin-bottom: 0;
   }
-  .RISKPROX {
+  .TX {
     color: #00C49F;
     margin-bottom: 0;
   }
@@ -193,22 +193,22 @@
 
 .PieChart{
   .piePiece{
-      &.STABLE-MoC {
+      &.TP-MoC {
           fill: $color-moc-tp;
       }
-      &.STABLE-RDoC & {
+      &.TP-RDoC & {
         fill: $color-roc-tp;
       }
-      &.RISKPRO-MoC {
+      &.TC-MoC {
           fill: $color-moc-tc;
       }
-      &.RISKPRO-RDoC & {
+      &.TC-RDoC & {
         fill: $color-roc-tc;
       }
-      &.RISKPROX-MoC {
+      &.TX-MoC {
         fill: $color-moc-tx;
       }
-      &.RISKPROX-RDoC & {
+      &.TX-RDoC & {
         fill: $color-roc-tx;
     }
       &.MOC {
@@ -243,23 +243,23 @@
         color: $color-moc-tp;
         font-weight: 700;
       }
-      .STABLE-RDoC & {
+      .TP-RDoC & {
         color: $color-roc-tp;
         font-weight: 700;
       }
-      .RISKPRO-MoC {
+      .TC-MoC {
         color: $color-moc-tc;
         font-weight: 700;
       }
-      .RISKPRO-RDoC & {
+      .TC-RDoC & {
         color: $color-roc-tc;
         font-weight: 700;
       }
-      .RISKPROX {
+      .TX {
         color: $color-moc-tx;
         font-weight: 700;
       }
-      .RISKPROX-RDoC & {
+      .TX-RDoC & {
         color: $color-roc-tx;
         font-weight: 700;
       }
