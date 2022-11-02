@@ -289,19 +289,19 @@ export default function ListOperations(props) {
 
             switch (element.asset) {
                 case 'TP':
-                    asset.push({ 'image': 'icon-tp.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
+                    asset.push({ 'image': 'icon-tp.svg', 'color': 'color-token-tp', 'txt': 'DOC' });
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TP_code`, { ns: ns });
                     break;
                 case 'TC':
-                    asset.push({ 'image': 'icon-tc.svg', 'color': 'color-token-riskpro', 'txt': 'BPRO' });
+                    asset.push({ 'image': 'icon-tc.svg', 'color': 'color-token-tc', 'txt': 'BPRO' });
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TC_code`, { ns: ns });
                     break;
                 case 'TX':
-                    asset.push({ 'image': 'icon-tx.svg', 'color': 'color-token-riskprox', 'txt': 'BTCX' });
+                    asset.push({ 'image': 'icon-tx.svg', 'color': 'color-token-tx', 'txt': 'BTCX' });
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TX_code`, { ns: ns });
                     break;
                 default:
-                    asset.push({ 'image': 'icon-tp.svg', 'color': 'color-token-stable', 'txt': 'DOC' });
+                    asset.push({ 'image': 'icon-tp.svg', 'color': 'color-token-tp', 'txt': 'DOC' });
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TP_code`, { ns: ns });
                     break;
             }

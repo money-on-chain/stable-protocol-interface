@@ -8,10 +8,10 @@ import Web3 from 'web3';
 import { config } from './../../../Config/config';
 import {getDecimals} from "../../../Helpers/helper";
 import {
-    userDocBalance,
-    userBproBalance,
-    userBtcxBalance,
-    userMocBalance,
+    userTPBalance,
+    userTCBalance,
+    userTXBalance,
+    userTGBalance,
     userCollateralBalance
     } from "../../../Helpers/balances";
 
@@ -70,10 +70,10 @@ function WalletBalancePie(props) {
     const getUserBalances = () => {
 
         const userBalances = {}
-        userBalances['doc'] = userDocBalance(auth);
-        userBalances['bpro'] = userBproBalance(auth);
-        userBalances['moc'] = userMocBalance(auth);
-        userBalances['btcx'] = userBtcxBalance(auth);
+        userBalances['doc'] = userTPBalance(auth);
+        userBalances['bpro'] = userTCBalance(auth);
+        userBalances['moc'] = userTGBalance(auth);
+        userBalances['btcx'] = userTXBalance(auth);
         userBalances['collateral'] = userCollateralBalance(auth);
 
         return userBalances;
