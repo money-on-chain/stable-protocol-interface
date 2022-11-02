@@ -93,19 +93,19 @@ export default function Skeleton() {
                         key="mint-stable"
                         onClick={() => navigate('/wallet/stable')}
                         icon={<p className={`set-icon-tp-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu == 'mint-stable' ? "active" : ""}`}></p>}
-                    >{t(`${AppProject}.menu-sidebar.STABLEWallet`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.TPWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-pro"
                         onClick={() => navigate('/wallet/pro')}
                         icon={<p className={`set-icon-tc-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu == 'mint-pro' ? "active" : ""}`}></p>}
-                    >{t(`${AppProject}.menu-sidebar.RISKPROWallet`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.TCWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-leveraged"
                         onClick={() => navigate('/wallet/leveraged')}
                         icon={<p className={`set-icon-tx-${process.env.REACT_APP_ENVIRONMENT_APP_PROJECT} ${selectedMenu == 'mint-leveraged' ? "active" : ""}`}></p>}
-                    >{t(`${AppProject}.menu-sidebar.RISKPROXWallet`, { ns: ns })}
+                    >{t(`${AppProject}.menu-sidebar.TXWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="rewards"
@@ -172,21 +172,21 @@ export default function Skeleton() {
                             onClick={() => navigate('/wallet/stable')}
                             icon={<span className="icon-icon-stable"></span>}
                         >
-                            {t(`${AppProject}.menu-drawer.STABLEWallet`, { ns: ns })}
+                            {t(`${AppProject}.menu-drawer.TPWallet`, { ns: ns })}
                         </Menu.Item>
                         <Menu.Item
                             key="mint-pro"
                             onClick={() => navigate('/wallet/pro')}
                             icon={<span className="icon-icon-tc"></span>}
                         >
-                            {t(`${AppProject}.menu-drawer.RISKPROWallet`, { ns: ns })}
+                            {t(`${AppProject}.menu-drawer.TCWallet`, { ns: ns })}
                         </Menu.Item>
                         <Menu.Item
                             key="mint-leveraged"
                             onClick={() => navigate('/wallet/leveraged')}
                             icon={<span className="icon-icon-tx"></span>}
                         >
-                            {t(`${AppProject}.menu-drawer.RISKPROXWallet`, { ns: ns })}
+                            {t(`${AppProject}.menu-drawer.TXWallet`, { ns: ns })}
                         </Menu.Item>
                         <Menu.Item
                             key="rewards"

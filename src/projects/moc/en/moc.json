@@ -135,9 +135,9 @@
       "faqs": "Help Center",
       "rewards": "MoC Tokens",
       "language": "Language",
-      "RISKPROWallet": "BPro Token",
-      "RISKPROXWallet": "BTCx Position",
-      "STABLEWallet": "DoC Token",
+      "TCWallet": "BPro Token",
+      "TXWallet": "BTCx Position",
+      "TPWallet": "DoC Token",
       "getRBTC": "Convert BTC to RBTC",
       "wiki-url": "https://wiki.moneyonchain.com/",
       "repository-url": "https://github.com/money-on-chain/main-RBTC-contract"
@@ -154,10 +154,10 @@
       "faqs": "Help Center",
       "rewards": "MoC",
       "language": "Language",
-      "RISKPROWallet": "BPro",
-      "RISKPROXWallet": "BTCx",
+      "TCWallet": "BPro",
+      "TXWallet": "BTCx",
       "Metrics": "Metrics",
-      "STABLEWallet": "DoC",
+      "TPWallet": "DoC",
       "getRBTC": "BTC to RBTC"
     },
     "drawer-allowance": {

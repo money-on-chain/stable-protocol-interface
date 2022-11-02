@@ -108,7 +108,7 @@ export default function Mint(props) {
                     <Row>
                         <Col span={24}   style={{minHeight:'163px'}}>
                             <div className="Card MintCard CardSettlement"  style={{minHeight:'100%'}}>
-                                <h3 className="CardTitle">{t('global.riskproxWallet_NextSettlement', { ns: 'global' })}</h3>
+                                <h3 className="CardTitle">{t('global.txWallet_NextSettlement', { ns: 'global' })}</h3>
                                 {auth.isLoggedIn &&
                                     <>{!loading ?
                                         <Row>
@@ -137,7 +137,7 @@ export default function Mint(props) {
                                 <div>
                                     <span>{getBtcx['x2Leverage']}</span>
                                 </div>
-                                <h3 className="CardTitle">{t('global.riskproxWallet_CurrentRate', { ns: 'global' })}</h3>
+                                <h3 className="CardTitle">{t('global.txWallet_CurrentRate', { ns: 'global' })}</h3>
                                 <div>
                                     {/*<span>0.027379</span>*/}
                                     <LargeNumber

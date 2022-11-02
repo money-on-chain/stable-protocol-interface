@@ -140,9 +140,9 @@
       "faqs": "Help Center",
       "rewards": "MoC Tokens",
       "language": "Language",
-      "RISKPROWallet":"RIFP Tokens",
-      "RISKPROXWallet":"RIFX Positions",
-      "STABLEWallet":"RDOC Tokens",
+      "TCWallet":"RIFP Tokens",
+      "TXWallet":"RIFX Positions",
+      "TPWallet":"RDOC Tokens",
       "getRBTC":"BTC Peg in / Peg out",
       "wiki-url": "https://wiki.rifonchain.com/",
       "repository-url": "https://github.com/money-on-chain/RDOC-Contract"
@@ -159,9 +159,9 @@
       "faqs": "Help Center",
       "rewards": "MoC Tokens",
       "language": "Language",
-      "RISKPROWallet":"RIFpro",
-      "RISKPROXWallet":"RIFX",
-      "STABLEWallet":"RDOC",
+      "TCWallet":"RIFpro",
+      "TXWallet":"RIFX",
+      "TPWallet":"RDOC",
       "getRBTC":"BTC Peg in / Peg out"
     },
     "drawer-allowance": {
