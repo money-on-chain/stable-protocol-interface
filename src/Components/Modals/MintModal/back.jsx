@@ -3,7 +3,7 @@
 import { Button, Collapse, Slider } from 'antd';
 //import { SettingFilled } from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
-import './RDoC/style.scss';
+//import './RDoC/style.scss';
 import React, { useState, useContext, useEffect } from 'react';
 import { Modal, notification } from 'antd';
 
