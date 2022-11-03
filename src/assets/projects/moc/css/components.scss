@@ -872,24 +872,15 @@
 
 .PieChart{
   .piePiece{
-      &.TP-MoC {
+      &.TP {
           fill: $color-moc-tp;
       }
-      &.TP-RDoC & {
-        fill: $color-roc-tp;
-      }
-      &.TC-MoC {
+      &.TC {
           fill: $color-moc-tc;
       }
-      &.TC-RDoC & {
-        fill: $color-roc-tc;
-      }
-      &.TX-MoC {
+      &.TX {
         fill: $color-moc-tx;
       }
-      &.TX-RDoC & {
-        fill: $color-roc-tx;
-    }
       &.MOC {
           fill: $color-moc;
       }
@@ -918,28 +909,20 @@
       padding: 10px;
       text-align: center;
       @include primary-text(1em, white, 400);
-      .STABLE-MoC {
+      .TP {
         color: $color-moc-tp;
         font-weight: 700;
       }
-      .TP-RDoC & {
-        color: $color-roc-tp;
-        font-weight: 700;
-      }
-      .TC-MoC {
+      .TC {
         color: $color-moc-tc;
         font-weight: 700;
       }
-      .TC-RDoC & {
+      .TC & {
         color: $color-roc-tc;
         font-weight: 700;
       }
       .TX {
         color: $color-moc-tx;
-        font-weight: 700;
-      }
-      .TX-RDoC & {
-        color: $color-roc-tx;
         font-weight: 700;
       }
       .MOC {

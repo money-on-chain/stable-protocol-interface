@@ -139,7 +139,7 @@ function Reserve(props) {
                                             paddingAngle={1}
                                             dataKey="reserveValue"
                                         >
-                                            {balancesData.map((entry, index) => <Cell key={index} fill={BalancePieColors[index % BalancePieColors.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`}/>)}
+                                            {balancesData.map((entry, index) => <Cell key={index} fill={BalancePieColors[index % BalancePieColors.length]} className={`piePiece ${entry.currencyCode}`}/>)}
                                         </Pie>
                                         <TooltipRecharts content={<CustomTooltip />} />
                                     </PieChart>

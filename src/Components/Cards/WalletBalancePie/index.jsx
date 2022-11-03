@@ -169,7 +169,7 @@ function WalletBalancePie(props) {
                         {getPie() !== undefined &&
 
                         getPie().map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={BalancePieColors[index % BalancePieColors.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`} />
+                            <Cell key={`cell-${index}`} fill={BalancePieColors[index % BalancePieColors.length]} className={`piePiece ${entry.currencyCode}`} />
                         ))
 
                         }
