@@ -1,0 +1,27 @@
+
+.rlogin-modal-body {
+  border: 4px solid #FFF !important;
+  border-bottom-right-radius: 11px !important;
+  border-bottom-left-radius: 11px !important;
+}
+
+.ant-modal-header{
+  padding: 8px 24px;
+  border-radius: 0 0 0 0 !important;
+  background-color: #FFF !important;
+  border-bottom: none !important;
+}
+
+.ant-modal-close-x {
+  color: rgba(0,0,0,.45) !important;
+  font-size: 18px !important;
+}
+
+.ant-modal-content{
+  border: 4px solid #FFF !important;
+}
+
+.ant-modal-title, .ant-modal-close{
+  color: #707070 !important;
+  text-align: center !important;
+}

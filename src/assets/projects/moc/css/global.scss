@@ -696,101 +696,6 @@ a {
   font-size: 15px;
 }
 
-
-.set-icon-tc{
-  background-image: url("../icons/menu/icon-tc.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-.set-icon-tc:hover,
-.set-icon-tc:focus{
-  background-image: url("../icons/menu/icon-tc2.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-.set-icon-tc.active{
-  background-image: url("../icons/menu/icon-tc2.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-.set-icon-tx{
-  background-image: url("../icons/menu/icon-tc.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-.set-icon-tx:hover,
-.set-icon-tx:focus{
-  background-image: url("../icons/menu/icon-tx2.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-.set-icon-tx.active{
-  background-image: url("../icons/menu/icon-tx2.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-.set-icon-rewards{
-  background-image: url("../icons/menu/icon-tg.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-.set-icon-rewards:hover,
-.set-icon-rewards:focus{
-  background-image: url("../icons/menu/icon-tg2.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-.set-icon-rewards.active{
-  background-image: url("../icons/menu/icon-tg2.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-.set-icon-rbtc{
-  background-image: url("../icons/menu/icon-btc.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-.set-icon-rbtc:hover,
-.set-icon-rbtc-MoC:focus{
-  background-image: url("../icons/menu/icon-btc2.svg");
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
-  background-repeat:no-repeat;
-}
-
-
-
 .set-icon-tp{
   background-image: url("../icons/menu/icon-tp.svg");
   width: 30px;
@@ -842,7 +747,7 @@ a {
 }
 
 .set-icon-tx{
-  background-image: url("../icons/menu/icon-tx.svg");
+  background-image: url("../icons/menu/icon-tc.svg");
   width: 30px;
   height: 30px;
   background-size: 30px 30px;
@@ -891,7 +796,7 @@ a {
   background-repeat:no-repeat;
 }
 
-.set-icon-rbtc{
+.set-icon-rbtc {
   background-image: url("../icons/menu/icon-btc.svg");
   width: 30px;
   height: 30px;

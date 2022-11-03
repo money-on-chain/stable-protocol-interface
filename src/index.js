@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './assets/css/global.scss';
+import './assets/css/components.scss';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
@@ -25,7 +26,7 @@ async function loadTranslations() {
         let global_es= await import('./projects/global-es.json')
         let global_en= await import('./projects/global-en.json')
 
-        let css1= await import('./assets/css/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+        //let css1= await import('./assets/css/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
 
         await i18next.init({
             interpolation: {escapeValue:false},

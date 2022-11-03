@@ -1,0 +1,28 @@
+.Header {
+  background: #05364f;
+  height: 54px;
+  line-height: 54px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  padding-right: 10px;
+
+  .ant-image-img {
+    vertical-align: baseline;
+  }
+}
+
+.MenuCollapseButton {
+  border: none !important;
+  box-shadow: none !important;
+  color: #fff;
+  display: none;
+
+  path {
+    fill: #fff;
+  }
+}
