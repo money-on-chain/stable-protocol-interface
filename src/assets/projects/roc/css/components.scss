@@ -212,29 +212,19 @@
   }
 }
 
-.color-price-STABLE {
+.color-price-TP {
   color: $color-roc-tp;
 }
 
-.color-price-RISKPROX  {
+.color-price-TX  {
   color: $color-roc-tx;
 }
 
-.color-price-RISKPRO {
+.color-price-TC {
   color: $color-roc-tc;
 }
 
 /* AmountCard */
-
-.RDoC-STABLE {
-  color: $color-roc-tp;
-}
-.RDoC-RIKSPRO {
-  color: $color-roc-tc;
-}
-.RDoC-RISKPROX {
-  color: $color-roc-tx;
-}
 
 
 .WalletCurrencyPrice {
@@ -242,13 +232,9 @@
     margin-bottom: 0.8em;
   }
 
+
   h4 {
-    .MoC & {
-      @include primary-text(1em, $secondary-dark-color, 400);
-    }
-    .RDoC & {
-      @include primary-text(1em, $accent-color, 500);
-    }
+
   }
 
   @media (max-width: 500px) {
@@ -850,15 +836,15 @@
   .value-1 {
     margin-bottom: 0;
   }
-  .STABLE {
+  .TP {
     color: #00a651;
     margin-bottom: 0;
   }
-  .RISKPRO {
+  .TC {
     color: #ef8a13;
     margin-bottom: 0;
   }
-  .RISKPROX {
+  .TX {
     color: #00C49F;
     margin-bottom: 0;
   }

@@ -224,12 +224,7 @@
   }
 
   h4 {
-    .MoC & {
-      @include primary-text(1em, $secondary-dark-color, 400);
-    }
-    .RDoC & {
-      @include primary-text(1em, $accent-color, 500);
-    }
+
   }
 
   @media (max-width: 500px) {
@@ -887,9 +882,6 @@
       &.EMPTY {
           fill: $low-grey;
       }
-      &.RDoC {
-        // fill: $color-roc
-      }
   }
   .chart-inner-text {
       position: absolute;
@@ -929,10 +921,7 @@
         color: $color-moc;
         font-weight: 700;
       }
-      .RDoC {
-        // color: $color-roc;
-        font-weight: 700;
-      }
+
   }
 }
 
