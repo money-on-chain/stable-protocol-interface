@@ -58,7 +58,7 @@ ReactDOM.render(
             <AuthenticateProvider>
                 <HashRouter>
                     {/*<React.Suspense fallback={ <span>Loading...</span> }>*/}
-                    <React.Suspense fallback={ <img style={{'position':'fixed','left': '50%','top':'50%','transform':'translateX(-50%) translateY(-50%)'}} width={50} height={50} src={process.env.REACT_APP_PUBLIC_URL+"global/status-pending.png"} alt="ssa" className={'img-status rotate'}/> }>
+                    <React.Suspense fallback={ <img style={{'position':'fixed','left': '50%','top':'50%','transform':'translateX(-50%) translateY(-50%)'}} width={50} height={50} src={process.env.REACT_APP_PUBLIC_URL+"img/status-pending.png"} alt="ssa" className={'img-status rotate'}/> }>
                         <Router />
                     </React.Suspense>
                 </HashRouter>

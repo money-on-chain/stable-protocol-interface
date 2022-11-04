@@ -10,7 +10,7 @@ function AlertLabel(props) {
     const AppProject = config.environment.AppProject;
     return (
         <div className="AlertLabel">
-            <img src={process.env.REACT_APP_PUBLIC_URL+"global/icon-alert.svg"} alt="Alert Icon" />
+            <img src={process.env.REACT_APP_PUBLIC_URL+"img/icon-alert.svg"} alt="Alert Icon" />
             <div className="AlertText">
                 <p>
                     <strong>{t(`${AppProject}.modal-send.beCareful`, {ns: ns})}</strong>
