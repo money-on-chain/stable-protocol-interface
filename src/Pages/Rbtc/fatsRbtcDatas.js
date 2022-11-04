@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, useContext } from 'react';
 //import rLogin from "../../Lib/rLogin";
 //import Web3 from "web3";
-import FastBtcBridge from "../../Contracts/coinbase/FastBtcBridge.json";
+import FastBtcBridge from "../../Contracts/FastBtcBridge.json";
 //import {toNumberFormat} from "../../Helpers/helper";
 import {AuthenticateContext} from "../../Context/Auth";
 import { config } from '../../Config/config';

@@ -1,4 +1,16 @@
-import { baseAbis } from './abis/moc-base';
+import {
+    Multicall2,
+    MoCConnector,
+    MoC,
+    MoCState,
+    MoCExchange,
+    MoCInrate,
+    MoCSettlement,
+    TC,
+    TP,
+    TG,
+    ReserveToken,
+    MoCVendors } from './abis/moc-base';
 import { omocAbis } from './abis/omoc';
 
 import { addABI } from './transaction';
@@ -14,6 +26,7 @@ const readContracts = async (web3, environment) => {
   dContracts.contracts = {}
   dContracts.contractsAddresses = {}
 
+  /*
   const {
     Multicall2,
     MoCConnector,
@@ -27,7 +40,7 @@ const readContracts = async (web3, environment) => {
     TG,
     ReserveToken,
     MoCVendors
-  } = baseAbis(appMode);
+  } = baseAbis(appMode);*/
 
   const abiContracts = {}
 

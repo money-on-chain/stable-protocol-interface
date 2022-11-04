@@ -6,7 +6,7 @@ import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import { AuthenticateContext } from '../../../Context/Auth';
 //import Copy from '../../../Components/Page/Copy';
 //import Web3 from "web3";
-import FastBtcBridge from "../../../Contracts/coinbase/FastBtcBridge.json";
+import FastBtcBridge from "../../../Contracts/FastBtcBridge.json";
 import { toNumberFormat, btcInSatoshis, DYNAMIC_FEE_DIVISOR } from '../../../Helpers/math-helpers';
 import { useTranslation } from "react-i18next";
 import Step2 from "./step2";
