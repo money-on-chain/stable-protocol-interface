@@ -30,7 +30,7 @@ export default function SelectCurrency(props) {
       >
         {optionsFiltered.map((possibleOption) => <Option key={possibleOption.value} value={possibleOption.value}>
           <div className="currencyOption">
-              <img className="currencyImage" src={(auth.urlBase+possibleOption.image.charAt(0)=='.')? auth.urlBase+possibleOption.image.substring(1) : auth.urlBase+possibleOption.image} alt={possibleOption.label} />
+              <img className="currencyImage" src={(process.env.REACT_APP_PUBLIC_URL+possibleOption.image.charAt(0)=='.')? process.env.REACT_APP_PUBLIC_URL+possibleOption.image.substring(1) : process.env.REACT_APP_PUBLIC_URL+possibleOption.image} alt={possibleOption.label} />
             {possibleOption.label}
           </div>
         </Option>)}

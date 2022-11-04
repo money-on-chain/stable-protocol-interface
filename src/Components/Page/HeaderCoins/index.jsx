@@ -80,7 +80,7 @@ function HeaderCoins(props) {
     <>{
       <div className={'mrl-25 div_coin'}>
         {/*<img src={image} alt="arrow" height={38}/>*/}
-        <img src={auth.urlBaseFull+image}  alt="arrow" height={38}/>
+        <img src={process.env.REACT_APP_PUBLIC_URL+image}  alt="arrow" height={38}/>
         <div className={'div_values'}>
           <span className="value_usd1">
             <LargeNumber {...{ amount: getBalanceUSD(), currencyCode: 'USDPrice', includeCurrency: true }} />

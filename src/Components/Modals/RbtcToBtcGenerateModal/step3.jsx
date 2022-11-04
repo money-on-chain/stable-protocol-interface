@@ -209,14 +209,14 @@ export default function Step3(props) {
                         || labelTrx=='Initializing' || labelTrx=='Validating') &&
                         <Fragment>
                             <p style={{'display':'flex','width':'100%'}}>
-                                <img style={{'flexGrow':'0'}} className={'rotate'} src={auth.urlBase+"img/" + imgTrx} alt="" width={28} height={28}/>
+                                <img style={{'flexGrow':'0'}} className={'rotate'} src={process.env.REACT_APP_PUBLIC_URL+"img/" + imgTrx} alt="" width={28} height={28}/>
                                 <span style={{'flexGrow':'1','textAlign':'center','marginTop':'5px','marginLeft':'-45px','color':labelColor}}><b>{labelTrx}</b></span>
                             </p>
                         </Fragment>}
                     { ( (labelTrx!='Pending' && labelTrx!='Mined' && labelTrx!='Failed' && labelTrx!='Waiting'
                         && labelTrx!='Initializing' && labelTrx!='Validating') || (labelTrx=='Confirmed')) &&
                         <p style={{'display':'flex','width':'100%'}}>
-                            <img style={{'flexGrow':'0'}} src={auth.urlBase+"img/" + imgTrx} alt="332" />
+                            <img style={{'flexGrow':'0'}} src={process.env.REACT_APP_PUBLIC_URL+"img/" + imgTrx} alt="332" />
                             <span style={{'flexGrow':'1','textAlign':'center','marginTop':'5px','marginLeft':'-45px','color':labelColor}}>{labelTrx}</span>
                         </p>}
                 </div>

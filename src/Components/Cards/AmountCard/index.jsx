@@ -48,7 +48,7 @@ export default function AmountCard(props) {
                     <Col>
                         <img
                             width={56}
-                            src={auth.urlBaseFull+`img/icon-${tokenName.toLowerCase()}.svg`}
+                            src={process.env.REACT_APP_PUBLIC_URL+`img/icon-${tokenName.toLowerCase()}.svg`}
                             alt="icon-wallet"
                         />
                     </Col>

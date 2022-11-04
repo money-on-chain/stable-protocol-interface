@@ -444,7 +444,7 @@ export default function MintModal(props) {
         {renderAmount(t('global.ConfirmTransactionModal_Exchanging'), exchanging, 'AmountExchanging')}
         <LargeNumber tooltip="topLeft" currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
         {showError && renderError()}
-        <div className={'text-align-center'}><img width={30} height={30} src={auth.urlBase+"img/d-arrow.png"} alt="ssa"/></div>
+        <div className={'text-align-center'}><img width={30} height={30} src={process.env.REACT_APP_PUBLIC_URL+"img/d-arrow.png"} alt="ssa"/></div>
         {renderAmount(t('global.ConfirmTransactionModal_Receiving'), receiving, 'AmountReceiving')}
         <LargeNumber tooltip="topLeft" currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
         <hr style={{ border: '1px solid #08374F','opacity':'0.5' }} />
@@ -493,7 +493,7 @@ export default function MintModal(props) {
         {!showTransaction &&<div className={'div-price-v'}>
         <Collapse className="CollapseTolerance">
           <Collapse.Panel showArrow={false} header={<div className="PriceVariationSetting">
-            <img width={17} height={17} src={auth.urlBase+"img/torq.png"} alt="ssa"/>
+            <img width={17} height={17} src={process.env.REACT_APP_PUBLIC_URL+"img/torq.png"} alt="ssa"/>
             <span className="SliderText color-08374F font-size-12">{t("global.CustomizePrize_VariationToleranceSettingsTitle")}</span>
           </div>}>
             <div className="PriceVariationContainer">
@@ -544,18 +544,18 @@ export default function MintModal(props) {
                 switch (txtTransaction) {
                   case 'REVIEW':
                     if( currentHash!=null && currentHash!='') {
-                      return <><p className={'text-align-center'}><img src={auth.urlBase + "img/status-pending.png"} width={50} height={50}
+                      return <><p className={'text-align-center'}><img src={process.env.REACT_APP_PUBLIC_URL + "img/status-pending.png"} width={50} height={50}
                                        className='img-status rotate' alt='pending'/>.</p><p
                           className={'Transaction_confirmation'}>{t(`${AppProject}.PleaseReviewYourWallet`, {ns: ns})}</p></>;
                     }else {
                       return <p className={'Transaction_confirmation'}>{t(`${AppProject}.PleaseReviewYourWallet`, {ns: ns})}</p>
                     }
                   case 'PENDING':
-                      return <><p className={'text-align-center'}><img src={auth.urlBase+"img/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
+                      return <><p className={'text-align-center'}><img src={process.env.REACT_APP_PUBLIC_URL+"img/status-pending.png"} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
                   case 'SUCCESSFUL':
-                    return <><p className={'text-align-center'}><img width={50} height={50} src={auth.urlBase+"img/status-success.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_successful'}>{t('global.Operation_successful')}</p></>;
+                    return <><p className={'text-align-center'}><img width={50} height={50} src={process.env.REACT_APP_PUBLIC_URL+"img/status-success.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_successful'}>{t('global.Operation_successful')}</p></>;
                   default:
-                    return <><p className={'text-align-center'}><img width={50} height={50} src={auth.urlBase+"img/status-error.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_failed'}>{t('global.Operation_failed')}</p></>;
+                    return <><p className={'text-align-center'}><img width={50} height={50} src={process.env.REACT_APP_PUBLIC_URL+"img/status-error.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_failed'}>{t('global.Operation_failed')}</p></>;
                 }
               })()}
             </div>
@@ -574,7 +574,7 @@ export default function MintModal(props) {
         </>}
       </div>
       <Modal visible={confirmModal} footer={null} width={450}>
-        <img className={'img-campana'} width={27} height={30} src={auth.urlBase+"img/campana.png"} alt='Info'/>
+        <img className={'img-campana'} width={27} height={30} src={process.env.REACT_APP_PUBLIC_URL+"img/campana.png"} alt='Info'/>
         <div className={'div-txt'}>
         <p className={'color-08374F'}>{t('global.ModalMind_CopyTx')}</p>
         <div>

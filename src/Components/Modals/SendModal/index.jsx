@@ -298,7 +298,7 @@ export default function SendModal(props) {
             { statusScreen == 2 &&
             <>
               <div style={{'textAlign':'center'}}>
-                <img src={auth.urlBase+"img/status-pending.png"} width={50} height={50} className='img-status rotate'/>
+                <img src={process.env.REACT_APP_PUBLIC_URL+"img/status-pending.png"} width={50} height={50} className='img-status rotate'/>
                 <br/>
                 <br/>
                 <p className={'Transaction_confirmation'}>{t(`${AppProject}.PleaseReviewYourWallet`, {ns: ns})}</p>
@@ -323,9 +323,9 @@ export default function SendModal(props) {
                       {(() => {
                         switch (statusScreen) {
                           case 3:
-                            return <img src={auth.urlBase+"img/status-pending.png"} width={50} height={50} className='img-status rotate'/>;
+                            return <img src={process.env.REACT_APP_PUBLIC_URL+"img/status-pending.png"} width={50} height={50} className='img-status rotate'/>;
                           case 4:
-                            return <img width={50} height={50} src={auth.urlBase+"img/status-success.png"} alt="ssa" className={'img-status'}/>;
+                            return <img width={50} height={50} src={process.env.REACT_APP_PUBLIC_URL+"img/status-success.png"} alt="ssa" className={'img-status'}/>;
                         }
                       })()}
                     </div>
@@ -353,7 +353,7 @@ export default function SendModal(props) {
             }
           </div>
           <Modal visible={confirmModal} footer={null} width={450}>
-            <img className={'img-campana'} width={27} height={30} src={auth.urlBase+"img/campana.png"}/>
+            <img className={'img-campana'} width={27} height={30} src={process.env.REACT_APP_PUBLIC_URL+"img/campana.png"}/>
             <div className={'div-txt'}>
               <p className={'color-08374F'}>{t('global.ModalSend_CopyTx')}</p>
               <div>

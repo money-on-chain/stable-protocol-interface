@@ -22,7 +22,7 @@ function TC(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={auth.urlBaseFull+"img/icon-tc.svg" }
+                    src={process.env.REACT_APP_PUBLIC_URL+"img/icon-tc.svg" }
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.wallets.TC.title`, { ns: ns })}

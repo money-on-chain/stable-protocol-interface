@@ -49,8 +49,6 @@ const AuthenticateContext = createContext({
     balanceRbtc: null,
     contractStatusData: null,
     web3: null,
-    urlBaseFull:null,
-    urlBase:null,
     getAppMode:null,
     connect: () => {},
     interfaceExchangeMethod: async (sourceCurrency, targetCurrency, amount, slippage, onTransaction, onReceipt) => {},
@@ -99,8 +97,6 @@ const AuthenticateProvider = ({ children }) => {
     const [account, setAccount] = useState(null);
     const [userBalanceData, setUserBalanceData] = useState(null);
     const [balanceRbtc, setBalanceRbtc] = useState(null);
-    const [urlBaseFull, setUrlBaseFull] = useState(process.env.REACT_APP_PUBLIC_URL+'/');
-    const [urlBase, setUrlBase] = useState(process.env.REACT_APP_PUBLIC_URL + '/');
     const [getAppMode, seGetAppMode] = useState(config.environment.AppMode);
     const [accountData, setAccountData] = useState({
         Wallet: '',
@@ -659,8 +655,6 @@ const AuthenticateProvider = ({ children }) => {
                 contractStatusData,
                 isLoggedIn,
                 web3,
-                urlBaseFull,
-                urlBase,
                 getAppMode,
                 connect,
                 disconnect,

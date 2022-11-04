@@ -54,7 +54,7 @@ export default function Sovryn(props) {
                 {/*<Col span={22}>*/}
                 <div className="title">
                     <div className="CardLogo">
-                        <img width="32" src={auth.urlBaseFull+'icons/icon-sovryn_fastbtc.svg'} alt="" />
+                        <img width="32" src={process.env.REACT_APP_PUBLIC_URL+'icons/icon-sovryn_fastbtc.svg'} alt="" />
                         <h1>Sovryn <br />FastBTC</h1>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ export default function Sovryn(props) {
             </Row>
             <Row>
                 <div className="content-container"><img className="logo-img" width="111"
-                    src={auth.urlBaseFull+'icons/icon-rbtclogo.svg'}
+                    src={process.env.REACT_APP_PUBLIC_URL+'icons/icon-rbtclogo.svg'}
                     alt="" />
                     <div className="FastBTCLeftPanel"><b>{t(`${AppProject}.fastbtc.leftPannel.header`, { ns: ns })}</b>
                         <ul>

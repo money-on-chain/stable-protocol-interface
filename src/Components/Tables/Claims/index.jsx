@@ -198,7 +198,7 @@ export default function Claims(props) {
                 key: element.key,
                 info: '',
                 event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
-                asset: <img className="uk-preserve-width uk-border-circle" src={auth.urlBaseFull+ asset[0].image} alt="avatar" width={32} />,
+                asset: <img className="uk-preserve-width uk-border-circle" src={process.env.REACT_APP_PUBLIC_URL+ asset[0].image} alt="avatar" width={32} />,
                 amount: <span className="display-inline CurrencyTx">{element.amount}</span>,
                 date: <span>{element.date}</span>,
                 status: <span>{element.status}</span>,

@@ -134,7 +134,7 @@ export default function Skeleton() {
             </Sider>
             <Layout>
                 <Header className="Header" style={{ paddingLeft: 18 }}>
-                    <img src={auth.urlBaseFull + "img/logo.svg"} className='header-logo' />
+                    <img src={process.env.REACT_APP_PUBLIC_URL + "img/logo.svg"} className='header-logo' />
                     <div className="MiddleSide">
                         <HeaderCoins tokenName="TP" image={'img/icon-rbtclogo.svg'} />
                         <HeaderCoins tokenName="TC" image={'img/TCIcon.svg'} />

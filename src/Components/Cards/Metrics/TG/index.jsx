@@ -23,7 +23,7 @@ function TG(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={auth.urlBaseFull+"img/icon-tg.svg" }
+                    src={process.env.REACT_APP_PUBLIC_URL+"img/icon-tg.svg" }
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.metrics.TG.title`, { ns: ns })}

@@ -36,7 +36,7 @@ export default function BtcToRbtc(props) {
                 <Col xs={8}>
                     <div className='text-center'>
                         <img className="logo-img" width="111"
-                             src={auth.urlBaseFull+'icons/icon-btc_to_rbtc.svg'}
+                             src={process.env.REACT_APP_PUBLIC_URL+'icons/icon-btc_to_rbtc.svg'}
                              alt=""/>
                     </div>
                 </Col>
