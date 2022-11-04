@@ -23,7 +23,7 @@ function TX(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={auth.urlBaseFull+'icon-tx.svg'}
+                    src={auth.urlBaseFull+'img/icon-tx.svg'}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.wallets.TX.title`, { ns: ns })}

@@ -26,7 +26,7 @@ function TP(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={auth.urlBaseFull +"icon-tp.svg"}
+                    src={auth.urlBaseFull +"img/icon-tp.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.wallets.TP.title`, { ns: ns })}

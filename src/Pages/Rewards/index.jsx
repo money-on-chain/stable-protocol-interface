@@ -46,7 +46,7 @@ export default function Rewards(props) {
                     <YourAddressCard
                         height="100%"
                         tokenToSend="MOC"
-                        iconWallet={process.env.PUBLIC_URL + process.env.REACT_APP_ENVIRONMENT_APP_PROJECT + "/icon-tg.svg" }
+                        iconWallet={process.env.PUBLIC_URL + process.env.REACT_APP_ENVIRONMENT_APP_PROJECT + "/img/icon-tg.svg" }
                         view={'moc'}
                     // currencyOptions={['RESERVE', 'MOC']}
                     />

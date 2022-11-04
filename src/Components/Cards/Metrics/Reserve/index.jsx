@@ -117,7 +117,7 @@ function Reserve(props) {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 <img
                     width={45}
-                    src={auth.urlBaseFull+"icon-reserve.svg"}
+                    src={auth.urlBaseFull+"img/icon-reserve.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.Tokens_RESERVE_name`, { ns: ns })}

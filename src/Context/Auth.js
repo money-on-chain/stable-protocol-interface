@@ -99,8 +99,8 @@ const AuthenticateProvider = ({ children }) => {
     const [account, setAccount] = useState(null);
     const [userBalanceData, setUserBalanceData] = useState(null);
     const [balanceRbtc, setBalanceRbtc] = useState(null);
-    const [urlBaseFull, setUrlBaseFull] = useState(process.env.REACT_APP_PUBLIC_URL+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/');
-    const [urlBase, setUrlBase] = useState(process.env.REACT_APP_PUBLIC_URL);
+    const [urlBaseFull, setUrlBaseFull] = useState(process.env.REACT_APP_PUBLIC_URL+'/');
+    const [urlBase, setUrlBase] = useState(process.env.REACT_APP_PUBLIC_URL + '/');
     const [getAppMode, seGetAppMode] = useState(config.environment.AppMode);
     const [accountData, setAccountData] = useState({
         Wallet: '',

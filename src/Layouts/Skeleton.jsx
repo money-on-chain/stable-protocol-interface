@@ -134,11 +134,11 @@ export default function Skeleton() {
             </Sider>
             <Layout>
                 <Header className="Header" style={{ paddingLeft: 18 }}>
-                    <img src={auth.urlBaseFull + "logo.svg"} className='header-logo' />
+                    <img src={auth.urlBaseFull + "img/logo.svg"} className='header-logo' />
                     <div className="MiddleSide">
-                        <HeaderCoins tokenName="TP" image={'icon-rbtclogo.svg'} />
-                        <HeaderCoins tokenName="TC" image={'TCIcon.svg'} />
-                        <HeaderCoins tokenName="TX" image={'TXIcon.svg'} />
+                        <HeaderCoins tokenName="TP" image={'img/icon-rbtclogo.svg'} />
+                        <HeaderCoins tokenName="TC" image={'img/TCIcon.svg'} />
+                        <HeaderCoins tokenName="TX" image={'img/TXIcon.svg'} />
                     </div>
                     <LoginButton {...loginButtonSettings} />
 
