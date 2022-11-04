@@ -55,7 +55,7 @@
     "start:moc-testnet": "export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocTestnet react-scripts start",
     "start:moc-mainnet": "export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocMainnet2 react-scripts start",
     "start:roc-alpha-testnet": "export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.rdocTestnetAlpha react-scripts start",
-    "start:roc-testnet": "export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.rdocTestnet react-scripts start",
+    "start:roc-testnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.rdocTestnet react-scripts start",
     "start:roc-mainnet": "export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.rdocMainnet react-scripts start",
     "build": "export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env react-scripts build",
     "build:moc-alpha-testnet": "export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.mocTestnetAlpha react-scripts build",
