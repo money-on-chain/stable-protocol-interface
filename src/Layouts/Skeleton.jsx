@@ -137,8 +137,8 @@ export default function Skeleton() {
                     <img src={auth.urlBaseFull + "logo.svg"} className='header-logo' />
                     <div className="MiddleSide">
                         <HeaderCoins tokenName="TP" image={'icon-rbtclogo.svg'} />
-                        <HeaderCoins tokenName="TC" image={'BPROIcon.svg'} />
-                        <HeaderCoins tokenName="TX" image={'BTXIcon.svg'} />
+                        <HeaderCoins tokenName="TC" image={'TCIcon.svg'} />
+                        <HeaderCoins tokenName="TX" image={'TXIcon.svg'} />
                     </div>
                     <LoginButton {...loginButtonSettings} />
 
