@@ -5,6 +5,10 @@ import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import { useTranslation } from "react-i18next";
 import { config} from '../../../Config/config';
+import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-sovryn_fastbtc.svg';
+import { ReactComponent as LogoIconRBTC } from '../../../assets/icons/icon-rbtclogo.svg';
+
+
 //import BigNumber from "bignumber.js";
 
 export default function Sovryn(props) {
@@ -54,15 +58,15 @@ export default function Sovryn(props) {
                 {/*<Col span={22}>*/}
                 <div className="title">
                     <div className="CardLogo">
-                        <img width="32" src={process.env.REACT_APP_PUBLIC_URL+'icons/icon-sovryn_fastbtc.svg'} alt="" />
+                        <LogoIconFastBTC width="32" height="32" alt="" />
                         <h1>Sovryn <br />FastBTC</h1>
                     </div>
                 </div>
                 {/*</Col>*/}
             </Row>
             <Row>
-                <div className="content-container"><img className="logo-img" width="111"
-                    src={process.env.REACT_APP_PUBLIC_URL+'icons/icon-rbtclogo.svg'}
+                <div className="content-container">
+                <LogoIconRBTC className="logo-img" width="111" height="111"
                     alt="" />
                     <div className="FastBTCLeftPanel"><b>{t(`${AppProject}.fastbtc.leftPannel.header`, { ns: ns })}</b>
                         <ul>

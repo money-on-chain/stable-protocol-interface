@@ -9,6 +9,21 @@ import InformationModal from '../../Modals/InformationModal';
 import { config } from './../../../Config/config';
 import { getUserBalance } from "../../../Helpers/balances";
 
+import { ReactComponent as LogoIconReserve } from './../../../assets/icons/icon-reserve.svg';
+import { ReactComponent as LogoIconTP } from './../../../assets/icons/icon-tp.svg';
+import { ReactComponent as LogoIconTC } from './../../../assets/icons/icon-tc.svg';
+import { ReactComponent as LogoIconTX } from './../../../assets/icons/icon-tx.svg';
+import { ReactComponent as LogoIconTG } from './../../../assets/icons/icon-tg.svg';
+import { ReactComponent as LogoIconRBTC } from './../../../assets/icons/icon-tg.svg';
+
+const amountCardLogos = {
+    RESERVE: <LogoIconReserve width="56" />,
+    TP: <LogoIconTP width="56" alt="icon-wallet" />,
+    TC: <LogoIconTC width="56" alt="icon-wallet" />,
+    TX: <LogoIconTX width="56" alt="icon-wallet" />,
+    TG: <LogoIconTG width="56" alt="icon-wallet" />,
+    RBTC: <LogoIconRBTC width="56" alt="icon-wallet" />
+}
 
 export default function AmountCard(props) {
 
@@ -32,6 +47,8 @@ export default function AmountCard(props) {
 
     const pre_label = t(`${AppProject}.Tokens_${tokenName.toUpperCase()}_name`, { ns: ns })
 
+    const logoIcon = amountCardLogos[tokenName.toUpperCase()]
+
     return (
         <Fragment>
             <div className="Card CardAmount">
@@ -46,11 +63,7 @@ export default function AmountCard(props) {
                 </Row>
                 <Row>
                     <Col>
-                        <img
-                            width={56}
-                            src={process.env.REACT_APP_PUBLIC_URL+`img/icon-${tokenName.toLowerCase()}.svg`}
-                            alt="icon-wallet"
-                        />
+                        {logoIcon}
                     </Col>
                 </Row>
                 <Row className="tokenAndBalance">

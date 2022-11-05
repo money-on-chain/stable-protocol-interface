@@ -6,6 +6,7 @@ import {Skeleton, Tooltip} from 'antd';
 //import { InfoCircleOutlined } from '@ant-design/icons';
 import InformationModal from '../../Modals/InformationModal';
 import BalanceItemCard from "../BalanceItemCard/BalanceItemCard";
+import { ReactComponent as LogoIcon } from '../../../assets/icons/icon-tg.svg';
 //import BigNumber from "bignumber.js";
 
 function MocAmount() {
@@ -36,7 +37,7 @@ function MocAmount() {
                             <InformationModal currencyCode={'TG'}/>
                         </div>
                         <div className="LogoAndAmount">
-                            <img className="MocLogo" srcSet={process.env.REACT_APP_PUBLIC_URL + "img/icon-tg.svg"}/>
+                            <LogoIcon className="MocLogo" width={45} height={45} />
                             <div className="TotalAmountContainer">
                                 <h2>{t("global.RewardsBalance_MocsTokens", {ns: 'global'})}</h2>
                                 <div className="BalanceItemCard TotalAmount">

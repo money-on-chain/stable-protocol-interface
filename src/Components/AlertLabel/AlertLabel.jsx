@@ -1,6 +1,7 @@
 import React from 'react';
 import {useTranslation} from "react-i18next";
 import {config} from '../../Config/config';
+import { ReactComponent as LogoIcon } from '../../assets/icons/icon-alert.svg';
 
 
 function AlertLabel(props) {
@@ -10,7 +11,7 @@ function AlertLabel(props) {
     const AppProject = config.environment.AppProject;
     return (
         <div className="AlertLabel">
-            <img src={process.env.REACT_APP_PUBLIC_URL+"img/icon-alert.svg"} alt="Alert Icon" />
+            <LogoIcon alt="Alert Icon" />
             <div className="AlertText">
                 <p>
                     <strong>{t(`${AppProject}.modal-send.beCareful`, {ns: ns})}</strong>

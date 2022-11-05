@@ -4,7 +4,8 @@ import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import {useTranslation} from "react-i18next";
 import { config } from '../../../Config/config';
-// const BigNumber = require('bignumber.js');
+import { ReactComponent as LogoIconRBTC } from '../../../assets/icons/icon-btc_to_rbtc.svg';
+
 
 export default function BtcToRbtc(props) {
 
@@ -35,9 +36,7 @@ export default function BtcToRbtc(props) {
             <Row className="m-b">
                 <Col xs={8}>
                     <div className='text-center'>
-                        <img className="logo-img" width="111"
-                             src={process.env.REACT_APP_PUBLIC_URL+'icons/icon-btc_to_rbtc.svg'}
-                             alt=""/>
+                        <LogoIconRBTC className="logo-img" width="111" height="111" alt=""/>
                     </div>
                 </Col>
                 <Col xs={13}>

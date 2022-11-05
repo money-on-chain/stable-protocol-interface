@@ -11,8 +11,15 @@ import HeaderCoins from "../Components/Page/HeaderCoins";
 import { useTranslation } from "react-i18next";
 import { config } from '../Config/config';
 import BigNumber from "bignumber.js";
+import { ReactComponent as LogoIcon } from '../assets/icons/logo.svg';
+import { ReactComponent as LogoIconTP } from '../assets/icons/icon-rbtclogo.svg';
+import { ReactComponent as LogoIconTC } from '../assets/icons/TCIcon.svg';
+import { ReactComponent as LogoIconTX } from '../assets/icons/TXIcon.svg';
+
+
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
+
 
 export default function Skeleton() {
     const auth = useContext(AuthenticateContext);
@@ -134,11 +141,11 @@ export default function Skeleton() {
             </Sider>
             <Layout>
                 <Header className="Header" style={{ paddingLeft: 18 }}>
-                    <img src={process.env.REACT_APP_PUBLIC_URL + "img/logo.svg"} className='header-logo' />
+                    <LogoIcon className='header-logo' />
                     <div className="MiddleSide">
-                        <HeaderCoins tokenName="TP" image={'img/icon-rbtclogo.svg'} />
-                        <HeaderCoins tokenName="TC" image={'img/TCIcon.svg'} />
-                        <HeaderCoins tokenName="TX" image={'img/TXIcon.svg'} />
+                        <HeaderCoins tokenName="TP" image={<LogoIconTP alt="arrow" height="38" width="38" />} />
+                        <HeaderCoins tokenName="TC" image={<LogoIconTC alt="arrow" height="38" width="38" />} />
+                        <HeaderCoins tokenName="TX" image={<LogoIconTX alt="arrow" height="38" width="38" />} />
                     </div>
                     <LoginButton {...loginButtonSettings} />
 

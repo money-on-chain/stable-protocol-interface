@@ -8,6 +8,7 @@ import { LargeNumber } from '../../../LargeNumber';
 import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../../Helpers/Formats';
 import BigNumber from 'bignumber.js';
 import { config } from '../../../../Config/config';
+import { ReactComponent as LogoIcon } from '../../../../assets/icons/icon-reserve.svg';
 
 const AppProject = config.environment.AppProject;
 const BalancePieColors = config.home.walletBalancePie.colors;
@@ -115,9 +116,8 @@ function Reserve(props) {
     return (
         <div className="Card CardSystemStatus">
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
-                <img
+                <LogoIcon
                     width={45}
-                    src={process.env.REACT_APP_PUBLIC_URL+"img/icon-reserve.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.Tokens_RESERVE_name`, { ns: ns })}

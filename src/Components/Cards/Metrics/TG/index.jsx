@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Skeleton } from 'antd';
 import { LargeNumber } from '../../../LargeNumber';
 import {config} from '../../../../Config/config';
+import { ReactComponent as LogoIcon } from '../../../../assets/icons/icon-tg.svg';
 
 function TG(props) {
     const auth = useContext(AuthenticateContext);
@@ -21,9 +22,9 @@ function TG(props) {
     return (
         <div className="Card CardSystemStatus">
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
-                <img
+                <LogoIcon
                     width={45}
-                    src={process.env.REACT_APP_PUBLIC_URL+"img/icon-tg.svg" }
+                    height={45}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.metrics.TG.title`, { ns: ns })}

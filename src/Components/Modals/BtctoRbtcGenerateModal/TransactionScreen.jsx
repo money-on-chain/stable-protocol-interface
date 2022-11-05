@@ -6,6 +6,10 @@ import './transactionscreen.scss';
 import { urlBtcExplorer, urlExplorerUrl } from '../../../Lib/fastBTC/fastBTCMethods';
 import {AuthenticateContext} from "../../../Context/Auth";
 import { config } from '../../../Config/config';
+import { ReactComponent as btcLogo } from '../../../assets/icons/icon-btclogo.svg';
+import { ReactComponent as greenLogo } from '../../../assets/icons/greenreload.svg';
+import { ReactComponent as rbtcLogo } from '../../../assets/icons/icon-rbtclogo.svg';
+
 
 const TransactionInfo = ({ txId, txName, state}) => {
 const [t, i18n]= useTranslation(["global",'moc','rdoc']);
@@ -160,14 +164,14 @@ export default function TransactionScreen({ state, setState }) {
           <div className="transaction-details mrb-4">
             <h3 className="transaction-btc-title font-size-12">{t(`${AppProject}.fastbtc.topUpWalletModal.transaction1DetailsTitle`, {ns: ns})}</h3>
             <TransactionInfo txId={TxId.DEPOSIT} txName="BTC" state={state} />
-              <img className="logo-img img-set1" width={128} src={process.env.REACT_APP_PUBLIC_URL+"img/icon-btclogo.svg"} alt=""/>
+              <btcLogo className="logo-img img-set1" width={128} height={128} alt=""/>
           </div>
           <hr />
           <div className='transaction-details mrb-35 mrt-25'>
               <h3 className="transaction-btc-title font-size-12">{t(`${AppProject}.fastbtc.topUpWalletModal.transaction2DetailsTitle`, {ns: ns})}</h3>
             <TransactionInfo txId={TxId.TRANSFER} txName="RBTC" state={state} />
-              <img className="logo-img img-reload" width={17} src={process.env.REACT_APP_PUBLIC_URL+"img/greenreload.svg"} alt=""/>
-              <img className="logo-img img-set2" width={128} src={process.env.REACT_APP_PUBLIC_URL+"img/icon-rbtclogo.svg"} alt=""/>
+              <greenLogo className="logo-img img-reload" width={17} height={17}  alt=""/>
+              <rbtcLogo className="logo-img img-set2" width={128} height={128} alt=""/>
           </div>
         </div>
       )}

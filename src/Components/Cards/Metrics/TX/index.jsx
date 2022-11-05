@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
 import { Skeleton } from 'antd';
 import {config} from '../../../../Config/config';
+import { ReactComponent as LogoIcon } from '../../../../assets/icons/icon-tp.svg';
 
 function TX(props) {
     const auth = useContext(AuthenticateContext);
@@ -21,9 +22,8 @@ function TX(props) {
     return (
         <div className="Card CardSystemStatus">
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
-                <img
+                <LogoIcon
                     width={45}
-                    src={process.env.REACT_APP_PUBLIC_URL+'img/icon-tx.svg'}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.wallets.TX.title`, { ns: ns })}

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Skeleton, Tooltip } from 'antd';
 import { LargeNumber } from '../../../LargeNumber';
 import {config} from '../../../../Config/config';
+import { ReactComponent as LogoIcon } from '../../../../assets/icons/icon-tp.svg';
 /*
 import web3 from "web3";
 import {setNumber, setToLocaleString} from "../../../../Helpers/helper";
@@ -24,9 +25,8 @@ function TP(props) {
     return (
         <div className="Card CardSystemStatus">
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
-                <img
+                <LogoIcon
                     width={45}
-                    src={process.env.REACT_APP_PUBLIC_URL +"img/icon-tp.svg"}
                     alt=""
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.wallets.TP.title`, { ns: ns })}
