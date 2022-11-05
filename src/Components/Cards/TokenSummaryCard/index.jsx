@@ -13,6 +13,22 @@ import { config } from "../../../Config/config";
 
 import { getUserBalance } from "../../../Helpers/balances";
 
+import { ReactComponent as LogoIconReserve } from './../../../assets/icons/icon-reserve.svg';
+import { ReactComponent as LogoIconTP } from './../../../assets/icons/icon-tp.svg';
+import { ReactComponent as LogoIconTC } from './../../../assets/icons/icon-tc.svg';
+import { ReactComponent as LogoIconTX } from './../../../assets/icons/icon-tx.svg';
+import { ReactComponent as LogoIconTG } from './../../../assets/icons/icon-tg.svg';
+import { ReactComponent as LogoIconRBTC } from './../../../assets/icons/icon-tg.svg';
+
+
+const amountCardLogos = {
+    RESERVE: <LogoIconReserve width="56" />,
+    TP: <LogoIconTP width="56" alt="icon-wallet" />,
+    TC: <LogoIconTC width="56" alt="icon-wallet" />,
+    TX: <LogoIconTX width="56" alt="icon-wallet" />,
+    TG: <LogoIconTG width="56" alt="icon-wallet" />,
+    RBTC: <LogoIconRBTC width="56" alt="icon-wallet" />
+}
 
 const styleCentered = {
     display: 'flex',
@@ -40,6 +56,8 @@ export default function TokenSummaryCard(props) {
 
     const userBalance = getUserBalance(auth, i18n, tokenName);
 
+    const logoIcon = amountCardLogos[tokenName.toUpperCase()]
+
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke);
     },[auth]);
@@ -65,11 +83,7 @@ export default function TokenSummaryCard(props) {
                             justifyContent: 'flex-start'
                         }}
                     >
-                        <img
-                            height={45}
-                            src={process.env.REACT_APP_PUBLIC_URL+`img/icon-${tokenName}.svg` }
-                            alt="icon-wallet"
-                        />
+                        {logoIcon}
                     </Col>
                     <Col
                         span={16}
