@@ -7,6 +7,10 @@ import Copy from "../../Page/Copy";
 import { config } from '../../../Config/config';
 import BigNumber from "bignumber.js";
 
+import LogoIconAttention from './../../../assets/icons/icon-atention.png';
+import LogoIconPending from './../../../assets/icons/status-pending.png';
+import LogoIconConfirmed from './../../../assets/icons/icon-confirmed.png';
+
 
 export default function Step3(props) {
 
@@ -15,9 +19,8 @@ export default function Step3(props) {
     const [feesPaid, setFeesPaid] = useState('0');
     // const [headerState, setHeaderState] = useState('Double check that you are entering the correct BTC destination address.');
     const [labelColor, setLabelColor] = useState('white');
-    // const [headerIcon, setHeaderIcon] = useState('icon-atention.svg');
-    const [imgTrx, setImgTrx] = useState('icon-atention.svg');
-    // const [imgTrx, setImgTrx] = useState('status-pending.png');
+
+    const [imgTrx, setImgTrx] = useState('attention');
     const [isVisible, setIsVisible] = useState(true)
     const [completed, setCompleted] = useState(false);
     const [buttonCompleted, setButtonCompleted] = useState('Confirm');
@@ -30,6 +33,20 @@ export default function Step3(props) {
     const {web3}= auth;
     const { accountData } = auth;
     const [account, setAccount] = useState(null);
+
+    let iconStatus = LogoIconAttention;
+    switch (imgTrx) {
+        case 'attention':
+            iconStatus = LogoIconAttention;
+            break;
+        case 'pending':
+            iconStatus = LogoIconPending;
+            break;
+        case 'confirmed':
+            iconStatus = LogoIconConfirmed;
+            break;
+    }
+
 
     useEffect(() => {
         connect();
@@ -86,7 +103,7 @@ export default function Step3(props) {
 
             const fastBtcTransferToBtc= () => {
                 return new Promise((resolve, reject) => {
-                    setImgTrx('status-pending.png')
+                    setImgTrx('pending')
                     setIsVisible(false)
                     setlabelTrx('Waiting')
                     fastBtcBridge.methods.transferToBtc(props.rbtcAddress).send(
@@ -169,7 +186,7 @@ export default function Step3(props) {
                     case "3": {
                         setLabelColor("white");
                         setlabelTrx("Confirmed");
-                        setImgTrx("icon-confirmed.svg");
+                        setImgTrx("confirmed");
                         clearInterval(intervalBTCCheck);
                         setIntervalBTCCheck(null);
                         break;
@@ -209,14 +226,14 @@ export default function Step3(props) {
                         || labelTrx=='Initializing' || labelTrx=='Validating') &&
                         <Fragment>
                             <p style={{'display':'flex','width':'100%'}}>
-                                <img style={{'flexGrow':'0'}} className={'rotate'} src={process.env.REACT_APP_PUBLIC_URL+"img/" + imgTrx} alt="" width={28} height={28}/>
+                                <img style={{'flexGrow':'0'}} className={'rotate'} src={iconStatus} alt="" width={28} height={28}/>
                                 <span style={{'flexGrow':'1','textAlign':'center','marginTop':'5px','marginLeft':'-45px','color':labelColor}}><b>{labelTrx}</b></span>
                             </p>
                         </Fragment>}
                     { ( (labelTrx!='Pending' && labelTrx!='Mined' && labelTrx!='Failed' && labelTrx!='Waiting'
                         && labelTrx!='Initializing' && labelTrx!='Validating') || (labelTrx=='Confirmed')) &&
                         <p style={{'display':'flex','width':'100%'}}>
-                            <img style={{'flexGrow':'0'}} src={process.env.REACT_APP_PUBLIC_URL+"img/" + imgTrx} alt="332" />
+                            <img style={{'flexGrow':'0'}} src={iconStatus} alt="332" />
                             <span style={{'flexGrow':'1','textAlign':'center','marginTop':'5px','marginLeft':'-45px','color':labelColor}}>{labelTrx}</span>
                         </p>}
                 </div>

@@ -218,10 +218,6 @@ export default function SendModal(props) {
 
   const [statusScreen, setStatusScreen] = useState(false);
 
-  console.log("DBUG>>")
-  console.log(tokensToSend)
-  console.log(tokenToSend)
-
   return (
       <>
         <Button

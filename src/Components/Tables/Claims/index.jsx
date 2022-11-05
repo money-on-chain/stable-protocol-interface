@@ -18,6 +18,7 @@ import {AuthenticateContext} from "../../../Context/Auth";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import moment from 'moment';
+import { ReactComponent as LogoIconTG } from './../../../assets/icons/icon-tg.svg';
 
 import './style.scss';
 
@@ -191,14 +192,20 @@ export default function Claims(props) {
 
         });
         data_row_coins2.forEach((element, index) => {
-            const asset = [{ 'image': 'img/icon-tg.svg', 'color': '', 'txt': 'CLAIM' }]
+            const asset = [
+                {
+                    'image': <LogoIconTG className="uk-preserve-width uk-border-circle" alt="avatar" width={32} height={32} />,
+                    'color': '',
+                    'txt': 'CLAIM'
+                }
+            ]
             data_row_coins2[index].detail.asset = 'MOC'
 
             data.push({
                 key: element.key,
                 info: '',
                 event: <span className={classnames('event-action', asset[0].color)}>{element.event}</span>,
-                asset: <img className="uk-preserve-width uk-border-circle" src={process.env.REACT_APP_PUBLIC_URL+ asset[0].image} alt="avatar" width={32} />,
+                asset: asset[0].image,
                 amount: <span className="display-inline CurrencyTx">{element.amount}</span>,
                 date: <span>{element.date}</span>,
                 status: <span>{element.status}</span>,
