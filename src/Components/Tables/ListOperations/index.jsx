@@ -18,6 +18,11 @@ import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 //import { LargeNumber } from '../../LargeNumber';
 import RowColumn from "../RowDetail/RowColumn";
 
+import { ReactComponent as LogoIconTP } from './../../../assets/icons/icon-tp.svg';
+import { ReactComponent as LogoIconTC } from './../../../assets/icons/icon-tc.svg';
+import { ReactComponent as LogoIconTX } from './../../../assets/icons/icon-tx.svg';
+import { ReactComponent as LogoIconTG } from './../../../assets/icons/icon-tg.svg';
+
 
 export default function ListOperations(props) {
     const { token } = props;
@@ -289,19 +294,43 @@ export default function ListOperations(props) {
 
             switch (element.asset) {
                 case 'TP':
-                    asset.push({ 'image': 'img/icon-tp.svg', 'color': 'color-token-tp', 'txt': 'DOC' });
+                    asset.push(
+                        {
+                            'image': <LogoIconTP className="uk-preserve-width uk-border-circle" alt="avatar" width="32" height="32" /> ,
+                            'color': 'color-token-tp',
+                            'txt': 'DOC'
+                        }
+                    );
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TP_code`, { ns: ns });
                     break;
                 case 'TC':
-                    asset.push({ 'image': 'img/icon-tc.svg', 'color': 'color-token-tc', 'txt': 'BPRO' });
+                    asset.push(
+                        {
+                            'image': <LogoIconTC className="uk-preserve-width uk-border-circle" alt="avatar" width="32" height="32" /> ,
+                            'color': 'color-token-tc',
+                            'txt': 'BPRO'
+                        }
+                    );
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TC_code`, { ns: ns });
                     break;
                 case 'TX':
-                    asset.push({ 'image': 'img/icon-tx.svg', 'color': 'color-token-tx', 'txt': 'BTCX' });
+                    asset.push(
+                        {
+                            'image': <LogoIconTX className="uk-preserve-width uk-border-circle" alt="avatar" width="32" height="32" /> ,
+                            'color': 'color-token-tx',
+                            'txt': 'BTCX'
+                        }
+                    );
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TX_code`, { ns: ns });
                     break;
                 default:
-                    asset.push({ 'image': 'img/icon-tp.svg', 'color': 'color-token-tp', 'txt': 'DOC' });
+                    asset.push(
+                        {
+                            'image': <LogoIconTP className="uk-preserve-width uk-border-circle" alt="avatar" width="32" height="32" /> ,
+                            'color': 'color-token-tp',
+                            'txt': 'DOC'
+                        }
+                    );
                     data_row_coins2[index].detail.asset = t(`${AppProject}.Tokens_TP_code`, { ns: ns });
                     break;
             }
@@ -310,7 +339,7 @@ export default function ListOperations(props) {
                 key: element.key,
                 info: '',
                 event: <span className={classnames('event-action', `${AppProject}-${asset[0].color}`)}>{element.event}</span>,
-                asset: <img className="uk-preserve-width uk-border-circle" src={process.env.REACT_APP_PUBLIC_URL+ asset[0].image} alt="avatar" width={32} />,
+                asset: asset[0].image,
                 // platform: <span className="display-inline CurrencyTx">{element.platform} {asset[0].txt}</span>,
                 platform: <span className="display-inline CurrencyTx">{element.platform}</span>,
                 wallet: <span className="display-inline ">{element.wallet} </span>,
