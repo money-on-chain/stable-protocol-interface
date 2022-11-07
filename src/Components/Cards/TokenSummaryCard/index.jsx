@@ -22,12 +22,12 @@ import { ReactComponent as LogoIconRBTC } from './../../../assets/icons/icon-tg.
 
 
 const amountCardLogos = {
-    RESERVE: <LogoIconReserve width="56" />,
-    TP: <LogoIconTP width="56" alt="icon-wallet" />,
-    TC: <LogoIconTC width="56" alt="icon-wallet" />,
-    TX: <LogoIconTX width="56" alt="icon-wallet" />,
-    TG: <LogoIconTG width="56" alt="icon-wallet" />,
-    RBTC: <LogoIconRBTC width="56" alt="icon-wallet" />
+    RESERVE: <LogoIconReserve width="45" />,
+    TP: <LogoIconTP width="45" alt="icon-wallet" />,
+    TC: <LogoIconTC width="45" alt="icon-wallet" />,
+    TX: <LogoIconTX width="45" alt="icon-wallet" />,
+    TG: <LogoIconTG width="45" alt="icon-wallet" />,
+    RBTC: <LogoIconRBTC width="45" alt="icon-wallet" />
 }
 
 const styleCentered = {
@@ -77,7 +77,7 @@ export default function TokenSummaryCard(props) {
             >
                 <Row className="ArrowHomeIndicators arrow-center-values">
                     <Col
-                        span={8}
+                        span={12}
                         style={{
                             ...styleCentered,
                             justifyContent: 'flex-start'
@@ -86,11 +86,12 @@ export default function TokenSummaryCard(props) {
                         {logoIcon}
                     </Col>
                     <Col
-                        span={16}
+                        span={12}
                         style={{
                             ...styleCentered,
                             justifyContent: 'flex-end',
-                            textAlign: 'right'
+                            textAlign: 'right',
+                            'padding-left': '12px'
                         }}
                     >
                         <span className={`Number ${AppProject}-${tokenName}`}> {/* style={{ color }}> */}

@@ -141,9 +141,9 @@ export default function Skeleton() {
                 <Header className="Header" style={{ paddingLeft: 18 }}>
                     <LogoIcon className='header-logo' />
                     <div className="MiddleSide">
-                        <HeaderCoins tokenName="TP" image={<LogoIconTP alt="arrow" height="38" width="38" />} />
-                        <HeaderCoins tokenName="TC" image={<LogoIconTC alt="arrow" height="38" width="38" />} />
-                        <HeaderCoins tokenName="TX" image={<LogoIconTX alt="arrow" height="38" width="38" />} />
+                        <HeaderCoins tokenName="TP" image={<LogoIconTP alt="arrow" height="50" width="40" />} />
+                        <HeaderCoins tokenName="TC" image={<LogoIconTC alt="arrow" height="50" width="40" />} />
+                        <HeaderCoins tokenName="TX" image={<LogoIconTX alt="arrow" height="50" width="40" />} />
                     </div>
                     <LoginButton {...loginButtonSettings} />
 
