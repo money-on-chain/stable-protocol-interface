@@ -5,15 +5,13 @@ import { AuthenticateContext } from '../../../Context/Auth';
 import PriceVariation from '../../PriceVariation';
 import {LargeNumber} from "../../LargeNumber";
 import web3 from "web3";
-//import {Alert} from "antd";
 import {setNumber, setToLocaleString} from "../../../Helpers/helper";
 import {useTranslation} from "react-i18next";
 import './style.scss';
 
 function HeaderCoins(props) {
 
-  const auth = useContext(AuthenticateContext);
-  //const { accountData = {} } = auth;
+  const auth = useContext(AuthenticateContext);  
   const { image, arrow, color, tokenName } = props;
   const [timeRefresh, setTimeRefresh] = useState(new Date());
 
@@ -29,7 +27,7 @@ function HeaderCoins(props) {
     if (auth.contractStatusData) {
       switch (props.tokenName) {
         case 'TP':
-          if (auth.contractStatusData['bitcoinPrice'] != 0) {
+          if (auth.contractStatusData['bitcoinPrice'] !== 0) {
             // return (web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether'));
             // return setToLocaleString(parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinPrice']), 'ether')),2,i18n)
             return auth.contractStatusData['bitcoinPrice']
@@ -37,7 +35,7 @@ function HeaderCoins(props) {
             return 0;
           }
         case 'TC':
-          if (auth.contractStatusData['bproPriceInUsd'] != 0) {
+          if (auth.contractStatusData['bproPriceInUsd'] !== 0) {
             // return (web3.utils.toWei(auth.contractStatusData['bproPriceInUsd'], 'ether'));
             // return setToLocaleString(parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bproPriceInUsd']), 'ether')),2,i18n)
             return auth.contractStatusData['bproPriceInUsd']
@@ -46,7 +44,7 @@ function HeaderCoins(props) {
           }
 
         case 'TX':
-          if (auth.contractStatusData['bprox2PriceInRbtc'] != 0) {
+          if (auth.contractStatusData['bprox2PriceInRbtc'] !== 0) {
             return (auth.contractStatusData['bitcoinPrice'] * web3.utils.fromWei(setNumber(auth.contractStatusData['bprox2PriceInRbtc']), 'ether'))
           } else {
             return 0;

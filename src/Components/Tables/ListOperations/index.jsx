@@ -1,13 +1,13 @@
 import React, {useContext, useEffect} from 'react';
 import 'antd/dist/antd.css';
 import './style.scss';
-import {Table, Progress, Result, Tooltip, Skeleton} from 'antd';
+import {Table, Progress, Tooltip, Skeleton} from 'antd';
 import RowDetail from "../RowDetail";
 import classnames from 'classnames';
 import api from '../../../services/api';
 import Moment from 'react-moment';
 import { useState } from 'react'
-import {readJsonTable, setNumber, myParseDate, getDatasMetrics, TokenNameNewToOld, TokenNameOldToNew} from '../../../Helpers/helper'
+import {readJsonTable, myParseDate, TokenNameNewToOld, TokenNameOldToNew} from '../../../Helpers/helper'
 import {config} from '../../../Config/config';
 import Copy from "../../Page/Copy";
 import { useTranslation } from "react-i18next";

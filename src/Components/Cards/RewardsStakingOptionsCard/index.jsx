@@ -3,7 +3,6 @@ import {Row, Col, Tabs, Button, Table, Alert, Skeleton} from 'antd';
 import moment from "moment";
 import PerformanceChart from '../../../Components/PerformanceChart';
 import { LargeNumber } from '../../LargeNumber';
-//import CoinSelect from '../../Form/CoinSelect';
 import StakingOptionsModal from '../../Modals/StakingOptionsModal';
 import { AuthenticateContext } from '../../../Context/Auth';
 import BigNumber from "bignumber.js";
@@ -13,7 +12,6 @@ import InputWithCurrencySelector from '../../Form/InputWithCurrencySelector';
 import {config} from '../../../Config/config';
 
 const { TabPane } = Tabs;
-// const token = "MOC";
 
 const withdrawalStatus = {
     pending: "PENDING",
@@ -184,17 +182,7 @@ export default function RewardsStakingOptions(props) {
                                 </div>
                             </Row>
                             <Row style={{ marginTop: '1em' }}>
-                                <Col xs={24}>
-                                    {/* <CoinSelect
-                                        label={t('global.RewardsOptions_AmountToStakePlaceholder', { ns: 'global' })}
-                                        value={'MOC'}
-                                        AccountData={props.AccountData}
-                                        UserBalanceData={props.UserBalanceData}
-                                        token={token}
-                                        onInputValueChange={onStakingInputValueChange}
-                                        inputValueInWei={stakingAmountInputValue}
-                                        currencyOptions={'MOC'}
-                                    /> */}
+                                <Col xs={24}>                                    
                                     <InputWithCurrencySelector
                                         cleanInputCount={cleanInputCount}
                                         title={t("global.RewardsOptions_AmountToStakePlaceholder")}
@@ -285,14 +273,7 @@ export default function RewardsStakingOptions(props) {
                                     maxValueAllowedInWei={stackedBalance}
                                     showMaxValueAllowed
                                     validate={auth}
-                                />
-                                {/* <CoinSelect
-                                    label={t('global.RewardsOptions_AmountToUnstakePlaceholder', { ns: 'global' })}
-                                    value={token}
-                                    AccountData={props.AccountData}
-                                    onInputValueChange={() => setUnstakingAmountInputValue(stackedBalance)}
-                                    inputValueInWei={unstakingAmountInputValue}
-                                />*/ }
+                                />                               
                             </Col>
                         </Row>
                         <Row style={{ marginTop: '1em' }} className="typography">

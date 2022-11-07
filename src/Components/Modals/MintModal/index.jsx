@@ -16,12 +16,10 @@ import {
 import Copy from "../../Page/Copy";
 import { getCurrencyDetail } from '../../../Helpers/currency';
 import { LargeNumber } from '../../LargeNumber';
-//import {formatLocalMap2} from '../../../Helpers/Formats';
 import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";
 import { config } from '../../../Config/config';
-//import {setNumber} from "../../../Helpers/helper";
 import Web3 from "web3";
 import IconDownArrow from './../../../assets/icons/d-arrow.png';
 import IconTorque from './../../../assets/icons/torq.png';
@@ -67,13 +65,7 @@ export default function MintModal(props) {
   const [transaction, setTransaction] = useState(false);
   const [txtTransaction, setTxtTransaction] = useState('PENDING');
   const auth = useContext(AuthenticateContext);
-  const tokenNameExchange = exchanging.currencyCode
-    ? getCurrencyDetail(exchanging.currencyCode).longNameKey
-    : '';
-  const tokenNameReceive = receiving.currencyCode
-    ? getCurrencyDetail(receiving.currencyCode).longNameKey
-    : '';
-
+  
   const [currentHash, setCurrentHash] = useState(null);
   const [comment, setComment] = useState('');
   const [showError, setShowError] = useState(false);
@@ -382,9 +374,9 @@ export default function MintModal(props) {
   const [buttonClose, setButtonClose] = useState(true);
 
   const cancelButton = () => {
-    if(confirmModal==false){
+    if(confirmModal===false){
       if( showTransaction ){
-        if( txtTransaction!= 'SUCCESSFUL' && txtTransaction!= 'REVIEW' ){
+        if( txtTransaction!== 'SUCCESSFUL' && txtTransaction!== 'REVIEW' ){
           setConfirmModal(true)
           setButtonClose(false)
         }else{
@@ -558,11 +550,11 @@ export default function MintModal(props) {
                       return <p className={'Transaction_confirmation'}>{t(`${AppProject}.PleaseReviewYourWallet`, {ns: ns})}</p>
                     }
                   case 'PENDING':
-                      return <><p className={'text-align-center'}><img src={IconStatusPending} width={50} height={50} className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
+                      return <><p className={'text-align-center'}><img src={IconStatusPending} width={50} height={50} alt="pending" className='img-status rotate'/>.</p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
                   case 'SUCCESSFUL':
-                    return <><p className={'text-align-center'}><img width={50} height={50} src={IconStatusSuccess} alt="ssa" className={'img-status'}/></p><p className={'Operation_successful'}>{t('global.Operation_successful')}</p></>;
+                    return <><p className={'text-align-center'}><img width={50} height={50} src={IconStatusSuccess} alt="success" className={'img-status'}/></p><p className={'Operation_successful'}>{t('global.Operation_successful')}</p></>;
                   default:
-                    return <><p className={'text-align-center'}><img width={50} height={50} src={IconStatusError} alt="ssa" className={'img-status'}/></p><p className={'Operation_failed'}>{t('global.Operation_failed')}</p></>;
+                    return <><p className={'text-align-center'}><img width={50} height={50} src={IconStatusError} alt="error" className={'img-status'}/></p><p className={'Operation_failed'}>{t('global.Operation_failed')}</p></>;
                 }
               })()}
             </div>

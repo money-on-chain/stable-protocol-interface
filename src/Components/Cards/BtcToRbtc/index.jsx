@@ -1,5 +1,5 @@
 import { Row, Col, Button } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../../Context/Auth';
 import {useTranslation} from "react-i18next";
@@ -8,8 +8,7 @@ import { ReactComponent as LogoIconRBTC } from '../../../assets/icons/icon-btc_t
 
 
 export default function BtcToRbtc(props) {
-
-    const auth = useContext(AuthenticateContext);
+    
     const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
     const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
     const AppProject = config.environment.AppProject;

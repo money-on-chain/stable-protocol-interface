@@ -10,67 +10,43 @@ import BigNumber from 'bignumber.js';
 import { config } from '../../../../Config/config';
 import { ReactComponent as LogoIcon } from '../../../../assets/icons/icon-reserve.svg';
 
-const AppProject = config.environment.AppProject;
 const BalancePieColors = config.home.walletBalancePie.colors;
 
 function Reserve(props) {
     const auth = useContext(AuthenticateContext);
-    const { accountData, convertToken } = auth;
+    const { convertToken } = auth;
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
     const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500;
-    const totalRISKPROInUSD = convertToken("TC", "USD", props.totalRISKPRO);
-    const totalRISKPROXInUSD = convertToken("TX", "USD", props.totalRISKPROX);
-    const totalUSD = totalRISKPROInUSD ? totalRISKPROInUSD?.plus(totalRISKPROXInUSD?.plus(props.totalSTABLE)) : 0;
+    const totalTCInUSD = convertToken("TC", "USD", props.totalTC);
+    const totalTXInUSD = convertToken("TX", "USD", props.totalTX);
+    const totalUSD = totalTCInUSD ? totalTCInUSD?.plus(totalTXInUSD?.plus(props.totalTP)) : 0;
     const totalRBTC = convertToken("TP", "RESERVE", totalUSD);
 
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke)
     },[auth]);
-
-    /*
-    const setRbtc = () => {
-        if (auth.userBalanceData && accountData.Balance) {
-            const b0BproAmount = (auth.contractStatusData['b0BproAmount'] / 1000000000000000000).toFixed(6);
-            const docAvailableToRedeem = (auth.contractStatusData['docAvailableToRedeem'] / 1000000000000000000000).toFixed(5);
-            return { b0BproAmount: b0BproAmount, docAvailableToRedeem: docAvailableToRedeem }
-        } else {
-            return { b0BproAmount: 0, docAvailableToRedeem: 0 }
-        }
-    };*/
-
-    /*
-    const getPie = () => {
-        if (auth.userBalanceData && accountData.Balance) {
-            const data = [
-                { name: 'Group A', value: Number(setRbtc()['docAvailableToRedeem']), set1: ' RBTC', set2: ' DOC', class: 'STABLE' },
-                { name: 'Group B', value: Number(setRbtc()['b0BproAmount']), set1: ' RBTC', set2: ' BPRO', class: 'RISKPRO' }
-            ];
-
-            return data;
-        }
-    };*/
-
-    const toShow = ({ totalSTABLE, totalRISKPRO, totalRISKPROX }) => {
+    
+    const toShow = ({ totalTP, totalTC, totalTX }) => {
         return [
           {
             currencyCode: "TC",
-            balance: totalRISKPRO,
+            balance: totalTC,
           },
           {
             currencyCode: "TX",
-            balance: totalRISKPROX
+            balance: totalTX
           },
           {
             currencyCode: "TP",
-            balance: totalSTABLE
+            balance: totalTP
           }
         ]
     };
 
-    const tokensToShow = toShow({ totalSTABLE: props.totalSTABLE, totalRISKPRO: props.totalRISKPRO, totalRISKPROX: props.totalRISKPROX });
+    const tokensToShow = toShow({ totalTP: props.totalTP, totalTC: props.totalTC, totalTX: props.totalTX });
 
     let totalBalance = new BigNumber(0);
     let balancesData = tokensToShow.map(({balance, currencyCode}) => {

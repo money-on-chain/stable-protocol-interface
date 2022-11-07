@@ -1,5 +1,4 @@
 import React from 'react';
-import { useContext } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
 import Skeleton from '../Layouts/Skeleton';

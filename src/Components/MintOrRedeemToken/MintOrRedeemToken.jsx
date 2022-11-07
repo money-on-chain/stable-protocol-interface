@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Web3 from 'web3';
 import {
     notification,
     Popover,
@@ -9,7 +8,6 @@ import {
     Card,
     Switch, Skeleton
 } from 'antd';
-// import ArrowRightOutlined from '@ant-design/icons/ArrowRightOutlined';
 import { LoadingOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import {
     getMaxMintableBalance,
@@ -19,26 +17,13 @@ import {
 } from '../../Helpers/exchangeManagerHelper';
 import { LargeNumber } from '../LargeNumber';
 import InputWithCurrencySelector from '../Form/InputWithCurrencySelector';
-// import ButtonPrimary from '../../atoms/ButtonPrimary/ButtonPrimary';
-// import ButtonSecondary from '../../atoms/ButtonSecondary/ButtonSecondary';
-// import ConfirmTransactionModal from '../../molecules/ConfirmTransactionModal/ConfirmTransactionModal';
-// import { userAccountIsLoggedIn } from '../../../../api/helpers/userAccountHelper';
-//import { getExchangeMethod } from '../../Helpers/exchangeHelper';
 import {
   formatVisibleValue,
   formatValueToContract,
-  //formatValueWithContractPrecision,
   formatLocalMap2
 } from '../../Helpers/Formats';
-// import { approveReserve } from '../../Lib/nodeManager/nodeManagerRRC20';
-// import { approveMoCToken } from '../../Lib/nodeManager/nodeManagerBase';
 import BigNumber from 'bignumber.js';
 import MintModal from '../Modals/MintModal';
-// import tokenPricesContainer from '../../../containers/tokenPricesContainer';
-// import mocStateContainer from '../../../containers/mocStateContainer';
-// import userStateContainer from '../../../containers/userStateContainer';
-// import Card from '../../atoms/Card/Card';
-// import Switch from '../../atoms/Switch/Switch';
 import {useTranslation} from "react-i18next";
 import { AuthenticateContext } from '../../Context/Auth';
 import { config } from './../../Config/config';
@@ -50,18 +35,10 @@ const MintOrRedeemToken = (props) => {
   const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
   const AppProject = config.environment.AppProject;
   const auth = useContext(AuthenticateContext);
-  //const {web3} = auth;
-
+  
   /* Context props */
   const { token, mocState, userState,style } = props;
-
-  /*
-  let reservePrice;
-  if (mocState && mocState.bitcoinPrice) {
-      reservePrice = mocState.bitcoinPrice;
-  }
-  */
-
+  
   /* State variable */
   const [currencyYouExchange, setCurrencyYouExchange] = useState('RESERVE');
   const [valueYouExchange, setValueYouExchange] = useState('0');
@@ -76,9 +53,7 @@ const MintOrRedeemToken = (props) => {
   const [ShowModalAllowanceReserve, setShowModalAllowanceReserve] = useState(false);
   const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] = useState('Confirm');
   const [tolerance, setTolerance] = useState('0.1');
-
-  let userComment = '';
-  let userTolerance = '';
+  
   const userAccountIsLoggedIn = mocState;
 
     const [loading, setLoading] = useState(true);
@@ -221,63 +196,10 @@ const MintOrRedeemToken = (props) => {
     }
     return { interestRate, interestValue };
   };
-
-  /*
-  const onConfirmTransaction = async data => {
-    userComment = data.comment;
-    userTolerance = data.tolerance;
-
-    const { appMode } = window;
-    // In rrc20 mode show allowance when need it
-    if (appMode === 'RRC20') {
-      const userAllowance = await auth.getReserveAllowance(window.address);
-      if (valueYouExchange > userAllowance) {
-        allowanceReserveModalShow(true);
-        return;
-      }
-    }
-    // onConfirmTransactionFinish();
-  };
-  */
-
-  /* const onConfirmTransactionFinish = async () => {
-    const exchangeMethod = getExchangeMethod(
-      currencyYouExchange,
-      currencyYouReceive,
-      `${commission.currencyCode}_COMMISSION`
-    );
-    const userAmount = formatValueWithContractPrecision(valueYouExchange, 'RESERVE');
-    const userToleranceAmount = formatValueToContract(
-      new BigNumber(userTolerance)
-          .multipliedBy(userAmount)
-          .div(100)
-          .toFixed(),
-      'RESERVE'
-    );
-
-    exchangeMethod(userAmount, userToleranceAmount, callback).then((res) => console.log(res, callback))
-    // setConfirmingTransaction(false);
-  }; */
-
-  /* const callback = (error, transactionHash) => {
-    setCurrentHash(transactionHash);
-  }; */
-
+  
   const allowanceReserveModalClose = async () => {
     setShowModalAllowanceReserve(false);
   };
-
-  /*
-  const allowanceReserveModalShow = async () => {
-    setShowModalAllowanceReserve(true);
-  };
-  */
-
-  /*
-  const allowanceReserveModalModeWaiting = async () => {
-    setModalAllowanceReserveMode('Waiting');
-  };
-  */
 
   const renderAllowanceReserveModalConfirm = () => {
     return (
@@ -654,7 +576,7 @@ const MintOrRedeemToken = (props) => {
         }
       // loading={loading}
       className="Card MintOrRedeemToken"
-      style={(style=='minHeight')? {'minHeight':'375px'}: {'height':'100%'}}
+      style={(style==='minHeight')? {'minHeight':'375px'}: {'height':'100%'}}
     >
       {auth.convertToken && mocState && (
         <>

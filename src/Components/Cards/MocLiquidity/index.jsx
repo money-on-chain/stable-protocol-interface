@@ -12,12 +12,10 @@ import api from "../../../services/api";
 import {config} from "../../../Config/config";
 import OperationStatusModal from "../../Modals/OperationStatusModal/OperationStatusModal";
 import moment from 'moment';
-//import {getGasPrice} from "../../../Lib/integration/utils";
 
 
 function MocLiquidity(props) {
-    const auth = useContext(AuthenticateContext);
-    const {web3} = auth;
+    const auth = useContext(AuthenticateContext);    
     const [t, i18n] = useTranslation(["global", 'moc'])
     const [callAgent, setCallAgent] = useState(false);
     const [incentiveState, setIncentiveState] = useState(null);

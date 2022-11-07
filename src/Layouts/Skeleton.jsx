@@ -6,7 +6,6 @@ import LoginButton from '../Components/Auth/LoginButton/index';
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthenticateContext } from '../Context/Auth';
-//import { formatVisibleValue } from '../Helpers/Formats';
 import HeaderCoins from "../Components/Page/HeaderCoins";
 import { useTranslation } from "react-i18next";
 import { config } from '../Config/config';
@@ -21,8 +20,7 @@ const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 
-export default function Skeleton() {
-    const auth = useContext(AuthenticateContext);
+export default function Skeleton() {    
     const navigate = useNavigate();
     const location = useLocation();
     const { accountData, balanceRbtc } = useContext(AuthenticateContext);

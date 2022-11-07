@@ -222,8 +222,8 @@ export default function Step3(props) {
         <Fragment>
             <div className="alert-message-modal">
                 <div className="alert-message">
-                    { (labelTrx=='Pending' || labelTrx=='Mined' || labelTrx=='Failed' || labelTrx=='Waiting'
-                        || labelTrx=='Initializing' || labelTrx=='Validating') &&
+                    { (labelTrx==='Pending' || labelTrx==='Mined' || labelTrx==='Failed' || labelTrx==='Waiting'
+                        || labelTrx==='Initializing' || labelTrx==='Validating') &&
                         <Fragment>
                             <p style={{'display':'flex','width':'100%'}}>
                                 <img style={{'flexGrow':'0'}} className={'rotate'} src={iconStatus} alt="" width={28} height={28}/>

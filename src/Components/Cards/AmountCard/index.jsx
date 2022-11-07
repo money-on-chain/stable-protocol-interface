@@ -37,11 +37,10 @@ export default function AmountCard(props) {
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke)
     },[auth.userBalanceData]);
+    
     if (!auth) return null;
-    const {
-        tokenName = '',
-        color = '',
-        titleName = '' } = props;
+    
+    const { tokenName = '' } = props;
 
     const userBalance = getUserBalance(auth, i18n, tokenName);
 

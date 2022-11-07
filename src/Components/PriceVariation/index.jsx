@@ -1,19 +1,11 @@
 
 import React, {Fragment, useContext} from 'react';
 import { Tooltip } from 'antd';
-import {
-    //formatVisibleValue,
-    formatValueVariation,
-    //formatPerc,
-    //adjustPrecision,
-    //formatLocalMap2
-} from '../../Helpers/Formats';
-//import i18n from "i18next";
+import { formatValueVariation } from '../../Helpers/Formats';
 import {AuthenticateContext} from "../../Context/Auth";
 import web3 from "web3";
 import {setNumber} from "../../Helpers/helper";
 import {useTranslation} from "react-i18next";
-//import {LargeNumber} from "../LargeNumber";
 import {LargeNumberF3} from "../LargeNumberF3";
 import { config } from '../../Config/config';
 
@@ -60,15 +52,7 @@ export default function PriceVariation(props) {
     };
 
     const { currencyName, currencyCode, priceVariation, blockHeight } = props;
-   /* const {
-        isDailyVariation,
-        value,
-        blockHeightReference,
-        valueReference, blockHeight,
-    } = props.priceVariation; */
-    // const formattedRefValue = formatVisibleValue(valueReference, currencyCode, 'en');
-    // const formattedRefValue = formatVisibleValue(interestRate, 'USDPrice', formatLocalMap2[i18n.languages[0]]);
-
+   
     const isPositive = priceVariation.current > priceVariation.day;
     const sign = isPositive ? '+' : '';
     const color = isPositive ? '#3fcb97' : '#f2316a';

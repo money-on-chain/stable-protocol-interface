@@ -1,14 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthenticateContext } from '../../../../Context/Auth';
 import { useTranslation } from "react-i18next";
-import { Skeleton, Tooltip } from 'antd';
+import { Skeleton } from 'antd';
 import { LargeNumber } from '../../../LargeNumber';
 import {config} from '../../../../Config/config';
 import { ReactComponent as LogoIcon } from '../../../../assets/icons/icon-tp.svg';
-/*
-import web3 from "web3";
-import {setNumber, setToLocaleString} from "../../../../Helpers/helper";
-import BigNumber from "bignumber.js";*/
 
 function TP(props) {
     const auth = useContext(AuthenticateContext);

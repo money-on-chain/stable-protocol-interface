@@ -1,4 +1,4 @@
-import React, {Fragment, useContext, useEffect} from 'react';
+import React, {Fragment, useContext } from 'react';
 import SystemStatus from '../../Components/Cards/Metrics/SystemStatus'
 import Reserve from '../../Components/Cards/Metrics/Reserve'
 import TG from '../../Components/Cards/Metrics/TG'
@@ -8,7 +8,7 @@ import TC from '../../Components/Cards/Metrics/TC'
 import Liquidity from '../../Components/Cards/Metrics/Liquidity'
 import NextSettlement from '../../Components/Cards/Metrics/NextSettlement'
 import BigNumber from 'bignumber.js';
-import {Row, Col, Tooltip, Alert} from 'antd';
+import {Row, Col, Alert} from 'antd';
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../Context/Auth';
 import { getMaxAvailableOfCurrencyCode } from '../../Helpers/currency';
@@ -73,8 +73,7 @@ function Metrics(props) {
     const bproDiscountPriceUsd =
         (convertToken && convertToken('RESERVE', 'USD', bproDiscountPriceRBTC)) || 0;
 
-    const totalDocAmount = b0DocAmount.plus(x2DocAmount);
-    //const totalDocInRBTC = (convertToken && convertToken('STABLE', 'RESERVE', totalDocAmount)) || 0;
+    const totalDocAmount = b0DocAmount.plus(x2DocAmount);    
     const totalBproInRBTC = b0BproAmount.multipliedBy(new BigNumber(bproPriceInRbtc).div(10 ** 18));
     const totalBpro = (convertToken && convertToken('RESERVE', 'TC', totalBproInRBTC)) || 0;
 
@@ -82,9 +81,7 @@ function Metrics(props) {
         new BigNumber(bprox2PriceInRbtc).div(10 ** 18)
     ); //new BigNumber(x2BTCAmount);
     const totalBprox = (convertToken && convertToken('RESERVE', 'TX', totalBproxInRBTC)) || 0;
-
-    //const totalBproInUSD = (convertToken && convertToken('RESERVE', 'USD', totalBproInRBTC)) || 0;
-    //const totalBproxInUSD = (convertToken && convertToken('RESERVE', 'USD', totalBproxInRBTC)) || 0;
+    
     const adjustedTargetCoverage = parseFloat(
         b0TargetCoverage * (bitcoinPrice / Math.min(bitcoinPrice, bitcoinMovingAverage))
     );
@@ -107,9 +104,9 @@ function Metrics(props) {
                 <Col className={'RBTCSection'}>
                     <Reserve
                         rbtcPrice={bitcoinPrice}
-                        totalSTABLE={totalDocAmount}
-                        totalRISKPRO={totalBpro}
-                        totalRISKPROX={totalBprox}
+                        totalTP={totalDocAmount}
+                        totalTC={totalBpro}
+                        totalTX={totalBprox}
                         EMA={bitcoinMovingAverage}
                         targetCoverage={adjustedTargetCoverage}
                         b0BTCInrateBag={b0BTCInrateBag}

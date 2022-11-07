@@ -7,8 +7,7 @@ import { Skeleton } from 'antd';
 import {config} from '../../../../Config/config';
 
 function NextSettlement() {
-    const auth = useContext(AuthenticateContext);
-    const { accountData } = auth;
+    const auth = useContext(AuthenticateContext);    
     const [daysHours, setDaysHours] = useState(null);
     const [crono, setCrono] = useState(2);
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
@@ -58,19 +57,19 @@ function NextSettlement() {
                 setSettlementBlock(Number(getDatasMetrics(auth)['blockHeight']) + Number(getDatasMetrics(auth)['blocksToSettlement']))
             }
         }, crono);
-    }, [auth, daysHours]);
+    }, [auth, daysHours, crono]);
 
     useEffect(() => {
         setBlocksToSettlement(getDatasMetrics(auth)['blocksToSettlement'])
-    }, [getDatas['blocksToSettlement']]);
+    }, [auth, getDatas['blocksToSettlement']]);
 
     useEffect(() => {
         setBlockHeight(getDatasMetrics(auth)['blockHeight'])
-    }, [getDatas['blockHeight']]);
+    }, [auth, getDatas['blockHeight']]);
 
     useEffect(() => {
         setSettlementBlock(Number(getDatasMetrics(auth)['blockHeight']) + Number(getDatasMetrics(auth)['blocksToSettlement']))
-    }, [getDatas['blockHeight'], getDatas['blocksToSettlement']]);
+    }, [auth, getDatas['blockHeight'], getDatas['blocksToSettlement']]);
 
 
     return (
@@ -78,8 +77,7 @@ function NextSettlement() {
             <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
                 {t(`${AppProject}.metrics.Settlement.title`, { ns: ns })}
             </h3>
-            {/*<h2>{position}</h2>*/}
-
+            
             <div className="CardMetricContent BProThemeMetric">
                {!loading
                 ? <>
@@ -91,11 +89,9 @@ function NextSettlement() {
                         <h5>{t(`${AppProject}.metrics.Settlement.lastUpdateHeight`, { ns: ns })}</h5>
                         {blockHeight}
                     </div>
-                    <div className="separator" /><div>
-                        {/*<h5>Blocks to <br /> settlement</h5>*/}
+                    <div className="separator" /><div>                        
                         <h5>{t(`${AppProject}.metrics.Settlement.blocksToSettlement`, { ns: ns })}</h5>
-                        {blocksToSettlement}
-                        {/*<h5>Settlement will <br /> happen on block</h5>*/}
+                        {blocksToSettlement}                        
                         <h5>{t(`${AppProject}.metrics.Settlement.blockSettlement`, { ns: ns })}</h5>
                         {settlementBlock}
                     </div></>

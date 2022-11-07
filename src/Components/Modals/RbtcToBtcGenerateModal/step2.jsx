@@ -8,12 +8,9 @@ import { ReactComponent as LogoIconReserve } from '../../../assets/icons/icon-re
 
 
 function Step2(props) {
-
-    // const {visible = false, handleClose = () => {}} = props;
-
+    
     const amountInput = useRef();
     const {auth}= props;
-    //const {web3}= auth;
 
     const [currentStep, setCurrentStep]= useState(2);
     const [rbtcAmount, setRbtcAmount]= useState("");

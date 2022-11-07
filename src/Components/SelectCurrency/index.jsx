@@ -20,7 +20,7 @@ export default function SelectCurrency(props) {
   }));
   const option = options.find(it => it.value === value);
   const optionsFiltered = options.filter(it => currencyOptions.includes(it.value));
-    const auth = useContext(AuthenticateContext);
+  const auth = useContext(AuthenticateContext);
   return (
     <div className={`SelectCurrency ${disabled ? 'disabled' : ''}`}>
       <Select

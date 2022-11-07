@@ -1,57 +1,16 @@
-import { Row, Col, Tooltip } from 'antd';
-//import { InfoCircleOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
-import { useContext } from 'react';
-import { AuthenticateContext } from '../../../Context/Auth';
+import { Row } from 'antd';
+import React from 'react';
 import { useTranslation } from "react-i18next";
 import { config} from '../../../Config/config';
 import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-sovryn_fastbtc.svg';
 import { ReactComponent as LogoIconRBTC } from '../../../assets/icons/icon-rbtclogo.svg';
 
-
-//import BigNumber from "bignumber.js";
-
 export default function Sovryn(props) {
-    const {
-        tokenName = '',
-        color = '',
-        titleName = '' } = props;
-
-    const auth = useContext(AuthenticateContext);
+        
     const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
     const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
     const AppProject = config.environment.AppProject;
-
-    /*
-    const getBalance = () => {
-        if (auth.userBalanceData) {
-            switch (tokenName) {
-                case 'stable':
-                    return auth.userBalanceData['docBalance'];
-                case 'riskpro':
-                    return auth.userBalanceData['bproBalance'];
-                case 'riskprox':
-                    return auth.userBalanceData['bprox2Balance'];
-                default:
-                    throw new Error('Invalid token name');
-            }
-        }
-    };*/
-    /*
-    const getBalanceUSD = () => {
-        if (auth.userBalanceData) {
-            switch (tokenName) {
-                case 'stable':
-                    return Math.round(auth.userBalanceData['docBalance']).toFixed(2);
-                case 'riskpro':
-                    return auth.contractStatusData["bproPriceInUsd"];
-                case 'riskprox':
-                    return new BigNumber(auth.contractStatusData['bitcoinPrice'] * auth.userBalanceData['bprox2Balance']).toFixed(4);
-                default:
-                    throw new Error('Invalid token name');
-            }
-        }
-    };*/
+    
     return (
         <div className="Card FastCard">
             <Row>

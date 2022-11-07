@@ -1,8 +1,8 @@
 //import MintCard from '../../../Components/Cards/MintCard';
 import AmountCard from '../../../Components/Cards/AmountCard';
 import YourAddressCard from '../../../Components/Cards/YourAddressCard';
-import {Row, Col, Switch, Alert} from 'antd';
-import React, {Fragment, useContext, useEffect} from 'react';
+import {Row, Col, Alert} from 'antd';
+import React, {Fragment, useContext} from 'react';
 import ListOperations from "../../../Components/Tables/ListOperations";
 import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../Context/Auth';
@@ -41,15 +41,7 @@ export default function Mint(props) {
                 <Col xs={24} md={12} xl={5}>
                     <YourAddressCard height="23.4em" tokenToSend="TC" currencyOptions={['RESERVE', 'TC']} />
                 </Col>
-                <Col xs={24} xl={14}>
-                    {/* <MintCard
-                        token={'RISKPRO'}
-                        AccountData={auth.accountData}
-                        UserBalanceData={auth.userBalanceData}
-                        StatusData={auth.contractStatusData}
-                        currencyOptions={['RESERVE', 'RISKPRO']}
-                        color="#ef8a13"
-                    /> */}
+                <Col xs={24} xl={14}>                    
                     <MintOrRedeemToken
                         token={'TC'}
                         AccountData={auth.accountData}

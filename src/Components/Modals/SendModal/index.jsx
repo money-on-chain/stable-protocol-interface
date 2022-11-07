@@ -5,7 +5,6 @@ import React, { useEffect, useState, useContext } from "react";
 import debounce from 'lodash.debounce';
 import web3 from 'web3';
 import { Row, Col, Modal, Button } from 'antd';
-//import CoinSelect from "../../Form/CoinSelect";
 import InputAddress from "../../InputAddress";
 import InputWithCurrencySelector from "../../Form/InputWithCurrencySelector";
 import { getBalanceAndTransferMethodOfTokenToSend } from '../../../Helpers/currency';
@@ -28,9 +27,6 @@ export default function SendModal(props) {
   //const { docBalance = 0, bproBalance = 0, bprox2Balance = 0, mocBalance = 0 } = props.UserBalanceData ? props.UserBalanceData : {};
   const [address, setAddress] = useState('');
   const [currencyYouReceive, setCurrencyYouReceive] = useState('');
-  /* const [currencyYouExchange, setCurrencyYouExchange] = useState(
-    props.currencyOptions[0]
-  ); */
 
   const [addTotalSend, setAddTotalSend] = useState('0.0000');
   const [visible, setVisible] = useState(false);
@@ -83,13 +79,7 @@ export default function SendModal(props) {
       }
     }
   };
-
-  /*
-  const setDefaultState = () => {
-    getDefaultState();
-  }
-  */
-
+  
   const showModal = () => {
     setVisible(true);
   };
@@ -239,7 +229,7 @@ export default function SendModal(props) {
         >
           <div>
             {visibleAlertInvalidAddress && <AlertLabel />}
-            {(statusScreen!=1 && statusScreen!=2 && statusScreen!=3 && statusScreen!=4) &&
+            {(statusScreen!==1 && statusScreen!==2 && statusScreen!==3 && statusScreen!==4) &&
             <>
               <InputAddress
                   title={t(`${AppProject}.wallets.receiverAddress`, { ns: ns })}
@@ -300,10 +290,10 @@ export default function SendModal(props) {
               </div>
             </>
             }
-            { statusScreen == 2 &&
+            { statusScreen === 2 &&
             <>
               <div style={{'textAlign':'center'}}>
-                <img src={IconStatusPending} width={50} height={50} className='img-status rotate'/>
+                <img src={IconStatusPending} width={50} height={50} alt="pending" className='img-status rotate'/>
                 <br/>
                 <br/>
                 <p className={'Transaction_confirmation'}>{t(`${AppProject}.PleaseReviewYourWallet`, {ns: ns})}</p>
@@ -312,7 +302,7 @@ export default function SendModal(props) {
               </div>
             </>
             }
-            {(statusScreen == 3 || statusScreen == 4 ) &&
+            {(statusScreen === 3 || statusScreen === 4 ) &&
             <>
               <div className={'div-txt'}>
                 <div>
@@ -328,9 +318,9 @@ export default function SendModal(props) {
                       {(() => {
                         switch (statusScreen) {
                           case 3:
-                            return <img src={IconStatusPending} width={50} height={50} className='img-status rotate'/>;
+                            return <img src={IconStatusPending} width={50} height={50} alt="pending" className='img-status rotate'/>;
                           case 4:
-                            return <img width={50} height={50} src={IconStatusSuccess} alt="ssa" className={'img-status'}/>;
+                            return <img width={50} height={50} src={IconStatusSuccess} alt="success" className={'img-status'}/>;
                         }
                       })()}
                     </div>
@@ -358,7 +348,7 @@ export default function SendModal(props) {
             }
           </div>
           <Modal visible={confirmModal} footer={null} width={450}>
-            <img className={'img-campana'} width={27} height={30} src={IconCampana}/>
+            <img className={'img-campana'} width={27} height={30} alt="alert" src={IconCampana}/>
             <div className={'div-txt'}>
               <p className={'color-08374F'}>{t('global.ModalSend_CopyTx')}</p>
               <div>

@@ -1,11 +1,8 @@
 import { Modal } from 'antd';
 import React, { useContext, useEffect, useMemo, useState, Fragment } from 'react';
 import { Button } from 'antd';
-//import WarningOutlined from '@ant-design/icons/WarningOutlined';
 import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import { AuthenticateContext } from '../../../Context/Auth';
-//import Copy from '../../../Components/Page/Copy';
-//import Web3 from "web3";
 import FastBtcBridge from "../../../Contracts/FastBtcBridge.json";
 import { toNumberFormat, btcInSatoshis, DYNAMIC_FEE_DIVISOR } from '../../../Helpers/math-helpers';
 import { useTranslation } from "react-i18next";
@@ -119,16 +116,7 @@ export default function RbtcToBtcGenerateModal(props) {
             </div>
         </div>
     );
-
-    /*
-    const footerModal = (
-        <div className="alert-message">
-            <WarningOutlined />
-            <p>{alertText}</p>
-        </div>
-    );
-    */
-
+    
     return (
         <Modal
             visible={visible}

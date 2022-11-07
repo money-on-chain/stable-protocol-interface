@@ -29,19 +29,17 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
       numericLabelParams
     );
 
-    {/* <Tooltip title={Number(amount)?.toLocaleString(formatLocalMap2[i18n.languages[0]])}>>
-    <NumericLabel {... {params }}>{value.toString()}</NumericLabel> */}
-  return (<>
-          { !isNaN(value) &&
-          <Tooltip placement={tooltip ? tooltip : 'top'} title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
-              <div className={className}>
-                  {/* <NumericLabel {... {params }}>{amount?.toString()}</NumericLabel> */}
-                  <NumericLabel {... {params }}>{value.toString()}</NumericLabel>
-                  {/*<span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>*/}
-                  <span className={'number-label'}>{includeCurrency && ` ${getCoinName(currencyCode)}`}</span>
-              </div>
-          </Tooltip>}</>
-  );
+    return (<>
+            { !isNaN(value) &&
+            <Tooltip placement={tooltip ? tooltip : 'top'} title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
+                <div className={className}>
+                    {/* <NumericLabel {... {params }}>{amount?.toString()}</NumericLabel> */}
+                    <NumericLabel {... {params }}>{value.toString()}</NumericLabel>
+                    {/*<span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>*/}
+                    <span className={'number-label'}>{includeCurrency && ` ${getCoinName(currencyCode)}`}</span>
+                </div>
+            </Tooltip>}</>
+    );
   }
 
   return (
@@ -53,7 +51,7 @@ const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams
 
 const InfoIcon = ({infoDescription}) => {
 
-    if (infoDescription != '') {
+    if (infoDescription !== '') {
         return (
             <Tooltip placement="topLeft" title={infoDescription}>
                 <DollarOutlined className="LargeNumberIcon" />
@@ -96,11 +94,12 @@ const USDValueLargeNumber = ({amountUSD, showUSD, numericLabelParams}) => {
 }
 
 const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive, showSign, showUSD, amountUSD, numericLabelParams, infoDescription, showFlat,t, i18n  }) => {
-    if (currencyCode == 'RBTC') {
-        var displayCurrencyCode = 'RBTC';
+    var displayCurrencyCode = ''
+    if (currencyCode === 'RBTC') {
+        displayCurrencyCode = 'RBTC';
         currencyCode = 'RESERVE';
     } else {
-        var displayCurrencyCode = t(`${AppProject}.Tokens_${currencyCode}_code`, { ns: ns });
+        displayCurrencyCode = t(`${AppProject}.Tokens_${currencyCode}_code`, { ns: ns });
     }
 
     if (amount !== null && amount !== '' && !Number.isNaN(Number(amount))) {
@@ -170,7 +169,7 @@ DetailedLargeNumber.defaultProps = {
 }
 
 const getExplainByEvent = ({ event, amount, amount_rbtc, status, token_involved, t, i18n }) => {
-    if (status != 'confirmed') {
+    if (status !== 'confirmed') {
         return '--';
     }
 

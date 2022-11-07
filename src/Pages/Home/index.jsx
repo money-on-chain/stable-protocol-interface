@@ -1,14 +1,13 @@
 import TokenSummaryCard from '../../Components/Cards/TokenSummaryCard';
 
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../Context/Auth';
 import WalletBalance from '../../Components/Cards/WalletBalance';
-import {Row, Col, Alert, Tooltip} from 'antd';
+import {Row, Alert } from 'antd';
 import MocAmount from "../../Components/Cards/MocAmount";
 import MocLiquidity from "../../Components/Cards/MocLiquidity";
 import ListOperations from "../../Components/Tables/ListOperations";
-//import data_json from "../../services/webapp_transactions_list.json";
 import {useTranslation} from "react-i18next";
 import { config } from './../../Config/config';
 
@@ -21,8 +20,7 @@ function Home(props) {
     const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
-    const data_row_coins2= [];
-
+    
     return (
 
         <Fragment>

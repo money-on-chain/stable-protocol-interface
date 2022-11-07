@@ -41,8 +41,7 @@ function WalletBalancePie(props) {
     const AppProject = config.environment.AppProject;
 
     const auth = useContext(AuthenticateContext);
-    //const { accountData } = useContext(AuthenticateContext);
-
+    
     const getBalanceUSD = () => {
         if (auth.userBalanceData) {
 

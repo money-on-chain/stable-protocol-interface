@@ -143,13 +143,7 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
 
   const valueYouExchangeInRESERVE = convertToken(currencyYouExchange, "RESERVE", valueYouExchange);
   const valueYouExchangeInMOC = convertToken("RESERVE", "TG", valueYouExchangeInRESERVE);
-
-  console.log("DEBUG")
-  console.log(valueYouExchangeInRESERVE)
-  console.log(valueYouExchangeInMOC)
-  console.log(currencyYouExchange)
-  console.log(currencyYouReceive)
-
+  
   const commissionRateForMOC = BigNumber(
     commissionRates[getTransactionType(currencyYouExchange, currencyYouReceive, "MOC_COMMISSION")])
     .plus(vendor.markup);
@@ -248,14 +242,6 @@ const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState) => {
   }
   return response;
 }
-
-/*
-const isAmountBiggerThanMax = (amount, currency, maxAvailable) => {
-  const bdInputAmount = new BigNumber(formatValueToContract(amount, currency));
-  return !bdInputAmount.isNaN() && bdInputAmount.isGreaterThan(maxAvailable);
-};
-*/
-//const isAmountZero = amount => amount.eq(BigNumber('0'));
 
 export {
   convertAmount,
