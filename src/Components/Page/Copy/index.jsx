@@ -2,6 +2,8 @@ import { notification } from 'antd';
 import {config} from "../../../Config/config";
 import React from "react";
 
+import IconCopy from './../../../assets/icons/copy2.png';
+
 export default function Copy(props) {
 
     const {textToShow = '', textToCopy = '', fastBTC = false, typeUrl=''} = props;
@@ -29,7 +31,7 @@ export default function Copy(props) {
             {textToCopy && <img onClick={onClick}
                  width={17}
                  height={17}
-                 src={process.env.REACT_APP_PUBLIC_URL+'/img/copy2.png'}
+                 src={IconCopy}
                  alt=""
                  style={{marginRight: 10, cursor: 'pointer','flexGrow':'0','marginTop':'3px'}}
             />}
