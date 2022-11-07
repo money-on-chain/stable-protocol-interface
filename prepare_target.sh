@@ -5,7 +5,7 @@ echo "Preparing to run project: $1"
 echo "Copying public files ..."
 cp public/projects/$1/*.* public/
 cp public/projects/$1/icons/ public/ -R
-cp public/projects/$1/img/ public/ -R
+#cp public/projects/$1/img/ public/ -R
 echo "Copying public files done!"
 
 # Assets
