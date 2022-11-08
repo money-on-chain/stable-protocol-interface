@@ -61,25 +61,6 @@ export default function SendModal(props) {
     setInputIsValid(true);
   };
 
-  const changeValueYouAddTotal = (tokenToSend) => {
-    if( tokenToSend===undefined || tokenToSend==''){
-      return  'MOC'
-    }else{
-      switch (tokenToSend) {
-        case 'TP':
-          return 'DOC'
-        case 'TC':
-          return  'BPRO'          
-        case 'TX':
-          return 'BPROX'
-        case 'TG':
-          return 'MOC'          
-        default:
-          return 'RBTC'
-      }
-    }
-  };
-  
   const showModal = () => {
     setVisible(true);
   };
@@ -268,7 +249,7 @@ export default function SendModal(props) {
                     <div style={{ width: '100%','display':'inline-block' }}>
                       <p className={'Transaction_ID'} style={{'float':'left'}}>Send</p>
                       <div style={{'float':'right'}}>
-                        <p className={'copy-txt'}>{formatVisibleValue(amountToSend, tokenToSend, formatLocalMap2['en'])}&nbsp;&nbsp;&nbsp;<span>{changeValueYouAddTotal(tokenToSend)}</span></p>
+                        <p className={'copy-txt'}>{formatVisibleValue(amountToSend, tokenToSend, formatLocalMap2['en'])}&nbsp;&nbsp;&nbsp;<span>{t(`${AppProject}.Tokens_${tokenToSend}_code`, { ns: ns })}</span></p>
                       </div>
                     </div>
                     <br/>

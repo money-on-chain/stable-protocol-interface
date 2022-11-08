@@ -12,7 +12,7 @@ const getBalanceAndTransferMethodOfTokenToSend = (userState, currencyCode, auth)
     case 'TC':
       return {
         amount: userState?.bproBalance,
-        methodTransferTo: auth?.interfaceTCTo,
+        methodTransferTo: auth?.interfaceTransferTCTo,
       };
     case 'TP':
       return {
