@@ -33,7 +33,7 @@ const TransactionTypeIdsRRC20 = {
 const buyCurrencyMap = {
   TX: {
     RESERVE: {
-      MOC_COMMISSION: {
+      TG_COMMISSION: {
         APP_MODE_MoC: {
           exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.REDEEM_BTCX_FEES_MOC
@@ -58,7 +58,7 @@ const buyCurrencyMap = {
   },
   TC: {
     RESERVE: {
-      MOC_COMMISSION:{
+      TG_COMMISSION:{
         APP_MODE_MoC: {
           exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.REDEEM_BPRO_FEES_MOC
@@ -84,7 +84,7 @@ const buyCurrencyMap = {
   },
   TP: {
     RESERVE: {
-      MOC_COMMISSION:{
+      TG_COMMISSION:{
         APP_MODE_MoC: {
           exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.REDEEM_DOC_FEES_MOC
@@ -110,7 +110,7 @@ const buyCurrencyMap = {
   },
   RESERVE: {
     TC: {
-      MOC_COMMISSION:{
+      TG_COMMISSION:{
         APP_MODE_MoC: {
           exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.MINT_BPRO_FEES_MOC
@@ -134,7 +134,7 @@ const buyCurrencyMap = {
       }
     },
     TP: {
-      MOC_COMMISSION:{
+      TG_COMMISSION:{
         APP_MODE_MoC: {
           exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.MINT_DOC_FEES_MOC
@@ -158,7 +158,7 @@ const buyCurrencyMap = {
       }
     },
     TX: {
-      MOC_COMMISSION:{
+      TG_COMMISSION:{
         APP_MODE_MoC: {
           exchangeFunction: null,
           transactionTypeId: TransactionTypeIdsMoC.MINT_BTCX_FEES_MOC
@@ -188,8 +188,9 @@ const buyCurrencyMap = {
 const appMode = config.environment.AppMode
 const appModeString = `APP_MODE_${appMode}`;
 
-const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =>
-    buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
+const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) => {
+    return buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
+}
 
 /*
 const getTargetOptionsFor = currency => {

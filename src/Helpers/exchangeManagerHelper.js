@@ -145,7 +145,7 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
   const valueYouExchangeInMOC = convertToken("RESERVE", "TG", valueYouExchangeInRESERVE);
   
   const commissionRateForMOC = BigNumber(
-    commissionRates[getTransactionType(currencyYouExchange, currencyYouReceive, "MOC_COMMISSION")])
+    commissionRates[getTransactionType(currencyYouExchange, currencyYouReceive, "TG_COMMISSION")])
     .plus(vendor.markup);
   const commissionRateForRESERVE = BigNumber(
     commissionRates[getTransactionType(currencyYouExchange, currencyYouReceive, "RESERVE_COMMISSION")])
@@ -158,7 +158,7 @@ const getCommissionRateAndCurrency = ({currencyYouExchange, currencyYouReceive, 
   const commissionYouPay = canPayInMOC ? commissionValueIfPaidInMOC : commissionValueIfPaidInRESERVE;
 
   return {
-      commissionCurrency: canPayInMOC ? "MOC" : "RESERVE",
+      commissionCurrency: canPayInMOC ? "TG" : "RESERVE",
       commissionRate: canPayInMOC ? commissionRateForMOC : commissionRateForRESERVE,
       commissionYouPay: commissionYouPay,
       enoughMOCBalance: enoughMOCBalance(commissionValueIfPaidInMOC, userState)

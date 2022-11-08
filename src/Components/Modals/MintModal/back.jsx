@@ -151,6 +151,7 @@ export default function MintModal(props) {
     };
 
     const onConfirmTransactionFinish = async () => {
+
         const exchangeMethod = getExchangeMethod(
             exchanging.currencyCode,
             receiving.currencyCode,
