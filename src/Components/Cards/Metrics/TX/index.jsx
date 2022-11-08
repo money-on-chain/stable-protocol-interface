@@ -21,7 +21,7 @@ function TX(props) {
 
     return (
         <div className="Card CardSystemStatus">
-            <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
+            <h3 className="CardTitle" style={{ fontSize: '1.4em', 'display': 'inline-flex', 'align-items': 'center' }}>
                 <LogoIcon
                     width={45}
                     alt=""
