@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
 import { Skeleton } from 'antd';
 import {config} from '../../../../Config/config';
-import { ReactComponent as LogoIcon } from '../../../../assets/icons/icon-tp.svg';
+import { ReactComponent as LogoIcon } from '../../../../assets/icons/icon-tx.svg';
 
 function TX(props) {
     const auth = useContext(AuthenticateContext);
