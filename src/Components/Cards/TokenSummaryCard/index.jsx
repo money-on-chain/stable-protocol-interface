@@ -22,12 +22,12 @@ import { ReactComponent as LogoIconRBTC } from './../../../assets/icons/icon-tg.
 
 
 const amountCardLogos = {
-    RESERVE: <LogoIconReserve width="45" />,
-    TP: <LogoIconTP width="45" alt="icon-wallet" />,
-    TC: <LogoIconTC width="45" alt="icon-wallet" />,
-    TX: <LogoIconTX width="45" alt="icon-wallet" />,
-    TG: <LogoIconTG width="45" alt="icon-wallet" />,
-    RBTC: <LogoIconRBTC width="45" alt="icon-wallet" />
+    RESERVE: <LogoIconReserve width="45" height="45" alt="RESERVE" />,
+    TP: <LogoIconTP width="45" height="45" alt="TP" />,
+    TC: <LogoIconTC width="45" height="45" alt="TC" />,
+    TX: <LogoIconTX width="45" height="45" alt="TX" />,
+    TG: <LogoIconTG width="45" height="45" alt="TG" />,
+    RBTC: <LogoIconRBTC width="45" height="45" alt="COINBASE" />
 }
 
 const styleCentered = {

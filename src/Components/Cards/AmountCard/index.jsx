@@ -17,12 +17,12 @@ import { ReactComponent as LogoIconTG } from './../../../assets/icons/icon-tg.sv
 import { ReactComponent as LogoIconRBTC } from './../../../assets/icons/icon-tg.svg';
 
 const amountCardLogos = {
-    RESERVE: <LogoIconReserve width="56" />,
-    TP: <LogoIconTP width="56" alt="icon-wallet" />,
-    TC: <LogoIconTC width="56" alt="icon-wallet" />,
-    TX: <LogoIconTX width="56" alt="icon-wallet" />,
-    TG: <LogoIconTG width="56" alt="icon-wallet" />,
-    RBTC: <LogoIconRBTC width="56" alt="icon-wallet" />
+    RESERVE: <LogoIconReserve width="56" height="56" alt="RESERVE" />,
+    TP: <LogoIconTP width="56" height="56" alt="TP" />,
+    TC: <LogoIconTC width="56" height="56" alt="TC" />,
+    TX: <LogoIconTX width="56" height="56" alt="TX" />,
+    TG: <LogoIconTG width="56" height="56" alt="TG" />,
+    RBTC: <LogoIconRBTC width="56" height="56" alt="COINBASE" />
 }
 
 export default function AmountCard(props) {

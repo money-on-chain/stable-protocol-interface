@@ -25,7 +25,7 @@ function TG(props) {
                 <LogoIcon
                     width={45}
                     height={45}
-                    alt=""
+                    alt="Token TG"
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.metrics.TG.title`, { ns: ns })}
             </h3>

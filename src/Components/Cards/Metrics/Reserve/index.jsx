@@ -93,8 +93,9 @@ function Reserve(props) {
         <div className="Card CardSystemStatus">
             <h3 className="CardTitle" style={{ fontSize: '1.4em', 'display': 'inline-flex', 'align-items': 'center' }}>
                 <LogoIcon
-                    width={45}
-                    alt=""
+                    width="45"
+                    height="45"
+                    alt="Token Reserve"
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.Tokens_RESERVE_name`, { ns: ns })}
             </h3>
