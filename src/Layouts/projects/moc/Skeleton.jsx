@@ -1,19 +1,22 @@
-import '../assets/css/global.scss';
+
 import { Outlet } from 'react-router-dom';
 import { Layout, Menu, Image, Drawer, Button } from 'antd';
 import { HomeFilled, MenuOutlined, CloseOutlined, PieChartFilled, InfoCircleFilled } from '@ant-design/icons';
-import LoginButton from '../Components/Auth/LoginButton/index';
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AuthenticateContext } from '../Context/Auth';
-import HeaderCoins from "../Components/Page/HeaderCoins";
 import { useTranslation } from "react-i18next";
-import { config } from '../Config/config';
 import BigNumber from "bignumber.js";
-import { ReactComponent as LogoIcon } from '../assets/icons/logo.svg';
-import { ReactComponent as LogoIconTP } from '../assets/icons/icon-rbtclogo.svg';
-import { ReactComponent as LogoIconTC } from '../assets/icons/TCIcon.svg';
-import { ReactComponent as LogoIconTX } from '../assets/icons/TXIcon.svg';
+
+import { config } from '../../../Config/config';
+import LoginButton from '../../../Components/Auth/LoginButton/index';
+import '../../../assets/css/global.scss';
+import { AuthenticateContext } from '../../../Context/Auth';
+import HeaderCoins from "../../../Components/Page/HeaderCoins";
+
+import { ReactComponent as LogoIcon } from '../../../assets/icons/logo.svg';
+import { ReactComponent as LogoIconTP } from '../../../assets/icons/icon-rbtclogo.svg';
+import { ReactComponent as LogoIconTC } from '../../../assets/icons/TCIcon.svg';
+import { ReactComponent as LogoIconTX } from '../../../assets/icons/TXIcon.svg';
 
 
 const { Header, Content, Sider } = Layout;
