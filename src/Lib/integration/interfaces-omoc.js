@@ -155,19 +155,19 @@ const approveMoCTokenStaking = async (interfaceContext, enabled, callback) => {
   const dContracts = window.integration;
 
   const stakingAddress = dContracts.contracts.istakingmachine._address
-  const moctoken = dContracts.contracts.moctoken
+  const tg = dContracts.contracts.tg
 
   const newAllowance = enabled
         ? Web3.utils.toWei(Number.MAX_SAFE_INTEGER.toString())
         : 0;
 
   // Calculate estimate gas cost
-  const estimateGas = await moctoken.methods
+  const estimateGas = await tg.methods
     .approve(stakingAddress, newAllowance)
     .estimateGas({ from: account })
 
   // Send tx
-  const receipt = moctoken.methods
+  const receipt = tg.methods
     .approve(stakingAddress, newAllowance)
     .send(
             {
@@ -184,9 +184,9 @@ const approveMoCTokenStaking = async (interfaceContext, enabled, callback) => {
 
 const getMoCAllowance = async (address) => {
   const dContracts = window.integration;
-  const moctoken = dContracts.contracts.moctoken;
+  const tg = dContracts.contracts.tg;
   const stakingAddress = dContracts.contracts.istakingmachine._address
-  return await moctoken.methods.allowance(address, stakingAddress).call();
+  return await tg.methods.allowance(address, stakingAddress).call();
 };
 
 

@@ -13,6 +13,22 @@ import { config } from "../../../Config/config";
 
 import { getUserBalance } from "../../../Helpers/balances";
 
+import { ReactComponent as LogoIconReserve } from './../../../assets/icons/icon-reserve.svg';
+import { ReactComponent as LogoIconTP } from './../../../assets/icons/icon-tp.svg';
+import { ReactComponent as LogoIconTC } from './../../../assets/icons/icon-tc.svg';
+import { ReactComponent as LogoIconTX } from './../../../assets/icons/icon-tx.svg';
+import { ReactComponent as LogoIconTG } from './../../../assets/icons/icon-tg.svg';
+import { ReactComponent as LogoIconRBTC } from './../../../assets/icons/icon-tg.svg';
+
+
+const amountCardLogos = {
+    RESERVE: <LogoIconReserve width="45" height="45" alt="RESERVE" />,
+    TP: <LogoIconTP width="45" height="45" alt="TP" />,
+    TC: <LogoIconTC width="45" height="45" alt="TC" />,
+    TX: <LogoIconTX width="45" height="45" alt="TX" />,
+    TG: <LogoIconTG width="45" height="45" alt="TG" />,
+    RBTC: <LogoIconRBTC width="45" height="45" alt="COINBASE" />
+}
 
 const styleCentered = {
     display: 'flex',
@@ -40,6 +56,8 @@ export default function TokenSummaryCard(props) {
 
     const userBalance = getUserBalance(auth, i18n, tokenName);
 
+    const logoIcon = amountCardLogos[tokenName.toUpperCase()]
+
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke);
     },[auth]);
@@ -59,24 +77,21 @@ export default function TokenSummaryCard(props) {
             >
                 <Row className="ArrowHomeIndicators arrow-center-values">
                     <Col
-                        span={8}
+                        span={12}
                         style={{
                             ...styleCentered,
                             justifyContent: 'flex-start'
                         }}
                     >
-                        <img
-                            height={45}
-                            src={auth.urlBaseFull+`icon-${tokenName}.svg` }
-                            alt="icon-wallet"
-                        />
+                        {logoIcon}
                     </Col>
                     <Col
-                        span={16}
+                        span={12}
                         style={{
                             ...styleCentered,
                             justifyContent: 'flex-end',
-                            textAlign: 'right'
+                            textAlign: 'right',
+                            'padding-left': '12px'
                         }}
                     >
                         <span className={`Number ${AppProject}-${tokenName}`}> {/* style={{ color }}> */}

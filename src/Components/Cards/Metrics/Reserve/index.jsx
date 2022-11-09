@@ -5,71 +5,48 @@ import { Tooltip as TooltipRecharts } from 'recharts';
 import { AuthenticateContext } from '../../../../Context/Auth';
 import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
-import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../../Lib/Formats';
+import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../../Helpers/Formats';
 import BigNumber from 'bignumber.js';
 import { config } from '../../../../Config/config';
+import { ReactComponent as LogoIcon } from '../../../../assets/icons/icon-reserve.svg';
 
-const AppProject = config.environment.AppProject;
 const BalancePieColors = config.home.walletBalancePie.colors;
 
 function Reserve(props) {
     const auth = useContext(AuthenticateContext);
-    const { accountData, convertToken } = auth;
+    const { convertToken } = auth;
     const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
     const ns = config.environment.AppProject.toLowerCase();
     const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500;
-    const totalRISKPROInUSD = convertToken("RISKPRO", "USD", props.totalRISKPRO);
-    const totalRISKPROXInUSD = convertToken("RISKPROX", "USD", props.totalRISKPROX);
-    const totalUSD = totalRISKPROInUSD ? totalRISKPROInUSD?.plus(totalRISKPROXInUSD?.plus(props.totalSTABLE)) : 0;
-    const totalRBTC = convertToken("STABLE", "RESERVE", totalUSD);
+    const totalTCInUSD = convertToken("TC", "USD", props.totalTC);
+    const totalTXInUSD = convertToken("TX", "USD", props.totalTX);
+    const totalUSD = totalTCInUSD ? totalTCInUSD?.plus(totalTXInUSD?.plus(props.totalTP)) : 0;
+    const totalRBTC = convertToken("TP", "RESERVE", totalUSD);
 
     useEffect(() => {
         setTimeout(() => setLoading(false), timeSke)
     },[auth]);
-
-    /*
-    const setRbtc = () => {
-        if (auth.userBalanceData && accountData.Balance) {
-            const b0BproAmount = (auth.contractStatusData['b0BproAmount'] / 1000000000000000000).toFixed(6);
-            const docAvailableToRedeem = (auth.contractStatusData['docAvailableToRedeem'] / 1000000000000000000000).toFixed(5);
-            return { b0BproAmount: b0BproAmount, docAvailableToRedeem: docAvailableToRedeem }
-        } else {
-            return { b0BproAmount: 0, docAvailableToRedeem: 0 }
-        }
-    };*/
-
-    /*
-    const getPie = () => {
-        if (auth.userBalanceData && accountData.Balance) {
-            const data = [
-                { name: 'Group A', value: Number(setRbtc()['docAvailableToRedeem']), set1: ' RBTC', set2: ' DOC', class: 'STABLE' },
-                { name: 'Group B', value: Number(setRbtc()['b0BproAmount']), set1: ' RBTC', set2: ' BPRO', class: 'RISKPRO' }
-            ];
-
-            return data;
-        }
-    };*/
-
-    const toShow = ({ totalSTABLE, totalRISKPRO, totalRISKPROX }) => {
+    
+    const toShow = ({ totalTP, totalTC, totalTX }) => {
         return [
           {
-            currencyCode: "RISKPRO",
-            balance: totalRISKPRO,
+            currencyCode: "TC",
+            balance: totalTC,
           },
           {
-            currencyCode: "RISKPROX",
-            balance: totalRISKPROX
+            currencyCode: "TX",
+            balance: totalTX
           },
           {
-            currencyCode: "STABLE",
-            balance: totalSTABLE
+            currencyCode: "TP",
+            balance: totalTP
           }
         ]
     };
 
-    const tokensToShow = toShow({ totalSTABLE: props.totalSTABLE, totalRISKPRO: props.totalRISKPRO, totalRISKPROX: props.totalRISKPROX });
+    const tokensToShow = toShow({ totalTP: props.totalTP, totalTC: props.totalTC, totalTX: props.totalTX });
 
     let totalBalance = new BigNumber(0);
     let balancesData = tokensToShow.map(({balance, currencyCode}) => {
@@ -114,11 +91,11 @@ function Reserve(props) {
 
     return (
         <div className="Card CardSystemStatus">
-            <h3 className="CardTitle" style={{ fontSize: '1.4em' }}>
-                <img
-                    width={45}
-                    src={auth.urlBaseFull+"icon-reserve.svg"}
-                    alt=""
+            <h3 className="CardTitle" style={{ fontSize: '1.4em', 'display': 'inline-flex', 'align-items': 'center' }}>
+                <LogoIcon
+                    width="45"
+                    height="45"
+                    alt="Token Reserve"
                     style={{ marginRight: 10 }}
                 /> {t(`${AppProject}.Tokens_RESERVE_name`, { ns: ns })}
             </h3>
@@ -139,7 +116,7 @@ function Reserve(props) {
                                             paddingAngle={1}
                                             dataKey="reserveValue"
                                         >
-                                            {balancesData.map((entry, index) => <Cell key={index} fill={BalancePieColors[index % BalancePieColors.length]} className={`piePiece ${entry.currencyCode}-${AppProject}`}/>)}
+                                            {balancesData.map((entry, index) => <Cell key={index} fill={BalancePieColors[index % BalancePieColors.length]} className={`piePiece ${entry.currencyCode}`}/>)}
                                         </Pie>
                                         <TooltipRecharts content={<CustomTooltip />} />
                                     </PieChart>

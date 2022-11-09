@@ -1,4 +1,4 @@
-import {Row, Col, Button, Skeleton} from 'antd';
+import {Row, Col, Skeleton} from 'antd';
 import React, {Fragment, useEffect, useState} from 'react';
 import { useContext } from 'react'
 import {AuthenticateContext} from "../../../Context/Auth";
@@ -8,7 +8,7 @@ import {useTranslation} from "react-i18next";
 import { config } from './../../../Config/config';
 
 export default function YourAddressCard(props) {
-    const { height = '', iconWallet, tokenToSend, className, view } = props;
+    const { height = '', tokenToSend, className, view } = props;
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
     const [t, i18n]= useTranslation(["global",'moc','rdoc']);
@@ -41,7 +41,7 @@ export default function YourAddressCard(props) {
                 <Col>
                     {auth.isLoggedIn && <Fragment>
                         <br/><SendModal
-                        {...{ tokensToSend: [tokenToSend], iconWallet}}
+                        {...{ tokensToSend: [tokenToSend]}}
                         currencyOptions={props.currencyOptions}
                         userState={auth}
                         view={view}

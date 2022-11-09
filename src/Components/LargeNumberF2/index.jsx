@@ -1,6 +1,6 @@
 import { Tooltip } from 'antd';
 import NumericLabel from 'react-pretty-numbers';
-import { adjustPrecision, formatLocalMap } from '../../Lib/Formats';
+import { adjustPrecision, formatLocalMap } from '../../Helpers/Formats';
 import {useTranslation} from "react-i18next";
 import { config } from './../../Config/config';
 import {getCoinName} from "../../Helpers/helper";

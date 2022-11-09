@@ -212,8 +212,8 @@
         "ModalSend_pegout_EnterTheAmount": "Ingresa el valor de rBTC a enviar",
         "ModalSend_AddAComment": "Agregar un comentario (opcional)",
 
-        "riskproxWallet_NextSettlement": "Siguiente settlement",
-        "riskproxWallet_CurrentRate": "Tasa de interés actual",
+        "txWallet_NextSettlement": "Siguiente settlement",
+        "txWallet_CurrentRate": "Tasa de interés actual",
 
         "RewardsClaimButton_Claim": "Reclamar",
         "RewardsClaimButton_Modal_Title":"Detalles de la operación",

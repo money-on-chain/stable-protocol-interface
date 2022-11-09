@@ -1,27 +1,69 @@
-import React, { useEffect } from 'react';
-import LoginButton from './default';
-import { config } from './../../../Config/config';
+import { useContext, useState, Fragment } from 'react'
+import { AuthenticateContext } from '../../../Context/Auth'
+import LogoutModal from '../../../Components/Modals/LogoutModal'
+import Select from 'antd/lib/select';
+import {useTranslation} from "react-i18next";
+
+function LoginButton(props) {
+
+    const auth = useContext(AuthenticateContext);
+    const [logoutVisible, setLogoutVisible] = useState(false);
+
+    const closeLogoutModal = () => {
+        setLogoutVisible(false);
+    };
+
+    const [t, i18n]= useTranslation(["global",'moc'])
 
 
-const ThemeMoC = React.lazy(() => import('./themes/moc'));
-const ThemeRDoC = React.lazy(() => import('./themes/rdoc'));
+    const { Option } = Select;
+    const availableLang= ["en", "es"]
+
+    const [prefLanguage, setPrefLanguage] = useState("en");
+
+    const handleChangeLanguage= (event) => {
+        setPrefLanguage(event);
+        i18n.changeLanguage(event)
+    };
 
 
-const ThemeSelector = ({ children }) => {
-  const CHOSEN_THEME = config.environment.AppProject;
-  return (
-    <>
-      <React.Suspense fallback={<></>}>
-        {(CHOSEN_THEME === 'MoC') && <ThemeMoC />}
-        {(CHOSEN_THEME === 'RDoC') && <ThemeRDoC />}
-      </React.Suspense>
-      {children}
-    </>
-  )
+    return (
+        <Fragment>
+            <div
+                className="LoginButton"
+                onClick={() => {
+                    if (auth.isLoggedIn) {
+                        setLogoutVisible(true)
+                    } else {
+                        auth.connect()
+                    }
+                }}
+            >
+                <div className="Text">
+                    <div className="Title">{ props.title }</div>
+                    <div className="Subtitle">{ props.subtitle }</div>
+                </div>
+                <div className={`StatusIcon ${props.status}`}>
+                    <div className="Circle"></div>
+                </div>
+            </div>
+            <LogoutModal
+                visible={logoutVisible}
+                handleClose={closeLogoutModal}
+            />
+            <Select className="customSelect"  value={prefLanguage}  onChange={handleChangeLanguage}>
+                <Option value="en">
+                    <div className="container_flag">EN</div>
+                </Option>
+
+                {availableLang.includes('es') && (
+                    <Option value="es">
+                        <div className="container_flag">ES</div>
+                    </Option>
+                )}
+            </Select>
+        </Fragment>
+    );
 }
 
-const ThemeRender = (params) => {
-    return (<ThemeSelector><LoginButton { ...params } /></ThemeSelector>)
-}
-
-export default ThemeRender;
+export default LoginButton

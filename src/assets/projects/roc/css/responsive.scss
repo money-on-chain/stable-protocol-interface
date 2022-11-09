@@ -1,0 +1,39 @@
+@media all and (max-width: 600px) {
+  .page-container {
+    margin-left: 0 !important;
+    padding: 20px 10px !important;
+  }
+
+  .Sidebar {
+    display: none;
+  }
+
+  .MenuCollapseButton {
+    display: block;
+  }
+
+  .ArrowHomeIndicators {
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    .ant-col {
+      min-width: auto;
+      max-width: inherit;
+    }
+    img {
+      flex-grow: 1;
+      min-width: 40px;
+    }
+    span {
+      flex-grow: 1;
+    }
+  }
+
+  .MintSelectsContainer {
+    flex-direction: column;
+    > .ant-col {
+      min-width: 100%;
+    }
+  }
+}

@@ -5,8 +5,6 @@ import { useTranslation } from "react-i18next";
 import { config } from './../../../Config/config';
 import './style.scss'
 
-//import { getKeyThenIncreaseKey } from 'antd/lib/message';
-
 export default function InformationModal({ currencyCode }) {
 
   const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
@@ -29,9 +27,6 @@ export default function InformationModal({ currencyCode }) {
   }
 
   const pre_label = t(`${AppProject}.Tokens_${currencyCode.toUpperCase()}_name`, { ns: ns })
-
-    // document.querySelectorAll('.rlogin-modal-hitbox')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
-
 
   const TokenInformationContent = ({ token }) => (
     <Row>

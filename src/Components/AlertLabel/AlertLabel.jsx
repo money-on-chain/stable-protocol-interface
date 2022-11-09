@@ -1,27 +1,25 @@
-import React, { useEffect } from 'react';
-import AlertLabel from './default';
-import { config } from './../../Config/config';
+import React from 'react';
+import {useTranslation} from "react-i18next";
+import {config} from '../../Config/config';
+import { ReactComponent as LogoIcon } from '../../assets/icons/icon-alert.svg';
 
 
-const ThemeMoC = React.lazy(() => import('./themes/moc'));
-const ThemeRDoC = React.lazy(() => import('./themes/rdoc'));
+function AlertLabel(props) {
 
-
-const ThemeSelector = ({ children }) => {
-  const CHOSEN_THEME = config.environment.AppProject;
-  return (
-    <>
-      <React.Suspense fallback={<></>}>
-        {(CHOSEN_THEME === 'MoC') && <ThemeMoC />}
-        {(CHOSEN_THEME === 'RDoC') && <ThemeRDoC />}
-      </React.Suspense>
-      {children}
-    </>
-  )
+    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
+    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const AppProject = config.environment.AppProject;
+    return (
+        <div className="AlertLabel">
+            <LogoIcon alt="Alert Icon" />
+            <div className="AlertText">
+                <p>
+                    <strong>{t(`${AppProject}.modal-send.beCareful`, {ns: ns})}</strong>
+                </p>
+                <p>{t(`${AppProject}.modal-send.alertAddress`, {ns: ns})}.</p>
+            </div>
+        </div>
+    );
 }
 
-const ThemeRender = (params) => {
-    return (<ThemeSelector><AlertLabel { ...params } /></ThemeSelector>)
-}
-
-export default ThemeRender;
+export default AlertLabel;

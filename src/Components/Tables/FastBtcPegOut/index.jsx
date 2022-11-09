@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import { useState } from 'react'
 import { myParseDate, readJsonTableFastBtcPegOut} from '../../../Helpers/helper'
 import { useTranslation } from "react-i18next";
-import date from '../../../Config/date';
+import date from '../../../Helpers/date';
 import {AuthenticateContext} from "../../../Context/Auth";
 import Copy from "../../Page/Copy";
 import RowDetailPegOut from "./RowDetailPegOut";

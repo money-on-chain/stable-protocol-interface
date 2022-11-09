@@ -7,18 +7,18 @@
 
     "MetamaskTutorial_connectWithMetamask_text": "Regresa a la pestaña de Money On Chain. Haga clic en siguiente en la ventana de Metamask.",
 
-    "Tokens_STABLE_code": "RDOC",
-    "Tokens_STABLE_name": "RIF" ,
-    "Tokens_RISKPRO_code": "RIFP",
-    "Tokens_RISKPRO_name": "RIFpro" ,
-    "Tokens_RISKPROX_code": "RIFX",
-    "Tokens_RISKPROX_name": "RIFX" ,
+    "Tokens_TP_code": "RDOC",
+    "Tokens_TP_name": "RIF" ,
+    "Tokens_TC_code": "RIFP",
+    "Tokens_TC_name": "RIFpro" ,
+    "Tokens_TX_code": "RIFX",
+    "Tokens_TX_name": "RIFX" ,
     "Tokens_RESERVE_code": "RIF",
     "Tokens_RESERVE_name": "RIF" ,
     "Tokens_USD_code": "USD",
     "Tokens_USD_name": "Dollar" ,
-    "Tokens_MOC_code": "MoC",
-    "Tokens_MOC_name": "MoC" ,
+    "Tokens_TG_code": "MoC",
+    "Tokens_TG_name": "MoC" ,
     "Tokens_USDPrice_code": "USD",
     "Tokens_USDPrice_name": "Dollar",
     "Tokens_RBTC_code": "RBTC",
@@ -140,9 +140,9 @@
       "faqs": "Ayuda",
       "rewards": "Recompensas MOC",
       "language": "Idioma",
-      "RISKPROWallet":"Tokens RIFP",
-      "RISKPROXWallet":"Posiciones RIFX",
-      "STABLEWallet":"Tokens RDOC",
+      "TCWallet":"Tokens RIFP",
+      "TXWallet":"Posiciones RIFX",
+      "TPWallet":"Tokens RDOC",
       "getRBTC":"BTC Peg in / Peg out",
       "wiki-url": "https://wiki.rifonchain.com/v/espanol",
       "repository-url": "https://github.com/money-on-chain/RDOC-Contract"
@@ -159,9 +159,9 @@
       "faqs": "Ayuda",
       "rewards": "Recompensas MOC",
       "language": "Idioma",
-      "RISKPROWallet":"RIFP",
-      "RISKPROXWallet":"RIFX",
-      "STABLEWallet":"RDOC",
+      "TCWallet":"RIFP",
+      "TXWallet":"RIFX",
+      "TPWallet":"RDOC",
       "getRBTC":"BTC Peg in / Peg out"
     },
     "drawer-allowance": {
@@ -174,19 +174,19 @@
       "subtitle": "Tu billetera activa",
       "receiverAddress": "Dirección o dominio del Receptor",
       "ownAddressLabel": "Tu dirección",
-      "RISKPRO":{
+      "TC":{
         "title":"RIFpro",
         "subtitle":"Administra tus Tokens RIFpro"
       },
-      "RISKPROX":{
+      "TX":{
         "title":"RIFX",
         "subtitle":"Administra tus posiciones RIFX"
       },
-      "STABLE":{
+      "TP":{
         "title":"RDOC",
         "subtitle":"Administra tus Tokens RIF Dollar"
       },
-      "MOC":{
+      "TG":{
         "title":"MOC",
         "subtitle":"Administra tus Tokens MoC"
       }
@@ -232,13 +232,13 @@
       }
     },
     "metrics": {
-      "STABLE":{
+      "TP":{
         "title":"RIF Dollar",
         "total":"Total RDOC en el sistema",
         "availableRedeem":"RDOC disponibles para redimir",
         "availableMint":"RDOC disponibles para emitir"
       },
-      "RISKPRO":{
+      "TC":{
         "title":"RIFpro",
         "usd":"RIFP USD",
         "availableRedeem":"Disponibles para redimir",
@@ -247,7 +247,7 @@
         "total":"Total en el sistema",
         "bproDiscountPriceUsd":"Precio descuento"
       },
-      "RISKPROX":{
+      "TX":{
         "title":"RIFX",
         "usd":"RIFX USD",
         "availableMint":"Disponibles para emitir",
@@ -333,7 +333,7 @@
         "blockSettlement": "El próximo Settlement ocurrirá en el bloque",
         "lastUpdateHeight": "Bloque indexado"
       },
-      "Moc":{
+      "TG":{
         "title":"MoC",
         "price": "Precio actual en USD"
       }
@@ -719,7 +719,7 @@
     },
     "tokenInformationTooltip": "Información acerca de",
     "TokenInformationContent": {
-      "STABLE": {
+      "TP": {
         "factSheet": "RDOC Fact Sheet ",
         "title": "El RIF Dollar (RDOC) es una moneda estable con RIF de colateral que sigue 1:1 el valor del dólar estadounidense. Sus principales características son:",
         "characteristics": {
@@ -733,7 +733,7 @@
           ]
         }
       },
-      "RISKPRO": {
+      "TC": {
         "factSheet": "RIFP Fact Sheet",
         "title": "El Token RIFpro (RIFP) sigue la volatilidad del RIF y añade la combinación de un ingreso pasivo y apalancamiento gratuito. Es un Token adecuado para HODLers propensos al riesgo medio y el perfecto balance entre beneficios y riesgo.",
         "characteristics": {
@@ -747,7 +747,7 @@
           ]
         }
       },
-      "RISKPROX": {
+      "TX": {
         "factSheet": "RIFX Fact Sheet",
         "title": "El RIFX es un apalancamiento LONG descentralizado sobre el precio del RIF sin riesgo de contraparte. Si no has entendido la línea superior, este Token no es para tí y posiblemente perderás tus fondos al proceder con la operación sin haber adquirido el conocimiento suficiente respecto a trading. Por favor dirígete a https://rifonchain.com/es/ o a nuestra Wiki para aprender más acerca de RIFX.",
         "characteristics": {
@@ -764,7 +764,7 @@
           ]
         }
       },
-      "MOC": {
+      "TG": {
         "factSheet": "MoC Fact Sheet",
         "title": "Para funcionar como un protocolo descentralizado, Money On Chain tiene su propio token para gobernar la plataforma. Se llama MoC (por Money On Chain) token.",
         "characteristics": {

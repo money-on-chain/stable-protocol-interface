@@ -1,28 +1,42 @@
 import { createContext, useEffect, useState } from 'react';
 import getRLogin from '../Lib/rLogin';
 import Web3 from 'web3';
-//import _ from 'lodash/core';
-import addressHelper from '../Lib/addressHelper';
+import addressHelper from '../Helpers/addressHelper';
 import FastBtcSocketWrapper from '../Lib/fastBTC/FastBtcSocketWrapper';
-//import { getPriceFields } from '../Lib/price';
 import { config } from '../Config/config';
 import { readContracts } from '../Lib/integration/contracts';
 import { contractStatus, userBalance } from '../Lib/integration/multicall';
-import { mintStable, redeemStable, mintRiskPro, redeemRiskPro, mintRiskProx, redeemRiskProx } from '../Lib/integration/interfaces-coinbase';
+import { mintTP, redeemTP, mintTC, redeemTC, mintTX, redeemTX } from '../Lib/integration/interfaces-coinbase';
 import { AllowanceUseReserveToken,
-    mintStableRRC20,
-    redeemStableRRC20,
-    mintRiskProRRC20,
-    redeemRiskProRRC20,
-    mintRiskProxRRC20,
-    redeemRiskProxRRC20 } from '../Lib/integration/interfaces-rrc20';
+    mintTPRRC20,
+    redeemTPRRC20,
+    mintTCRRC20,
+    redeemTCRRC20,
+    mintTXRRC20,
+    redeemTXRRC20 } from '../Lib/integration/interfaces-rrc20';
 import { decodeEvents } from '../Lib/integration/transaction';
 
-import { transferStableTo, transferRiskProTo, transferMocTo,transferRBTCTo, calcMintInterest, approveMoCTokenCommission } from '../Lib/integration/interfaces-base';
-import { stackedBalance, lockedBalance, pendingWithdrawals, stakingDeposit, unStake, delayMachineWithdraw, delayMachineCancelWithdraw, approveMoCTokenStaking, getMoCAllowance } from '../Lib/integration/interfaces-omoc';
+import {
+    transferTPTo,
+    transferTCTo,
+    transferTGTo,
+    transferCoinbaseTo,
+    calcMintInterest,
+    approveTGTokenCommission
+    } from '../Lib/integration/interfaces-base';
+import {
+    stackedBalance,
+    lockedBalance,
+    pendingWithdrawals,
+    stakingDeposit,
+    unStake,
+    delayMachineWithdraw,
+    delayMachineCancelWithdraw,
+    approveMoCTokenStaking,
+    getMoCAllowance
+    } from '../Lib/integration/interfaces-omoc';
 import { getGasPrice } from '../Lib/integration/utils';
 import BigNumber from "bignumber.js";
-//import createNodeManager from '../Lib/nodeManagerFactory';
 
 const helper = addressHelper(Web3);
 
@@ -35,24 +49,22 @@ const AuthenticateContext = createContext({
     balanceRbtc: null,
     contractStatusData: null,
     web3: null,
-    urlBaseFull:null,
-    urlBase:null,
     getAppMode:null,
     connect: () => {},
     interfaceExchangeMethod: async (sourceCurrency, targetCurrency, amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintRiskPro: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemRiskPro: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintStable: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemStable: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintRiskProx: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemRiskProx: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintRiskProRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemRiskProRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintStableRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemStableRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintRiskProxRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemRiskProxRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceApproveMoCTokenCommission: async (enabled, onTransaction, onReceipt) => {},
+    interfaceMintTC: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemTC: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintTP: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemTP: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintTX: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemTX: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintTCRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemTCRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintTPRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemTPRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintTXRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceRedeemTXRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceApproveTGTokenCommission: async (enabled, onTransaction, onReceipt) => {},
     disconnect: () => {},
     getTransactionReceipt: (hash) => {},
     interfaceDecodeEvents: async (receipt) => {},
@@ -65,10 +77,10 @@ const AuthenticateContext = createContext({
     interfaceDelayMachineWithdraw: async (id) => {},
     interfaceDelayMachineCancelWithdraw: async (id) => {},
     interfacePendingWithdrawals: async (address) => {},
-    interfaceTransferStableTo: async (to, amount) => {},
-    interfaceTransferRiskProTo: async (to, amount) => {},
-    interfaceTransferMocTo: async (to, amount) => {},
-    interfaceTransferRBTCTo: async (to, amount) => {},
+    interfaceTransferTPTo: async (to, amount) => {},
+    interfaceTransferTCTo: async (to, amount) => {},
+    interfaceTransferTGTo: async (to, amount) => {},
+    interfaceTransferCoinbaseTo: async (to, amount) => {},
     interfaceCalcMintInterestValues: async (amount) => {},
     interfaceApproveReserve: async (address) => {},
     convertToken: async (from, to, amount) => {},
@@ -85,8 +97,6 @@ const AuthenticateProvider = ({ children }) => {
     const [account, setAccount] = useState(null);
     const [userBalanceData, setUserBalanceData] = useState(null);
     const [balanceRbtc, setBalanceRbtc] = useState(null);
-    const [urlBaseFull, setUrlBaseFull] = useState(process.env.REACT_APP_PUBLIC_URL+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/');
-    const [urlBase, setUrlBase] = useState(process.env.REACT_APP_PUBLIC_URL);
     const [getAppMode, seGetAppMode] = useState(config.environment.AppMode);
     const [accountData, setAccountData] = useState({
         Wallet: '',
@@ -210,59 +220,59 @@ const AuthenticateProvider = ({ children }) => {
         const appModeString = `APP_MODE_${appMode}`;
 
         const exchangeCurrencyMap = {
-            RISKPROX: {
+            TX: {
                 RESERVE: {
                     APP_MODE_MoC: {
-                        exchangeFunction: interfaceRedeemRiskProx
+                        exchangeFunction: interfaceRedeemTX
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: interfaceRedeemRiskProxRRC20
+                        exchangeFunction: interfaceRedeemTXRRC20
                     }
                 }
             },
-            RISKPRO: {
+            TC: {
                 RESERVE: {
                     APP_MODE_MoC: {
-                        exchangeFunction: interfaceRedeemRiskPro
+                        exchangeFunction: interfaceRedeemTC
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: interfaceRedeemRiskProRRC20
+                        exchangeFunction: interfaceRedeemTCRRC20
                     }
                 }
             },
-            STABLE: {
+            TP: {
                 RESERVE: {
                     APP_MODE_MoC: {
-                        exchangeFunction: interfaceRedeemStable
+                        exchangeFunction: interfaceRedeemTP
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: interfaceRedeemStableRRC20
+                        exchangeFunction: interfaceRedeemTPRRC20
                     }
                 }
             },
             RESERVE: {
-                RISKPRO: {
+                TC: {
                     APP_MODE_MoC: {
-                        exchangeFunction: interfaceMintRiskPro
+                        exchangeFunction: interfaceMintTC
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: interfaceMintRiskProRRC20
+                        exchangeFunction: interfaceMintTCRRC20
                     }
                 },
-                STABLE: {
+                TP: {
                     APP_MODE_MoC: {
-                        exchangeFunction: interfaceMintStable
+                        exchangeFunction: interfaceMintTP
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: interfaceMintStableRRC20
+                        exchangeFunction: interfaceMintTPRRC20
                     }
                 },
-                RISKPROX: {
+                TX: {
                     APP_MODE_MoC: {
-                        exchangeFunction: interfaceMintRiskProx
+                        exchangeFunction: interfaceMintTX
                     },
                     APP_MODE_RRC20: {
-                        exchangeFunction: interfaceMintRiskProxRRC20
+                        exchangeFunction: interfaceMintTXRRC20
                     }
                 }
             }
@@ -273,69 +283,69 @@ const AuthenticateProvider = ({ children }) => {
 
     }
 
-    const interfaceMintStable = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTP = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await mintStable(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await mintTP(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceMintStableRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTPRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await mintStableRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await mintTPRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceRedeemStable = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTP = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemStable(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await redeemTP(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceRedeemStableRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTPRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemStableRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await redeemTPRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceMintRiskPro = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTC = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await mintRiskPro(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await mintTC(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceMintRiskProRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTCRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await mintRiskProRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await mintTCRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceRedeemRiskPro = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTC = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemRiskPro(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await redeemTC(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceRedeemRiskProRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTCRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemRiskProRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await redeemTCRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceMintRiskProx = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTX = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await mintRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await mintTX(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceMintRiskProxRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTXRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await mintRiskProxRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await mintTXRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceRedeemRiskProx = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTX = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemRiskProx(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await redeemTX(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceRedeemRiskProxRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTXRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemRiskProxRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
+        await redeemTXRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
     }
 
-    const interfaceApproveMoCTokenCommission = async (enabled, onTransaction, onReceipt) => {
+    const interfaceApproveTGTokenCommission = async (enabled, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
-        return approveMoCTokenCommission(interfaceContext, enabled, onTransaction, onReceipt);
+        return approveTGTokenCommission(interfaceContext, enabled, onTransaction, onReceipt);
     };
 
     const initContractsConnection = async () => {
@@ -523,28 +533,28 @@ const AuthenticateProvider = ({ children }) => {
         return approveMoCTokenStaking(interfaceContext, enabled, callback);
     };
 
-    const interfaceTransferStableTo = async (to, amount, onTransaction, onReceipt) => {
+    const interfaceTransferTPTo = async (to, amount, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferStableTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
+        return transferTPTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
     };
 
-    const interfaceTransferRiskProTo = async (to, amount, onTransaction, onReceipt) => {
+    const interfaceTransferTCTo = async (to, amount, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferRiskProTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
+        return transferTCTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
     };
 
-    const interfaceTransferMocTo = async (to, amount, onTransaction, onReceipt) => {
+    const interfaceTransferTGTo = async (to, amount, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferMocTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
+        return transferTGTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
     };
 
-    const interfaceTransferRBTCTo = async (to, amount, onTransaction, onReceipt) => {
+    const interfaceTransferCoinbaseTo = async (to, amount, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferRBTCTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
+        return transferCoinbaseTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
     }
 
     const interfaceCalcMintInterestValues = async (amount) => {
@@ -606,27 +616,27 @@ const AuthenticateProvider = ({ children }) => {
             convertRbtcToDoc(amount).div(mocPrice).times(reservePrecision);
 
         const convertMap = {
-            STABLE: { USD: convertDocToUsd, RESERVE: convertDocToRbtc },
-            RISKPRO: {
+            TP: { USD: convertDocToUsd, RESERVE: convertDocToRbtc },
+            TC: {
                 USD: convertBproToUsd,
                 RESERVE: convertBproToRbtc,
-                RISKPROX: convertBproToBprox2
+                TX: convertBproToBprox2
             },
-            RISKPROX: {
+            TX: {
                 RESERVE: convertBprox2ToRbtc,
-                RISKPRO: convertBprox2ToBpro,
+                TC: convertBprox2ToBpro,
                 USD: convertBprox2ToUsd
             },
-            MOC: {
+            TG: {
                 RESERVE: convertMoCTokenToRbtc,
                 USD: convertMoCTokenToUsd
             },
             RESERVE: {
                 USD: convertRbtcToUsd,
-                RISKPRO: convertRbtcToBpro,
-                STABLE: convertRbtcToDoc,
-                RISKPROX: convertRbtcToBprox2,
-                MOC: convertRbtcToMoCToken
+                TC: convertRbtcToBpro,
+                TP: convertRbtcToDoc,
+                TX: convertRbtcToBprox2,
+                TG: convertRbtcToMoCToken
             }
         };
 
@@ -645,25 +655,23 @@ const AuthenticateProvider = ({ children }) => {
                 contractStatusData,
                 isLoggedIn,
                 web3,
-                urlBaseFull,
-                urlBase,
                 getAppMode,
                 connect,
                 disconnect,
                 interfaceExchangeMethod,
-                interfaceMintRiskPro,
-                interfaceRedeemRiskPro,
-                interfaceMintStable,
-                interfaceRedeemStable,
-                interfaceMintRiskProx,
-                interfaceRedeemRiskProx,
-                interfaceMintRiskProRRC20,
-                interfaceRedeemRiskProRRC20,
-                interfaceMintStableRRC20,
-                interfaceRedeemStableRRC20,
-                interfaceMintRiskProxRRC20,
-                interfaceRedeemRiskProxRRC20,
-                interfaceApproveMoCTokenCommission,
+                interfaceMintTC,
+                interfaceRedeemTC,
+                interfaceMintTP,
+                interfaceRedeemTP,
+                interfaceMintTX,
+                interfaceRedeemTX,
+                interfaceMintTCRRC20,
+                interfaceRedeemTCRRC20,
+                interfaceMintTPRRC20,
+                interfaceRedeemTPRRC20,
+                interfaceMintTXRRC20,
+                interfaceRedeemTXRRC20,
+                interfaceApproveTGTokenCommission,
                 getTransactionReceipt,
                 interfaceStackedBalance,
                 interfaceGetMoCAllowance,
@@ -674,10 +682,10 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceDelayMachineWithdraw,
                 interfaceDelayMachineCancelWithdraw,
                 interfacePendingWithdrawals,
-                interfaceTransferStableTo,
-                interfaceTransferRiskProTo,
-                interfaceTransferMocTo,
-                interfaceTransferRBTCTo,
+                interfaceTransferTPTo,
+                interfaceTransferTCTo,
+                interfaceTransferTGTo,
+                interfaceTransferCoinbaseTo,
                 interfaceCalcMintInterestValues,
                 interfaceApproveReserve,
                 socket,

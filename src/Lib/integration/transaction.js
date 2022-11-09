@@ -10,9 +10,9 @@ const addABI = (abiContracts, appMode) => {
   abiDecoder.addABI(abiContracts.MoCExchange.abi)
   abiDecoder.addABI(abiContracts.MoCInrate.abi)
   abiDecoder.addABI(abiContracts.MoCSettlement.abi)
-  abiDecoder.addABI(abiContracts.StableToken.abi)
-  abiDecoder.addABI(abiContracts.RiskProToken.abi)
-  abiDecoder.addABI(abiContracts.MoCToken.abi)
+  abiDecoder.addABI(abiContracts.TP.abi)
+  abiDecoder.addABI(abiContracts.TC.abi)
+  abiDecoder.addABI(abiContracts.TG.abi)
   abiDecoder.addABI(abiContracts.MoCVendors.abi)
   if (appMode === 'RRC20') {
     abiDecoder.addABI(abiContracts.ReserveToken.abi)

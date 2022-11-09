@@ -1,25 +1,30 @@
 /* eslint-disable default-case */
 /* eslint-disable react/jsx-no-target-blank */
 import { Button, Collapse, Slider } from 'antd';
-//import { SettingFilled } from '@ant-design/icons';
 import { AuthenticateContext } from '../../../Context/Auth';
-import './RDoC/style.scss';
 import React, { useState, useContext, useEffect } from 'react';
 import { Modal, notification } from 'antd';
 
-import { convertAmount } from '../../../Lib/exchangeManagerHelper';
-import { getExchangeMethod } from '../../../Lib/exchangeHelper';
+import { convertAmount } from '../../../Helpers/exchangeManagerHelper';
+import { getExchangeMethod } from '../../../Helpers/exchangeHelper';
 import {
     formatValueToContract,
     formatValueWithContractPrecision,
-} from '../../../Lib/Formats';
+} from '../../../Helpers/Formats';
 import Copy from "../../Page/Copy";
-import { currencies as currenciesDetail } from '../../../Config/currency';
+import { currencies as currenciesDetail } from '../../../Helpers/currency';
 import { LargeNumber } from '../../LargeNumber';
-//import {formatLocalMap2} from '../../../Lib/Formats';
 import { useTranslation } from "react-i18next";
 import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";
+
+import IconDownArrow from './../../../assets/icons/d-arrow.png';
+import IconTorque from './../../../assets/icons/torq.png';
+import IconStatusPending from './../../../assets/icons/status-pending.png';
+import IconStatusSuccess from './../../../assets/icons/status-success.png';
+import IconStatusError from './../../../assets/icons/status-error.png';
+
+
 export default function MintModal(props) {
     const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
     const {
@@ -146,6 +151,7 @@ export default function MintModal(props) {
     };
 
     const onConfirmTransactionFinish = async () => {
+
         const exchangeMethod = getExchangeMethod(
             exchanging.currencyCode,
             receiving.currencyCode,
@@ -267,7 +273,9 @@ export default function MintModal(props) {
                 {renderAmount(t('global.ConfirmTransactionModal_Exchanging'), exchanging, 'AmountExchanging')}
                 <LargeNumber currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
                 {showError && renderError()}
-                <div className={'text-align-center'}><img width={30} height={30} src={"/global/d-arrow.png"} alt="sa"/></div>
+                <div className={'text-align-center'}>
+                    <img width={30} height={30} src={IconDownArrow} alt="sa"/>
+                </div>
                 {renderAmount(t('global.ConfirmTransactionModal_Receiving'), receiving, 'AmountReceiving')}
                 <LargeNumber currencyCode={'USD'} amount={receivingInUSD} includeCurrency className="color-08374F"/>
                 <hr style={{ border: '1px solid #08374F','opacity':'0.5' }} />
@@ -326,7 +334,7 @@ export default function MintModal(props) {
                 {!showTransaction &&<div className={'div-price-v'}>
                     <Collapse className="CollapseTolerance">
                         <Collapse.Panel showArrow={false} header={<div className="PriceVariationSetting">
-                            <img width={17} height={17} src={"/global/torq.png"} alt="ssa"/>
+                            <img width={17} height={17} src={IconTorque} alt="ssa"/>
                             <span className="SliderText color-08374F font-size-12">{t("global.CustomizePrize_VariationToleranceSettingsTitle")}</span>
                         </div>}>
                             <div className="PriceVariationContainer">
@@ -387,11 +395,7 @@ export default function MintModal(props) {
 
             <div style={{ display: 'flex', justifyContent: 'space-around'}}>
                 {showTransaction
-                    ? <div style={{ width: '100%' }}>
-                        {/*<div>*/}
-                        {/*  <p style={{ width: '50%', float: 'left' }}>Transaction status</p>*/}
-                        {/*  <p style={{ textAlign: 'right', color: transaction ? '#09c199' : '#f1a954' }}>{transaction ? 'SUCCESSFUL' : 'PENDING'}</p>*/}
-                        {/*</div>*/}
+                    ? <div style={{ width: '100%' }}>                        
                         <div>
                             <p className={'Transaction_ID'}>{t('global.Transaction_ID')}</p>
                             <div style={{ textAlign: 'right' }}>
@@ -403,11 +407,11 @@ export default function MintModal(props) {
                             {(() => {
                                 switch (txtTransaction) {
                                     case 'PENDING':
-                                        return <><p><img src={"/global/status-pending.png"} width={50} height={50} className='img-status rotate'/></p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
+                                        return <><p><img src={IconStatusPending} width={50} height={50} alt="pending" className='img-status rotate'/></p><p className={'Transaction_confirmation'}>{t('global.Transaction_confirmation')}</p></>;
                                     case 'SUCCESSFUL':
-                                        return <><p><img width={50} height={50} src={"/global/status-success.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_successful'}>{t('global.Operation_successful')}</p></>;
+                                        return <><p><img width={50} height={50} src={IconStatusSuccess} alt="successful" className={'img-status'}/></p><p className={'Operation_successful'}>{t('global.Operation_successful')}</p></>;
                                     default:
-                                        return <><p><img width={50} height={50} src={"/global/status-error.png"} alt="ssa" className={'img-status'}/></p><p className={'Operation_failed'}>{t('global.Operation_failed')}</p></>;
+                                        return <><p><img width={50} height={50} src={IconStatusError} alt="error" className={'img-status'}/></p><p className={'Operation_failed'}>{t('global.Operation_failed')}</p></>;
                                 }
                             })()}
                         </div>
@@ -415,12 +419,7 @@ export default function MintModal(props) {
                             <Button className={'width-120'} type="primary" onClick={() => {cancelButton(); setCurrentHash(null); setShowTransaction(false)}}>Close</Button>
                         </div>
                     </div>
-                    : <>
-                        {/*<Button*/}
-                        {/*  onClick={() => cancelButton()}*/}
-                        {/*>*/}
-                        {/*  Cancel*/}
-                        {/*</Button>*/}
+                    : <>                        
                         <Button
                             type="primary"
                             disabled={!auth.isLoggedIn}
