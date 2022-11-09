@@ -2,6 +2,8 @@ import { notification } from 'antd';
 import React from "react";
 import { config } from '../../../Config/config';
 
+import IconCopy from './../../../assets/icons/copy-verde.png';
+
 export default function CopyModal(props) {
 
     const {textToShow = '', textToCopy = '', fastBTC = false} = props;
@@ -24,7 +26,7 @@ export default function CopyModal(props) {
         &nbsp;&nbsp;&nbsp;<img onClick={onClick}
                                width={15}
                                height={17}
-                               src={process.env.REACT_APP_PUBLIC_URL+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+"global/copy-verde.png"}
+                               src={IconCopy}
                                alt=""
                                style={{marginRight: 10, cursor: 'pointer',marginTop: -10}}
     /></>

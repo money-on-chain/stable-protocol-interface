@@ -3,7 +3,7 @@ import {config} from '../Config/config';
 import Web3 from "web3";
 import {DetailedLargeNumber, getExplainByEvent} from "../Components/LargeNumber";
 import moment from 'moment';
-import {formatLocalMap2} from "../Lib/Formats";
+import {formatLocalMap2} from "../Helpers/Formats";
 import BigNumber from "bignumber.js";
 const ns = config.environment.AppProject.toLowerCase();
 const AppProject = config.environment.AppProject;
@@ -77,97 +77,83 @@ export function getDatasMetrics(auth,i18n=null){
     }
 }
 
+export function TokenNameOldToNew(tokenName){
+    let token = ''
+    switch (tokenName) {
+        case 'STABLE':
+            token = 'TP';
+            break;
+        case 'RISKPRO':
+            token = 'TC'
+            break;
+        case 'RISKPROX':
+            token = 'TX'
+            break;
+        case 'MOC':
+            token = 'TG'
+            break;
+        case 'TP':
+            token = 'TP'
+            break;
+        case 'TC':
+            token = 'TC'
+            break;
+        case 'TX':
+            token = 'TX'
+            break;
+        case 'TG':
+            token = 'TG'
+            break;
+        default:
+            throw new Error('Invalid token name');
+    }
+
+    return token
+}
+
+export function TokenNameNewToOld(tokenName){
+    let token = ''
+    switch (tokenName) {
+        case 'TP':
+            token = 'STABLE';
+            break;
+        case 'TC':
+            token = 'RISKPRO'
+            break;
+        case 'TX':
+            token = 'RISKPROX'
+            break;
+        case 'TG':
+            token = 'MOC'
+            break;
+        case 'all':
+            token = 'all'
+            break;
+        default:
+            throw new Error('Invalid token name');
+    }
+
+    return token
+}
+
 
 
 export function readJsonTable(data_j,t, i18n){
+
     var set_event= "TRANSFER";
     if(data_j.event.includes("Mint")){set_event='MINT'}
     if(data_j.event.includes("Settlement")){set_event='SETTLEMENT'}
     if(data_j.event.includes("Redeem")){set_event='REDEEM'}
 
-    const set_asset= data_j.tokenInvolved;
-
-    let fixed=2
-    if( set_asset!='STABLE' && set_asset!='USD'){
-        fixed= 6
-    }
-
-    let asset=''
-    switch (set_asset) {
-        case 'STABLE':
-            asset = 'DOC';
-            break;
-        case 'RISKPRO':
-            asset = 'BPRO'
-            break;
-        case 'RISKPROX':
-            asset = 'BTCX'
-            break;
-        default:
-            asset = 'DOC'
-            break;
-    }
-
-    let asset_detail=''
-    let asset_detail_fixed= 6
-    switch (asset) {
-        case 'BPRO':
-            if(data_j.event.includes("Redeem")){
-                asset_detail= 'RBTC'
-            }
-            if(data_j.event.includes("Settlement")){
-                asset_detail= 'BPRO'
-            }
-            if(data_j.event.includes("Mint")){
-                asset_detail= 'BPRO'
-            }
-            if(data_j.event.includes("Transfer")){
-                asset_detail= 'BPRO'
-            }
-
-            break;
-        case 'BTCX':
-            if(data_j.event.includes("Redeem")){
-                asset_detail= 'RBTC'
-            }
-            if(data_j.event.includes("Settlement")){
-                asset_detail= 'RBTC'
-            }
-            if(data_j.event.includes("Mint")){
-                asset_detail= 'BTCX'
-            }
-            if(data_j.event.includes("Transfer")){
-                asset_detail= 'BTCX'
-            }
-            break;
-        case 'DOC':
-            if(data_j.event.includes("Redeem")){
-                asset_detail= 'RBTC'
-            }
-            if(data_j.event.includes("Settlement")){
-                asset_detail= 'DOC'
-                asset_detail_fixed= 2
-            }
-            if(data_j.event.includes("Mint")){
-                asset_detail= 'DOC'
-                asset_detail_fixed= 2
-            }
-            if(data_j.event.includes("Transfer")){
-                asset_detail= 'DOC'
-                asset_detail_fixed= 2
-            }
-            break;
-        default:
-            asset_detail= 'DOC'
-            break;
-    }
+    data_j.tokenInvolved = TokenNameOldToNew(data_j.tokenInvolved)
+    const set_asset = data_j.tokenInvolved;
 
     const set_status_txt= data_j.status;
     const set_status_percent= data_j.confirmingPercent;
 
     const wallet_detail= (data_j.userAmount!==undefined)? parseFloat(data_j.userAmount).toFixed(6)  : '--'
     const wallet_detail_usd= (wallet_detail * config.coin_usd).toFixed(2)
-    const paltform_detail= DetailedLargeNumber({
+    const platform_detail= DetailedLargeNumber({
         amount: data_j.amount,
         currencyCode: data_j.tokenInvolved,
         includeCurrency: true,
@@ -178,7 +164,7 @@ export function readJsonTable(data_j,t, i18n){
         t: t,
         i18n:i18n
     })
-    const paltform_detail_usd= (paltform_detail * config.coin_usd).toFixed(2)
+    const platform_detail_usd= (platform_detail * config.coin_usd).toFixed(2)
     const truncate_address= (data_j.address)? data_j.address.substring(0, 6) + '...' + data_j.address.substring(data_j.address.length - 4, data_j.address.length) : '--'
     const truncate_txhash= (data_j.transactionHash!==undefined)? data_j.transactionHash.substring(0, 6) + '...' + data_j.transactionHash.substring(data_j.transactionHash.length - 4, data_j.transactionHash.length) : '--'
 
@@ -225,7 +211,7 @@ export function readJsonTable(data_j,t, i18n){
          amount: new BigNumber(data_j.rbtcCommission).gt(0)
              ? data_j.rbtcCommission
              : data_j.mocCommissionValue,
-         currencyCode: new BigNumber(data_j.rbtcCommission).gt(0) ? 'RESERVE' : 'MOC',
+         currencyCode: new BigNumber(data_j.rbtcCommission).gt(0) ? 'RESERVE' : 'TG',
          includeCurrency: true,
          amountUSD: data_j.USDCommission ? data_j.USDCommission : 0,
          showUSD: true,
@@ -305,8 +291,8 @@ export function readJsonTable(data_j,t, i18n){
         set_status_percent:set_status_percent,
         wallet_detail:wallet_detail,
         wallet_detail_usd:wallet_detail_usd,
-        paltform_detail_usd:paltform_detail_usd,
-        paltform_detail:paltform_detail,
+        platform_detail_usd:platform_detail_usd,
+        platform_detail:platform_detail,
         truncate_address:truncate_address,
         truncate_txhash:truncate_txhash,
         lastUpdatedAt:lastUpdatedAt,
@@ -447,7 +433,7 @@ export function readJsonClaims(data_j,t, i18n){
     const set_asset= 'CLAIM';
     const mocs= DetailedLargeNumber({
         amount: data_j.mocs,
-        currencyCode: 'MOC',
+        currencyCode: 'TG',
         includeCurrency: true,
         // isPositive: data_j.event == 'RiskProxRedeem' ? false : true,
         isPositive: true,
@@ -538,12 +524,12 @@ export function getCoinName(coin){
 
     let currencies= {
         'COINBASE':config.tokens.COINBASE.name,
-        'STABLE':config.tokens.STABLE.name,
-        'RISKPRO':config.tokens.RISKPRO.name,
-        'RISKPROX':config.tokens.RISKPROX.name,
+        'TP':config.tokens.TP.name,
+        'TC':config.tokens.TC.name,
+        'TX':config.tokens.TX.name,
         'RESERVE':config.tokens.RESERVE.name,
         'USDPrice':'USD',
-        'MOC':config.tokens.MOC.name,
+        'TG':config.tokens.TG.name,
         'USD':'USD',
     }
 
@@ -553,16 +539,16 @@ export function getCoinName(coin){
 export function getDecimals(coin,AppProject){
     let decimals= {
         'COINBASE':config.tokens.COINBASE.decimals,
-        'STABLE':config.tokens.STABLE.decimals,
-        'RISKPRO':config.tokens.RISKPRO.decimals,
-        'RISKPROX':config.tokens.RISKPROX.decimals,
-        'MOC':config.tokens.MOC.decimals,
+        'TP':config.tokens.TP.decimals,
+        'TC':config.tokens.TC.decimals,
+        'TX':config.tokens.TX.decimals,
+        'TG':config.tokens.TG.decimals,
         'USDPrice': (AppProject=='MoC')? 2 : 4,
         'RESERVE':config.tokens.RESERVE.decimals,
         'USD':2,
         'REWARD':config.Precisions.REWARDPrecision.decimals,
         'DOC':2,
-        'RISKPROXInterest':config.Precisions.RISKPROXInterest.decimals
+        'TXInterest':config.Precisions.TXInterest.decimals
     }
 
     return decimals[coin]
@@ -572,11 +558,11 @@ export function getDecimals(coin,AppProject){
 export function getSelectCoins(appMode){
     switch (appMode) {
         case 'RRC20':
-            return ['RISKPRO', 'STABLE', 'RESERVE']
+            return ['TC', 'TP', 'RESERVE']
         case 'MoC':
-            return ['RISKPRO', 'STABLE', 'RESERVE']
+            return ['TC', 'TP', 'RESERVE']
         default:
-            return ['RISKPRO', 'STABLE', 'RESERVE']
+            return ['TC', 'TP', 'RESERVE']
     }
 
 }

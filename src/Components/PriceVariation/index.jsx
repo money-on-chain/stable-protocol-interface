@@ -1,21 +1,17 @@
 
 import React, {Fragment, useContext} from 'react';
 import { Tooltip } from 'antd';
-import {
-    //formatVisibleValue,
-    formatValueVariation,
-    //formatPerc,
-    //adjustPrecision,
-    //formatLocalMap2
-} from '../../Lib/Formats';
-//import i18n from "i18next";
+import { formatValueVariation } from '../../Helpers/Formats';
 import {AuthenticateContext} from "../../Context/Auth";
 import web3 from "web3";
 import {setNumber} from "../../Helpers/helper";
 import {useTranslation} from "react-i18next";
-//import {LargeNumber} from "../LargeNumber";
 import {LargeNumberF3} from "../LargeNumberF3";
 import { config } from '../../Config/config';
+
+import { ReactComponent as LogoIconUp } from '../../assets/icons/icon-arrow-up2.svg';
+import { ReactComponent as LogoIconDown } from '../../assets/icons/icon-arrow-down2.svg';
+
 import './style.scss';
 
 export default function PriceVariation(props) {
@@ -30,20 +26,20 @@ export default function PriceVariation(props) {
     const getBalanceUSD = (tokenName) => {
         if (auth.contractStatusData) {
             switch (tokenName) {
-                case 'stable':
+                case 'TP':
                     if (auth.contractStatusData['bitcoinPrice']) {
                         return auth.contractStatusData['bitcoinPrice']
 
                     } else {
                         return 0;
                     }
-                case 'riskpro':
+                case 'TC':
                     if (auth.contractStatusData['bproPriceInUsd']) {
                         return auth.contractStatusData['bproPriceInUsd']
                     } else {
                         return 0;
                     }
-                case 'riskprox':
+                case 'TX':
                     if (auth.contractStatusData['bprox2PriceInRbtc']) {
                          return (auth.contractStatusData['bitcoinPrice'] * web3.utils.fromWei(setNumber(auth.contractStatusData['bprox2PriceInRbtc']), 'ether'))
                     } else {
@@ -56,17 +52,8 @@ export default function PriceVariation(props) {
     };
 
     const { currencyName, currencyCode, priceVariation, blockHeight } = props;
-   /* const {
-        isDailyVariation,
-        value,
-        blockHeightReference,
-        valueReference, blockHeight,
-    } = props.priceVariation; */
-    // const formattedRefValue = formatVisibleValue(valueReference, currencyCode, 'en');
-    // const formattedRefValue = formatVisibleValue(interestRate, 'USDPrice', formatLocalMap2[i18n.languages[0]]);
-
+   
     const isPositive = priceVariation.current > priceVariation.day;
-    const arrow = auth.urlBaseFull+`${isPositive ? 'icon-arrow-up2' : 'icon-arrow-down2'}.svg`;
     const sign = isPositive ? '+' : '';
     const color = isPositive ? '#3fcb97' : '#f2316a';
     const formattedVar = formatValueVariation((priceVariation.current - priceVariation.day), i18n.languages[0],auth);
@@ -103,7 +90,10 @@ export default function PriceVariation(props) {
             <div className={'div_crypto'}>
                 <Fragment>
                     <Tooltip placement="topLeft" title={tooltip} mouseEnterDelay={0.5}>
-                        <img className={'crypto_img'} src={arrow} alt="arrow" height={11}/>
+
+                        {isPositive && <LogoIconUp className={'crypto_img'} alt="arrow" height={11}/>}
+                        {!isPositive && <LogoIconDown className={'crypto_img'} alt="arrow" height={11}/>}
+
                         <span className={'crypto_value'} style={{color: `${color}`}}>{variationText}</span>
                     </Tooltip>
                 </Fragment>

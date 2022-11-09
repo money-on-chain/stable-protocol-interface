@@ -4,18 +4,18 @@
       "name": "Money on Chain",
       "code": "MoC"
     },
-    "Tokens_STABLE_code": "DOC",
-    "Tokens_STABLE_name": "DoC",
-    "Tokens_RISKPRO_code": "BPRO",
-    "Tokens_RISKPRO_name": "BPro",
-    "Tokens_RISKPROX_code": "BTCX",
-    "Tokens_RISKPROX_name": "BTCx",
+    "Tokens_TP_code": "DOC",
+    "Tokens_TP_name": "DoC",
+    "Tokens_TC_code": "BPRO",
+    "Tokens_TC_name": "BPro",
+    "Tokens_TX_code": "BTCX",
+    "Tokens_TX_name": "BTCx",
     "Tokens_RESERVE_code": "RBTC",
     "Tokens_RESERVE_name": "rBTC",
     "Tokens_USD_code": "USD",
     "Tokens_USD_name": "Dollar",
-    "Tokens_MOC_code": "MOC",
-    "Tokens_MOC_name": "MoC",
+    "Tokens_TG_code": "MOC",
+    "Tokens_TG_name": "MoC",
     "Tokens_USDPrice_code": "USD",
     "Tokens_USDPrice_name": "Dollar",
     "MetamaskTutorial_connectWithMetamask_text": "Regresa a la pestaña de Money On Chain. Haga clic en siguiente en la ventana de Metamask.",
@@ -135,9 +135,9 @@
       "faqs": "Wiki",
       "rewards": "Token MoC",
       "language": "Idioma",
-      "RISKPROWallet": "Token BPro",
-      "RISKPROXWallet": "Posición BTCx",
-      "STABLEWallet": "Token DoC",
+      "TCWallet": "Token BPro",
+      "TXWallet": "Posición BTCx",
+      "TPWallet": "Token DoC",
       "getRBTC": "Convierte BTC a RBTC",
       "wiki-url": "https://wiki.moneyonchain.com/v/espanol",
       "repository-url": "https://github.com/money-on-chain/main-RBTC-contract"
@@ -154,10 +154,10 @@
       "faqs": "Wiki",
       "rewards": "MoC",
       "language": "Idioma",
-      "RISKPROWallet": "BPro",
-      "RISKPROXWallet": "BTCx",
+      "TCWallet": "BPro",
+      "TXWallet": "BTCx",
       "Metrics": "Métricas",
-      "STABLEWallet": "DoC",
+      "TPWallet": "DoC",
       "getRBTC": "BTC a RBTC"
     },
     "drawer-allowance": {
@@ -170,19 +170,19 @@
       "subtitle": "Su billetera activa",
       "receiverAddress": "Dirección o dominio del Receptor",
       "ownAddressLabel": "Su dirección",
-      "RISKPRO": {
+      "TC": {
         "title": "BPro",
         "subtitle": "Administra tus Tokens BPro"
       },
-      "RISKPROX": {
+      "TX": {
         "title": "BTCx",
         "subtitle": "Administra tus posiciones BTCx"
       },
-      "STABLE": {
+      "TP": {
         "title": "DOC",
         "subtitle": "Administre sus DOCs"
       },
-      "MOC": {
+      "TG": {
         "title": "MOC",
         "subtitle": "Administre sus MOCs"
       }
@@ -228,13 +228,13 @@
       }
     },
     "metrics": {
-      "STABLE": {
+      "TP": {
         "title": "DoC",
         "total": "Total en el sistema",
         "availableRedeem": "Disponibles para redimir",
         "availableMint": "Disponibles para emitir"
       },
-      "RISKPRO": {
+      "TC": {
         "title": "BPro",
         "usd": "BPro USD",
         "availableRedeem": "Disponibles para redimir",
@@ -243,7 +243,7 @@
         "total": "Total en el sistema",
         "bproDiscountPriceUsd": "Precio descuento"
       },
-      "RISKPROX": {
+      "TX": {
         "title": "BTCx",
         "usd": "BTCx USD",
         "availableMint": "Disponibles para emitir",
@@ -329,7 +329,7 @@
         "blockSettlement": "El próximo Settlement ocurrirá en el bloque",
         "lastUpdateHeight": "Bloque indexado"
       },
-      "Moc": {
+      "TG": {
         "title": "MoC",
         "price": "Precio actual"
       }
@@ -715,7 +715,7 @@
     },
     "tokenInformationTooltip": "Información acerca de ",
     "TokenInformationContent": {
-      "STABLE": {
+      "TP": {
         "factSheet": "DoC Fact Sheet",
         "title": "Dollar on Chain (DoC) es una moneda estable con rBTC de colateral que sigue 1:1 el valor del dólar estadounidense. Sus principales características son:",
         "characteristics": {
@@ -729,7 +729,7 @@
           ]
         }
       },
-      "RISKPRO": {
+      "TC": {
         "factSheet": "BPro Fact Sheet",
         "title": "El token BPro mantiene la volatilidad del bitcoin y añade la combinación de un ingreso pasivo y apalancamiento gratuito. Es un token adecuado para HODLers propensos al riesgo medio y el perfecto balance entre beneficios y riesgo.:",
         "characteristics": {
@@ -744,7 +744,7 @@
           ]
         }
       },
-      "RISKPROX": {
+      "TX": {
         "factSheet": "BTCx Fact Sheet",
         "title": "El BTCx es un apalancamiento LONG descentralizado sobre el precio del bitcoin sin riesgo de contraparte.<br><br>Si no has entendido la línea superior, este token no es para tí y posiblemente perderás tus fondos al proceder con la operación sin haber adquirido el conocimiento suficiente respecto a \"trading\". Por favor dirígete a <a href=\"https://moneyonchain.com/btcx-long-leveraged-bitcoin/\" target=\"_blank\">https://moneyonchain.com/btcx-long-leveraged-bitcoin/</a> o a nuestra Wiki para aprender más acerca de BTCx.\n",
         "characteristics": {
@@ -759,7 +759,7 @@
           ]
         }
       },
-      "MOC": {
+      "TG": {
         "factSheet": "MoC Fact Sheet",
         "title": "Para funcionar como un protocolo descentralizado, Money On Chain tiene su propio token para gobernar la plataforma. Se llama MoC (por Money On Chain) token.",
         "characteristics": {

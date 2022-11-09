@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {
   Modal,
-  Alert,
-  Button
+  Alert
 } from 'antd';
 
 
@@ -15,6 +14,9 @@ import { getBtcAddress } from '../../../Lib/fastBTC/fastBTCMethods';
 import { AuthenticateContext } from '../../../Context/Auth';
 import TransactionScreen from './TransactionScreen';
 import { config } from '../../../Config/config';
+import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-sovryn_fastbtc.svg';
+import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-atention.svg';
+
 import './style.scss';
 
 export default function BtcToRbtcGenerateModal(props) {
@@ -97,7 +99,7 @@ export default function BtcToRbtcGenerateModal(props) {
   const getModalTitle = () => (
     <div className="ModalHeaderTitle">
       <div className="CardLogo">
-        <img width="32" src={auth.urlBaseFull+'icons/icon-sovryn_fastbtc.svg'} alt=""/>
+        <LogoIconFastBTC width="32" height="32" alt=""/>
         <h1>Sovryn<br/>FastBTC</h1>
       </div>
       <div className="title">
@@ -109,7 +111,7 @@ export default function BtcToRbtcGenerateModal(props) {
   const ModalFooter = () => {
     return (
       <div className="AlertWarning" type="warning" icon="" >
-          <img src={auth.urlBase+"global/icon-atention.svg"} alt=""/>
+          <LogoIconAttention width="27" height="23" alt=""/>
         <div>{t(`${AppProject}.fastbtc.topUpWalletModal.footer`, {ns: ns})}</div>
       </div>
     )

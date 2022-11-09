@@ -1,6 +1,6 @@
 import { Tooltip } from 'antd';
 import NumericLabel from 'react-pretty-numbers';
-import { adjustPrecision, formatLocalMap } from '../../Lib/Formats';
+import { adjustPrecision } from '../../Helpers/Formats';
 import {useTranslation} from "react-i18next";
 import { config } from '../../Config/config';
 
@@ -28,14 +28,14 @@ const LargeNumberF3 = ({ amount, currencyCode, includeCurrency, numericLabelPara
 
 
 
-      return (<>
-              { !isNaN(value) &&
+    return (<>
+            { !isNaN(value) &&
 
-              <><NumericLabel {... {params }}>{value.toString()}</NumericLabel>
-                  <span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: ns })}`}</span></>
+            <><NumericLabel {... {params }}>{value.toString()}</NumericLabel>
+                <span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: ns })}`}</span></>
 
-              }</>
-      );
+            }</>
+    );
   }
 
   return (
@@ -44,10 +44,6 @@ const LargeNumberF3 = ({ amount, currencyCode, includeCurrency, numericLabelPara
     </Tooltip>
   )
 };
-
-
-
-
 
 
 export { LargeNumberF3 };

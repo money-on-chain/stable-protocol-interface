@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { CheckCircleFilled } from "@ant-design/icons";
 import { AuthenticateContext } from "../../../../Context/Auth";
 import { getDatasMetrics } from '../../../../Helpers/helper'
-import { formatValueToContract } from '../../../../Lib/Formats';
+import { formatValueToContract } from '../../../../Helpers/Formats';
 import SystemOperations from "./operations";
 import { useTranslation } from "react-i18next";
 import { Skeleton, Tooltip } from 'antd';

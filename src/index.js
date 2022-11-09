@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './assets/css/global.scss';
+import './assets/css/components.scss';
+
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
@@ -12,6 +14,8 @@ import { AuthenticateProvider } from './Context/Auth';
 import {I18nextProvider} from "react-i18next";
 import i18next from "i18next";
 import {config} from "./Config/config";
+
+import IconWaiting from './assets/icons/status-pending.png';
 
 console.log(`Starting app version: ${process.env.REACT_APP_VERSION}`);
 
@@ -25,7 +29,7 @@ async function loadTranslations() {
         let global_es= await import('./projects/global-es.json')
         let global_en= await import('./projects/global-en.json')
 
-        let css1= await import('./assets/css/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
+        //let css1= await import('./assets/css/'+process.env.REACT_APP_ENVIRONMENT_APP_PROJECT+'/style.scss')
 
         await i18next.init({
             interpolation: {escapeValue:false},
@@ -44,7 +48,7 @@ async function loadTranslations() {
             }
         })
     } catch (error) {
-        console.log(`Ocurrió un error: ${error}`);
+        console.log(`Something wrong: ${error}`);
     }
 }
 
@@ -56,7 +60,7 @@ ReactDOM.render(
             <AuthenticateProvider>
                 <HashRouter>
                     {/*<React.Suspense fallback={ <span>Loading...</span> }>*/}
-                    <React.Suspense fallback={ <img style={{'position':'fixed','left': '50%','top':'50%','transform':'translateX(-50%) translateY(-50%)'}} width={50} height={50} src={process.env.REACT_APP_PUBLIC_URL+"global/status-pending.png"} alt="ssa" className={'img-status rotate'}/> }>
+                    <React.Suspense fallback={ <img style={{'position':'fixed','left': '50%','top':'50%','transform':'translateX(-50%) translateY(-50%)'}} width={50} height={50} src={IconWaiting} alt="ssa" className={'img-status rotate'}/> }>
                         <Router />
                     </React.Suspense>
                 </HashRouter>

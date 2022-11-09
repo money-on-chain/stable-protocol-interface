@@ -1,16 +1,14 @@
 import { Modal } from 'antd';
 import React, { useContext, useEffect, useMemo, useState, Fragment } from 'react';
 import { Button } from 'antd';
-//import WarningOutlined from '@ant-design/icons/WarningOutlined';
 import CopyOutlined from '@ant-design/icons/CopyOutlined';
 import { AuthenticateContext } from '../../../Context/Auth';
-//import Copy from '../../../Components/Page/Copy';
-//import Web3 from "web3";
-import FastBtcBridge from "../../../Contracts/coinbase/FastBtcBridge.json";
+import FastBtcBridge from "../../../Contracts/FastBtcBridge.json";
 import { toNumberFormat, btcInSatoshis, DYNAMIC_FEE_DIVISOR } from '../../../Helpers/math-helpers';
 import { useTranslation } from "react-i18next";
 import Step2 from "./step2";
 import { config } from '../../../Config/config';
+import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-sovryn_fastbtc.svg';
 import './style.scss';
 
 export default function RbtcToBtcGenerateModal(props) {
@@ -110,7 +108,7 @@ export default function RbtcToBtcGenerateModal(props) {
     const titleModal = (
         <div className='title'>
             <div className="CardLogo">
-                <img width="32" src={auth.urlBaseFull+'icons/icon-sovryn_fastbtc.svg'} alt="" />
+                <LogoIconFastBTC width="32" height="32" alt="" />
                 <h1>Sovryn <br />FastBTC</h1>
                 <div className='title-text'>
                     <h1>{title}</h1>
@@ -118,16 +116,7 @@ export default function RbtcToBtcGenerateModal(props) {
             </div>
         </div>
     );
-
-    /*
-    const footerModal = (
-        <div className="alert-message">
-            <WarningOutlined />
-            <p>{alertText}</p>
-        </div>
-    );
-    */
-
+    
     return (
         <Modal
             visible={visible}

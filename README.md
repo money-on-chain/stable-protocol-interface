@@ -4,12 +4,12 @@ Open source **decentralized interface** for multi-collateral stable protocol **M
 
 You can:
 
-* Mint / Redeem Stable Token
-* Mint / Redeem RiskPro Token
-* Mint / Redeem RiskProX Token (leveraged 2X)
+* Mint / Redeem Pegged Token (TP): Ex.: DoC or RDOC
+* Mint / Redeem Collateral Token (TC): Ex.: BPro or RIFP
+* Mint / Redeem Token X (TX): Ex.: BTCx or RIFx
 * Metrics
 * Last operations
-* Claim / Stake MoC
+* Claim / Stake TG (MOC)
 * FastBTC Bridge
 
 
@@ -21,15 +21,16 @@ You can:
 * RIF on Chain (RoC) (Collateral RIF) please review the contracts [here](https://github.com/money-on-chain/RDOC-Contract) 
 
 
-| Token generic     | Project | Token Name  | Collateral   | Network |
-|-------------------|---------|-------------|--------------|---------|
-| Stable            | MOC     | DOC         | RBTC         | RSK     |
-| RiskPro           | MOC     | BPRO        | RBTC         | RSK     |
-| RiskProx          | MOC     | BTCX        | RBTC         | RSK     |
-| Stable            | ROC     | RDOC        | RIF          | RSK     |
-| RiskPro           | ROC     | RIFP        | RIF          | RSK     |
-| RiskProx          | ROC     | RIFX        | RIF          | RSK     |
-
+| Token | Token name       | Project | Token Name | Collateral |
+|-------|------------------|---------|------------|------------|
+| TP    | Pegged Token 1:1 | MOC     | DOC        | RBTC       |
+| TC    | Collateral Token | MOC     | BPRO       | RBTC       |
+| TX    | Leverage Token X | MOC     | BTCX       | RBTC       |
+| TG    | Govern Token     | MOC     | MOC        | -          |
+| TP    | Pegged Token 1:1 | ROC     | RDOC       | RIF        |
+| TC    | Collateral Token | ROC     | RIFP       | RIF        |
+| TX    | Leverage Token X | ROC     | RIFX       | RIF        |
+| TG    | Govern Token     | ROC     | MOC        | -          |
 
 ### Setup: Running develop
 

@@ -2,67 +2,67 @@ import Web3 from 'web3';
 import BigNumber from "bignumber.js";
 import { setToLocaleString, setNumber } from "./helper";
 import { config } from "../Config/config";
-import { precisionDecimals } from "../Lib/Formats";
+import { precisionDecimals } from "../Helpers/Formats";
 
 
-const userDocBalance= (auth) =>{
+const userTPBalance= (auth) =>{
     if (auth.userBalanceData && auth.contractStatusData) {
 
-        const docBalance= new BigNumber(Web3.utils.fromWei(auth.userBalanceData['docBalance']));
-        const docBalanceCollateral = docBalance.div(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)));
+        const tpBalance= new BigNumber(Web3.utils.fromWei(auth.userBalanceData['docBalance']));
+        const tpBalanceCollateral = tpBalance.div(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)));
         return {
-            'normal': docBalance,
-            'usd': docBalance,
-            'collateral': docBalanceCollateral
+            'normal': tpBalance,
+            'usd': tpBalance,
+            'collateral': tpBalanceCollateral
             }
     }
 };
 
-const userBproBalance = (auth) =>{
+const userTCBalance = (auth) =>{
     if (auth.userBalanceData && auth.contractStatusData) {
 
-        const bproBalance = new BigNumber(Web3.utils.fromWei(auth.userBalanceData.bproBalance));
-        const bproBalanceUsd = new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bproPriceInUsd))
-            .multipliedBy(bproBalance);
-        const bproBalanceCollateral = bproBalanceUsd.div(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)));
+        const tcBalance = new BigNumber(Web3.utils.fromWei(auth.userBalanceData.bproBalance));
+        const tcBalanceUsd = new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bproPriceInUsd))
+            .multipliedBy(tcBalance);
+        const tcBalanceCollateral = tcBalanceUsd.div(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)));
 
         return {
-            'normal': bproBalance,
-            'usd': bproBalanceUsd,
-            'collateral': bproBalanceCollateral
+            'normal': tcBalance,
+            'usd': tcBalanceUsd,
+            'collateral': tcBalanceCollateral
             }
     }
 };
 
-const userBtcxBalance = (auth) =>{
+const userTXBalance = (auth) =>{
     if (auth.userBalanceData && auth.contractStatusData) {
 
-        const btcxBalance = new BigNumber(Web3.utils.fromWei(auth.userBalanceData['bprox2Balance']));
-        const btcxBalanceCollateral = new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bprox2PriceInRbtc))
-            .multipliedBy(btcxBalance);
-        const btcxBalanceUsd = btcxBalanceCollateral
+        const txBalance = new BigNumber(Web3.utils.fromWei(auth.userBalanceData['bprox2Balance']));
+        const txBalanceCollateral = new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bprox2PriceInRbtc))
+            .multipliedBy(txBalance);
+        const txBalanceUsd = txBalanceCollateral
             .multipliedBy(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)))
 
         return {
-            'normal': btcxBalance,
-            'usd': btcxBalanceUsd,
-            'collateral': btcxBalanceCollateral
+            'normal': txBalance,
+            'usd': txBalanceUsd,
+            'collateral': txBalanceCollateral
             }
     }
 };
 
-const userMocBalance = (auth) =>{
+const userTGBalance = (auth) =>{
     if (auth.userBalanceData && auth.contractStatusData) {
 
-        const mocBalance = new BigNumber(Web3.utils.fromWei(auth.userBalanceData.mocBalance));
-        const mocBalanceUsd = new BigNumber(Web3.utils.fromWei(auth.contractStatusData.mocPrice))
-            .multipliedBy(mocBalance);
-        const mocBalanceCollateral = mocBalanceUsd.div(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)));
+        const tgBalance = new BigNumber(Web3.utils.fromWei(auth.userBalanceData.mocBalance));
+        const tgBalanceUsd = new BigNumber(Web3.utils.fromWei(auth.contractStatusData.mocPrice))
+            .multipliedBy(tgBalance);
+        const tgBalanceCollateral = tgBalanceUsd.div(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice)));
 
         return {
-            'normal': mocBalance,
-            'usd': mocBalanceUsd,
-            'collateral': mocBalanceCollateral
+            'normal': tgBalance,
+            'usd': tgBalanceUsd,
+            'collateral': tgBalanceCollateral
             }
     }
 };
@@ -98,17 +98,17 @@ const getUserBalance = (auth, i18n, tokenName) => {
         let rDecimals;
         let notFormatted;
         switch (tokenName.toLowerCase()) {
-            case 'stable':
-                rDecimals = parseInt(config.tokens.STABLE.decimals);
-                notFormatted = userDocBalance(auth);
+            case 'tp':
+                rDecimals = parseInt(config.tokens.TP.decimals);
+                notFormatted = userTPBalance(auth);
                 break;
-            case 'riskpro':
-                rDecimals = parseInt(config.tokens.RISKPRO.decimals);
-                notFormatted = userBproBalance(auth);
+            case 'tc':
+                rDecimals = parseInt(config.tokens.TC.decimals);
+                notFormatted = userTCBalance(auth);
                 break;
-            case 'riskprox':
-                rDecimals = parseInt(config.tokens.RISKPROX.decimals);
-                notFormatted = userBtcxBalance(auth);
+            case 'tx':
+                rDecimals = parseInt(config.tokens.TX.decimals);
+                notFormatted = userTXBalance(auth);
                 break;
             default:
                 throw new Error('Invalid token name');
@@ -117,7 +117,7 @@ const getUserBalance = (auth, i18n, tokenName) => {
         result = {
             'normal': setToLocaleString(notFormatted.normal.toFixed(rDecimals), rDecimals, i18n),
             'normal_tooltip': setToLocaleString(notFormatted.normal.toFixed(12), 12, i18n),
-            'usd': setToLocaleString(notFormatted.usd.toFixed(parseInt(config.tokens.STABLE.decimals)), parseInt(config.tokens.STABLE.decimals), i18n),
+            'usd': setToLocaleString(notFormatted.usd.toFixed(parseInt(config.tokens.TP.decimals)), parseInt(config.tokens.TP.decimals), i18n),
             'usd_tooltip': setToLocaleString(notFormatted.usd.toFixed(12), 12, i18n),
             'collateral': setToLocaleString(notFormatted.collateral.toFixed(parseInt(config.tokens.RESERVE.decimals)), parseInt(config.tokens.RESERVE.decimals), i18n),
             'collateral_tooltip': setToLocaleString(notFormatted.collateral.toFixed(12), 12, i18n),
@@ -135,15 +135,15 @@ const getUserBalance = (auth, i18n, tokenName) => {
 const getUSD = (coin, value, auth, i18n=null) => {
     if (auth.contractStatusData) {
         switch (coin) {
-            case 'STABLE':
+            case 'TP':
                 return  setToLocaleString(new BigNumber(1 * Web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'RISKPRO':
+            case 'TC':
                 return  setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData['bproPriceInUsd']) * Web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'MOC':
+            case 'TG':
                 return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData['mocPrice']) * Web3.utils.fromWei(setNumber(value))),2,i18n)
             case 'RESERVE':
                 return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice) * Web3.utils.fromWei(setNumber(value))),2,i18n)
-            case 'RISKPROX':
+            case 'TX':
                 return setToLocaleString(new BigNumber(Web3.utils.fromWei(auth.contractStatusData.bitcoinPrice, 'ether') * Web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'], 'ether') * Web3.utils.fromWei(setNumber(value))),2,i18n)
 
         }
@@ -155,10 +155,10 @@ const getUSD = (coin, value, auth, i18n=null) => {
 
 
 export {
-    userDocBalance,
-    userBproBalance,
-    userBtcxBalance,
-    userMocBalance,
+    userTPBalance,
+    userTCBalance,
+    userTXBalance,
+    userTGBalance,
     userCollateralBalance,
     getUserBalance,
     getUSD

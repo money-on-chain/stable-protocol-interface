@@ -188,6 +188,7 @@
         "ConfirmTransactionModal_cancel": "Cancel",
         "ConfirmTransactionModal_confirm": "Confirm",
         "ConfirmTransactionModal_Interests": "Interest rate",
+        "ConfirmTransactionModal_Error_not_enough": "Not enough user balance! Please exchange a lower amount or review customize price variation tolerance section.",
 
         "MintOrRedeemToken_YouExchange": "You exchange",
         "MintOrRedeemToken_YouReceive": "You receive",
@@ -211,8 +212,8 @@
         "ModalSend_pegout_EnterTheAmount": "Enter rBTC amount to send",
         "ModalSend_AddAComment": "Add a comment (optional)",
 
-        "riskproxWallet_NextSettlement": "Next settlement",
-        "riskproxWallet_CurrentRate": "Current Interest Rate",
+        "txWallet_NextSettlement": "Next settlement",
+        "txWallet_CurrentRate": "Current Interest Rate",
 
         "RewardsClaimButton_Claim": "Claim",
         "RewardsClaimButton_Modal_Title":"Operation details",

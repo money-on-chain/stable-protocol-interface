@@ -3,15 +3,14 @@ import { AuthenticateContext } from '../../../Context/Auth';
 import React, {Fragment, useContext, useState,useRef} from "react";
 import Step3 from "./step3";
 import BigNumber from "bignumber.js";
+import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-atention.svg';
+import { ReactComponent as LogoIconReserve } from '../../../assets/icons/icon-reserve2.svg';
 
 
 function Step2(props) {
-
-    // const {visible = false, handleClose = () => {}} = props;
-
+    
     const amountInput = useRef();
     const {auth}= props;
-    //const {web3}= auth;
 
     const [currentStep, setCurrentStep]= useState(2);
     const [rbtcAmount, setRbtcAmount]= useState("");
@@ -83,7 +82,7 @@ function Step2(props) {
                         return <Fragment>
                             <div className="alert-message-modal">
                                 <div className="alert-message">
-                                    <img src={auth.urlBase+"global/icon-atention.svg"} alt="img" />
+                                    <LogoIconAttention width="27" height="23" alt="img" />
                                     <p>Double check that you are entering the correct BTC destination address.</p>
                                 </div>
                             </div>
@@ -116,8 +115,7 @@ function Step2(props) {
                             <div className={'inputAmount'}>
                                 <input type="number" ref={amountInput}  onBlur={handleChangeAmount} onMouseLeave={handleChangeAmount} placeholder="Enter rBTC amount to send" className="valueInput"/>
                                 <div>
-                                    {auth.getAppMode=='RRC20' && <img src={auth.urlBaseFull+"icon-reserve2.svg"} alt={'img'} width={30}/> }
-                                    {auth.getAppMode=='MoC' && <img src={auth.urlBaseFull+"icon-reserve.svg"} alt={'img'} width={30}/> }
+                                    <LogoIconReserve alt={'img'} width="30" height="30"/>
                                     <span>RBTC </span>
                                 </div>
                             </div>
