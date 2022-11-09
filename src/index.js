@@ -13,33 +13,31 @@ import reportWebVitals from './reportWebVitals';
 import { AuthenticateProvider } from './Context/Auth';
 import {config} from "./Config/config";
 import IconWaiting from './assets/icons/status-pending.png';
+import Router from './Router'
 
 console.log(`Starting app version: ${process.env.REACT_APP_VERSION}`);
 
-const Router = React.lazy(() => import('./Router/projects/' + config.environment.AppProject.toLowerCase()));
-
 async function loadTranslations() {
     try {
-        let moc_es= await import('./projects/'+config.environment.AppProject.toLowerCase()+'/es/moc.json');
-        let moc_en= await import('./projects/'+config.environment.AppProject.toLowerCase()+'/en/moc.json');
-        let rdoc_es = await import ('./projects/'+config.environment.AppProject.toLowerCase()+'/es/moc.json')
-        let rdoc_en = await import ('./projects/'+config.environment.AppProject.toLowerCase()+'/en/moc.json')
-        let global_es= await import('./projects/global-es.json')
-        let global_en= await import('./projects/global-en.json')
+
+        const langES = await import('./projects/'+config.environment.AppProject.toLowerCase()+'/es/moc.json');
+        const langEN = await import('./projects/'+config.environment.AppProject.toLowerCase()+'/en/moc.json');
 
         await i18next.init({
             interpolation: {escapeValue:false},
             lng: "en",
             resources: {
                 es: {
-                    global: global_es,
-                    moc: moc_es,
-                    rdoc: rdoc_es
+                    global: await import('./projects/global-es.json'),
+                    moc: langES,
+                    rdoc: langES,
+                    flipago: langES
                 },
                 en: {
-                    global: global_en,
-                    moc: moc_en,
-                    rdoc: rdoc_en
+                    global: await import('./projects/global-en.json'),
+                    moc: langEN,
+                    rdoc: langEN,
+                    flipago: langEN
                 },
             }
         })

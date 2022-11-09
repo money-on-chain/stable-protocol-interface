@@ -1,0 +1,17 @@
+{
+    "abi": [
+        {
+            "inputs": [],
+            "name": "getPriceProviderType",
+            "outputs": [
+                {
+                    "internalType": "enum IPriceProviderRegisterEntry.IPriceProviderType",
+                    "name": "",
+                    "type": "uint8"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        }
+    ]
+}
