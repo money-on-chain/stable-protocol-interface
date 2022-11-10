@@ -1,5 +1,5 @@
 import { config } from '../projects/config';
-import {getDecimals} from "../helpers/helper";
+import {getDecimals} from "./helper";
 import BigNumber from "bignumber.js";
 const precisions = config.Precisions;
 
@@ -91,7 +91,7 @@ const formatVisibleValue = (amount, currencyCode, language, decimals) => {
 const formatValueVariation = (amount, language, auth) => {
     if (!amount) return '-';
     const fd = formatMap['valueVariation'];
-    const num = formatValueFromMap(amount, fd, formatLocalMap[language],(auth.getAppMode=='MoC')? 2:4);
+    const num = formatValueFromMap(amount, fd, formatLocalMap[language],(auth.getAppMode==='MoC')? 2:4);
     return num;
 };
 
@@ -113,15 +113,6 @@ const formatValueToContract = (amount, currencyCode) => {
         .multipliedBy(precision(formatMap[currencyCode]))
         .toFixed(0);
 };
-/*
-const formatPerc = (value, language) =>
-    Number.isNaN(value)
-        ? '-'
-        : parseFloat(Math.round(value * 100) / 100).toLocaleString(language, {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
-          });
-*/
 
 export {
     formatValue,
@@ -129,8 +120,6 @@ export {
     formatValueVariation,
     formatValueToContract,
     formatValueWithContractPrecision,
-    //formatPerc,
-    //formatDecimalRatioAsPercent,
     adjustPrecision,
     precision,
     formatLocalMap,

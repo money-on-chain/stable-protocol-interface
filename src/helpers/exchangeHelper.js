@@ -192,59 +192,12 @@ const getExchangeMethod = (sourceCurrency, targetCurrency, commissionCurrency) =
     return buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString].exchangeFunction;
 }
 
-/*
-const getTargetOptionsFor = currency => {
-  if (!Object.prototype.hasOwnProperty.call(buyCurrencyMap, currency))
-    // throw new Meteor.Error('not-valid-currency');
-  return Object.keys(buyCurrencyMap[currency]);
-};
-*/
-/*
-const getDefaultTargetOptionsFor = currency => {
-  const targetOptions = getTargetOptionsFor(currency);
-  return targetOptions.length ? targetOptions[0] : undefined;
-};
-*/
-/*
-const getTargetOptions = (currency) => [
-  ...new Set(
-    Object.keys(buyCurrencyMap).reduce(
-      (accum, it) => {
-        if(it === currency) {
-          accum.concat(Object.keys(buyCurrencyMap[it]))
-        } else if (Object.keys(buyCurrencyMap[it]).includes(currency)) {
-          accum.concat([currency]);
-        }
-      },
-      []
-    )
-  )
-];
-*/
-/*
-const getDefaultSourceByTarget = currency =>
-  Object.keys(buyCurrencyMap).find(it => Object.keys(buyCurrencyMap[it]).includes(currency));
-*/
-/*
-const getTransactionTypeId = (sourceCurrency, targetCurrency, commissionCurrency) => {
-  return buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString]?.transactionTypeId;
-}
-*/
-
 const getTransactionType = (sourceCurrency, targetCurrency, commissionCurrency) => {
   let TransactionTypeIds = (appMode === "MoC") ? TransactionTypeIdsMoC : TransactionTypeIdsRRC20;
   return Object.keys(TransactionTypeIds).find(k => TransactionTypeIds[k] === buyCurrencyMap[sourceCurrency][targetCurrency][commissionCurrency][appModeString]?.transactionTypeId);
 }
 
-//const getSourceOptions = () => Object.keys(buyCurrencyMap);
-
 export {
   getExchangeMethod,
-  //getTargetOptionsFor,
-  //getTargetOptions,
-  //getSourceOptions,
-  //getDefaultSourceByTarget,
-  //getDefaultTargetOptionsFor,
-  //getTransactionTypeId,
   getTransactionType
 };

@@ -9,32 +9,6 @@ import { config } from '../projects/config';
 import BigNumber from "bignumber.js";
 const RBTCPrecision = config.Precisions.RBTCPrecision;
 
-/*
-const convertAmount2222 = (source, target, amount, convertToken) => {
-  if (amount === '') {
-    return '';
-  }
-  // if (TAPi18n.getLanguage() === 'es') {
-  //   amount = amount.toLocaleString(TAPi18n.getLanguage());
-  // }
-  // const convertedAmount = formatValueWithContractPrecision(
-  //   convertToken(source, target, formatValueToContract(amount, source)),
-  //   target
-  // );
-  const convertedAmount = formatValueWithContractPrecision(
-      convertToken(source, target, formatValueToContract(amount, source)),
-      target
-  );
-
-  const replacedDot = convertedAmount.replace(/\./g, '');
-  const replacedComma = replacedDot.replace(/,/g, '');
-  return isNaN(replacedComma) ? '' : replacedComma.toString();
-  // console.log(isNaN(convertAmount));
-  // return isNaN(convertedAmount) ? '' : convertedAmount.toString();
-  // return isNaN(convertedAmount) ? '' : convertedAmount.toString();
-};
-*/
-
 const convertAmount = (source, target, amount, convertToken) => {
   if (amount === '') {
     return '';
@@ -245,8 +219,6 @@ const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState) => {
 
 export {
   convertAmount,
-  //isAmountBiggerThanMax,
-  //isAmountZero,
   getMaxMintableBalance,
   getMaxRedeemableBalance,
   amountIsTooSmall,
