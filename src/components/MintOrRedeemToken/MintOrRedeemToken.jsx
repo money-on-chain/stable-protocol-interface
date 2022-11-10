@@ -9,6 +9,8 @@ import {
     Switch, Skeleton
 } from 'antd';
 import { LoadingOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import BigNumber from 'bignumber.js';
+
 import {
     getMaxMintableBalance,
     getMaxRedeemableBalance,
@@ -22,17 +24,15 @@ import {
   formatValueToContract,
   formatLocalMap2
 } from '../../helpers/Formats';
-import BigNumber from 'bignumber.js';
 import MintModal from '../Modals/MintModal';
-import {useTranslation} from "react-i18next";
 import { AuthenticateContext } from '../../context/Auth';
 import { config } from '../../projects/config';
+import { useProjectTranslation } from '../../helpers/translations';
 
 
 const MintOrRedeemToken = (props) => {
 
-  const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-  const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+  const [t, i18n, ns]= useProjectTranslation();
   const AppProject = config.environment.AppProject;
   const auth = useContext(AuthenticateContext);
   

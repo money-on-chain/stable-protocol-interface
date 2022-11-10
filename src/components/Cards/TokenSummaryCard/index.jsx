@@ -4,13 +4,13 @@ import React, {useEffect, useState} from 'react';
 import { useContext } from 'react';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+
 import { AuthenticateContext } from '../../../context/Auth';
 import { LargeNumber } from "../../LargeNumber";
-import { useTranslation } from "react-i18next";
 import InformationModal from '../../Modals/InformationModal';
 import {getCoinName} from "../../../helpers/helper";
 import { config } from "../../../projects/config";
-
+import { useProjectTranslation } from '../../../helpers/translations';
 import { getUserBalance } from "../../../helpers/balances";
 
 import { ReactComponent as LogoIconReserve } from './../../../assets/icons/icon-reserve.svg';
@@ -47,8 +47,7 @@ export default function TokenSummaryCard(props) {
     } = props;
 
     const auth = useContext(AuthenticateContext);
-    const [t, i18n] = useTranslation(["global", 'moc'])
-
+    const [t, i18n, ns] = useProjectTranslation();
 
     const [loading, setLoading] = useState(true);
     const timeSke= 1500

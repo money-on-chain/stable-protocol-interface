@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthenticateContext } from '../../../../context/Auth';
 import moment from "moment";
-import { getDatasMetrics } from '../../../../helpers/helper';
-import { useTranslation } from "react-i18next";
 import { Skeleton } from 'antd';
+
+import { AuthenticateContext } from '../../../../context/Auth';
+import { getDatasMetrics } from '../../../../helpers/helper';
 import {config} from '../../../../projects/config';
+import { useProjectTranslation } from '../../../../helpers/translations';
 
 function NextSettlement() {
     const auth = useContext(AuthenticateContext);    
     const [daysHours, setDaysHours] = useState(null);
     const [crono, setCrono] = useState(2);
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns]= useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     const decimaltoHour = (dayBlockSpan, blocksToSettlement) => {

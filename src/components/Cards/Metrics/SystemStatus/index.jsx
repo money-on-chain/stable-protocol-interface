@@ -1,21 +1,22 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CheckCircleFilled } from "@ant-design/icons";
+import BigNumber from "bignumber.js";
+import { Skeleton, Tooltip } from 'antd';
+
 import { AuthenticateContext } from "../../../../context/Auth";
 import { getDatasMetrics } from '../../../../helpers/helper'
 import { formatValueToContract } from '../../../../helpers/Formats';
 import SystemOperations from "./operations";
-import { useTranslation } from "react-i18next";
-import { Skeleton, Tooltip } from 'antd';
 import {config} from '../../../../projects/config';
-import BigNumber from "bignumber.js";
+import { useProjectTranslation } from '../../../../helpers/translations';
+
 
 function SystemStatus(props) {
 
     const auth = useContext(AuthenticateContext);
 
     const getDatas = getDatasMetrics(auth)
-    const [t, i18n] = useTranslation(["global", 'moc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns]= useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     const [loading, setLoading] = useState(true);

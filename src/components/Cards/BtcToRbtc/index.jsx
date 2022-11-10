@@ -2,15 +2,14 @@ import { Row, Col, Button } from 'antd';
 import React from 'react';
 import { useContext } from 'react';
 import { AuthenticateContext } from '../../../context/Auth';
-import {useTranslation} from "react-i18next";
 import { config } from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
 import { ReactComponent as LogoIconRBTC } from '../../../assets/icons/icon-btc_to_rbtc.svg';
 
 
 export default function BtcToRbtc(props) {
-    
-    const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+
+    const [t, i18n, ns]= useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const{
         title = 'BTC to rBTC Peg In',

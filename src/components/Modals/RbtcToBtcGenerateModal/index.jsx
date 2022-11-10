@@ -2,12 +2,13 @@ import { Modal } from 'antd';
 import React, { useContext, useEffect, useMemo, useState, Fragment } from 'react';
 import { Button } from 'antd';
 import CopyOutlined from '@ant-design/icons/CopyOutlined';
+
 import { AuthenticateContext } from '../../../context/Auth';
 import FastBtcBridge from "../../../contracts/FastBtcBridge.json";
 import { toNumberFormat, btcInSatoshis, DYNAMIC_FEE_DIVISOR } from '../../../helpers/math-helpers';
-import { useTranslation } from "react-i18next";
 import Step2 from "./step2";
 import { config } from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
 import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-sovryn_fastbtc.svg';
 import './style.scss';
 
@@ -18,8 +19,7 @@ export default function RbtcToBtcGenerateModal(props) {
     const [limits, setLimits] = useState(null);
     const auth = useContext(AuthenticateContext);
     const { web3 } = auth
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns]= useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     useEffect(() => {

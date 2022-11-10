@@ -1,22 +1,23 @@
-import TokenSummaryCard from '../../components/Cards/TokenSummaryCard';
+
 
 import React, { Fragment } from 'react';
 import { useContext } from 'react';
+import {Row, Alert } from 'antd';
+
 import { AuthenticateContext } from '../../context/Auth';
 import WalletBalance from '../../components/Cards/WalletBalance';
-import {Row, Alert } from 'antd';
+import TokenSummaryCard from '../../components/Cards/TokenSummaryCard';
 import MocAmount from "../../components/Cards/MocAmount";
 import MocLiquidity from "../../components/Cards/MocLiquidity";
 import ListOperations from "../../components/Tables/ListOperations";
-import {useTranslation} from "react-i18next";
-import { config } from './../../projects/config';
+import { config } from '../../projects/config';
+import { useProjectTranslation } from '../../helpers/translations';
 
 import './../../assets/css/pages.scss';
 
 function Home(props) {
 
-    const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};

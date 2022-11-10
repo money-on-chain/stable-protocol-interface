@@ -1,13 +1,13 @@
-
 import React, {Fragment, useContext} from 'react';
 import { Tooltip } from 'antd';
+import web3 from "web3";
+
 import { formatValueVariation } from '../../helpers/Formats';
 import {AuthenticateContext} from "../../context/Auth";
-import web3 from "web3";
 import {setNumber} from "../../helpers/helper";
-import {useTranslation} from "react-i18next";
 import {LargeNumberF3} from "../LargeNumberF3";
 import { config } from '../../projects/config';
+import { useProjectTranslation } from '../../helpers/translations';
 
 import { ReactComponent as LogoIconUp } from '../../assets/icons/icon-arrow-up2.svg';
 import { ReactComponent as LogoIconDown } from '../../assets/icons/icon-arrow-down2.svg';
@@ -19,8 +19,7 @@ export default function PriceVariation(props) {
    // if (!props.priceVariation) return null;
 
     const auth = useContext(AuthenticateContext);
-    const [t, i18n]= useTranslation(["global",'moc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     const getBalanceUSD = (tokenName) => {

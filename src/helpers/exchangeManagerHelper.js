@@ -1,3 +1,5 @@
+import BigNumber from "bignumber.js";
+
 import {
   formatValueWithContractPrecision,
   formatValueToContract,
@@ -6,7 +8,6 @@ import {
 import { getTransactionType } from './exchangeHelper';
 import { config } from '../projects/config';
 
-import BigNumber from "bignumber.js";
 const RBTCPrecision = config.Precisions.RBTCPrecision;
 
 const convertAmount = (source, target, amount, convertToken) => {

@@ -1,12 +1,11 @@
 import React from 'react';
 import { LargeNumber } from '../LargeNumber';
-import {useTranslation} from "react-i18next";
 import { config } from '../../projects/config';
+import { useProjectTranslation } from '../../helpers/translations';
 
 const BalanceItem = ({ theme, amount, currencyCode }) => {
 
-  const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-  const ns = config.environment.AppProject.toLowerCase();
+  const [t, i18n, ns]= useProjectTranslation();
   const AppProject = config.environment.AppProject;
   const classname = `BalanceItem ${theme}`;
   const currencyName = t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: ns});

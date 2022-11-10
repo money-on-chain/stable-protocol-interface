@@ -2,7 +2,7 @@ import { useContext, useState, Fragment } from 'react'
 import { AuthenticateContext } from '../../../context/Auth'
 import LogoutModal from '../../../components/Modals/LogoutModal'
 import Select from 'antd/lib/select';
-import {useTranslation} from "react-i18next";
+import { useProjectTranslation } from '../../../helpers/translations';
 
 function LoginButton(props) {
 
@@ -13,8 +13,7 @@ function LoginButton(props) {
         setLogoutVisible(false);
     };
 
-    const [t, i18n]= useTranslation(["global",'moc'])
-
+    const [t, i18n, ns]= useProjectTranslation();
 
     const { Option } = Select;
     const availableLang= ["en", "es"]

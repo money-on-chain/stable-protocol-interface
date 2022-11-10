@@ -3,15 +3,15 @@ import {Row, Col, Tooltip, Alert, Card, Skeleton} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import React, { useState, useEffect, Fragment, useContext } from 'react';
 import moment from 'moment';
+
 import ListOperations from "../../../components/Tables/ListOperations";
-import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../context/Auth';
 import MintOrRedeemToken from '../../../components/MintOrRedeemToken/MintOrRedeemToken';
-import { config } from './../../../projects/config';
-
+import { config } from '../../../projects/config';
 import {getDatasMetrics} from "../../../helpers/helper";
 import {getInrateToSettlement} from "../../../helpers/mocStateHelper";
 import {LargeNumber} from "../../../components/LargeNumber";
+import { useProjectTranslation } from '../../../helpers/translations';
 
 import './../../../assets/css/pages.scss';
 
@@ -53,9 +53,8 @@ export default function Mint(props) {
     const mocState = auth.contractStatusData;
     const inrateToSettlement = mocState && getInrateToSettlement(mocState);
     const formatDecimalRatioAsPercent = amount => (Number.isNaN(amount) ? 0 : amount * 100);
-    
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500

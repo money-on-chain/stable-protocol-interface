@@ -1,23 +1,21 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import 'antd/dist/antd.css';
 import { Table, Tooltip } from 'antd';
-import RowDetail from "../RowDetailClaim";
+import {InfoCircleOutlined} from "@ant-design/icons";
+import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
+import moment from 'moment';
 import classnames from 'classnames';
+
+import RowDetail from "../RowDetailClaim";
 import api from '../../../services/api';
-//import Moment from 'react-moment';
-import { useState } from 'react'
 import {
     myParseDate,
     readJsonClaims,
     dateFU
 } from '../../../helpers/helper'
 import {config} from '../../../projects/config';
-import { useTranslation } from "react-i18next";
-//import date from '../../../helpers/date';
 import {AuthenticateContext} from "../../../context/Auth";
-import {InfoCircleOutlined} from "@ant-design/icons";
-import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
-import moment from 'moment';
+import { useProjectTranslation } from '../../../helpers/translations';
 import { ReactComponent as LogoIconTG } from './../../../assets/icons/icon-tg.svg';
 
 import './style.scss';
@@ -40,10 +38,10 @@ export default function Claims(props) {
     const [yScroll, setYScroll] = useState(undefined);
     const [xScroll, setXScroll] = useState(undefined);
 
-    const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
+
     const { accountData = {} } = auth;
     const [currencyCode, setCurrencyCode]=  useState('MOC');
     const [dataJson, setDataJson]=  useState([]);

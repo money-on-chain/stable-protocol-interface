@@ -1,21 +1,19 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import {InfoCircleOutlined} from "@ant-design/icons";
+import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import 'antd/dist/antd.css';
-import './style.scss';
 import {Table, Progress, Tooltip, Skeleton} from 'antd';
-import RowDetail from "../RowDetail";
 import classnames from 'classnames';
-import api from '../../../services/api';
 import Moment from 'react-moment';
-import { useState } from 'react'
+
+import RowDetail from "../RowDetail";
+import api from '../../../services/api';
 import {readJsonTable, myParseDate, TokenNameNewToOld, TokenNameOldToNew} from '../../../helpers/helper'
 import {config} from '../../../projects/config';
 import Copy from "../../Page/Copy";
-import { useTranslation } from "react-i18next";
 import date from '../../../helpers/date';
 import {AuthenticateContext} from "../../../context/Auth";
-import {InfoCircleOutlined} from "@ant-design/icons";
-import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
-//import { LargeNumber } from '../../LargeNumber';
+import { useProjectTranslation } from '../../../helpers/translations';
 import RowColumn from "../RowDetail/RowColumn";
 
 import { ReactComponent as LogoIconTP } from './../../../assets/icons/icon-tp.svg';
@@ -23,6 +21,7 @@ import { ReactComponent as LogoIconTC } from './../../../assets/icons/icon-tc.sv
 import { ReactComponent as LogoIconTX } from './../../../assets/icons/icon-tx.svg';
 import { ReactComponent as LogoIconTG } from './../../../assets/icons/icon-tg.svg';
 
+import './style.scss';
 
 export default function ListOperations(props) {
     const { token } = props;
@@ -43,10 +42,10 @@ export default function ListOperations(props) {
     const [yScroll, setYScroll] = useState(undefined);
     const [xScroll, setXScroll] = useState(undefined);
 
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
+
     const { accountData = {} } = auth;
     const [currencyCode, setCurrencyCode]=  useState('TG');
     const [dataJson, setDataJson]=  useState([]);

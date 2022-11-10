@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
 import getRLogin from '../lib/rLogin';
 import Web3 from 'web3';
+import BigNumber from "bignumber.js";
+
 import addressHelper from '../helpers/addressHelper';
 import FastBtcSocketWrapper from '../lib/fastBTC/FastBtcSocketWrapper';
 import { config } from '../projects/config';
@@ -36,7 +38,6 @@ import {
     getMoCAllowance
     } from '../lib/integration/interfaces-omoc';
 import { getGasPrice } from '../lib/integration/utils';
-import BigNumber from "bignumber.js";
 
 const helper = addressHelper(Web3);
 

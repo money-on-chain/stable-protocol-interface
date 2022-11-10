@@ -4,7 +4,6 @@ import { Layout, Menu, Image, Drawer, Button } from 'antd';
 import { HomeFilled, MenuOutlined, CloseOutlined, PieChartFilled, InfoCircleFilled } from '@ant-design/icons';
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useTranslation } from "react-i18next";
 import BigNumber from "bignumber.js";
 
 import { config } from '../../../projects/config';
@@ -12,6 +11,7 @@ import LoginButton from '../../../components/Auth/LoginButton/index';
 import '../../../assets/css/global.scss';
 import { AuthenticateContext } from '../../../context/Auth';
 import HeaderCoins from "../../../components/Page/HeaderCoins";
+import { useProjectTranslation } from '../../../helpers/translations';
 
 import { ReactComponent as LogoIcon } from '../../../assets/icons/logo.svg';
 import { ReactComponent as LogoIconTP } from '../../../assets/icons/icon-rbtclogo.svg';
@@ -23,14 +23,14 @@ const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 
-export default function Skeleton() {    
+export default function Skeleton() {
+
     const navigate = useNavigate();
     const location = useLocation();
     const { accountData, balanceRbtc } = useContext(AuthenticateContext);
     const [drawerVisible, setDrawerVisible] = useState(false);
 
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const AppMode = config.environment.AppMode;
     const loginButtonSettings = accountData.Wallet

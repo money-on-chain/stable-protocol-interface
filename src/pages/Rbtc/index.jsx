@@ -1,21 +1,21 @@
+import {Row, Col} from 'antd';
+import React, {Fragment, useState, useContext, useEffect} from 'react';
+
 import RbtcToBtcGenerateModal from '../../components/Modals/RbtcToBtcGenerateModal';
 import BtcToRbtcGenerateModal from '../../components/Modals/BtctoRbtcGenerateModal';
 import BtcToRbtc from '../../components/Cards/BtcToRbtc';
-import {Row, Col} from 'antd';
-import React, {Fragment, useState, useContext, useEffect} from 'react';
 import Sovryn from "../../components/Cards/Sovryn";
 import { AuthenticateContext } from '../../context/Auth';
-import { useTranslation } from "react-i18next";
 import Table from "../../components/Tables/FastBtcPegOut/table";
-import { config } from './../../projects/config';
+import { config } from '../../projects/config';
+import { useProjectTranslation } from '../../helpers/translations';
 
 import './../../assets/css/pages.scss';
 
 export default function Rbtc(props) {
 
     const auth = useContext(AuthenticateContext);
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     const [rbtcGenVisible, setRbtcGenVisible] = useState(false);

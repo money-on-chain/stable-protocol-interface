@@ -1,15 +1,14 @@
 import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import QRCode from 'react-qr-code';
-import {useTranslation} from "react-i18next";
 import Copy from '../Page/Copy';
 import {AuthenticateContext} from "../../context/Auth";
 import { config } from '../../projects/config';
+import { useProjectTranslation } from '../../helpers/translations';
 
 const AddressContainer = ({ address, accountData, view }) => {
     const auth = useContext(AuthenticateContext);
-    const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const [t, i18n, ns]= useProjectTranslation();
     const AppProject = config.environment.AppProject;
     return (
         <div className="AddressContainer" style={{ marginTop: view === 'moc' && '5em'}}>

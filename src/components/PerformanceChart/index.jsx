@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-
 import { Row, Col, Tabs } from 'antd';
-import { useTranslation } from "react-i18next";
+
 import { config } from '../../projects/config';
+import { useProjectTranslation } from '../../helpers/translations';
 import './style.scss';
 
 export default function PerformanceChart(props) {
 
     const [percent, setPercent] = useState(0);
-    const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     let height = percent && percent > 0 ? percent * 190 / 100 : 0;

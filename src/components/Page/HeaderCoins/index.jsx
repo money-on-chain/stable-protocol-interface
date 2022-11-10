@@ -1,12 +1,13 @@
 /* eslint-disable default-case */
 
 import React, { Fragment, useContext, useEffect, useState } from 'react';
+import web3 from "web3";
+
 import { AuthenticateContext } from '../../../context/Auth';
 import PriceVariation from '../../PriceVariation';
 import {LargeNumber} from "../../LargeNumber";
-import web3 from "web3";
 import {setNumber, setToLocaleString} from "../../../helpers/helper";
-import {useTranslation} from "react-i18next";
+import { useProjectTranslation } from '../../../helpers/translations';
 import './style.scss';
 
 function HeaderCoins(props) {
@@ -21,7 +22,7 @@ function HeaderCoins(props) {
         }, 30000);
   }, [auth]);
 
-  const [t, i18n] = useTranslation(["global", 'moc'])
+  const [t, i18n, ns]= useProjectTranslation();
 
   const getBalanceUSD = () => {
     if (auth.contractStatusData) {

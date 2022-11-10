@@ -1,20 +1,19 @@
-//import MintCard from '../../../components/Cards/MintCard';
-import AmountCard from '../../../components/Cards/AmountCard';
-import YourAddressCard from '../../../components/Cards/YourAddressCard';
 import {Row, Col, Alert} from 'antd';
 import React, {Fragment, useContext} from 'react';
+
+import AmountCard from '../../../components/Cards/AmountCard';
+import YourAddressCard from '../../../components/Cards/YourAddressCard';
 import ListOperations from "../../../components/Tables/ListOperations";
-import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../../context/Auth';
 import MintOrRedeemToken from '../../../components/MintOrRedeemToken/MintOrRedeemToken';
-import { config } from './../../../projects/config';
+import { config } from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
 
 import './../../../assets/css/pages.scss';
 
 export default function Mint(props) {
 
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     const auth = useContext(AuthenticateContext);

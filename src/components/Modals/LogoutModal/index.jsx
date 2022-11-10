@@ -1,14 +1,17 @@
 import {Col, Modal} from 'antd';
 import React, { useContext, useState } from 'react';
 import { Button } from 'antd';
+
 import { AuthenticateContext } from '../../../context/Auth';
 import CopyModal from "../../Page/CopyModal";
-import {useTranslation} from "react-i18next";
+import { useProjectTranslation } from '../../../helpers/translations';
+
 export default function MintModal(props) {
+
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
     const {visible = false, handleClose = () => {}} = props;
-    const [t, i18n]= useTranslation(["global",'moc'])
+    const [t, i18n, ns]= useProjectTranslation();
 
     return (
         <Modal

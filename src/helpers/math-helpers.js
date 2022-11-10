@@ -1,6 +1,4 @@
-// import { bignumber } from 'mathjs';
 import bignumber from 'bignumber.js';
-//import { Unit } from 'web3-utils';
 
 export const normalizeWei = (amount) => {
   return roundToSmaller(amount, 0);

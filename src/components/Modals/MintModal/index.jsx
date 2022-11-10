@@ -2,11 +2,12 @@
 /* eslint-disable react/jsx-no-target-blank */
 import {Button, Collapse, Slider, Spin} from 'antd';
 import {LoadingOutlined, SettingFilled} from '@ant-design/icons';
-import { AuthenticateContext } from '../../../context/Auth';
-
 import React, {useState, useContext, useEffect, Fragment} from 'react';
 import { Modal, notification } from 'antd';
+import Web3 from "web3";
+import BigNumber from 'bignumber.js';
 
+import { AuthenticateContext } from '../../../context/Auth';
 import { convertAmount } from '../../../helpers/exchangeManagerHelper';
 import { getExchangeMethod } from '../../../helpers/exchangeHelper';
 import {
@@ -16,18 +17,16 @@ import {
 import Copy from "../../Page/Copy";
 import { getCurrencyDetail } from '../../../helpers/currency';
 import { LargeNumber } from '../../LargeNumber';
-import { useTranslation } from "react-i18next";
-import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";
 import { config } from '../../../projects/config';
-import Web3 from "web3";
+import { useProjectTranslation } from '../../../helpers/translations';
+
 import IconDownArrow from './../../../assets/icons/d-arrow.png';
 import IconTorque from './../../../assets/icons/torq.png';
 import IconStatusPending from './../../../assets/icons/status-pending.png';
 import IconStatusSuccess from './../../../assets/icons/status-success.png';
 import IconStatusError from './../../../assets/icons/status-error.png';
 import IconCampana from './../../../assets/icons/campana.png';
-
 
 import './style.scss';
 
@@ -71,9 +70,9 @@ export default function MintModal(props) {
   const [showError, setShowError] = useState(false);
   const [ShowModalAllowanceReserve, setShowModalAllowanceReserve] = useState(false);
   const [ModalAllowanceReserveMode, setModalAllowanceReserveMode] = useState('Confirm');
-  const [t, i18n]= useTranslation(['global', 'moc', 'rdoc'])
+
+  const [t, i18n, ns]= useProjectTranslation();
   const { appMode } = config.environment.AppMode;
-  const ns = config.environment.AppProject.toLowerCase();
   const AppProject = config.environment.AppProject;
 
   let userComment = '';

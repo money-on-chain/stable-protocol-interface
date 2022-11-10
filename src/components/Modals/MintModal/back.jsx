@@ -4,6 +4,7 @@ import { Button, Collapse, Slider } from 'antd';
 import { AuthenticateContext } from '../../../context/Auth';
 import React, { useState, useContext, useEffect } from 'react';
 import { Modal, notification } from 'antd';
+import BigNumber from 'bignumber.js';
 
 import { convertAmount } from '../../../helpers/exchangeManagerHelper';
 import { getExchangeMethod } from '../../../helpers/exchangeHelper';
@@ -14,9 +15,8 @@ import {
 import Copy from "../../Page/Copy";
 import { currencies as currenciesDetail } from '../../../helpers/currency';
 import { LargeNumber } from '../../LargeNumber';
-import { useTranslation } from "react-i18next";
-import BigNumber from 'bignumber.js';
 import {LargeNumberF2} from "../../LargeNumberF2";
+import { useProjectTranslation } from '../../../helpers/translations';
 
 import IconDownArrow from './../../../assets/icons/d-arrow.png';
 import IconTorque from './../../../assets/icons/torq.png';
@@ -26,6 +26,7 @@ import IconStatusError from './../../../assets/icons/status-error.png';
 
 
 export default function MintModal(props) {
+
     const isLoggedIn = true; //userAccountIsLoggedIn() && Session.get('rLoginConnected');
     const {
         exchanging,
@@ -69,7 +70,7 @@ export default function MintModal(props) {
     const [currentHash, setCurrentHash] = useState(null);
     const [comment, setComment] = useState('');
     const [showError, setShowError] = useState(false);
-    const [t, i18n]= useTranslation(["global",'moc'])
+    const [t, i18n, ns]= useProjectTranslation();
     const { appMode } = 'Moc';
 
     let userComment = '';
