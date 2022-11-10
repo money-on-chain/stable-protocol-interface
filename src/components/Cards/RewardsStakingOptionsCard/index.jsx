@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {Row, Col, Tabs, Button, Table, Alert, Skeleton} from 'antd';
 import moment from "moment";
+import BigNumber from "bignumber.js";
+
 import PerformanceChart from '../../../components/PerformanceChart';
 import { LargeNumber } from '../../LargeNumber';
 import StakingOptionsModal from '../../Modals/StakingOptionsModal';
 import { AuthenticateContext } from '../../../context/Auth';
-import BigNumber from "bignumber.js";
 import OperationStatusModal from '../../Modals/OperationStatusModal/OperationStatusModal';
-import { useTranslation } from "react-i18next";
 import InputWithCurrencySelector from '../../Form/InputWithCurrencySelector';
 import {config} from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
 
 const { TabPane } = Tabs;
 
@@ -70,8 +71,7 @@ export default function RewardsStakingOptions(props) {
     const [cleanInputCount, setUntouchCount] = useState(0);
 
     const [withdrawalId, setWithdrawalId] = useState("0");
-    const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     const [loading, setLoading] = useState(true);

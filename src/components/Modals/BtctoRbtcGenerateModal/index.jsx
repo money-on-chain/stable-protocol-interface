@@ -3,17 +3,17 @@ import {
   Modal,
   Alert
 } from 'antd';
-
+import QRCode from 'react-qr-code';
 
 import { initialState, Step, TxId } from '../../../lib/fastBTC/constants';
-import {useTranslation} from "react-i18next";
-import QRCode from 'react-qr-code';
 import Copy from '../../Page/Copy';
 import { BTCButton } from './components/BTCButton';
 import { getBtcAddress } from '../../../lib/fastBTC/fastBTCMethods';
 import { AuthenticateContext } from '../../../context/Auth';
 import TransactionScreen from './TransactionScreen';
 import { config } from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
+
 import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-sovryn_fastbtc.svg';
 import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-atention.svg';
 
@@ -25,9 +25,10 @@ export default function BtcToRbtcGenerateModal(props) {
   useEffect(() => {
     auth.socket.initialize();
   }, []);
+
   const {visible = false, handleClose = () => {}, accountData} = props;
-  const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppProject.toLowerCase();
+  const [t, i18n, ns]= useProjectTranslation();
+
   const AppProject = config.environment.AppProject;
   const [stateFBtc, setStateFBtc] = useState(initialState);
   const [underMaintenance, setUnderMaintenance] = useState(false);
@@ -197,8 +198,8 @@ export default function BtcToRbtcGenerateModal(props) {
 }
 
 const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
-  const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppProject.toLowerCase();
+
+  const [t, i18n, ns]= useProjectTranslation();
   const AppProject = config.environment.AppProject;
   useEffect(
     () => {

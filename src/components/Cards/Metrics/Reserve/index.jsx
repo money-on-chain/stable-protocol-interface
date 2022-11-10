@@ -2,12 +2,14 @@ import React, { useContext, useState, useEffect } from 'react';
 import {  Skeleton } from 'antd';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { Tooltip as TooltipRecharts } from 'recharts';
+import BigNumber from 'bignumber.js';
+
 import { AuthenticateContext } from '../../../../context/Auth';
-import { useTranslation } from "react-i18next";
 import { LargeNumber } from '../../../LargeNumber';
 import { formatVisibleValue, formatLocalMap2, adjustPrecision } from '../../../../helpers/Formats';
-import BigNumber from 'bignumber.js';
 import { config } from '../../../../projects/config';
+import { useProjectTranslation } from '../../../../helpers/translations';
+
 import { ReactComponent as LogoIcon } from '../../../../assets/icons/icon-reserve.svg';
 
 const BalancePieColors = config.home.walletBalancePie.colors;
@@ -15,8 +17,7 @@ const BalancePieColors = config.home.walletBalancePie.colors;
 function Reserve(props) {
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns]= useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
     const timeSke= 1500;

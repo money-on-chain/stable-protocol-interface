@@ -1,14 +1,16 @@
 /* eslint-disable default-case */
 import { Tabs, Tooltip, Button, Skeleton } from 'antd';
 import React, { useEffect, useContext, useState } from 'react';
-import FastBtcPegOut from "./index";
-import { Table as TableAntd } from 'antd';
-import { AuthenticateContext } from '../../../context/Auth';
-import {useTranslation} from "react-i18next";
-import { getDepositHistory } from "../../../lib/fastBTC/fastBTCMethods";
-import { config } from '../../../projects/config';
 import moment from 'moment';
 import SatoshiToBTC from 'satoshi-bitcoin';
+import { Table as TableAntd } from 'antd';
+
+import FastBtcPegOut from "./index";
+import { AuthenticateContext } from '../../../context/Auth';
+import { getDepositHistory } from "../../../lib/fastBTC/fastBTCMethods";
+import { config } from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
+
 const { TabPane } = Tabs;
 
 const onChange = (key) => {
@@ -22,8 +24,8 @@ const Table = ({ accountData }) => {
   }, []);
   const [operations, setOperations] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [t, i18n]= useTranslation(["global",'moc', 'rdoc']);
-  const ns = config.environment.AppProject.toLowerCase();
+
+  const [t, i18n, ns] = useProjectTranslation();
   const AppProject = config.environment.AppProject;
 
   const address = accountData?.Owner;

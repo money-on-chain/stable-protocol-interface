@@ -1,12 +1,12 @@
 import { Modal, Button, Spin, notification } from 'antd';
 import { useEffect, useState, useContext } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { LargeNumber } from '../../LargeNumber';
-import { AuthenticateContext } from '../../../context/Auth';
 import Web3 from 'web3';
 
-import {useTranslation} from "react-i18next";
-import { config } from './../../../projects/config';
+import { LargeNumber } from '../../LargeNumber';
+import { AuthenticateContext } from '../../../context/Auth';
+import { config } from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
 import './style.scss';
 
 export default function StakingOptionsModal(props) {
@@ -16,9 +16,8 @@ export default function StakingOptionsModal(props) {
     const { mode, onClose, visible, amount, onConfirm, withdrawalId, setBlockedWithdrawals } = props;
     const [step, setStep] = useState(0);
 
-   const amountInEth = Web3.utils.fromWei(amount);
-   const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-   const ns = config.environment.AppProject.toLowerCase();
+    const amountInEth = Web3.utils.fromWei(amount);
+    const [t, i18n, ns]= useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     useEffect(() => {

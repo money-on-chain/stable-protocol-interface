@@ -1,13 +1,11 @@
 import React from 'react';
-import {useTranslation} from "react-i18next";
 import {config} from '../../projects/config';
 import { ReactComponent as LogoIcon } from '../../assets/icons/icon-alert.svg';
-
+import { useProjectTranslation } from '../../helpers/translations';
 
 function AlertLabel(props) {
 
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const [t, i18n, ns]= useProjectTranslation();
     const AppProject = config.environment.AppProject;
     return (
         <div className="AlertLabel">

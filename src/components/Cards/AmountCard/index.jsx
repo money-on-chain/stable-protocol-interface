@@ -1,13 +1,14 @@
 import {Row, Col, Tooltip, Skeleton} from 'antd';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useContext } from 'react';
+
 import { AuthenticateContext } from '../../../context/Auth';
 import { LargeNumber } from '../../LargeNumber';
-import { useTranslation } from "react-i18next";
 import BalanceItem from '../../BalanceItem/BalanceItem';
 import InformationModal from '../../Modals/InformationModal';
 import { config } from '../../../projects/config';
 import { getUserBalance } from "../../../helpers/balances";
+import { useProjectTranslation } from '../../../helpers/translations';
 
 import { ReactComponent as LogoIconReserve } from './../../../assets/icons/icon-reserve.svg';
 import { ReactComponent as LogoIconTP } from './../../../assets/icons/icon-tp.svg';
@@ -27,8 +28,7 @@ const amountCardLogos = {
 
 export default function AmountCard(props) {
 
-    const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns]= useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
     const [loading, setLoading] = useState(true);

@@ -2,8 +2,9 @@ import React, {useContext} from 'react';
 import { Select } from 'antd';
 
 import { getCurrenciesDetail } from '../../helpers/currency';
-import { useTranslation } from "react-i18next";
 import {AuthenticateContext} from "../../context/Auth";
+import { useProjectTranslation } from '../../helpers/translations';
+
 import './style.scss';
 
 const { Option } = Select;
@@ -12,7 +13,7 @@ const { Option } = Select;
 export default function SelectCurrency(props) {
 
   const { value, onChange, currencyOptions, disabled } = props;
-  const [t, i18n]= useTranslation(["global",'moc']);
+  const [t, i18n, ns] = useProjectTranslation();
   const options = getCurrenciesDetail().map(it => ({
     value: it.value,
     image: it.image,

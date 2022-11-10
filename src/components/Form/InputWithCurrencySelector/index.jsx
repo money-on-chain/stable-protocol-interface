@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useContext, useEffect, useState} from 'react';
 import { Form, Tooltip, Radio } from 'antd';
+import BigNumber from "bignumber.js";
 import { DebounceInput } from 'react-debounce-input';
+
 import SelectCurrency from '../../SelectCurrency';
 import { LargeNumber } from '../../LargeNumber';
 import { amountIsTooSmall } from '../../../helpers/exchangeManagerHelper';
@@ -11,10 +13,9 @@ import {
   formatValueWithContractPrecision,
   formatLocalMap2
 } from '../../../helpers/Formats';
-import { useTranslation } from "react-i18next";
-import BigNumber from "bignumber.js";
 import {AuthenticateContext} from "../../../context/Auth";
 import {getUSD} from "../../../helpers/balances";
+import { useProjectTranslation } from '../../../helpers/translations';
 
 export default function InputWithCurrencySelector(props) {
   const {
@@ -37,7 +38,7 @@ export default function InputWithCurrencySelector(props) {
     onValueChange = () => {}
 } = props;
 
-  const [t, i18n]= useTranslation(["global",'moc'])
+  const [t, i18n, ns]= useProjectTranslation();
 
   const [inputValidation, setInputValidation] = useState({ validateStatus: 'success' });
   const [dirty, setDirty] = useState(false);
@@ -54,7 +55,7 @@ export default function InputWithCurrencySelector(props) {
       if (validate && dirty) {
           let inputValueInWeiCopy = inputValueInWei
           let val_res= validateValue(inputValueInWei, maxValueAllowedInWei)
-          if( val_res.validateStatus=='error' ){
+          if( val_res.validateStatus==='error' ){
               setInputValidation(val_res);
           }else{
               setInputValidation({validateStatus: "success", errorMsg: getUSD(currencySelected,inputValueInWeiCopy,auth,i18n)+" USD"});

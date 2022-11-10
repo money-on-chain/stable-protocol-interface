@@ -1,11 +1,12 @@
 import React, { useContext} from 'react';
 import { Button } from 'antd';
-import {useTranslation} from "react-i18next";
+
 import {config} from '../../../../projects/config';
+import { useProjectTranslation } from '../../../../helpers/translations';
 
 export function BTCButton({ onClick, underMaintenance }) {
-  const [t, i18n]= useTranslation(["global",'moc']);
-  const ns = config.environment.AppProject.toLowerCase();
+
+  const [t, i18n, ns]= useProjectTranslation();
   const AppProject = config.environment.AppProject;
     
   const socketConnected = true; // auth === true;

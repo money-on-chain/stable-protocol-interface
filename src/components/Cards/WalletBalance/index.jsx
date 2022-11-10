@@ -1,21 +1,21 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import { useContext } from 'react'
 import {Button, Skeleton} from 'antd';
+
 import WalletBalancePie from "../WalletBalancePie";
 import Copy from "../../Page/Copy";
 import { AuthenticateContext } from "../../../context/Auth";
-import { useTranslation } from "react-i18next";
 import SendModal from '../../Modals/SendModal';
 import { config } from '../../../projects/config';
 import {getSelectCoins} from "../../../helpers/helper";
+import { useProjectTranslation } from '../../../helpers/translations';
 
 
 function WalletBalance(props) {
 
     const auth= useContext(AuthenticateContext);
     const { accountData = {} } = auth;
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const [loading, setLoading] = useState(true);
 

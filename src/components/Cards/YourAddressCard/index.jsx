@@ -1,18 +1,19 @@
 import {Row, Col, Skeleton} from 'antd';
 import React, {Fragment, useEffect, useState} from 'react';
 import { useContext } from 'react'
+
 import {AuthenticateContext} from "../../../context/Auth";
 import SendModal from '../../Modals/SendModal';
 import AddressContainer from '../../AddressContainer/AddressContainer';
-import {useTranslation} from "react-i18next";
-import { config } from './../../../projects/config';
+import { config } from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
 
 export default function YourAddressCard(props) {
     const { height = '', tokenToSend, className, view } = props;
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
-    const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const isLoggedIn = auth?.userBalanceData;
 

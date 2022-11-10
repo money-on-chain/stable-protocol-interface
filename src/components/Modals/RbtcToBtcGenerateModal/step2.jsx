@@ -1,8 +1,10 @@
 import { Button } from 'antd';
-import { AuthenticateContext } from '../../../context/Auth';
 import React, {Fragment, useContext, useState,useRef} from "react";
+
+import { AuthenticateContext } from '../../../context/Auth';
 import Step3 from "./step3";
 import BigNumber from "bignumber.js";
+
 import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-atention.svg';
 import { ReactComponent as LogoIconReserve } from '../../../assets/icons/icon-reserve2.svg';
 

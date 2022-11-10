@@ -1,10 +1,12 @@
 /* eslint-disable default-case */
-import {config} from '../projects/config';
 import Web3 from "web3";
-import {DetailedLargeNumber, getExplainByEvent} from "../components/LargeNumber";
 import moment from 'moment';
-import {formatLocalMap2} from "../helpers/Formats";
 import BigNumber from "bignumber.js";
+
+import {config} from '../projects/config';
+import {DetailedLargeNumber, getExplainByEvent} from "../components/LargeNumber";
+import {formatLocalMap2} from "./Formats";
+
 const ns = config.environment.AppProject.toLowerCase();
 const AppProject = config.environment.AppProject;
 

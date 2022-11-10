@@ -5,17 +5,18 @@ import React, { useEffect, useState, useContext } from "react";
 import debounce from 'lodash.debounce';
 import web3 from 'web3';
 import { Row, Col, Modal, Button } from 'antd';
+import BigNumber from "bignumber.js";
+
 import InputAddress from "../../InputAddress";
 import InputWithCurrencySelector from "../../Form/InputWithCurrencySelector";
 import { getBalanceAndTransferMethodOfTokenToSend } from '../../../helpers/currency';
-import { useTranslation } from "react-i18next";
 import addressHelper from '../../../helpers/addressHelper';
 import {formatLocalMap2, formatVisibleValue} from "../../../helpers/Formats";
 import { AuthenticateContext } from "../../../context/Auth";
 import AlertLabel from "../../AlertLabel/AlertLabel";
 import Copy from "../../Page/Copy";
-import { config } from './../../../projects/config';
-import BigNumber from "bignumber.js";
+import { config } from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
 
 import IconStatusPending from './../../../assets/icons/status-pending.png';
 import IconStatusSuccess from './../../../assets/icons/status-success.png';
@@ -37,9 +38,9 @@ export default function SendModal(props) {
   const [tokenToSend, setTokenToSend] = useState(props.tokensToSend && props.tokensToSend[0]);
   const [inputIsValid, setInputIsValid] = useState(true);
 
-  const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-  const ns = config.environment.AppProject.toLowerCase();
+  const [t, i18n, ns]= useProjectTranslation();
   const AppProject = config.environment.AppProject;
+
   const helper = addressHelper(web3);
   const auth = useContext(AuthenticateContext);
 

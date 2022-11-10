@@ -1,22 +1,23 @@
 import React, { useEffect} from 'react';
 import { useContext,useState } from 'react'
-import { AuthenticateContext } from "../../../context/Auth";
 import CountUp from 'react-countup';
 import { Button, Skeleton, Tooltip} from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import {getRewardedToday} from '../../../helpers/helper'
+import moment from 'moment';
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+
+import { AuthenticateContext } from "../../../context/Auth";
+import {getRewardedToday} from '../../../helpers/helper'
 import {LargeNumber} from "../../LargeNumber";
 import api from "../../../services/api";
 import {config} from "../../../projects/config";
 import OperationStatusModal from "../../Modals/OperationStatusModal/OperationStatusModal";
-import moment from 'moment';
+import { useProjectTranslation } from '../../../helpers/translations';
 
 
 function MocLiquidity(props) {
-    const auth = useContext(AuthenticateContext);    
-    const [t, i18n] = useTranslation(["global", 'moc'])
+    const auth = useContext(AuthenticateContext);
+    const [t, i18n, ns] = useProjectTranslation();
     const [callAgent, setCallAgent] = useState(false);
     const [incentiveState, setIncentiveState] = useState(null);
     const { account, accountData, userBalanceData } = auth;

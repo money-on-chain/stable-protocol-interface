@@ -1,19 +1,18 @@
 import React, {useContext, useEffect} from 'react';
 import 'antd/dist/antd.css';
 import { Table } from 'antd';
-//import data_json from '../../../services/fatbts_pegout.json';
+import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
 import Moment from 'react-moment';
 import { useState } from 'react'
+
 import { myParseDate, readJsonTableFastBtcPegOut} from '../../../helpers/helper'
-import { useTranslation } from "react-i18next";
 import date from '../../../helpers/date';
 import {AuthenticateContext} from "../../../context/Auth";
 import Copy from "../../Page/Copy";
 import RowDetailPegOut from "./RowDetailPegOut";
-import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
+import { useProjectTranslation } from '../../../helpers/translations';
 import api from "../../../services/api";
 import {config} from "../../../projects/config";
-//import BigNumber from "bignumber.js";
 
 import './style.scss';
 
@@ -36,8 +35,9 @@ export default function FastBtcPegOut(props) {
     const [yScroll, setYScroll] = useState(undefined);
     const [xScroll, setXScroll] = useState(undefined);
 
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n, ns] = useProjectTranslation();
     const auth = useContext(AuthenticateContext);
+
     const { accountData = {} } = auth;
     const [dataJson, setDataJson]=  useState([]);
     const [callTable, setCallTable]=  useState(false);

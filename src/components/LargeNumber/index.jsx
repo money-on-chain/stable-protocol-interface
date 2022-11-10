@@ -2,16 +2,17 @@ import { Tooltip } from 'antd';
 import NumericLabel from 'react-pretty-numbers';
 import { adjustPrecision, formatLocalMap } from '../../helpers/Formats';
 import i18n from 'i18next';
-import {useTranslation} from "react-i18next";
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
-import { config } from './../../projects/config';
+import { config } from '../../projects/config';
 import {getCoinName} from "../../helpers/helper";
-const ns = config.environment.AppProject.toLowerCase();
+import { useProjectTranslation } from '../../helpers/translations';
+
 const AppProject = config.environment.AppProject;
+const ns = config.environment.AppProject.toLowerCase();
 
 const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams, className, tooltip }) => {
 
-  const [t, i18n]= useTranslation(["global",'moc','rdoc']);
+  const [t, i18n, ns]= useProjectTranslation();
   if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
     const { value, decimals } = adjustPrecision(amount, currencyCode,AppProject);
     const params = Object.assign(
@@ -175,57 +176,57 @@ const getExplainByEvent = ({ event, amount, amount_rbtc, status, token_involved,
 
     const map = {
         RiskProMint: (
-            <div class="">
+            <div>
                 {t(`${AppProject}.operations.explain.RiskProMint`, { ns: ns })} {amount}
             </div>
         ),
         RiskProRedeem: (
-            <div class="">
+            <div>
                 {t(`${AppProject}.operations.explain.RiskProRedeem`, { ns: ns })} {amount_rbtc}
             </div>
         ),
         StableTokenMint: (
-            <div class="">
+            <div>
                 {t(`${AppProject}.operations.explain.StableTokenMint`, { ns: ns })} {amount}
             </div>
         ),
         StableTokenRedeem: (
-            <span class="">
+            <span>
                 {t(`${AppProject}.operations.explain.StableTokenRedeem`, { ns: ns })} {amount_rbtc}
             </span>
         ),
         FreeStableTokenRedeem: (
-            <span class="">
+            <span>
                 {t(`${AppProject}.operations.explain.FreeStableTokenRedeem`, { ns: ns })} {amount_rbtc}
             </span>
         ),
         RiskProxMint: (
-            <span class="">
+            <span>
                 {t(`${AppProject}.operations.explain.RiskProxMint`, { ns: ns })} {amount}
             </span>
         ),
         RiskProxRedeem: (
-            <span class="">
+            <span>
                 {t(`${AppProject}.operations.explain.RiskProxRedeem`, { ns: ns })} {amount_rbtc}
             </span>
         ),
         SettlementDeleveraging: (
-            <span class="">
+            <span>
                 {t(`${AppProject}.operations.explain.SettlementDeleveraging`, { ns: ns })} {amount_rbtc}
             </span>
         ),
         RedeemRequestAlter: (
-            <span class="">
+            <span>
                 {t(`${AppProject}.operations.explain.RedeemRequestAlter`, { ns: ns })} {amount}
             </span>
         ),
         Transfer: (
-            <span class="">
+            <span>
                 {t(`${AppProject}.operations.explain.Transfer_positive`, { ns: ns })} {amount}
             </span>
         ),
         BucketLiquidation: (
-            <span class="">
+            <span>
                 {t(`${AppProject}.operations.explain.BucketLiquidation`, { ns: ns })} {amount}
             </span>
         )

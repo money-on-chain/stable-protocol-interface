@@ -1,11 +1,12 @@
 import { Button } from 'antd';
 import React, {Fragment, useContext, useEffect, useState} from "react";
+import BigNumber from "bignumber.js";
+
 import {weiToNumberFormat} from '../../../helpers/math-helpers'
 import Web3 from "web3";
 import FastBtcBridge from "../../../contracts/FastBtcBridge.json";
 import Copy from "../../Page/Copy";
 import { config } from '../../../projects/config';
-import BigNumber from "bignumber.js";
 
 import LogoIconAttention from './../../../assets/icons/icon-atention.png';
 import LogoIconPending from './../../../assets/icons/status-pending.png';

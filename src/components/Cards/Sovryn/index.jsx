@@ -1,14 +1,15 @@
 import { Row } from 'antd';
 import React from 'react';
-import { useTranslation } from "react-i18next";
+
 import { config} from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
+
 import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-sovryn_fastbtc.svg';
 import { ReactComponent as LogoIconRBTC } from '../../../assets/icons/icon-rbtclogo.svg';
 
 export default function Sovryn(props) {
-        
-    const [t, i18n] = useTranslation(["global", 'moc', 'rdoc']);
-    const ns = config.environment.AppProject === 'MoC' ? 'moc' : 'rdoc';
+
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     
     return (

@@ -1,14 +1,14 @@
 import React from 'react';
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
+
 import { config } from '../../../../projects/config';
+import { useProjectTranslation } from '../../../../helpers/translations';
 
 function GetChecksFor(props) {
 
     const iconCheckColor = '#09c199';
     const iconCheckColorCloseOutlined = '#ed1c24';
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns]= useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     const isAvailable = (operation) => props.operationsAvailable.find(element => element === operation);

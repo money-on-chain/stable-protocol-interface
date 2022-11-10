@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react'
+import BigNumber from "bignumber.js";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip} from 'recharts';
+
 import {AuthenticateContext} from "../../../context/Auth";
 import { formatLocalMap2 } from '../../../helpers/Formats';
-import {useTranslation} from "react-i18next";
 import {LargeNumber} from "../../LargeNumber";
 import Web3 from 'web3';
-import { config } from './../../../projects/config';
+import { config } from '../../../projects/config';
 import {getDecimals} from "../../../helpers/helper";
 import {
     userTPBalance,
@@ -14,8 +15,8 @@ import {
     userTGBalance,
     userCollateralBalance
     } from "../../../helpers/balances";
+import { useProjectTranslation } from '../../../helpers/translations';
 
-import BigNumber from "bignumber.js";
 const AppProject = config.environment.AppProject;
 const BalancePieColors = config.home.walletBalancePie.colors;
 
@@ -36,8 +37,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 function WalletBalancePie(props) {
-    const [t, i18n]= useTranslation(["global",'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     const auth = useContext(AuthenticateContext);

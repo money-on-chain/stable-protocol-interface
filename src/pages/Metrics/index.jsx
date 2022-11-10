@@ -1,4 +1,7 @@
 import React, {Fragment, useContext } from 'react';
+import BigNumber from 'bignumber.js';
+import {Row, Col, Alert} from 'antd';
+
 import SystemStatus from '../../components/Cards/Metrics/SystemStatus'
 import Reserve from '../../components/Cards/Metrics/Reserve'
 import TG from '../../components/Cards/Metrics/TG'
@@ -7,17 +10,15 @@ import TP from '../../components/Cards/Metrics/TP'
 import TC from '../../components/Cards/Metrics/TC'
 import Liquidity from '../../components/Cards/Metrics/Liquidity'
 import NextSettlement from '../../components/Cards/Metrics/NextSettlement'
-import BigNumber from 'bignumber.js';
-import {Row, Col, Alert} from 'antd';
-import { useTranslation } from "react-i18next";
 import { AuthenticateContext } from '../../context/Auth';
 import { getMaxAvailableOfCurrencyCode } from '../../helpers/currency';
+import { useProjectTranslation } from '../../helpers/translations';
 
 import './../../assets/css/pages.scss';
 
 function Metrics(props) {
 
-    const [t, i18n] = useTranslation(["global", 'moc']);
+    const [t, i18n, ns] = useProjectTranslation();
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;
     const mocState = auth.contractStatusData;

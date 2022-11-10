@@ -1,15 +1,16 @@
 import Modal from 'antd/lib/modal/Modal';
 import React from 'react';
 import {Button} from 'antd';
-import {useTranslation} from "react-i18next";
+
 import Copy from "../../Page/Copy";
 import { config } from '../../../projects/config';
+import { useProjectTranslation } from '../../../helpers/translations';
 import './style.scss';
 
 
 const OperationStatusModal = ({ className, visible, onCancel, title, operationStatus, txHash }) => {
 
-  const [t, i18n]= useTranslation(["global",'moc'])
+    const [t, i18n, ns]= useProjectTranslation();
     return (
         <Modal
             className={'OperationStatusModal ' + className || ''}

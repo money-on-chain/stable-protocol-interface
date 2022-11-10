@@ -1,12 +1,10 @@
-
 import React from 'react';
-import { useTranslation } from "react-i18next";
+import { useProjectTranslation } from '../../../helpers/translations';
 import { config } from '../../../projects/config';
 
 
 function RowColumn(props) {
-    const [t, i18n] = useTranslation(["global", 'moc','rdoc']);
-    const ns = config.environment.AppProject.toLowerCase();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     
     return (
