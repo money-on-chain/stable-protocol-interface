@@ -10,10 +10,10 @@ import './assets/css/components.scss';
 
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-import { AuthenticateProvider } from './Context/Auth';
-import {config} from "./Config/config";
+import { AuthenticateProvider } from './context/Auth';
+import {config} from "./projects/config";
 import IconWaiting from './assets/icons/status-pending.png';
-import Router from './Router'
+import Router from './router'
 
 console.log(`Starting app version: ${process.env.REACT_APP_VERSION}`);
 
