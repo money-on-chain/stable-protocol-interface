@@ -29,19 +29,19 @@
       @include primary-text(1.2em, black, 600);
       &.TP {
         color: $color-moc-tp;
-        &.RDoC {
+        &.RoC {
           color: $color-roc-tp;
         }
       }
       &.TX {
         color: $color-moc-tx;
-        &.RDoC {
+        &.RoC {
           color: $color-roc-tx;
         }
       }
       &.TC {
         color: $color-moc-tc;
-        &.RDoC {
+        &.RoC {
           color: $color-roc-tc;
         }
       }

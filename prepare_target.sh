@@ -17,8 +17,8 @@ echo "Copying assets files done!"
 
 # Contracts
 echo "Copying contract files ..."
-cp src/Contracts/projects/$1/*.* src/Contracts/
-cp src/Contracts/projects/$1/omoc/ src/Contracts/ -R
+cp src/contracts/projects/$1/*.* src/contracts/
+cp src/contracts/projects/$1/omoc/ src/contracts/ -R
 echo "Copying assets files done!"
 
 echo "Done preparing project! "

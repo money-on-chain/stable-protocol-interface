@@ -30,13 +30,13 @@ async function loadTranslations() {
                 es: {
                     global: await import('./projects/global-es.json'),
                     moc: langES,
-                    rdoc: langES,
+                    roc: langES,
                     flipago: langES
                 },
                 en: {
                     global: await import('./projects/global-en.json'),
                     moc: langEN,
-                    rdoc: langEN,
+                    roc: langEN,
                     flipago: langEN
                 },
             }
