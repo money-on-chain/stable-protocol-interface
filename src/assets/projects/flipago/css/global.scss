@@ -71,6 +71,13 @@ body, html {
 }
 
 .central-menu {
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
   width: 736px;
   height: 80px;
   margin-left: 31px;
@@ -82,7 +89,123 @@ body, html {
 
 }
 
+.menu-nav-item {
+  /* Nav Item */
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 15px;
+  gap: 8px;
+
+  width: 132px;
+  height: 80px;
+
+  /* Surface/Surface at +1 */
+
+  background: linear-gradient(0deg, rgba(189, 207, 255, 0.05), rgba(189, 207, 255, 0.05)), #131215;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+}
+
+.menu-nav-item-title {
+  width: 87px;
+  height: 17px;
+
+  /* Button Text */
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Text/Text Secondary */
+
+  color: #7F8A99;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.logo-home {
+  width: 32px;
+  height: 32px;
+  background-image: url("../icons/House.svg");
+  background-size: 32px 32px;
+  background-repeat:no-repeat;
+  /*margin-left: 32px;
+  margin-top: 19px;*/
+
+}
+
+.logo-send {
+  width: 32px;
+  height: 32px;
+  background-image: url("../icons/PaperPlaneTilt.svg");
+  background-size: 32px 32px;
+  background-repeat:no-repeat;
+  /*margin-left: 32px;
+  margin-top: 19px;*/
+
+}
+
+.logo-exchange {
+  width: 32px;
+  height: 32px;
+  background-image: url("../icons/ArrowsLeftRight.svg");
+  background-size: 32px 32px;
+  background-repeat:no-repeat;
+  /*margin-left: 32px;
+  margin-top: 19px;*/
+
+}
+
+.logo-performance {
+  width: 32px;
+  height: 32px;
+  background-image: url("../icons/ChartBar.svg");
+  background-size: 32px 32px;
+  background-repeat:no-repeat;
+  /*margin-left: 32px;
+  margin-top: 19px;*/
+
+}
+
+.logo-more {
+  width: 32px;
+  height: 32px;
+  background-image: url("../icons/More.svg");
+  background-size: 32px 32px;
+  background-repeat:no-repeat;
+  /*margin-left: 32px;
+  margin-top: 19px;*/
+
+}
+
 .wallet-user {
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 8px 16px;
+  gap: 8px;
+
   width: 192px;
   height: 80px;
   margin-left: 31px;
@@ -92,6 +215,105 @@ body, html {
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
   border-radius: 4px;
 }
+
+.wallet-translation {
+  /* Auto layout */
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Text/Text Secondary */
+
+  color: #7F8A99;
+
+
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  width: 80px;
+  height: 24px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+}
+
+.logo-translation {
+  width: 24px;
+  height: 24px;
+  background-image: url("../icons/Globe.svg");
+  background-size: 24px 24px;
+  background-repeat:no-repeat;
+  /*margin-left: 32px;
+  margin-top: 19px;*/
+
+}
+
+.wallet-address {
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Buttons/Button Primary */
+
+  color: #F1EB14;
+
+  width: 128px;
+  height: 24px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+}
+
+.wallet-address a {
+  color: #F1EB14;
+}
+
+.logo-wallet {
+  width: 24px;
+  height: 24px;
+  background-image: url("../icons/Wallet.svg");
+  background-size: 24px 24px;
+  background-repeat:no-repeat;
+  /*margin-left: 32px;
+  margin-top: 19px;*/
+
+}
+
 
 /* Content */
 .content-container {
