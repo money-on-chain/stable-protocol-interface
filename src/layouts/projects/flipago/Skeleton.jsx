@@ -5,6 +5,8 @@ import { AuthenticateContext } from '../../../context/Auth';
 import { useProjectTranslation } from '../../../helpers/translations';
 import { config } from '../../../projects/config';
 
+import TokensList from "../../../components/Tables/Tokens";
+
 import '../../../assets/css/global.scss';
 
 import { ReactComponent as LogoIcon } from '../../../assets/icons/logo.svg';
@@ -101,6 +103,22 @@ export default function Skeleton() {
 
 
 
+                    </div>
+
+                    {/* Portfolio */}
+                    <div className="dashboard-portfolio">
+                        <div className="tokens-card-content">
+                            <div className="tokens-list-header">
+                                <div className="tokens-list-header-title">Portfolio</div>
+                                <div className="tokens-list-header-balance">
+                                    <div className="tokens-list-header-balance-number">23,243.23 USD</div>
+                                    <div className="tokens-list-header-balance-title">Total balance</div>
+                                </div>
+                            </div>
+                            <div className="tokens-list-table">
+                                <TokensList />
+                            </div>
+                        </div>
                     </div>
 
                 </div>
