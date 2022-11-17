@@ -5,7 +5,7 @@ import {config} from "../../../projects/config";
 import NotFound from '../../../pages/NotFound';
 const Skeleton = React.lazy(() => import('../../../layouts/projects/' + config.environment.AppProject.toLowerCase() + '/Skeleton'));
 
-const Home = React.lazy(() => import('../../../pages/Home/index'));
+const Home = React.lazy(() => import('../../../pages/v3/Home/index'));
 const MintTC = React.lazy(() => import('../../../pages/Mint/MintTC'));
 const MintTP = React.lazy(() => import('../../../pages/Mint/MintTP'));
 const MintTX = React.lazy(() => import('../../../pages/Mint/MintTX'));
