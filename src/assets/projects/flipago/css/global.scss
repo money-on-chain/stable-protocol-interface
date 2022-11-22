@@ -874,6 +874,630 @@ h1.title-last-operations {
   color: #C3CCD9;
 }
 
+/* Modal Exchange */
+
+.modal-exchange {
+
+  /* Exchange */
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  gap: 32px;
+
+  position: relative;
+  width: 676px;
+  height: 454px;
+
+  background: linear-gradient(0deg, rgba(189, 207, 255, 0.08), rgba(189, 207, 255, 0.08)), #131215;
+  /* M3/Elevation Dark/2 */
+
+  box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+
+}
+
+.modal-exchange-header {
+
+  /* Modal Header */
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 0px 8px;
+  gap: 258px;
+
+  width: 612px;
+  height: 37px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+
+
+}
+
+.modal-exchange-header h1 {
+  /* Exchange */
+
+
+  width: 96px;
+  height: 24px;
+
+  /* Card Contents/Card Title */
+
+  font-family: 'Chivo';
+  font-style: italic;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height */
+
+
+  /* Brand Colors/Brand Color */
+
+  color: #F1EB14;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.modal-close {
+  width: 24px;
+  height: 24px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+}
+
+.icon-modal-close {
+  width: 24px;
+  height: 24px;
+  background-image: url("../icons/Close.svg");
+  background-size: 24px 24px;
+  background-repeat:no-repeat;
+}
+
+.modal-exchange-content {
+  /* Mint-Redeem Modal */
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 32px;
+
+  /* Auto layout */
+
+
+  width: 612px;
+  height: 321px;
+
+  border-radius: 8px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+}
+
+.exchange-content-fields {
+  /* Fields */
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+
+  width: 320px;
+  height: 296px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+}
+
+.exchange-content-info {
+  /* Info */
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 32px;
+
+  width: 260px;
+  height: 321px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.exchange-content-info-prices {
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 260px;
+  height: 42px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+
+}
+
+.exchange-content-info-conversion_0 {
+  width: 260px;
+  height: 17px;
+
+  /* Card Contents/Explanation */
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+
+  /* Text/Text Primary */
+
+  color: #C3CCD9;
+
+}
+
+.exchange-content-info-conversion_1 {
+  /* Balance: */
+
+  width: 242px;
+  height: 17px;
+
+  /* Card Contents/Explanation */
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+
+  /* Text/Text Primary */
+
+  color: #C3CCD9;
+}
+
+.exchange-content-info-fees {
+  /* Fees */
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 11px 0px 4px;
+  gap: 16px;
+
+  width: 260px;
+  height: 119px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.exchange-content-info-fees-frame {
+  /* Frame 10 */
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 245px;
+  height: 47px;
+}
+
+.exchange-content-info-fees-frame-t {
+
+  /* Balance: */
+
+
+  width: 198px;
+  height: 17px;
+
+  /* Card Contents/Explanation */
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+
+  /* Text/Text Primary */
+
+  color: #C3CCD9;
+
+
+}
+
+.exchange-content-info-fees-frame-switch {
+
+  /* Switch */
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 3px;
+  gap: 8px;
+
+  width: 44px;
+  height: 22px;
+
+  /* Field Background */
+
+  background: #2D313A;
+  border-radius: 11px;
+
+}
+
+.exchange-content-info-fees-balance {
+
+  /* Balance: */
+
+
+  width: 245px;
+  height: 56px;
+
+  /* Card Contents/Explanation (small) */
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+
+  /* Text/Text Primary */
+
+  color: #C3CCD9;
+
+
+}
+
+.exchange-content-info-cta {
+  /* CTA */
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+
+  width: 260px;
+  height: 96px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.exchange-content-info-cta-exchanging {
+
+  /* Exchanging */
+
+
+  width: 193px;
+  height: 19px;
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+
+  text-align: center;
+
+  /* Buttons/Button Primary */
+
+  color: #F1EB14;
+
+}
+
+.exchange-content-info-cta-button {
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+  gap: 8px;
+
+  width: 148px;
+  height: 53px;
+
+  /* Buttons/Button Primary */
+
+  background: #F1EB14;
+  /* Shadow */
+
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+
+  /* Buttons/Button Text Color */
+
+  color: #0C0C08;
+
+
+}
+
+.exchange-swap-from {
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 318px;
+  height: 108px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+}
+
+.exchange-swap-arrow {
+
+  width: 32px;
+  height: 32px;
+
+}
+
+.icon-swap-arrow {
+  width: 32px;
+  height: 32px;
+  background-image: url("../icons/SwapArrow.svg");
+  background-size: 32px 32px;
+  background-repeat:no-repeat;
+}
+
+select .exchange-select-token {
+
+}
+
+input[type='text'].exchange-input-value {
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 11px 16px;
+  gap: 8px;
+
+  width: 318px;
+  height: 51px;
+
+  background: #2D313A;
+  border-radius: 4px;
+  border: 0;
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  /* identical to box height */
+
+  text-align: right;
+
+  /* Buttons/Button Primary */
+
+  color: #F1EB14;
+
+}
+
+input[type='text'].exchange-input-value::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #F1EB14;
+  opacity: 1; /* Firefox */
+}
+
+.exchange-currency-option {
+
+}
+
+.exchange-currency-caption {
+
+}
+
+.exchange-token-balance {
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 0px 0px 4px;
+  gap: 8px;
+
+  width: 318px;
+  height: 17px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+
+}
+
+.exchange-token-balance-value {
+  /* Balance: */
+
+
+  width: 117px;
+  height: 17px;
+
+  /* Card Contents/Explanation */
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+
+  /* Text/Text Primary */
+
+  color: #C3CCD9;
+
+
+}
+
+a.exchange-token-balance-add-total {
+
+  /* Balance: */
+
+
+  width: 121px;
+  height: 17px;
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: right;
+
+  /* Buttons/Button Primary */
+
+  color: #F1EB14;
+
+
+}
+
+
+
+.exchange-swap-to {
+
+  /* SwapTo */
+
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 318px;
+  height: 108px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+
+}
+
+
 .ant-layout-footer {
   padding: 24px 50px;
   color: rgba(0, 0, 0, 0.85);
