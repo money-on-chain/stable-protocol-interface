@@ -1,0 +1,53 @@
+.currencyOption {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-self: center;
+
+  font-family: 'Chivo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+
+
+  /* Text/Text Primary */
+
+  color: #C3CCD9;
+
+  .currencyImage {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+}
+
+.SelectCurrency {
+  display: flex;
+  justify-content: space-between;
+  color: #C3CCD9;
+
+  .ant-select-selection-item {
+    display: flex;
+    height: 100%;
+  }
+  .ant-select-selector {
+    height: 48px !important;
+    border-radius: 0 !important;
+  }
+  &.disabled {
+    cursor: not-allowed;
+    .ant-select-selection-item {
+      padding-right: 0;
+      right: 10px;
+      position: absolute;
+    }
+    .ant-select-arrow {
+      display: none;
+    }
+  }
+  .ant-select-arrow {
+    color: #C3CCD9 !important;
+  }
+}
