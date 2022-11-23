@@ -1258,7 +1258,7 @@ h1.title-last-operations {
   /* Exchanging */
 
 
-  width: 193px;
+  width: 200px;
   height: 19px;
 
   font-family: 'Chivo';
@@ -1451,7 +1451,7 @@ a.exchange-token-balance-add-total {
   /* Balance: */
 
 
-  width: 121px;
+  width: 131px;
   height: 17px;
 
   font-family: 'Chivo';
@@ -1494,6 +1494,14 @@ a.exchange-token-balance-add-total {
   flex: none;
   order: 2;
   flex-grow: 0;
+
+}
+.ant-switch {
+  background-color: #2D313A;
+}
+
+.ant-switch-handle::before {
+  background-color: #F1EB14;
 
 }
 

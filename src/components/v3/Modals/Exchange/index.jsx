@@ -92,7 +92,7 @@ export default function ModalExchange() {
                             <div className="exchange-content-info-fees-frame-switch">
                                 <Switch
                                     disabled={false}
-                                    checked={true}
+                                    checked={false}
                                 />
 
                             </div>
