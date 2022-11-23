@@ -10,7 +10,6 @@ import { config } from '../../../projects/config';
 import SectionHeader from "../../../components/v3/Header";
 import StakingRewards from "../../../components/v3/Dashboards/StakingRewards"
 import Portfolio from "../../../components/v3/Dashboards/Portfolio"
-import ModalExchange from "../../../components/v3/Modals/Exchange"
 
 import '../../../assets/css/global.scss';
 
@@ -42,9 +41,6 @@ export default function Skeleton() {
 
                     {/* Dashboard Staking Rewards */}
                     <StakingRewards />
-
-                    {/* Modal Exchange */}
-                    <ModalExchange />
 
                     {/* Portfolio */}
                     <Portfolio />

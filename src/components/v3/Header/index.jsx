@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 
 import {useProjectTranslation} from "../../../helpers/translations";
 import {config} from "../../../projects/config";
+import ModalExchange from "../../../components/v3/Modals/Exchange"
 
 const { Header } = Layout;
 
@@ -22,7 +23,7 @@ export default function SectionHeader() {
                 <div className="central-menu">
                     <a href="#" className="menu-nav-item"><i className="logo-home"></i> <span className="menu-nav-item-title">Home</span> </a>
                     <a href="#" className="menu-nav-item"><i className="logo-send"></i> <span className="menu-nav-item-title">Send</span> </a>
-                    <a href="#" className="menu-nav-item"><i className="logo-exchange"></i> <span className="menu-nav-item-title">Exchange</span>  </a>
+                    <ModalExchange />
                     <a href="#" className="menu-nav-item"><i className="logo-performance"></i> <span className="menu-nav-item-title">Staking</span> </a>
                     <a href="#" className="menu-nav-item"><i className="logo-more"></i> <span className="menu-nav-item-title">More Options</span> </a>
                 </div>

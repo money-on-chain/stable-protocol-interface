@@ -4,7 +4,6 @@ import Modal from 'antd/lib/modal/Modal';
 import {useProjectTranslation} from "../../../../helpers/translations";
 import {config} from "../../../../projects/config";
 import Exchange from "../../../v3/Exchange";
-import {Button} from "antd";
 
 
 export default function ModalExchange() {
@@ -22,11 +21,9 @@ export default function ModalExchange() {
 
     return (
         <div>
-            <Button
-                type="primary"
-                onClick={showModal}
-            >{t(`${AppProject}.wallet.send`, { ns: ns })}
-            </Button>
+            <a href="#" onClick={showModal} className="menu-nav-item">
+                <i className="logo-exchange"></i> <span className="menu-nav-item-title">Exchange</span>
+            </a>
             <Modal
                 title="Exchange"
                 width={650}
