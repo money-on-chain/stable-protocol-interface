@@ -5,6 +5,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import {useProjectTranslation} from "../../../helpers/translations";
 import {config} from "../../../projects/config";
 import SelectCurrency from "../../v3/SelectCurrency";
+import ModalConfirmOperation from "../../v3/Modals/ConfirmOperation";
 
 
 export default function Exchange() {
@@ -28,9 +29,9 @@ export default function Exchange() {
                 <input className="exchange-input-value" type="text" id="select-token-from" name="select-token-from" placeholder="123.4" />
 
                 <div className="exchange-token-balance">
-                            <span className="exchange-token-balance-value">
-                                Balance: 1234.12
-                            </span>
+                    <span className="exchange-token-balance-value">
+                        Balance: 1234.12
+                    </span>
                     <a href="#" className="exchange-token-balance-add-total">Add total available</a>
 
                 </div>
@@ -55,12 +56,10 @@ export default function Exchange() {
                 <input className="exchange-input-value" type="text" id="select-token-from" name="select-token-from" placeholder="123.4" />
 
                 <div className="exchange-token-balance">
-                            <span className="exchange-token-balance-value">
-                                Balance: 1234.12
-                            </span>
-
+                    <span className="exchange-token-balance-value">
+                        Balance: 1234.12
+                    </span>
                     <a href="#" className="exchange-token-balance-add-total">Add total available</a>
-
                 </div>
 
 
@@ -85,7 +84,6 @@ export default function Exchange() {
                         disabled={false}
                         checked={false}
                     />
-
                 </div>
             </div>
             <div className="exchange-content-info-fees-balance">
@@ -95,14 +93,11 @@ export default function Exchange() {
         </div>
 
         <div className="exchange-content-info-cta">
-                        <span className="exchange-content-info-cta-exchanging">
-                            Exchanging ≈ 132.15 USD
-                        </span>
+            <span className="exchange-content-info-cta-exchanging">
+                Exchanging ≈ 132.15 USD
+            </span>
 
-            <Button
-                type="primary"
-                className="exchange-content-info-cta-button"
-            > Exchange </Button>
+            <ModalConfirmOperation />
 
         </div>
     </div>
