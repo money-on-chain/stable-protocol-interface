@@ -15,10 +15,10 @@ export default function Exchange() {
     return (
     <div className="exchange-content">
         <div className="fields">
-            <div className="exchange-swap-from">
+            <div className="swap-from">
 
                 <SelectCurrency
-                    className="exchange-select-token"
+                    className="select-token"
                     disabled={false}
                     inputValueInWei={0.00}
                     value={'RESERVE'}
@@ -26,26 +26,26 @@ export default function Exchange() {
                     currencyOptions={['RESERVE', 'TC', 'TP']}
                 />
 
-                <input className="exchange-input-value" type="text" id="select-token-from" name="select-token-from" placeholder="123.4" />
+                <input className="input-value" type="text" id="select-token-from" name="select-token-from" placeholder="0.00" />
 
-                <div className="exchange-token-balance">
-                    <span className="exchange-token-balance-value">
+                <div className="token-balance">
+                    <span className="token-balance-value">
                         Balance: 1234.12
                     </span>
-                    <a href="#" className="exchange-token-balance-add-total">Add total available</a>
+                    <a href="#" className="token-balance-add-total">Add total available</a>
 
                 </div>
 
-
             </div>
-            <div className="exchange-swap-arrow">
+
+            <div className="swap-arrow">
                 <i className="icon-swap-arrow"></i>
             </div>
 
-            <div className="exchange-swap-to">
+            <div className="swap-to">
 
                 <SelectCurrency
-                    className="exchange-select-token"
+                    className="select-token"
                     disabled={false}
                     inputValueInWei={0.00}
                     value={'TP'}
@@ -53,13 +53,13 @@ export default function Exchange() {
                     currencyOptions={['RESERVE', 'TC', 'TP']}
                 />
 
-                <input className="exchange-input-value" type="text" id="select-token-from" name="select-token-from" placeholder="123.4" />
+                <input className="input-value" type="text" id="select-token-from" name="select-token-from" placeholder="0.00" />
 
-                <div className="exchange-token-balance">
-                    <span className="exchange-token-balance-value">
+                <div className="token-balance">
+                    <span className="token-balance-value">
                         Balance: 1234.12
                     </span>
-                    <a href="#" className="exchange-token-balance-add-total">Add total available</a>
+                    <a href="#" className="token-balance-add-total">Add total available</a>
                 </div>
 
 

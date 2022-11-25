@@ -914,6 +914,20 @@ h1.title-last-operations {
 
 }
 
+
+.rotate {
+  animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-359deg);
+  }
+}
+
 .confirm-operation {
 
   font-family: 'Chivo';
@@ -1137,6 +1151,7 @@ h1.title-last-operations {
       line-height: 17px;
       text-align: center;
       color: #FAF515;
+      margin-top: 90px;
     }
 
     .btn {
@@ -1157,6 +1172,7 @@ h1.title-last-operations {
       line-height: 21px;
       text-align: center;
       color: #0C0C08;
+      margin-top: 20px;
     }
 
   }
@@ -1278,9 +1294,6 @@ h1.title-last-operations {
   }
 
 
-
-
-
 }
 
 .icon-copy {
@@ -1315,6 +1328,23 @@ h1.title-last-operations {
   background-repeat:no-repeat;
 }
 
+.icon-swap-arrow {
+  width: 32px;
+  height: 32px;
+  background-image: url("../icons/SwapArrow.svg");
+  background-size: 32px 32px;
+  background-repeat:no-repeat;
+}
+
+.icon-wheel {
+  width: 16px;
+  height: 16px;
+  background-image: url("../icons/Wheel.svg");
+  background-size: 16px 16px;
+  background-repeat:no-repeat;
+}
+
+
 
 
 
@@ -1322,10 +1352,10 @@ h1.title-last-operations {
 
 .ModalExchange {
 
+  font-family: 'Chivo';
+
   .ant-modal-content {
     background: linear-gradient(0deg, rgba(189, 207, 255, 0.08), rgba(189, 207, 255, 0.08)), #131215;
-    /* M3/Elevation Dark/2 */
-
     box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
   }
@@ -1333,19 +1363,17 @@ h1.title-last-operations {
   .ant-modal-header {
     background-color: transparent !important;
     border-bottom: 0 !important;
-    /* Card Contents/Card Title */
-
-    font-family: 'Chivo';
     font-style: italic;
     font-weight: 900;
     font-size: 20px;
     line-height: 24px;
-    /* identical to box height */
+    padding: 10px 32px 10px 32px;
   }
 
   .ant-modal-title {
-    /* Brand Colors/Brand Color */
     color: #F1EB14 !important;
+    text-align: left;
+    padding-top: 20px;
   }
 
   .ant-modal-content {
@@ -1354,11 +1382,18 @@ h1.title-last-operations {
 
   .ant-modal-close-x {
     color: #C3CCD9;
-
   }
 
+  .ant-modal-close {
+    top: 8px;
+  }
+
+  .ant-modal-body {
+    padding: 16px 32px 32px 32px;
+  }
 
 }
+
 
 /* Exchange Component */
 
@@ -1388,6 +1423,107 @@ h1.title-last-operations {
     flex: none;
     order: 0;
     flex-grow: 0;
+
+    select .select-token {
+
+    }
+
+    input[type='text'].input-value {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 11px 16px;
+      gap: 8px;
+      width: 318px;
+      height: 51px;
+      background: #2D313A;
+      border-radius: 4px;
+      border: 0;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 29px;
+      text-align: right;
+      color: #F1EB14;
+
+    }
+
+    input[type='text'].input-value::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #7F8A99;
+      opacity: 1; /* Firefox */
+    }
+
+    .token-balance {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 0px 0px 4px;
+      gap: 8px;
+      width: 318px;
+      height: 17px;
+      flex: none;
+      order: 2;
+      flex-grow: 0;
+
+      .token-balance-value {
+        width: 117px;
+        height: 17px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #C3CCD9;
+      }
+
+      a.token-balance-add-total {
+        width: 131px;
+        height: 17px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: right;
+        color: #F1EB14;
+
+      }
+
+
+    }
+
+    .swap-from {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 8px;
+      width: 318px;
+      height: 108px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    .swap-arrow {
+      width: 32px;
+      height: 32px;
+    }
+
+    .swap-to {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 8px;
+      width: 318px;
+      height: 108px;
+      flex: none;
+      order: 2;
+      flex-grow: 0;
+    }
+
+
   }
 
   .info {
@@ -1480,6 +1616,14 @@ h1.title-last-operations {
           background: #2D313A;
           border-radius: 11px;
 
+          .ant-switch {
+            background-color: #2D313A;
+          }
+
+          .ant-switch-handle::before {
+            background-color: #F1EB14;
+          }
+
         }
 
       }
@@ -1500,7 +1644,7 @@ h1.title-last-operations {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      padding: 0px;
+      padding: 0;
       gap: 24px;
       width: 260px;
       height: 96px;
@@ -1522,27 +1666,9 @@ h1.title-last-operations {
 
     }
 
-
-
   }
 
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .ShowModalConfirmOperation {
   .btnConfirm {
@@ -1595,93 +1721,11 @@ h1.title-last-operations {
 
 }*/
 
-.exchange-swap-from {
-
-  /* Auto layout */
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-
-  width: 318px;
-  height: 108px;
 
 
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-
-}
-
-.exchange-swap-arrow {
-
-  width: 32px;
-  height: 32px;
-
-}
-
-.icon-swap-arrow {
-  width: 32px;
-  height: 32px;
-  background-image: url("../icons/SwapArrow.svg");
-  background-size: 32px 32px;
-  background-repeat:no-repeat;
-}
-
-.icon-wheel {
-  width: 16px;
-  height: 16px;
-  background-image: url("../icons/Wheel.svg");
-  background-size: 16px 16px;
-  background-repeat:no-repeat;
-}
 
 
-select .exchange-select-token {
 
-}
-
-input[type='text'].exchange-input-value {
-
-  /* Auto layout */
-
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 11px 16px;
-  gap: 8px;
-
-  width: 318px;
-  height: 51px;
-
-  background: #2D313A;
-  border-radius: 4px;
-  border: 0;
-
-  font-family: 'Chivo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 29px;
-  /* identical to box height */
-
-  text-align: right;
-
-  /* Buttons/Button Primary */
-
-  color: #F1EB14;
-
-}
-
-input[type='text'].exchange-input-value::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #F1EB14;
-  opacity: 1; /* Firefox */
-}
 
 .exchange-currency-option {
 
@@ -1691,111 +1735,7 @@ input[type='text'].exchange-input-value::placeholder { /* Chrome, Firefox, Opera
 
 }
 
-.exchange-token-balance {
 
-  /* Auto layout */
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px 0px 0px 4px;
-  gap: 8px;
-
-  width: 318px;
-  height: 17px;
-
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 2;
-  flex-grow: 0;
-
-}
-
-.exchange-token-balance-value {
-  /* Balance: */
-
-
-  width: 117px;
-  height: 17px;
-
-  /* Card Contents/Explanation */
-
-  font-family: 'Chivo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  /* identical to box height */
-
-
-  /* Text/Text Primary */
-
-  color: #C3CCD9;
-
-
-}
-
-a.exchange-token-balance-add-total {
-
-  /* Balance: */
-
-
-  width: 131px;
-  height: 17px;
-
-  font-family: 'Chivo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  /* identical to box height */
-
-  text-align: right;
-
-  /* Buttons/Button Primary */
-
-  color: #F1EB14;
-
-
-}
-
-
-
-.exchange-swap-to {
-
-  /* SwapTo */
-
-
-  /* Auto layout */
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-
-  width: 318px;
-  height: 108px;
-
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 2;
-  flex-grow: 0;
-
-}
-.ant-switch {
-  background-color: #2D313A;
-}
-
-.ant-switch-handle::before {
-  background-color: #F1EB14;
-
-}
 
 
 .ant-layout-footer {

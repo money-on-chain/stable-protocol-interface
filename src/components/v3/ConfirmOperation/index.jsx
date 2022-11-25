@@ -4,6 +4,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import {useProjectTranslation} from "../../../helpers/translations";
 import {config} from "../../../projects/config";
 import {Collapse, Slider} from "antd";
+import IconStatusPending from "../../../assets/icons/status-pending.png";
+import IconStatusSuccess from "../../../assets/icons/status-success.png";
+import IconStatusError from "../../../assets/icons/status-error.png";
 
 
 export default function ConfirmOperation() {
@@ -11,7 +14,31 @@ export default function ConfirmOperation() {
     const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
-    const [status, setStatus] = useState('WAITING');
+    const [status, setStatus] = useState('SUBMIT');
+
+    let sentIcon = '';
+    let statusLabel = '';
+    switch (status) {
+        case 'SUBMIT':
+            sentIcon = 'icon-tx-waiting rotate';
+            statusLabel = 'Wait for transaction confirmation';
+            break;
+        case 'WAITING':
+            sentIcon = 'icon-tx-waiting rotate';
+            statusLabel = 'Wait for transaction confirmation';
+            break;
+        case 'SUCCESS':
+            sentIcon = 'icon-tx-success';
+            statusLabel = 'Operation Successful';
+            break;
+        case 'ERROR':
+            sentIcon = 'icon-tx-error';
+            statusLabel = 'Operation Failed!';
+            break;
+        default:
+            sentIcon = 'icon-tx-waiting rotate';
+            statusLabel = 'Wait for transaction confirmation';
+    }
 
     const markStyle = {
         style: {
@@ -100,7 +127,7 @@ export default function ConfirmOperation() {
             </div>
             }
 
-            { status === 'WAITING' && <div className="tx-sent">
+            { (status === 'WAITING' || status === 'SUCCESS' || status === 'ERROR')  && <div className="tx-sent">
 
                 <div className="status">
 
@@ -113,11 +140,11 @@ export default function ConfirmOperation() {
                     </div>
 
                     <div className="tx-logo-status">
-                        <i className="icon-tx-waiting"></i>
+                        <i className={sentIcon}></i>
                     </div>
 
                     <div className="status-label">
-                        Wait for transaction confirmation
+                        {statusLabel}
                     </div>
 
                     <button type="primary" className="btnClose">Close</button>

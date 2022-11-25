@@ -26,7 +26,7 @@ export default function ModalExchange() {
             </a>
             <Modal
                 title="Exchange"
-                width={650}
+                width={670}
                 visible={visible}
                 onCancel={hideModal}
                 footer={null}
