@@ -1363,301 +1363,186 @@ h1.title-last-operations {
 /* Exchange Component */
 
 .exchange-content {
-  /* Mint-Redeem Modal */
 
-
-  /* Auto layout */
-
+  font-family: 'Chivo';
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 0px;
+  padding: 0;
   gap: 32px;
-
-  /* Auto layout */
-
-
   width: 612px;
   height: 321px;
-
   border-radius: 8px;
-
-  /* Inside auto layout */
-
   flex: none;
   order: 1;
   flex-grow: 0;
 
-}
+  .fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap: 24px;
+    width: 320px;
+    height: 296px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
 
-.exchange-content-fields {
-  /* Fields */
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 32px;
+    width: 260px;
+    height: 321px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
 
+    .prices {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0;
+      gap: 8px;
+      width: 260px;
+      height: 42px;
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
 
-  /* Auto layout */
+      .conversion_0 {
+        width: 260px;
+        height: 17px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #C3CCD9;
+      }
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0px;
-  gap: 24px;
+      .conversion_1 {
+        width: 242px;
+        height: 17px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #C3CCD9;
+      }
 
-  width: 320px;
-  height: 296px;
+    }
 
+    .fees {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px 11px 0px 4px;
+      gap: 16px;
+      width: 260px;
+      height: 119px;
+      flex: none;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0;
 
-  /* Inside auto layout */
+      .frame {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 8px;
+        width: 245px;
+        height: 47px;
 
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+        .frame-t {
+          width: 198px;
+          height: 17px;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+          color: #C3CCD9;
+        }
 
-}
+        .switch {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 3px;
+          gap: 8px;
+          width: 44px;
+          height: 22px;
+          background: #2D313A;
+          border-radius: 11px;
 
-.exchange-content-info {
-  /* Info */
+        }
 
+      }
 
-  /* Auto layout */
+      .balance {
+        width: 245px;
+        height: 56px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        color: #C3CCD9;
+      }
 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 32px;
+    }
 
-  width: 260px;
-  height: 321px;
+    .cta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 24px;
+      width: 260px;
+      height: 96px;
+      flex: none;
+      order: 2;
+      align-self: stretch;
+      flex-grow: 0;
 
+      .exchanging {
+        width: 200px;
+        height: 19px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        color: #F1EB14;
+      }
 
-  /* Inside auto layout */
-
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-}
-
-.exchange-content-info-prices {
-
-  /* Auto layout */
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-
-  width: 260px;
-  height: 42px;
-
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
-
-}
-
-.exchange-content-info-conversion_0 {
-  width: 260px;
-  height: 17px;
-
-  /* Card Contents/Explanation */
-
-  font-family: 'Chivo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  /* identical to box height */
-
-
-  /* Text/Text Primary */
-
-  color: #C3CCD9;
-
-}
-
-.exchange-content-info-conversion_1 {
-  /* Balance: */
-
-  width: 242px;
-  height: 17px;
-
-  /* Card Contents/Explanation */
-
-  font-family: 'Chivo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  /* identical to box height */
-
-
-  /* Text/Text Primary */
-
-  color: #C3CCD9;
-}
-
-.exchange-content-info-fees {
-  /* Fees */
-
-
-  /* Auto layout */
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px 11px 0px 4px;
-  gap: 16px;
-
-  width: 260px;
-  height: 119px;
-
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
-}
-
-.exchange-content-info-fees-frame {
-  /* Frame 10 */
-
-
-  /* Auto layout */
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-
-  width: 245px;
-  height: 47px;
-}
-
-.exchange-content-info-fees-frame-t {
-
-  /* Balance: */
+    }
 
 
-  width: 198px;
-  height: 17px;
 
-  /* Card Contents/Explanation */
+  }
 
-  font-family: 'Chivo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  /* identical to box height */
-
-
-  /* Text/Text Primary */
-
-  color: #C3CCD9;
 
 
 }
 
-.exchange-content-info-fees-frame-switch {
-
-  /* Switch */
 
 
-  /* Auto layout */
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 3px;
-  gap: 8px;
-
-  width: 44px;
-  height: 22px;
-
-  /* Field Background */
-
-  background: #2D313A;
-  border-radius: 11px;
-
-}
-
-.exchange-content-info-fees-balance {
-
-  /* Balance: */
 
 
-  width: 245px;
-  height: 56px;
-
-  /* Card Contents/Explanation (small) */
-
-  font-family: 'Chivo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
-
-  /* Text/Text Primary */
-
-  color: #C3CCD9;
 
 
-}
-
-.exchange-content-info-cta {
-  /* CTA */
 
 
-  /* Auto layout */
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 24px;
-
-  width: 260px;
-  height: 96px;
 
 
-  /* Inside auto layout */
-
-  flex: none;
-  order: 2;
-  align-self: stretch;
-  flex-grow: 0;
-}
-
-.exchange-content-info-cta-exchanging {
-
-  /* Exchanging */
 
 
-  width: 200px;
-  height: 19px;
 
-  font-family: 'Chivo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  /* identical to box height */
-
-  text-align: center;
-
-  /* Buttons/Button Primary */
-
-  color: #F1EB14;
-
-}
 
 .ShowModalConfirmOperation {
   .btnConfirm {

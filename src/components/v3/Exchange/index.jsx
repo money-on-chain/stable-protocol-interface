@@ -14,7 +14,7 @@ export default function Exchange() {
 
     return (
     <div className="exchange-content">
-        <div className="exchange-content-fields">
+        <div className="fields">
             <div className="exchange-swap-from">
 
                 <SelectCurrency
@@ -67,40 +67,41 @@ export default function Exchange() {
 
         </div>
 
-        <div className="exchange-content-info">
-        <div className="exchange-content-info-prices">
-            <div className="exchange-content-info-conversion_0">1 FlipMega ≈ 1.0323 Dollar On Chain</div>
-            <div className="exchange-content-info-conversion_1">1 Dollar On CHain ≈ 0.9323 FlipMega</div>
-        </div>
-
-        <div className="exchange-content-info-fees">
-            <div className="exchange-content-info-fees-frame">
-                <div className="exchange-content-info-fees-frame-t">
-                    Fee (0.15%) ≈ 0.0000342 rBTC
-                </div>
-
-                <div className="exchange-content-info-fees-frame-switch">
-                    <Switch
-                        disabled={false}
-                        checked={false}
-                    />
-                </div>
-            </div>
-            <div className="exchange-content-info-fees-balance">
-                This fee will be deducted from the transaction value transfered. Amounts my be different at transaction confirmation.
+        <div className="info">
+            <div className="prices">
+                <div className="conversion_0">1 FlipMega ≈ 1.0323 Dollar On Chain</div>
+                <div className="conversion_1">1 Dollar On CHain ≈ 0.9323 FlipMega</div>
             </div>
 
+            <div className="fees">
+                <div className="frame">
+                    <div className="frame-t">
+                        Fee (0.15%) ≈ 0.0000342 rBTC
+                    </div>
+
+                    <div className="switch">
+                        <Switch
+                            disabled={false}
+                            checked={false}
+                        />
+                    </div>
+                </div>
+                <div className="balance">
+                    This fee will be deducted from the transaction value transfered. Amounts my be different at transaction confirmation.
+                </div>
+
+            </div>
+
+            <div className="cta">
+                <span className="exchanging">
+                    Exchanging ≈ 132.15 USD
+                </span>
+
+                <ModalConfirmOperation />
+
+            </div>
         </div>
 
-        <div className="exchange-content-info-cta">
-            <span className="exchange-content-info-cta-exchanging">
-                Exchanging ≈ 132.15 USD
-            </span>
-
-            <ModalConfirmOperation />
-
-        </div>
-    </div>
     </div>
     )
 }
