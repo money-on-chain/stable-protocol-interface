@@ -12,7 +12,7 @@ jobs:
       changelog: ${{ steps.github_tag_action.outputs.changelog }}
     steps:
       - name: Checkout
-        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
+        uses: actions/checkout@v2 # v3.2.0
 
       - name: setup Node
         uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # v3.5.1
@@ -25,7 +25,7 @@ jobs:
 
       - name: Bump version and push tag
         id: github_tag_action
-        uses: mathieudutour/github-tag-action@d745f2e74aaf1ee82e747b181f7a0967978abee0  # v6.0
+        uses: mathieudutour/github-tag-action@fcfbdceb3093f6d85a3b194740f8c6cec632f4e2  # v6.1
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN }}
           release_branches: pre-release.*
