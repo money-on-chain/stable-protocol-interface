@@ -46,6 +46,8 @@ jobs:
         with:
           node-version: 14.x
           registry-url: 'https://npm.pkg.github.com'
+
+      - name: Install setup
         run: npm ci
 
       - name: Build setup
