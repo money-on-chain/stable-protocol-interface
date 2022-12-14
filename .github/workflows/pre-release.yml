@@ -1,8 +1,7 @@
 name: Pre-Release
 on:
-  push:
-    branches:
-      - pre-release
+  workflow_dispatch:
+
 jobs:
   bump_version:
     name: Bump Version
@@ -50,6 +49,8 @@ jobs:
       - name: Install setup
         run: npm ci
 
+      # Target Mainnet
+
       - name: Build setup
         run: CI=false npm run build:moc-mainnet
 
@@ -60,20 +61,20 @@ jobs:
 #      - name: Compile Mainnet
 #        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:moc-mainnet" -v "$(pwd)"/build/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
 #
-#      - name: Pin to IPFS Mainnet
-#        id: upload
-#        uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.3
-#        with:
-#          pin-name: MoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
-#          path: './build'
-#          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
-#          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
-#
-#      - name: Convert CIDv0 to CIDv1 Mainnet
-#        id: convert_cidv0
-#        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
-#        with:
-#          cidv0: ${{ steps.upload.outputs.hash }}
+      - name: Pin to IPFS Mainnet
+        id: upload
+        uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
+        with:
+          pin-name: MoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
+          path: './build'
+          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
+
+      - name: Convert CIDv0 to CIDv1 Mainnet
+        id: convert_cidv0
+        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
+        with:
+          cidv0: ${{ steps.upload.outputs.hash }}
 #
 #      # Target Staging Testnet
 #      - name: Compile Staging
