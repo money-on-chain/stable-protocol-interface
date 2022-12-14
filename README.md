@@ -32,6 +32,19 @@ You can:
 | TX    | Leverage Token X | ROC     | RIFX       | RIF        |
 | TG    | Govern Token     | ROC     | MOC        | -          |
 
+### Releases
+
+Each release gets deployed to IPFS automatically.
+
+Please go to release section, there are several links to [releases](https://github.com/money-on-chain/release) 
+
+**Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
+
+
+
+
+## DEVELOP
+
 ### Setup: Running develop
 
 Requires:
@@ -75,12 +88,3 @@ In testnet you may need some test tRIF o tRBTC
 ### Integration
 
 If you want to integrate Money on Chain protocols please review our Integration repository:  [https://github.com/money-on-chain/moc-integration-js](https://github.com/money-on-chain/moc-integration-js)
-
-### IPFS notes
-
-Each release gets deployed to IPFS automatically.
-
-**Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
-
-
-
