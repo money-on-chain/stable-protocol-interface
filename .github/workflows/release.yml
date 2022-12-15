@@ -1,8 +1,7 @@
 name: Release
-on: 
-  push:
-    branches:
-      - master
+on:
+  workflow_dispatch:
+
 jobs:
   bump_version:
     name: Bump Version
@@ -12,10 +11,10 @@ jobs:
       changelog: ${{ steps.github_tag_action.outputs.changelog }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
 
       - name: setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # v3.5.1
         with:
           node-version: 14.x
           registry-url: 'https://npm.pkg.github.com'
@@ -25,10 +24,10 @@ jobs:
 
       - name: Bump version and push tag
         id: github_tag_action
-        uses: mathieudutour/github-tag-action@v6.0
+        uses: mathieudutour/github-tag-action@fcfbdceb3093f6d85a3b194740f8c6cec632f4e2  # v6.1
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN }}
-          release_branches: release.*,hotfix.*
+          release_branches: master
           default_bump: fix
           custom_tag: ${{ env.PACKAGE_VERSION }}
           
@@ -38,28 +37,25 @@ jobs:
     needs: bump_version
     if: ${{ needs.bump_version.outputs.new_tag != null }}
     steps:
-      - name: Set Swap Space
-        uses: pierotofy/set-swap-space@master
-        with:
-          swap-size-gb: 10
-      - name: HW Rev
-        run: |
-           free -h
-           lscpu
-        shell: bash
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
 
-      - name: Docker Build image
-        run: docker build -t builder_stable_interface -f Dockerfile .
+      - name: setup Node
+        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # v3.5.1
+        with:
+          node-version: 14.x
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Install setup
+        run: npm ci
 
       # Target Mainnet
-      - name: Compile Mainnet
-        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:moc-mainnet" -v "$(pwd)"/build/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
+      - name: Build setup Mainnet
+        run: CI=false npm run build:moc-mainnet
 
       - name: Pin to IPFS Mainnet
         id: upload
-        uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.3
+        uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
         with:
           pin-name: MoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
           path: './build'
@@ -72,15 +68,24 @@ jobs:
         with:
           cidv0: ${{ steps.upload.outputs.hash }}
 
-      - name: Update DNS with new IPFS hash Mainnet
-        env:
-          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-          RECORD_DOMAIN: 'moneyonchain.com'
-          RECORD_NAME: '_dnslink.app'
-          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-        uses: textileio/cloudflare-update-dnslink@0fe7b7a1ffc865db3a4da9773f0f987447ad5848
+      # Target ROC Mainnet
+      - name: Build setup ROC Mainnet
+        run: CI=false npm run build:roc-mainnet
+
+      - name: Pin to IPFS ROC Mainnet
+        id: upload_roc
+        uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
         with:
-          cid: ${{ steps.upload.outputs.hash }}
+          pin-name: RoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
+          path: './build'
+          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
+
+      - name: Convert CIDv0 to CIDv1 RoC Mainnet
+        id: convert_cidv0_roc
+        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
+        with:
+          cidv0: ${{ steps.upload_roc.outputs.hash }}
 
       # Create the release
       - name: Create GitHub Release
@@ -94,8 +99,7 @@ jobs:
           body: |
             **MoC Mainnet gateways**:
             - CIDv0: `${{ steps.upload.outputs.hash }}`
-            - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`
-            - https://app.moneyonchain.com
+            - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`            
             - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload.outputs.hash }}            
             - https://gateway.pinata.cloud/ipfs/${{ steps.upload.outputs.hash }}
             - https://cloudflare-ipfs.com/ipfs/${{ steps.upload.outputs.hash }}
@@ -103,5 +107,16 @@ jobs:
             - https://${{ steps.convert_cidv0.outputs.cidv1 }}.ipfs.dweb.link/
             - https://${{ steps.convert_cidv0.outputs.cidv1 }}.ipfs.cf-ipfs.com/
             - [ipfs://${{ steps.upload.outputs.hash }}/](ipfs://${{ steps.upload.outputs.hash }}/)
+            
+            **RoC Mainnet gateways**:
+            - CIDv0: `${{ steps.upload_roc.outputs.hash }}`
+            - CIDv1: `${{ steps.convert_cidv0_roc.outputs.cidv1 }}`            
+            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_roc.outputs.hash }}            
+            - https://gateway.pinata.cloud/ipfs/${{ steps.upload_roc.outputs.hash }}
+            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_roc.outputs.hash }}
+            - https://ipfs.io/ipfs/${{ steps.upload_roc.outputs.hash }}
+            - https://${{ steps.convert_cidv0_roc.outputs.cidv1 }}.ipfs.dweb.link/
+            - https://${{ steps.convert_cidv0_roc.outputs.cidv1 }}.ipfs.cf-ipfs.com/
+            - [ipfs://${{ steps.upload_roc.outputs.hash }}/](ipfs://${{ steps.upload_roc.outputs.hash }}/)
                                                 
             ${{ needs.bump_version.outputs.changelog }}
