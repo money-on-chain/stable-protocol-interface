@@ -4,12 +4,12 @@ Open source **decentralized interface** for multi-collateral stable protocol **M
 
 You can:
 
-* Mint / Redeem Stable Token
-* Mint / Redeem RiskPro Token
-* Mint / Redeem RiskProX Token (leveraged 2X)
+* Mint / Redeem Pegged Token (TP): Ex.: DoC or RDOC
+* Mint / Redeem Collateral Token (TC): Ex.: BPro or RIFP
+* Mint / Redeem Token X (TX): Ex.: BTCx or RIFx
 * Metrics
 * Last operations
-* Claim / Stake MoC
+* Claim / Stake TG (MOC)
 * FastBTC Bridge
 
 
@@ -21,15 +21,29 @@ You can:
 * RIF on Chain (RoC) (Collateral RIF) please review the contracts [here](https://github.com/money-on-chain/RDOC-Contract) 
 
 
-| Token generic     | Project | Token Name  | Collateral   | Network |
-|-------------------|---------|-------------|--------------|---------|
-| Stable            | MOC     | DOC         | RBTC         | RSK     |
-| RiskPro           | MOC     | BPRO        | RBTC         | RSK     |
-| RiskProx          | MOC     | BTCX        | RBTC         | RSK     |
-| Stable            | ROC     | RDOC        | RIF          | RSK     |
-| RiskPro           | ROC     | RIFP        | RIF          | RSK     |
-| RiskProx          | ROC     | RIFX        | RIF          | RSK     |
+| Token | Token name       | Project | Token Name | Collateral |
+|-------|------------------|---------|------------|------------|
+| TP    | Pegged Token 1:1 | MOC     | DOC        | RBTC       |
+| TC    | Collateral Token | MOC     | BPRO       | RBTC       |
+| TX    | Leverage Token X | MOC     | BTCX       | RBTC       |
+| TG    | Govern Token     | MOC     | MOC        | -          |
+| TP    | Pegged Token 1:1 | ROC     | RDOC       | RIF        |
+| TC    | Collateral Token | ROC     | RIFP       | RIF        |
+| TX    | Leverage Token X | ROC     | RIFX       | RIF        |
+| TG    | Govern Token     | ROC     | MOC        | -          |
 
+### Releases
+
+Each release gets deployed to IPFS automatically.
+
+Please go to release section, there are several links to [releases](https://github.com/money-on-chain/release) 
+
+**Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
+
+
+
+
+## DEVELOP
 
 ### Setup: Running develop
 
@@ -74,12 +88,3 @@ In testnet you may need some test tRIF o tRBTC
 ### Integration
 
 If you want to integrate Money on Chain protocols please review our Integration repository:  [https://github.com/money-on-chain/moc-integration-js](https://github.com/money-on-chain/moc-integration-js)
-
-### IPFS notes
-
-Each release gets deployed to IPFS automatically.
-
-**Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
-
-
-

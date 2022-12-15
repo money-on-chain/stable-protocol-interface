@@ -1,43 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import './assets/css/global.scss';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
-
-// import {BrowserRouter} from 'react-router-dom';
 import { HashRouter } from 'react-router-dom';
-import Router from './Router';
-import { AuthenticateProvider } from './Context/Auth';
 import {I18nextProvider} from "react-i18next";
 import i18next from "i18next";
-import {config} from "./Config/config";
+
+import './index.css';
+import './assets/css/global.scss';
+import './assets/css/components.scss';
+
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import reportWebVitals from './reportWebVitals';
+import { AuthenticateProvider } from './context/Auth';
+import {config} from "./projects/config";
+import IconWaiting from './assets/icons/status-pending.png';
+import Router from './router'
 
 console.log(`Starting app version: ${process.env.REACT_APP_VERSION}`);
 
 async function loadTranslations() {
     try {
-        const strmoc= config.environment.AppProject
-        let moc_es= await import('./translations/'+strmoc+'/es/moc.json');
-        let moc_en= await import('./translations/'+strmoc+'/en/moc.json');
-        let global_es= await import('./translations/global-es.json')
-        let global_en= await import('./translations/global-en.json')
+
+        const langES = await import('./projects/'+config.environment.AppProject.toLowerCase()+'/es/moc.json');
+        const langEN = await import('./projects/'+config.environment.AppProject.toLowerCase()+'/en/moc.json');
+
         await i18next.init({
             interpolation: {escapeValue:false},
             lng: "en",
             resources: {
                 es: {
-                    global: global_es,
-                    moc: moc_es
+                    global: await import('./projects/global-es.json'),
+                    moc: langES,
+                    roc: langES,
+                    flipago: langES
                 },
                 en: {
-                    global: global_en,
-                    moc: moc_en
+                    global: await import('./projects/global-en.json'),
+                    moc: langEN,
+                    roc: langEN,
+                    flipago: langEN
                 },
             }
         })
     } catch (error) {
-        console.log(`Ocurrió un error: ${error}`);
+        console.log(`Something wrong: ${error}`);
     }
 }
 
@@ -49,7 +54,7 @@ ReactDOM.render(
             <AuthenticateProvider>
                 <HashRouter>
                     {/*<React.Suspense fallback={ <span>Loading...</span> }>*/}
-                    <React.Suspense fallback={ <img style={{'position':'fixed','left': '50%','top':'50%','transform':'translateX(-50%) translateY(-50%)'}} width={50} height={50} src={"global/status-pending.png"} alt="ssa" className={'img-status rotate'}/> }>
+                    <React.Suspense fallback={ <img style={{'position':'fixed','left': '50%','top':'50%','transform':'translateX(-50%) translateY(-50%)'}} width={50} height={50} src={IconWaiting} alt="Loading..." className={'img-status rotate'}/> }>
                         <Router />
                     </React.Suspense>
                 </HashRouter>

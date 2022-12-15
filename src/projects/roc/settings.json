@@ -1,0 +1,131 @@
+{
+  "forceChecksumAddressInput": true,
+  "forceRskIp60Addresses": true,
+  "minimumUserBalanceToOperate": "0",
+  "transfer": [
+    {
+      "address": "0xA066d6e20e122deB1139FA3Ae3e96d04578c67B5",
+      "title": "TEX"
+    }
+  ],
+  "globalCoverage": {
+    "ok": 5.5,
+    "warning": 2,
+    "dangerous": 1.5
+  },
+  "contractUrl": "https://github.com/money-on-chain/RDOC-Contract",
+  "home": {
+    "walletBalancePie": {
+      "colors": ["#0d84ff", "#1f99ea", "#66baff", "#66cfc8", "#808080"]
+    }
+  },
+  "tokens": {
+      "COINBASE": {
+        "name": "RBTC",
+        "decimals": "6"
+      },
+      "RESERVE": {
+        "name": "RIF",
+        "decimals": "2"
+      },
+      "TP": {
+        "name": "RDOC",
+        "decimals": "2"
+      },
+      "TC": {
+        "name": "RIFP",
+        "decimals": "2"
+      },
+      "TX": {
+        "name": "RIFX",
+        "decimals": "2"
+      },
+      "TG": {
+        "name": "MOC",
+        "decimals": "2"
+      },
+      "USDPrice": {
+        "name": "USD",
+        "decimals": "4"
+      },
+      "USD": {
+        "name": "USD",
+        "decimals": "2"
+      }
+    },
+  "Precisions": {
+      "REWARDPrecision": {
+        "contractDecimals": 18,
+        "decimals": 6
+      },
+      "valueVariation": {
+        "contractDecimals": 18,
+        "decimals": 2
+      },
+      "mocPrecision": {
+        "contractDecimals": 18,
+        "decimals": 2
+      },
+      "RBTCPrecision": {
+        "contractDecimals": 18,
+        "decimals": 6
+      },
+      "USDPrecision": {
+        "contractDecimals": 18,
+        "decimals": 2
+      },
+      "PriceUSDPrecision": {
+        "contractDecimals": 18,
+        "decimals": 2
+      },
+      "COVPrecision": {
+        "contractDecimals": 18,
+        "decimals": 4
+      },
+      "percentagePrecision": {
+        "contractDecimals": 6,
+        "decimals": 0
+      },
+      "visiblePercentage": {
+        "contractDecimals": 0,
+        "decimals": 6
+      },
+      "TXInterest": {
+        "contractDecimals": 18,
+        "decimals": 6
+      },
+      "FreeDocInterest": {
+        "contractDecimals": 18,
+        "decimals": 2
+      },
+      "commissionRate": {
+        "contractDecimals": 18,
+        "decimals": 2
+      }
+    },
+  "environment": {
+    "AppMode": "RRC20",
+    "AppProject": "RoC",
+    "MoC": "",
+    "Multicall2": "",
+    "BProToken": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
+    "IRegistry": "",
+    "fastBtcBridgeAddress": "",
+    "LiquidityCollateralToken": "",
+    "rns": {
+      "url": "",
+      "address": ""
+    },
+    "vendor": {
+      "address": "",
+      "markup": ""
+    },
+    "chainId": 31,
+    "api": {
+      "operations": "",
+      "incentives": ""
+    },
+    "explorerUrl": "",
+    "btcExplorer": ""
+  }
+}

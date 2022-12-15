@@ -27,7 +27,7 @@ jobs:
         uses: mathieudutour/github-tag-action@fcfbdceb3093f6d85a3b194740f8c6cec632f4e2  # v6.1
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN }}
-          release_branches: pre-release.*
+          release_branches: master, develop
           default_bump: fix
           custom_tag: ${{ env.PACKAGE_VERSION }}
 
@@ -51,16 +51,9 @@ jobs:
 
       # Target Mainnet
 
-      - name: Build setup
+      - name: Build setup Mainnet
         run: CI=false npm run build:moc-mainnet
 
-#      - name: Docker Build image
-#        run: docker build -t builder_stable_interface -f Dockerfile .
-#
-#      # Target Mainnet
-#      - name: Compile Mainnet
-#        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:moc-mainnet" -v "$(pwd)"/build/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
-#
       - name: Pin to IPFS Mainnet
         id: upload
         uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
@@ -75,115 +68,101 @@ jobs:
         uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
         with:
           cidv0: ${{ steps.upload.outputs.hash }}
-#
-#      # Target Staging Testnet
-#      - name: Compile Staging
-#        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:moc-testnet" -v "$(pwd)"/build_staging/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
-#
-#      - name: Pin to IPFS Staging
-#        id: upload_staging
-#        uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.3
-#        with:
-#          pin-name: MoC Testnet ${{ needs.bump_version.outputs.new_tag }}
-#          path: './build_staging'
-#          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
-#          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
-#
-#      - name: Convert CIDv0 to CIDv1 Staging
-#        id: convert_cidv0_staging
-#        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
-#        with:
-#          cidv0: ${{ steps.upload_staging.outputs.hash }}
-#
-#      - name: Update DNS with new IPFS hash Staging
-#        env:
-#          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-#          RECORD_DOMAIN: 'moneyonchain.com'
-#          RECORD_NAME: '_dnslink.app-testnet'
-#          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-#        uses: textileio/cloudflare-update-dnslink@0fe7b7a1ffc865db3a4da9773f0f987447ad5848
-#        with:
-#          cid: ${{ steps.upload_staging.outputs.hash }}
-#
-#      # Target ROC Mainnet
-#      - name: Compile Mainnet
-#        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:roc-mainnet" -v "$(pwd)"/build/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
-#
-#      - name: Pin to IPFS Mainnet
-#        id: upload_roc
-#        uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.3
-#        with:
-#          pin-name: RoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
-#          path: './build'
-#          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
-#          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
-#
-#      - name: Convert CIDv0 to CIDv1 RoC Mainnet
-#        id: convert_cidv0_roc
-#        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
-#        with:
-#          cidv0: ${{ steps.upload_roc.outputs.hash }}
-#
-#      # Target Staging RoC Testnet
-#      - name: Compile Staging
-#        run: docker run --rm --name stable-interface-compiler --env TOOL_NODE_FLAGS="--max-old-space-size=4096" --env TARGET_BUILD="build:roc-testnet" -v "$(pwd)"/build_staging/:/usr/src/app/build -v "$(pwd)"/src/:/usr/src/app/src -v "$(pwd)"/public/:/usr/src/app/public builder_stable_interface
-#
-#      - name: Pin to IPFS Staging
-#        id: upload_staging_roc
-#        uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.3
-#        with:
-#          pin-name: RoC Testnet ${{ needs.bump_version.outputs.new_tag }}
-#          path: './build_staging'
-#          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
-#          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
-#
-#      - name: Convert CIDv0 to CIDv1 Staging RoC
-#        id: convert_cidv0_staging_roc
-#        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
-#        with:
-#          cidv0: ${{ steps.upload_staging_roc.outputs.hash }}
-#
-##      - name: Update DNS with new IPFS hash Staging
-##        env:
-##          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-##          RECORD_DOMAIN: 'moneyonchain.com'
-##          RECORD_NAME: '_dnslink.app-testnet'
-##          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-##        uses: textileio/cloudflare-update-dnslink@0fe7b7a1ffc865db3a4da9773f0f987447ad5848
-##        with:
-##          cid: ${{ steps.upload_staging.outputs.hash }}
-#
-#      # Create the release
-#      - name: Create GitHub Release
-#        id: create_release
-#        uses: actions/create-release@v1.1.0
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-#        with:
-#          tag_name: ${{ needs.bump_version.outputs.new_tag }}
-#          release_name: Staging ${{ needs.bump_version.outputs.new_tag }}
-#          prerelease: true
-#          body: |
-#            **IMPORTANT:** This is a pre-release!, please use at your own RISK... is for testing purpose!
-#
-#            **MoC Mainnet gateways**:
-#            - CIDv0: `${{ steps.upload.outputs.hash }}`
-#            - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`
-#            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload.outputs.hash }}
-#
-#            **MoC Testnet gateways**:
-#            - CIDv0: `${{ steps.upload_staging.outputs.hash }}`
-#            - CIDv1: `${{ steps.convert_cidv0_staging.outputs.cidv1 }}`
-#            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_staging.outputs.hash }}
-#
-#            **RoC Mainnet gateways**:
-#            - CIDv0: `${{ steps.upload_roc.outputs.hash }}`
-#            - CIDv1: `${{ steps.convert_cidv0_roc.outputs.cidv1 }}`
-#            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_roc.outputs.hash }}
-#
-#            **RoC Testnet gateways**:
-#            - CIDv0: `${{ steps.upload_staging_roc.outputs.hash }}`
-#            - CIDv1: `${{ steps.convert_cidv0_staging_roc.outputs.cidv1 }}`
-#            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_staging_roc.outputs.hash }}
-#
-#            ${{ needs.bump_version.outputs.changelog }}
+
+      # Target Staging Testnet
+
+      - name: Build setup Testnet
+        run: CI=false npm run build:moc-testnet
+
+      - name: Pin to IPFS Staging
+        id: upload_staging
+        uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
+        with:
+          pin-name: MoC Testnet ${{ needs.bump_version.outputs.new_tag }}
+          path: './build'
+          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
+
+      - name: Convert CIDv0 to CIDv1 Staging
+        id: convert_cidv0_staging
+        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
+        with:
+          cidv0: ${{ steps.upload_staging.outputs.hash }}
+
+      # Target ROC Mainnet
+      - name: Build setup ROC Mainnet
+        run: CI=false npm run build:roc-mainnet
+
+      - name: Pin to IPFS Mainnet
+        id: upload_roc
+        uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
+        with:
+          pin-name: RoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
+          path: './build'
+          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
+
+      - name: Convert CIDv0 to CIDv1 RoC Mainnet
+        id: convert_cidv0_roc
+        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
+        with:
+          cidv0: ${{ steps.upload_roc.outputs.hash }}
+
+      # Target Staging RoC Testnet
+
+      - name: Build setup ROC Testnet
+        run: CI=false npm run build:roc-testnet
+
+      - name: Pin to IPFS Staging
+        id: upload_staging_roc
+        uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
+        with:
+          pin-name: RoC Testnet ${{ needs.bump_version.outputs.new_tag }}
+          path: './build'
+          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
+
+      - name: Convert CIDv0 to CIDv1 Staging RoC
+        id: convert_cidv0_staging_roc
+        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
+        with:
+          cidv0: ${{ steps.upload_staging_roc.outputs.hash }}
+
+      # Create the release
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        with:
+          tag_name: ${{ needs.bump_version.outputs.new_tag }}
+          release_name: Staging ${{ needs.bump_version.outputs.new_tag }}
+          prerelease: true
+          body: |
+            **IMPORTANT:** This is a pre-release!, please use at your own RISK... is for testing purpose!
+
+            **MoC Mainnet gateways**:
+            - CIDv0: `${{ steps.upload.outputs.hash }}`
+            - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`
+            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload.outputs.hash }}
+            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload.outputs.hash }}
+
+            **MoC Testnet gateways**:
+            - CIDv0: `${{ steps.upload_staging.outputs.hash }}`
+            - CIDv1: `${{ steps.convert_cidv0_staging.outputs.cidv1 }}`
+            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_staging.outputs.hash }}
+            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_staging.outputs.hash }}
+
+            **RoC Mainnet gateways**:
+            - CIDv0: `${{ steps.upload_roc.outputs.hash }}`
+            - CIDv1: `${{ steps.convert_cidv0_roc.outputs.cidv1 }}`
+            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_roc.outputs.hash }}
+            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_roc.outputs.hash }}
+
+            **RoC Testnet gateways**:
+            - CIDv0: `${{ steps.upload_staging_roc.outputs.hash }}`
+            - CIDv1: `${{ steps.convert_cidv0_staging_roc.outputs.cidv1 }}`
+            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_staging_roc.outputs.hash }}
+            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_staging_roc.outputs.hash }}
+
+            ${{ needs.bump_version.outputs.changelog }}

@@ -1,0 +1,512 @@
+{
+    "abi": [
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "coinPair",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "address",
+                    "name": "addr",
+                    "type": "address"
+                }
+            ],
+            "name": "registerCoinPair",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleOwnerAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "internetName",
+                    "type": "string"
+                }
+            ],
+            "name": "registerOracle",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleOwnerAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                }
+            ],
+            "name": "setOracleName",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleOwnerAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                }
+            ],
+            "name": "setOracleAddress",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleOwnerAddr",
+                    "type": "address"
+                }
+            ],
+            "name": "removeOracle",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleOwnerAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bytes32",
+                    "name": "coinPair",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "subscribeToCoinPair",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleOwnerAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bytes32",
+                    "name": "coinPair",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "unSubscribeFromCoinPair",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleOwnerAddr",
+                    "type": "address"
+                }
+            ],
+            "name": "onWithdraw",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleOwnerAddr",
+                    "type": "address"
+                }
+            ],
+            "name": "getOracleAddress",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "ownerAddr",
+                    "type": "address"
+                }
+            ],
+            "name": "isRegistered",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                }
+            ],
+            "name": "getOracleOwner",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getRegisteredOraclesLen",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "idx",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getRegisteredOracleAtIndex",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "ownerAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "url",
+                    "type": "string"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bytes32",
+                    "name": "coinPair",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "isSubscribed",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                }
+            ],
+            "name": "isOracleRegistered",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                }
+            ],
+            "name": "getOracleRegistrationInfo",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "internetName",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "stake",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_owner",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bytes32",
+                    "name": "coinpair",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "getOracleRoundInfo",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "points",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "selectedInCurrentRound",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                }
+            ],
+            "name": "canRemoveOracle",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "oracleAddr",
+                    "type": "address"
+                }
+            ],
+            "name": "getStake",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "balance",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getCoinPairCount",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "i",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getCoinPairAtIndex",
+            "outputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "",
+                    "type": "bytes32"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "coinpair",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "getContractAddress",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "coinPair",
+                    "type": "bytes32"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "hint",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getCoinPairIndex",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address[]",
+                    "name": "addresses",
+                    "type": "address[]"
+                }
+            ],
+            "name": "getMaxStake",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getStakingContract",
+            "outputs": [
+                {
+                    "internalType": "contract IStakingMachine",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getMinCPSubscriptionStake",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ]
+}
