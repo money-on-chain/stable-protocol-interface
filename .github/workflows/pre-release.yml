@@ -99,8 +99,8 @@ jobs:
         with:
           pin-name: RoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
           path: './build'
-          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
-          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
+          pinata-api-key: ${{ secrets.PINATA_API_KEY_RIF }}
+          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY_RIF }}
 
       - name: Convert CIDv0 to CIDv1 RoC Mainnet
         id: convert_cidv0_roc
@@ -119,8 +119,8 @@ jobs:
         with:
           pin-name: RoC Testnet ${{ needs.bump_version.outputs.new_tag }}
           path: './build'
-          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
-          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
+          pinata-api-key: ${{ secrets.PINATA_API_KEY_RIF }}
+          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY_RIF }}
 
       - name: Convert CIDv0 to CIDv1 Staging RoC
         id: convert_cidv0_staging_roc
@@ -156,13 +156,13 @@ jobs:
             **RoC Mainnet gateways**:
             - CIDv0: `${{ steps.upload_roc.outputs.hash }}`
             - CIDv1: `${{ steps.convert_cidv0_roc.outputs.cidv1 }}`
-            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_roc.outputs.hash }}
+            - https://rifonchain.mypinata.cloud/ipfs/${{ steps.upload_roc.outputs.hash }}
             - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_roc.outputs.hash }}
 
             **RoC Testnet gateways**:
             - CIDv0: `${{ steps.upload_staging_roc.outputs.hash }}`
             - CIDv1: `${{ steps.convert_cidv0_staging_roc.outputs.cidv1 }}`
-            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_staging_roc.outputs.hash }}
+            - https://rifonchain.mypinata.cloud/ipfs/${{ steps.upload_staging_roc.outputs.hash }}
             - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_staging_roc.outputs.hash }}
 
             ${{ needs.bump_version.outputs.changelog }}
