@@ -3,12 +3,12 @@ const getRLogin = (port) => {
 
     let rpcUrls= {}
 
-    if( port===31 ){
+    if( parseInt(port)===31 ){
         rpcUrls = {
             31: 'https://public-node.testnet.rsk.co'
         };
     }
-    if( port===30 ){
+    if( parseInt(port)===30 ){
         rpcUrls = {
             30: 'https://public-node.rsk.co'
         };
