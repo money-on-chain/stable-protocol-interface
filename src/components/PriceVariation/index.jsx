@@ -4,7 +4,6 @@ import web3 from "web3";
 
 import { formatValueVariation } from '../../helpers/Formats';
 import {AuthenticateContext} from "../../context/Auth";
-import {setNumber} from "../../helpers/helper";
 import {LargeNumberF3} from "../LargeNumberF3";
 import { config } from '../../projects/config';
 import { useProjectTranslation } from '../../helpers/translations';
@@ -13,6 +12,7 @@ import { ReactComponent as LogoIconUp } from '../../assets/icons/icon-arrow-up2.
 import { ReactComponent as LogoIconDown } from '../../assets/icons/icon-arrow-down2.svg';
 
 import './style.scss';
+import BigNumber from "bignumber.js";
 
 export default function PriceVariation(props) {
 
@@ -40,7 +40,9 @@ export default function PriceVariation(props) {
                     }
                 case 'TX':
                     if (auth.contractStatusData['bprox2PriceInRbtc']) {
-                         return (auth.contractStatusData['bitcoinPrice'] * web3.utils.fromWei(setNumber(auth.contractStatusData['bprox2PriceInRbtc']), 'ether'))
+                        const txPrice = new BigNumber(web3.utils.fromWei(auth.contractStatusData['bitcoinPrice']))
+                            .times(new BigNumber(web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'])))
+                        return web3.utils.toWei(txPrice.toString(), 'ether')
                     } else {
                         return 0;
                     }
@@ -52,11 +54,24 @@ export default function PriceVariation(props) {
 
     const { currencyName, currencyCode, priceVariation, blockHeight } = props;
    
-    const isPositive = priceVariation.current > priceVariation.day;
+    const isPositive = priceVariation.current.gt(priceVariation.day);
     const sign = isPositive ? '+' : '';
     const color = isPositive ? '#3fcb97' : '#f2316a';
-    const formattedVar = formatValueVariation((priceVariation.current - priceVariation.day), i18n.languages[0],auth);
-    const formattedPerc = parseFloat(((priceVariation.current - priceVariation.day)/priceVariation.day)*100).toLocaleString(i18n.languages[0], {minimumFractionDigits:2, maximumFractionDigits:2});
+
+    let priceDiff = priceVariation.current.minus(priceVariation.day);
+    let referenceValue = priceVariation.day
+    // If price diff > 100000000 is an error
+    if (priceDiff.abs().gt(100000000)) {
+        priceDiff = new BigNumber(0);
+        referenceValue = new BigNumber(0);
+    }
+
+    const formattedVar = formatValueVariation(priceDiff, i18n.languages[0],auth);
+    const formattedPerc = parseFloat(priceDiff.div(priceVariation.day).times(100)).toLocaleString(
+        i18n.languages[0],
+        {minimumFractionDigits:2, maximumFractionDigits:2}
+    );
+
     const variationText = `${sign}${formattedVar} (${formattedPerc}%)`;
 
     const tooltip = (
@@ -79,7 +94,7 @@ export default function PriceVariation(props) {
              )}
              <p>
                  <b>{t(`${AppProject}.general.priceVariation.tooltip.referenceValue`, { ns: ns })}:</b>
-                 {' '}{parseFloat(web3.utils.fromWei(auth.contractStatusData.historic.bitcoinPrice, 'ether')).toFixed(2)}{' USD'}
+                 {' '}{parseFloat(referenceValue).toFixed(2)}{' USD'}
              </p>
          </div>
      );
