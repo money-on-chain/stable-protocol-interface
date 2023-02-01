@@ -71,7 +71,7 @@ export default function TokenSummaryCard(props) {
                     ...styleCentered,
                     textAlign: 'right',
                     'flexGrow':'0',
-                    width:'160px'
+                    width:'210px'
                 }}
             >
                 <Row className="ArrowHomeIndicators arrow-center-values">
