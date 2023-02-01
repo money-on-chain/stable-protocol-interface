@@ -44,7 +44,7 @@ function HeaderCoins(props) {
           if (auth.contractStatusData['bprox2PriceInRbtc'] !== 0) {
             const txPrice = new BigNumber(web3.utils.fromWei(auth.contractStatusData['bitcoinPrice']))
                 .times(new BigNumber(web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'])))
-            return web3.utils.toWei(txPrice.toString(), 'ether')
+            return web3.utils.toWei(txPrice.toFixed(6), 'ether')
           } else {
             return 0;
           }
