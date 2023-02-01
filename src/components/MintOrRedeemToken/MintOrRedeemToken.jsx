@@ -40,7 +40,16 @@ const MintOrRedeemToken = (props) => {
   const { token, mocState, userState,style } = props;
   
   /* State variable */
-  const [currencyYouExchange, setCurrencyYouExchange] = useState('RESERVE');
+
+  /* Disable Mint TX */
+  let defaultCurrencyExchange;
+  if (token === 'TX' && AppProject === 'MoC') {
+      defaultCurrencyExchange = token
+  } else {
+      defaultCurrencyExchange = 'RESERVE'
+  }
+
+  const [currencyYouExchange, setCurrencyYouExchange] = useState(defaultCurrencyExchange);
   const [valueYouExchange, setValueYouExchange] = useState('0');
   const [valueYouReceive, setValueYouReceive] = useState('0');
   const [youExchangeIsValid, onYouExchangeValidityChange] = useState(false);
@@ -388,7 +397,15 @@ const MintOrRedeemToken = (props) => {
   const currencyYouReceive = getCurrencyYouReceive(actionIsMint, token);
   const commission = calcCommission();
   const totals = totalsWithCommissionAndInterests();
-    /* View */
+
+  /* View */
+  /* Disable Mint TX */
+  let currencyOptions;
+  if (token === 'TX' && AppProject === 'MoC') {
+      currencyOptions = [token]
+  } else {
+      currencyOptions = [token, 'RESERVE']
+  }
 
   const renderExchangeInputs = () => {
     return (
@@ -400,7 +417,7 @@ const MintOrRedeemToken = (props) => {
             onCurrencySelect={onChangeCurrencyYouExchange}
             inputValueInWei={(valueYouExchange==0)? 0.00: valueYouExchange}
             onInputValueChange={onValueYouExchangeChange}
-            currencyOptions={[token, 'RESERVE']}
+            currencyOptions={currencyOptions}
             onValidationStatusChange={onYouExchangeValidityChange}
             maxValueAllowedInWei={getMaxValues().youExchange}
             showMaxValueAllowed
