@@ -2,11 +2,11 @@
 
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import web3 from "web3";
+import BigNumber from "bignumber.js";
 
 import { AuthenticateContext } from '../../../context/Auth';
 import PriceVariation from '../../PriceVariation';
 import {LargeNumber} from "../../LargeNumber";
-import {setNumber, setToLocaleString} from "../../../helpers/helper";
 import { useProjectTranslation } from '../../../helpers/translations';
 import './style.scss';
 
@@ -29,16 +29,12 @@ function HeaderCoins(props) {
       switch (props.tokenName) {
         case 'TP':
           if (auth.contractStatusData['bitcoinPrice'] !== 0) {
-            // return (web3.utils.toWei(auth.contractStatusData['bitcoinPrice'], 'ether'));
-            // return setToLocaleString(parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bitcoinPrice']), 'ether')),2,i18n)
             return auth.contractStatusData['bitcoinPrice']
           } else {
             return 0;
           }
         case 'TC':
           if (auth.contractStatusData['bproPriceInUsd'] !== 0) {
-            // return (web3.utils.toWei(auth.contractStatusData['bproPriceInUsd'], 'ether'));
-            // return setToLocaleString(parseFloat(web3.utils.fromWei(setNumber(auth.contractStatusData['bproPriceInUsd']), 'ether')),2,i18n)
             return auth.contractStatusData['bproPriceInUsd']
           } else {
             return 0;
@@ -46,7 +42,9 @@ function HeaderCoins(props) {
 
         case 'TX':
           if (auth.contractStatusData['bprox2PriceInRbtc'] !== 0) {
-            return (auth.contractStatusData['bitcoinPrice'] * web3.utils.fromWei(setNumber(auth.contractStatusData['bprox2PriceInRbtc']), 'ether'))
+            const txPrice = new BigNumber(web3.utils.fromWei(auth.contractStatusData['bitcoinPrice']))
+                .times(new BigNumber(web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'])))
+            return web3.utils.toWei(txPrice.toString(), 'ether')
           } else {
             return 0;
           }
@@ -60,20 +58,25 @@ function HeaderCoins(props) {
       {
         case 'RESERVE':
         case 'TP':
-          return {day: auth.contractStatusData.historic.bitcoinPrice, current: auth.contractStatusData.bitcoinPrice};
+          return {
+            day: new BigNumber(web3.utils.fromWei(auth.contractStatusData.historic.bitcoinPrice)),
+            current: new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice))
+          };
         case 'TC':
-          return {day: auth.contractStatusData.historic.bproPriceInUsd, current: auth.contractStatusData.bproPriceInUsd};
+          return {
+            day: new BigNumber(web3.utils.fromWei(auth.contractStatusData.historic.bproPriceInUsd)),
+            current: new BigNumber(web3.utils.fromWei(auth.contractStatusData.bproPriceInUsd))};
         case 'TX':
           return {
-            day: (auth.contractStatusData.historic.bitcoinPrice * web3.utils.fromWei(setNumber(auth.contractStatusData.historic.bprox2PriceInRbtc), 'ether')),
-            current: (auth.contractStatusData.bitcoinPrice * web3.utils.fromWei(setNumber(auth.contractStatusData.bprox2PriceInRbtc), 'ether'))
+            day: new BigNumber(web3.utils.fromWei(auth.contractStatusData.historic.bitcoinPrice))
+                .times(new BigNumber(web3.utils.fromWei(auth.contractStatusData.historic.bprox2PriceInRbtc))),
+            current: new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice))
+                .times(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bprox2PriceInRbtc)))
             };
         default:
       }
     }
   };
-
-  //const [currencyCode, setCurrencyCode]=  useState('USDPrice');
 
   return (
     <>{
