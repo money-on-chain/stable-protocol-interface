@@ -39,12 +39,17 @@ function HeaderCoins(props) {
           } else {
             return 0;
           }
-
         case 'TX':
           if (auth.contractStatusData['bprox2PriceInRbtc'] !== 0) {
             const txPrice = new BigNumber(web3.utils.fromWei(auth.contractStatusData['bitcoinPrice']))
                 .times(new BigNumber(web3.utils.fromWei(auth.contractStatusData['bprox2PriceInRbtc'])))
             return web3.utils.toWei(txPrice.toFixed(6), 'ether')
+          } else {
+            return 0;
+          }
+        case 'TG':
+          if (auth.contractStatusData['mocPrice'] !== 0) {
+            return auth.contractStatusData['mocPrice']
           } else {
             return 0;
           }
@@ -73,6 +78,10 @@ function HeaderCoins(props) {
             current: new BigNumber(web3.utils.fromWei(auth.contractStatusData.bitcoinPrice))
                 .times(new BigNumber(web3.utils.fromWei(auth.contractStatusData.bprox2PriceInRbtc)))
             };
+        case 'TG':
+          return {
+            day: new BigNumber(web3.utils.fromWei(auth.contractStatusData.historic.mocPrice)),
+            current: new BigNumber(web3.utils.fromWei(auth.contractStatusData.mocPrice))};
         default:
       }
     }

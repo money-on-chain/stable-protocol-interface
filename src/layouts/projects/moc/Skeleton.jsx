@@ -16,7 +16,7 @@ import { useProjectTranslation } from '../../../helpers/translations';
 import { ReactComponent as LogoIcon } from '../../../assets/icons/logo.svg';
 import { ReactComponent as LogoIconTP } from '../../../assets/icons/icon-rbtclogo.svg';
 import { ReactComponent as LogoIconTC } from '../../../assets/icons/TCIcon.svg';
-import { ReactComponent as LogoIconTX } from '../../../assets/icons/TXIcon.svg';
+import { ReactComponent as LogoIconTG } from '../../../assets/icons/icon-tg.svg';
 
 
 const { Header, Content, Sider } = Layout;
@@ -146,7 +146,7 @@ export default function Skeleton() {
                     <div className="MiddleSide">
                         <HeaderCoins tokenName="TP" image={<LogoIconTP alt="arrow" height="50" width="40" />} />
                         <HeaderCoins tokenName="TC" image={<LogoIconTC alt="arrow" height="50" width="40" />} />
-                        <HeaderCoins tokenName="TX" image={<LogoIconTX alt="arrow" height="50" width="40" />} />
+                        <HeaderCoins tokenName="TG" image={<LogoIconTG alt="arrow" height="50" width="40" />} />
                     </div>
                     <LoginButton {...loginButtonSettings} />
 
