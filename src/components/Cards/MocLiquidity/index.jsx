@@ -155,6 +155,7 @@ function MocLiquidity(props) {
                     <p>MOC</p>
                 </div>
             </div>
+            <div className="Separator"></div>
             <div className="Metric"><h2>{t("global.RewardsBalance_EarnedToday", { ns: 'global' })}</h2>
                 <div className="IncentivesItem">
                     <h3>
