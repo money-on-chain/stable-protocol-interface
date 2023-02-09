@@ -20,7 +20,7 @@ function Home(props) {
     const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const auth = useContext(AuthenticateContext);
-    const { docBalance = '0', bproBalance = '0', bprox2Balance = '0' } = auth.userBalanceData ? auth.userBalanceData : {};
+    const { docBalance = '0', bproBalance = '0', bprox2Balance = '0', mocBalance='0' } = auth.userBalanceData ? auth.userBalanceData : {};
     
     return (
 
@@ -63,20 +63,20 @@ function Home(props) {
                             currencyCodeNumber={'TC'}
                         />
                         <TokenSummaryCard
-                            tokenName="tx"
+                            tokenName="tg"
                             // color="#ed1c24"
-                            page="/wallet/leveraged"
-                            balance={bprox2Balance}
+                            page="/rewards"
+                            balance={mocBalance}
                             labelCoin={t(`${AppProject}.Tokens_RESERVE_code`, {ns: ns })}
-                            currencyCode={'TX'}
-                            currencyCodeNumber={'TX'}
+                            currencyCode={'TG'}
+                            currencyCodeNumber={'TG'}
                         />
                     </div>
                 </div>
                 <div className={'sec-3'}>
                 {/*<Col flex="248px">*/}
                     <div className="ContainerMocAmountDatas">
-                        <MocAmount />
+                        {/*<MocAmount />*/}
                         <MocLiquidity />
                     </div>
                 </div>
