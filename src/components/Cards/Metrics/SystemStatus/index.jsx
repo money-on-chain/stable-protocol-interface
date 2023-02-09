@@ -37,7 +37,6 @@ function SystemStatus(props) {
             "redeemSTABLEOutsideOfSettlement",
             "mintRISKPRO",
             "redeemRISKPRO",
-            "mintRISKPROX",
             "redeemRISKPROX"
         ]
     }
@@ -50,7 +49,6 @@ function SystemStatus(props) {
             "redeemSTABLEOnSettlement",
             "redeemSTABLEOutsideOfSettlement",
             "mintRISKPRO",
-            "mintRISKPROX",
             "redeemRISKPROX"
         ]
     }
@@ -61,7 +59,6 @@ function SystemStatus(props) {
         subtitle: t(`${AppProject}.metrics.statusOrange.subtitle`, {ns: ns}),
         operationsAvailable: [
             "mintRISKPRO",
-            "mintRISKPROX",
             "redeemRISKPROX"
         ]
     }
@@ -71,7 +68,6 @@ function SystemStatus(props) {
         title: t(`${AppProject}.metrics.statusRed.title`, {ns: ns}),
         subtitle: t(`${AppProject}.metrics.statusRed.subtitle`, {ns: ns}),
         operationsAvailable: [
-            "mintRISKPROX",
             "redeemRISKPROX"
         ]
     }
