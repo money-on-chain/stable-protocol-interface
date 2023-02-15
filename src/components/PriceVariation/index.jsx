@@ -66,7 +66,7 @@ export default function PriceVariation(props) {
         referenceValue = new BigNumber(0);
     }
 
-    const formattedVar = formatValueVariation(priceDiff, i18n.languages[0],auth);
+    const formattedVar = formatValueVariation(priceDiff.times(new BigNumber(10).exponentiatedBy(18)), i18n.languages[0],auth);
     const formattedPerc = parseFloat(priceDiff.div(priceVariation.day).times(100)).toLocaleString(
         i18n.languages[0],
         {minimumFractionDigits:2, maximumFractionDigits:2}
@@ -94,6 +94,7 @@ export default function PriceVariation(props) {
              )}
              <p>
                  <b>{t(`${AppProject}.general.priceVariation.tooltip.referenceValue`, { ns: ns })}:</b>
+
                  {' '}{parseFloat(referenceValue).toFixed(2)}{' USD'}
              </p>
          </div>

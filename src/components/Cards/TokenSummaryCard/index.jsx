@@ -62,44 +62,41 @@ export default function TokenSummaryCard(props) {
     },[auth]);
 
     return (
-        <Row className="Card TokenSummaryCard" style={{'height':'135px','display':'flex'}}>
+        <div className="Card TokenSummaryCard" style={{'height':'135px','display':'flex'}}>
             {!loading ? <>
             <InformationModal currencyCode={currencyCode} />
-            <Col
+            <div
                 // span={7}
                 style={{
-                    ...styleCentered,
-                    textAlign: 'right',
-                    'flexGrow':'0',
-                    width:'160px'
+                    display: 'flex',
+                    width:'210px'
                 }}
             >
-                <Row className="ArrowHomeIndicators arrow-center-values">
-                    <Col
-                        span={12}
+                <div className="" style={{display: 'flex'}}>
+                    <div
                         style={{
-                            ...styleCentered,
-                            justifyContent: 'flex-start'
+                            display: 'flex',
+                            'place-items': 'center'
                         }}
                     >
                         {logoIcon}
-                    </Col>
-                    <Col
-                        span={12}
-                        style={{
-                            ...styleCentered,
-                            justifyContent: 'flex-end',
+                    </div>
+                    <div style={{
                             textAlign: 'right',
-                            'padding-left': '12px'
+                            width: '200px',
+                            display: 'flex',
+                            'align-items': 'center'
                         }}
                     >
-                        <span className={`Number ${AppProject}-${tokenName}`}> {/* style={{ color }}> */}
-                        <LargeNumber amount={balance} currencyCode={currencyCode} />
+                        <span className={`Number ${AppProject}-${tokenName}`} style={{
+                            'text-align': 'right',
+                            'width': '100%'}} > {/* style={{ color }}> */}
+                            <LargeNumber amount={balance} currencyCode={currencyCode} />
                         </span>
-                    </Col>
-                </Row>
-            </Col>
-            <Col
+                    </div>
+                </div>
+            </div>
+            <div
                 // span={14}
                 style={{
                     ...styleCentered,
@@ -109,7 +106,7 @@ export default function TokenSummaryCard(props) {
                     ,'flexGrow':'1'
                 }}
             >
-                <div className="Numbers Left">
+                <div className="Numbers Right">
                     <Tooltip placement="top" title={userBalance.collateral_tooltip}>
                         <div className="Number Few">
                             {userBalance.collateral}{' '}
@@ -121,8 +118,8 @@ export default function TokenSummaryCard(props) {
                         <div className="Number Few">{userBalance.usd} USD</div>
                     </Tooltip>
                 </div>
-            </Col>
-            <Col
+            </div>
+            <div
                 // span={3}
                 style={{
                     ...styleCentered,
@@ -136,9 +133,9 @@ export default function TokenSummaryCard(props) {
                     onClick={() => navigate(page)}
                     icon={<ArrowRightOutlined />}
                 />
-            </Col></>:
+            </div></>:
                 <Skeleton active={true}  paragraph={{ rows: 2 }}></Skeleton>
             }
-        </Row>
+        </div>
     );
 }
