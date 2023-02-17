@@ -1,0 +1,92 @@
+name: RoC-Release
+on:
+  workflow_dispatch:
+
+jobs:
+  bump_version:
+    name: Bump Version
+    runs-on: ubuntu-22.04
+    outputs:
+      new_tag: ${{ steps.github_tag_action.outputs.new_tag }}
+      changelog: ${{ steps.github_tag_action.outputs.changelog }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
+
+      - name: setup Node
+        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # v3.5.1
+        with:
+          node-version: 14.x
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: package-version
+        run: node -p -e '`PACKAGE_VERSION=${require("./package.json").version}`' >> $GITHUB_ENV
+
+      - name: Bump version and push tag
+        id: github_tag_action
+        uses: mathieudutour/github-tag-action@fcfbdceb3093f6d85a3b194740f8c6cec632f4e2  # v6.1
+        with:
+          github_token: ${{ secrets.PERSONAL_TOKEN }}
+          release_branches: master
+          default_bump: fix
+          custom_tag: ${{ env.PACKAGE_VERSION }}
+
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-22.04
+    needs: bump_version
+    if: ${{ needs.bump_version.outputs.new_tag != null }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
+
+      - name: setup Node
+        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # v3.5.1
+        with:
+          node-version: 14.x
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Install setup
+        run: npm ci
+
+      # Target ROC Mainnet
+      - name: Build setup ROC Mainnet
+        run: CI=false npm run build:roc-mainnet
+
+      - name: Pin to IPFS ROC Mainnet
+        id: upload_roc
+        uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
+        with:
+          pin-name: RoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
+          path: './build'
+          pinata-api-key: ${{ secrets.PINATA_API_KEY_RIF }}
+          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY_RIF }}
+
+      - name: Convert CIDv0 to CIDv1 RoC Mainnet
+        id: convert_cidv0_roc
+        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
+        with:
+          cidv0: ${{ steps.upload_roc.outputs.hash }}
+
+      # Create the release
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        with:
+          tag_name: ${{ needs.bump_version.outputs.new_tag }}
+          release_name: Release ${{ needs.bump_version.outputs.new_tag }}
+          body: |
+            **RoC Mainnet gateways**:
+            - CIDv0: `${{ steps.upload_roc.outputs.hash }}`
+            - CIDv1: `${{ steps.convert_cidv0_roc.outputs.cidv1 }}`            
+            - https://rifonchain.mypinata.cloud/ipfs/${{ steps.upload_roc.outputs.hash }}            
+            - https://gateway.pinata.cloud/ipfs/${{ steps.upload_roc.outputs.hash }}
+            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_roc.outputs.hash }}
+            - https://ipfs.io/ipfs/${{ steps.upload_roc.outputs.hash }}
+            - https://${{ steps.convert_cidv0_roc.outputs.cidv1 }}.ipfs.dweb.link/
+            - https://${{ steps.convert_cidv0_roc.outputs.cidv1 }}.ipfs.cf-ipfs.com/
+            - [ipfs://${{ steps.upload_roc.outputs.hash }}/](ipfs://${{ steps.upload_roc.outputs.hash }}/)
+                                                
+            ${{ needs.bump_version.outputs.changelog }}
