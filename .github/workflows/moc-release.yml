@@ -1,4 +1,4 @@
-name: Release
+name: MoC-Release
 on:
   workflow_dispatch:
 
@@ -68,25 +68,6 @@ jobs:
         with:
           cidv0: ${{ steps.upload.outputs.hash }}
 
-      # Target ROC Mainnet
-      - name: Build setup ROC Mainnet
-        run: CI=false npm run build:roc-mainnet
-
-      - name: Pin to IPFS ROC Mainnet
-        id: upload_roc
-        uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
-        with:
-          pin-name: RoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
-          path: './build'
-          pinata-api-key: ${{ secrets.PINATA_API_KEY_RIF }}
-          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY_RIF }}
-
-      - name: Convert CIDv0 to CIDv1 RoC Mainnet
-        id: convert_cidv0_roc
-        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
-        with:
-          cidv0: ${{ steps.upload_roc.outputs.hash }}
-
       # Create the release
       - name: Create GitHub Release
         id: create_release
@@ -96,7 +77,7 @@ jobs:
         with:
           tag_name: ${{ needs.bump_version.outputs.new_tag }}
           release_name: Release ${{ needs.bump_version.outputs.new_tag }}
-          body: |
+          body: |            
             **MoC Mainnet gateways**:
             - CIDv0: `${{ steps.upload.outputs.hash }}`
             - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`            
@@ -107,16 +88,5 @@ jobs:
             - https://${{ steps.convert_cidv0.outputs.cidv1 }}.ipfs.dweb.link/
             - https://${{ steps.convert_cidv0.outputs.cidv1 }}.ipfs.cf-ipfs.com/
             - [ipfs://${{ steps.upload.outputs.hash }}/](ipfs://${{ steps.upload.outputs.hash }}/)
-            
-            **RoC Mainnet gateways**:
-            - CIDv0: `${{ steps.upload_roc.outputs.hash }}`
-            - CIDv1: `${{ steps.convert_cidv0_roc.outputs.cidv1 }}`            
-            - https://rifonchain.mypinata.cloud/ipfs/${{ steps.upload_roc.outputs.hash }}            
-            - https://gateway.pinata.cloud/ipfs/${{ steps.upload_roc.outputs.hash }}
-            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_roc.outputs.hash }}
-            - https://ipfs.io/ipfs/${{ steps.upload_roc.outputs.hash }}
-            - https://${{ steps.convert_cidv0_roc.outputs.cidv1 }}.ipfs.dweb.link/
-            - https://${{ steps.convert_cidv0_roc.outputs.cidv1 }}.ipfs.cf-ipfs.com/
-            - [ipfs://${{ steps.upload_roc.outputs.hash }}/](ipfs://${{ steps.upload_roc.outputs.hash }}/)
                                                 
             ${{ needs.bump_version.outputs.changelog }}
