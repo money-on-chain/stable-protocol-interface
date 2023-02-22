@@ -100,7 +100,7 @@ function Metrics(props) {
             <h3 className="PageSubTitle">{t('global.Metrics_subtitle', { ns: 'global' })}</h3>
             <Row gutter={15} className="MetricsCardsContainer">
                 <Col className={'SystemStatusSection'}>
-                    <SystemStatus coverage={globalCoverage} paused={paused} blocksToSettlement={blocksToSettlement}/>
+                    <SystemStatus coverage={globalCoverage} adjustedTargetCoverage={adjustedTargetCoverage} paused={paused} blocksToSettlement={blocksToSettlement}/>
                 </Col>
                 <Col className={'RBTCSection'}>
                     <Reserve
