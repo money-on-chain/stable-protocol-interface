@@ -7,10 +7,7 @@ function SystemOperations(props) {
             <div className="CardMetricContent" style={{'margin': 0}}>
                 <GetChecksFor operations={["mintSTABLE","redeemSTABLEOutsideOfSettlement"]} operationsAvailable={props.operationsAvailable}></GetChecksFor>
                 <div className="separator" style={{height: 100}}/>
-                <GetChecksFor operations={["mintRISKPRO",
-                    "redeemRISKPRO",
-                    "mintRISKPROX",
-                    "redeemRISKPROX"]} operationsAvailable={props.operationsAvailable}></GetChecksFor>
+                <GetChecksFor operations={["mintRISKPRO", "redeemRISKPRO"]} operationsAvailable={props.operationsAvailable}></GetChecksFor>
             </div>
         </div>
     )

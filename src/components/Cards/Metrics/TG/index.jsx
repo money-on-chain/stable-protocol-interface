@@ -34,7 +34,7 @@ function TG(props) {
                 {!loading
                     ? <div>
                         <h5>{t(`${AppProject}.metrics.TG.price`, { ns: ns })}</h5>
-                        <LargeNumber amount={props.mocPrice} currencyCode="USDPrice" tooltip="topLeft"/>
+                        <span className={'color-tg'}><LargeNumber amount={props.mocPrice} currencyCode="USDPrice" tooltip="topLeft"/></span>
                     </div>
                 : <Skeleton active={true} />}
             </div>

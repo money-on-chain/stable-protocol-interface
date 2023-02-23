@@ -123,6 +123,9 @@ function Metrics(props) {
                         total={totalDocAmount}
                     />
                 </Col>
+                <Col className={'MetricsCardsMOC'}>
+                    <TG mocPrice={mocPriceUsd} />
+                </Col>
                 <Col className={'MetricsCardsBPRO'}>
                     <TC
                         total={totalBpro}
@@ -132,35 +135,33 @@ function Metrics(props) {
                         bproDiscountPriceUsd={bproDiscountPriceUsd}
                     />
                 </Col>
-                <Col className={'MetricsCardsBTCX'}>
-                    <TX
-                        leverage={x2Leverage}
-                        coverage={x2Coverage}
-                        availableMint={maxRiskproxMintAvailable}
-                        total={totalBprox}
-                        usdValue={bprox2PriceInUsd}
-                    />
-                </Col>
+                {/*<Col className={'MetricsCardsBTCX'}>*/}
+                {/*    <TX*/}
+                {/*        leverage={x2Leverage}*/}
+                {/*        coverage={x2Coverage}*/}
+                {/*        availableMint={maxRiskproxMintAvailable}*/}
+                {/*        total={totalBprox}*/}
+                {/*        usdValue={bprox2PriceInUsd}*/}
+                {/*    />*/}
+                {/*</Col>*/}
             </Row>
 
-            <Row style={{ marginTop: 15 }} gutter={15} className="MetricsCardsContainer">
-                <Col className={'MetricsCardsMOC'}>
-                    <TG mocPrice={mocPriceUsd} />
-                </Col>
-                <Col className={'MetricsCardsLiquidity'}>
-                    <Liquidity
-                        b0BTCAmount={b0BTCAmount}
-                        b0DocAmount={b0DocAmount}
-                        b0BproAmount={b0BproAmount}
-                        x2BTCAmount={x2BTCAmount}
-                        x2DocAmount={x2DocAmount}
-                        x2BproAmount={x2BproAmount}
-                    />
-                </Col>
-                <Col className={'MetricsCardsNextSettlement'}>
-                    <NextSettlement />
-                </Col>
-            </Row>
+            {/*<Row style={{ marginTop: 15 }} gutter={15} className="MetricsCardsContainer">*/}
+
+            {/*    <Col className={'MetricsCardsLiquidity'}>*/}
+            {/*        <Liquidity*/}
+            {/*            b0BTCAmount={b0BTCAmount}*/}
+            {/*            b0DocAmount={b0DocAmount}*/}
+            {/*            b0BproAmount={b0BproAmount}*/}
+            {/*            x2BTCAmount={x2BTCAmount}*/}
+            {/*            x2DocAmount={x2DocAmount}*/}
+            {/*            x2BproAmount={x2BproAmount}*/}
+            {/*        />*/}
+            {/*    </Col>*/}
+            {/*    <Col className={'MetricsCardsNextSettlement'}>*/}
+            {/*        <NextSettlement />*/}
+            {/*    </Col>*/}
+            {/*</Row>*/}
         </Fragment>
     )
 }

@@ -46,6 +46,12 @@ export default function PriceVariation(props) {
                     } else {
                         return 0;
                     }
+                case 'TG':
+                    if (auth.contractStatusData['mocPrice']) {
+                        return auth.contractStatusData['mocPrice']
+                    } else {
+                        return 0;
+                    }
                 default:
                     throw new Error('Invalid token name'); 
             }
