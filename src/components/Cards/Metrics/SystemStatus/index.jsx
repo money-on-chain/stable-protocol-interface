@@ -89,7 +89,7 @@ function SystemStatus(props) {
     }
 
 
-    const getConfigByCoverage = (coverage, paused, blocksToSettlement, price_active) => {
+    const getConfigByCoverage = (coverage, adjustedTargetCoverage, paused, blocksToSettlement, price_active) => {
 
         if (!price_active) {
             return configStatusNoPrice;
@@ -103,13 +103,11 @@ function SystemStatus(props) {
             return configStatusSettlement;
         }
 
-        const coverageIsGreaterOrEqualThan = (numberInEther) => new BigNumber(coverage).gte(formatValueToContract(numberInEther, "COV"));
-
-        if (coverageIsGreaterOrEqualThan(config.globalCoverage.ok)) {
+        if (new BigNumber(coverage).gte(new BigNumber(adjustedTargetCoverage))) {
             return configStatusGreen;
-        } else if (coverageIsGreaterOrEqualThan(config.globalCoverage.warning)) {
+        } else if (new BigNumber(coverage).gte(formatValueToContract(config.globalCoverage.warning, "COV"))) {
             return configStatusYellow;
-        } else if (coverageIsGreaterOrEqualThan(config.globalCoverage.dangerous)) {
+        } else if (new BigNumber(coverage).gte(formatValueToContract(config.globalCoverage.dangerous, "COV"))) {
             return configStatusOrange;
         } else {
             return configStatusRed;
@@ -125,7 +123,7 @@ function SystemStatus(props) {
 
 
     const price_active = true
-    const { className, operationsAvailable } = getConfigByCoverage(props.coverage, props.paused, props.blocksToSettlement, price_active);
+    const { className, operationsAvailable } = getConfigByCoverage(props.coverage, props.adjustedTargetCoverage, props.paused, props.blocksToSettlement, price_active);
 
     return (
         <div className="Card CardSystemStatus">
