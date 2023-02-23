@@ -16,7 +16,7 @@ import { useProjectTranslation } from '../../../helpers/translations';
 import { ReactComponent as LogoIcon } from '../../../assets/icons/logo.svg';
 import { ReactComponent as LogoIconTP } from '../../../assets/icons/icon-rbtclogo.svg';
 import { ReactComponent as LogoIconTC } from '../../../assets/icons/TCIcon.svg';
-import { ReactComponent as LogoIconTX } from '../../../assets/icons/TXIcon.svg';
+import { ReactComponent as LogoIconTG } from '../../../assets/icons/icon-tg.svg';
 
 
 const { Header, Content, Sider } = Layout;
@@ -50,8 +50,6 @@ export default function Skeleton() {
             selectedMenuKey = 'mint-stable';
         } else if (location.pathname === '/wallet/pro') {
             selectedMenuKey = 'mint-pro';
-        } else if (location.pathname === '/wallet/leveraged') {
-            selectedMenuKey = 'mint-leveraged';
         } else if (location.pathname === '/rewards') {
             selectedMenuKey = 'rewards';
         } else if (location.pathname === '/metrics') {
@@ -110,12 +108,6 @@ export default function Skeleton() {
                     >{t(`${AppProject}.menu-sidebar.TCWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
-                        key="mint-leveraged"
-                        onClick={() => navigate('/wallet/leveraged')}
-                        icon={<p className={`set-icon-tx ${selectedMenu == 'mint-leveraged' ? "active" : ""}`}></p>}
-                    >{t(`${AppProject}.menu-sidebar.TXWallet`, { ns: ns })}
-                    </Menu.Item>
-                    <Menu.Item
                         key="rewards"
                         onClick={() => navigate('/rewards')}
                         icon={<p className={`set-icon-rewards ${selectedMenu == 'rewards' ? "active" : ""}`}></p>}
@@ -146,7 +138,7 @@ export default function Skeleton() {
                     <div className="MiddleSide">
                         <HeaderCoins tokenName="TP" image={<LogoIconTP alt="arrow" height="50" width="40" />} />
                         <HeaderCoins tokenName="TC" image={<LogoIconTC alt="arrow" height="50" width="40" />} />
-                        <HeaderCoins tokenName="TX" image={<LogoIconTX alt="arrow" height="50" width="40" />} />
+                        <HeaderCoins tokenName="TG" image={<LogoIconTG alt="arrow" height="50" width="40" />} />
                     </div>
                     <LoginButton {...loginButtonSettings} />
 
@@ -188,13 +180,6 @@ export default function Skeleton() {
                             icon={<span className="icon-icon-tc"></span>}
                         >
                             {t(`${AppProject}.menu-drawer.TCWallet`, { ns: ns })}
-                        </Menu.Item>
-                        <Menu.Item
-                            key="mint-leveraged"
-                            onClick={() => navigate('/wallet/leveraged')}
-                            icon={<span className="icon-icon-tx"></span>}
-                        >
-                            {t(`${AppProject}.menu-drawer.TXWallet`, { ns: ns })}
                         </Menu.Item>
                         <Menu.Item
                             key="rewards"

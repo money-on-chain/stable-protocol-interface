@@ -32,10 +32,6 @@ export default function Router() {
                     element: <MintTP />
                 },
                 {
-                    path: 'wallet/leveraged',
-                    element: <MintTX />
-                },
-                {
                     path: 'rewards',
                     element: <Rewards />
                 },

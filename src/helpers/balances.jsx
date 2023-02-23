@@ -110,6 +110,10 @@ const getUserBalance = (auth, i18n, tokenName) => {
                 rDecimals = parseInt(config.tokens.TX.decimals);
                 notFormatted = userTXBalance(auth);
                 break;
+            case 'tg':
+                rDecimals = parseInt(config.tokens.TG.decimals);
+                notFormatted = userTGBalance(auth);
+                break;
             default:
                 throw new Error('Invalid token name');
         }

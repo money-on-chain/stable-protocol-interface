@@ -35,21 +35,21 @@ function TC(props) {
                     ? <>
                         <div>
                             <h5>{t(`${AppProject}.metrics.TC.usd`, { ns: ns })}</h5>
-                            <span className={'space'}>
+                            <span className={'space color-tc'}>
                                 <LargeNumber amount={props.usdValue} currencyCode={'USDPrice'} />
                             </span>
                             <h5>{t(`${AppProject}.metrics.TC.leverage`, { ns: ns })}</h5>
-                            <span className={'space'}>
+                            <span className={'space color-tc'}>
                                 <LargeNumber amount={props.leverage} currencyCode="TC" />
                             </span>
                         </div>
                         <div className="separator" /><div>
                             <h5>{t(`${AppProject}.metrics.TC.total`, { ns: ns })}</h5>
-                            <LargeNumber amount={props.total} currencyCode="TC" />
+                            <span className={'color-tc'}><LargeNumber amount={props.total} currencyCode="TC" /></span>
                             <h5>{t(`${AppProject}.metrics.TC.availableRedeem`, { ns: ns })}</h5>
-                            <LargeNumber amount={props.availableRedeem} currencyCode="TC" />
+                            <span className={'color-tc'}><LargeNumber amount={props.availableRedeem} currencyCode="TC" /></span>
                             <h5>{t(`${AppProject}.metrics.TC.bproDiscountPriceUsd`, { ns: ns })}</h5>
-                            <LargeNumber amount={props.bproDiscountPriceUsd} currencyCode={'USDPrice'} />
+                            <span className={'color-tc'}><LargeNumber amount={props.bproDiscountPriceUsd} currencyCode={'USDPrice'} /></span>
                         </div></>
                 : <Skeleton />}
             </div>

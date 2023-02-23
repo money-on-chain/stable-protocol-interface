@@ -146,15 +146,7 @@ function MocLiquidity(props) {
                     <InfoCircleOutlined className="Icon" />
                 </Tooltip>
             </div>
-            <div className="Metric"><h2>{t("global.RewardsBalance_Amount", { ns: 'global' })}</h2>
-                <div className="IncentivesItem">
-                    <h3>
-                        {auth.isLoggedIn && <LargeNumber amount={(claimsValue!=null)?claimsValue.moc_balance:0} currencyCode="REWARD" />}
-                        {!auth.isLoggedIn && <span>0.000000 </span>}
-                    </h3>
-                    <p>MOC</p>
-                </div>
-            </div>
+
             <div className="Metric"><h2>{t("global.RewardsBalance_EarnedToday", { ns: 'global' })}</h2>
                 <div className="IncentivesItem">
                     <h3>
@@ -174,6 +166,17 @@ function MocLiquidity(props) {
                     { rewardedToday!=0 && <p>MOC</p>}
                 </div>
             </div>
+            <div className="Separator"></div>
+            <div className="Metric"><h2>{t("global.RewardsBalance_Amount", { ns: 'global' })}</h2>
+                        <div className="IncentivesItem">
+                            <h3>
+                                {auth.isLoggedIn && <LargeNumber amount={(claimsValue!=null)?claimsValue.moc_balance:0} currencyCode="REWARD" />}
+                                {!auth.isLoggedIn && <span>0.000000 </span>}
+                            </h3>
+                            <p>MOC</p>
+                        </div>
+            </div>
+
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 {!props.rewards
                     ?

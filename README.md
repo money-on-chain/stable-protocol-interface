@@ -1,4 +1,4 @@
-# Stable protocol interface
+# Stable protocol interface version 2.0
 
 Open source **decentralized interface** for multi-collateral stable protocol **Money on Chain**
 
@@ -6,7 +6,6 @@ You can:
 
 * Mint / Redeem Pegged Token (TP): Ex.: DoC or RDOC
 * Mint / Redeem Collateral Token (TC): Ex.: BPro or RIFP
-* Mint / Redeem Token X (TX): Ex.: BTCx or RIFx
 * Metrics
 * Last operations
 * Claim / Stake TG (MOC)
@@ -25,11 +24,9 @@ You can:
 |-------|------------------|---------|------------|------------|
 | TP    | Pegged Token 1:1 | MOC     | DOC        | RBTC       |
 | TC    | Collateral Token | MOC     | BPRO       | RBTC       |
-| TX    | Leverage Token X | MOC     | BTCX       | RBTC       |
 | TG    | Govern Token     | MOC     | MOC        | -          |
 | TP    | Pegged Token 1:1 | ROC     | RDOC       | RIF        |
 | TC    | Collateral Token | ROC     | RIFP       | RIF        |
-| TX    | Leverage Token X | ROC     | RIFX       | RIF        |
 | TG    | Govern Token     | ROC     | MOC        | -          |
 
 ### Releases
@@ -39,8 +36,6 @@ Each release gets deployed to IPFS automatically.
 Please go to release section, there are several links to [releases](https://github.com/money-on-chain/release) 
 
 **Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
-
-
 
 
 ## DEVELOP
