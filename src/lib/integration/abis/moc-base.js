@@ -10,6 +10,7 @@ import TC from '../../../contracts/BProToken.json';
 import TG from '../../../contracts/MoCToken.json';
 import ReserveToken from '../../../contracts/ReserveToken.json';
 import MoCVendors from '../../../contracts/MoCVendors.json';
+import TokenMigrator from '../../../contracts/TokenMigrator.json';
 
 export {
   Multicall2,
@@ -23,5 +24,6 @@ export {
   TP,
   TG,
   ReserveToken,
-  MoCVendors
+  MoCVendors,
+  TokenMigrator
 };

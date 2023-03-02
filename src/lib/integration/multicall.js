@@ -505,6 +505,14 @@ const userBalance = async (web3, dContracts, userAddress, appMode) => {
 
   listMethods.push([liquiditycollateraltoken.options.address, liquiditycollateraltoken.methods.balanceOf(userAddress).encodeABI(), 'uint256']) // 8
 
+  // Token migrator
+  if (dContracts.contracts.tp_legacy) {
+    const tpLegacy = dContracts.contracts.tp_legacy
+    const tokenMigrator = dContracts.contracts.token_migrator
+    listMethods.push([tpLegacy.options.address, tpLegacy.methods.balanceOf(userAddress).encodeABI(), 'uint256']) // 9
+    listMethods.push([tpLegacy.options.address, tpLegacy.methods.allowance(userAddress, tokenMigrator.options.address).encodeABI(), 'uint256']) // 10
+  }
+
   // Remove decode result parameter
   const cleanListMethods = listMethods.map(x => [x[0], x[1]])
   const multicallResult = await multicall.methods.tryBlockAndAggregate(false, cleanListMethods).call()
@@ -522,6 +530,12 @@ const userBalance = async (web3, dContracts, userAddress, appMode) => {
   userBalance.spendableBalance = listReturnData[4]
   userBalance.reserveAllowance = listReturnData[7]
   userBalance.liquidityCollateralToken = listReturnData[8]
+
+  if (dContracts.contracts.tp_legacy) {
+    userBalance.tpLegacyBalance = listReturnData[9]
+    userBalance.tpLegacyAllowance = listReturnData[10]
+  }
+
   userBalance.potentialBprox2MaxInterest = '0'
   userBalance.bProHoldIncentive = '0'
   userBalance.estimateGasMintBpro = '2000000'

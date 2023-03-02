@@ -10,7 +10,8 @@ import {
     TP,
     TG,
     ReserveToken,
-    MoCVendors } from './abis/moc-base';
+    MoCVendors,
+    TokenMigrator } from './abis/moc-base';
 import { omocAbis } from './abis/omoc';
 
 import { addABI } from './transaction';
@@ -56,6 +57,7 @@ const readContracts = async (web3, environment) => {
   abiContracts.TG = TG
   abiContracts.ReserveToken = ReserveToken
   abiContracts.MoCVendors = MoCVendors
+  abiContracts.TokenMigrator = TokenMigrator
 
   console.log('Reading Multicall2 Contract... address: ', environment.Multicall2)
   const multicall = new web3.eth.Contract(Multicall2.abi, environment.Multicall2)
@@ -131,6 +133,18 @@ const readContracts = async (web3, environment) => {
   console.log('Reading MoC Vendors Contract... address: ', mocVendorsAddress)
   const mocvendors = new web3.eth.Contract(MoCVendors.abi, mocVendorsAddress)
   dContracts.contracts.mocvendors = mocvendors
+
+  // Token migrator & Legacy token
+  if (process.env.REACT_APP_CONTRACT_LEGACY_TP) {
+
+    const tpLegacy = new web3.eth.Contract(TP.abi, process.env.REACT_APP_CONTRACT_LEGACY_TP)
+    dContracts.contracts.tp_legacy = tpLegacy
+
+    if (!process.env.REACT_APP_CONTRACT_TOKEN_MIGRATOR) console.log("Error: Please set token migrator address!")
+
+    const tokenMigrator = new web3.eth.Contract(TokenMigrator.abi, process.env.REACT_APP_CONTRACT_TOKEN_MIGRATOR)
+    dContracts.contracts.token_migrator = tokenMigrator
+  }
 
   const {
     IRegistry,

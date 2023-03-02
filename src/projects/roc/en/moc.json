@@ -7,8 +7,8 @@
 
     "MetamaskTutorial_connectWithMetamask_text": "Return to Money on Chain Tab. Click on Next on the Metamask Window",
 
-    "Tokens_TP_code": "RDOC",
-    "Tokens_TP_name": "RDOC",
+    "Tokens_TP_code": "USDRIF",
+    "Tokens_TP_name": "USDRIF",
     "Tokens_TC_code": "RIFP",
     "Tokens_TC_name": "RIFP",
     "Tokens_TX_code": "RIFX",
@@ -183,8 +183,8 @@
         "subtitle":"Manage your RIFX position"
       },
       "TP":{
-        "title":"RDOC",
-        "subtitle":"Manage your RDOC"
+        "title":"USDRIF",
+        "subtitle":"Manage your USDRIF"
       },
       "TG":{
         "title":"MOC",
@@ -233,7 +233,7 @@
     },
     "metrics": {
       "TP":{
-        "title":"RDOC",
+        "title":"USDRIF",
         "total":"Total in the system",
         "availableRedeem":"Available to redeem",
         "availableMint":"Available to Mint"

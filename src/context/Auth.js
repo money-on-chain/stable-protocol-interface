@@ -24,8 +24,10 @@ import {
     transferTGTo,
     transferCoinbaseTo,
     calcMintInterest,
-    approveTGTokenCommission
-    } from '../lib/integration/interfaces-base';
+    approveTGTokenCommission,
+    AllowUseTokenMigrator,
+    MigrateToken
+} from '../lib/integration/interfaces-base';
 import {
     stackedBalance,
     lockedBalance,
@@ -66,6 +68,8 @@ const AuthenticateContext = createContext({
     interfaceMintTXRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceRedeemTXRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceApproveTGTokenCommission: async (enabled, onTransaction, onReceipt) => {},
+    interfaceAllowUseTokenMigrator: async (amount, onTransaction, onReceipt) => {},
+    interfaceMigrateToken: async (onTransaction, onReceipt) => {},
     disconnect: () => {},
     getTransactionReceipt: (hash) => {},
     interfaceDecodeEvents: async (receipt) => {},
@@ -347,6 +351,16 @@ const AuthenticateProvider = ({ children }) => {
     const interfaceApproveTGTokenCommission = async (enabled, onTransaction, onReceipt) => {
         const interfaceContext = buildInterfaceContext();
         return approveTGTokenCommission(interfaceContext, enabled, onTransaction, onReceipt);
+    };
+
+    const interfaceAllowUseTokenMigrator = async (amount, onTransaction, onReceipt) => {
+        const interfaceContext = buildInterfaceContext();
+        return AllowUseTokenMigrator(interfaceContext, amount, onTransaction, onReceipt);
+    };
+
+    const interfaceMigrateToken = async (onTransaction, onReceipt) => {
+        const interfaceContext = buildInterfaceContext();
+        return MigrateToken(interfaceContext, onTransaction, onReceipt);
     };
 
     const initContractsConnection = async () => {
@@ -673,6 +687,8 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceMintTXRRC20,
                 interfaceRedeemTXRRC20,
                 interfaceApproveTGTokenCommission,
+                interfaceAllowUseTokenMigrator,
+                interfaceMigrateToken,
                 getTransactionReceipt,
                 interfaceStackedBalance,
                 interfaceGetMoCAllowance,
