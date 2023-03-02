@@ -134,8 +134,6 @@ function Reserve(props) {
                         <div style={{ marginLeft: 30 }}>
                         <h3>{t(`${AppProject}.metrics.infoRBTC.priceRBTC`, { ns: ns })}</h3>
                         <LargeNumber amount={props.rbtcPrice} currencyCode={"USDPrice"} includeCurrency={true} />
-                        <h3>{t(`${AppProject}.metrics.infoRBTC.interest`, { ns: ns })}</h3>
-                        <LargeNumber amount={props.b0BTCInrateBag} currencyCode={"RESERVE"} includeCurrency={true} />
                         <h3>{t(`${AppProject}.metrics.infoRBTC.EMA`, { ns: ns })}</h3>
                         <LargeNumber amount={props.EMA} currencyCode={"USDPrice"} includeCurrency={true} />
                         <h3>{t(`${AppProject}.metrics.infoRBTC.targetCoverage`, { ns: ns })}</h3>
