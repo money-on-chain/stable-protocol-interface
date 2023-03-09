@@ -187,7 +187,7 @@ const SwapToken = (props) => {
                         <i className="icon-tx-waiting rotate"></i>
                     </div>
                     <p>Please, wait while the allowance authorization is mined in the blockchain. Once it’s done, the transaction will be sent to your wallet.</p>
-                    <p>Transaction Hash <Copy textToShow={TruncateAddress(txID)} textToCopy={txID}/></p>
+                    <p>Transaction Hash <Copy textToShow={TruncateAddress(txID)} textToCopy={txID} typeUrl={'tx'}/></p>
                 </div>)}
 
                 {status === 'ALLOWANCE-ERROR' && (<div> {/*ALLOWANCE-ERROR*/}
@@ -195,7 +195,7 @@ const SwapToken = (props) => {
                         <i className="icon-tx-error"></i>
                     </div>
                     <p className="Center">Operation Failed!.</p>
-                    <p className="Center"> Transaction Hash <Copy textToShow={TruncateAddress(txID)} textToCopy={txID}/></p>
+                    <p className="Center"> Transaction Hash <Copy textToShow={TruncateAddress(txID)} textToCopy={txID} typeUrl={'tx'}/></p>
                 </div>)}
 
                 {status === 'TOKEN-MIGRATION-SIGN' && (<div>
@@ -210,7 +210,7 @@ const SwapToken = (props) => {
                         <i className="icon-tx-waiting rotate"></i>
                     </div>
                     <p>Please, wait while the token migration transaction is mined in the blockchain.</p>
-                    <p>Transaction Hash <Copy textToShow={TruncateAddress(txID)} textToCopy={txID}/></p>
+                    <p>Transaction Hash <Copy textToShow={TruncateAddress(txID)} textToCopy={txID} typeUrl={'tx'}/></p>
 
                 </div>)}
 
@@ -219,7 +219,7 @@ const SwapToken = (props) => {
                         <i className="icon-tx-success"></i>
                     </div>
                     <p className="Center">Operation successful.</p>
-                    <p className="Center">Transaction Hash <Copy textToShow={TruncateAddress(txID)} textToCopy={txID}/></p>
+                    <p className="Center">Transaction Hash <Copy textToShow={TruncateAddress(txID)} textToCopy={txID} typeUrl={'tx'}/></p>
                 </div>)}
 
                 {status === 'TOKEN-MIGRATION-ERROR' && (<div>
@@ -227,7 +227,7 @@ const SwapToken = (props) => {
                         <i className="icon-tx-error"></i>
                     </div>
                     <p className="Center">Operation Failed!.</p>
-                    <p className="Center">Transaction Hash <Copy textToShow={TruncateAddress(txID)} textToCopy={txID}/></p>
+                    <p className="Center">Transaction Hash <Copy textToShow={TruncateAddress(txID)} textToCopy={txID} typeUrl={'tx'}/></p>
                 </div>)}
 
             </div>
