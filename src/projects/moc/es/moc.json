@@ -942,7 +942,6 @@
         "header": "Vas a necesitar rBTC en tu billetera para:",
         "items": [
           "Mintear DoC y BPro",
-          "Fijar posición de BTCx",
           "Pagar tarifas de gas en la red RSK"
         ],
         "learnMore": "Conoce más acerca de rBTC"

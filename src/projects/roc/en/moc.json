@@ -942,7 +942,6 @@
         "header": "You will need rBTC in your wallet to:",
         "items": [
           "Mint DoC and BPro",
-          "Set BTCx positions",
           "Pay gas fees on RSK network"
         ],
         "learnMore": "Learn more about rBTC"
