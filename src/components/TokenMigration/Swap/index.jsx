@@ -232,9 +232,15 @@ const SwapToken = (props) => {
 
             </div>
             <div className="Actions">
-
-                <Button className="" onClick={onClose}>Cancel</Button>
-                {(status === 'SUBMIT' || status === 'CONFIRM' || status === 'TOKEN-MIGRATION-SUCCESS')  && (<Button className="ConfirmBtn" type="primary" disabled={btnDisable} onClick={onConfirm}>{btnLabel}</Button>)}
+                
+                {(status !== 'TOKEN-MIGRATION-SUCCESS' &&
+                  status !== 'ALLOWANCE-WAITING' &&
+                  status !== 'TOKEN-MIGRATION-WAITING' &&
+                  status !== 'TOKEN-MIGRATION-ERROR' &&
+                  status !== 'ALLOWANCE-ERROR')  && (<Button className="" onClick={onClose}>Cancel</Button>)}
+                {(status === 'SUBMIT' ||
+                  status === 'CONFIRM' ||
+                  status === 'TOKEN-MIGRATION-SUCCESS')  && (<Button className="ConfirmBtn" type="primary" disabled={btnDisable} onClick={onConfirm}>{btnLabel}</Button>)}
 
             </div>
         </div>
