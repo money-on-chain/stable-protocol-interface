@@ -32,7 +32,6 @@ export default function Sovryn(props) {
                         <ul>
                             <li className="instruction-item">{t(`${AppProject}.fastbtc.leftPannel.items.0`, { ns: ns })}</li>
                             <li className="instruction-item">{t(`${AppProject}.fastbtc.leftPannel.items.1`, { ns: ns })}</li>
-                            <li className="instruction-item">{t(`${AppProject}.fastbtc.leftPannel.items.2`, { ns: ns })}</li>
                         </ul>
                         <a href="https://www.rsk.co/rbtc/" target="_blank" rel="noopener noreferrer">&gt; {t(`${AppProject}.fastbtc.leftPannel.learnMore`, { ns: ns })}</a></div>
                 </div>
