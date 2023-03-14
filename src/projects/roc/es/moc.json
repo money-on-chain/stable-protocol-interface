@@ -934,7 +934,7 @@
       "leftPannel":{
         "header": "Vas a necesitar rBTC en tu billetera para:",
         "items":[
-          
+          "Mintear RDOC y RIFPro",          
           "Pagar tarifas de gas en la red RSK"
         ],
         "learnMore":"Conoce más acerca de rBTC"
