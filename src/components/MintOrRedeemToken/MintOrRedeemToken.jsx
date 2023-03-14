@@ -473,7 +473,7 @@ const MintOrRedeemToken = (props) => {
           <Button
             type="primary"
             onClick={openConfirmationModal}
-            disabled={!youExchangeIsValid || !youReceiveIsValid || valueYouExchange==='0' || valueYouReceive==='0'}
+            disabled={!youExchangeIsValid || !youReceiveIsValid || valueYouExchange==0 || valueYouReceive==0}
           >
             {
               actionIsMint
