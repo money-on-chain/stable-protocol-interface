@@ -164,6 +164,12 @@ const validateValue = (value, maxValueAllowedInWei) => {
                     inputValidation.validateStatus === 'error' ? 'formError' : ''
                 }`}
                 type={"number"}
+                /* Disable up/down keys and scrolling behavior*/
+                /* The up/down buttons were hidden by css */
+                onWheel={event => event.currentTarget.blur()}
+                onKeyDown={event => {if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {event.preventDefault()}}}
+                min={0}
+                step={0}
               />
             </Tooltip>
             <SelectCurrency
