@@ -941,7 +941,7 @@
       "leftPannel": {
         "header": "You will need rBTC in your wallet to:",
         "items": [
-          "Mint DoC and BPro",
+          "Mint RDOC and RIFPro",
           "Pay gas fees on RSK network"
         ],
         "learnMore": "Learn more about rBTC"
