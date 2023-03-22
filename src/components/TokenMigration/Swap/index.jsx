@@ -47,7 +47,9 @@ const SwapToken = (props) => {
         setStatus('TOKEN-MIGRATION-SIGN')
         auth.interfaceMigrateToken(onTransactionTokenMigration, onReceiptTokenMigration).then((value => {
             onSuccess();
-        }))
+        })).catch((response) => {
+            onClose();
+        });
     };
 
     const onTransactionTokenMigration = (transactionHash) => {
@@ -71,7 +73,9 @@ const SwapToken = (props) => {
         const allowanceAmount = new BigNumber(Web3.utils.fromWei(auth.userBalanceData.tpLegacyBalance))
         auth.interfaceAllowUseTokenMigrator(allowanceAmount, onTransactionAuthorize, onReceiptAuthorize).then((value => {
             onTokenMigration();
-        }))
+        })).catch((response) => {
+            onClose();
+        });
     };
 
     const onTransactionAuthorize = (transactionHash) => {
