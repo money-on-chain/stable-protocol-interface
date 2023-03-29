@@ -26,7 +26,8 @@ const convertAmount = (source, target, amount, convertToken) => {
 
 const amountIsTooSmall = target => {
   const minorValue = BigNumber('0.0000000000000000001');
-  return minorValue.gt(new BigNumber(target));
+  const isZero = new BigNumber(target).eq(0)
+  return (minorValue.gt(new BigNumber(target)) && (!isZero))
 };
 
 const calcCommissionValue = (rbtcBalance, commissionRate) =>
