@@ -11,12 +11,13 @@ const ns = config.environment.AppProject.toLowerCase();
 const AppProject = config.environment.AppProject;
 
 export function setNumber(number){
-    if(number.indexOf(".")!==-1){
-        const result = number.indexOf(".");
-        const result2 = number.substring(0, result);
+    const strNumber = number.toString()
+    if(strNumber.indexOf(".")!==-1){
+        const result = strNumber.indexOf(".");
+        const result2 = strNumber.substring(0, result);
         return result2
     }else{
-        return number
+        return strNumber
     }
 }
 

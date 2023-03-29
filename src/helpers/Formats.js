@@ -48,8 +48,14 @@ const precision = ({ contractDecimals }) =>
     new BigNumber(10).exponentiatedBy(contractDecimals);
 
 const formatValue = (amount, currencyCode, format, decimals) => {
+    let formatDecimals;
+    if (decimals !== undefined) {
+        formatDecimals = decimals;
+    } else {
+        formatDecimals = getDecimals(currencyCode);
+    }
     const fd = formatMap[currencyCode];
-    return formatValueFromMap(amount, fd, format, getDecimals(currencyCode));
+    return formatValueFromMap(amount, fd, format, formatDecimals);
 };
 
 const formatValueFromMap = (amount, mapEntry, format, decimals) => {

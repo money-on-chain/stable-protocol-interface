@@ -145,9 +145,10 @@ const MintOrRedeemToken = (props) => {
 
  const clear = () => {
     // setCurrencyYouExchange(token);
-    setValueYouReceive('0');
     setValueYouExchange('0');
+    setValueYouReceive('0');
   };
+
   const openConfirmationModal = () => {
     setConfirmingTransaction(true);
   };

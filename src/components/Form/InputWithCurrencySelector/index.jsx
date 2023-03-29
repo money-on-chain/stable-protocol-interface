@@ -145,6 +145,14 @@ const validateValue = (value, maxValueAllowedInWei) => {
     handleValueChangeInWei(new BigNumber(maxValueAllowedInWei).multipliedBy(parseFloat(e.target.value)).dividedBy(100).toString());
   };
 
+  const formatInputVisibleValue = (inputValueInWei, currencySelected) => {
+      if (inputValueInWei === 0) {
+          return '0.0'
+      } else {
+          return formatVisibleValue(inputValueInWei, (currencySelected==='TP' && auth.getAppMode==='MoC')? 'USD': currencySelected, formatLocalMap2['en'], 10)
+      }
+  };
+
   return (
     <div className={`InputWithCurrencySelector ${className || ''}`}>
       <h3>{title}</h3>
@@ -157,7 +165,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
             <Tooltip title={formatValueWithContractPrecision(inputValueInWei, currencySelected)}>
               <DebounceInput
                 placeholder={placeholder}
-                value={formatVisibleValue(inputValueInWei, (currencySelected==='TP' && auth.getAppMode==='MoC')? 'USD': currencySelected, formatLocalMap2['en'])}
+                value={formatInputVisibleValue(inputValueInWei, currencySelected)}
                 debounceTimeout={1000}
                 onChange={event => handleValueChange(event.target.value)}
                 className={`valueInput ${
