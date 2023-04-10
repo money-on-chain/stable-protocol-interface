@@ -33,9 +33,10 @@ export default function InputWithCurrencySelector(props) {
     className,
     cleanInputCount,
     showConvertBTC_RBTC_Link,
-    placeholder = '',
+    placeholder = '0.0',
     showSelectPercent = false,
-    onValueChange = () => {}
+    onValueChange = () => {},
+    isDirty
 } = props;
 
   const [t, i18n, ns]= useProjectTranslation();
@@ -149,7 +150,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
       if (inputValueInWei === 0) {
           return '0.0'
       } else {
-          return formatVisibleValue(inputValueInWei, (currencySelected==='TP' && auth.getAppMode==='MoC')? 'USD': currencySelected, formatLocalMap2['en'], 10)
+          return formatVisibleValue(inputValueInWei, (currencySelected==='TP' && auth.getAppMode==='MoC')? 'USD': currencySelected, formatLocalMap2['en'])
       }
   };
 
@@ -165,7 +166,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
             <Tooltip title={formatValueWithContractPrecision(inputValueInWei, currencySelected)}>
               <DebounceInput
                 placeholder={placeholder}
-                value={formatInputVisibleValue(inputValueInWei, currencySelected)}
+                value={(isDirty) ? null : formatInputVisibleValue(inputValueInWei, currencySelected)}
                 debounceTimeout={1000}
                 onChange={event => handleValueChange(event.target.value)}
                 className={`valueInput ${

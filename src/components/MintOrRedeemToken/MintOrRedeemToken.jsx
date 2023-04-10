@@ -52,6 +52,8 @@ const MintOrRedeemToken = (props) => {
   const [currencyYouExchange, setCurrencyYouExchange] = useState(defaultCurrencyExchange);
   const [valueYouExchange, setValueYouExchange] = useState('0');
   const [valueYouReceive, setValueYouReceive] = useState('0');
+  const [isDirtyYouExchange, setIsDirtyYouExchange] = useState(false);
+  const [isDirtyYouReceive, setIsDirtyYouReceive] = useState(false);
   const [youExchangeIsValid, onYouExchangeValidityChange] = useState(false);
   const [youReceiveIsValid, onYouReceiveValidityChange] = useState(false);
   const [confirmingTransaction, setConfirmingTransaction] = useState(false);
@@ -100,6 +102,8 @@ const MintOrRedeemToken = (props) => {
   };
 
   const onValueYouExchangeChange = newValueYouExchange => {
+    setIsDirtyYouExchange(true)
+    setIsDirtyYouReceive(false)
     setValueYouExchange(newValueYouExchange);
     const newValueYouReceiveInWei = convertAmount(
       currencyYouExchange,
@@ -111,6 +115,8 @@ const MintOrRedeemToken = (props) => {
   };
 
   const onValueYouReceiveChange = newValueYouReceive => {
+    setIsDirtyYouExchange(false)
+    setIsDirtyYouReceive(true)
     setValueYouReceive(newValueYouReceive);
     const newValueYouExchange = convertAmount(
       currencyYouReceive,
@@ -424,6 +430,7 @@ const MintOrRedeemToken = (props) => {
             showMaxValueAllowed
             validate={userAccountIsLoggedIn}
             showConvertBTC_RBTC_Link={false}
+            isDirty={isDirtyYouExchange}
          />
         </div>
         <ArrowRightOutlined />
@@ -440,6 +447,7 @@ const MintOrRedeemToken = (props) => {
             showMaxValueAllowed
             onInputValueChange={onValueYouReceiveChange}
             showConvertBTC_RBTC_Link={false}
+            isDirty={isDirtyYouReceive}
          />
         </div>
       </div>
