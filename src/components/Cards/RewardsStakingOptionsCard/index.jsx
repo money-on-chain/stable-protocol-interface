@@ -199,6 +199,7 @@ export default function RewardsStakingOptions(props) {
                                         maxValueAllowedInWei={mocBalance}
                                         showMaxValueAllowed
                                         validate={auth}
+                                        isDirty={true}
                                     />
                                 </Col>
                             </Row>
@@ -273,6 +274,7 @@ export default function RewardsStakingOptions(props) {
                                     maxValueAllowedInWei={stackedBalance}
                                     showMaxValueAllowed
                                     validate={auth}
+                                    isDirty={true}
                                 />                               
                             </Col>
                         </Row>

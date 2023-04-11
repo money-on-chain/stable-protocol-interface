@@ -232,6 +232,7 @@ export default function SendModal(props) {
                   showMaxValueAllowed
                   onValidationStatusChange={onInputValidityChange}
                   className="separation"
+                  isDirty={true}
               />
               <Row style={{ marginTop: '2em' }}>
                 <Col span={24} style={{ display: 'flex', justifyContent: 'space-evenly' }}>
