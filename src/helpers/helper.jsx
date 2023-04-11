@@ -561,11 +561,11 @@ export function getDecimals(coin,AppProject){
 export function getSelectCoins(appMode){
     switch (appMode) {
         case 'RRC20':
-            return ['TC', 'TP', 'RESERVE']
+            return ['TC', 'TP', 'TG', 'RESERVE']
         case 'MoC':
-            return ['TC', 'TP', 'RESERVE']
+            return ['TC', 'TP', 'TG', 'RESERVE']
         default:
-            return ['TC', 'TP', 'RESERVE']
+            return ['TC', 'TP', 'TG', 'RESERVE']
     }
 
 }
