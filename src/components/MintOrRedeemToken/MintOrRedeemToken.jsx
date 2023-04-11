@@ -534,6 +534,7 @@ const MintOrRedeemToken = (props) => {
 
   const renderComissionCurrencySwitch = () => {
     const { enoughMOCBalance } = commission;
+
     if (commissionSwitch !== commission.currencyCode) {
       setCommissionSwitch(commission.currencyCode);
       setLoadingSwitch(false);
@@ -555,7 +556,7 @@ const MintOrRedeemToken = (props) => {
             <LargeNumber
                 includeCurrency
                 amount={commission.value}
-                currencyCode={'TG'}
+                currencyCode={commission.currencyCode}
             />}
         <Popover content={tooltip} placement="top">
           <div className="PayWithMocToken">
