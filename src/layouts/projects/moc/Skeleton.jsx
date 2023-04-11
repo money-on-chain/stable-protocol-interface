@@ -36,7 +36,7 @@ export default function Skeleton() {
     const loginButtonSettings = accountData.Wallet
         ? {
             title: accountData.truncatedAddress,
-            subtitle: new BigNumber(AppMode === 'Moc' ? accountData.Balance : balanceRbtc).toFixed(4) + ' ' +  t(`${AppProject}.Tokens_RESERVE_code`, { ns: ns }),
+            subtitle: new BigNumber(AppMode === 'Moc' ? accountData.Balance : balanceRbtc).toFixed(6) + ' ' +  t(`${AppProject}.Tokens_RESERVE_code`, { ns: ns }),
             status: 'Active'
         }
         : { title: 'Connect' };
