@@ -166,7 +166,7 @@ const validateValue = (value, maxValueAllowedInWei) => {
             <Tooltip title={formatValueWithContractPrecision(inputValueInWei, currencySelected)}>
               <DebounceInput
                 placeholder={placeholder}
-                value={(isDirty) ? null : formatInputVisibleValue(inputValueInWei, currencySelected)}
+                value={(isDirty) ? null : (inputValueInWei===0) ? '' : formatInputVisibleValue(inputValueInWei, currencySelected)}
                 debounceTimeout={1000}
                 onChange={event => handleValueChange(event.target.value)}
                 className={`valueInput ${

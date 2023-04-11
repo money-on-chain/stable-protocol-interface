@@ -159,7 +159,8 @@ const MintOrRedeemToken = (props) => {
   };
 
  const clear = () => {
-    // setCurrencyYouExchange(token);
+    setIsDirtyYouExchange(false)
+    setIsDirtyYouReceive(false)
     setValueYouExchange('0');
     setValueYouReceive('0');
   };
