@@ -102,8 +102,14 @@ const MintOrRedeemToken = (props) => {
   };
 
   const onValueYouExchangeChange = newValueYouExchange => {
-    setIsDirtyYouExchange(true)
-    setIsDirtyYouReceive(false)
+    if (newValueYouExchange === '0' && valueYouExchange === '0') {
+      setIsDirtyYouExchange(true);
+      setIsDirtyYouReceive(true);
+    } else {
+      setIsDirtyYouExchange(true);
+      setIsDirtyYouReceive(false);
+    }
+
     setValueYouExchange(newValueYouExchange);
     const newValueYouReceiveInWei = convertAmount(
       currencyYouExchange,
@@ -128,6 +134,9 @@ const MintOrRedeemToken = (props) => {
   };
 
   const onChangeCurrencyYouExchange = (newCurrencyYouExchange) => {
+    setValueYouExchange('0')
+    setValueYouReceive('0')
+    onValueYouReceiveChange('0');
     setCurrencyYouExchange(newCurrencyYouExchange);
   };
 
