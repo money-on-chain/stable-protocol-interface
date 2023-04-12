@@ -43,8 +43,9 @@ export default function Rbtc(props) {
                             title={t(`${AppProject}.fastbtc.titleCard_pegin`, { ns: ns })}
                             description={t(`${AppProject}.fastbtc.getRBTC_description`, { ns: ns })}
                             btnText={t(`${AppProject}.fastbtc.getRBTC`, { ns: ns })}
-                        btnAction={() => {setBtcGenVisible(true)}}
-                    />
+                            btnAction={() => {setBtcGenVisible(true)}}
+                            mode={'pegin'}
+                        />
                     <BtcToRbtcGenerateModal
                         visible={btcGenVisible}
                         handleClose={() => setBtcGenVisible(false)}
@@ -57,6 +58,7 @@ export default function Rbtc(props) {
                             description={t(`${AppProject}.fastbtc.getBTC_description`, { ns: ns })}
                             btnText={t(`${AppProject}.fastbtc.getBTC`, { ns: ns })}
                             btnAction={() => { setRbtcGenVisible(true) }}
+                            mode={'pegout'}
                         />
                         <RbtcToBtcGenerateModal
                             visible={rbtcGenVisible}

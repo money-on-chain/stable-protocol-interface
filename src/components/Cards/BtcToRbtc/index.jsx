@@ -4,7 +4,8 @@ import { useContext } from 'react';
 import { AuthenticateContext } from '../../../context/Auth';
 import { config } from '../../../projects/config';
 import { useProjectTranslation } from '../../../helpers/translations';
-import { ReactComponent as LogoIconRBTC } from '../../../assets/icons/icon-btc_to_rbtc.svg';
+import { ReactComponent as LogoIconBTCtoRBTC } from '../../../assets/icons/icon-btc_to_rbtc.svg';
+import LogoIconRBTCtoBTC from '../../../assets/icons/icon-rbtc_to_btc.png';
 
 
 export default function BtcToRbtc(props) {
@@ -15,7 +16,8 @@ export default function BtcToRbtc(props) {
         title = 'BTC to rBTC Peg In',
         description = t(`${AppProject}.fastbtc.getRBTC_description`, {ns: ns}),
         btnAction = ()=>{},
-        btnText = 'Convert rBTC to BTC'
+        btnText = 'Convert rBTC to BTC',
+        mode = 'pegin'
     } = props;
 
     const {accountData}= useContext(AuthenticateContext);
@@ -34,7 +36,7 @@ export default function BtcToRbtc(props) {
             <Row className="m-b">
                 <Col xs={8}>
                     <div className='text-center'>
-                        <LogoIconRBTC className="logo-img" width="111" height="111" alt=""/>
+                        {(mode === 'pegin') ? <LogoIconBTCtoRBTC className="logo-img" width="111" height="111" alt=""/> : <img src={LogoIconRBTCtoBTC} width="44" height="111" alt=""/>}
                     </div>
                 </Col>
                 <Col xs={13}>

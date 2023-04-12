@@ -809,7 +809,7 @@
       "titleCard_pegin": "BTC to rBTC Peg In",
       "getRBTC": "Convierte BTC a rBTC",
       "getRBTC_description": "Convierta BTC de la red Bitcoin a rBTC Smart Bitcoins utilizando el FastBTC integrado de Sovryn.",
-      "titleCard_pegout": "BTC to rBTC Peg Out",
+      "titleCard_pegout": "rBTC to BTC Peg Out",
       "getBTC": "Convierte rBTC a BTC",
       "getBTC_description": "Convierta rBTC Smart Bitcoins a BTC utilizando el FastBTC integrado de Sovryn.",
       "subTitle": "Integracion de Sovryn FastBTC",
