@@ -1,9 +1,9 @@
-.RbtcToBtcModal{
-    .ant-modal-content{
-        border-color: black!important;
+.RbtcToBtcModal {
+    .ant-modal-content {
+        border-color: black !important;
     }
     .ant-modal-header {
-        background-color: black!important;
+        background-color: black !important;
         color: white;
         padding: 7px;
     }
@@ -20,7 +20,7 @@
         align-items: center;
         //padding:0;
         h1 {
-            font-family: Quicksand,sans-serif;
+            font-family: Quicksand, sans-serif;
             color: #fff;
             //font-family: Source Sans Pro,sans-serif;
             font-weight: 700;
@@ -63,7 +63,7 @@
     .conversion-limits {
         padding: 9px;
         border-radius: 8px;
-        background: #08374F;
+        background: #08374f;
         color: white;
         font-size: 12px;
         p {
@@ -113,7 +113,9 @@
                     font-size: 17px;
                     cursor: pointer;
                 }
-                p {margin: 0 1em}
+                p {
+                    margin: 0 1em;
+                }
             }
         }
     }
@@ -123,7 +125,7 @@
             display: flex;
             flex-direction: row;
             border-radius: 8px;
-            background: #08374F;
+            background: #08374f;
             padding: 4px 10px;
             align-items: center;
             text-align: left;
@@ -144,12 +146,11 @@
     }
 }
 
-
-.ModalUpTopContainer{
-    .InputAddressLabel{
-        .rbtc_address{
+.ModalUpTopContainer {
+    .InputAddressLabel {
+        .rbtc_address {
             color: #707070;
-            font-family: "Montserrat", sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 12px;
             font-weight: initial;
         }
@@ -164,7 +165,7 @@
         font-weight: bold !important;
         color: #888888 !important;
     }
-    .InputAddressContainer{
+    .InputAddressContainer {
         margin-top: 16px;
         input {
             width: 100%;
@@ -195,50 +196,47 @@
     }
 }
 
-
-
-.inputAmount{
+.inputAmount {
     margin-top: 10px;
     display: flex;
     align-items: center;
     width: 100%;
     input {
-        border-radius: 8px ;
-        background: #fff ;
-        font-size: 16px ;
-        color: #888888 ;
-        font-weight: 400 ;
-        height: 40px ;
+        border-radius: 8px;
+        background: #fff;
+        font-size: 16px;
+        color: #888888;
+        font-weight: 400;
+        height: 40px;
         border: 1px solid #949494;
         width: 80%;
         border-right: none;
-        border-top-right-radius:0px;
+        border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
         padding-left: 10px;
     }
 
-    div{
-        border-radius: 8px ;
+    div {
+        border-radius: 8px;
         border: 1px solid #949494;
         line-height: 2.125;
         width: 20%;
-        @media screen and (max-width:900px) {
+        @media screen and (max-width: 900px) {
             width: 45%;
         }
         border-left: none;
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
-        span{
+        span {
             font-weight: bold;
             color: lightgray;
             font-size: 18px;
             margin-left: 10px;
         }
-        img{
+        img {
             margin-bottom: 4px;
         }
     }
-
 }
 
 .BalanceSelectorContainer {
@@ -248,8 +246,8 @@
     .ant-radio-group {
         span {
             font-size: 12px !important;
-            font-family: "Montserrat", sans-serif !important;
-            color: #7B7B7B !important;
+            font-family: 'Montserrat', sans-serif !important;
+            color: #7b7b7b !important;
         }
 
         display: flex;
@@ -276,7 +274,6 @@
         align-items: center;
         justify-content: space-between;
     }
-
 }
 
 .setValueToMax {
@@ -285,14 +282,13 @@
     font-size: 12px;
 }
 
-
 .AmountSummary {
     display: flex;
     flex-direction: row;
     .Detail {
         flex-grow: 1;
         color: #888888;
-        font-family: "Montserrat", sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 12px;
     }
     .strong {
@@ -300,13 +296,12 @@
     }
 }
 
-
 .alert-message-modal {
     .alert-message {
         display: flex;
         flex-direction: row;
         border-radius: 8px;
-        background: #08374F;
+        background: #08374f;
         padding: 4px 10px;
         align-items: center;
         text-align: left;
