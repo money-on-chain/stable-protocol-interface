@@ -12,9 +12,12 @@
     "bignumber.js": "^9.0.2",
     "classnames": "^2.3.2",
     "env-cmd": "^10.1.0",
+    "husky": "^8.0.3",
     "i18next": "^21.8.2",
+    "lint-staged": "^13.2.1",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.29.3",
+    "prettier": "^2.8.7",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-countup": "^6.2.0",
@@ -79,5 +82,10 @@
     "source-map-explorer": "^2.5.2",
     "webpack": "4.46.0",
     "webpack-cli": "^4.10.0"
+  },
+  "husky": {
+    "hooks": {
+    "pre-commit": "lint-staged"
+    }
   }
 }

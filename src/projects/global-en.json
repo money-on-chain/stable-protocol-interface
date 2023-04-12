@@ -22,7 +22,7 @@
 
         "NiftyTutorial_setupYourWallet_title": "Setup your wallet",
         "NiftyTutorial_setupYourWallet_text": "To operate on the platform you need to connect your wallet to the RSK network. Follow the steps and we will help you.",
-        "NiftyTutorial_getYourWallet_title" : "Get your wallet",
+        "NiftyTutorial_getYourWallet_title": "Get your wallet",
         "NiftyTutorial_getYourWallet_text": "Click on Download and add Nifty Wallet to Chrome from the web store",
         "NiftyTutorial_getYourWallet_externalLink": "Download",
         "NiftyTutorial_keepItClose_title": "Keep your wallet close",
@@ -207,8 +207,8 @@
 
         "ModalSend_EnterTheAmount": "Enter the amount",
         "ModalSend_Amount": "Amount",
-        "ModalSend_CopyTx":"Copy the transaction ID before closing since the information about this operation will not be available in the dAPP.",
-        "ModalMind_CopyTx":"Copy the transaction ID before closing since the information about this operation will not be available in the dAPP until successful.",
+        "ModalSend_CopyTx": "Copy the transaction ID before closing since the information about this operation will not be available in the dAPP.",
+        "ModalMind_CopyTx": "Copy the transaction ID before closing since the information about this operation will not be available in the dAPP until successful.",
         "ModalSend_pegout_EnterTheAmount": "Enter rBTC amount to send",
         "ModalSend_AddAComment": "Add a comment (optional)",
 
@@ -216,7 +216,7 @@
         "txWallet_CurrentRate": "Current Interest Rate",
 
         "RewardsClaimButton_Claim": "Claim",
-        "RewardsClaimButton_Modal_Title":"Operation details",
+        "RewardsClaimButton_Modal_Title": "Operation details",
         "RewardsClaimButton_Modal_TxStatus": "Transaction status",
         "RewardsClaimButton_Modal_Hash": "Hash",
         "RewardsClaimButton_Modal_ViewOnExplorer": "View on the explorer",
@@ -228,7 +228,7 @@
 
         "Metrics_title": "Metrics",
         "Metrics_subtitle": "Current system information",
-        "Metrics_globalCoverage":"Global Coverage",
+        "Metrics_globalCoverage": "Global Coverage",
 
         "Notification_notification_title": "Operations",
         "Notification_notification_description": "Transaction is in pending state, please wait to blockchain confirm the operation.",
