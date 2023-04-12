@@ -1,9 +1,15 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
-import {config} from "../../../projects/config";
+import { config } from '../../../projects/config';
 
 import NotFound from '../../../pages/NotFound';
-const Skeleton = React.lazy(() => import('../../../layouts/projects/' + config.environment.AppProject.toLowerCase() + '/Skeleton'));
+const Skeleton = React.lazy(() =>
+    import(
+        '../../../layouts/projects/' +
+            config.environment.AppProject.toLowerCase() +
+            '/Skeleton'
+    )
+);
 
 const Home = React.lazy(() => import('../../../pages/Home/index'));
 const MintTC = React.lazy(() => import('../../../pages/Mint/MintTC'));

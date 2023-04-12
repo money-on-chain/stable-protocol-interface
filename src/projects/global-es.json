@@ -22,7 +22,7 @@
 
         "NiftyTutorial_setupYourWallet_title": "Configura tu billetera",
         "NiftyTutorial_setupYourWallet_text": "Para operar en la plataforma necesitas conectar tu billetera a la red de RSK. Sigue los pasos, te ayudaremos.",
-        "NiftyTutorial_getYourWallet_title" : "Descarga tu billetera",
+        "NiftyTutorial_getYourWallet_title": "Descarga tu billetera",
         "NiftyTutorial_getYourWallet_text": "Haz clic en descargar y agrega la billetera Nifty a tu navegador chrome desde Web Store",
         "NiftyTutorial_getYourWallet_externalLink": "Descargar",
         "NiftyTutorial_keepItClose_title": "Deja tu billetera cerrada",
@@ -207,8 +207,8 @@
 
         "ModalSend_EnterTheAmount": "Ingresa el valor",
         "ModalSend_Amount": "Valor",
-        "ModalSend_CopyTx":"Copie el ID de la transacción antes de cerrar ya que la información sobre esta operación no estará disponible en la dAPP.",
-        "ModalMind_CopyTx":"Copie el ID de la transacción antes de cerrar, ya que la información sobre esta operación no estará disponible en el dAPP hasta que se realice correctamente.",
+        "ModalSend_CopyTx": "Copie el ID de la transacción antes de cerrar ya que la información sobre esta operación no estará disponible en la dAPP.",
+        "ModalMind_CopyTx": "Copie el ID de la transacción antes de cerrar, ya que la información sobre esta operación no estará disponible en el dAPP hasta que se realice correctamente.",
         "ModalSend_pegout_EnterTheAmount": "Ingresa el valor de rBTC a enviar",
         "ModalSend_AddAComment": "Agregar un comentario (opcional)",
 
@@ -216,7 +216,7 @@
         "txWallet_CurrentRate": "Tasa de interés actual",
 
         "RewardsClaimButton_Claim": "Reclamar",
-        "RewardsClaimButton_Modal_Title":"Detalles de la operación",
+        "RewardsClaimButton_Modal_Title": "Detalles de la operación",
         "RewardsClaimButton_Modal_TxStatus": "Estado de la transacción",
         "RewardsClaimButton_Modal_Hash": "Hash",
         "RewardsClaimButton_Modal_ViewOnExplorer": "Ver en el explorer",
@@ -228,7 +228,7 @@
 
         "Metrics_title": "Métricas",
         "Metrics_subtitle": "Información actual del sistema",
-        "Metrics_globalCoverage":"Cobertura Global",
+        "Metrics_globalCoverage": "Cobertura Global",
 
         "Notification_notification_title": "Operaciones",
         "Notification_notification_description": "La transacción está en estado pendiente. Por favor espera la confirmación de la operación.",
