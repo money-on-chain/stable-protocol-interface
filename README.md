@@ -46,6 +46,8 @@ Requires:
 
 * Nodejs > 12
 
+`nvm use`
+
 Install packages
 
 `npm install`
@@ -56,20 +58,24 @@ Run
 
 **Note:** Start the environment you want to run ex. **"start:moc-testnet"** to start environment Moc Testnet 
 
+Then in your browser:
+
+`http://localhost:3000`
+
 
 ### Environment table
 
 Environment is our already deployed contracts. 
 **Develop**: npm run start:<environment>
 
-| Name             | Project | Main Gateway                                 | Environment | Network | npm run                 |
-|------------------|---------|----------------------------------------------|-------------|---------|-------------------------|
-| MoC TestnetAlpha | MOC     |                                              | Testnet     | RSK     | start:moc-alpha-testnet |
-| MoC Testnet      | MOC     | [link](https://app-testnet.moneyonchain.com) | Testnet     | RSK     | start:moc-testnet       |
-| MoC Mainnet      | MOC     | [link](https://app.moneyonchain.com)         | Mainnet     | RSK     | start:moc-mainnet       |
-| RoC TestnetAlpha | RIF     |                                              | Testnet     | RSK     | start:roc-alpha-testnet |
-| RoC Testnet      | RIF     | [link](https://app-testnet.rifonchain.com)   | Testnet     | RSK     | start:roc-testnet       |
-| RoC Mainnet      | RIF     | [link](https://app.rifonchain.com)           | Mainnet     | RSK     | start:roc-mainnet       |
+| Name             | Project | Main Gateway                           | Environment | Network | npm run                 |
+|------------------|---------|----------------------------------------|-------------|---------|-------------------------|
+| MoC TestnetAlpha | MOC     |                                        | Testnet     | RSK     | start:moc-alpha-testnet |
+| MoC Testnet      | MOC     |                                        | Testnet     | RSK     | start:moc-testnet       |
+| MoC Mainnet      | MOC     | [link](https://alpha.moneyonchain.com) | Mainnet     | RSK     | start:moc-mainnet       |
+| RoC TestnetAlpha | RIF     |                                        | Testnet     | RSK     | start:roc-alpha-testnet |
+| RoC Testnet      | RIF     |                                        | Testnet     | RSK     | start:roc-testnet       |
+| RoC Mainnet      | RIF     |                                        | Mainnet     | RSK     | start:roc-mainnet       |
 
 
 ### Faucets
