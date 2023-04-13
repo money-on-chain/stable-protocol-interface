@@ -253,7 +253,7 @@
 
   .title {
     background: #08374F;
-    padding: 7px 12px;
+    padding: 7px 12px !important;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     min-height: 48px;
@@ -261,11 +261,11 @@
     //padding:0;
     h1 {
       font-family: Quicksand,sans-serif;
-      color: #fff;
+      color: #fff !important;
       //font-family: Source Sans Pro,sans-serif;
-      font-weight: 700;
+      font-weight: 700 !important;
       line-height: 18px;
-      font-size: 14px;
+      font-size: 14px !important;
       margin-left: 6px;
     }
   }
