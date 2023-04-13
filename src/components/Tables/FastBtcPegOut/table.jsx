@@ -17,13 +17,19 @@ const onChange = (key) => {
     console.log(key);
 };
 
-const Table = ({ accountData }) => {
+const Table = ({ accountData, defaultPane }) => {
     const auth = useContext(AuthenticateContext);
     useEffect(() => {
         auth.socket.initialize();
     }, []);
     const [operations, setOperations] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [currentPane, setCurrentPane] = useState('1');
+
+    if (defaultPane !== '0' && defaultPane !== currentPane)
+    {
+        setCurrentPane(defaultPane)
+    }
 
     const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
@@ -209,7 +215,7 @@ const Table = ({ accountData }) => {
     };
 
     return (
-        <Tabs defaultActiveKey="1" onChange={onChange}>
+        <Tabs activeKey={currentPane} onChange={onChange}>
             <TabPane tab="Peg In" key="1">
                 <TableAntd
                     columns={columns}

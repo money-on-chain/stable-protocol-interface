@@ -24,6 +24,13 @@ export default function Rbtc(props) {
         setRbtcGenVisible(false);
     };
 
+    let defaultPane = '0';
+    if (!rbtcGenVisible && btcGenVisible) {
+        defaultPane = '1';
+    } else if (rbtcGenVisible && !btcGenVisible) {
+        defaultPane = '2';
+    }
+
     return (
         <Fragment>
             {!auth.isLoggedIn && <p>Not connected! </p>}
@@ -114,7 +121,7 @@ export default function Rbtc(props) {
                             })}
                         </span>
                         {/*<FastBtcPegOut></FastBtcPegOut>*/}
-                        <Table accountData={auth.accountData}></Table>
+                        <Table accountData={auth.accountData} defaultPane={defaultPane}></Table>
                     </div>
                 </>
             )}
