@@ -105,7 +105,7 @@ const MintOrRedeemToken = (props) => {
             const markupFromContract = await auth.interfaceVendorMarkup(vendorAccount);
             setVendorMarkup(markupFromContract);
         };
-        if (auth) {
+        if (auth.contractStatusData) {
             awaitVendorMarkup();
         }
 
@@ -229,9 +229,6 @@ const MintOrRedeemToken = (props) => {
             'commissionRate',
             formatLocalMap2[i18n.languages[0]]
         );
-
-        console.log("DEBUG I>>>>")
-        console.log(commissionRateVisible)
 
         return {
             percentage: commissionRateVisible,
