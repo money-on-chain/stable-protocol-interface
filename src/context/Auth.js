@@ -33,7 +33,8 @@ import {
     transferTGTo,
     transferCoinbaseTo,
     calcMintInterest,
-    approveTGTokenCommission
+    approveTGTokenCommission,
+    vendorMarkup
 } from '../lib/integration/interfaces-base';
 import {
     stackedBalance,
@@ -133,6 +134,7 @@ const AuthenticateContext = createContext({
     interfaceTransferTGTo: async (to, amount) => {},
     interfaceTransferCoinbaseTo: async (to, amount) => {},
     interfaceCalcMintInterestValues: async (amount) => {},
+    interfaceVendorMarkup: async (vendorAccount) => {},
     interfaceApproveReserve: async (address) => {},
     convertToken: async (from, to, amount) => {},
     getSpendableBalance: async (address) => {},
@@ -814,6 +816,11 @@ const AuthenticateProvider = ({ children }) => {
         return mintInterest;
     };
 
+    const interfaceVendorMarkup = (vendorAccount) => {
+        const interfaceContext = buildInterfaceContext();
+        return vendorMarkup(interfaceContext, vendorAccount);
+    };
+
     const interfaceApproveReserve = (address, callback) => {
         const interfaceContext = buildInterfaceContext();
         return AllowanceUseReserveToken(interfaceContext, true, callback);
@@ -938,6 +945,7 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceTransferTGTo,
                 interfaceTransferCoinbaseTo,
                 interfaceCalcMintInterestValues,
+                interfaceVendorMarkup,
                 interfaceApproveReserve,
                 socket,
                 convertToken,
