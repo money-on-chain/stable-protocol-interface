@@ -37,7 +37,8 @@ const getUsableReserveBalance = (
     currencyToMint,
     userState,
     mocState,
-    convertToken
+    convertToken,
+    vendorMarkup
 ) => {
     const {
         rbtcBalance = 0,
@@ -48,7 +49,8 @@ const getUsableReserveBalance = (
         currencyToMint,
         mocState,
         userState,
-        convertToken
+        convertToken,
+        vendorMarkup
     );
     const gasEstimation = gasMintingEstimation(currencyToMint, userState);
 
@@ -91,7 +93,8 @@ const getCommissionRateForMintingTotalAvailable = (
     tokenToMint,
     mocState,
     userState,
-    convertToken
+    convertToken,
+    vendorMarkup
 ) => {
     const { spendableBalance = '0', rbtcBalance = '0' } = userState || {};
     return getCommissionRateAndCurrency({
@@ -100,7 +103,8 @@ const getCommissionRateForMintingTotalAvailable = (
         valueYouExchange: rbtcBalance,
         mocState,
         userState,
-        convertToken
+        convertToken,
+        vendorMarkup
     });
 };
 
@@ -129,13 +133,11 @@ const getCommissionRateAndCurrency = ({
     valueYouExchange,
     mocState,
     userState,
-    convertToken
+    convertToken,
+    vendorMarkup
 }) => {
     const { commissionRates = {} } = mocState || {};
     if (!convertToken) return {};
-
-    // const vendor = { address: "0xf69287F5Ca3cC3C6d3981f2412109110cB8af076", markup: "500000000000000" };
-    const vendor = config.environment.vendor;
 
     const valueYouExchangeInRESERVE = convertToken(
         currencyYouExchange,
@@ -156,7 +158,7 @@ const getCommissionRateAndCurrency = ({
                 'TG_COMMISSION'
             )
         ]
-    ).plus(vendor.markup);
+    ).plus(vendorMarkup);
     const commissionRateForRESERVE = BigNumber(
         commissionRates[
             getTransactionType(
@@ -165,7 +167,7 @@ const getCommissionRateAndCurrency = ({
                 'RESERVE_COMMISSION'
             )
         ]
-    ).plus(vendor.markup);
+    ).plus(vendorMarkup);
 
     const commissionValueIfPaidInMOC = commissionRateForMOC
         .times(valueYouExchangeInMOC)
@@ -199,13 +201,15 @@ const getMaxMintableBalance = (
     currencyToMint,
     userState,
     mocState,
-    convertToken
+    convertToken,
+    vendorMarkup
 ) => {
     const usableReserveBalance = getUsableReserveBalance(
         currencyToMint,
         userState,
         mocState,
-        convertToken
+        convertToken,
+        vendorMarkup
     );
     const { docAvailableToMint, bprox2AvailableToMint } = mocState;
     const usableReserveBalanceInCurrencyToMint = convertToken(

@@ -31,8 +31,11 @@ import { config } from '../../projects/config';
 import { useProjectTranslation } from '../../helpers/translations';
 
 const MintOrRedeemToken = (props) => {
+
     const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
+    const vendorAccount = config.environment.vendor.address;
+    const vendorMarkupDefault = config.environment.vendor.markup;
     const auth = useContext(AuthenticateContext);
 
     /* Context props */
@@ -74,6 +77,7 @@ const MintOrRedeemToken = (props) => {
     const userAccountIsLoggedIn = mocState;
 
     const [loading, setLoading] = useState(true);
+    const [vendorMarkup, setVendorMarkup] = useState(vendorMarkupDefault);
     const timeSke = 1500;
 
     useEffect(() => {
@@ -94,9 +98,20 @@ const MintOrRedeemToken = (props) => {
         if (auth.convertToken) {
             awaitInterests(valueYouExchange);
         }
-    }, [valueYouExchange]);
 
-    /* Methods */
+    }, [valueYouExchange]);
+    useEffect(() => {
+        const awaitVendorMarkup = async () => {
+            const markupFromContract = await auth.interfaceVendorMarkup(vendorAccount);
+            setVendorMarkup(markupFromContract);
+        };
+        if (auth) {
+            awaitVendorMarkup();
+        }
+
+    }, [auth]);
+
+
     const getCurrencyYouReceive = (actionIsMint, tokenToMintOrRedeem) => {
         return actionIsMint ? tokenToMintOrRedeem : 'RESERVE';
     };
@@ -147,7 +162,8 @@ const MintOrRedeemToken = (props) => {
                 token,
                 userState,
                 mocState,
-                auth.convertToken
+                auth.convertToken,
+                vendorMarkup
             ).value.toString();
             maxValueYouExchange = convertAmount(
                 token,
@@ -192,6 +208,7 @@ const MintOrRedeemToken = (props) => {
 
     const calcCommission = () => {
         if (!auth.convertToken || !mocState) return {};
+
         const {
             commissionCurrency,
             commissionRate,
@@ -203,7 +220,8 @@ const MintOrRedeemToken = (props) => {
             currencyYouExchange,
             mocState,
             userState,
-            convertToken: auth.convertToken
+            convertToken: auth.convertToken,
+            vendorMarkup
         });
 
         const commissionRateVisible = formatVisibleValue(
@@ -211,6 +229,10 @@ const MintOrRedeemToken = (props) => {
             'commissionRate',
             formatLocalMap2[i18n.languages[0]]
         );
+
+        console.log("DEBUG I>>>>")
+        console.log(commissionRateVisible)
+
         return {
             percentage: commissionRateVisible,
             value: commissionYouPay,

@@ -100,6 +100,14 @@ const calcMintInterest = async (interfaceContext, amount) => {
     return calcMintInterest;
 };
 
+const vendorMarkup = async (interfaceContext, vendorAccount) => {
+    const { web3, account } = interfaceContext;
+    const dContracts = window.integration;
+    const mocvendors = dContracts.contracts.mocvendors;
+    const result = await mocvendors.methods.vendors(vendorAccount).call()
+    return result[1];
+};
+
 const transferTPTo = async (
     interfaceContext,
     to,
@@ -272,5 +280,6 @@ export {
     transferTCTo,
     transferTGTo,
     transferCoinbaseTo,
-    approveTGTokenCommission
+    approveTGTokenCommission,
+    vendorMarkup
 };
