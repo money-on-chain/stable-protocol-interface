@@ -35,6 +35,8 @@ Each release gets deployed to IPFS automatically.
 
 Please go to release section, there are several links to [releases](https://github.com/money-on-chain/release) 
 
+**MOC Release**: You can always get the last stable release on: [dapp.moneyonchain.com](https://dapp.moneyonchain.com)
+
 **Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
 
 
@@ -54,9 +56,9 @@ Install packages
 
 Run
 
-`npm run start:moc-testnet`
+`npm run start:moc-mainnet`
 
-**Note:** Start the environment you want to run ex. **"start:moc-testnet"** to start environment Moc Testnet 
+**Note:** Start the environment you want to run ex. **"start:moc-mainnet"** to start environment Moc Production Mainnet 
 
 Then in your browser:
 
