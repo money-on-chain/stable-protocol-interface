@@ -121,7 +121,10 @@ export default function Rbtc(props) {
                             })}
                         </span>
                         {/*<FastBtcPegOut></FastBtcPegOut>*/}
-                        <Table accountData={auth.accountData} defaultPane={defaultPane}></Table>
+                        <Table
+                            accountData={auth.accountData}
+                            defaultPane={defaultPane}
+                        ></Table>
                     </div>
                 </>
             )}

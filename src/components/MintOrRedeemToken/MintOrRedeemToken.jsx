@@ -31,7 +31,6 @@ import { config } from '../../projects/config';
 import { useProjectTranslation } from '../../helpers/translations';
 
 const MintOrRedeemToken = (props) => {
-
     const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     const vendorAccount = config.environment.vendor.address;
@@ -98,19 +97,18 @@ const MintOrRedeemToken = (props) => {
         if (auth.convertToken) {
             awaitInterests(valueYouExchange);
         }
-
     }, [valueYouExchange]);
     useEffect(() => {
         const awaitVendorMarkup = async () => {
-            const markupFromContract = await auth.interfaceVendorMarkup(vendorAccount);
+            const markupFromContract = await auth.interfaceVendorMarkup(
+                vendorAccount
+            );
             setVendorMarkup(markupFromContract);
         };
         if (auth.contractStatusData) {
             awaitVendorMarkup();
         }
-
     }, [auth]);
-
 
     const getCurrencyYouReceive = (actionIsMint, tokenToMintOrRedeem) => {
         return actionIsMint ? tokenToMintOrRedeem : 'RESERVE';
@@ -128,7 +126,7 @@ const MintOrRedeemToken = (props) => {
             auth.convertToken
         );
         setValueYouReceive(newValueYouReceiveInWei);
-    }
+    };
 
     const onMaxValueYouReceiveChange = (maxValue) => {
         setIsDirtyYouExchange(false);
@@ -142,7 +140,7 @@ const MintOrRedeemToken = (props) => {
             auth.convertToken
         );
         setValueYouExchange(newValueYouExchange);
-    }
+    };
 
     const onValueYouExchangeChange = (newValueYouExchange) => {
         if (newValueYouExchange === '0' && valueYouExchange === '0') {

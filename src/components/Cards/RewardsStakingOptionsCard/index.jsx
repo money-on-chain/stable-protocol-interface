@@ -261,7 +261,9 @@ export default function RewardsStakingOptions(props) {
                                         showMaxValueAllowed
                                         validate={auth}
                                         isDirty={stakingAmountIsDirty}
-                                        onMaxValueChange={onStakingMaxInputValueChange}
+                                        onMaxValueChange={
+                                            onStakingMaxInputValueChange
+                                        }
                                     />
                                 </Col>
                             </Row>
@@ -365,7 +367,9 @@ export default function RewardsStakingOptions(props) {
                                     showMaxValueAllowed
                                     validate={auth}
                                     isDirty={unstakingAmountIsDirty}
-                                    onMaxValueChange={onUnstakingMaxInputValueChange}
+                                    onMaxValueChange={
+                                        onUnstakingMaxInputValueChange
+                                    }
                                 />
                             </Col>
                         </Row>

@@ -104,7 +104,7 @@ const vendorMarkup = async (interfaceContext, vendorAccount) => {
     const { web3, account } = interfaceContext;
     const dContracts = window.integration;
     const mocvendors = dContracts.contracts.mocvendors;
-    const result = await mocvendors.methods.vendors(vendorAccount).call()
+    const result = await mocvendors.methods.vendors(vendorAccount).call();
     return result[1];
 };
 

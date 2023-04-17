@@ -26,9 +26,8 @@ const Table = ({ accountData, defaultPane }) => {
     const [loading, setLoading] = useState(true);
     const [currentPane, setCurrentPane] = useState('1');
 
-    if (defaultPane !== '0' && defaultPane !== currentPane)
-    {
-        setCurrentPane(defaultPane)
+    if (defaultPane !== '0' && defaultPane !== currentPane) {
+        setCurrentPane(defaultPane);
     }
 
     const [t, i18n, ns] = useProjectTranslation();
