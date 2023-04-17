@@ -36,7 +36,8 @@ export default function InputWithCurrencySelector(props) {
         placeholder = '0.0',
         showSelectPercent = false,
         onValueChange = () => {},
-        isDirty
+        isDirty,
+        onMaxValueChange
     } = props;
 
     const [t, i18n, ns] = useProjectTranslation();
@@ -93,7 +94,7 @@ export default function InputWithCurrencySelector(props) {
     };
 
     const setValueToMax = () => {
-        handleValueChangeInWei(maxValueAllowedInWei);
+        onMaxValueChange(maxValueAllowedInWei);
     };
 
     const handleCurrencySelect = (newCurrencySelected) => {

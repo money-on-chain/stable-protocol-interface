@@ -31,6 +31,7 @@ export default function SendModal(props) {
     const [addTotalSend, setAddTotalSend] = useState('0.0000');
     const [visible, setVisible] = useState(false);
     const [amountToSend, setAmountToSend] = useState(0);
+    const [amountIsDirty, setAmountIsDirty] = useState(true);
     const [visibleAlertInvalidAddress, setVisibleAlertInvalidAddress] =
         useState(false);
     const [maxExceeded, setMaxExceeded] = useState(false);
@@ -81,6 +82,8 @@ export default function SendModal(props) {
     };
 
     const onTokenToSendSelect = (newTokenToSend) => {
+        setAmountIsDirty(false);
+        setAmountToSend(0);
         setTokenToSend(newTokenToSend);
     };
 
@@ -90,6 +93,11 @@ export default function SendModal(props) {
 
     const onInputValidityChange = (newValidity) => {
         setInputIsValid(newValidity);
+    };
+
+    const onMaxValueChange = (maxValue) => {
+        setAmountIsDirty(false);
+        setAmountToSend(maxValue);
     };
 
     const handleOk = debounce(() => {
@@ -274,7 +282,8 @@ export default function SendModal(props) {
                                         onInputValidityChange
                                     }
                                     className="separation"
-                                    isDirty={true}
+                                    isDirty={amountIsDirty}
+                                    onMaxValueChange={onMaxValueChange}
                                 />
                                 <Row style={{ marginTop: '2em' }}>
                                     <Col

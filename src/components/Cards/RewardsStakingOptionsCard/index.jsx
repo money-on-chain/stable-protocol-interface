@@ -65,8 +65,10 @@ export default function RewardsStakingOptions(props) {
     // falta los SETS
     const [stakingAmountInputValue, setStakingAmountInputValue] =
         useState('0.00');
+    const [stakingAmountIsDirty, setStakingAmountIsDirty] = useState(true);
     const [unstakingAmountInputValue, setUnstakingAmountInputValue] =
         useState('0');
+    const [unstakingAmountIsDirty, setUnStakingAmountIsDirty] = useState(true);
     const [modalMode, setModalMode] = useState(null);
     const [stackedBalance, setStakedBalance] = useState('0');
     const [mocBalance, setMocBalance] = useState('0');
@@ -163,7 +165,17 @@ export default function RewardsStakingOptions(props) {
         setStakingAmountInputValue(value);
     };
 
+    const onStakingMaxInputValueChange = (value) => {
+        setStakingAmountIsDirty(false);
+        setStakingAmountInputValue(value);
+    };
+
     const onUnstakingInputValueChange = (value) => {
+        setUnstakingAmountInputValue(value);
+    };
+
+    const onUnstakingMaxInputValueChange = (value) => {
+        setUnStakingAmountIsDirty(false);
         setUnstakingAmountInputValue(value);
     };
 
@@ -248,7 +260,8 @@ export default function RewardsStakingOptions(props) {
                                         maxValueAllowedInWei={mocBalance}
                                         showMaxValueAllowed
                                         validate={auth}
-                                        isDirty={true}
+                                        isDirty={stakingAmountIsDirty}
+                                        onMaxValueChange={onStakingMaxInputValueChange}
                                     />
                                 </Col>
                             </Row>
@@ -351,7 +364,8 @@ export default function RewardsStakingOptions(props) {
                                     maxValueAllowedInWei={stackedBalance}
                                     showMaxValueAllowed
                                     validate={auth}
-                                    isDirty={true}
+                                    isDirty={unstakingAmountIsDirty}
+                                    onMaxValueChange={onUnstakingMaxInputValueChange}
                                 />
                             </Col>
                         </Row>

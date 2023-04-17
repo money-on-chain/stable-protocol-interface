@@ -116,6 +116,34 @@ const MintOrRedeemToken = (props) => {
         return actionIsMint ? tokenToMintOrRedeem : 'RESERVE';
     };
 
+    const onMaxValueYouExchangeChange = (maxValue) => {
+        setIsDirtyYouExchange(false);
+        setIsDirtyYouReceive(false);
+
+        setValueYouExchange(maxValue);
+        const newValueYouReceiveInWei = convertAmount(
+            currencyYouExchange,
+            currencyYouReceive,
+            maxValue,
+            auth.convertToken
+        );
+        setValueYouReceive(newValueYouReceiveInWei);
+    }
+
+    const onMaxValueYouReceiveChange = (maxValue) => {
+        setIsDirtyYouExchange(false);
+        setIsDirtyYouReceive(false);
+
+        setValueYouReceive(maxValue);
+        const newValueYouExchange = convertAmount(
+            currencyYouReceive,
+            currencyYouExchange,
+            maxValue,
+            auth.convertToken
+        );
+        setValueYouExchange(newValueYouExchange);
+    }
+
     const onValueYouExchangeChange = (newValueYouExchange) => {
         if (newValueYouExchange === '0' && valueYouExchange === '0') {
             setIsDirtyYouExchange(true);
@@ -506,6 +534,7 @@ const MintOrRedeemToken = (props) => {
                         validate={userAccountIsLoggedIn}
                         showConvertBTC_RBTC_Link={false}
                         isDirty={isDirtyYouExchange}
+                        onMaxValueChange={onMaxValueYouExchangeChange}
                     />
                 </div>
                 <ArrowRightOutlined />
@@ -527,6 +556,7 @@ const MintOrRedeemToken = (props) => {
                         onInputValueChange={onValueYouReceiveChange}
                         showConvertBTC_RBTC_Link={false}
                         isDirty={isDirtyYouReceive}
+                        onMaxValueChange={onMaxValueYouReceiveChange}
                     />
                 </div>
             </div>
