@@ -12,16 +12,16 @@ import ReserveToken from '../../../contracts/ReserveToken.json';
 import MoCVendors from '../../../contracts/MoCVendors.json';
 
 export {
-  Multicall2,
-  MoCConnector,
-  MoC,
-  MoCState,
-  MoCExchange,
-  MoCInrate,
-  MoCSettlement,
-  TC,
-  TP,
-  TG,
-  ReserveToken,
-  MoCVendors
+    Multicall2,
+    MoCConnector,
+    MoC,
+    MoCState,
+    MoCExchange,
+    MoCInrate,
+    MoCSettlement,
+    TC,
+    TP,
+    TG,
+    ReserveToken,
+    MoCVendors
 };

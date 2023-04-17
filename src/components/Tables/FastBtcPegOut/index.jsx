@@ -1,29 +1,33 @@
-import React, {useContext, useEffect} from 'react';
+import React, { useContext, useEffect } from 'react';
 import 'antd/dist/antd.css';
 import { Table } from 'antd';
-import {DownCircleOutlined, UpCircleOutlined} from "@ant-design/icons";
+import { DownCircleOutlined, UpCircleOutlined } from '@ant-design/icons';
 import Moment from 'react-moment';
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { myParseDate, readJsonTableFastBtcPegOut} from '../../../helpers/helper'
+import {
+    myParseDate,
+    readJsonTableFastBtcPegOut
+} from '../../../helpers/helper';
 import date from '../../../helpers/date';
-import {AuthenticateContext} from "../../../context/Auth";
-import Copy from "../../Page/Copy";
-import RowDetailPegOut from "./RowDetailPegOut";
+import { AuthenticateContext } from '../../../context/Auth';
+import Copy from '../../Page/Copy';
+import RowDetailPegOut from './RowDetailPegOut';
 import { useProjectTranslation } from '../../../helpers/translations';
-import api from "../../../services/api";
-import {config} from "../../../projects/config";
+import api from '../../../services/api';
+import { config } from '../../../projects/config';
 
 import './style.scss';
 
 export default function FastBtcPegOut(props) {
-
     const [current, setCurrent] = useState(1);
     const [bordered, setBordered] = useState(false);
     const [loading, setLoading] = useState(false);
     const [pagination, setPagination] = useState({ position: 'bottom' });
     const [size, setSize] = useState('default');
-    const [expandable, setExpandable] = useState({ expandedRowRender: record => <p>{record.description}</p> });
+    const [expandable, setExpandable] = useState({
+        expandedRowRender: (record) => <p>{record.description}</p>
+    });
 
     const [title, setTitle] = useState(undefined);
     const [showHeader, setShowHeader] = useState(true);
@@ -39,32 +43,36 @@ export default function FastBtcPegOut(props) {
     const auth = useContext(AuthenticateContext);
 
     const { accountData = {} } = auth;
-    const [dataJson, setDataJson]=  useState([]);
-    const [callTable, setCallTable]=  useState(false);
-    const [totalTable, setTotalTable]=  useState(0);
+    const [dataJson, setDataJson] = useState([]);
+    const [callTable, setCallTable] = useState(false);
+    const [totalTable, setTotalTable] = useState(0);
     const [currentHash, setCurrentHash] = useState(true);
     const [timer, setTimer] = useState(100);
 
-
-    const getFastbtcPegout= (skip,call_table) => {
-        if(auth.isLoggedIn) {
+    const getFastbtcPegout = (skip, call_table) => {
+        if (auth.isLoggedIn) {
             setTimeout(() => {
                 try {
-                    api('get', `${config.environment.api.operations}` + 'webapp/fastbtc/pegout/', {address: accountData.Owner})
-                        .then(response => {
+                    api(
+                        'get',
+                        `${config.environment.api.operations}` +
+                            'webapp/fastbtc/pegout/',
+                        { address: accountData.Owner }
+                    )
+                        .then((response) => {
                             setDataJson(response);
-                            setTotalTable(response.total)
+                            setTotalTable(response.total);
                             if (call_table) {
-                                setCallTable(call_table)
+                                setCallTable(call_table);
                             }
                         })
                         .catch((response) => {
                             if (call_table) {
-                                setCallTable(call_table)
+                                setCallTable(call_table);
                             }
                         });
                 } catch (error) {
-                    console.error({error});
+                    console.error({ error });
                     console.log(error);
                 }
             }, 500);
@@ -74,39 +82,39 @@ export default function FastBtcPegOut(props) {
     const columns = [
         {
             title: '',
-            dataIndex: 'info',
+            dataIndex: 'info'
         },
 
         {
             title: 'Hash Id',
-            dataIndex: 'hashId',
+            dataIndex: 'hashId'
         },
         {
             title: 'Status',
-            dataIndex: 'status',
+            dataIndex: 'status'
         },
         {
             title: 'BTC Amount',
-            dataIndex: 'btcAmount',
+            dataIndex: 'btcAmount'
         },
         {
             title: 'BTC Fee',
-            dataIndex: 'btcFee',
+            dataIndex: 'btcFee'
         },
         {
             title: 'BTC Address',
-            dataIndex: 'btcAddress',
+            dataIndex: 'btcAddress'
         },
         {
             title: 'Date Added',
-            dataIndex: 'date',
-        },
+            dataIndex: 'date'
+        }
     ];
 
     useEffect(() => {
         const interval = setInterval(() => {
             if (currentHash) {
-                getFastbtcPegout(current)
+                getFastbtcPegout(current);
             }
         }, 30000);
         return () => clearInterval(interval);
@@ -117,81 +125,166 @@ export default function FastBtcPegOut(props) {
     const onChange = (page) => {
         setCurrent(page);
         data_row(page);
-        getFastbtcPegout(page,true)
+        getFastbtcPegout(page, true);
     };
 
     const data_row_coins2 = [];
-    var json_end = []
+    var json_end = [];
     const data_row = (set_current) => {
         /*******************************sort descending by date lastUpdatedAt***********************************/
-        if(dataJson.pegout_requests!==undefined){
+        if (dataJson.pegout_requests !== undefined) {
             dataJson.pegout_requests.sort((a, b) => {
-                return myParseDate(b.updated) - myParseDate(a.updated)
+                return myParseDate(b.updated) - myParseDate(a.updated);
             });
         }
         /*******************************end sort descending by date lastUpdatedAt***********************************/
 
         /*******************************set json group according to limits***********************************/
-        json_end = dataJson.pegout_requests
-        if( dataJson.pegout_requests==undefined ){
-            getFastbtcPegout(current)
-            json_end = dataJson.pegout_requests
+        json_end = dataJson.pegout_requests;
+        if (dataJson.pegout_requests == undefined) {
+            getFastbtcPegout(current);
+            json_end = dataJson.pegout_requests;
         }
         /*******************************end set json group according to limits***********************************/
 
         /*******************************extraer datos del json con el json seteado por limit y skip***********************************/
         data = [];
 
-        if(json_end!==undefined){
+        if (json_end !== undefined) {
             json_end.forEach((data_j) => {
-                const datas_response = readJsonTableFastBtcPegOut(data_j)
-                    const detail = {
-                        status: <span className={datas_response['statusColor']}>{datas_response['status']}</span>
-                        ,btcAmount: datas_response['btcAmount']
-                        ,btcFee: datas_response['btcFee']
-                        ,btcAddress: <Copy textToShow={datas_response['btcAddressCut']} textToCopy={datas_response['btcAddress']} />
-                        ,date: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['date']}</Moment></span>
-                        ,timestamp: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['timestamp']}</Moment></span>
-                        ,transactionHash: <Copy textToShow={datas_response['transactionHashCut']} textToCopy={datas_response['transactionHash']} typeUrl={'tx'}/>
-                        ,transId: <Copy textToShow={datas_response['hash_id_cut']} textToCopy={datas_response['hashId']} />
-                        ,blockNumber: datas_response['blockNumber']
-                        ,rskAddress: <Copy textToShow={datas_response['rskAddressCut']} textToCopy={datas_response['rskAddress']} />
-                        ,transactionHashLastUpdated: <Copy textToShow={datas_response['transactionHashLastUpdated']} textToCopy={datas_response['transactionHashLastUpdated']} />
+                const datas_response = readJsonTableFastBtcPegOut(data_j);
+                const detail = {
+                    status: (
+                        <span className={datas_response['statusColor']}>
+                            {datas_response['status']}
+                        </span>
+                    ),
+                    btcAmount: datas_response['btcAmount'],
+                    btcFee: datas_response['btcFee'],
+                    btcAddress: (
+                        <Copy
+                            textToShow={datas_response['btcAddressCut']}
+                            textToCopy={datas_response['btcAddress']}
+                        />
+                    ),
+                    date: (
+                        <span>
+                            <Moment
+                                format={
+                                    i18n.language === 'en'
+                                        ? date.DATE_EN
+                                        : date.DATE_ES
+                                }
+                            >
+                                {datas_response['date']}
+                            </Moment>
+                        </span>
+                    ),
+                    timestamp: (
+                        <span>
+                            <Moment
+                                format={
+                                    i18n.language === 'en'
+                                        ? date.DATE_EN
+                                        : date.DATE_ES
+                                }
+                            >
+                                {datas_response['timestamp']}
+                            </Moment>
+                        </span>
+                    ),
+                    transactionHash: (
+                        <Copy
+                            textToShow={datas_response['transactionHashCut']}
+                            textToCopy={datas_response['transactionHash']}
+                            typeUrl={'tx'}
+                        />
+                    ),
+                    transId: (
+                        <Copy
+                            textToShow={datas_response['hash_id_cut']}
+                            textToCopy={datas_response['hashId']}
+                        />
+                    ),
+                    blockNumber: datas_response['blockNumber'],
+                    rskAddress: (
+                        <Copy
+                            textToShow={datas_response['rskAddressCut']}
+                            textToCopy={datas_response['rskAddress']}
+                        />
+                    ),
+                    transactionHashLastUpdated: (
+                        <Copy
+                            textToShow={
+                                datas_response['transactionHashLastUpdated']
+                            }
+                            textToCopy={
+                                datas_response['transactionHashLastUpdated']
+                            }
+                        />
+                    )
+                };
 
-                    }
-
-                    data_row_coins2.push({
-                        key: datas_response['hashId']
-                        ,hashId: <Copy textToShow={datas_response['transactionHashCut']} textToCopy={datas_response['transactionHash']} />
-                        ,status: <span className={datas_response['statusColor']}>{datas_response['status']}</span>
-                        ,btcAmount: datas_response['btcAmount']
-                        ,btcFee: datas_response['btcFee']
-                        ,btcAddress: <Copy textToShow={datas_response['btcAddressCut']} textToCopy={datas_response['btcAddress']} />
-                        ,date: <span><Moment format={(i18n.language === "en") ? date.DATE_EN : date.DATE_ES}>{datas_response['date']}</Moment></span>
-                        ,detail: detail
-                    });
-
+                data_row_coins2.push({
+                    key: datas_response['hashId'],
+                    hashId: (
+                        <Copy
+                            textToShow={datas_response['transactionHashCut']}
+                            textToCopy={datas_response['transactionHash']}
+                        />
+                    ),
+                    status: (
+                        <span className={datas_response['statusColor']}>
+                            {datas_response['status']}
+                        </span>
+                    ),
+                    btcAmount: datas_response['btcAmount'],
+                    btcFee: datas_response['btcFee'],
+                    btcAddress: (
+                        <Copy
+                            textToShow={datas_response['btcAddressCut']}
+                            textToCopy={datas_response['btcAddress']}
+                        />
+                    ),
+                    date: (
+                        <span>
+                            <Moment
+                                format={
+                                    i18n.language === 'en'
+                                        ? date.DATE_EN
+                                        : date.DATE_ES
+                                }
+                            >
+                                {datas_response['date']}
+                            </Moment>
+                        </span>
+                    ),
+                    detail: detail
+                });
             });
-
 
             data_row_coins2.forEach((element, index) => {
                 data.push({
                     key: element.key,
                     info: '',
-                    hashId: <span >{element.hashId}</span>,
-                    status: <span >{element.status}</span>,
-                    btcAmount: <span >{element.btcAmount}</span>,
-                    btcFee: <span >{element.btcFee}</span>,
-                    btcAddress: <span >{element.btcAddress}</span>,
-                    date: <span >{element.date}</span>,
-                    description: <div className={'div-table-in'}><RowDetailPegOut detail={element.detail} /></div>,
+                    hashId: <span>{element.hashId}</span>,
+                    status: <span>{element.status}</span>,
+                    btcAmount: <span>{element.btcAmount}</span>,
+                    btcFee: <span>{element.btcFee}</span>,
+                    btcAddress: <span>{element.btcAddress}</span>,
+                    date: <span>{element.date}</span>,
+                    description: (
+                        <div className={'div-table-in'}>
+                            <RowDetailPegOut detail={element.detail} />
+                        </div>
+                    )
                 });
-            })
+            });
         }
         /*******************************end extraer datos del json con el json seteado por limit y skip***********************************/
-    }
+    };
 
-    data_row(current)
+    data_row(current);
 
     //const { xScroll, yScroll, ...state } = this.state;
 
@@ -203,7 +296,7 @@ export default function FastBtcPegOut(props) {
         scroll.x = '100vw';
     }
 
-    const tableColumns = columns.map(item => ({ ...item }));
+    const tableColumns = columns.map((item) => ({ ...item }));
 
     if (xScroll === 'fixed') {
         tableColumns[0].fixed = true;
@@ -224,13 +317,14 @@ export default function FastBtcPegOut(props) {
         top,
         bottom,
         yScroll,
-        xScroll,
-    }
+        xScroll
+    };
 
-    let divi= document.querySelectorAll('.ant-table-tbody')
-    divi.forEach(function(userItem) {
-        if( userItem.offsetHeight!=0 ){
-            document.querySelector('.FastBTCHistory').style.height=userItem.offsetHeight+265+'px'
+    let divi = document.querySelectorAll('.ant-table-tbody');
+    divi.forEach(function (userItem) {
+        if (userItem.offsetHeight != 0) {
+            document.querySelector('.FastBTCHistory').style.height =
+                userItem.offsetHeight + 265 + 'px';
         }
     });
 
@@ -239,19 +333,31 @@ export default function FastBtcPegOut(props) {
             <Table
                 {...state}
                 expandable={{
-                    expandedRowRender: record => (
+                    expandedRowRender: (record) => (
                         <p style={{ margin: 0 }}>{record.description}</p>
                     ),
                     expandIcon: ({ expanded, onExpand, record }) =>
                         expanded ? (
-                            <UpCircleOutlined onClick={e => onExpand(record, e)} />
+                            <UpCircleOutlined
+                                onClick={(e) => onExpand(record, e)}
+                            />
                         ) : (
-                            <DownCircleOutlined onClick={e => onExpand(record, e)} />
+                            <DownCircleOutlined
+                                onClick={(e) => onExpand(record, e)}
+                            />
                         )
                 }}
-                pagination={{pageSize:10, position: [top, bottom], defaultCurrent: 1, onChange:onChange , total: totalTable }}
+                pagination={{
+                    pageSize: 10,
+                    position: [top, bottom],
+                    defaultCurrent: 1,
+                    onChange: onChange,
+                    total: totalTable
+                }}
                 columns={tableColumns}
-                dataSource={hasData ? (auth.isLoggedIn == true) ? data : null : null}
+                dataSource={
+                    hasData ? (auth.isLoggedIn == true ? data : null) : null
+                }
                 scroll={scroll}
             />
         </>

@@ -1,15 +1,15 @@
-import React, {Fragment, useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import BigNumber from 'bignumber.js';
-import {Row, Col, Alert} from 'antd';
+import { Row, Col, Alert } from 'antd';
 
-import SystemStatus from '../../components/Cards/Metrics/SystemStatus'
-import Reserve from '../../components/Cards/Metrics/Reserve'
-import TG from '../../components/Cards/Metrics/TG'
-import TX from '../../components/Cards/Metrics/TX'
-import TP from '../../components/Cards/Metrics/TP'
-import TC from '../../components/Cards/Metrics/TC'
-import Liquidity from '../../components/Cards/Metrics/Liquidity'
-import NextSettlement from '../../components/Cards/Metrics/NextSettlement'
+import SystemStatus from '../../components/Cards/Metrics/SystemStatus';
+import Reserve from '../../components/Cards/Metrics/Reserve';
+import TG from '../../components/Cards/Metrics/TG';
+import TX from '../../components/Cards/Metrics/TX';
+import TP from '../../components/Cards/Metrics/TP';
+import TC from '../../components/Cards/Metrics/TC';
+import Liquidity from '../../components/Cards/Metrics/Liquidity';
+import NextSettlement from '../../components/Cards/Metrics/NextSettlement';
 import { AuthenticateContext } from '../../context/Auth';
 import { getMaxAvailableOfCurrencyCode } from '../../helpers/currency';
 import { useProjectTranslation } from '../../helpers/translations';
@@ -17,7 +17,6 @@ import { useProjectTranslation } from '../../helpers/translations';
 import './../../assets/css/pages.scss';
 
 function Metrics(props) {
-
     const [t, i18n, ns] = useProjectTranslation();
     const auth = useContext(AuthenticateContext);
     const { convertToken } = auth;
@@ -39,7 +38,7 @@ function Metrics(props) {
         x2BTCAmount = 0,
         x2DocAmount = 0,
         x2BproAmount = 0
-      } = mocState || {};
+    } = mocState || {};
 
     b0BTCAmount = new BigNumber(b0BTCAmount);
     b0DocAmount = new BigNumber(b0DocAmount);
@@ -67,40 +66,60 @@ function Metrics(props) {
         bproPriceInRbtc,
         bproDiscountPrice,
         mocPrice
-    } = (!!mocState) ? mocState : 0;
-    const bprox2PriceInUsd = (convertToken && convertToken('RESERVE', 'USD', bprox2PriceInRbtc)) || 0;
+    } = !!mocState ? mocState : 0;
+    const bprox2PriceInUsd =
+        (convertToken && convertToken('RESERVE', 'USD', bprox2PriceInRbtc)) ||
+        0;
     const mocPriceUsd = new BigNumber(mocPrice);
     const bproDiscountPriceRBTC = new BigNumber(bproDiscountPrice);
     const bproDiscountPriceUsd =
-        (convertToken && convertToken('RESERVE', 'USD', bproDiscountPriceRBTC)) || 0;
+        (convertToken &&
+            convertToken('RESERVE', 'USD', bproDiscountPriceRBTC)) ||
+        0;
 
-    const totalDocAmount = b0DocAmount.plus(x2DocAmount);    
-    const totalBproInRBTC = b0BproAmount.multipliedBy(new BigNumber(bproPriceInRbtc).div(10 ** 18));
-    const totalBpro = (convertToken && convertToken('RESERVE', 'TC', totalBproInRBTC)) || 0;
+    const totalDocAmount = b0DocAmount.plus(x2DocAmount);
+    const totalBproInRBTC = b0BproAmount.multipliedBy(
+        new BigNumber(bproPriceInRbtc).div(10 ** 18)
+    );
+    const totalBpro =
+        (convertToken && convertToken('RESERVE', 'TC', totalBproInRBTC)) || 0;
 
     const totalBproxInRBTC = x2BproAmount.multipliedBy(
         new BigNumber(bprox2PriceInRbtc).div(10 ** 18)
     ); //new BigNumber(x2BTCAmount);
-    const totalBprox = (convertToken && convertToken('RESERVE', 'TX', totalBproxInRBTC)) || 0;
-    
+    const totalBprox =
+        (convertToken && convertToken('RESERVE', 'TX', totalBproxInRBTC)) || 0;
+
     const adjustedTargetCoverage = parseFloat(
-        b0TargetCoverage * (bitcoinPrice / Math.min(bitcoinPrice, bitcoinMovingAverage))
+        b0TargetCoverage *
+            (bitcoinPrice / Math.min(bitcoinPrice, bitcoinMovingAverage))
     );
 
     return (
         <Fragment>
-            {!auth.isLoggedIn && <Alert
-                message={t('global.NoConnection_alertTitle')}
-                description={t('global.NoConnection_alertPleaseConnect')}
-                type="error"
-                showIcon
-                className="AlertNoConnection"
-            />}
-            <h1 className="PageTitle">{t('global.Metrics_title', { ns: 'global' })}</h1>
-            <h3 className="PageSubTitle">{t('global.Metrics_subtitle', { ns: 'global' })}</h3>
+            {!auth.isLoggedIn && (
+                <Alert
+                    message={t('global.NoConnection_alertTitle')}
+                    description={t('global.NoConnection_alertPleaseConnect')}
+                    type="error"
+                    showIcon
+                    className="AlertNoConnection"
+                />
+            )}
+            <h1 className="PageTitle">
+                {t('global.Metrics_title', { ns: 'global' })}
+            </h1>
+            <h3 className="PageSubTitle">
+                {t('global.Metrics_subtitle', { ns: 'global' })}
+            </h3>
             <Row gutter={15} className="MetricsCardsContainer">
                 <Col className={'SystemStatusSection'}>
-                    <SystemStatus coverage={globalCoverage} adjustedTargetCoverage={adjustedTargetCoverage} paused={paused} blocksToSettlement={blocksToSettlement}/>
+                    <SystemStatus
+                        coverage={globalCoverage}
+                        adjustedTargetCoverage={adjustedTargetCoverage}
+                        paused={paused}
+                        blocksToSettlement={blocksToSettlement}
+                    />
                 </Col>
                 <Col className={'RBTCSection'}>
                     <Reserve
@@ -115,7 +134,11 @@ function Metrics(props) {
                 </Col>
             </Row>
 
-            <Row style={{ marginTop: 15 }} gutter={15} className="MetricsCardsContainer">
+            <Row
+                style={{ marginTop: 15 }}
+                gutter={15}
+                className="MetricsCardsContainer"
+            >
                 <Col className={'MetricsCardsDOC'}>
                     <TP
                         availableRedeem={maxStableRedeemAvailable}
@@ -163,7 +186,7 @@ function Metrics(props) {
             {/*    </Col>*/}
             {/*</Row>*/}
         </Fragment>
-    )
+    );
 }
 
 export default Metrics;

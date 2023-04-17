@@ -35,6 +35,8 @@ Each release gets deployed to IPFS automatically.
 
 Please go to release section, there are several links to [releases](https://github.com/money-on-chain/release) 
 
+**MOC Release**: You can always get the last stable release on: [dapp.moneyonchain.com](https://dapp.moneyonchain.com)
+
 **Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
 
 
@@ -46,15 +48,21 @@ Requires:
 
 * Nodejs > 12
 
+`nvm use`
+
 Install packages
 
 `npm install`
 
 Run
 
-`npm run start:moc-testnet`
+`npm run start:moc-mainnet`
 
-**Note:** Start the environment you want to run ex. **"start:moc-testnet"** to start environment Moc Testnet 
+**Note:** Start the environment you want to run ex. **"start:moc-mainnet"** to start environment Moc Production Mainnet 
+
+Then in your browser:
+
+`http://localhost:3000`
 
 
 ### Environment table
@@ -62,14 +70,14 @@ Run
 Environment is our already deployed contracts. 
 **Develop**: npm run start:<environment>
 
-| Name             | Project | Main Gateway                                 | Environment | Network | npm run                 |
-|------------------|---------|----------------------------------------------|-------------|---------|-------------------------|
-| MoC TestnetAlpha | MOC     |                                              | Testnet     | RSK     | start:moc-alpha-testnet |
-| MoC Testnet      | MOC     | [link](https://app-testnet.moneyonchain.com) | Testnet     | RSK     | start:moc-testnet       |
-| MoC Mainnet      | MOC     | [link](https://app.moneyonchain.com)         | Mainnet     | RSK     | start:moc-mainnet       |
-| RoC TestnetAlpha | RIF     |                                              | Testnet     | RSK     | start:roc-alpha-testnet |
-| RoC Testnet      | RIF     | [link](https://app-testnet.rifonchain.com)   | Testnet     | RSK     | start:roc-testnet       |
-| RoC Mainnet      | RIF     | [link](https://app.rifonchain.com)           | Mainnet     | RSK     | start:roc-mainnet       |
+| Name             | Project | Main Gateway                           | Environment | Network | npm run                 |
+|------------------|---------|----------------------------------------|-------------|---------|-------------------------|
+| MoC TestnetAlpha | MOC     |                                        | Testnet     | RSK     | start:moc-alpha-testnet |
+| MoC Testnet      | MOC     |                                        | Testnet     | RSK     | start:moc-testnet       |
+| MoC Mainnet      | MOC     | [link](https://alpha.moneyonchain.com) | Mainnet     | RSK     | start:moc-mainnet       |
+| RoC TestnetAlpha | RIF     |                                        | Testnet     | RSK     | start:roc-alpha-testnet |
+| RoC Testnet      | RIF     |                                        | Testnet     | RSK     | start:roc-testnet       |
+| RoC Mainnet      | RIF     |                                        | Mainnet     | RSK     | start:roc-mainnet       |
 
 
 ### Faucets

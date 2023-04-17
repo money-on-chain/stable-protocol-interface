@@ -4,21 +4,23 @@ import { useContext } from 'react';
 import { AuthenticateContext } from '../../../context/Auth';
 import { config } from '../../../projects/config';
 import { useProjectTranslation } from '../../../helpers/translations';
-import { ReactComponent as LogoIconRBTC } from '../../../assets/icons/icon-btc_to_rbtc.svg';
-
+import { ReactComponent as LogoIconBTCtoRBTC } from '../../../assets/icons/icon-btc_to_rbtc.svg';
+import LogoIconRBTCtoBTC from '../../../assets/icons/icon-rbtc_to_btc.png';
 
 export default function BtcToRbtc(props) {
-
-    const [t, i18n, ns]= useProjectTranslation();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
-    const{
+    const {
         title = 'BTC to rBTC Peg In',
-        description = t(`${AppProject}.fastbtc.getRBTC_description`, {ns: ns}),
-        btnAction = ()=>{},
-        btnText = 'Convert rBTC to BTC'
+        description = t(`${AppProject}.fastbtc.getRBTC_description`, {
+            ns: ns
+        }),
+        btnAction = () => {},
+        btnText = 'Convert rBTC to BTC',
+        mode = 'pegin'
     } = props;
 
-    const {accountData}= useContext(AuthenticateContext);
+    const { accountData } = useContext(AuthenticateContext);
 
     return (
         <div className="Card BtoRCard">
@@ -26,28 +28,41 @@ export default function BtcToRbtc(props) {
                 <Col xs={24}>
                     <div className="title">
                         <div className="CardLogo">
-                            <h1>{ title }</h1>
+                            <h1>{title}</h1>
                         </div>
                     </div>
                 </Col>
             </Row>
             <Row className="m-b">
                 <Col xs={8}>
-                    <div className='text-center'>
-                        <LogoIconRBTC className="logo-img" width="111" height="111" alt=""/>
+                    <div className="text-center">
+                        {mode === 'pegin' ? (
+                            <LogoIconBTCtoRBTC
+                                className="logo-img"
+                                width="111"
+                                height="111"
+                                alt=""
+                            />
+                        ) : (
+                            <img
+                                src={LogoIconRBTCtoBTC}
+                                width="44"
+                                height="111"
+                                alt=""
+                            />
+                        )}
                     </div>
                 </Col>
                 <Col xs={13}>
                     <p>{description}</p>
-                    {accountData.Wallet &&
-                    <Button type="primary" onClick={btnAction}>
-                        <b>{btnText}</b>
-                    </Button>}
+                    {accountData.Wallet && (
+                        <Button type="primary" onClick={btnAction}>
+                            <b>{btnText}</b>
+                        </Button>
+                    )}
                 </Col>
-                <Col xs={3}/>
+                <Col xs={3} />
             </Row>
-
         </div>
-
-    )
+    );
 }
