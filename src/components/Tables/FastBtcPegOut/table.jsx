@@ -13,9 +13,6 @@ import { useProjectTranslation } from '../../../helpers/translations';
 
 const { TabPane } = Tabs;
 
-const onChange = (key) => {
-    console.log(key);
-};
 
 const Table = ({ accountData, defaultPane }) => {
     const auth = useContext(AuthenticateContext);
@@ -212,6 +209,11 @@ const Table = ({ accountData, defaultPane }) => {
             ns: ns
         })
     };
+
+    const onChange = (key) => {
+        setCurrentPane(key);
+    };
+
 
     return (
         <Tabs activeKey={currentPane} onChange={onChange}>
