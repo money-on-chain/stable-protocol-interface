@@ -24,7 +24,7 @@ function Step2(props) {
     const [errorRbtcAddress, setErrorRbtcAddress] = useState(true);
 
     let btcEnvironment;
-    if (process.env.REACT_APP_ENVIRONMENT_CHAIN_ID === 30) {
+    if (process.env.REACT_APP_ENVIRONMENT_CHAIN_ID === '30') {
         btcEnvironment = 'mainnet';
     } else {
         btcEnvironment = 'testnet';
@@ -68,9 +68,9 @@ function Step2(props) {
     };
 
     const validateBTCAddress = (btcAddress) => {
-        let isValid = false
+        let isValid = false;
         if (validate(btcAddress)) {
-            const infoAddress = getAddressInfo(btcAddress)
+            const infoAddress = getAddressInfo(btcAddress);
             if (infoAddress && VALID_BTC_TYPE_ADDRESS.includes(infoAddress.type) && btcEnvironment === infoAddress.network) {
                 isValid = true
             }
