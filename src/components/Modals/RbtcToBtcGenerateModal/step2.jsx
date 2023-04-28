@@ -1,5 +1,6 @@
 import { Button } from 'antd';
 import React, { Fragment, useContext, useState, useRef } from 'react';
+import { validate, getAddressInfo } from 'bitcoin-address-validation';
 
 import { AuthenticateContext } from '../../../context/Auth';
 import Step3 from './step3';
@@ -7,6 +8,9 @@ import BigNumber from 'bignumber.js';
 
 import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-atention.svg';
 import { ReactComponent as LogoIconReserve } from '../../../assets/icons/icon-reserve2.svg';
+
+const VALID_BTC_TYPE_ADDRESS = ['p2pkh', 'p2sh', 'p2wpkh', 'p2wsh']; // Taproot not compatible 'p2tr'
+
 
 function Step2(props) {
     const amountInput = useRef();
@@ -19,47 +23,65 @@ function Step2(props) {
     const [errorRbtcAmount, setErrorRbtcAmount] = useState(true);
     const [errorRbtcAddress, setErrorRbtcAddress] = useState(true);
 
+    let btcEnvironment;
+    if (process.env.REACT_APP_ENVIRONMENT_CHAIN_ID === '30') {
+        btcEnvironment = 'mainnet';
+    } else {
+        btcEnvironment = 'testnet';
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         // 👇️ value of input field
-        if (rbtcAmount.trim().length != 0) {
-            setErrorRbtcAmount(false);
-        }
-        if (rbtcAddress.trim().length != 0) {
-            setErrorRbtcAddress(false);
-        }
 
-        if (errorRbtcAmount == false && errorRbtcAddress == false) {
+        setErrorRbtcAmount(!validateAmount(rbtcAmount));
+        setErrorRbtcAddress(!validateBTCAddress(rbtcAddress));
+
+        if (errorRbtcAmount === false && errorRbtcAddress === false) {
             setCurrentStep(3);
         }
     };
     const { visible = false, handleClose = () => {} } = props;
 
+    const validateAmount = (amount) => {
+        let isValid;
+        if (new BigNumber(amount).gt(0)) {
+            isValid = true
+        } else {
+            isValid = false
+        }
+        return isValid;
+    }
+
     const handleChangeAmount = (event) => {
+        if (!validateAmount(event.target.value)) return;
+
         setRbtcAmount(event.target.value);
         if (event.target.value.length < 7 || event.target.value.length > 7) {
             const multiple = 1.0;
             setRbtcAmount((event.target.value * multiple).toFixed(6));
             event.target.value = (event.target.value * multiple).toFixed(6);
             setErrorRbtcAmount(false);
-        }
-
-        if (rbtcAmount.trim().length != 0) {
-            setErrorRbtcAmount(false);
-        }
-        if (rbtcAddress.trim().length != 0) {
-            setErrorRbtcAddress(false);
+        } else {
+            setErrorRbtcAmount(true);
         }
     };
 
+    const validateBTCAddress = (btcAddress) => {
+        let isValid = false;
+        if (validate(btcAddress)) {
+            const infoAddress = getAddressInfo(btcAddress);
+            if (infoAddress && VALID_BTC_TYPE_ADDRESS.includes(infoAddress.type) && btcEnvironment === infoAddress.network) {
+                isValid = true
+            }
+        }
+        return isValid
+    }
+
     const handleChangeAddress = (event) => {
+        const isValid = validateBTCAddress(event.target.value);
+        setErrorRbtcAddress(!isValid);
         setrbtcAddress(event.target.value);
-        if (rbtcAddress.trim().length != 0) {
-            setErrorRbtcAddress(false);
-        }
-        if (rbtcAmount.trim().length != 0) {
-            setErrorRbtcAmount(false);
-        }
     };
 
     const { accountData } = useContext(AuthenticateContext);
@@ -123,9 +145,7 @@ function Step2(props) {
                                                                             'error'
                                                                         }
                                                                     >
-                                                                        This
-                                                                        field is
-                                                                        required
+                                                                        Invalid BTC Address - Taproot type address is not supported!.
                                                                     </p>
                                                                 </Fragment>
                                                             )}
