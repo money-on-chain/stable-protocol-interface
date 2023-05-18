@@ -1,6 +1,6 @@
 {
-  "short_name": "Money On Chain",
-  "name": "Money On Chain - Dollar On Chain Stable Interface",
+  "short_name": "RIF On Chain",
+  "name": "RIF On Chain - Stable Interface",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,11 +11,6 @@
       "src": "favicon-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",

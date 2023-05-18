@@ -1,14 +1,13 @@
 import { config } from '../projects/config';
 const getRLogin = (port) => {
+    let rpcUrls = {};
 
-    let rpcUrls= {}
-
-    if( parseInt(port)===31 ){
+    if (parseInt(port) === 31) {
         rpcUrls = {
             31: 'https://public-node.testnet.rsk.co'
         };
     }
-    if( parseInt(port)===30 ){
+    if (parseInt(port) === 30) {
         rpcUrls = {
             30: 'https://public-node.rsk.co'
         };
@@ -32,33 +31,33 @@ const getRLogin = (port) => {
             'custom-ledger': {
                 ...window.rLoginLedgerProvider.ledgerProviderOptions,
                 options: {
-                  rpcUrl: rpcUrls[parseInt(chainId, 10)],
-                  chainId: parseInt(chainId, 10)
+                    rpcUrl: rpcUrls[parseInt(chainId, 10)],
+                    chainId: parseInt(chainId, 10)
                 }
             },
             'custom-dcent': {
-              ...window.rLoginDCentProvider.dcentProviderOptions,
-              options: {
-                rpcUrl: rpcUrls[parseInt(chainId)],
-                chainId: parseInt(chainId),
-                debug: true
-              }
+                ...window.rLoginDCentProvider.dcentProviderOptions,
+                options: {
+                    rpcUrl: rpcUrls[parseInt(chainId)],
+                    chainId: parseInt(chainId),
+                    debug: true
+                }
             },
             'custom-trezor': {
                 ...window.rLoginTrezorProvider.trezorProviderOptions,
                 options: {
-                  rpcUrl: rpcUrls[parseInt(chainId, 10)],
-                  chainId: parseInt(chainId, 10),
-                  manifestEmail: 'info@moneyonchain.com',
-                  manifestAppUrl: 'https://moneyonchain.com/'
+                    rpcUrl: rpcUrls[parseInt(chainId, 10)],
+                    chainId: parseInt(chainId, 10),
+                    manifestEmail: 'info@moneyonchain.com',
+                    manifestAppUrl: 'https://moneyonchain.com/'
                 }
             }
         },
         rpcUrls: selectedNetwork,
-            supportedChains
+        supportedChains
     });
 
     return rLogin;
-}
+};
 
 export default getRLogin;

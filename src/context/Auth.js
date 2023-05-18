@@ -1,21 +1,30 @@
 import { createContext, useEffect, useState } from 'react';
 import getRLogin from '../lib/rLogin';
 import Web3 from 'web3';
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
 
 import addressHelper from '../helpers/addressHelper';
 import FastBtcSocketWrapper from '../lib/fastBTC/FastBtcSocketWrapper';
 import { config } from '../projects/config';
 import { readContracts } from '../lib/integration/contracts';
 import { contractStatus, userBalance } from '../lib/integration/multicall';
-import { mintTP, redeemTP, mintTC, redeemTC, mintTX, redeemTX } from '../lib/integration/interfaces-coinbase';
-import { AllowanceUseReserveToken,
+import {
+    mintTP,
+    redeemTP,
+    mintTC,
+    redeemTC,
+    mintTX,
+    redeemTX
+} from '../lib/integration/interfaces-coinbase';
+import {
+    AllowanceUseReserveToken,
     mintTPRRC20,
     redeemTPRRC20,
     mintTCRRC20,
     redeemTCRRC20,
     mintTXRRC20,
-    redeemTXRRC20 } from '../lib/integration/interfaces-rrc20';
+    redeemTXRRC20
+} from '../lib/integration/interfaces-rrc20';
 import { decodeEvents } from '../lib/integration/transaction';
 
 import {
@@ -25,6 +34,7 @@ import {
     transferCoinbaseTo,
     calcMintInterest,
     approveTGTokenCommission,
+    vendorMarkup,
     AllowUseTokenMigrator,
     MigrateToken
 } from '../lib/integration/interfaces-base';
@@ -38,7 +48,7 @@ import {
     delayMachineCancelWithdraw,
     approveMoCTokenStaking,
     getMoCAllowance
-    } from '../lib/integration/interfaces-omoc';
+} from '../lib/integration/interfaces-omoc';
 import { getGasPrice } from '../lib/integration/utils';
 
 const helper = addressHelper(Web3);
@@ -52,22 +62,63 @@ const AuthenticateContext = createContext({
     balanceRbtc: null,
     contractStatusData: null,
     web3: null,
-    getAppMode:null,
+    getAppMode: null,
     connect: () => {},
-    interfaceExchangeMethod: async (sourceCurrency, targetCurrency, amount, slippage, onTransaction, onReceipt) => {},
+    interfaceExchangeMethod: async (
+        sourceCurrency,
+        targetCurrency,
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {},
     interfaceMintTC: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceRedeemTC: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceMintTP: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceRedeemTP: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceMintTX: async (amount, slippage, onTransaction, onReceipt) => {},
     interfaceRedeemTX: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintTCRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemTCRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintTPRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemTPRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintTXRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemTXRRC20: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceApproveTGTokenCommission: async (enabled, onTransaction, onReceipt) => {},
+    interfaceMintTCRRC20: async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {},
+    interfaceRedeemTCRRC20: async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {},
+    interfaceMintTPRRC20: async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {},
+    interfaceRedeemTPRRC20: async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {},
+    interfaceMintTXRRC20: async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {},
+    interfaceRedeemTXRRC20: async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {},
+    interfaceApproveTGTokenCommission: async (
+        enabled,
+        onTransaction,
+        onReceipt
+    ) => {},
     interfaceAllowUseTokenMigrator: async (amount, onTransaction, onReceipt) => {},
     interfaceMigrateToken: async (onTransaction, onReceipt) => {},
     disconnect: () => {},
@@ -87,6 +138,7 @@ const AuthenticateContext = createContext({
     interfaceTransferTGTo: async (to, amount) => {},
     interfaceTransferCoinbaseTo: async (to, amount) => {},
     interfaceCalcMintInterestValues: async (amount) => {},
+    interfaceVendorMarkup: async (vendorAccount) => {},
     interfaceApproveReserve: async (address) => {},
     convertToken: async (from, to, amount) => {},
     getSpendableBalance: async (address) => {},
@@ -119,12 +171,14 @@ const AuthenticateProvider = ({ children }) => {
     const socket = new FastBtcSocketWrapper();
 
     async function loadCss() {
-        let css_logout= await import ('../assets/css/logout.scss');
-     }
+        let css_logout = await import('../assets/css/logout.scss');
+    }
 
     useEffect(() => {
         if (!window.rLogin) {
-            window.rLogin = getRLogin(process.env.REACT_APP_ENVIRONMENT_CHAIN_ID);
+            window.rLogin = getRLogin(
+                process.env.REACT_APP_ENVIRONMENT_CHAIN_ID
+            );
 
             if (window.rLogin.cachedProvider) {
                 connect();
@@ -136,9 +190,14 @@ const AuthenticateProvider = ({ children }) => {
     });
 
     const disableLogin = () => {
-        document.querySelectorAll('.rlogin-modal-hitbox')[0].addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); })
-        loadCss()
-    }
+        document
+            .querySelectorAll('.rlogin-modal-hitbox')[0]
+            .addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        loadCss();
+    };
 
     useEffect(() => {
         if (account) {
@@ -149,12 +208,12 @@ const AuthenticateProvider = ({ children }) => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            if(account){
+            if (account) {
                 loadContractsStatusAndUserBalance();
             }
         }, 30000);
         return () => clearInterval(interval);
-    },[account]);
+    }, [account]);
 
     const connect = () =>
         window.rLogin.connect().then((rLoginResponse) => {
@@ -173,7 +232,7 @@ const AuthenticateProvider = ({ children }) => {
             provider.on('chainChanged', function (accounts) {
                 disconnect();
                 window.location.reload();
-            })
+            });
 
             setweb3(web3);
             window.web3 = web3;
@@ -185,7 +244,6 @@ const AuthenticateProvider = ({ children }) => {
                 setAccount(account);
                 setIsLoggedIn(true);
             });
-
         });
 
     const disconnect = async () => {
@@ -216,11 +274,17 @@ const AuthenticateProvider = ({ children }) => {
             config,
             account,
             vendorAddress: config.environment.vendor.address
-        }
+        };
+    };
 
-    }
-
-    const interfaceExchangeMethod = async (sourceCurrency, targetCurrency, amount, slippage, onTransaction, onReceipt) => {
+    const interfaceExchangeMethod = async (
+        sourceCurrency,
+        targetCurrency,
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const appMode = config.environment.AppMode;
         const appModeString = `APP_MODE_${appMode}`;
 
@@ -283,74 +347,216 @@ const AuthenticateProvider = ({ children }) => {
             }
         };
 
-        const exchangeMethod = exchangeCurrencyMap[sourceCurrency][targetCurrency][appModeString].exchangeFunction;
+        const exchangeMethod =
+            exchangeCurrencyMap[sourceCurrency][targetCurrency][appModeString]
+                .exchangeFunction;
         return exchangeMethod(amount, slippage, onTransaction, onReceipt);
+    };
 
-    }
-
-    const interfaceMintTP = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTP = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await mintTP(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await mintTP(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceMintTPRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTPRRC20 = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await mintTPRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await mintTPRRC20(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceRedeemTP = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTP = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemTP(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await redeemTP(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceRedeemTPRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTPRRC20 = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemTPRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await redeemTPRRC20(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceMintTC = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTC = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await mintTC(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await mintTC(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceMintTCRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTCRRC20 = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await mintTCRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await mintTCRRC20(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceRedeemTC = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTC = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemTC(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await redeemTC(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceRedeemTCRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTCRRC20 = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemTCRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await redeemTCRRC20(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceMintTX = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTX = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await mintTX(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await mintTX(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceMintTXRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceMintTXRRC20 = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await mintTXRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await mintTXRRC20(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceRedeemTX = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTX = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemTX(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await redeemTX(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceRedeemTXRRC20 = async (amount, slippage, onTransaction, onReceipt) => {
+    const interfaceRedeemTXRRC20 = async (
+        amount,
+        slippage,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        await redeemTXRRC20(interfaceContext, amount, slippage, onTransaction, onReceipt);
-    }
+        await redeemTXRRC20(
+            interfaceContext,
+            amount,
+            slippage,
+            onTransaction,
+            onReceipt
+        );
+    };
 
-    const interfaceApproveTGTokenCommission = async (enabled, onTransaction, onReceipt) => {
+    const interfaceApproveTGTokenCommission = async (
+        enabled,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
-        return approveTGTokenCommission(interfaceContext, enabled, onTransaction, onReceipt);
+        return approveTGTokenCommission(
+            interfaceContext,
+            enabled,
+            onTransaction,
+            onReceipt
+        );
     };
 
     const interfaceAllowUseTokenMigrator = async (amount, onTransaction, onReceipt) => {
@@ -366,7 +572,7 @@ const AuthenticateProvider = ({ children }) => {
     const initContractsConnection = async () => {
         window.integration = await readContracts(web3, config.environment);
         await loadContractsStatusAndUserBalance();
-    }
+    };
 
     const loadContractsStatusAndUserBalance = async () => {
         if (!window.integration) return;
@@ -403,8 +609,7 @@ const AuthenticateProvider = ({ children }) => {
         };
 
         window.appMode = 'MoC';
-
-    }
+    };
 
     const loadAccountData = async () => {
         const owner = await getAccount();
@@ -433,7 +638,7 @@ const AuthenticateProvider = ({ children }) => {
         try {
             let balance = await web3.eth.getBalance(address);
             balance = web3.utils.fromWei(balance);
-            return balance
+            return balance;
         } catch (e) {
             console.log(e);
         }
@@ -444,7 +649,7 @@ const AuthenticateProvider = ({ children }) => {
         const dContracts = window.integration;
         const moctoken = dContracts.contracts.moctoken;
         return moctoken.methods.balanceOf(from).call();
-    }
+    };
 
     const getSpendableBalance = async (address) => {
         const from = address || account;
@@ -457,8 +662,7 @@ const AuthenticateProvider = ({ children }) => {
         } else {
             return await web3.eth.getBalance(from);
         }
-
-    }
+    };
 
     const getReserveAllowance = async (address) => {
         const from = address || account;
@@ -466,12 +670,13 @@ const AuthenticateProvider = ({ children }) => {
         const appMode = config.environment.AppMode;
         if (appMode === 'RRC20') {
             const reservetoken = dContracts.contracts.reservetoken;
-            return reservetoken.methods.allowance(from, dContracts.contracts.moc._address).call();
+            return reservetoken.methods
+                .allowance(from, dContracts.contracts.moc._address)
+                .call();
         } else {
             return await web3.eth.getBalance(from);
         }
-
-    }
+    };
 
     const getTransactionReceipt = async (hash, callback) => {
         //const web3 = new Web3(provider);
@@ -483,9 +688,9 @@ const AuthenticateProvider = ({ children }) => {
         return transactionReceipt;
     };
 
-    const toCheckSumAddress = address => helper.toCheckSumAddress(address);
+    const toCheckSumAddress = (address) => helper.toCheckSumAddress(address);
 
-    const isCheckSumAddress = address => {
+    const isCheckSumAddress = (address) => {
         if (address === undefined) return false;
         return helper.isValidAddressChecksum(address);
     };
@@ -495,7 +700,9 @@ const AuthenticateProvider = ({ children }) => {
     };
 
     const interfaceDecodeEvents = async (receipt) => {
-        const txRcp = await web3.eth.getTransactionReceipt(receipt.transactionHash);
+        const txRcp = await web3.eth.getTransactionReceipt(
+            receipt.transactionHash
+        );
         const filteredEvents = decodeEvents(txRcp);
         return filteredEvents;
     };
@@ -505,11 +712,10 @@ const AuthenticateProvider = ({ children }) => {
         return stackedBalance(from);
     };
 
-
     const interfaceGetMoCAllowance = async (address) => {
         const from = address || account;
         return getMoCAllowance(from);
-    }
+    };
 
     const interfaceLockedBalance = async (address) => {
         const from = address || account;
@@ -542,40 +748,91 @@ const AuthenticateProvider = ({ children }) => {
         return delayMachineCancelWithdraw(interfaceContext, id, callback);
     };
 
-
-    const interfaceApproveMoCTokenStaking = async (enabled, callback = () => {}) => {
+    const interfaceApproveMoCTokenStaking = async (
+        enabled,
+        callback = () => {}
+    ) => {
         const interfaceContext = buildInterfaceContext();
         return approveMoCTokenStaking(interfaceContext, enabled, callback);
     };
 
-    const interfaceTransferTPTo = async (to, amount, onTransaction, onReceipt) => {
+    const interfaceTransferTPTo = async (
+        to,
+        amount,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferTPTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
+        return transferTPTo(
+            interfaceContext,
+            toWithChecksum,
+            amount,
+            onTransaction,
+            onReceipt
+        );
     };
 
-    const interfaceTransferTCTo = async (to, amount, onTransaction, onReceipt) => {
+    const interfaceTransferTCTo = async (
+        to,
+        amount,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferTCTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
+        return transferTCTo(
+            interfaceContext,
+            toWithChecksum,
+            amount,
+            onTransaction,
+            onReceipt
+        );
     };
 
-    const interfaceTransferTGTo = async (to, amount, onTransaction, onReceipt) => {
+    const interfaceTransferTGTo = async (
+        to,
+        amount,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferTGTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
+        return transferTGTo(
+            interfaceContext,
+            toWithChecksum,
+            amount,
+            onTransaction,
+            onReceipt
+        );
     };
 
-    const interfaceTransferCoinbaseTo = async (to, amount, onTransaction, onReceipt) => {
+    const interfaceTransferCoinbaseTo = async (
+        to,
+        amount,
+        onTransaction,
+        onReceipt
+    ) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
-        return transferCoinbaseTo(interfaceContext, toWithChecksum, amount, onTransaction, onReceipt);
-    }
+        return transferCoinbaseTo(
+            interfaceContext,
+            toWithChecksum,
+            amount,
+            onTransaction,
+            onReceipt
+        );
+    };
 
     const interfaceCalcMintInterestValues = async (amount) => {
         const interfaceContext = buildInterfaceContext();
         const mintInterest = await calcMintInterest(interfaceContext, amount);
         return mintInterest;
+    };
+
+    const interfaceVendorMarkup = (vendorAccount) => {
+        const interfaceContext = buildInterfaceContext();
+        return vendorMarkup(interfaceContext, vendorAccount);
     };
 
     const interfaceApproveReserve = (address, callback) => {
@@ -704,6 +961,7 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceTransferTGTo,
                 interfaceTransferCoinbaseTo,
                 interfaceCalcMintInterestValues,
+                interfaceVendorMarkup,
                 interfaceApproveReserve,
                 socket,
                 convertToken,
@@ -717,7 +975,5 @@ const AuthenticateProvider = ({ children }) => {
         </AuthenticateContext.Provider>
     );
 };
-
-
 
 export { AuthenticateContext, AuthenticateProvider };

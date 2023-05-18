@@ -7,15 +7,15 @@ import IVotingMachine from '../../../contracts/omoc/IVotingMachine.json';
 import IVestingFactory from '../../../contracts/omoc/IVestingFactory.json';
 
 const omocAbis = () => {
-  return {
-    IRegistry,
-    IStakingMachine,
-    IDelayMachine,
-    ISupporters,
-    IVestingMachine,
-    IVotingMachine,
-    IVestingFactory
-  }
-}
+    return {
+        IRegistry,
+        IStakingMachine,
+        IDelayMachine,
+        ISupporters,
+        IVestingMachine,
+        IVotingMachine,
+        IVestingFactory
+    };
+};
 
 export { omocAbis };

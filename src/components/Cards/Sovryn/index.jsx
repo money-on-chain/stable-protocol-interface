@@ -1,17 +1,16 @@
 import { Row } from 'antd';
 import React from 'react';
 
-import { config} from '../../../projects/config';
+import { config } from '../../../projects/config';
 import { useProjectTranslation } from '../../../helpers/translations';
 
 import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-sovryn_fastbtc.svg';
 import { ReactComponent as LogoIconRBTC } from '../../../assets/icons/icon-rbtclogo.svg';
 
 export default function Sovryn(props) {
-
     const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
-    
+
     return (
         <div className="Card FastCard">
             <Row>
@@ -19,25 +18,53 @@ export default function Sovryn(props) {
                 <div className="title">
                     <div className="CardLogo">
                         <LogoIconFastBTC width="32" height="32" alt="" />
-                        <h1>Sovryn <br />FastBTC</h1>
+                        <h1>
+                            Sovryn <br />
+                            FastBTC
+                        </h1>
                     </div>
                 </div>
                 {/*</Col>*/}
             </Row>
             <Row>
                 <div className="content-container">
-                <LogoIconRBTC className="logo-img" width="111" height="111"
-                    alt="" />
-                    <div className="FastBTCLeftPanel"><b>{t(`${AppProject}.fastbtc.leftPannel.header`, { ns: ns })}</b>
+                    <LogoIconRBTC
+                        className="logo-img"
+                        width="111"
+                        height="111"
+                        alt=""
+                    />
+                    <div className="FastBTCLeftPanel">
+                        <b>
+                            {t(`${AppProject}.fastbtc.leftPannel.header`, {
+                                ns: ns
+                            })}
+                        </b>
                         <ul>
-                            <li className="instruction-item">{t(`${AppProject}.fastbtc.leftPannel.items.0`, { ns: ns })}</li>
-                            <li className="instruction-item">{t(`${AppProject}.fastbtc.leftPannel.items.1`, { ns: ns })}</li>
+                            <li className="instruction-item">
+                                {t(`${AppProject}.fastbtc.leftPannel.items.0`, {
+                                    ns: ns
+                                })}
+                            </li>
+                            <li className="instruction-item">
+                                {t(`${AppProject}.fastbtc.leftPannel.items.1`, {
+                                    ns: ns
+                                })}
+                            </li>
                         </ul>
-                        <a href="https://www.rsk.co/rbtc/" target="_blank" rel="noopener noreferrer">&gt; {t(`${AppProject}.fastbtc.leftPannel.learnMore`, { ns: ns })}</a></div>
+                        <a
+                            href="https://www.rsk.co/rbtc/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            &gt;{' '}
+                            {t(`${AppProject}.fastbtc.leftPannel.learnMore`, {
+                                ns: ns
+                            })}
+                        </a>
+                    </div>
                 </div>
             </Row>
-
         </div>
-
-    )
+    );
 }

@@ -4,68 +4,95 @@ import { adjustPrecision, formatLocalMap } from '../../helpers/Formats';
 import i18n from 'i18next';
 import DollarOutlined from '@ant-design/icons/DollarOutlined';
 import { config } from '../../projects/config';
-import {getCoinName} from "../../helpers/helper";
+import { getCoinName } from '../../helpers/helper';
 import { useProjectTranslation } from '../../helpers/translations';
 
 const AppProject = config.environment.AppProject;
 const ns = config.environment.AppProject.toLowerCase();
 
-const LargeNumber = ({ amount, currencyCode, includeCurrency, numericLabelParams, className, tooltip }) => {
+const LargeNumber = ({
+    amount,
+    currencyCode,
+    includeCurrency,
+    numericLabelParams,
+    className,
+    tooltip
+}) => {
+    const [t, i18n, ns] = useProjectTranslation();
+    if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
+        const { value, decimals } = adjustPrecision(
+            amount,
+            currencyCode,
+            AppProject
+        );
+        const params = Object.assign(
+            {
+                commafy: true,
+                justification: 'L',
+                locales: i18n.languages[0],
+                precision: decimals,
+                shortFormat: true,
+                shortFormatMinValue: 1000000,
+                shortFormatPrecision: decimals,
+                title: '',
+                cssClass: ['value_usd']
+            },
+            numericLabelParams
+        );
 
-  const [t, i18n, ns]= useProjectTranslation();
-  if (amount !== null && amount !== '' && !Number.isNaN(amount)) {
-    const { value, decimals } = adjustPrecision(amount, currencyCode,AppProject);
-    const params = Object.assign(
-      {
-          commafy: true,
-          justification: "L",
-          locales: i18n.languages[0],
-          precision: decimals,
-          shortFormat: true,
-          shortFormatMinValue: 1000000,
-          shortFormatPrecision: decimals,
-          title: "",
-          cssClass:['value_usd']
-      },
-      numericLabelParams
+        return (
+            <>
+                {!isNaN(value) && (
+                    <Tooltip
+                        placement={tooltip ? tooltip : 'top'}
+                        title={
+                            value === 0
+                                ? '0'
+                                : value.toFormat(
+                                      formatLocalMap[i18n.languages[0]]
+                                  )
+                        }
+                    >
+                        <div className={className}>
+                            {/* <NumericLabel {... {params }}>{amount?.toString()}</NumericLabel> */}
+                            <NumericLabel {...{ params }}>
+                                {value.toString()}
+                            </NumericLabel>
+                            {/*<span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>*/}
+                            <span className={'number-label'}>
+                                {includeCurrency &&
+                                    ` ${getCoinName(currencyCode)}`}
+                            </span>
+                        </div>
+                    </Tooltip>
+                )}
+            </>
+        );
+    }
+
+    return (
+        <Tooltip
+            title={t(`${AppProject}.general.invalidValueDescription`, {
+                ns: ns
+            })}
+        >
+            {t(`${AppProject}.general.invalidValuePlaceholder`, { ns: ns })}
+        </Tooltip>
     );
-
-    return (<>
-            { !isNaN(value) &&
-            <Tooltip placement={tooltip ? tooltip : 'top'} title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
-                <div className={className}>
-                    {/* <NumericLabel {... {params }}>{amount?.toString()}</NumericLabel> */}
-                    <NumericLabel {... {params }}>{value.toString()}</NumericLabel>
-                    {/*<span className={'number-label'}>{includeCurrency && ` ${t(`${AppProject}.Tokens_${currencyCode}_code`, {ns: 'moc' })}`}</span>*/}
-                    <span className={'number-label'}>{includeCurrency && ` ${getCoinName(currencyCode)}`}</span>
-                </div>
-            </Tooltip>}</>
-    );
-  }
-
-  return (
-    <Tooltip title={t(`${AppProject}.general.invalidValueDescription`, {ns: ns})}>
-      {t(`${AppProject}.general.invalidValuePlaceholder`, {ns: ns})}
-    </Tooltip>
-  )
 };
 
-const InfoIcon = ({infoDescription}) => {
-
+const InfoIcon = ({ infoDescription }) => {
     if (infoDescription !== '') {
         return (
             <Tooltip placement="topLeft" title={infoDescription}>
                 <DollarOutlined className="LargeNumberIcon" />
             </Tooltip>
         );
-
     }
-    return ('');
+    return '';
+};
 
-}
-
-const USDValueLargeNumber = ({amountUSD, showUSD, numericLabelParams}) => {
-
+const USDValueLargeNumber = ({ amountUSD, showUSD, numericLabelParams }) => {
     if (showUSD && amountUSD > 0) {
         const { value, decimals } = adjustPrecision(amountUSD, 'USD');
         const params = Object.assign(
@@ -85,26 +112,50 @@ const USDValueLargeNumber = ({amountUSD, showUSD, numericLabelParams}) => {
         );
 
         return (
-            <span> ( <NumericLabel {...{ params }}>{value.toString()}</NumericLabel> USD ) </span>
+            <span>
+                {' '}
+                ({' '}
+                <NumericLabel {...{ params }}>
+                    {value.toString()}
+                </NumericLabel>{' '}
+                USD ){' '}
+            </span>
         );
-
     }
 
-    return ('');
+    return '';
+};
 
-}
-
-const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive, showSign, showUSD, amountUSD, numericLabelParams, infoDescription, showFlat,t, i18n  }) => {
-    var displayCurrencyCode = ''
+const DetailedLargeNumber = ({
+    amount,
+    currencyCode,
+    includeCurrency,
+    isPositive,
+    showSign,
+    showUSD,
+    amountUSD,
+    numericLabelParams,
+    infoDescription,
+    showFlat,
+    t,
+    i18n
+}) => {
+    var displayCurrencyCode = '';
     if (currencyCode === 'RBTC') {
         displayCurrencyCode = 'RBTC';
         currencyCode = 'RESERVE';
     } else {
-        displayCurrencyCode = t(`${AppProject}.Tokens_${currencyCode}_code`, { ns: ns });
+        displayCurrencyCode = t(`${AppProject}.Tokens_${currencyCode}_code`, {
+            ns: ns
+        });
     }
 
     if (amount !== null && amount !== '' && !Number.isNaN(Number(amount))) {
-        const { value, decimals } = adjustPrecision(amount, currencyCode,AppProject);
+        const { value, decimals } = adjustPrecision(
+            amount,
+            currencyCode,
+            AppProject
+        );
         const params = Object.assign(
             {
                 shortFormat: true,
@@ -128,24 +179,47 @@ const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive,
         if (infoDescription) {
             return (
                 <div>
-                    <Tooltip title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
+                    <Tooltip
+                        title={
+                            value === 0
+                                ? '0'
+                                : value.toFormat(
+                                      formatLocalMap[i18n.languages[0]]
+                                  )
+                        }
+                    >
                         {showSign && (isPositive ? '+' : '-')}
-                        <NumericLabel {...{ params }}>{value.toString()}</NumericLabel>
+                        <NumericLabel {...{ params }}>
+                            {value.toString()}
+                        </NumericLabel>
                         {includeCurrency && ` ${displayCurrencyCode}`}
-                        <USDValueLargeNumber amountUSD={amountUSD} showUSD={showUSD} numericLabelParams={numericLabelParams}></USDValueLargeNumber>
+                        <USDValueLargeNumber
+                            amountUSD={amountUSD}
+                            showUSD={showUSD}
+                            numericLabelParams={numericLabelParams}
+                        ></USDValueLargeNumber>
                     </Tooltip>
                     <InfoIcon infoDescription={infoDescription}></InfoIcon>
                 </div>
             );
-
         }
 
         return (
-            <Tooltip title={value === 0 ? '0' : value.toFormat(formatLocalMap[i18n.languages[0]])}>
+            <Tooltip
+                title={
+                    value === 0
+                        ? '0'
+                        : value.toFormat(formatLocalMap[i18n.languages[0]])
+                }
+            >
                 {showSign && (isPositive ? '+' : '-')}
                 <NumericLabel {...{ params }}>{value.toString()}</NumericLabel>
                 {includeCurrency && ` ${displayCurrencyCode}`}
-                <USDValueLargeNumber amountUSD={amountUSD} showUSD={showUSD} numericLabelParams={numericLabelParams}></USDValueLargeNumber>
+                <USDValueLargeNumber
+                    amountUSD={amountUSD}
+                    showUSD={showUSD}
+                    numericLabelParams={numericLabelParams}
+                ></USDValueLargeNumber>
             </Tooltip>
         );
     }
@@ -155,8 +229,12 @@ const DetailedLargeNumber= ({ amount, currencyCode, includeCurrency, isPositive,
     }
 
     return (
-        <Tooltip title={t(`${AppProject}.general.invalidValueDescription`, {ns: ns })}>
-            {t(`${AppProject}.general.invalidValuePlaceholder`, {ns: ns })}
+        <Tooltip
+            title={t(`${AppProject}.general.invalidValueDescription`, {
+                ns: ns
+            })}
+        >
+            {t(`${AppProject}.general.invalidValuePlaceholder`, { ns: ns })}
         </Tooltip>
     );
 };
@@ -167,9 +245,17 @@ DetailedLargeNumber.defaultProps = {
     showUSD: false,
     amountUSD: 0.0,
     infoDescription: ''
-}
+};
 
-const getExplainByEvent = ({ event, amount, amount_rbtc, status, token_involved, t, i18n }) => {
+const getExplainByEvent = ({
+    event,
+    amount,
+    amount_rbtc,
+    status,
+    token_involved,
+    t,
+    i18n
+}) => {
     if (status !== 'confirmed') {
         return '--';
     }
@@ -177,57 +263,86 @@ const getExplainByEvent = ({ event, amount, amount_rbtc, status, token_involved,
     const map = {
         RiskProMint: (
             <div>
-                {t(`${AppProject}.operations.explain.RiskProMint`, { ns: ns })} {amount}
+                {t(`${AppProject}.operations.explain.RiskProMint`, { ns: ns })}{' '}
+                {amount}
             </div>
         ),
         RiskProRedeem: (
             <div>
-                {t(`${AppProject}.operations.explain.RiskProRedeem`, { ns: ns })} {amount_rbtc}
+                {t(`${AppProject}.operations.explain.RiskProRedeem`, {
+                    ns: ns
+                })}{' '}
+                {amount_rbtc}
             </div>
         ),
         StableTokenMint: (
             <div>
-                {t(`${AppProject}.operations.explain.StableTokenMint`, { ns: ns })} {amount}
+                {t(`${AppProject}.operations.explain.StableTokenMint`, {
+                    ns: ns
+                })}{' '}
+                {amount}
             </div>
         ),
         StableTokenRedeem: (
             <span>
-                {t(`${AppProject}.operations.explain.StableTokenRedeem`, { ns: ns })} {amount_rbtc}
+                {t(`${AppProject}.operations.explain.StableTokenRedeem`, {
+                    ns: ns
+                })}{' '}
+                {amount_rbtc}
             </span>
         ),
         FreeStableTokenRedeem: (
             <span>
-                {t(`${AppProject}.operations.explain.FreeStableTokenRedeem`, { ns: ns })} {amount_rbtc}
+                {t(`${AppProject}.operations.explain.FreeStableTokenRedeem`, {
+                    ns: ns
+                })}{' '}
+                {amount_rbtc}
             </span>
         ),
         RiskProxMint: (
             <span>
-                {t(`${AppProject}.operations.explain.RiskProxMint`, { ns: ns })} {amount}
+                {t(`${AppProject}.operations.explain.RiskProxMint`, { ns: ns })}{' '}
+                {amount}
             </span>
         ),
         RiskProxRedeem: (
             <span>
-                {t(`${AppProject}.operations.explain.RiskProxRedeem`, { ns: ns })} {amount_rbtc}
+                {t(`${AppProject}.operations.explain.RiskProxRedeem`, {
+                    ns: ns
+                })}{' '}
+                {amount_rbtc}
             </span>
         ),
         SettlementDeleveraging: (
             <span>
-                {t(`${AppProject}.operations.explain.SettlementDeleveraging`, { ns: ns })} {amount_rbtc}
+                {t(`${AppProject}.operations.explain.SettlementDeleveraging`, {
+                    ns: ns
+                })}{' '}
+                {amount_rbtc}
             </span>
         ),
         RedeemRequestAlter: (
             <span>
-                {t(`${AppProject}.operations.explain.RedeemRequestAlter`, { ns: ns })} {amount}
+                {t(`${AppProject}.operations.explain.RedeemRequestAlter`, {
+                    ns: ns
+                })}{' '}
+                {amount}
             </span>
         ),
         Transfer: (
             <span>
-                {t(`${AppProject}.operations.explain.Transfer_positive`, { ns: ns })} {amount}
+                {t(`${AppProject}.operations.explain.Transfer_positive`, {
+                    ns: ns
+                })}{' '}
+                {amount}
             </span>
         ),
         BucketLiquidation: (
             <span>
-                {t(`${AppProject}.operations.explain.BucketLiquidation`, { ns: ns })} {amount}
+                {t(`${AppProject}.operations.explain.BucketLiquidation`, {
+                    ns: ns
+                })}{' '}
+                {amount}
             </span>
         )
     };
@@ -236,4 +351,3 @@ const getExplainByEvent = ({ event, amount, amount_rbtc, status, token_involved,
 };
 
 export { LargeNumber, DetailedLargeNumber, getExplainByEvent };
-

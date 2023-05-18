@@ -13,17 +13,17 @@ import MoCVendors from '../../../contracts/MoCVendors.json';
 import TokenMigrator from '../../../contracts/TokenMigrator.json';
 
 export {
-  Multicall2,
-  MoCConnector,
-  MoC,
-  MoCState,
-  MoCExchange,
-  MoCInrate,
-  MoCSettlement,
-  TC,
-  TP,
-  TG,
-  ReserveToken,
-  MoCVendors,
-  TokenMigrator
+    Multicall2,
+    MoCConnector,
+    MoC,
+    MoCState,
+    MoCExchange,
+    MoCInrate,
+    MoCSettlement,
+    TC,
+    TP,
+    TG,
+    ReserveToken,
+    MoCVendors,
+    TokenMigrator
 };
