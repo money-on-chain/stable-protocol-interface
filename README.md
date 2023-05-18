@@ -37,6 +37,8 @@ Please go to release section, there are several links to [releases](https://gith
 
 **MOC Release**: You can always get the last stable release on: [dapp.moneyonchain.com](https://dapp.moneyonchain.com)
 
+**ROC Release**: You can always get the last stable release on: [dapp.rifonchain.com](https://dapp.rifonchain.com)
+
 **Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
 
 
@@ -77,7 +79,7 @@ Environment is our already deployed contracts.
 | MoC Mainnet      | MOC     | [link](https://alpha.moneyonchain.com) | Mainnet     | RSK     | start:moc-mainnet       |
 | RoC TestnetAlpha | RIF     |                                        | Testnet     | RSK     | start:roc-alpha-testnet |
 | RoC Testnet      | RIF     |                                        | Testnet     | RSK     | start:roc-testnet       |
-| RoC Mainnet      | RIF     |                                        | Mainnet     | RSK     | start:roc-mainnet       |
+| RoC Mainnet      | RIF     | [link](https://dapp.rifonchain.com)    | Mainnet     | RSK     | start:roc-mainnet       |
 
 
 ### Faucets
