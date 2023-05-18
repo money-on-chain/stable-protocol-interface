@@ -1,8 +1,8 @@
-@import "src/assets/css/general_styling";
-.top-up-wallet-modal-container{
+@import 'src/assets/css/general_styling';
+.top-up-wallet-modal-container {
     display: flex;
     align-items: center;
-    margin:10px 20px 10px 50px;
+    margin: 10px 20px 10px 50px;
 }
 
 .ModalHeaderTitle {
@@ -38,8 +38,8 @@
 .ModalTopUpContainer {
     .ant-modal-body {
         padding: 16px;
-        @media screen and (min-width:450px) {
-                padding: 32px;
+        @media screen and (min-width: 450px) {
+            padding: 32px;
         }
     }
     .ant-modal-header {
@@ -52,18 +52,18 @@
     .ModalTopUpTitle {
         .subtitle {
             font-size: 12px;
-            font-family: "Montserrat", sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
     }
     .ModalTopUpContent {
         display: flex;
         flex-direction: column;
-        @media screen and (max-width:600px) {
+        @media screen and (max-width: 600px) {
             flex-direction: column;
         }
-        .TxLimits{
+        .TxLimits {
             width: 100%;
-            @media screen and (max-width:600px) {
+            @media screen and (max-width: 600px) {
                 width: 100%;
             }
         }
@@ -76,12 +76,13 @@
         li {
             padding-left: 4px;
         }
-        b, li {
-            font-family: "Montserrat", sans-serif;
+        b,
+        li {
+            font-family: 'Montserrat', sans-serif;
             font-size: 12px;
         }
         a {
-            color: #4EC199;
+            color: #4ec199;
             font-weight: bold;
         }
         .section-title {
@@ -89,7 +90,7 @@
             margin-top: 14px;
         }
         .ButtonPrimary {
-            background: #4EC199;
+            background: #4ec199;
             font-size: 14px;
             font-weight: bold;
             height: auto;
@@ -105,21 +106,21 @@
         .BlueSection {
             padding: 9px;
             border-radius: 8px;
-            background: #08374F;
+            background: #08374f;
             b {
                 color: #fff;
-                font-family: "Montserrat", sans-serif;
+                font-family: 'Montserrat', sans-serif;
             }
             ul {
                 list-style: none;
                 padding: 0;
-              li {
-                  color: #fff;
-                  padding-left: 0;
-              }
+                li {
+                    color: #fff;
+                    padding-left: 0;
+                }
             }
         }
-        .TxActions{
+        .TxActions {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -131,66 +132,66 @@
                 button {
                     // width: 90%;
                     margin: 15px 0 0 0;
-                    @media screen and (max-width:600px) {
+                    @media screen and (max-width: 600px) {
                         width: 100%;
                     }
-                    @media screen and (max-width:350px) {
+                    @media screen and (max-width: 350px) {
                         font-size: 10px;
                     }
                 }
             }
         }
 
-        .under-maintenance-alert{
-            margin-left:1em;
+        .under-maintenance-alert {
+            margin-left: 1em;
             display: flex;
             align-self: center;
         }
     }
 
-    .open-modal-button{
+    .open-modal-button {
         width: max-content;
     }
 
-    .ModalTopUpTitle{
+    .ModalTopUpTitle {
         text-align: center;
         h1 {
             @include primary-text(1.2em, $grey, 400);
         }
     }
 
-    .ant-modal-content{
+    .ant-modal-content {
         //border: solid black 2px;
     }
 
-    .ant-modal-footer{
+    .ant-modal-footer {
         text-align: center;
-        @media screen and (min-width:450px) {
-                padding: 32px;
+        @media screen and (min-width: 450px) {
+            padding: 32px;
         }
     }
 
-    .ant-modal-header{
+    .ant-modal-header {
         //background-color: black;
         color: white;
         border-bottom: 0px;
         border-radius: 0px;
     }
 
-    .ant-modal-title{
+    .ant-modal-title {
         text-align: center;
         color: white;
     }
 
-    .ant-modal-body{
+    .ant-modal-body {
         padding-top: 10px;
     }
 
-    .modal-header{
+    .modal-header {
         position: relative;
     }
 
-    .sov-logo{
+    .sov-logo {
         float: left;
         text-align: left;
         position: absolute;
@@ -198,8 +199,8 @@
         top: 0px;
     }
 
-    .ant-modal-close{
-        color:white;
+    .ant-modal-close {
+        color: white;
     }
 
     .AddressQrCode {
@@ -232,11 +233,10 @@
     display: flex;
     flex-direction: row;
     border-radius: 8px;
-    background: #08374F;
+    background: #08374f;
     padding: 4px 10px;
     align-items: center;
     img {
-
     }
 
     div {

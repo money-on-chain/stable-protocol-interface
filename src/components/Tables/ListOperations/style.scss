@@ -1,102 +1,104 @@
 @import '../../../assets/css/config_styling.scss';
 
 .Card.WalletOperations .title {
-  padding: 0;
-  margin-bottom: 0;
+    padding: 0;
+    margin-bottom: 0;
 }
 
 .components-table-demo-control-bar .ant-form-item {
-  margin-right: 16px;
-  margin-bottom: 8px;
+    margin-right: 16px;
+    margin-bottom: 8px;
 }
 
-
-.ant-table-thead>tr>th {
-  background: #fff !important;
-  color: #232222 !important;
-  text-transform: uppercase !important;
+.ant-table-thead > tr > th {
+    background: #fff !important;
+    color: #232222 !important;
+    text-transform: uppercase !important;
 }
 
 .MoC-color-token-tp {
-  color: $color-moc-tp;
+    color: $color-moc-tp;
 }
 
 .MoC-color-token-tx {
-  color: $color-moc-tx;
+    color: $color-moc-tx;
 }
 
 .MoC-color-token-tc {
-  color: $color-moc-tc;
+    color: $color-moc-tc;
 }
 
 .RoC-color-token-tp {
-  color: $color-roc-tp;
+    color: $color-roc-tp;
 }
 
 .RoC-color-token-tx {
-  color: $color-roc-tx;
+    color: $color-roc-tx;
 }
 
 .RoC-color-token-tc {
-  color: $color-roc-tc;
+    color: $color-roc-tc;
 }
 
 .event-action {
-  font-weight: 500;
-  font-size: 15px;
+    font-weight: 500;
+    font-size: 15px;
 }
 
 .CurrencyTx {
-  font-weight: 600;
-  div{
-    display: inline-block;
-  }
+    font-weight: 600;
+    div {
+        display: inline-block;
+    }
 }
 
-.ant-descriptions-item-label-th{
-  font-weight: 600;
+.ant-descriptions-item-label-th {
+    font-weight: 600;
 }
-.ant-descriptions-border-bottom{
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.ant-descriptions-a{
-  color : #1890ff;
-  cursor: pointer;
+.ant-descriptions-border-bottom {
+    border-bottom: 1px solid #f0f0f0;
 }
 
-.color-confirmed{
-  color: #478210;
+.ant-descriptions-a {
+    color: #1890ff;
+    cursor: pointer;
+}
+
+.color-confirmed {
+    color: #478210;
 }
 
 .color-confirming {
-  color: #1890ff;
+    color: #1890ff;
 }
 
-.ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
-  position: fixed !important;
-
+.ant-table-thead
+    > tr
+    > th:not(:last-child):not(.ant-table-selection-column):not(
+        .ant-table-row-expand-icon-cell
+    ):not([colspan])::before {
+    position: fixed !important;
 }
 
-.show-desk{
-  display: inline-block;
+.show-desk {
+    display: inline-block;
 }
 
-.show-mobile{
-  display: none;
+.show-mobile {
+    display: none;
 }
 
 .conf_title:first-letter {
-  text-transform: uppercase;
+    text-transform: uppercase;
 }
 
-.Tooltip{
-  color: #707070;
-  cursor: pointer;
+.Tooltip {
+    color: #707070;
+    cursor: pointer;
 }
 
-.ant-tooltip-inner{
-  color: white;
-  font-size: 13px;
-  font-weight: 500;
+.ant-tooltip-inner {
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
-import {I18nextProvider} from "react-i18next";
-import i18next from "i18next";
+import { I18nextProvider } from 'react-i18next';
+import i18next from 'i18next';
 
 import './index.css';
 import './assets/css/global.scss';
@@ -11,21 +11,28 @@ import './assets/css/components.scss';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { AuthenticateProvider } from './context/Auth';
-import {config} from "./projects/config";
+import { config } from './projects/config';
 import IconWaiting from './assets/icons/status-pending.png';
-import Router from './router'
+import Router from './router';
 
 console.log(`Starting app version: ${process.env.REACT_APP_VERSION}`);
 
 async function loadTranslations() {
     try {
-
-        const langES = await import('./projects/'+config.environment.AppProject.toLowerCase()+'/es/moc.json');
-        const langEN = await import('./projects/'+config.environment.AppProject.toLowerCase()+'/en/moc.json');
+        const langES = await import(
+            './projects/' +
+                config.environment.AppProject.toLowerCase() +
+                '/es/moc.json'
+        );
+        const langEN = await import(
+            './projects/' +
+                config.environment.AppProject.toLowerCase() +
+                '/en/moc.json'
+        );
 
         await i18next.init({
-            interpolation: {escapeValue:false},
-            lng: "en",
+            interpolation: { escapeValue: false },
+            lng: 'en',
             resources: {
                 es: {
                     global: await import('./projects/global-es.json'),
@@ -38,15 +45,15 @@ async function loadTranslations() {
                     moc: langEN,
                     roc: langEN,
                     flipago: langEN
-                },
+                }
             }
-        })
+        });
     } catch (error) {
         console.log(`Something wrong: ${error}`);
     }
 }
 
-loadTranslations()
+loadTranslations();
 
 ReactDOM.render(
     <React.StrictMode>
@@ -54,7 +61,24 @@ ReactDOM.render(
             <AuthenticateProvider>
                 <HashRouter>
                     {/*<React.Suspense fallback={ <span>Loading...</span> }>*/}
-                    <React.Suspense fallback={ <img style={{'position':'fixed','left': '50%','top':'50%','transform':'translateX(-50%) translateY(-50%)'}} width={50} height={50} src={IconWaiting} alt="Loading..." className={'img-status rotate'}/> }>
+                    <React.Suspense
+                        fallback={
+                            <img
+                                style={{
+                                    position: 'fixed',
+                                    left: '50%',
+                                    top: '50%',
+                                    transform:
+                                        'translateX(-50%) translateY(-50%)'
+                                }}
+                                width={50}
+                                height={50}
+                                src={IconWaiting}
+                                alt="Loading..."
+                                className={'img-status rotate'}
+                            />
+                        }
+                    >
                         <Router />
                     </React.Suspense>
                 </HashRouter>

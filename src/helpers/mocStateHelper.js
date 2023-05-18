@@ -1,14 +1,14 @@
-export const getDaysToSettlement = mocState => {
-  const { dayBlockSpan, blocksToSettlement } = mocState;
-  const daysToSettlement = blocksToSettlement / dayBlockSpan;
+export const getDaysToSettlement = (mocState) => {
+    const { dayBlockSpan, blocksToSettlement } = mocState;
+    const daysToSettlement = blocksToSettlement / dayBlockSpan;
 
-  return daysToSettlement;
+    return daysToSettlement;
 };
 
-export const getInrateToSettlement = mocState => {
-  const { spotInrate } = mocState;
+export const getInrateToSettlement = (mocState) => {
+    const { spotInrate } = mocState;
 
-  return spotInrate * contractDaysToSettlement(mocState);
+    return spotInrate * contractDaysToSettlement(mocState);
 };
 
 /*
@@ -21,7 +21,8 @@ export const getBTCxRedeemInrateToSettlement = mocState => {
 
 // Calculates rate to settlement using custom rate
 export const rateToSettlement = (mocState, dailyInrate) =>
-  dailyInrate * contractDaysToSettlement(mocState);
+    dailyInrate * contractDaysToSettlement(mocState);
 
 // Contract use integers for daysToSettlement
-const contractDaysToSettlement = mocState => Math.floor(getDaysToSettlement(mocState));
+const contractDaysToSettlement = (mocState) =>
+    Math.floor(getDaysToSettlement(mocState));

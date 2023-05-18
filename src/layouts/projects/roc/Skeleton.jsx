@@ -1,16 +1,21 @@
-
 import { Outlet } from 'react-router-dom';
 import { Layout, Menu, Image, Drawer, Button } from 'antd';
-import { HomeFilled, MenuOutlined, CloseOutlined, PieChartFilled, InfoCircleFilled } from '@ant-design/icons';
+import {
+    HomeFilled,
+    MenuOutlined,
+    CloseOutlined,
+    PieChartFilled,
+    InfoCircleFilled
+} from '@ant-design/icons';
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
 
 import { config } from '../../../projects/config';
 import LoginButton from '../../../components/Auth/LoginButton/index';
 import '../../../assets/css/global.scss';
 import { AuthenticateContext } from '../../../context/Auth';
-import HeaderCoins from "../../../components/Page/HeaderCoins";
+import HeaderCoins from '../../../components/Page/HeaderCoins';
 import { useProjectTranslation } from '../../../helpers/translations';
 
 import { ReactComponent as LogoIcon } from '../../../assets/icons/logo.svg';
@@ -18,13 +23,10 @@ import { ReactComponent as LogoIconTP } from '../../../assets/icons/icon-rbtclog
 import { ReactComponent as LogoIconTC } from '../../../assets/icons/TCIcon.svg';
 import { ReactComponent as LogoIconTG } from '../../../assets/icons/icon-tg.svg';
 
-
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
-
 export default function Skeleton() {
-
     const navigate = useNavigate();
     const location = useLocation();
     const { accountData, balanceRbtc } = useContext(AuthenticateContext);
@@ -35,10 +37,15 @@ export default function Skeleton() {
     const AppMode = config.environment.AppMode;
     const loginButtonSettings = accountData.Wallet
         ? {
-            title: accountData.truncatedAddress,
-            subtitle: new BigNumber(AppMode === 'Moc' ? accountData.Balance : balanceRbtc).toFixed(4) + ' ' +  t(`${AppProject}.Tokens_RESERVE_code`, { ns: ns }),
-            status: 'Active'
-        }
+              title: accountData.truncatedAddress,
+              subtitle:
+                  new BigNumber(
+                      AppMode === 'Moc' ? accountData.Balance : balanceRbtc
+                  ).toFixed(4) +
+                  ' ' +
+                  t(`${AppProject}.Tokens_RESERVE_code`, { ns: ns }),
+              status: 'Active'
+          }
         : { title: 'Connect' };
     const [selectedMenu, setSelectedMenu] = useState('');
 
@@ -54,8 +61,7 @@ export default function Skeleton() {
             selectedMenuKey = 'rewards';
         } else if (location.pathname === '/metrics') {
             selectedMenuKey = 'metrics';
-        }
-        else if (location.pathname === '/getRBTC') {
+        } else if (location.pathname === '/getRBTC') {
             selectedMenuKey = 'getRBTC';
         }
 
@@ -76,8 +82,8 @@ export default function Skeleton() {
                 className="Sidebar"
                 breakpoint="lg"
                 collapsed={true}
-                onBreakpoint={(broken) => { } }
-                onCollapse={(collapsed, type) => { } }
+                onBreakpoint={(broken) => {}}
+                onCollapse={(collapsed, type) => {}}
                 style={{
                     overflow: 'auto',
                     height: '100vh',
@@ -92,53 +98,161 @@ export default function Skeleton() {
                     <Menu.Item
                         key="home"
                         onClick={() => navigate('/')}
-                        icon={<p className={`set-icon-home ${selectedMenu == 'home' ? "active" : ""}`}></p>}
-                    >{t(`${AppProject}.menu-sidebar.home`, { ns: ns })}
+                        icon={
+                            <p
+                                className={`set-icon-home ${
+                                    selectedMenu == 'home' ? 'active' : ''
+                                }`}
+                            ></p>
+                        }
+                    >
+                        {t(`${AppProject}.menu-sidebar.home`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-stable"
                         onClick={() => navigate('/wallet/stable')}
-                        icon={<p className={`set-icon-tp ${selectedMenu == 'mint-stable' ? "active" : ""}`}></p>}
-                    >{t(`${AppProject}.menu-sidebar.TPWallet`, { ns: ns })}
+                        icon={
+                            <p
+                                className={`set-icon-tp ${
+                                    selectedMenu == 'mint-stable'
+                                        ? 'active'
+                                        : ''
+                                }`}
+                            ></p>
+                        }
+                    >
+                        {t(`${AppProject}.menu-sidebar.TPWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="mint-pro"
                         onClick={() => navigate('/wallet/pro')}
-                        icon={<p className={`set-icon-tc ${selectedMenu == 'mint-pro' ? "active" : ""}`}></p>}
-                    >{t(`${AppProject}.menu-sidebar.TCWallet`, { ns: ns })}
+                        icon={
+                            <p
+                                className={`set-icon-tc ${
+                                    selectedMenu == 'mint-pro' ? 'active' : ''
+                                }`}
+                            ></p>
+                        }
+                    >
+                        {t(`${AppProject}.menu-sidebar.TCWallet`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="rewards"
                         onClick={() => navigate('/rewards')}
-                        icon={<p className={`set-icon-rewards ${selectedMenu == 'rewards' ? "active" : ""}`}></p>}
-                    >{t(`${AppProject}.menu-sidebar.rewards`, { ns: ns })}
+                        icon={
+                            <p
+                                className={`set-icon-rewards ${
+                                    selectedMenu == 'rewards' ? 'active' : ''
+                                }`}
+                            ></p>
+                        }
+                    >
+                        {t(`${AppProject}.menu-sidebar.rewards`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="getRBTC"
                         onClick={() => navigate('/getRBTC')}
-                        icon={<p className={`set-icon-rbtc ${selectedMenu == 'getRBTC' ? "active" : ""}`}></p>}
-                    >{t(`${AppProject}.menu-sidebar.getRBTC`, { ns: ns })}
+                        icon={
+                            <p
+                                className={`set-icon-rbtc ${
+                                    selectedMenu == 'getRBTC' ? 'active' : ''
+                                }`}
+                            ></p>
+                        }
+                    >
+                        {t(`${AppProject}.menu-sidebar.getRBTC`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="metrics"
                         onClick={() => navigate('/metrics')}
-                        icon={<p className={`set-icon-chart ${selectedMenu == 'metrics' ? "active" : ""}`}></p>}
-                    >{t(`${AppProject}.menu-sidebar.metrics`, { ns: ns })}
+                        icon={
+                            <p
+                                className={`set-icon-chart ${
+                                    selectedMenu == 'metrics' ? 'active' : ''
+                                }`}
+                            ></p>
+                        }
+                    >
+                        {t(`${AppProject}.menu-sidebar.metrics`, { ns: ns })}
                     </Menu.Item>
-                    <SubMenu key="information" title="Profile" icon={<p className={`set-icon-information-solid`}></p>} theme={'light'}>
-                        <Menu.Item key="contract_repository" onClick={() => window.open(config.contractUrl, '_self')}>{t(`${AppProject}.info-button.contract-repository`, { ns: ns })}</Menu.Item>
-                        <Menu.Item key="webapp_repository" onClick={() => window.open('https://github.com/money-on-chain/webapp-stable-ipfs', '_self')}>{t(`${AppProject}.info-button.webapp-repository`, { ns: ns })}</Menu.Item>
-                        <Menu.Item key="help_center" onClick={() => window.open('https://wiki.moneyonchain.com/', '_self')}>{t(`${AppProject}.menu-sidebar.faqs`, { ns: ns })}</Menu.Item>
+                    <SubMenu
+                        key="information"
+                        title="Profile"
+                        icon={<p className={`set-icon-information-solid`}></p>}
+                        theme={'light'}
+                    >
+                        <Menu.Item
+                            key="contract_repository"
+                            onClick={() =>
+                                window.open(config.contractUrl, '_self')
+                            }
+                        >
+                            {t(
+                                `${AppProject}.info-button.contract-repository`,
+                                { ns: ns }
+                            )}
+                        </Menu.Item>
+                        <Menu.Item
+                            key="webapp_repository"
+                            onClick={() =>
+                                window.open(
+                                    'https://github.com/money-on-chain/webapp-stable-ipfs',
+                                    '_self'
+                                )
+                            }
+                        >
+                            {t(`${AppProject}.info-button.webapp-repository`, {
+                                ns: ns
+                            })}
+                        </Menu.Item>
+                        <Menu.Item
+                            key="help_center"
+                            onClick={() =>
+                                window.open(
+                                    'https://wiki.moneyonchain.com/',
+                                    '_self'
+                                )
+                            }
+                        >
+                            {t(`${AppProject}.menu-sidebar.faqs`, { ns: ns })}
+                        </Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>
             <Layout>
                 <Header className="Header" style={{ paddingLeft: 18 }}>
-                    <LogoIcon className='header-logo' />
+                    <LogoIcon className="header-logo" />
                     <div className="MiddleSide">
-                        <HeaderCoins tokenName="TP" image={<LogoIconTP alt="arrow" height="50" width="40" />} />
-                        <HeaderCoins tokenName="TC" image={<LogoIconTC alt="arrow" height="50" width="40" />} />
-                        <HeaderCoins tokenName="TG" image={<LogoIconTG alt="arrow" height="50" width="40" />} />
+                        <HeaderCoins
+                            tokenName="TP"
+                            image={
+                                <LogoIconTP
+                                    alt="arrow"
+                                    height="50"
+                                    width="40"
+                                />
+                            }
+                        />
+                        <HeaderCoins
+                            tokenName="TC"
+                            image={
+                                <LogoIconTC
+                                    alt="arrow"
+                                    height="50"
+                                    width="40"
+                                />
+                            }
+                        />
+                        <HeaderCoins
+                            tokenName="TG"
+                            image={
+                                <LogoIconTG
+                                    alt="arrow"
+                                    height="50"
+                                    width="40"
+                                />
+                            }
+                        />
                     </div>
                     <LoginButton {...loginButtonSettings} />
 
@@ -146,8 +260,11 @@ export default function Skeleton() {
                         onClick={toggleDrawerVisible}
                         className="MenuCollapseButton"
                         ghost
-                        icon={drawerVisible ? <CloseOutlined /> : <MenuOutlined />}
-                        style={{ marginLeft: 10 }} />
+                        icon={
+                            drawerVisible ? <CloseOutlined /> : <MenuOutlined />
+                        }
+                        style={{ marginLeft: 10 }}
+                    />
                 </Header>
                 <Content className="page-container">
                     <Outlet />
@@ -159,7 +276,11 @@ export default function Skeleton() {
                     width={250}
                     onClose={toggleDrawerVisible}
                 >
-                    <Menu theme="light" mode="inline" selectedKeys={[selectedMenu]}>
+                    <Menu
+                        theme="light"
+                        mode="inline"
+                        selectedKeys={[selectedMenu]}
+                    >
                         <Menu.Item
                             key="home"
                             onClick={() => navigate('/')}
@@ -172,14 +293,18 @@ export default function Skeleton() {
                             onClick={() => navigate('/wallet/stable')}
                             icon={<span className="icon-icon-stable"></span>}
                         >
-                            {t(`${AppProject}.menu-drawer.TPWallet`, { ns: ns })}
+                            {t(`${AppProject}.menu-drawer.TPWallet`, {
+                                ns: ns
+                            })}
                         </Menu.Item>
                         <Menu.Item
                             key="mint-pro"
                             onClick={() => navigate('/wallet/pro')}
                             icon={<span className="icon-icon-tc"></span>}
                         >
-                            {t(`${AppProject}.menu-drawer.TCWallet`, { ns: ns })}
+                            {t(`${AppProject}.menu-drawer.TCWallet`, {
+                                ns: ns
+                            })}
                         </Menu.Item>
                         <Menu.Item
                             key="rewards"
@@ -193,7 +318,10 @@ export default function Skeleton() {
                             key="getRBTC"
                             onClick={() => navigate('/getRBTC')}
                             icon={<span className="icon-icon-btc"></span>}
-                        >{t(`${AppProject}.menu-sidebar.getRBTC`, { ns: ns })}
+                        >
+                            {t(`${AppProject}.menu-sidebar.getRBTC`, {
+                                ns: ns
+                            })}
                         </Menu.Item>
 
                         <Menu.Item
@@ -207,6 +335,5 @@ export default function Skeleton() {
                 </Drawer>
             </Layout>
         </Layout>
-        
     );
 }

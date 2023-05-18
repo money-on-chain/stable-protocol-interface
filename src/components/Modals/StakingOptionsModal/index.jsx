@@ -10,14 +10,21 @@ import { useProjectTranslation } from '../../../helpers/translations';
 import './style.scss';
 
 export default function StakingOptionsModal(props) {
-
     const auth = useContext(AuthenticateContext);
     const { accountData = {} } = auth;
-    const { mode, onClose, visible, amount, onConfirm, withdrawalId, setBlockedWithdrawals } = props;
+    const {
+        mode,
+        onClose,
+        visible,
+        amount,
+        onConfirm,
+        withdrawalId,
+        setBlockedWithdrawals
+    } = props;
     const [step, setStep] = useState(0);
 
     const amountInEth = Web3.utils.fromWei(amount);
-    const [t, i18n, ns]= useProjectTranslation();
+    const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
 
     useEffect(() => {
@@ -28,20 +35,20 @@ export default function StakingOptionsModal(props) {
     }, []);
     if (!mode) return null;
 
-
     //methods
     const setAllowance = async () => {
         setStep(1);
-        await auth.interfaceApproveMoCTokenStaking(true, (error) => {
-        }).then(res => {
+        await auth
+            .interfaceApproveMoCTokenStaking(true, (error) => {})
+            .then((res) => {
                 setStep(2);
                 return null;
             })
-            .catch(e => {
+            .catch((e) => {
                 console.error(e);
                 notification['error']({
-                    message: "Operations",
-                    description: "Something went wrong! Transaction rejected!",
+                    message: 'Operations',
+                    description: 'Something went wrong! Transaction rejected!',
                     duration: 10
                 });
             });
@@ -49,44 +56,55 @@ export default function StakingOptionsModal(props) {
 
     const depositMoCs = async () => {
         setStep(99);
-        await auth.interfaceStakingDeposit(amountInEth, accountData.Wallet, (error, txHash) => {
-            onClose();
-            if (error) {
-                return error;
-            }
-            const status = 'pending';
-            onConfirm(status, txHash);
-        })
-        .then(res => {
-            const status = res.status ? 'success' : 'error';
-            onConfirm(status, res.transactionHash);
-            return null;
-        })
-        .catch(e => {
-            notification['error']({
-                message: t('global.RewardsError_Title'),
-                description: t('global.RewardsError_Message'),
-                duration: 10
+        await auth
+            .interfaceStakingDeposit(
+                amountInEth,
+                accountData.Wallet,
+                (error, txHash) => {
+                    onClose();
+                    if (error) {
+                        return error;
+                    }
+                    const status = 'pending';
+                    onConfirm(status, txHash);
+                }
+            )
+            .then((res) => {
+                const status = res.status ? 'success' : 'error';
+                onConfirm(status, res.transactionHash);
+                return null;
+            })
+            .catch((e) => {
+                notification['error']({
+                    message: t('global.RewardsError_Title'),
+                    description: t('global.RewardsError_Message'),
+                    duration: 10
+                });
             });
-        })
     };
 
     const restakeMoCs = async () => {
         onClose();
-        await auth.interfaceDelayMachineCancelWithdraw(withdrawalId, (error, txHash) => {
-                if (error) return error;
+        await auth
+            .interfaceDelayMachineCancelWithdraw(
+                withdrawalId,
+                (error, txHash) => {
+                    if (error) return error;
 
-                const status = 'pending';
-                onConfirm(status, txHash);
-                setBlockedWithdrawals(prev => [...prev, withdrawalId]);
-            })
-            .then(res => {
+                    const status = 'pending';
+                    onConfirm(status, txHash);
+                    setBlockedWithdrawals((prev) => [...prev, withdrawalId]);
+                }
+            )
+            .then((res) => {
                 const status = res.status ? 'success' : 'error';
                 onConfirm(status, res.transactionHash);
-                setBlockedWithdrawals(prev => prev.filter(val => val !== withdrawMoCs));
+                setBlockedWithdrawals((prev) =>
+                    prev.filter((val) => val !== withdrawMoCs)
+                );
                 return null;
             })
-            .catch(e => {
+            .catch((e) => {
                 console.error(e);
                 notification['error']({
                     message: t('global.RewardsError_Title'),
@@ -98,18 +116,19 @@ export default function StakingOptionsModal(props) {
 
     const unstakeMoCs = async () => {
         onClose();
-        await auth.interfaceUnStake(amountInEth, (error, txHash) => {
+        await auth
+            .interfaceUnStake(amountInEth, (error, txHash) => {
                 if (error) return error;
 
                 const status = 'pending';
                 onConfirm(status, txHash);
             })
-            .then(res => {
+            .then((res) => {
                 const status = res.status ? 'success' : 'error';
                 onConfirm(status, res.transactionHash);
                 return null;
             })
-            .catch(e => {
+            .catch((e) => {
                 console.error(e);
                 notification['error']({
                     message: t('global.RewardsError_Title'),
@@ -121,19 +140,21 @@ export default function StakingOptionsModal(props) {
     const withdrawMoCs = () => {
         onClose();
         auth.interfaceDelayMachineWithdraw(withdrawalId, (error, txHash) => {
-                if (error) return error;
+            if (error) return error;
 
-                const status = 'pending';
-                onConfirm(status, txHash);
-                setBlockedWithdrawals(prev => [...prev, withdrawalId]);
-            })
-            .then(res => {
+            const status = 'pending';
+            onConfirm(status, txHash);
+            setBlockedWithdrawals((prev) => [...prev, withdrawalId]);
+        })
+            .then((res) => {
                 const status = res.status ? 'success' : 'error';
                 onConfirm(status, res.transactionHash);
-                setBlockedWithdrawals(prev => prev.filter(val => val !== withdrawMoCs));
+                setBlockedWithdrawals((prev) =>
+                    prev.filter((val) => val !== withdrawMoCs)
+                );
                 return null;
             })
-            .catch(e => {
+            .catch((e) => {
                 console.error(e);
                 notification['error']({
                     message: t('global.RewardsError_Title'),
@@ -146,75 +167,113 @@ export default function StakingOptionsModal(props) {
     // renders
     const renderStaking = () => {
         const steps = {
-            '0': () => {
+            0: () => {
                 return (
                     <>
-                        <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_SetAllowance')}</h1>
+                        <h1 className="StakingOptionsModal_Title">
+                            {t('global.StakingOptionsModal_SetAllowance')}
+                        </h1>
                         <div className="StakingOptionsModal_Content">
-                            <p>{t('global.StakingOptionsModal_AllowanceDescription')}
+                            <p>
+                                {t(
+                                    'global.StakingOptionsModal_AllowanceDescription'
+                                )}
                             </p>
-                            <div style={{ display: 'flex', justifyContent: 'center'}}>
-                                <Button
-                                    type="primary"
-                                    onClick={setAllowance}
-                                >{t('global.StakingOptionsModal_Authorize')}
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <Button type="primary" onClick={setAllowance}>
+                                    {t('global.StakingOptionsModal_Authorize')}
                                 </Button>
-                            </div>
-                        </div>
-                    </>
-                )
-            },
-            '1': () => {
-                return (
-                    <>
-                        <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_SetAllowance')}</h1>
-                        <div className="StakingOptionsModal_Content AllowanceLoading">
-                            <Spin indicator={<LoadingOutlined />} />
-                            <p>{t('global.StakingOptionsModal_ProccessingAllowance')}</p>
-                        </div>
-                    </>
-                )
-            },
-            '2': () => {
-                return (
-                    <>
-                        <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_Title')}</h1>
-                        <div className="StakingOptionsModal_Content">
-                            <div className="InfoContainer">
-                                <span className="title">{t('global.StakingOptionsModal_AmountToStake')}</span>
-                                <span className="value amount">
-                                    <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                                    <span>{t(`${AppProject}.Tokens_TG_code`, {ns: ns})}</span>
-                                </span>
-                            </div>
-                            <p>{t('global.StakingOptionsModal_StakingDescription')}</p>
-                            <div className="ActionButtonsRow">
-                                <Button
-                                    type="default"
-                                    onClick={onClose}
-                                >{t('global.StakingOptionsModal_Cancel')}</Button>
-                                <Button
-                                    type="primary"
-                                    onClick={depositMoCs}
-                                    className="ButtonPrimary"
-                                >{t('global.StakingOptionsModal_Comfirm')}</Button>
                             </div>
                         </div>
                     </>
                 );
             },
-            '99': () => {
+            1: () => {
                 return (
                     <>
-                        <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_ReviewYourWallet')}</h1>
+                        <h1 className="StakingOptionsModal_Title">
+                            {t('global.StakingOptionsModal_SetAllowance')}
+                        </h1>
                         <div className="StakingOptionsModal_Content AllowanceLoading">
                             <Spin indicator={<LoadingOutlined />} />
-                            <p>{t('global.StakingOptionsModal_ReviewYourWalletDescription')}</p>
+                            <p>
+                                {t(
+                                    'global.StakingOptionsModal_ProccessingAllowance'
+                                )}
+                            </p>
                         </div>
                     </>
-                )
+                );
+            },
+            2: () => {
+                return (
+                    <>
+                        <h1 className="StakingOptionsModal_Title">
+                            {t('global.StakingOptionsModal_Title')}
+                        </h1>
+                        <div className="StakingOptionsModal_Content">
+                            <div className="InfoContainer">
+                                <span className="title">
+                                    {t(
+                                        'global.StakingOptionsModal_AmountToStake'
+                                    )}
+                                </span>
+                                <span className="value amount">
+                                    <LargeNumber
+                                        amount={amount}
+                                        currencyCode="RESERVE"
+                                    />{' '}
+                                    <span>
+                                        {t(`${AppProject}.Tokens_TG_code`, {
+                                            ns: ns
+                                        })}
+                                    </span>
+                                </span>
+                            </div>
+                            <p>
+                                {t(
+                                    'global.StakingOptionsModal_StakingDescription'
+                                )}
+                            </p>
+                            <div className="ActionButtonsRow">
+                                <Button type="default" onClick={onClose}>
+                                    {t('global.StakingOptionsModal_Cancel')}
+                                </Button>
+                                <Button
+                                    type="primary"
+                                    onClick={depositMoCs}
+                                    className="ButtonPrimary"
+                                >
+                                    {t('global.StakingOptionsModal_Comfirm')}
+                                </Button>
+                            </div>
+                        </div>
+                    </>
+                );
+            },
+            99: () => {
+                return (
+                    <>
+                        <h1 className="StakingOptionsModal_Title">
+                            {t('global.StakingOptionsModal_ReviewYourWallet')}
+                        </h1>
+                        <div className="StakingOptionsModal_Content AllowanceLoading">
+                            <Spin indicator={<LoadingOutlined />} />
+                            <p>
+                                {t(
+                                    'global.StakingOptionsModal_ReviewYourWalletDescription'
+                                )}
+                            </p>
+                        </div>
+                    </>
+                );
             }
-        }
+        };
 
         return steps[step] ? steps[step]() : null;
     };
@@ -222,26 +281,38 @@ export default function StakingOptionsModal(props) {
     const renderUnstaking = () => {
         return (
             <>
-                <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_UnstakeTitle')}</h1>
+                <h1 className="StakingOptionsModal_Title">
+                    {t('global.StakingOptionsModal_UnstakeTitle')}
+                </h1>
                 <div className="StakingOptionsModal_Content">
                     <div className="InfoContainer">
-                        <span className="title">{t('global.StakingOptionsModal_AmountToUnstake')}</span>
+                        <span className="title">
+                            {t('global.StakingOptionsModal_AmountToUnstake')}
+                        </span>
                         <span className="value amount">
-                            <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                            <span>{t(`${AppProject}.Tokens_TG_code`, {ns: ns})}</span>
+                            <LargeNumber
+                                amount={amount}
+                                currencyCode="RESERVE"
+                            />{' '}
+                            <span>
+                                {t(`${AppProject}.Tokens_TG_code`, { ns: ns })}
+                            </span>
                         </span>
                     </div>
-                    <p>{t('global.StakingOptionsModal_UnstakingDescription')}</p>
+                    <p>
+                        {t('global.StakingOptionsModal_UnstakingDescription')}
+                    </p>
                     <div className="ActionButtonsRow">
-                        <Button
-                            type="default"
-                            onClick={onClose}
-                        >{t('global.StakingOptionsModal_Cancel')}</Button>
+                        <Button type="default" onClick={onClose}>
+                            {t('global.StakingOptionsModal_Cancel')}
+                        </Button>
                         <Button
                             type="primary"
                             onClick={unstakeMoCs}
                             className="ButtonPrimary"
-                        >{t('global.StakingOptionsModal_Comfirm')}</Button>
+                        >
+                            {t('global.StakingOptionsModal_Comfirm')}
+                        </Button>
                     </div>
                 </div>
             </>
@@ -251,26 +322,36 @@ export default function StakingOptionsModal(props) {
     const renderWithdraw = () => {
         return (
             <>
-                <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_WithdrawTitle')}</h1>
+                <h1 className="StakingOptionsModal_Title">
+                    {t('global.StakingOptionsModal_WithdrawTitle')}
+                </h1>
                 <div className="StakingOptionsModal_Content">
                     <div className="InfoContainer">
-                        <span className="title">{t('global.StakingOptionsModal_AmountToWithdraw')}</span>
+                        <span className="title">
+                            {t('global.StakingOptionsModal_AmountToWithdraw')}
+                        </span>
                         <span className="value amount">
-                            <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                            <span>{t(`${AppProject}.Tokens_TG_code`, {ns: ns})}</span>
+                            <LargeNumber
+                                amount={amount}
+                                currencyCode="RESERVE"
+                            />{' '}
+                            <span>
+                                {t(`${AppProject}.Tokens_TG_code`, { ns: ns })}
+                            </span>
                         </span>
                     </div>
                     <p>{t('global.StakingOptionsModal_WithdrawDescription')}</p>
                     <div className="ActionButtonsRow">
-                        <Button
-                            type="default"
-                            onClick={onClose}
-                        >{t('global.StakingOptionsModal_Cancel')}</Button>
+                        <Button type="default" onClick={onClose}>
+                            {t('global.StakingOptionsModal_Cancel')}
+                        </Button>
                         <Button
                             type="primary"
                             onClick={withdrawMoCs}
                             className="ButtonPrimary"
-                        >{t('global.StakingOptionsModal_Comfirm')}</Button>
+                        >
+                            {t('global.StakingOptionsModal_Comfirm')}
+                        </Button>
                     </div>
                 </div>
             </>
@@ -280,26 +361,36 @@ export default function StakingOptionsModal(props) {
     const renderRestaking = () => {
         return (
             <>
-                <h1 className="StakingOptionsModal_Title">{t('global.StakingOptionsModal_RestakeTitle')}</h1>
+                <h1 className="StakingOptionsModal_Title">
+                    {t('global.StakingOptionsModal_RestakeTitle')}
+                </h1>
                 <div className="StakingOptionsModal_Content">
                     <div className="InfoContainer">
-                        <span className="title">{t('global.StakingOptionsModal_AmountToRestake')}</span>
+                        <span className="title">
+                            {t('global.StakingOptionsModal_AmountToRestake')}
+                        </span>
                         <span className="value amount">
-                            <LargeNumber amount={amount} currencyCode="RESERVE" />{' '}
-                            <span>{t(`${AppProject}.Tokens_TG_code`, {ns: ns})}</span>
+                            <LargeNumber
+                                amount={amount}
+                                currencyCode="RESERVE"
+                            />{' '}
+                            <span>
+                                {t(`${AppProject}.Tokens_TG_code`, { ns: ns })}
+                            </span>
                         </span>
                     </div>
                     <p>{t('global.StakingOptionsModal_RestakeDescription')}</p>
                     <div className="ActionButtonsRow">
-                        <Button
-                            type="default"
-                            onClick={onClose}
-                        >{t('global.StakingOptionsModal_Cancel')}</Button>
+                        <Button type="default" onClick={onClose}>
+                            {t('global.StakingOptionsModal_Cancel')}
+                        </Button>
                         <Button
                             type="primary"
                             onClick={restakeMoCs}
                             className="ButtonPrimary"
-                        >{t('global.StakingOptionsModal_Comfirm')}</Button>
+                        >
+                            {t('global.StakingOptionsModal_Comfirm')}
+                        </Button>
                     </div>
                 </div>
             </>
@@ -326,5 +417,5 @@ export default function StakingOptionsModal(props) {
         >
             {render()}
         </Modal>
-    )
+    );
 }
