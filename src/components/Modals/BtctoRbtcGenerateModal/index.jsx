@@ -15,6 +15,7 @@ import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-so
 import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-atention.svg';
 
 import './style.scss';
+import BigNumber from "bignumber.js";
 
 export default function BtcToRbtcGenerateModal(props) {
     const auth = useContext(AuthenticateContext);
@@ -155,9 +156,10 @@ export default function BtcToRbtcGenerateModal(props) {
                                                     {
                                                         ns: ns,
                                                         minValue: parseFloat(
-                                                            stateFBtc.limits.min.toFixed(
-                                                                4
-                                                            )
+                                                            (stateFBtc.limits.min < 0.0005) ? 0.0005 :
+                                                                stateFBtc.limits.min.toFixed(
+                                                                    8
+                                                                )
                                                         )
                                                     }
                                                 )}
@@ -169,14 +171,14 @@ export default function BtcToRbtcGenerateModal(props) {
                                                         ns: ns,
                                                         maxValue: parseFloat(
                                                             stateFBtc.limits.max.toFixed(
-                                                                4
+                                                                8
                                                             )
                                                         )
                                                     }
                                                 )}
                                             </li>
                                             <li>
-                                                <p>Fee: 5k satoshis + 0.2%</p>
+                                                <p>Fee: 0.00006 BTC + 0.2%</p>
                                             </li>
                                         </ul>
                                     </div>
