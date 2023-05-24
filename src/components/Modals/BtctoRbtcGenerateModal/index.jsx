@@ -16,6 +16,7 @@ import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-
 
 import './style.scss';
 import BigNumber from "bignumber.js";
+import IconStatusPending from "../../../assets/icons/status-pending.png";
 
 export default function BtcToRbtcGenerateModal(props) {
     const auth = useContext(AuthenticateContext);
@@ -292,7 +293,7 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
 
     return (
         <div className="TxActions">
-            {state.step === Step.WALLET && state.deposit.address !== '' ? (
+            {(state.step === Step.WALLET && state.deposit.address !== '') && (
                 <div className="AddressQrCode">
                     <div className="tw-text-lg tw-ml-8 tw-mb-2.5">
                         <b className="AddressTitle">
@@ -328,8 +329,19 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
                         />
                     </div>
                 </div>
-            ) : (
-                ''
+            )}
+
+            {(state.step === Step.WALLET && state.deposit.address === '') && (
+                <div>
+                    <img
+                        src={IconStatusPending}
+                        width={50}
+                        height={50}
+                        alt="pending"
+                        className="img-status rotate"
+                    />
+                    <div> Please wait ... getting btc address deposit from fastbtc servers. </div>
+                </div>
             )}
 
             <div className="MainActions">
