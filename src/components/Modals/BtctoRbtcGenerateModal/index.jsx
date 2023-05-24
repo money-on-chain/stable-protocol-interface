@@ -260,6 +260,9 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
     const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     useEffect(() => {
+        socket.initialize();
+    }, []);
+    useEffect(() => {
         if (!address) console.log('--- USER IS NOT LOGGED IN ----');
         if (!socket) console.log('---- SOCKET IS NOT CONNECTED ---');
         getBtcAddress(socket, address)
@@ -304,7 +307,7 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
                                 '...' +
                                 state.deposit.address.substring(
                                     state.deposit.address.length - 4,
-                                    state.deposit.address.lenght
+                                    state.deposit.address.length
                                 )
                             }
                             textToCopy={state.deposit.address}
