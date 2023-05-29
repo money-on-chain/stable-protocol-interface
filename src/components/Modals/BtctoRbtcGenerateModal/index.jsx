@@ -15,6 +15,7 @@ import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-so
 import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-atention.svg';
 
 import './style.scss';
+import IconStatusPending from "../../../assets/icons/status-pending.png";
 
 export default function BtcToRbtcGenerateModal(props) {
     const auth = useContext(AuthenticateContext);
@@ -155,9 +156,10 @@ export default function BtcToRbtcGenerateModal(props) {
                                                     {
                                                         ns: ns,
                                                         minValue: parseFloat(
-                                                            stateFBtc.limits.min.toFixed(
-                                                                4
-                                                            )
+                                                            (stateFBtc.limits.min < 0.0005) ? 0.0005 :
+                                                                stateFBtc.limits.min.toFixed(
+                                                                    8
+                                                                )
                                                         )
                                                     }
                                                 )}
@@ -169,14 +171,14 @@ export default function BtcToRbtcGenerateModal(props) {
                                                         ns: ns,
                                                         maxValue: parseFloat(
                                                             stateFBtc.limits.max.toFixed(
-                                                                4
+                                                                8
                                                             )
                                                         )
                                                     }
                                                 )}
                                             </li>
                                             <li>
-                                                <p>Fee: 5k satoshis + 0.2%</p>
+                                                <p>Fee: 0.00006 BTC + 0.2%</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -258,6 +260,9 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
     const [t, i18n, ns] = useProjectTranslation();
     const AppProject = config.environment.AppProject;
     useEffect(() => {
+        socket.initialize();
+    }, []);
+    useEffect(() => {
         if (!address) console.log('--- USER IS NOT LOGGED IN ----');
         if (!socket) console.log('---- SOCKET IS NOT CONNECTED ---');
         getBtcAddress(socket, address)
@@ -287,7 +292,7 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
 
     return (
         <div className="TxActions">
-            {state.step === Step.WALLET && state.deposit.address !== '' ? (
+            {(state.step === Step.WALLET && state.deposit.address !== '') && (
                 <div className="AddressQrCode">
                     <div className="tw-text-lg tw-ml-8 tw-mb-2.5">
                         <b className="AddressTitle">
@@ -302,7 +307,7 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
                                 '...' +
                                 state.deposit.address.substring(
                                     state.deposit.address.length - 4,
-                                    state.deposit.address.lenght
+                                    state.deposit.address.length
                                 )
                             }
                             textToCopy={state.deposit.address}
@@ -323,8 +328,19 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
                         />
                     </div>
                 </div>
-            ) : (
-                ''
+            )}
+
+            {(state.step === Step.WALLET && state.deposit.address === '') && (
+                <div>
+                    <img
+                        src={IconStatusPending}
+                        width={50}
+                        height={50}
+                        alt="pending"
+                        className="img-status rotate"
+                    />
+                    <div> Please wait ... getting btc address deposit from fastbtc servers. </div>
+                </div>
             )}
 
             <div className="MainActions">
