@@ -15,7 +15,6 @@ import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-so
 import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-atention.svg';
 
 import './style.scss';
-import BigNumber from "bignumber.js";
 import IconStatusPending from "../../../assets/icons/status-pending.png";
 
 export default function BtcToRbtcGenerateModal(props) {
