@@ -104,7 +104,7 @@ const vendorMarkup = async (interfaceContext, vendorAccount) => {
     const { web3, account } = interfaceContext;
     const dContracts = window.integration;
     const mocvendors = dContracts.contracts.mocvendors;
-    const result = await mocvendors.methods.vendors(vendorAccount).call();
+    const result = await mocvendors.methods.vendors(web3.utils.toChecksumAddress(vendorAccount)).call();
     return result[1];
 };
 
@@ -125,13 +125,13 @@ const transferTPTo = async (
     // Calculate estimate gas cost
     const estimateGas = await tp.methods
         .transfer(to, toContractPrecision(amount))
-        .estimateGas({ from: account });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account) });
 
     // Send tx
     const receipt = tp.methods
         .transfer(to, toContractPrecision(amount))
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -160,13 +160,13 @@ const transferTCTo = async (
     // Calculate estimate gas cost
     const estimateGas = await tc.methods
         .transfer(to, toContractPrecision(amount))
-        .estimateGas({ from: account });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account) });
 
     // Send tx
     const receipt = tc.methods
         .transfer(to, toContractPrecision(amount))
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -195,13 +195,13 @@ const transferTGTo = async (
     // Calculate estimate gas cost
     const estimateGas = await tg.methods
         .transfer(to, toContractPrecision(amount))
-        .estimateGas({ from: account });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account) });
 
     // Send tx
     const receipt = tg.methods
         .transfer(to, toContractPrecision(amount))
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -224,8 +224,8 @@ const transferCoinbaseTo = async (
     let tokens = web3.utils.toWei(amount.toString(), 'ether');
     const receipt = await web3.eth
         .sendTransaction({
-            from: account.toLowerCase(),
-            to: to.toLowerCase(),
+            from: web3.utils.toChecksumAddress(account),
+            to: web3.utils.toChecksumAddress(to),
             value: web3.utils.toBN(tokens),
             gasPrice: await getGasPrice(web3),
             gas: 72000
@@ -255,13 +255,13 @@ const approveTGTokenCommission = async (
     // Calculate estimate gas cost
     const estimateGas = await tg.methods
         .approve(mocAddress, newAllowance)
-        .estimateGas({ from: account });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account) });
 
     // Send tx
     const receipt = tg.methods
         .approve(mocAddress, newAllowance)
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,

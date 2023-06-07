@@ -81,7 +81,7 @@ const mintTP = async (
     const estimateGas = await moc.methods
         .mintDocVendors(toContractPrecision(reserveAmount), vendorAddress)
         .estimateGas({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: toContractPrecision(valueToSend)
         });
 
@@ -89,7 +89,7 @@ const mintTP = async (
     const receipt = moc.methods
         .mintDocVendors(toContractPrecision(reserveAmount), vendorAddress)
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: toContractPrecision(valueToSend),
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -161,7 +161,7 @@ const redeemTP = async (
             toContractPrecision(new BigNumber(tpAmount)),
             vendorAddress
         )
-        .estimateGas({ from: account, value: '0x' });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account), value: '0x' });
 
     // Send tx
     const receipt = moc.methods
@@ -170,7 +170,7 @@ const redeemTP = async (
             vendorAddress
         )
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -252,7 +252,7 @@ const mintTC = async (
     const estimateGas = await moc.methods
         .mintBProVendors(toContractPrecision(reserveAmount), vendorAddress)
         .estimateGas({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: toContractPrecision(valueToSend)
         });
 
@@ -260,7 +260,7 @@ const mintTC = async (
     const receipt = moc.methods
         .mintBProVendors(toContractPrecision(reserveAmount), vendorAddress)
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: toContractPrecision(valueToSend),
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -329,7 +329,7 @@ const redeemTC = async (
             toContractPrecision(new BigNumber(tcAmount)),
             vendorAddress
         )
-        .estimateGas({ from: account, value: '0x' });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account), value: '0x' });
 
     // Send tx
     const receipt = moc.methods
@@ -338,7 +338,7 @@ const redeemTC = async (
             vendorAddress
         )
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -444,7 +444,7 @@ const mintTX = async (
             vendorAddress
         )
         .estimateGas({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: toContractPrecision(valueToSend)
         });
 
@@ -456,7 +456,7 @@ const mintTX = async (
             vendorAddress
         )
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: toContractPrecision(valueToSend),
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -520,7 +520,7 @@ const redeemTX = async (
             toContractPrecision(new BigNumber(txAmount)),
             vendorAddress
         )
-        .estimateGas({ from: account, value: '0x' });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account), value: '0x' });
 
     // Send tx
     const receipt = moc.methods
@@ -530,7 +530,7 @@ const redeemTX = async (
             vendorAddress
         )
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,

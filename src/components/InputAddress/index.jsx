@@ -14,14 +14,14 @@ export default function InputAddress(props) {
     const [help, setHelp] = useState('');
     const [value, setValue] = useState('');
 
-    const rns = new window.RNS(
+    /*const rns = new window.RNS(
         window.ethereum,
         config.environment.rns.address && {
             contractAddresses: {
                 registry: config.environment.rns.address
             }
         }
-    );
+    );*/
 
     const helper = addressHelper(web3);
 
@@ -42,7 +42,7 @@ export default function InputAddress(props) {
         if (isHexadecimal && isValidChecksum) {
             return onResolutionCompleted(true, '', addressOrRNS);
         }
-        if (!isHexadecimal && rns.utils.isValidDomain(addressOrRNS)) {
+        /*if (!isHexadecimal && rns.utils.isValidDomain(addressOrRNS)) {
             return rns
                 .addr(addressOrRNS)
                 .then((addr) =>
@@ -55,7 +55,7 @@ export default function InputAddress(props) {
                         addressOrRNS
                     )
                 );
-        }
+        }*/
 
         return onResolutionCompleted(
             false,
