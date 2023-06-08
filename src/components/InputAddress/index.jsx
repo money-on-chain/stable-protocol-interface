@@ -15,7 +15,7 @@ export default function InputAddress(props) {
     const [value, setValue] = useState('');
 
     const rns = new window.RNS(
-        window.ethereum,
+        web3,
         config.environment.rns.address && {
             contractAddresses: {
                 registry: config.environment.rns.address
