@@ -36,12 +36,12 @@ body, html {
 }
 
 a {
-  color: #09c199;
+  color: #4b5cf0;
   font-weight: normal;
   font-size: 13px;
   &:hover {
     cursor: pointer;
-    color: #09c199;
+    color: #4b5cf0;
   }
 }
 
@@ -200,8 +200,8 @@ a {
   //padding: 0 20px;
   height: 40px;
   &.ant-btn-ghost, &.ant-btn-default {
-    border: solid 1px #09c199;
-    color: #09c199;
+    border: solid 1px #4b5cf0;
+    color: #4b5cf0;
     //box-shadow: 0 2px 4px rgb(9, 193, 153, 20%), 0 2px 4px rgb(9, 193, 153, 20%);
     &:hover {
       border: solid 1px #000;
@@ -211,8 +211,8 @@ a {
   &.ant-btn-primary {
     color: #fff;
     //box-shadow: 0 2px 4px rgb(9, 193, 153, 20%), 0 2px 4px rgb(9, 193, 153, 20%);
-    border: solid 1px #09c199;
-    background: #09c199;
+    border: solid 1px #4b5cf0;
+    background: #4b5cf0;
     &:hover {
       background: #000;
       border: solid 1px #000;
@@ -228,7 +228,7 @@ a {
   }
 
   &.ArrowButton {
-    background: #09c199;
+    background: #4b5cf0;
     border: none;
     width: 40px;
     min-width: 40px;
@@ -439,11 +439,11 @@ a {
     color: inherit;
   }
   .ant-tabs-tab {
-    color: #09c199!important;
+    color: #4b5cf0!important;
   }
 
   .ant-tabs-ink-bar {
-    background: #09c199!important;
+    background: #4b5cf0!important;
   }
 }
 .RewardsBalanceContainer {
@@ -687,7 +687,7 @@ a {
 }
 
 .copy-txt{
-  color: #09C199;
+  color: #4b5cf0;
 }
 
 .ant-form-item-explain-success{
