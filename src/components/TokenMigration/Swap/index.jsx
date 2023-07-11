@@ -154,7 +154,7 @@ const SwapToken = (props) => {
             <div className="Title">{title}</div>
             <div className="Body">
                 {status === 'SUBMIT' && (<div>
-                    <p>RIF Dollar (RDOC) is changing to RIF USD (USDRIF). You need to swap your RIF Dollars to operate with the udpated DAPP.
+                    <p>RIF Dollar (RDOC) is changing to RIF US Dollar (USDRIF). You need to swap your RIF Dollars to operate with the udpated DAPP.
                         You will no longer be able to see your RDOC balance in the DAPP. </p>
 
                     <p>The exchange rate for the swap is <strong>1 RDOC = 1 USDRIF</strong>. You will not be charged a transaction fee.</p>

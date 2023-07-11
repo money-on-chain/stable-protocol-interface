@@ -25,7 +25,7 @@ export default function ModalTokenMigration(props) {
         <div className="ShowTokenMigration">
             <div className="NotificationMigration">
                 <div className="Important">Important</div>
-                <div className="Information">RIF Dollar (RDOC) is changing to RIF US Dollar (USDRIF). You need to swap your RIF US Dollar to operate with the updated DAPP. You will no longer be able to see your RDOC balances in the DAPP. Please swap your tokens using the Swap Now button.</div>
+                <div className="Information">RIF Dollar (RDOC) is changing to RIF US Dollar (USDRIF). You need to swap your RIF Dollar to operate with the updated DAPP. You will no longer be able to see your RDOC balances in the DAPP. Please swap your tokens using the Swap Now button.</div>
                 <div className="Action"><Button className="btnSwap" onClick={showModal}>Swap Now</Button></div>
             </div>
             <Modal
