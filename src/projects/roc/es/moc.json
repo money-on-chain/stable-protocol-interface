@@ -184,7 +184,7 @@
             },
             "TP": {
                 "title": "USDRIF",
-                "subtitle": "Administra tus Tokens RIF Dollar"
+                "subtitle": "Administra tus Tokens RIF US Dollar"
             },
             "TG": {
                 "title": "MOC",
@@ -218,7 +218,7 @@
                 "inrateTitle": "la Tasa de Interés",
                 "inrateTooltipText": "La tasa de interés que se muestra es absoluta, depende de los días restantes hasta el Settlement, y serán descontados de la cantidad a comprar.",
                 "freeDocRateTitle": "Tasa de redención libre",
-                "freeDocRateTooltipText": "Los RIF Dollar (RIFD) redimidos antes de la liquidación pagarán un interés, puedes encolar tu solicitud de redención para el próximo settlement y así evitar pagarlo.",
+                "freeDocRateTooltipText": "Los RIF US Dollar (USDRIF) redimidos antes de la liquidación pagarán un interés, puedes encolar tu solicitud de redención para el próximo settlement y así evitar pagarlo.",
                 "amountDisclaimer": "*Los montos pueden diferir cuando la transacción sea procesada",
                 "isCreditInterest": "**Crédito"
             },
@@ -233,7 +233,7 @@
         },
         "metrics": {
             "TP": {
-                "title": "RIF Dollar",
+                "title": "RIF US Dollar",
                 "total": "Total USDRIF en el sistema",
                 "availableRedeem": "USDRIF disponibles para redimir",
                 "availableMint": "USDRIF disponibles para emitir"
@@ -311,7 +311,7 @@
                 "totalBitPro": "Total de {{tokenName}}s",
                 "tooltip": {
                     "title": "Tokens en RIFP",
-                    "subtitle": "- Total de RIF Dollar en cadena: la cantidad de USDRIF que proporciona apalancamiento gratuito a RIFpro. - Total RIFpro: Número de RIFpro emitidos por el sistema - Total de RIF tokens: la suma de lo anterior expresado en RIF\n"
+                    "subtitle": "- Total de RIF US Dollar en cadena: la cantidad de USDRIF que proporciona apalancamiento gratuito a RIFpro. - Total RIFpro: Número de RIFpro emitidos por el sistema - Total de RIF tokens: la suma de lo anterior expresado en RIF\n"
                 }
             },
             "BtcInBucket2": {
@@ -413,7 +413,7 @@
             },
             "docToken": {
                 "title": "Token USDRIF",
-                "descStep1": "El RIF Dollar, o {{tokenNameHTML}}, es la moneda estable con colateral en RIF y una relación 1:1 con el precio del dólar estadounidense. Recomendada para evitar la volatilidad y para ahorro. Es el Token ideal si no quieres asumir riesgos."
+                "descStep1": "El RIF US Dollar, o {{tokenNameHTML}}, es la moneda estable con colateral en RIF y una relación 1:1 con el precio del dólar estadounidense. Recomendada para evitar la volatilidad y para ahorro. Es el Token ideal si no quieres asumir riesgos."
             },
             "BProToken": {
                 "title": "Token RIFP",
@@ -721,7 +721,7 @@
         "TokenInformationContent": {
             "TP": {
                 "factSheet": "USDRIF Fact Sheet ",
-                "title": "El RIF Dollar (USDRIF) es una moneda estable con RIF de colateral que sigue 1:1 el valor del dólar estadounidense. Sus principales características son:",
+                "title": "El RIF US Dollar (USDRIF) es una moneda estable con RIF de colateral que sigue 1:1 el valor del dólar estadounidense. Sus principales características son:",
                 "characteristics": {
                     "left": [
                         "Relación 1:1 con el dólar estadounidense.",

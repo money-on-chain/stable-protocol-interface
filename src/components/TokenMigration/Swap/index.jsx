@@ -154,12 +154,12 @@ const SwapToken = (props) => {
             <div className="Title">{title}</div>
             <div className="Body">
                 {status === 'SUBMIT' && (<div>
-                    <p>RIF Dollar (RDOC) is changing to RIF US Dollar (USDRIF). You need to swap your RIF Dollars to operate with the udpated DAPP.
+                    <p>RIF Dollar on Chain (RDOC) is changing to RIF US Dollar (USDRIF). You need to swap your RIF Dollar on Chain (RDOC) to operate with the update DAPP.
                         You will no longer be able to see your RDOC balance in the DAPP. </p>
 
-                    <p>The exchange rate for the swap is <strong>1 RDOC = 1 USDRIF</strong>. You will not be charged a transaction fee.</p>
+                    <p>The exchange rate for the swap is <strong>1 RDOC = 1 USDRIF</strong>. You will not be charged a transaction fee, only gas fees will apply.</p>
 
-                    <p>Clicking Confirm button your wallet will ask you to sign the transaction. All your RDOC balance will be converted to USDRIF</p>
+                    <p>Clicking Confirm button on your wallet will ask you to sign the transaction. All your RDOC balance will be converted to USDRIF</p>
                 </div>)}
 
                 {status === 'CONFIRM' && (<div>
@@ -251,8 +251,8 @@ const SwapToken = (props) => {
                   status !== 'TOKEN-MIGRATION-ERROR' &&
                   status !== 'ALLOWANCE-ERROR')  && (<Button className="" onClick={onClose}>Cancel</Button>)}
                 {(status === 'SUBMIT' ||
-                  status === 'CONFIRM' ||
-                  status === 'TOKEN-MIGRATION-SUCCESS')  && (<Button className="ConfirmBtn" type="primary" disabled={btnDisable} onClick={onConfirm}>{btnLabel}</Button>)}
+                  status === 'CONFIRM')  && (<Button className="ConfirmBtn" type="primary" disabled={btnDisable} onClick={onConfirm}>{btnLabel}</Button>)}
+                {(status === 'TOKEN-MIGRATION-SUCCESS')  && (<Button className="" type="primary" disabled={btnDisable} onClick={onConfirm}>{btnLabel}</Button>)}
 
             </div>
         </div>

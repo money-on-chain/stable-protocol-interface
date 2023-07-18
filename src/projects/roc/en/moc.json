@@ -224,7 +224,7 @@
             },
             "allowance": {
                 "allowanceSendTitle": "Allowance",
-                "allowanceSendDescription": "Please approve the TX in your wallet to use MoC Tokens in the platform. Turn on screen reader support",
+                "allowanceSendDescription": "Please approve the TX in your wallet to use MoC Tokens in the platform. Turn on screen reader support.",
                 "allowanceTxTitle": "Allowance",
                 "allowanceTxDescription": "Allowance sent! please await confirmation. You can explore the transaction hash. ",
                 "allowanceSendErrorTitle": "Allowance",
@@ -311,7 +311,7 @@
                 "totalBitPro": "Total {{tokenName}}",
                 "tooltip": {
                     "title": "Tokens in RIFpro",
-                    "subtitle": "- Total RIF Dollar on chain:The amount of USDRIF giving free leverage to RIFpro.\n- Total RifPro: Number of RIFpro issued by the system\n- Total RIF tokens: the sum of the above expresed in RIF\n"
+                    "subtitle": "- Total RIF US Dollar: The amount of USDRIF giving free leverage to RIFpro.\n- Total RifPro: Number of RIFpro issued by the system\n- Total RIF tokens: the sum of the above expresed in RIF\n"
                 }
             },
             "BtcInBucket2": {
@@ -414,7 +414,7 @@
             "docToken": {
                 "title": "RIFUSD Token",
                 "descStep1": "Avoid crypto volatility using {{tokenNameHTML}} for payments, daily transactions, holding your savings, and acquiring RIF Services like identity, storage or communications.",
-                "descStep2": "RIF Dollar is a fully crypto collateralized stablecoin. 1:1 pegged to US Dollar guaranteed by the smart contract. RIF Dollar (USDRIF) is the ideal token to participate in Decentralized Sharing Economies."
+                "descStep2": "RIF US Dollar is a fully crypto collateralized stablecoin. 1:1 pegged to US Dollar guaranteed by the smart contract. RIF US Dollar (USDRIF) is the ideal token to participate in Decentralized Sharing Economies."
             },
             "BProToken": {
                 "title": "RIFP Token",
