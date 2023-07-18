@@ -49,7 +49,8 @@ const mintTPRRC20 = async (
     reserveAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Mint TP with collateral RRC20
 
@@ -157,6 +158,7 @@ const mintTPRRC20 = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -168,7 +170,8 @@ const redeemTPRRC20 = async (
     tpAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Redeem TP token receiving collateral RRC20
 
@@ -238,6 +241,7 @@ const redeemTPRRC20 = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -249,7 +253,8 @@ const mintTCRRC20 = async (
     reserveAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Mint TC token with collateral RRC20
 
@@ -343,6 +348,7 @@ const mintTCRRC20 = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -354,7 +360,8 @@ const redeemTCRRC20 = async (
     tcAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Redeem TC token receiving RRC20
 
@@ -424,6 +431,7 @@ const redeemTCRRC20 = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -435,7 +443,8 @@ const mintTXRRC20 = async (
     reserveAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Mint TX token with collateral RRC20
 
@@ -536,6 +545,7 @@ const mintTXRRC20 = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -547,7 +557,8 @@ const redeemTXRRC20 = async (
     txAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Redeem TX token receiving RRC20
 
@@ -610,6 +621,7 @@ const redeemTXRRC20 = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 

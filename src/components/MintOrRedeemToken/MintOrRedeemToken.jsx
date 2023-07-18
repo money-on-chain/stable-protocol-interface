@@ -381,12 +381,17 @@ const MintOrRedeemToken = (props) => {
             setDoneSwitch(allowanceEnabled);
         };
 
+        const onErrorAllowance = async (error) => {
+            console.log("Error Allowance TG:", error)
+        };
+
         msgAllowanceSend();
         await auth
             .interfaceApproveTGTokenCommission(
                 allowanceEnabled,
                 onTransactionAllowance,
-                onReceiptAllowance
+                onReceiptAllowance,
+                onErrorAllowance
             )
             .catch((e) => {
                 console.error(e);

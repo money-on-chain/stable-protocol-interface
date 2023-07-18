@@ -70,57 +70,65 @@ const AuthenticateContext = createContext({
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {},
-    interfaceMintTC: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemTC: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintTP: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemTP: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceMintTX: async (amount, slippage, onTransaction, onReceipt) => {},
-    interfaceRedeemTX: async (amount, slippage, onTransaction, onReceipt) => {},
+    interfaceMintTC: async (amount, slippage, onTransaction, onReceipt, onError) => {},
+    interfaceRedeemTC: async (amount, slippage, onTransaction, onReceipt, onError) => {},
+    interfaceMintTP: async (amount, slippage, onTransaction, onReceipt, onError) => {},
+    interfaceRedeemTP: async (amount, slippage, onTransaction, onReceipt, onError) => {},
+    interfaceMintTX: async (amount, slippage, onTransaction, onReceipt, onError) => {},
+    interfaceRedeemTX: async (amount, slippage, onTransaction, onReceipt, onError) => {},
     interfaceMintTCRRC20: async (
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {},
     interfaceRedeemTCRRC20: async (
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {},
     interfaceMintTPRRC20: async (
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {},
     interfaceRedeemTPRRC20: async (
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {},
     interfaceMintTXRRC20: async (
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {},
     interfaceRedeemTXRRC20: async (
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {},
     interfaceApproveTGTokenCommission: async (
         enabled,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {},
-    interfaceAllowUseTokenMigrator: async (amount, onTransaction, onReceipt) => {},
-    interfaceMigrateToken: async (onTransaction, onReceipt) => {},
+    interfaceAllowUseTokenMigrator: async (amount, onTransaction, onReceipt, onError) => {},
+    interfaceMigrateToken: async (onTransaction, onReceipt, onError) => {},
     disconnect: () => {},
     getTransactionReceipt: (hash) => {},
     interfaceDecodeEvents: async (receipt) => {},
@@ -283,7 +291,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const appMode = config.environment.AppMode;
         const appModeString = `APP_MODE_${appMode}`;
@@ -350,14 +359,15 @@ const AuthenticateProvider = ({ children }) => {
         const exchangeMethod =
             exchangeCurrencyMap[sourceCurrency][targetCurrency][appModeString]
                 .exchangeFunction;
-        return exchangeMethod(amount, slippage, onTransaction, onReceipt);
+        return exchangeMethod(amount, slippage, onTransaction, onReceipt, onError);
     };
 
     const interfaceMintTP = async (
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await mintTP(
@@ -365,7 +375,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -373,7 +384,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await mintTPRRC20(
@@ -381,7 +393,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -389,7 +402,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await redeemTP(
@@ -397,7 +411,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -405,7 +420,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await redeemTPRRC20(
@@ -413,7 +429,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -421,7 +438,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await mintTC(
@@ -429,7 +447,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -437,7 +456,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await mintTCRRC20(
@@ -445,7 +465,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -453,7 +474,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await redeemTC(
@@ -461,7 +483,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -469,7 +492,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await redeemTCRRC20(
@@ -477,7 +501,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -485,7 +510,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await mintTX(
@@ -493,7 +519,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -501,7 +528,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await mintTXRRC20(
@@ -509,7 +537,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -517,7 +546,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await redeemTX(
@@ -525,7 +555,8 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -533,7 +564,8 @@ const AuthenticateProvider = ({ children }) => {
         amount,
         slippage,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         await redeemTXRRC20(
@@ -541,32 +573,35 @@ const AuthenticateProvider = ({ children }) => {
             amount,
             slippage,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
     const interfaceApproveTGTokenCommission = async (
         enabled,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         return approveTGTokenCommission(
             interfaceContext,
             enabled,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
-    const interfaceAllowUseTokenMigrator = async (amount, onTransaction, onReceipt) => {
+    const interfaceAllowUseTokenMigrator = async (amount, onTransaction, onReceipt, onError) => {
         const interfaceContext = buildInterfaceContext();
-        return AllowUseTokenMigrator(interfaceContext, amount, onTransaction, onReceipt);
+        return AllowUseTokenMigrator(interfaceContext, amount, onTransaction, onReceipt, onError);
     };
 
-    const interfaceMigrateToken = async (onTransaction, onReceipt) => {
+    const interfaceMigrateToken = async (onTransaction, onReceipt, onError) => {
         const interfaceContext = buildInterfaceContext();
-        return MigrateToken(interfaceContext, onTransaction, onReceipt);
+        return MigrateToken(interfaceContext, onTransaction, onReceipt, onError);
     };
 
     const initContractsConnection = async () => {
@@ -760,7 +795,8 @@ const AuthenticateProvider = ({ children }) => {
         to,
         amount,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
@@ -769,7 +805,8 @@ const AuthenticateProvider = ({ children }) => {
             toWithChecksum,
             amount,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -777,7 +814,8 @@ const AuthenticateProvider = ({ children }) => {
         to,
         amount,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
@@ -786,7 +824,8 @@ const AuthenticateProvider = ({ children }) => {
             toWithChecksum,
             amount,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -794,7 +833,8 @@ const AuthenticateProvider = ({ children }) => {
         to,
         amount,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
@@ -803,7 +843,8 @@ const AuthenticateProvider = ({ children }) => {
             toWithChecksum,
             amount,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -811,7 +852,8 @@ const AuthenticateProvider = ({ children }) => {
         to,
         amount,
         onTransaction,
-        onReceipt
+        onReceipt,
+        onError
     ) => {
         const interfaceContext = buildInterfaceContext();
         const toWithChecksum = helper.toWeb3CheckSumAddress(to);
@@ -820,7 +862,8 @@ const AuthenticateProvider = ({ children }) => {
             toWithChecksum,
             amount,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 

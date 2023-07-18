@@ -190,7 +190,8 @@ export default function MintModal(props) {
             userAmount,
             userToleranceFormat,
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
     };
 
@@ -213,6 +214,17 @@ export default function MintModal(props) {
     const onReceipt = async (receipt) => {
         auth.loadContractsStatusAndUserBalance();
         const filteredEvents = auth.interfaceDecodeEvents(receipt);
+    };
+
+    const onError = async (error) => {
+        console.log("On transaction error:", error)
+        setLoading(false);
+        setTxtTransaction('ERROR');
+        notification['error']({
+            message: t('global.RewardsError_Title'),
+            description: t('global.RewardsError_Message'),
+            duration: 10
+        });
     };
 
     const renderError = () => {

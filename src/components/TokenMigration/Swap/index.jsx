@@ -45,11 +45,14 @@ const SwapToken = (props) => {
     const onTokenMigration = () => {
         // First change status to sign tx
         setStatus('TOKEN-MIGRATION-SIGN')
-        auth.interfaceMigrateToken(onTransactionTokenMigration, onReceiptTokenMigration).then((value => {
-            onSuccess();
-        })).catch((response) => {
-            onClose();
-        });
+        auth.interfaceMigrateToken(
+            onTransactionTokenMigration,
+            onReceiptTokenMigration,
+            onErrorTokenMigration).then((value => {
+                onSuccess();
+            })).catch((response) => {
+                onClose();
+            });
     };
 
     const onTransactionTokenMigration = (transactionHash) => {
@@ -65,6 +68,12 @@ const SwapToken = (props) => {
         const filteredEvents = auth.interfaceDecodeEvents(receipt);
     };
 
+    const onErrorTokenMigration = async (error) => {
+        // Tx error
+        setStatus('TOKEN-MIGRATION-ERROR');
+        console.log("Transaction error: ", error);
+    };
+
     const onAuthorize = () => {
         // First change status to sign tx
 
@@ -77,11 +86,15 @@ const SwapToken = (props) => {
         if (oldAllowanceAmount.gte(allowanceAmount)) {
             onTokenMigration();
         } else {
-            auth.interfaceAllowUseTokenMigrator(maxAllowanceAmount, onTransactionAuthorize, onReceiptAuthorize).then((value => {
-                onTokenMigration();
-            })).catch((response) => {
-                onClose();
-            });
+            auth.interfaceAllowUseTokenMigrator(
+                maxAllowanceAmount,
+                onTransactionAuthorize,
+                onReceiptAuthorize,
+                onErrorAuthorize).then((value => {
+                    onTokenMigration();
+                })).catch((response) => {
+                    onClose();
+                });
         }
 
     };
@@ -97,6 +110,12 @@ const SwapToken = (props) => {
         // Tx is mined ok proceed with operation transaction
         console.log("On receipt authorize: ", receipt)
         const filteredEvents = auth.interfaceDecodeEvents(receipt);
+    };
+
+    const onErrorAuthorize = async (error) => {
+        // Tx Authorize error
+        setStatus('TOKEN-MIGRATION-ERROR');
+        console.log("Transaction error: ", error);
     };
 
     const onConfirm = () => {
