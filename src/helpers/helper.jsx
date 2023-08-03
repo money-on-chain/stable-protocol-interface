@@ -181,7 +181,12 @@ export function readJsonTable(data_j, t, i18n) {
         set_event = 'REDEEM';
     }
 
-    data_j.tokenInvolved = TokenNameOldToNew(data_j.tokenInvolved);
+    if (data_j.tokenInvolved && data_j.tokenInvolved !== 'N/A') {
+        data_j.tokenInvolved = TokenNameOldToNew(data_j.tokenInvolved);
+    } else {
+        data_j.tokenInvolved = 'N/A';
+    }
+
     const set_asset = data_j.tokenInvolved;
 
     const set_status_txt = data_j.status;

@@ -163,6 +163,9 @@ export default function ListOperations(props) {
     }, [window.innerWidth]);
 
     const changeStatus = (percent, txt) => {
+
+        percent = percent || 0;
+
         if (width <= 768) {
             return (
                 <Progress
