@@ -16,8 +16,13 @@ const BUCKET_C0 =
 
 const getGasPrice = async (web3) => {
     try {
-        const gasPrice = await web3.eth.getGasPrice();
-        //gasPrice = web3.utils.fromWei(gasPrice);
+        const nodeGasPrice = await web3.eth.getGasPrice();
+        // Min from node gas price and fixed value.
+        const gasPrice = Math.min(
+            parseInt(nodeGasPrice.toString()),
+            parseInt(process.env.REACT_APP_ENVIRONMENT_GAS_PRICE_LIMIT)
+        )
+        console.log("Proposing gas price: ", gasPrice)
         return gasPrice;
     } catch (e) {
         console.log(e);
