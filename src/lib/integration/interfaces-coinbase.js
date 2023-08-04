@@ -9,7 +9,8 @@ const mintTP = async (
     reserveAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Mint TP with collateral coin base
 
@@ -95,6 +96,7 @@ const mintTP = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -106,7 +108,8 @@ const redeemTP = async (
     tpAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Redeem TP token receiving coin base
 
@@ -176,6 +179,7 @@ const redeemTP = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -187,7 +191,8 @@ const mintTC = async (
     reserveAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Mint TC token with collateral coin base
 
@@ -266,6 +271,7 @@ const mintTC = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -277,7 +283,8 @@ const redeemTC = async (
     tcAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Redeem TC token receiving coin base
 
@@ -344,6 +351,7 @@ const redeemTC = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -355,7 +363,8 @@ const mintTX = async (
     reserveAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Mint TX token with collateral coin base
 
@@ -462,6 +471,7 @@ const mintTX = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -473,7 +483,8 @@ const redeemTX = async (
     txAmount,
     mintSlippage,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     // Redeem TX token receiving coin base
 
@@ -536,6 +547,7 @@ const redeemTX = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 

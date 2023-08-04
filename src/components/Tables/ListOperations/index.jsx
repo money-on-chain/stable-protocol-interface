@@ -163,6 +163,9 @@ export default function ListOperations(props) {
     }, [window.innerWidth]);
 
     const changeStatus = (percent, txt) => {
+
+        percent = percent || 0;
+
         if (width <= 768) {
             return (
                 <Progress
@@ -426,6 +429,24 @@ export default function ListOperations(props) {
                     });
                     data_row_coins2[index].detail.asset = t(
                         `${AppProject}.Tokens_TX_code`,
+                        { ns: ns }
+                    );
+                    break;
+                case 'TG':
+                    asset.push({
+                        image: (
+                            <LogoIconTG
+                                className="uk-preserve-width uk-border-circle"
+                                alt="avatar"
+                                width="32"
+                                height="32"
+                            />
+                        ),
+                        color: 'color-token-tg',
+                        txt: 'MOC'
+                    });
+                    data_row_coins2[index].detail.asset = t(
+                        `${AppProject}.Tokens_TG_code`,
                         { ns: ns }
                     );
                     break;
