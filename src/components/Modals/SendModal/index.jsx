@@ -178,8 +178,13 @@ export default function SendModal(props) {
             inputAddress,
             formatVisibleValue(amountToSend, tokenToSend, 'en'),
             onTransaction,
-            onReceipt
+            onReceipt,
+            onError
         );
+    };
+
+    const onError = (error) => {
+        console.log("Error Transaction", error)
     };
 
     const onTransaction = (transactionHash) => {

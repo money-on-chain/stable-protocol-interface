@@ -113,7 +113,8 @@ const transferTPTo = async (
     to,
     amount,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     const { web3, account } = interfaceContext;
     const dContracts = window.integration;
@@ -137,6 +138,7 @@ const transferTPTo = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -148,7 +150,8 @@ const transferTCTo = async (
     to,
     amount,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     const { web3, account } = interfaceContext;
     const dContracts = window.integration;
@@ -172,6 +175,7 @@ const transferTCTo = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -183,7 +187,8 @@ const transferTGTo = async (
     to,
     amount,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     const { web3, account } = interfaceContext;
     const dContracts = window.integration;
@@ -207,6 +212,7 @@ const transferTGTo = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -218,7 +224,8 @@ const transferCoinbaseTo = async (
     to,
     amount,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     const { web3, account } = interfaceContext;
     let tokens = web3.utils.toWei(amount.toString(), 'ether');
@@ -230,6 +237,7 @@ const transferCoinbaseTo = async (
             gasPrice: await getGasPrice(web3),
             gas: 72000
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
@@ -240,7 +248,8 @@ const approveTGTokenCommission = async (
     interfaceContext,
     enabled,
     onTransaction,
-    onReceipt
+    onReceipt,
+    onError
 ) => {
     const { web3, account } = interfaceContext;
     const dContracts = window.integration;
@@ -267,6 +276,7 @@ const approveTGTokenCommission = async (
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
+        .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
