@@ -31,8 +31,7 @@ export default function Rbtc(props) {
                     height="186"
                     width="177"
                 />
-                <p style={{marginTop: '25px', color: '#06364F'}}>Sovryn is currently updating FastBTC smart contracts.  After the update
-                    is finished and the updated smart contracts has been verified we will re-enable this feature.  </p>
+                <p style={{marginTop: '25px', color: '#06364F'}}>Sovryn updated the FastBTC smart contracts. The development team is verifying everything works fine before re-enabling this feature.  </p>
             </div>
         </Fragment>
     );
