@@ -81,6 +81,13 @@ Environment is our already deployed contracts.
 | RoC Testnet      | RIF     |                                        | Testnet     | RSK     | start:roc-testnet       |
 | RoC Mainnet      | RIF     | [link](https://dapp.rifonchain.com)    | Mainnet     | RSK     | start:roc-mainnet       |
 
+### Projects requirements (optional)
+
+To fully operational this dapp requires also running:
+
+* [Stable Protocol API](https://github.com/money-on-chain/stable-protocol-api)
+* [Stable Protocol Indexer](https://github.com/money-on-chain/stable-protocol-indexer)
+
 
 ### Faucets
 
