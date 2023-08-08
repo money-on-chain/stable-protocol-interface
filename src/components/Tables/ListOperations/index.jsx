@@ -366,7 +366,7 @@ export default function ListOperations(props) {
                 asset: datas_response['set_asset'],
                 platform: datas_response['platform_detail'],
                 wallet: datas_response['wallet_value_main'],
-                date: datas_response['createdAt'],
+                date: datas_response['lastUpdatedAt'],
                 status: {
                     txt: datas_response['set_status_txt'],
                     percent: datas_response['set_status_percent']

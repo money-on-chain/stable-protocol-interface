@@ -230,7 +230,6 @@ export function readJsonTable(data_j, t, i18n) {
               )
             : '--';
 
-    // const lastUpdatedAt= data_j.lastUpdatedAt
     const lastUpdatedAt = data_j.createdAt
         ? moment(data_j.createdAt).format('YYYY-MM-DD HH:mm:ss')
         : '--';
