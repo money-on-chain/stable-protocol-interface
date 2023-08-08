@@ -261,15 +261,15 @@ export default function ListOperations(props) {
     const data_row_coins2 = [];
     var json_end = [];
     const data_row = () => {
-        /*******************************sort descending by date lastUpdatedAt***********************************/
+        /*******************************sort descending by date createdAt***********************************/
         if (dataJson.transactions !== undefined) {
             dataJson.transactions.sort((a, b) => {
                 return (
-                    myParseDate(b.lastUpdatedAt) - myParseDate(a.lastUpdatedAt)
+                    myParseDate(b.createdAt) - myParseDate(a.createdAt)
                 );
             });
         }
-        /*******************************end sort descending by date lastUpdatedAt***********************************/
+        /*******************************end sort descending by date createdAt***********************************/
 
         /*******************************filter by type (token)***********************************/
         var pre_datas = [];
@@ -305,7 +305,7 @@ export default function ListOperations(props) {
                                     : date.DATE_ES
                             }
                         >
-                            {datas_response['lastUpdatedAt']}
+                            {datas_response['createdAt']}
                         </Moment>
                     </span>
                 ),
@@ -449,6 +449,14 @@ export default function ListOperations(props) {
                         `${AppProject}.Tokens_TG_code`,
                         { ns: ns }
                     );
+                    break;
+                case 'N/A':
+                    asset.push({
+                        image: '',
+                        color: 'color-token-tx',
+                        txt: 'N/A'
+                    });
+                    data_row_coins2[index].detail.asset = 'Failed';
                     break;
                 default:
                     asset.push({
