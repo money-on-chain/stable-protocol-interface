@@ -42,9 +42,9 @@ const MintOrRedeemToken = (props) => {
 
     /* State variable */
 
-    /* Disable Mint TX */
+    /* Temporally disable mint TP on RoC */
     let defaultCurrencyExchange;
-    if (token === 'TX') {
+    if (token === 'TP' && AppProject === 'RoC') {
         defaultCurrencyExchange = token;
     } else {
         defaultCurrencyExchange = 'RESERVE';
@@ -508,9 +508,9 @@ const MintOrRedeemToken = (props) => {
     const totals = totalsWithCommissionAndInterests();
 
     /* View */
-    /* Disable Mint TX */
+    /* Temporally disable mint TP on RoC */
     let currencyOptions;
-    if (token === 'TX') {
+    if (token === 'TP' && AppProject === 'RoC') {
         currencyOptions = [token];
     } else {
         currencyOptions = [token, 'RESERVE'];
