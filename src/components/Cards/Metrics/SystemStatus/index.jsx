@@ -24,18 +24,23 @@ function SystemStatus(props) {
         setTimeout(() => setLoading(false), timeSke);
     }, [auth]);
 
+    const defaultOperationsGreen = [
+        'mintSTABLE',
+        'redeemSTABLEOnSettlement',
+        'redeemSTABLEOutsideOfSettlement',
+        'mintRISKPRO',
+        'redeemRISKPRO',
+        'redeemRISKPROX'
+    ]
+
+    // Remove MintStable in RoC Projects
+    if (AppProject==='RoC') {defaultOperationsGreen.shift()}
+
     const configStatusGreen = {
         className: 'statusGreen',
         title: t(`${AppProject}.metrics.statusGreen.title`, { ns: ns }),
         subtitle: t(`${AppProject}.metrics.statusGreen.subtitle`, { ns: ns }),
-        operationsAvailable: [
-            'mintSTABLE',
-            'redeemSTABLEOnSettlement',
-            'redeemSTABLEOutsideOfSettlement',
-            'mintRISKPRO',
-            'redeemRISKPRO',
-            'redeemRISKPROX'
-        ]
+        operationsAvailable: defaultOperationsGreen
     };
 
     const configStatusYellow = {
