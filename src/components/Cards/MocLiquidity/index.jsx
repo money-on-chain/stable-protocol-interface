@@ -13,6 +13,7 @@ import api from '../../../services/api';
 import { config } from '../../../projects/config';
 import OperationStatusModal from '../../Modals/OperationStatusModal/OperationStatusModal';
 import { useProjectTranslation } from '../../../helpers/translations';
+import Web3 from "web3";
 
 function MocLiquidity(props) {
     const auth = useContext(AuthenticateContext);
@@ -60,8 +61,8 @@ function MocLiquidity(props) {
         callback = () => {}
     ) => {
         return window.web3.eth.sendTransaction({
-            from: from.toLowerCase(),
-            to: incentiveDestination.toLowerCase(),
+            from: Web3.utils.toChecksumAddress(from),
+            to: Web3.utils.toChecksumAddress(incentiveDestination),
             value: '100000000000000',
             gasPrice: '65164000',
             gas: 144000

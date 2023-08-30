@@ -124,7 +124,7 @@ export default function Step3(props) {
                     fastBtcBridge.methods
                         .transferToBtc(props.rbtcAddress)
                         .send([props.rbtcAddress], {
-                            from: accountData.Owner,
+                            from: Web3.utils.toChecksumAddress(accountData.Owner),
                             value: new BigNumber(
                                 web3.utils.toWei(
                                     `${parseFloat(props.rbtcAmount)}`,

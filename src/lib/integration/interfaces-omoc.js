@@ -6,20 +6,20 @@ import { toContractPrecision, getGasPrice, BUCKET_X2 } from './utils';
 const stackedBalance = async (address) => {
     const dContracts = window.integration;
     const istakingmachine = dContracts.contracts.istakingmachine;
-    return await istakingmachine.methods.getBalance(address).call();
+    return await istakingmachine.methods.getBalance(Web3.utils.toChecksumAddress(address)).call();
 };
 
 const lockedBalance = async (address) => {
     const dContracts = window.integration;
     const istakingmachine = dContracts.contracts.istakingmachine;
-    return await istakingmachine.methods.getLockedBalance(address).call();
+    return await istakingmachine.methods.getLockedBalance(Web3.utils.toChecksumAddress(address)).call();
 };
 
 const pendingWithdrawals = async (address) => {
     const dContracts = window.integration;
     const idelaymachine = dContracts.contracts.idelaymachine;
     const { ids, amounts, expirations } = await idelaymachine.methods
-        .getTransactions(address)
+        .getTransactions(Web3.utils.toChecksumAddress(address))
         .call();
     const withdraws = [];
     for (let i = 0; i < ids.length; i++) {
@@ -42,15 +42,15 @@ const stakingDeposit = async (interfaceContext, amount, address, callback) => {
 
     // Calculate estimate gas cost
     const estimateGas = await istakingmachine.methods
-        .deposit(toContractPrecision(amount), address)
-        .estimateGas({ from: account });
+        .deposit(toContractPrecision(amount), Web3.utils.toChecksumAddress(address))
+        .estimateGas({ from: Web3.utils.toChecksumAddress(account) });
 
     // Send tx
     const receipt = istakingmachine.methods
-        .deposit(toContractPrecision(amount), address)
+        .deposit(toContractPrecision(amount), Web3.utils.toChecksumAddress(address))
         .send(
             {
-                from: account,
+                from: Web3.utils.toChecksumAddress(account),
                 gasPrice: await getGasPrice(web3),
                 gas: estimateGas * 2,
                 gasLimit: estimateGas * 2
@@ -72,14 +72,14 @@ const unStake = async (interfaceContext, amount, callback) => {
     // Calculate estimate gas cost
     const estimateGas = await istakingmachine.methods
         .withdraw(toContractPrecision(amount))
-        .estimateGas({ from: account });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account) });
 
     // Send tx
     const receipt = istakingmachine.methods
         .withdraw(toContractPrecision(amount))
         .send(
             {
-                from: account,
+                from: web3.utils.toChecksumAddress(account),
                 gasPrice: await getGasPrice(web3),
                 gas: estimateGas * 2,
                 gasLimit: estimateGas * 2
@@ -99,12 +99,12 @@ const delayMachineWithdraw = async (interfaceContext, id, callback) => {
     // Calculate estimate gas cost
     const estimateGas = await idelaymachine.methods
         .withdraw(id)
-        .estimateGas({ from: account });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account) });
 
     // Send tx
     const receipt = idelaymachine.methods.withdraw(id).send(
         {
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
@@ -124,12 +124,12 @@ const delayMachineCancelWithdraw = async (interfaceContext, id, callback) => {
     // Calculate estimate gas cost
     const estimateGas = await idelaymachine.methods
         .cancel(id)
-        .estimateGas({ from: account });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account) });
 
     // Send tx
     const receipt = idelaymachine.methods.cancel(id).send(
         {
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
@@ -154,12 +154,12 @@ const approveMoCTokenStaking = async (interfaceContext, enabled, callback) => {
     // Calculate estimate gas cost
     const estimateGas = await tg.methods
         .approve(stakingAddress, newAllowance)
-        .estimateGas({ from: account });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account) });
 
     // Send tx
     const receipt = tg.methods.approve(stakingAddress, newAllowance).send(
         {
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
@@ -174,7 +174,7 @@ const getMoCAllowance = async (address) => {
     const dContracts = window.integration;
     const tg = dContracts.contracts.tg;
     const stakingAddress = dContracts.contracts.istakingmachine._address;
-    return await tg.methods.allowance(address, stakingAddress).call();
+    return await tg.methods.allowance(Web3.utils.toChecksumAddress(address), stakingAddress).call();
 };
 
 export {

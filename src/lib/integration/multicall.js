@@ -1124,27 +1124,27 @@ const userBalance = async (web3, dContracts, userAddress, appMode) => {
     const liquiditycollateraltoken =
         dContracts.contracts.liquiditycollateraltoken;
 
-    console.log(`Reading user balance ... account: ${userAddress}`);
+    console.log(`Reading user balance ... account: ${web3.utils.toChecksumAddress(userAddress)}`);
 
     const listMethods = [
         [
             tg.options.address,
-            tg.methods.balanceOf(userAddress).encodeABI(),
+            tg.methods.balanceOf(web3.utils.toChecksumAddress(userAddress)).encodeABI(),
             'uint256'
         ], // 0
         [
             tg.options.address,
-            tg.methods.allowance(userAddress, moc.options.address).encodeABI(),
+            tg.methods.allowance(web3.utils.toChecksumAddress(userAddress), moc.options.address).encodeABI(),
             'uint256'
         ], // 1
         [
             tp.options.address,
-            tp.methods.balanceOf(userAddress).encodeABI(),
+            tp.methods.balanceOf(web3.utils.toChecksumAddress(userAddress)).encodeABI(),
             'uint256'
         ], // 2
         [
             tc.options.address,
-            tc.methods.balanceOf(userAddress).encodeABI(),
+            tc.methods.balanceOf(web3.utils.toChecksumAddress(userAddress)).encodeABI(),
             'uint256'
         ] // 3
     ];
@@ -1152,45 +1152,45 @@ const userBalance = async (web3, dContracts, userAddress, appMode) => {
     if (appMode === 'MoC') {
         listMethods.push([
             multicall.options.address,
-            multicall.methods.getEthBalance(userAddress).encodeABI(),
+            multicall.methods.getEthBalance(web3.utils.toChecksumAddress(userAddress)).encodeABI(),
             'uint256'
         ]); // 4
         listMethods.push([
             moc.options.address,
-            moc.methods.docAmountToRedeem(userAddress).encodeABI(),
+            moc.methods.docAmountToRedeem(web3.utils.toChecksumAddress(userAddress)).encodeABI(),
             'uint256'
         ]); // 5
         listMethods.push([
             moc.options.address,
-            moc.methods.bproxBalanceOf(BUCKET_X2, userAddress).encodeABI(),
+            moc.methods.bproxBalanceOf(BUCKET_X2, web3.utils.toChecksumAddress(userAddress)).encodeABI(),
             'uint256'
         ]); // 6
         listMethods.push([
             multicall.options.address,
-            multicall.methods.getEthBalance(userAddress).encodeABI(),
+            multicall.methods.getEthBalance(web3.utils.toChecksumAddress(userAddress)).encodeABI(),
             'uint256'
         ]); // 7
     } else {
         const reservetoken = dContracts.contracts.reservetoken;
         listMethods.push([
             reservetoken.options.address,
-            reservetoken.methods.balanceOf(userAddress).encodeABI(),
+            reservetoken.methods.balanceOf(web3.utils.toChecksumAddress(userAddress)).encodeABI(),
             'uint256'
         ]); // 4
         listMethods.push([
             moc.options.address,
-            moc.methods.stableTokenAmountToRedeem(userAddress).encodeABI(),
+            moc.methods.stableTokenAmountToRedeem(web3.utils.toChecksumAddress(userAddress)).encodeABI(),
             'uint256'
         ]); // 5
         listMethods.push([
             moc.options.address,
-            moc.methods.riskProxBalanceOf(BUCKET_X2, userAddress).encodeABI(),
+            moc.methods.riskProxBalanceOf(BUCKET_X2, web3.utils.toChecksumAddress(userAddress)).encodeABI(),
             'uint256'
         ]); // 6
         listMethods.push([
             reservetoken.options.address,
             reservetoken.methods
-                .allowance(userAddress, dContracts.contracts.moc._address)
+                .allowance(web3.utils.toChecksumAddress(userAddress), dContracts.contracts.moc._address)
                 .encodeABI(),
             'uint256'
         ]); // 7
@@ -1198,17 +1198,16 @@ const userBalance = async (web3, dContracts, userAddress, appMode) => {
 
     listMethods.push([
         liquiditycollateraltoken.options.address,
-        liquiditycollateraltoken.methods.balanceOf(userAddress).encodeABI(),
+        liquiditycollateraltoken.methods.balanceOf(web3.utils.toChecksumAddress(userAddress)).encodeABI(),
         'uint256'
     ]); // 8
-
-  // Token migrator
-  if (dContracts.contracts.tp_legacy) {
-    const tpLegacy = dContracts.contracts.tp_legacy
-    const tokenMigrator = dContracts.contracts.token_migrator
-    listMethods.push([tpLegacy.options.address, tpLegacy.methods.balanceOf(userAddress).encodeABI(), 'uint256']) // 9
-    listMethods.push([tpLegacy.options.address, tpLegacy.methods.allowance(userAddress, tokenMigrator.options.address).encodeABI(), 'uint256']) // 10
-  }
+    // Token migrator
+    if (dContracts.contracts.tp_legacy) {
+      const tpLegacy = dContracts.contracts.tp_legacy
+      const tokenMigrator = dContracts.contracts.token_migrator
+      listMethods.push([tpLegacy.options.address, tpLegacy.methods.balanceOf(userAddress).encodeABI(), 'uint256']) // 9
+      listMethods.push([tpLegacy.options.address, tpLegacy.methods.allowance(userAddress, tokenMigrator.options.address).encodeABI(), 'uint256']) // 10
+    }
 
     // Remove decode result parameter
     const cleanListMethods = listMethods.map((x) => [x[0], x[1]]);
@@ -1393,7 +1392,7 @@ const calcCommission = async (
             mocinrate.options.address,
             mocinrate.methods
                 .calculateVendorMarkup(
-                    vendorAddress,
+                    web3.utils.toChecksumAddress(vendorAddress),
                     toContractPrecision(reserveAmount)
                 )
                 .encodeABI(),

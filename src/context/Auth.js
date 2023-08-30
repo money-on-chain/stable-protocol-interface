@@ -671,7 +671,7 @@ const AuthenticateProvider = ({ children }) => {
     };
     const getBalance = async (address) => {
         try {
-            let balance = await web3.eth.getBalance(address);
+            let balance = await web3.eth.getBalance(web3.utils.toChecksumAddress(address));
             balance = web3.utils.fromWei(balance);
             return balance;
         } catch (e) {
@@ -683,7 +683,7 @@ const AuthenticateProvider = ({ children }) => {
         const from = address || account;
         const dContracts = window.integration;
         const moctoken = dContracts.contracts.moctoken;
-        return moctoken.methods.balanceOf(from).call();
+        return moctoken.methods.balanceOf(web3.utils.toChecksumAddress(from)).call();
     };
 
     const getSpendableBalance = async (address) => {
@@ -693,9 +693,9 @@ const AuthenticateProvider = ({ children }) => {
 
         if (appMode === 'RRC20') {
             const reservetoken = dContracts.contracts.reservetoken;
-            return reservetoken.methods.balanceOf(from).call();
+            return reservetoken.methods.balanceOf(web3.utils.toChecksumAddress(from)).call();
         } else {
-            return await web3.eth.getBalance(from);
+            return await web3.eth.getBalance(web3.utils.toChecksumAddress(from));
         }
     };
 
@@ -706,10 +706,10 @@ const AuthenticateProvider = ({ children }) => {
         if (appMode === 'RRC20') {
             const reservetoken = dContracts.contracts.reservetoken;
             return reservetoken.methods
-                .allowance(from, dContracts.contracts.moc._address)
+                .allowance(web3.utils.toChecksumAddress(from), dContracts.contracts.moc._address)
                 .call();
         } else {
-            return await web3.eth.getBalance(from);
+            return await web3.eth.getBalance(web3.utils.toChecksumAddress(from));
         }
     };
 

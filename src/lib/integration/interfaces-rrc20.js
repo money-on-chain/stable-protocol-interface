@@ -23,7 +23,7 @@ const AllowanceUseReserveToken = async (
             dContracts.contracts.moc._address,
             toContractPrecision(newAllowance)
         )
-        .estimateGas({ from: account, value: '0x' });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account), value: '0x' });
 
     // Send tx
     const receipt = reservetoken.methods
@@ -33,7 +33,7 @@ const AllowanceUseReserveToken = async (
         )
         .send(
             {
-                from: account,
+                from: web3.utils.toChecksumAddress(account),
                 gasPrice: await getGasPrice(web3),
                 gas: estimateGas * 2,
                 gasLimit: estimateGas * 2
@@ -143,7 +143,7 @@ const mintTPRRC20 = async (
             toContractPrecision(reserveAmount),
             vendorAddress
         )
-        .estimateGas({ from: account, value: '0x' });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account), value: '0x' });
 
     // encode function
     const receipt = moc.methods
@@ -152,7 +152,7 @@ const mintTPRRC20 = async (
             vendorAddress
         )
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -226,7 +226,7 @@ const redeemTPRRC20 = async (
             toContractPrecision(new BigNumber(tpAmount)),
             vendorAddress
         )
-        .estimateGas({ from: account, value: '0x' });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account), value: '0x' });
 
     // Send TX
     const receipt = moc.methods
@@ -235,7 +235,7 @@ const redeemTPRRC20 = async (
             vendorAddress
         )
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -336,13 +336,13 @@ const mintTCRRC20 = async (
     // Calculate estimate gas cost
     const estimateGas = await moc.methods
         .mintRiskProVendors(toContractPrecision(reserveAmount), vendorAddress)
-        .estimateGas({ from: account, value: '0x' });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account), value: '0x' });
 
     // encode function
     const receipt = moc.methods
         .mintRiskProVendors(toContractPrecision(reserveAmount), vendorAddress)
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -416,7 +416,7 @@ const redeemTCRRC20 = async (
             toContractPrecision(new BigNumber(tcAmount)),
             vendorAddress
         )
-        .estimateGas({ from: account, value: '0x' });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account), value: '0x' });
 
     // encode function
     const receipt = moc.methods
@@ -425,7 +425,7 @@ const redeemTCRRC20 = async (
             vendorAddress
         )
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -529,7 +529,7 @@ const mintTXRRC20 = async (
             toContractPrecision(reserveAmount),
             vendorAddress
         )
-        .estimateGas({ from: account, value: '0x' });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account), value: '0x' });
 
     // Send tx
     const receipt = moc.methods
@@ -539,7 +539,7 @@ const mintTXRRC20 = async (
             vendorAddress
         )
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,
@@ -605,7 +605,7 @@ const redeemTXRRC20 = async (
             toContractPrecision(new BigNumber(txAmount)),
             vendorAddress
         )
-        .estimateGas({ from: account, value: '0x' });
+        .estimateGas({ from: web3.utils.toChecksumAddress(account), value: '0x' });
 
     // encode function
     const receipt = moc.methods
@@ -615,7 +615,7 @@ const redeemTXRRC20 = async (
             vendorAddress
         )
         .send({
-            from: account,
+            from: web3.utils.toChecksumAddress(account),
             value: '0x',
             gasPrice: await getGasPrice(web3),
             gas: estimateGas * 2,

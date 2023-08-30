@@ -180,8 +180,16 @@ export function readJsonTable(data_j, t, i18n) {
     if (data_j.event.includes('Redeem')) {
         set_event = 'REDEEM';
     }
+    if (data_j.event.includes('ERROR')) {
+        set_event = 'FAILED';
+    }
 
-    data_j.tokenInvolved = TokenNameOldToNew(data_j.tokenInvolved);
+    if (data_j.tokenInvolved && data_j.tokenInvolved !== 'N/A') {
+        data_j.tokenInvolved = TokenNameOldToNew(data_j.tokenInvolved);
+    } else {
+        data_j.tokenInvolved = 'N/A';
+    }
+
     const set_asset = data_j.tokenInvolved;
 
     const set_status_txt = data_j.status;
@@ -222,7 +230,6 @@ export function readJsonTable(data_j, t, i18n) {
               )
             : '--';
 
-    // const lastUpdatedAt= data_j.lastUpdatedAt
     const lastUpdatedAt = data_j.createdAt
         ? moment(data_j.createdAt).format('YYYY-MM-DD HH:mm:ss')
         : '--';
