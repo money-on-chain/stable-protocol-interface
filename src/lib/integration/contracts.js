@@ -10,8 +10,6 @@ import {
     TP,
     TG,
     ReserveToken,
-    MoCVendors
-} from './abis/moc-base';
     MoCVendors,
     TokenMigrator } from './abis/moc-base';
 import { omocAbis } from './abis/omoc';
