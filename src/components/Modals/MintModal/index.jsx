@@ -90,6 +90,14 @@ export default function MintModal(props) {
         receiving.value,
         convertToken
     );
+
+    const exchangingInUSD = convertAmount(
+        exchanging.currencyCode,
+        'USD',
+        exchanging.value,
+        convertToken
+    );
+
     /* View */
     const renderAmount = (name, amountAndCurrencyCode, classElement) => {
         return (
@@ -489,7 +497,7 @@ export default function MintModal(props) {
                 <LargeNumber
                     tooltip="topLeft"
                     currencyCode={'USD'}
-                    amount={receivingInUSD}
+                    amount={exchangingInUSD}
                     includeCurrency
                     className="color-08374F"
                 />
@@ -570,8 +578,6 @@ export default function MintModal(props) {
                             </>
                         )}
                     <div className="Legend-s1">
-                        {t('global.ConfirmTransactionModal_MOCFee_Disclaimer')}
-                        <br />
                         {t(
                             'global.ConfirmTransactionModal_AmountMayDifferDisclaimer'
                         )}
