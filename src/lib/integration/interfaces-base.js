@@ -245,9 +245,9 @@ const transferCoinbaseTo = async (
             gasPrice: await getGasPrice(web3),
             gas: 72000
         }, handleReceipt)
-        .on('error', onError)
-        .on('transactionHash', onTransaction)
-        .on('receipt', onReceipt);
+        //.on('error', onError)
+        //.on('transactionHash', onTransaction)
+        //.on('receipt', onReceipt);
 
     return receipt;
 };
