@@ -137,6 +137,9 @@ export function TokenNameOldToNew(tokenName) {
         case 'TG':
             token = 'TG';
             break;
+        case 'RESERVE':
+            token = 'RESERVE';
+            break;
         default:
             throw new Error('Invalid token name');
     }

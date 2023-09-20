@@ -34,7 +34,9 @@ import {
     transferCoinbaseTo,
     calcMintInterest,
     approveTGTokenCommission,
-    vendorMarkup
+    vendorMarkup,
+    AllowUseTokenMigrator,
+    MigrateToken
 } from '../lib/integration/interfaces-base';
 import {
     stackedBalance,
@@ -125,6 +127,8 @@ const AuthenticateContext = createContext({
         onReceipt,
         onError
     ) => {},
+    interfaceAllowUseTokenMigrator: async (amount, onTransaction, onReceipt, onError) => {},
+    interfaceMigrateToken: async (onTransaction, onReceipt, onError) => {},
     disconnect: () => {},
     getTransactionReceipt: (hash) => {},
     interfaceDecodeEvents: async (receipt) => {},
@@ -590,6 +594,16 @@ const AuthenticateProvider = ({ children }) => {
         );
     };
 
+    const interfaceAllowUseTokenMigrator = async (amount, onTransaction, onReceipt, onError) => {
+        const interfaceContext = buildInterfaceContext();
+        return AllowUseTokenMigrator(interfaceContext, amount, onTransaction, onReceipt, onError);
+    };
+
+    const interfaceMigrateToken = async (onTransaction, onReceipt, onError) => {
+        const interfaceContext = buildInterfaceContext();
+        return MigrateToken(interfaceContext, onTransaction, onReceipt, onError);
+    };
+
     const initContractsConnection = async () => {
         window.integration = await readContracts(web3, config.environment);
         await loadContractsStatusAndUserBalance();
@@ -973,6 +987,8 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceMintTXRRC20,
                 interfaceRedeemTXRRC20,
                 interfaceApproveTGTokenCommission,
+                interfaceAllowUseTokenMigrator,
+                interfaceMigrateToken,
                 getTransactionReceipt,
                 interfaceStackedBalance,
                 interfaceGetMoCAllowance,

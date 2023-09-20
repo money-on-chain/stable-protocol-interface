@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Signifier 4</title>
+    <g id="🟢Prototypes-Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="0402-Transaction-Status-/-Failed" transform="translate(-242.000000, -461.000000)">
+            <g id="Status" transform="translate(38.000000, 461.000000)">
+                <g id="Signifier" transform="translate(204.000000, 0.000000)">
+                    <circle id="Ellipse-4" fill="#E54A49" fill-rule="nonzero" cx="16" cy="16" r="16"></circle>
+                    <g id="Warning" transform="translate(4.000000, 4.000000)">
+                        <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                        <line x1="12.003125" y1="9.75" x2="12.003125" y2="13.5" id="Path" stroke="#2B2C36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                        <path d="M10.7017903,3.7485675 L2.454015,17.9978438 C2.18540533,18.4619068 2.18493214,19.0340574 2.45277385,19.4985641 C2.72061556,19.9630708 3.21603382,20.2492828 3.75222464,20.2492828 L20.2477734,20.2492828 C20.7839701,20.2492828 21.2793902,19.9630738 21.5472323,19.4985661 C21.8150744,19.0340584 21.8145996,18.4619063 21.5459869,17.9978438 L13.2982097,3.7485675 C13.0300447,3.28527362 12.5353071,3.00000054 12,3.00000054 C11.4646929,3.00000054 10.9699553,3.28527362 10.7017903,3.7485675 Z" id="Path" stroke="#2B2C36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <circle id="Oval" fill="#2B2C36" fill-rule="nonzero" cx="12" cy="16.875" r="1.125"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

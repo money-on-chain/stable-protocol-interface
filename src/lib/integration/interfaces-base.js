@@ -283,6 +283,72 @@ const approveTGTokenCommission = async (
     return receipt;
 };
 
+const AllowUseTokenMigrator = async (interfaceContext, newAllowance, onTransaction, onReceipt, onError) => {
+
+    const { web3, account } = interfaceContext;
+    const dContracts = window.integration;
+
+    if (!dContracts.contracts.tp_legacy) console.log("Error: Please set token migrator address in environment vars!")
+
+    const tp_legacy = dContracts.contracts.tp_legacy
+    const tokenMigrator = dContracts.contracts.token_migrator
+
+    // Calculate estimate gas cost
+    const estimateGas = await tp_legacy.methods
+        .approve(tokenMigrator._address, toContractPrecision(newAllowance))
+        .estimateGas({ from: account, value: '0x' })
+
+    // Send tx
+    const receipt = tp_legacy.methods
+        .approve(tokenMigrator._address, toContractPrecision(newAllowance))
+        .send(
+            {
+                from: account,
+                gasPrice: await getGasPrice(web3),
+                gas: estimateGas * 2,
+                gasLimit: estimateGas * 2
+            }
+        )
+        .on('error', onError)
+        .on('transactionHash', onTransaction)
+        .on('receipt', onReceipt);
+
+    return receipt
+}
+
+
+const MigrateToken = async (interfaceContext, onTransaction, onReceipt, onError) => {
+
+    const { web3, account } = interfaceContext;
+    const dContracts = window.integration;
+
+    if (!dContracts.contracts.token_migrator) console.log("Error: Please set token migrator address in environment vars!")
+
+    const tokenMigrator = dContracts.contracts.token_migrator
+
+    // Calculate estimate gas cost
+    const estimateGas = await tokenMigrator.methods
+        .migrateToken()
+        .estimateGas({ from: account, value: '0x' })
+
+    // Send tx
+    const receipt = tokenMigrator.methods
+        .migrateToken()
+        .send(
+            {
+                from: account,
+                gasPrice: await getGasPrice(web3),
+                gas: estimateGas * 2,
+                gasLimit: estimateGas * 2
+            }
+        )
+        .on('error', onError)
+        .on('transactionHash', onTransaction)
+        .on('receipt', onReceipt);
+
+    return receipt
+}
+
 export {
     addCommissions,
     calcMintInterest,
@@ -291,5 +357,7 @@ export {
     transferTGTo,
     transferCoinbaseTo,
     approveTGTokenCommission,
-    vendorMarkup
+    vendorMarkup,
+    AllowUseTokenMigrator,
+    MigrateToken
 };
