@@ -229,6 +229,14 @@ const transferCoinbaseTo = async (
 ) => {
     const { web3, account } = interfaceContext;
     let tokens = web3.utils.toWei(amount.toString(), 'ether');
+
+    const handleReceipt = (error, receipt) => {
+        if (error) console.error(error);
+        else {
+            console.log(receipt);
+        }
+    }
+
     const receipt = await web3.eth
         .sendTransaction({
             from: web3.utils.toChecksumAddress(account),
@@ -236,7 +244,7 @@ const transferCoinbaseTo = async (
             value: web3.utils.toBN(tokens),
             gasPrice: await getGasPrice(web3),
             gas: 72000
-        })
+        }, handleReceipt)
         .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
