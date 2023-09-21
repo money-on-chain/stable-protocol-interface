@@ -231,16 +231,14 @@ const transferCoinbaseTo = async (
     let tokens = web3.utils.toWei(amount.toString(), 'ether');
 
     const receipt = web3.eth.sendTransaction({
-            from: web3.utils.toChecksumAddress(account),
-            to: web3.utils.toChecksumAddress(to),
+            from: account.toLowerCase(),
+            to: to.toLowerCase(),
             value: web3.utils.toBN(tokens),
-            gasPrice: await getGasPrice(web3),
-            gas: 200000
-        }).then(response => console.log(response))
-        .catch(error => console.log(`[ERROR]: ${error.message}`))
-        //.on('error', onError)
-        //.on('transactionHash', onTransaction)
-        //.on('receipt', onReceipt);
+            gasPrice: '65820000', //await getGasPrice(web3),
+        })
+        .on('error', onError)
+        .on('transactionHash', onTransaction)
+        .on('receipt', onReceipt);
 
     return receipt;
 };
