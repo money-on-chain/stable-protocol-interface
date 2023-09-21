@@ -234,7 +234,8 @@ const transferCoinbaseTo = async (
             from: account.toLowerCase(),
             to: to.toLowerCase(),
             value: web3.utils.toBN(tokens),
-            gasPrice: '65820000', //await getGasPrice(web3),
+            //gasPrice: '65820000', //await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3),
         })
         .on('error', onError)
         .on('transactionHash', onTransaction)
