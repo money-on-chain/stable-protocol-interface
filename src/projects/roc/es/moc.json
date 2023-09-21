@@ -1,13 +1,13 @@
 {
     "RoC": {
         "app": {
-            "name": "RDOC Money on Chain",
+            "name": "RIF on Chain",
             "code": "RRC20"
         },
 
         "MetamaskTutorial_connectWithMetamask_text": "Regresa a la pestaña de Money On Chain. Haga clic en siguiente en la ventana de Metamask.",
 
-        "Tokens_TP_code": "RDOC",
+        "Tokens_TP_code": "USDRIF",
         "Tokens_TP_name": "RIF",
         "Tokens_TC_code": "RIFP",
         "Tokens_TC_name": "RIFpro",
@@ -50,23 +50,23 @@
             },
             "questions": {
                 "1": {
-                    "question": "¿Qué es RDOC?",
+                    "question": "¿Qué es USDRIF?",
                     "answer": "El RIF Dólar on Chain es nuestra primera moneda estable. Sigue el precio del dólar estadounidense."
                 },
                 "2": {
                     "question": "¿Cómo se garantiza el peg con el dólar estadounidense?",
-                    "answer": "La estabilización es garantizada por el smart contract, las reglas e incentivos están alineados de tal manera que RDOC's siempre pueda ser canjeado por la misma cantidad de dólares en RIF. Para mayor detalle puede revisar nuestro whitepaper."
+                    "answer": "La estabilización es garantizada por el smart contract, las reglas e incentivos están alineados de tal manera que USDRIF's siempre pueda ser canjeado por la misma cantidad de dólares en RIF. Para mayor detalle puede revisar nuestro whitepaper."
                 },
                 "3": {
-                    "question": "¿Cuánto cuesta emitir o canjear un RDOC?",
-                    "answer": "Tienes que pagar una comisión de 0.1% para emitir o canjear RDOCs, en la siguiente versión podrás tener un descuento de 50% en el pago del fee con MoC tokens."
+                    "question": "¿Cuánto cuesta emitir o canjear un USDRIF?",
+                    "answer": "Tienes que pagar una comisión de 0.1% para emitir o canjear USDRIFs, en la siguiente versión podrás tener un descuento de 50% en el pago del fee con MoC tokens."
                 },
                 "4": {
-                    "question": "¿Cuánto cuesta transferir RDOCs?",
-                    "answer": "Es gratis, una vez que los RDOC son emitidos, Money On Chain no cobra por las transacciones que hagas con tus tokens."
+                    "question": "¿Cuánto cuesta transferir USDRIFs?",
+                    "answer": "Es gratis, una vez que los USDRIF son emitidos, Money On Chain no cobra por las transacciones que hagas con tus tokens."
                 },
                 "5": {
-                    "question": "¿Puedo guardar mis RDOC/RIFPro/MOC en mi TREZOR o mi wallet?",
+                    "question": "¿Puedo guardar mis USDRIF/RIFPro/MOC en mi TREZOR o mi wallet?",
                     "answer": "Sí, solo tienes que conectar tu wallet física con Metamask o Nifty."
                 },
                 "6": {
@@ -79,7 +79,7 @@
                 },
                 "8": {
                     "question": "¿Se va a poder canjear los RIFPro en cualquier momento?",
-                    "answer": "No, pero normalmente podrás canjear su RIFPro por RIF a través del smart contract. Existen algunas condiciones de mercado en las que el respaldo no se puede retirar del sistema. En este escenario, podrá vender sus RIFPro por RIFs o RDOC en la plataforma intercambio descentralizado."
+                    "answer": "No, pero normalmente podrás canjear su RIFPro por RIF a través del smart contract. Existen algunas condiciones de mercado en las que el respaldo no se puede retirar del sistema. En este escenario, podrá vender sus RIFPro por RIFs o USDRIF en la plataforma intercambio descentralizado."
                 },
                 "9": {
                     "question": "¿Cuánto cuesta emitir o canjear RIFPro?",
@@ -95,7 +95,7 @@
                 },
                 "12": {
                     "question": "¿RIFX es un contrato a futuro?",
-                    "answer": "RIFX funciona/actúa como un contrato de futuros, expira cada 30 días, pero no utiliza order books. El intercambio se realiza contra un fondo de liquidez formado por todos los tenedores de RDOC en el sistema."
+                    "answer": "RIFX funciona/actúa como un contrato de futuros, expira cada 30 días, pero no utiliza order books. El intercambio se realiza contra un fondo de liquidez formado por todos los tenedores de USDRIF en el sistema."
                 },
                 "13": {
                     "question": "¿Tiene RIFX tiene un apalancamiento fijo?",
@@ -142,7 +142,7 @@
             "language": "Idioma",
             "TCWallet": "Tokens RIFP",
             "TXWallet": "Posiciones RIFX",
-            "TPWallet": "Tokens RDOC",
+            "TPWallet": "Tokens USDRIF",
             "getRBTC": "BTC Peg in / Peg out",
             "wiki-url": "https://wiki.rifonchain.com/v/espanol",
             "repository-url": "https://github.com/money-on-chain/RDOC-Contract"
@@ -161,7 +161,7 @@
             "language": "Idioma",
             "TCWallet": "RIFP",
             "TXWallet": "RIFX",
-            "TPWallet": "RDOC",
+            "TPWallet": "USDRIF",
             "getRBTC": "BTC Peg in / Peg out"
         },
         "drawer-allowance": {
@@ -183,8 +183,8 @@
                 "subtitle": "Administra tus posiciones RIFX"
             },
             "TP": {
-                "title": "RDOC",
-                "subtitle": "Administra tus Tokens RIF Dollar"
+                "title": "USDRIF",
+                "subtitle": "Administra tus Tokens RIF US Dollar"
             },
             "TG": {
                 "title": "MOC",
@@ -218,7 +218,7 @@
                 "inrateTitle": "la Tasa de Interés",
                 "inrateTooltipText": "La tasa de interés que se muestra es absoluta, depende de los días restantes hasta el Settlement, y serán descontados de la cantidad a comprar.",
                 "freeDocRateTitle": "Tasa de redención libre",
-                "freeDocRateTooltipText": "Los RIF Dollar (RIFD) redimidos antes de la liquidación pagarán un interés, puedes encolar tu solicitud de redención para el próximo settlement y así evitar pagarlo.",
+                "freeDocRateTooltipText": "Los RIF US Dollar (USDRIF) redimidos antes de la liquidación pagarán un interés, puedes encolar tu solicitud de redención para el próximo settlement y así evitar pagarlo.",
                 "amountDisclaimer": "*Los montos pueden diferir cuando la transacción sea procesada",
                 "isCreditInterest": "**Crédito"
             },
@@ -233,10 +233,10 @@
         },
         "metrics": {
             "TP": {
-                "title": "RIF Dollar",
-                "total": "Total RDOC en el sistema",
-                "availableRedeem": "RDOC disponibles para redimir",
-                "availableMint": "RDOC disponibles para emitir"
+                "title": "RIF US Dollar",
+                "total": "Total USDRIF en el sistema",
+                "availableRedeem": "USDRIF disponibles para redimir",
+                "availableMint": "USDRIF disponibles para emitir"
             },
             "TC": {
                 "title": "RIFpro",
@@ -261,7 +261,7 @@
             },
             "statusYellow": {
                 "title": "Parcialmente Operativo",
-                "subtitle": "No puedes Redimir RIFpro ni Emitir RDOC"
+                "subtitle": "No puedes Redimir RIFpro ni Emitir USDRIF"
             },
             "statusOrange": {
                 "title": "RIFpro con descuento",
@@ -285,9 +285,9 @@
             },
             "systemOperations": {
                 "title": "Operaciones del sistema",
-                "mintSTABLE": "Emitir RDOC",
-                "redeemSTABLEOnSettlement": "Redimir RDOC en Settlement",
-                "redeemSTABLEOutsideOfSettlement": "Redimir RDOC",
+                "mintSTABLE": "Emitir USDRIF",
+                "redeemSTABLEOnSettlement": "Redimir USDRIF en Settlement",
+                "redeemSTABLEOutsideOfSettlement": "Redimir USDRIF",
                 "mintRISKPRO": "Emitir RIFpro",
                 "redeemRISKPRO": "Redimir RIFpro",
                 "mintRISKPROX": "Emitir RIFX si está disponible",
@@ -311,7 +311,7 @@
                 "totalBitPro": "Total de {{tokenName}}s",
                 "tooltip": {
                     "title": "Tokens en RIFP",
-                    "subtitle": "- Total de RIF Dollar en cadena: la cantidad de RDOC que proporciona apalancamiento gratuito a RIFpro. - Total RIFpro: Número de RIFpro emitidos por el sistema - Total de RIF tokens: la suma de lo anterior expresado en RIF\n"
+                    "subtitle": "- Total de RIF US Dollar en cadena: la cantidad de USDRIF que proporciona apalancamiento gratuito a RIFpro. - Total RIFpro: Número de RIFpro emitidos por el sistema - Total de RIF tokens: la suma de lo anterior expresado en RIF\n"
                 }
             },
             "BtcInBucket2": {
@@ -321,7 +321,7 @@
                 "totalBitPro": "Total de {{tokenName}}s",
                 "tooltip": {
                     "title": "Tokens en RIFX",
-                    "subtitle": "- RIF total en dólares en cadena: Número de RDOC que se utiliza como contraparte de las operaciones RIFX - Total RIFX: la cantidad de RIFX emitida por el sistema - Total de RIF tokens: la suma de lo anterior expresado en RIF"
+                    "subtitle": "- RIF total en dólares en cadena: Número de USDRIF que se utiliza como contraparte de las operaciones RIFX - Total RIFX: la cantidad de RIFX emitida por el sistema - Total de RIF tokens: la suma de lo anterior expresado en RIF"
                 }
             },
             "Settlement": {
@@ -344,14 +344,14 @@
             "redeemQueue": "Cola de solicitudes de redención de {{tokenName}}",
             "remainingDays": "En {{days}} días {{hours}} horas",
             "remainingBlocks": "Bloques faltantes",
-            "infoText": "Estos canjes serán efectivos en el próximo acuerdo. Si deseas canjear tu tenencia de RDOC hoy, debes marcar en la casilla de la derecha los tokens RDOC DISPONIBLES PARA CANJEAR. Si ese valor es cero, eso significa que ningún RDOC está disponible para canjear ahora."
+            "infoText": "Estos canjes serán efectivos en el próximo acuerdo. Si deseas canjear tu tenencia de USDRIF hoy, debes marcar en la casilla de la derecha los tokens RDOC DISPONIBLES PARA CANJEAR. Si ese valor es cero, eso significa que ningún RDOC está disponible para canjear ahora."
         },
         "banner-settlement": {
             "title": "¡Settlement en Proceso!",
-            "description": "Mientras el settlement esté en proceso no vas a poder realizar solicitudes de redención de RDOC o Emitir/Redimir RIFX. Por favor aguardá a que esto finalice.",
+            "description": "Mientras el settlement esté en proceso no vas a poder realizar solicitudes de redención de USDRIF o Emitir/Redimir RIFX. Por favor aguardá a que esto finalice.",
             "btc-price": "Precio de {{tokenName}}:",
             "btcx-price": "Precio de {{tokenName}}:",
-            "doc-redeem-count": "Cantidad de solicitudes de redención de RDOC:",
+            "doc-redeem-count": "Cantidad de solicitudes de redención de USDRIF:",
             "accounts-to-redeem": "Cantidad de cuentas que redimen {{tokenCode}}:",
             "go-to-faq": {
                 "question": "¿Tienes dudas sobre esto?",
@@ -412,8 +412,8 @@
                 "descStep2": "Veamos brevemente de qué Tokens se trata."
             },
             "docToken": {
-                "title": "Token RDOC",
-                "descStep1": "El RIF Dollar, o {{tokenNameHTML}}, es la moneda estable con colateral en RIF y una relación 1:1 con el precio del dólar estadounidense. Recomendada para evitar la volatilidad y para ahorro. Es el Token ideal si no quieres asumir riesgos."
+                "title": "Token USDRIF",
+                "descStep1": "El RIF US Dollar, o {{tokenNameHTML}}, es la moneda estable con colateral en RIF y una relación 1:1 con el precio del dólar estadounidense. Recomendada para evitar la volatilidad y para ahorro. Es el Token ideal si no quieres asumir riesgos."
             },
             "BProToken": {
                 "title": "Token RIFP",
@@ -594,8 +594,8 @@
             "invalidValuePlaceholder": "--",
             "contractLiquidation": {
                 "title": "Contrato Liquidado",
-                "desc": "Este contrato ha sido liquidado, la única operación disponible es la redención de RDOC.",
-                "buttonText": "Canjear mis RDOC"
+                "desc": "Este contrato ha sido liquidado, la única operación disponible es la redención de USDRIF.",
+                "buttonText": "Canjear mis USDRIF"
             },
             "priceVariation": {
                 "tooltip": {
@@ -720,12 +720,12 @@
         "tokenInformationTooltip": "Información acerca de",
         "TokenInformationContent": {
             "TP": {
-                "factSheet": "RDOC Fact Sheet ",
-                "title": "El RIF Dollar (RDOC) es una moneda estable con RIF de colateral que sigue 1:1 el valor del dólar estadounidense. Sus principales características son:",
+                "factSheet": "USDRIF Fact Sheet ",
+                "title": "El RIF US Dollar (USDRIF) es una moneda estable con RIF de colateral que sigue 1:1 el valor del dólar estadounidense. Sus principales características son:",
                 "characteristics": {
                     "left": [
                         "Relación 1:1 con el dólar estadounidense.",
-                        "La estabilidad está garantizada por el Contrato Inteligente y los RDOC son redimibles por RIF."
+                        "La estabilidad está garantizada por el Contrato Inteligente y los USDRIF son redimibles por RIF."
                     ],
                     "right": [
                         "Puede ser transferida libremente, en cualquier momento.",
@@ -934,7 +934,7 @@
             "leftPannel": {
                 "header": "Vas a necesitar rBTC en tu billetera para:",
                 "items": [
-                    "Mintear RDOC y RIFPro",
+                    "Mintear USDRIF y RIFPro",
                     "Pagar tarifas de gas en la red RSK"
                 ],
                 "learnMore": "Conoce más acerca de rBTC"

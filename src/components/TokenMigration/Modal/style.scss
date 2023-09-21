@@ -1,0 +1,40 @@
+.NotificationMigration {
+  padding: 20px;
+  background-color: #4B5CF0;
+  color: white;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  .Important {
+    max-width: 180px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .Information {
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 13px;
+  }
+
+  .Action {
+    max-width: 100px;
+
+    .btnSwap {
+      color: #4982ff;
+      background-color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .ant-btn {
+      border: solid 1px #4982ff;
+      border-radius: 65px;
+    }
+
+  }
+}

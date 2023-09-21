@@ -16,6 +16,7 @@ const addABI = (abiContracts, appMode) => {
     if (appMode === 'RRC20') {
         abiDecoder.addABI(abiContracts.ReserveToken.abi);
     }
+  if (process.env.REACT_APP_CONTRACT_TOKEN_MIGRATOR) abiDecoder.addABI(abiContracts.TokenMigrator.abi)
 
     abiDecoder.addABI(abiContracts.IRegistry.abi);
     abiDecoder.addABI(abiContracts.IStakingMachine.abi);
@@ -78,7 +79,8 @@ const decodeEvents = (receipt) => {
         'Approval',
         'VendorReceivedMarkup',
         'VendorStakeAdded',
-        'VendorStakeRemoved'
+        'VendorStakeRemoved',
+        'TokenMigrated'
     ];
 
     const filteredEvents = decodedLogs.filter((event) =>

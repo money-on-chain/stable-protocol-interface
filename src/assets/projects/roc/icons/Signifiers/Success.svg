@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Signifier 2</title>
+    <g id="🟢Prototypes-Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="0404-Transaction-Status-/-Success" transform="translate(-242.000000, -461.000000)">
+            <g id="Status" transform="translate(38.000000, 461.000000)">
+                <g id="Signifier" transform="translate(204.000000, 0.000000)">
+                    <circle id="Ellipse-4" fill="#9FE549" fill-rule="nonzero" cx="16" cy="16" r="16"></circle>
+                    <g id="Check" transform="translate(4.000000, 4.000000)">
+                        <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                        <polyline id="Path" stroke="#2B2C36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="20.25 6.75046875 9.75 17.25 4.5 12.0004687"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

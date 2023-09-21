@@ -26,7 +26,7 @@ const getGasPrice = async (web3) => {
         console.log("Node gas price: ", parseInt(nodeGasPrice.toString()))
         console.log("Fixed gas price: ", parseInt(process.env.REACT_APP_ENVIRONMENT_GAS_PRICE_LIMIT))
         console.log("Sending gas price: ", gasPrice)
-        return gasPrice;
+        return gasPrice.toString();
     } catch (e) {
         console.log(e);
     }

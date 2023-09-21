@@ -23,6 +23,8 @@ import { ReactComponent as LogoIconTP } from '../../../assets/icons/icon-rbtclog
 import { ReactComponent as LogoIconTC } from '../../../assets/icons/TCIcon.svg';
 import { ReactComponent as LogoIconTG } from '../../../assets/icons/icon-tg.svg';
 
+import ModalTokenMigration from '../../../components/TokenMigration/Modal';
+
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -267,6 +269,7 @@ export default function Skeleton() {
                     />
                 </Header>
                 <Content className="page-container">
+                    <ModalTokenMigration />
                     <Outlet />
                 </Content>
                 <Drawer

@@ -1,14 +1,14 @@
 {
     "RoC": {
         "app": {
-            "name": "RDOC Money on Chain",
+            "name": "RIF on Chain",
             "code": "RRC20"
         },
 
         "MetamaskTutorial_connectWithMetamask_text": "Return to Money on Chain Tab. Click on Next on the Metamask Window",
 
-        "Tokens_TP_code": "RDOC",
-        "Tokens_TP_name": "RDOC",
+        "Tokens_TP_code": "USDRIF",
+        "Tokens_TP_name": "USDRIF",
         "Tokens_TC_code": "RIFP",
         "Tokens_TC_name": "RIFP",
         "Tokens_TX_code": "RIFX",
@@ -50,23 +50,23 @@
             },
             "questions": {
                 "1": {
-                    "question": "What is RDOC?",
+                    "question": "What is USDRIF?",
                     "answer": "The dollar on chain, our first stable coin. It is pegged to the US dollar."
                 },
                 "2": {
                     "question": "How do peg to the US dollar is guaranteed?",
-                    "answer": "The peg is guaranteed by the smart contract, the rules and incentives are aligned so RDOCs can always be redeemed for the same amount of dollars in rBTC. For more detail check our technical white paper."
+                    "answer": "The peg is guaranteed by the smart contract, the rules and incentives are aligned so USDRIFs can always be redeemed for the same amount of dollars in rBTC. For more detail check our technical white paper."
                 },
                 "3": {
-                    "question": "How much it cost to mint or redeem a RDOC?",
-                    "answer": "You have to pay a fee of 0.1% to mint or redeem RDOC, in the next version you can have a 50% discount on fees paying the fee with the MOC tokens."
+                    "question": "How much it cost to mint or redeem a USDRIF?",
+                    "answer": "You have to pay a fee of 0.1% to mint or redeem USDRIF, in the next version you can have a 50% discount on fees paying the fee with the MOC tokens."
                 },
                 "4": {
-                    "question": "How much it cost to transfer RDOC?",
-                    "answer": "Its free, once RDOCs are issued Money On Chain protocol do not charge for transfers."
+                    "question": "How much it cost to transfer USDRIF?",
+                    "answer": "Its free, once USDRIFs are issued Money On Chain protocol do not charge for transfers."
                 },
                 "5": {
-                    "question": "Can I store my RDOC/RIFPro/MOC in my TREZOR or Ledger wallet?",
+                    "question": "Can I store my USDRIF/RIFPro/MOC in my TREZOR or Ledger wallet?",
                     "answer": "Yes, you just have to connect your hardware wallet to Metamask o Nifty."
                 },
                 "6": {
@@ -95,7 +95,7 @@
                 },
                 "12": {
                     "question": "Is RIFX a future contract?",
-                    "answer": "RIFX act like a future contract, it expires every 30 days, but there are no order books to trade it to, you trade against the liquidity pool form by all the RDOC in the system."
+                    "answer": "RIFX act like a future contract, it expires every 30 days, but there are no order books to trade it to, you trade against the liquidity pool form by all the USDRIF in the system."
                 },
                 "13": {
                     "question": "Is RIFX fixed leveraged?",
@@ -142,7 +142,7 @@
             "language": "Language",
             "TCWallet": "RIFP Tokens",
             "TXWallet": "RIFX Positions",
-            "TPWallet": "RDOC Tokens",
+            "TPWallet": "USDRIF Tokens",
             "getRBTC": "BTC Peg in / Peg out",
             "wiki-url": "https://wiki.rifonchain.com/",
             "repository-url": "https://github.com/money-on-chain/RDOC-Contract"
@@ -161,7 +161,7 @@
             "language": "Language",
             "TCWallet": "RIFpro",
             "TXWallet": "RIFX",
-            "TPWallet": "RDOC",
+            "TPWallet": "USDRIF",
             "getRBTC": "BTC Peg in / Peg out"
         },
         "drawer-allowance": {
@@ -183,8 +183,8 @@
                 "subtitle": "Manage your RIFX position"
             },
             "TP": {
-                "title": "RDOC",
-                "subtitle": "Manage your RDOC"
+                "title": "USDRIF",
+                "subtitle": "Manage your USDRIF"
             },
             "TG": {
                 "title": "MOC",
@@ -218,13 +218,13 @@
                 "inrateTitle": "Interest Rate",
                 "inrateTooltipText": "The displayed interest rate is absolute, depends on the remaining days until the settlement, and will be discounted from the amount bought.",
                 "freeDocRateTitle": "Free Redemption Rate",
-                "freeDocRateTooltipText": "Redeeming RDOC before settlement is charged with a fee, you can queue your redeem for next settlement to avoid the extra charged.",
+                "freeDocRateTooltipText": "Redeeming USDRIF before settlement is charged with a fee, you can queue your redeem for next settlement to avoid the extra charged.",
                 "amountDisclaimer": "*Amounts may differ at transaction confirmation",
                 "isCreditInterest": "**Credit"
             },
             "allowance": {
                 "allowanceSendTitle": "Allowance",
-                "allowanceSendDescription": "Please approve the TX in your wallet to use MoC Tokens in the platform. Turn on screen reader support",
+                "allowanceSendDescription": "Please approve the TX in your wallet to use MoC Tokens in the platform. Turn on screen reader support.",
                 "allowanceTxTitle": "Allowance",
                 "allowanceTxDescription": "Allowance sent! please await confirmation. You can explore the transaction hash. ",
                 "allowanceSendErrorTitle": "Allowance",
@@ -233,7 +233,7 @@
         },
         "metrics": {
             "TP": {
-                "title": "RDOC",
+                "title": "USDRIF",
                 "total": "Total in the system",
                 "availableRedeem": "Available to redeem",
                 "availableMint": "Available to Mint"
@@ -261,7 +261,7 @@
             },
             "statusYellow": {
                 "title": "Partially Operational",
-                "subtitle": "RIFPro cannot be redeemed. RDOC cannot be minted"
+                "subtitle": "RIFPro cannot be redeemed. USDRIF cannot be minted"
             },
             "statusOrange": {
                 "title": "Opportunity Mode",
@@ -285,9 +285,9 @@
             },
             "systemOperations": {
                 "title": "System Operations",
-                "mintSTABLE": "Mint RDOC",
-                "redeemSTABLEOnSettlement": "Redeem RDOC on Settlement",
-                "redeemSTABLEOutsideOfSettlement": "Redeem RDOC",
+                "mintSTABLE": "Mint USDRIF",
+                "redeemSTABLEOnSettlement": "Redeem USDRIF on Settlement",
+                "redeemSTABLEOutsideOfSettlement": "Redeem USDRIF",
                 "mintRISKPRO": "Mint RIFP",
                 "redeemRISKPRO": "Redeem RIFP",
                 "mintRISKPROX": "Mint RIFX",
@@ -311,7 +311,7 @@
                 "totalBitPro": "Total {{tokenName}}",
                 "tooltip": {
                     "title": "Tokens in RIFpro",
-                    "subtitle": "- Total RIF Dollar on chain:The amount of RDOC giving free leverage to RIFpro.\n- Total RifPro: Number of RIFpro issued by the system\n- Total RIF tokens: the sum of the above expresed in RIF\n"
+                    "subtitle": "- Total RIF US Dollar: The amount of USDRIF giving free leverage to RIFpro.\n- Total RifPro: Number of RIFpro issued by the system\n- Total RIF tokens: the sum of the above expresed in RIF\n"
                 }
             },
             "BtcInBucket2": {
@@ -321,7 +321,7 @@
                 "totalBitPro": "Total {{tokenName}}",
                 "tooltip": {
                     "title": "Tokens in RIFX",
-                    "subtitle": "- Total RIF in Dollar On Chain: Number of RDOC being used as counter-party of RIFX operations\n- Total RIFX: the amount of RIFX issued by the system\n- Total RIF Tokens: the sum of the above expresed in RIF"
+                    "subtitle": "- Total RIF in Dollar On Chain: Number of USDRIF being used as counter-party of RIFX operations\n- Total RIFX: the amount of RIFX issued by the system\n- Total RIF Tokens: the sum of the above expresed in RIF"
                 }
             },
             "Settlement": {
@@ -344,11 +344,11 @@
             "redeemQueue": "{{tokenName}} redeem queue",
             "remainingDays": "In {{days}} days {{hours}} hours",
             "remainingBlocks": "Remaining blocks",
-            "infoText": "These redemptions are going to be effective on the next settlement. If you want to redeem your RDOC holding today, you should check in the box of the right the AVAILABLE TO REDEEM RDOC tokens. If there that value is zero, that means that non RDOC is available to be redeemed now."
+            "infoText": "These redemptions are going to be effective on the next settlement. If you want to redeem your USDRIF holding today, you should check in the box of the right the AVAILABLE TO REDEEM USDRIF tokens. If there that value is zero, that means that non USDRIF is available to be redeemed now."
         },
         "banner-settlement": {
             "title": "Settlement in process!",
-            "description": "While the settlement is in process, it will not be able to make RDOC redeem request or Mint/Redeem RIFX. Please wait.",
+            "description": "While the settlement is in process, it will not be able to make USDRIF redeem request or Mint/Redeem RIFX. Please wait.",
             "btc-price": "{{tokenName}} Price:",
             "btcx-price": "{{tokenName}} Price:",
             "doc-redeem-count": "{{tokenCode}} redeem request count:",
@@ -412,9 +412,9 @@
                 "descStep2": "Let's introduce the different tokens briefly."
             },
             "docToken": {
-                "title": "RDOC Token",
+                "title": "RIFUSD Token",
                 "descStep1": "Avoid crypto volatility using {{tokenNameHTML}} for payments, daily transactions, holding your savings, and acquiring RIF Services like identity, storage or communications.",
-                "descStep2": "RIF Dollar is a fully crypto collateralized stablecoin. 1:1 pegged to US Dollar guaranteed by the smart contract. RIF Dollar (RDOC) is the ideal token to participate in Decentralized Sharing Economies."
+                "descStep2": "RIF US Dollar is a fully crypto collateralized stablecoin. 1:1 pegged to US Dollar guaranteed by the smart contract. RIF US Dollar (USDRIF) is the ideal token to participate in Decentralized Sharing Economies."
             },
             "BProToken": {
                 "title": "RIFP Token",
@@ -715,12 +715,12 @@
         "tokenInformationTooltip": "Information about ",
         "TokenInformationContent": {
             "TP": {
-                "factSheet": "RDOC Fact Sheet",
-                "title": "RIF Dollar (RDOC) is a stablecoin with a 1:1 peg to the US Dollar with RIF collateral and its main features are:",
+                "factSheet": "USDRIF Fact Sheet",
+                "title": "RIF US Dollar (USDRIF) is a stablecoin with a 1:1 peg to the US Dollar with RIF collateral and its main features are:",
                 "characteristics": {
                     "left": [
                         "1:1 Peg to the US Dollar.",
-                        "The peg is guaranteed by the smart contract and RDOC are redeemable for RIF."
+                        "The peg is guaranteed by the smart contract and USDRIF are redeemable for RIF."
                     ],
                     "right": [
                         "Can be transferred freely, at any time.",
@@ -941,7 +941,7 @@
             "leftPannel": {
                 "header": "You will need rBTC in your wallet to:",
                 "items": [
-                    "Mint RDOC and RIFPro",
+                    "Mint USDRIF and RIFPro",
                     "Pay gas fees on RSK network"
                 ],
                 "learnMore": "Learn more about rBTC"
