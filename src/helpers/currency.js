@@ -4,6 +4,8 @@ import { ReactComponent as LogoIconTC } from '../assets/icons/icon-tc.svg';
 import { ReactComponent as LogoIconTX } from '../assets/icons/icon-tx.svg';
 import { ReactComponent as LogoIconTG } from '../assets/icons/icon-tg.svg';
 import { ReactComponent as LogoIconRBTC } from '../assets/icons/icon-tg.svg';
+import { config } from '../projects/config';
+
 
 const getBalanceAndTransferMethodOfTokenToSend = (
     userState,
@@ -11,6 +13,7 @@ const getBalanceAndTransferMethodOfTokenToSend = (
     auth
 ) => {
     if (!userState) return {};
+    const appMode = config.environment.AppMode;
     switch (currencyCode) {
         case 'TC':
             return {
@@ -28,10 +31,20 @@ const getBalanceAndTransferMethodOfTokenToSend = (
                 methodTransferTo: auth?.interfaceTransferTGTo
             };
         case 'RESERVE':
-            return {
-                amount: userState?.rbtcBalance,
-                methodTransferTo: auth?.interfaceTransferCoinbaseTo
-            };
+
+            if (appMode === 'MoC') {
+                return {
+                    amount: userState?.rbtcBalance,
+                    methodTransferTo: auth?.interfaceTransferCoinbaseTo
+                };
+            } else {
+                return {
+                    amount: userState?.rbtcBalance,
+                    methodTransferTo: auth?.interfaceTransferRESERVETo
+                };
+            }
+
+
         default:
             return {};
     }

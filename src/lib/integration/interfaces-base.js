@@ -219,6 +219,44 @@ const transferTGTo = async (
     return receipt;
 };
 
+
+const transferRESERVETo = async (
+    interfaceContext,
+    to,
+    amount,
+    onTransaction,
+    onReceipt,
+    onError
+) => {
+    const { web3, account } = interfaceContext;
+    const dContracts = window.integration;
+
+    const reservetoken = dContracts.contracts.reservetoken;
+
+    amount = new BigNumber(amount);
+
+    // Calculate estimate gas cost
+    const estimateGas = await reservetoken.methods
+        .transfer(to, toContractPrecision(amount))
+        .estimateGas({ from: web3.utils.toChecksumAddress(account) });
+
+    // Send tx
+    const receipt = reservetoken.methods
+        .transfer(to, toContractPrecision(amount))
+        .send({
+            from: web3.utils.toChecksumAddress(account),
+            value: '0x',
+            gasPrice: await getGasPrice(web3),
+            gas: estimateGas * 2,
+            gasLimit: estimateGas * 2
+        })
+        .on('error', onError)
+        .on('transactionHash', onTransaction)
+        .on('receipt', onReceipt);
+
+    return receipt;
+};
+
 const transferCoinbaseTo = async (
     interfaceContext,
     to,
@@ -352,6 +390,7 @@ export {
     transferTPTo,
     transferTCTo,
     transferTGTo,
+    transferRESERVETo,
     transferCoinbaseTo,
     approveTGTokenCommission,
     vendorMarkup,

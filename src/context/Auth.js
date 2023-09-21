@@ -31,6 +31,7 @@ import {
     transferTPTo,
     transferTCTo,
     transferTGTo,
+    transferRESERVETo,
     transferCoinbaseTo,
     calcMintInterest,
     approveTGTokenCommission,
@@ -144,6 +145,7 @@ const AuthenticateContext = createContext({
     interfaceTransferTPTo: async (to, amount) => {},
     interfaceTransferTCTo: async (to, amount) => {},
     interfaceTransferTGTo: async (to, amount) => {},
+    interfaceTransferRESERVETo: async (to, amount) => {},
     interfaceTransferCoinbaseTo: async (to, amount) => {},
     interfaceCalcMintInterestValues: async (amount) => {},
     interfaceVendorMarkup: async (vendorAccount) => {},
@@ -848,6 +850,25 @@ const AuthenticateProvider = ({ children }) => {
         );
     };
 
+    const interfaceTransferRESERVETo = async (
+        to,
+        amount,
+        onTransaction,
+        onReceipt,
+        onError
+    ) => {
+        const interfaceContext = buildInterfaceContext();
+        const toWithChecksum = helper.toWeb3CheckSumAddress(to);
+        return transferRESERVETo(
+            interfaceContext,
+            toWithChecksum,
+            amount,
+            onTransaction,
+            onReceipt,
+            onError
+        );
+    };
+
     const interfaceTransferCoinbaseTo = async (
         to,
         amount,
@@ -1002,6 +1023,7 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceTransferTPTo,
                 interfaceTransferTCTo,
                 interfaceTransferTGTo,
+                interfaceTransferRESERVETo,
                 interfaceTransferCoinbaseTo,
                 interfaceCalcMintInterestValues,
                 interfaceVendorMarkup,
