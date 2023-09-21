@@ -230,18 +230,15 @@ const transferCoinbaseTo = async (
     const { web3, account } = interfaceContext;
     let tokens = web3.utils.toWei(amount.toString(), 'ether');
 
-    const receipt = web3.eth.sendTransaction({
+    return web3.eth.sendTransaction({
             from: account.toLowerCase(),
             to: to.toLowerCase(),
-            value: web3.utils.toBN(tokens),
-            //gasPrice: '65820000', //await getGasPrice(web3),
-            gasPrice: await getGasPrice(web3),
+            value: web3.utils.toBN(tokens)
         })
         .on('error', onError)
         .on('transactionHash', onTransaction)
         .on('receipt', onReceipt);
 
-    return receipt;
 };
 
 const approveTGTokenCommission = async (
