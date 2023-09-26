@@ -406,6 +406,25 @@
       "anonymous": false,
       "inputs": [
         {
+          "indexed": false,
+          "internalType": "address",
+          "name": "oldStableTokenAddress_",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "newStableTokenAddress_",
+          "type": "address"
+        }
+      ],
+      "name": "StableTokenMigrated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
           "indexed": true,
           "internalType": "address",
           "name": "account",
@@ -569,52 +588,7 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "connector",
-      "outputs": [
-        {
-          "internalType": "contract MoCConnector",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "getDayPrecision",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "getMocPrecision",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "getReservePrecision",
+      "name": "absoluteAccumulator",
       "outputs": [
         {
           "internalType": "uint256",
@@ -630,46 +604,36 @@
       "constant": false,
       "inputs": [
         {
-          "internalType": "address",
-          "name": "connectorAddress",
-          "type": "address"
-        }
-      ],
-      "name": "initialize",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
+          "internalType": "bytes32",
+          "name": "bucket",
+          "type": "bytes32"
+        },
         {
-          "internalType": "address",
-          "name": "owner",
+          "internalType": "address payable",
+          "name": "account",
           "type": "address"
         },
         {
-          "internalType": "address",
-          "name": "spender",
-          "type": "address"
+          "internalType": "uint256",
+          "name": "riskProxAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "riskProxPrice",
+          "type": "uint256"
         }
       ],
-      "name": "getMoCTokenBalance",
+      "name": "burnRiskProxFor",
       "outputs": [
         {
           "internalType": "uint256",
-          "name": "mocBalance",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "mocAllowance",
+          "name": "",
           "type": "uint256"
         }
       ],
       "payable": false,
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -753,6 +717,283 @@
       "type": "function"
     },
     {
+      "constant": true,
+      "inputs": [],
+      "name": "connector",
+      "outputs": [
+        {
+          "internalType": "contract MoCConnector",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "decayBlockSpan",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "differentialAccumulator",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "bucket",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address payable",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "riskProxAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "riskProxPrice",
+          "type": "uint256"
+        }
+      ],
+      "name": "forceRedeemRiskProx",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getDayPrecision",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        }
+      ],
+      "name": "getMoCTokenBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "mocBalance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "mocAllowance",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getMocPrecision",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getReservePrecision",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "connectorAddress",
+          "type": "address"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "lastMaxReserveAllowedToMint",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "maxResAllowed",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "lastMaxReserveAllowedToRedeem",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "maxResAllowed",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "lastOperationBlockNumber",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxAbsoluteOperation",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxOperationalDifference",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxReserveAllowedToMint",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "maxResAllowed",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxReserveAllowedToRedeem",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "maxResAllowed",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -807,13 +1048,18 @@
       "constant": false,
       "inputs": [
         {
-          "internalType": "address",
+          "internalType": "address payable",
           "name": "account",
           "type": "address"
         },
         {
+          "internalType": "bytes32",
+          "name": "bucket",
+          "type": "bytes32"
+        },
+        {
           "internalType": "uint256",
-          "name": "riskProAmount",
+          "name": "resTokensToMint",
           "type": "uint256"
         },
         {
@@ -822,58 +1068,7 @@
           "type": "address"
         }
       ],
-      "name": "redeemRiskPro",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "stableTokenAmount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "vendorAccount",
-          "type": "address"
-        }
-      ],
-      "name": "redeemFreeStableToken",
+      "name": "mintRiskProx",
       "outputs": [
         {
           "internalType": "uint256",
@@ -961,42 +1156,6 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "userAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "reservePrice",
-          "type": "uint256"
-        }
-      ],
-      "name": "redeemStableTokenWithPrice",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "internalType": "address",
           "name": "origin",
           "type": "address"
         },
@@ -1022,18 +1181,13 @@
       "constant": false,
       "inputs": [
         {
-          "internalType": "address payable",
+          "internalType": "address",
           "name": "account",
           "type": "address"
         },
         {
-          "internalType": "bytes32",
-          "name": "bucket",
-          "type": "bytes32"
-        },
-        {
           "internalType": "uint256",
-          "name": "resTokensToMint",
+          "name": "stableTokenAmount",
           "type": "uint256"
         },
         {
@@ -1042,7 +1196,58 @@
           "type": "address"
         }
       ],
-      "name": "mintRiskProx",
+      "name": "redeemFreeStableToken",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "riskProAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "vendorAccount",
+          "type": "address"
+        }
+      ],
+      "name": "redeemRiskPro",
       "outputs": [
         {
           "internalType": "uint256",
@@ -1134,32 +1339,32 @@
       "constant": false,
       "inputs": [
         {
-          "internalType": "bytes32",
-          "name": "bucket",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "address payable",
-          "name": "account",
+          "internalType": "address",
+          "name": "userAddress",
           "type": "address"
         },
         {
           "internalType": "uint256",
-          "name": "riskProxAmount",
+          "name": "amount",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "riskProxPrice",
+          "name": "reservePrice",
           "type": "uint256"
         }
       ],
-      "name": "forceRedeemRiskProx",
+      "name": "redeemStableTokenWithPrice",
       "outputs": [
         {
           "internalType": "bool",
           "name": "",
           "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "payable": false,
@@ -1170,34 +1375,63 @@
       "constant": false,
       "inputs": [
         {
-          "internalType": "bytes32",
-          "name": "bucket",
-          "type": "bytes32"
-        },
+          "internalType": "uint256",
+          "name": "decayBlockSpan_",
+          "type": "uint256"
+        }
+      ],
+      "name": "setDecayBlockSpan",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
         {
-          "internalType": "address payable",
-          "name": "account",
+          "internalType": "uint256",
+          "name": "maxAbsoluteOperation_",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMaxAbsoluteOperation",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "maxOperationalDifference_",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMaxOperationalDifference",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newStableTokenAddress_",
           "type": "address"
         },
         {
-          "internalType": "uint256",
-          "name": "riskProxAmount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "riskProxPrice",
-          "type": "uint256"
+          "internalType": "address",
+          "name": "bridgeAddress_",
+          "type": "address"
         }
       ],
-      "name": "burnRiskProxFor",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
+      "name": "migrateStableToken",
+      "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
