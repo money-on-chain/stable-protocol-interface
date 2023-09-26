@@ -202,7 +202,8 @@ const MintOrRedeemToken = (props) => {
             maxValueYouExchange = getMaxRedeemableBalance(
                 token,
                 userState,
-                mocState
+                mocState,
+                auth.convertToken
             ).value.toString();
             maxValueYouReceive = convertAmount(
                 token,

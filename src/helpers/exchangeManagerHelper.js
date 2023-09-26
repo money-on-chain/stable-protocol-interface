@@ -3,12 +3,14 @@ import BigNumber from 'bignumber.js';
 import {
     formatValueWithContractPrecision,
     formatValueToContract,
-    precision
+    precision,
+    formatVisibleValue
 } from './Formats';
 import { getTransactionType } from './exchangeHelper';
 import { config } from '../projects/config';
 
 const RBTCPrecision = config.Precisions.RBTCPrecision;
+const appMode = config.environment.AppMode;
 
 const convertAmount = (source, target, amount, convertToken) => {
     if (amount === '') {
@@ -212,6 +214,7 @@ const getMaxMintableBalance = (
         vendorMarkup
     );
     const { docAvailableToMint, bprox2AvailableToMint } = mocState;
+
     const usableReserveBalanceInCurrencyToMint = convertToken(
         'RESERVE',
         currencyToMint,
@@ -220,13 +223,41 @@ const getMaxMintableBalance = (
     let response;
     switch (currencyToMint) {
         case 'TP':
-            response = {
-                value: BigNumber.minimum(
-                    docAvailableToMint,
-                    usableReserveBalanceInCurrencyToMint
-                ),
-                currency: 'TP'
-            };
+            if (appMode === 'RRC20') {
+                const { maxReserveAllowedToMint } = mocState;
+
+                const fluxMaxReserveAllowedToMint = convertToken(
+                    'RESERVE',
+                    currencyToMint,
+                    maxReserveAllowedToMint
+                );
+
+                console.log('Max mintable balance');
+                console.log('======================');
+                console.log('Stable available to mint: ', formatVisibleValue(docAvailableToMint, 'TP', 'en', 2));
+                console.log('Stable balance: ', formatVisibleValue(usableReserveBalanceInCurrencyToMint, 'TP', 'en', 2));
+                console.log('Flux Max to mint: ', formatVisibleValue(fluxMaxReserveAllowedToMint, 'TP', 'en', 2));
+                console.log();
+
+                response = {
+                    value: BigNumber.minimum(
+                        docAvailableToMint,
+                        usableReserveBalanceInCurrencyToMint,
+                        fluxMaxReserveAllowedToMint
+                    ),
+                    currency: 'TP'
+                };
+            } else {
+                response = {
+                    value: BigNumber.minimum(
+                        docAvailableToMint,
+                        usableReserveBalanceInCurrencyToMint
+                    ),
+                    currency: 'TP'
+                };
+            }
+
+
             break;
         case 'TC':
             response = {
@@ -250,7 +281,7 @@ const getMaxMintableBalance = (
     return response;
 };
 
-const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState) => {
+const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState, convertToken) => {
     const {
         bproBalance = 0,
         bprox2Balance = 0,
@@ -260,10 +291,33 @@ const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState) => {
     let response;
     switch (currencyToRedeem) {
         case 'TP':
-            response = {
-                value: BigNumber.minimum(docAvailableToRedeem, docBalance),
-                currency: 'TP'
-            };
+            if (appMode === 'RRC20') {
+                const { maxReserveAllowedToRedeem } = mocState;
+
+                const fluxMaxReserveAllowedToRedeem = convertToken(
+                    'RESERVE',
+                    currencyToRedeem,
+                    maxReserveAllowedToRedeem
+                );
+
+                console.log('Max Redeemable Balance');
+                console.log('======================');
+                console.log('Stable available to redeem: ', formatVisibleValue(docAvailableToRedeem, 'TP', 'en', 2));
+                console.log('Stable balance: ', formatVisibleValue(docBalance, 'TP', 'en', 2));
+                console.log('Flux Max to redeem: ', formatVisibleValue(fluxMaxReserveAllowedToRedeem, 'TP', 'en', 2));
+                console.log();
+
+                response = {
+                    value: BigNumber.minimum(docAvailableToRedeem, docBalance, fluxMaxReserveAllowedToRedeem),
+                    currency: 'TP'
+                };
+            } else {
+                response = {
+                    value: BigNumber.minimum(docAvailableToRedeem, docBalance),
+                    currency: 'TP'
+                };
+            }
+
             break;
         case 'TC':
             response = {
