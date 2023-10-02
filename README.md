@@ -4,7 +4,7 @@ Open source **decentralized interface** for multi-collateral stable protocol **M
 
 You can:
 
-* Mint / Redeem Pegged Token (TP): Ex.: DoC or RDOC
+* Mint / Redeem Pegged Token (TP): Ex.: DoC or USDRIF
 * Mint / Redeem Collateral Token (TC): Ex.: BPro or RIFP
 * Metrics
 * Last operations
@@ -25,7 +25,7 @@ You can:
 | TP    | Pegged Token 1:1 | MOC     | DOC        | RBTC       |
 | TC    | Collateral Token | MOC     | BPRO       | RBTC       |
 | TG    | Govern Token     | MOC     | MOC        | -          |
-| TP    | Pegged Token 1:1 | ROC     | RDOC       | RIF        |
+| TP    | Pegged Token 1:1 | ROC     | USDRIF     | RIF        |
 | TC    | Collateral Token | ROC     | RIFP       | RIF        |
 | TG    | Govern Token     | ROC     | MOC        | -          |
 
