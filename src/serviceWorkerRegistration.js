@@ -19,8 +19,14 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  //if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
+
+    console.log('Register Service Worker');
+    console.log(window.location.href);
+
+    /*
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) {
       // Our service worker won't work if PUBLIC_URL is on a different origin
@@ -28,8 +34,22 @@ export function register(config) {
       // serve assets; see https://github.com/facebook/create-react-app/issues/2374
       return;
     }
-
+    */
     window.addEventListener('load', () => {
+      console.log('Register Service Worker (Load)');
+
+      fetch('http://localhost:3000')
+        .then(res=>{
+          for(const header of res.headers){
+            //console.log(res.headers.get('x-auth-token'));
+            console.log(`Name: ${header[0]}, Value:${header[1]}`);
+          }
+      })
+        .catch((error) => {
+          console.log(error)
+        });
+
+      /*
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
       if (isLocalhost) {
@@ -47,7 +67,7 @@ export function register(config) {
       } else {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);
-      }
+      }*/
     });
   }
 }
