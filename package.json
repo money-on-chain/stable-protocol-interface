@@ -1,6 +1,6 @@
 {
   "name": "stable-protocol-interface",
-  "version": "2.0.109",
+  "version": "2.0.110",
   "private": true,
   "homepage": ".",
   "dependencies": {
