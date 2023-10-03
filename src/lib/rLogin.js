@@ -23,9 +23,12 @@ const getRLogin = (port) => {
         cacheProvider: false,
         providerOptions: {
             walletconnect: {
-                package: window.WalletConnectProvider.default,
+                package: window.rLoginWalletConnect2Provider.WalletConnect2Provider,
                 options: {
-                    rpc: rpcUrls
+                    projectId: process.env.REACT_APP_RLOGIN_WALLETCONNECT2_PROJECTID,
+                    chains: [parseInt(chainId, 10)],
+                    showQrModal: true,
+                    rpcMap: rpcUrls
                 }
             },
             'custom-ledger': {
