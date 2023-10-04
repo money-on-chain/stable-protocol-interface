@@ -272,12 +272,13 @@ export default function MintModal(props) {
             </Button>
         );
         notification['warning']({
-            message: t('MoC.exchange.allowance.allowanceTxTitle', {
-                ns: 'moc'
+            message: t(`${AppProject}.exchange.allowance.allowanceTxTitle`, {
+                ns: ns
             }),
-            description: t('MoC.exchange.allowance.allowanceTxDescription', {
-                ns: 'moc'
-            }),
+            description: t(
+                `${AppProject}.exchange.allowance.allowanceTxDescription`,
+                { ns: ns }
+            ),
             btn,
             key,
             duration: 35
