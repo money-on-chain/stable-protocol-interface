@@ -245,11 +245,19 @@ const getMaxMintableBalance = (
                         usableReserveBalanceInCurrencyToMint,
                         fluxMaxReserveAllowedToMint
                     ),
+                    display: BigNumber.minimum(
+                        docAvailableToMint,
+                        usableReserveBalanceInCurrencyToMint
+                    ),
                     currency: 'TP'
                 };
             } else {
                 response = {
                     value: BigNumber.minimum(
+                        docAvailableToMint,
+                        usableReserveBalanceInCurrencyToMint
+                    ),
+                    display: BigNumber.minimum(
                         docAvailableToMint,
                         usableReserveBalanceInCurrencyToMint
                     ),
@@ -262,12 +270,17 @@ const getMaxMintableBalance = (
         case 'TC':
             response = {
                 value: usableReserveBalanceInCurrencyToMint,
+                display: usableReserveBalanceInCurrencyToMint,
                 currency: 'TC'
             };
             break;
         case 'TX':
             response = {
                 value: BigNumber.minimum(
+                    bprox2AvailableToMint,
+                    usableReserveBalanceInCurrencyToMint
+                ),
+                display: BigNumber.minimum(
                     bprox2AvailableToMint,
                     usableReserveBalanceInCurrencyToMint
                 ),
@@ -309,11 +322,13 @@ const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState, convertT
 
                 response = {
                     value: BigNumber.minimum(docAvailableToRedeem, docBalance, fluxMaxReserveAllowedToRedeem),
+                    display: BigNumber.minimum(docAvailableToRedeem, docBalance),
                     currency: 'TP'
                 };
             } else {
                 response = {
                     value: BigNumber.minimum(docAvailableToRedeem, docBalance),
+                    display: BigNumber.minimum(docAvailableToRedeem, docBalance),
                     currency: 'TP'
                 };
             }
@@ -322,12 +337,14 @@ const getMaxRedeemableBalance = (currencyToRedeem, userState, mocState, convertT
         case 'TC':
             response = {
                 value: BigNumber.minimum(bproAvailableToRedeem, bproBalance),
+                display: BigNumber.minimum(bproAvailableToRedeem, bproBalance),
                 currency: 'TC'
             };
             break;
         case 'TX':
             response = {
                 value: bprox2Balance,
+                display: bprox2Balance,
                 currency: 'TX'
             };
             break;
