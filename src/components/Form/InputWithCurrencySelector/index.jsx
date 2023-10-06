@@ -37,7 +37,8 @@ export default function InputWithCurrencySelector(props) {
         showSelectPercent = false,
         onValueChange = () => {},
         isDirty,
-        onMaxValueChange
+        onMaxValueChange,
+        maxValueAllowedDisplayedInWei
     } = props;
 
     const [t, i18n, ns] = useProjectTranslation();
@@ -270,7 +271,8 @@ export default function InputWithCurrencySelector(props) {
                                     ? 'USD'
                                     : currencySelected
                             }
-                            amount={maxValueAllowedInWei}
+                            amount={(maxValueAllowedDisplayedInWei !== undefined) ? maxValueAllowedDisplayedInWei : maxValueAllowedInWei}
+                            /*amount={maxValueAllowedInWei}*/
                             includeCurrency
                         />
                     </div>
@@ -292,7 +294,8 @@ export default function InputWithCurrencySelector(props) {
                         <div className="text-align-right">
                             <LargeNumber
                                 currencyCode={currencySelected}
-                                amount={maxValueAllowedInWei}
+                                amount={(maxValueAllowedDisplayedInWei !== undefined) ? maxValueAllowedDisplayedInWei : maxValueAllowedInWei}
+                                /*amount={maxValueAllowedInWei}*/
                                 includeCurrency
                             />
                         </div>
