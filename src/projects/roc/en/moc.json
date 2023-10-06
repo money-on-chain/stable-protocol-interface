@@ -232,7 +232,7 @@
             },
             "flowCapacitor": {
                 "displayWarning": "Temporarily limited by protocol",
-                "tooltip": "This is a safety feature the RIF on Chain protocol’s to enhance stability while also reinstating the minting/ redeeming operations for the RDOC stablecoin."
+                "tooltip": "This is a safety feature the RIF on Chain protocol’s to enhance stability while also reinstating the minting/ redeeming operations for the USDRIF stablecoin."
             }
         },
         "metrics": {
