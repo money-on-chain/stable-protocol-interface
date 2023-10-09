@@ -1051,6 +1051,29 @@
     }
     .YouExchange, .YouReceive {
         width: 45%;
+        height: 130px;
+    }
+    .flux-capacitor-warning {
+
+      .flux-limit {
+        display: flex;
+        justify-content: flex-end;
+        font-weight: 700;
+      }
+
+      .flux-warning-msg {
+        display: flex;
+        justify-content: flex-end;
+        font-weight: 700;
+
+
+        .Icon {
+          padding-top: 4px;
+          padding-left: 3px;
+        }
+
+      }
+
     }
     .ClearButton {
         margin-right: 15px;

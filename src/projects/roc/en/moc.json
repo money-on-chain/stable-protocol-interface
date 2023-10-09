@@ -229,6 +229,10 @@
                 "allowanceTxDescription": "Allowance sent! please await confirmation. You can explore the transaction hash. ",
                 "allowanceSendErrorTitle": "Allowance",
                 "allowanceSendErrorDescription": "Something went wrong on sending allowance transaction!"
+            },
+            "flowCapacitor": {
+                "displayWarning": "Temporarily limited by protocol",
+                "tooltip": "This is a safety feature the RIF on Chain protocol’s to enhance stability while also reinstating the minting/ redeeming operations for the USDRIF stablecoin."
             }
         },
         "metrics": {

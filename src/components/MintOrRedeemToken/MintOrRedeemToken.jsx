@@ -7,9 +7,9 @@ import {
     Modal,
     Card,
     Switch,
-    Skeleton
+    Skeleton, Tooltip
 } from 'antd';
-import { LoadingOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import {LoadingOutlined, ArrowRightOutlined, InfoCircleOutlined} from '@ant-design/icons';
 import BigNumber from 'bignumber.js';
 
 import {
@@ -182,7 +182,7 @@ const MintOrRedeemToken = (props) => {
     };
 
     const getMaxValues = () => {
-        let maxValueYouExchange, maxValueYouReceive;
+        let maxValueYouExchange, maxValueYouExchangeDisplay, maxValueYouReceive, maxValueYouReceiveDisplay;
         if (actionIsMint) {
             maxValueYouReceive = getMaxMintableBalance(
                 token,
@@ -191,10 +191,23 @@ const MintOrRedeemToken = (props) => {
                 auth.convertToken,
                 vendorMarkup
             ).value.toString();
+            maxValueYouReceiveDisplay = getMaxMintableBalance(
+                token,
+                userState,
+                mocState,
+                auth.convertToken,
+                vendorMarkup
+            ).display.toString();
             maxValueYouExchange = convertAmount(
                 token,
                 'RESERVE',
                 maxValueYouReceive,
+                auth.convertToken
+            );
+            maxValueYouExchangeDisplay = convertAmount(
+                token,
+                'RESERVE',
+                maxValueYouReceiveDisplay,
                 auth.convertToken
             );
         } else {
@@ -205,16 +218,30 @@ const MintOrRedeemToken = (props) => {
                 mocState,
                 auth.convertToken
             ).value.toString();
+            maxValueYouExchangeDisplay = getMaxRedeemableBalance(
+                token,
+                userState,
+                mocState,
+                auth.convertToken
+            ).display.toString();
             maxValueYouReceive = convertAmount(
                 token,
                 'RESERVE',
                 maxValueYouExchange,
                 auth.convertToken
             );
+            maxValueYouReceiveDisplay = convertAmount(
+                token,
+                'RESERVE',
+                maxValueYouExchangeDisplay,
+                auth.convertToken
+            );
         }
         return {
             youExchange: maxValueYouExchange,
-            youReceive: maxValueYouReceive
+            youExchangeDisplay: maxValueYouExchangeDisplay,
+            youReceive: maxValueYouReceive,
+            youReceiveDisplay: maxValueYouReceiveDisplay
         };
     };
 
@@ -502,11 +529,60 @@ const MintOrRedeemToken = (props) => {
         return { totalYouExchange, totalYouReceive };
     };
 
+    const fluxCapacitorLimit = () => {
+
+        if (!auth.convertToken || !mocState) return new BigNumber(-1);
+
+        // Flux Capacitor only applied in RoC Project
+        if (AppProject !== 'RoC') return new BigNumber(-1);
+
+        // Flux Capacitor only on Mint TP
+        if (currencyYouExchange === 'RESERVE' && currencyYouReceive === 'TP') {
+
+            const userBalanceMaxTPtoMint = auth.convertToken(
+                'RESERVE',
+                'TP',
+                userState.rbtcBalance
+            );
+
+            const fluxMaxReserveAllowedToMint = auth.convertToken(
+                'RESERVE',
+                'TP',
+                mocState.maxReserveAllowedToMint
+            );
+
+            if (userBalanceMaxTPtoMint.gt(fluxMaxReserveAllowedToMint)) {
+                // Show warning message
+                return fluxMaxReserveAllowedToMint;
+            }
+
+        // // Flux Capacitor only on Redeem TP
+        } else if (currencyYouExchange === 'TP' && currencyYouReceive === 'RESERVE') {
+
+            const userBalanceMaxTPtoRedeem = auth.convertToken(
+                'TP',
+                'RESERVE',
+                userState.docBalance
+            );
+
+            if (userBalanceMaxTPtoRedeem.gt(new BigNumber(mocState.maxReserveAllowedToRedeem))) {
+                // Show warning message
+                return new BigNumber(mocState.maxReserveAllowedToRedeem);
+            }
+
+        }
+
+        return new BigNumber(-1);
+
+    }
+
     /* Variables */
 
     const currencyYouReceive = getCurrencyYouReceive(actionIsMint, token);
     const commission = calcCommission();
     const totals = totalsWithCommissionAndInterests();
+    const fluxLimit = fluxCapacitorLimit();
+    const maxValues = getMaxValues();
 
     /* View */
     /* Disable Mint TX */
@@ -533,7 +609,8 @@ const MintOrRedeemToken = (props) => {
                         onInputValueChange={onValueYouExchangeChange}
                         currencyOptions={currencyOptions}
                         onValidationStatusChange={onYouExchangeValidityChange}
-                        maxValueAllowedInWei={getMaxValues().youExchange}
+                        maxValueAllowedInWei={maxValues.youExchange}
+                        maxValueAllowedDisplayedInWei={maxValues.youExchangeDisplay}
                         showMaxValueAllowed
                         validate={userAccountIsLoggedIn}
                         showConvertBTC_RBTC_Link={false}
@@ -555,13 +632,43 @@ const MintOrRedeemToken = (props) => {
                         inputValueInWei={
                             valueYouReceive == 0 ? 0.0 : valueYouReceive
                         }
-                        maxValueAllowedInWei={getMaxValues().youReceive}
+                        maxValueAllowedInWei={maxValues.youReceive}
+                        maxValueAllowedDisplayedInWei={maxValues.youReceiveDisplay}
                         showMaxValueAllowed
                         onInputValueChange={onValueYouReceiveChange}
                         showConvertBTC_RBTC_Link={false}
                         isDirty={isDirtyYouReceive}
                         onMaxValueChange={onMaxValueYouReceiveChange}
                     />
+
+                    { (fluxLimit.gte(0)) && <div className={'flux-capacitor-warning'}>
+                        <div className={'flux-limit'}>
+
+                            <LargeNumber
+                                currencyCode={currencyYouReceive}
+                                amount={fluxLimit}
+                                includeCurrency
+                            />
+
+                        </div>
+                        <div className={'flux-warning-msg'}>
+                            <span className={'flux-warning-txt'}>
+                                {t('RoC.exchange.flowCapacitor.displayWarning', {ns: ns})}
+                            </span>
+                            <Tooltip
+                                color={'rgba(0, 0, 0, 0.85)'}
+                                placement="topLeft"
+                                title={t('RoC.exchange.flowCapacitor.tooltip', {
+                                    ns: ns
+                                })}
+                                className="Tooltip"
+                            >
+                                <InfoCircleOutlined className="Icon" />
+                            </Tooltip>
+
+                        </div>
+                    </div> }
+
                 </div>
             </div>
         );
