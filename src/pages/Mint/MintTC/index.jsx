@@ -1,5 +1,5 @@
 import { Row, Col, Alert } from 'antd';
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect, useState} from 'react';
 
 import AmountCard from '../../../components/Cards/AmountCard';
 import YourAddressCard from '../../../components/Cards/YourAddressCard';
@@ -8,14 +8,24 @@ import { AuthenticateContext } from '../../../context/Auth';
 import MintOrRedeemToken from '../../../components/MintOrRedeemToken/MintOrRedeemToken';
 import { config } from '../../../projects/config';
 import { useProjectTranslation } from '../../../helpers/translations';
+import OnLoadingAuthBody from '../../../components/MintOrRedeemToken/onLoadingAuthBody';
 
 import './../../../assets/css/pages.scss';
 
 export default function Mint(props) {
-    const [t, i18n, ns] = useProjectTranslation();
-    const AppProject = config.environment.AppProject;
-
     const auth = useContext(AuthenticateContext);
+    const [t, i18n, ns] = useProjectTranslation();
+    const [isLoaded, setIsLoaded] = useState(false);
+    const AppProject = config.environment.AppProject;
+    useEffect(() => {
+        if (
+            auth.contractStatusData &&
+            auth.accountData &&
+            auth.userBalanceData
+        ) {
+            setIsLoaded(true);
+        }
+    }, [auth]);
 
     return (
         <Fragment>
@@ -50,13 +60,19 @@ export default function Mint(props) {
                     />
                 </Col>
                 <Col xs={24} xl={14}>
-                    <MintOrRedeemToken
-                        token={'TC'}
-                        AccountData={auth.accountData}
-                        userState={auth.userBalanceData}
-                        mocState={auth.contractStatusData}
-                        style={'height'}
-                    />
+                    {isLoaded ? (
+                        <MintOrRedeemToken
+                            token={'TC'}
+                            AccountData={auth.accountData}
+                            userState={auth.userBalanceData}
+                            mocState={auth.contractStatusData}
+                            style={'height'}
+                        />
+                    ) : (
+                        <OnLoadingAuthBody
+                            title={t('global.MintOrRedeemToken_Mint')}
+                        />
+                    )}
                 </Col>
             </Row>
             <div className="Card WalletOperations">
