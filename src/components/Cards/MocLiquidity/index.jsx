@@ -63,7 +63,7 @@ function MocLiquidity(props) {
         return window.web3.eth.sendTransaction({
             from: Web3.utils.toChecksumAddress(from),
             to: Web3.utils.toChecksumAddress(incentiveDestination),
-            value: '100000000000000',
+            value: '10000000000000',
             gasPrice: '65164000',
             gas: 144000
         });
