@@ -4,8 +4,8 @@ Open source **decentralized interface** for multi-collateral stable protocol **M
 
 You can:
 
-* Mint / Redeem Pegged Token (TP): Ex.: DoC or USDRIF
-* Mint / Redeem Collateral Token (TC): Ex.: BPro or RIFP
+* Mint / Redeem Pegged Token (TP): Ex.: DoC
+* Mint / Redeem Collateral Token (TC): Ex.: BPro
 * Metrics
 * Last operations
 * Claim / Stake TG (MOC)
@@ -17,7 +17,7 @@ You can:
 **Projects**
 
 * Dollar on Chain (DoC) (Main project - Collateral RBTC) please review the contracts [here](https://github.com/money-on-chain/main-RBTC-contract)
-* RIF on Chain (RoC) (Collateral RIF) please review the contracts [here](https://github.com/money-on-chain/RDOC-Contract) 
+* RIF on Chain (RoC) (Collateral RIF) was migrated to [V2](https://github.com/money-on-chain/stable-protocol-interface-v2) 
 
 
 | Token | Token name       | Project | Token Name | Collateral |
@@ -25,9 +25,6 @@ You can:
 | TP    | Pegged Token 1:1 | MOC     | DOC        | RBTC       |
 | TC    | Collateral Token | MOC     | BPRO       | RBTC       |
 | TG    | Govern Token     | MOC     | MOC        | -          |
-| TP    | Pegged Token 1:1 | ROC     | USDRIF     | RIF        |
-| TC    | Collateral Token | ROC     | RIFP       | RIF        |
-| TG    | Govern Token     | ROC     | MOC        | -          |
 
 ### Releases
 
@@ -36,8 +33,6 @@ Each release gets deployed to IPFS automatically.
 Please go to release section, there are several links to [releases](https://github.com/money-on-chain/release) 
 
 **MOC Release**: You can always get the last stable release on: [dapp.moneyonchain.com](https://dapp.moneyonchain.com)
-
-**ROC Release**: You can always get the last stable release on: [dapp.rifonchain.com](https://dapp.rifonchain.com)
 
 **Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
 
@@ -77,9 +72,7 @@ Environment is our already deployed contracts.
 | MoC TestnetAlpha | MOC     |                                        | Testnet     | RSK     | start:moc-alpha-testnet |
 | MoC Testnet      | MOC     |                                        | Testnet     | RSK     | start:moc-testnet       |
 | MoC Mainnet      | MOC     | [link](https://alpha.moneyonchain.com) | Mainnet     | RSK     | start:moc-mainnet       |
-| RoC TestnetAlpha | RIF     |                                        | Testnet     | RSK     | start:roc-alpha-testnet |
-| RoC Testnet      | RIF     |                                        | Testnet     | RSK     | start:roc-testnet       |
-| RoC Mainnet      | RIF     | [link](https://dapp.rifonchain.com)    | Mainnet     | RSK     | start:roc-mainnet       |
+
 
 ### Projects requirements (optional)
 
