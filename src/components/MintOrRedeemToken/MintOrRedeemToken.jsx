@@ -7,9 +7,14 @@ import {
     Modal,
     Card,
     Switch,
-    Skeleton, Tooltip
+    Skeleton,
+    Tooltip
 } from 'antd';
-import {LoadingOutlined, ArrowRightOutlined, InfoCircleOutlined} from '@ant-design/icons';
+import {
+    LoadingOutlined,
+    ArrowRightOutlined,
+    InfoCircleOutlined
+} from '@ant-design/icons';
 import BigNumber from 'bignumber.js';
 
 import {
@@ -182,7 +187,10 @@ const MintOrRedeemToken = (props) => {
     };
 
     const getMaxValues = () => {
-        let maxValueYouExchange, maxValueYouExchangeDisplay, maxValueYouReceive, maxValueYouReceiveDisplay;
+        let maxValueYouExchange,
+            maxValueYouExchangeDisplay,
+            maxValueYouReceive,
+            maxValueYouReceiveDisplay;
         if (actionIsMint) {
             maxValueYouReceive = getMaxMintableBalance(
                 token,
@@ -410,7 +418,7 @@ const MintOrRedeemToken = (props) => {
         };
 
         const onErrorAllowance = async (error) => {
-            console.log("Error Allowance TG:", error)
+            console.log('Error Allowance TG:', error);
         };
 
         msgAllowanceSend();
@@ -530,7 +538,6 @@ const MintOrRedeemToken = (props) => {
     };
 
     const fluxCapacitorLimit = () => {
-
         if (!auth.convertToken || !mocState) return new BigNumber(-1);
 
         // Flux Capacitor only applied in RoC Project
@@ -538,7 +545,6 @@ const MintOrRedeemToken = (props) => {
 
         // Flux Capacitor only on Mint TP
         if (currencyYouExchange === 'RESERVE' && currencyYouReceive === 'TP') {
-
             const userBalanceMaxTPtoMint = auth.convertToken(
                 'RESERVE',
                 'TP',
@@ -556,25 +562,29 @@ const MintOrRedeemToken = (props) => {
                 return fluxMaxReserveAllowedToMint;
             }
 
-        // // Flux Capacitor only on Redeem TP
-        } else if (currencyYouExchange === 'TP' && currencyYouReceive === 'RESERVE') {
-
+            // // Flux Capacitor only on Redeem TP
+        } else if (
+            currencyYouExchange === 'TP' &&
+            currencyYouReceive === 'RESERVE'
+        ) {
             const userBalanceMaxTPtoRedeem = auth.convertToken(
                 'TP',
                 'RESERVE',
                 userState.docBalance
             );
 
-            if (userBalanceMaxTPtoRedeem.gt(new BigNumber(mocState.maxReserveAllowedToRedeem))) {
+            if (
+                userBalanceMaxTPtoRedeem.gt(
+                    new BigNumber(mocState.maxReserveAllowedToRedeem)
+                )
+            ) {
                 // Show warning message
                 return new BigNumber(mocState.maxReserveAllowedToRedeem);
             }
-
         }
 
         return new BigNumber(-1);
-
-    }
+    };
 
     /* Variables */
 
@@ -610,7 +620,9 @@ const MintOrRedeemToken = (props) => {
                         currencyOptions={currencyOptions}
                         onValidationStatusChange={onYouExchangeValidityChange}
                         maxValueAllowedInWei={maxValues.youExchange}
-                        maxValueAllowedDisplayedInWei={maxValues.youExchangeDisplay}
+                        maxValueAllowedDisplayedInWei={
+                            maxValues.youExchangeDisplay
+                        }
                         showMaxValueAllowed
                         validate={userAccountIsLoggedIn}
                         showConvertBTC_RBTC_Link={false}
@@ -633,7 +645,9 @@ const MintOrRedeemToken = (props) => {
                             valueYouReceive == 0 ? 0.0 : valueYouReceive
                         }
                         maxValueAllowedInWei={maxValues.youReceive}
-                        maxValueAllowedDisplayedInWei={maxValues.youReceiveDisplay}
+                        maxValueAllowedDisplayedInWei={
+                            maxValues.youReceiveDisplay
+                        }
                         showMaxValueAllowed
                         onInputValueChange={onValueYouReceiveChange}
                         showConvertBTC_RBTC_Link={false}
@@ -641,34 +655,38 @@ const MintOrRedeemToken = (props) => {
                         onMaxValueChange={onMaxValueYouReceiveChange}
                     />
 
-                    { (fluxLimit.gte(0)) && <div className={'flux-capacitor-warning'}>
-                        <div className={'flux-limit'}>
-
-                            <LargeNumber
-                                currencyCode={currencyYouReceive}
-                                amount={fluxLimit}
-                                includeCurrency
-                            />
-
+                    {fluxLimit.gte(0) && (
+                        <div className={'flux-capacitor-warning'}>
+                            <div className={'flux-limit'}>
+                                <LargeNumber
+                                    currencyCode={currencyYouReceive}
+                                    amount={fluxLimit}
+                                    includeCurrency
+                                />
+                            </div>
+                            <div className={'flux-warning-msg'}>
+                                <span className={'flux-warning-txt'}>
+                                    {t(
+                                        'RoC.exchange.flowCapacitor.displayWarning',
+                                        { ns: ns }
+                                    )}
+                                </span>
+                                <Tooltip
+                                    color={'rgba(0, 0, 0, 0.85)'}
+                                    placement="topLeft"
+                                    title={t(
+                                        'RoC.exchange.flowCapacitor.tooltip',
+                                        {
+                                            ns: ns
+                                        }
+                                    )}
+                                    className="Tooltip"
+                                >
+                                    <InfoCircleOutlined className="Icon" />
+                                </Tooltip>
+                            </div>
                         </div>
-                        <div className={'flux-warning-msg'}>
-                            <span className={'flux-warning-txt'}>
-                                {t('RoC.exchange.flowCapacitor.displayWarning', {ns: ns})}
-                            </span>
-                            <Tooltip
-                                color={'rgba(0, 0, 0, 0.85)'}
-                                placement="topLeft"
-                                title={t('RoC.exchange.flowCapacitor.tooltip', {
-                                    ns: ns
-                                })}
-                                className="Tooltip"
-                            >
-                                <InfoCircleOutlined className="Icon" />
-                            </Tooltip>
-
-                        </div>
-                    </div> }
-
+                    )}
                 </div>
             </div>
         );

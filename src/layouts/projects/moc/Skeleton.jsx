@@ -291,7 +291,7 @@ export default function Skeleton() {
                         <Menu.Item
                             key="mint-stable"
                             onClick={() => navigate('/wallet/stable')}
-                            icon={<span className="icon-icon-stable"></span>}
+                            icon={<span className="icon-icon-tp"></span>}
                         >
                             {t(`${AppProject}.menu-drawer.TPWallet`, {
                                 ns: ns
@@ -309,7 +309,7 @@ export default function Skeleton() {
                         <Menu.Item
                             key="rewards"
                             onClick={() => navigate('/rewards')}
-                            icon={<span className="icon-icon-moc"></span>}
+                            icon={<span className="icon-icon-tg"></span>}
                         >
                             {t(`${AppProject}.menu-drawer.rewards`, { ns: ns })}
                         </Menu.Item>

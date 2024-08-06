@@ -13,7 +13,7 @@ import api from '../../../services/api';
 import { config } from '../../../projects/config';
 import OperationStatusModal from '../../Modals/OperationStatusModal/OperationStatusModal';
 import { useProjectTranslation } from '../../../helpers/translations';
-import Web3 from "web3";
+import Web3 from 'web3';
 
 function MocLiquidity(props) {
     const auth = useContext(AuthenticateContext);
@@ -179,7 +179,7 @@ function MocLiquidity(props) {
     }, [auth]);
 
     return (
-        <div className="Card RewardsBalanceLiquidity withPadding hasTitle">
+        <div className="Card RewardsBalanceLiquidity withPadding hasTitle sect__home__liquidity">
             {!loading ? (
                 <>
                     <div className="title">
@@ -204,7 +204,7 @@ function MocLiquidity(props) {
                             {t('global.RewardsBalance_EarnedToday', {
                                 ns: 'global'
                             })}
-                        </h2>
+                        </h2>{' '}
                         <div className="IncentivesItem">
                             <h3>
                                 {auth.isLoggedIn &&
@@ -249,7 +249,7 @@ function MocLiquidity(props) {
                             {t('global.RewardsBalance_Amount', {
                                 ns: 'global'
                             })}
-                        </h2>
+                        </h2>{' '}
                         <div className="IncentivesItem">
                             <h3>
                                 {auth.isLoggedIn && (
@@ -271,9 +271,10 @@ function MocLiquidity(props) {
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         {!props.rewards ? (
                             <Link to="/rewards">
+                                <div className="button__arrow"></div>
                                 <button
                                     type="button"
-                                    className="ButtonPrimary claimButton  "
+                                    className="ButtonPrimary claimButton"
                                 >
                                     <span
                                         role="img"

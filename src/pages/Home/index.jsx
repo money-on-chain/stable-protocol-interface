@@ -35,21 +35,19 @@ function Home(props) {
                     className="AlertNoConnection"
                 />
             )}
-
             <h1 className="PageTitle">
                 {t(`${AppProject}.home.title`, { ns: ns })}
             </h1>
             <h3 className="PageSubTitle">
                 {t(`${AppProject}.home.subtitle`, { ns: ns })}
             </h3>
-            <Row gutter={16}>
-                {/*<Col flex="300px" className={'WalletBalance-mb'}>*/}
-                <div className={'sec-1'}>
+            <div className="sect__home">
+                <div className={'sect__home__wallet'}>
                     <WalletBalance />
                 </div>
-                {/*<Col flex="auto">*/}
-                <div className={'sec-2'}>
-                    <div className={'container-b'} style={{ height: '100%' }}>
+
+                <div className={'sect__home__tokens'}>
+                    <div className={'container-b sect__home__tokens__tp'}>
                         <TokenSummaryCard
                             tokenName="tp"
                             // color="#00a651"
@@ -84,14 +82,12 @@ function Home(props) {
                         />
                     </div>
                 </div>
-                <div className={'sec-3'}>
-                    {/*<Col flex="248px">*/}
+                <div className={'sect__home__liquidity'}>
                     <div className="ContainerMocAmountDatas">
-                        {/*<MocAmount />*/}
                         <MocLiquidity />
                     </div>
                 </div>
-            </Row>
+            </div>
             <div className="Card WalletOperations">
                 <ListOperations token={'all'}></ListOperations>
             </div>

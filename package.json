@@ -1,92 +1,93 @@
 {
-  "name": "stable-protocol-interface",
-  "version": "2.0.124",
-  "private": true,
-  "homepage": ".",
-  "dependencies": {
-    "@ant-design/icons": "^4.7.0",
-    "@testing-library/jest-dom": "^5.16.2",
-    "abi-decoder": "^2.4.0",
-    "antd": "^4.19.3",
-    "axios": "^0.27.2",
-    "bignumber.js": "^9.0.2",
-    "bitcoin-address-validation": "^2.2.1",
-    "classnames": "^2.3.2",
-    "env-cmd": "^10.1.0",
-    "husky": "^8.0.3",
-    "i18next": "^21.8.2",
-    "lint-staged": "^13.2.1",
-    "lodash.debounce": "^4.0.8",
-    "moment": "^2.29.3",
-    "prettier": "^2.8.7",
-    "prop-types": "^15.8.1",
-    "react": "^17.0.2",
-    "react-countup": "^6.2.0",
-    "react-debounce-input": "^3.2.5",
-    "react-dom": "^17.0.2",
-    "react-i18next": "^11.16.9",
-    "react-moment": "^1.1.2",
-    "react-pretty-numbers": "^3.0.0",
-    "react-qr-code": "^2.0.5",
-    "react-router-dom": "^6.2.2",
-    "react-scripts": "^4.0.3",
-    "recharts": "^2.1.9",
-    "rskjs-util": "^1.0.3",
-    "sass": "^1.51.0",
-    "satoshi-bitcoin": "^1.0.5",
-    "socket.io-client": "^4.5.1",
-    "web-vitals": "^0.2.4",
-    "web3": "^1.8.0",
-    "workbox-core": "^5.1.4",
-    "workbox-expiration": "^5.1.4",
-    "workbox-precaching": "^5.1.4",
-    "workbox-routing": "^5.1.4",
-    "workbox-strategies": "^5.1.4"
-  },
-  "scripts": {
-    "start:moc-alpha-testnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocTestnetAlpha react-scripts start",
-    "start:moc-testnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocTestnet react-scripts start",
-    "start:moc-mainnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocMainnet2 react-scripts start",
-    "start:roc-alpha-testnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.rdocTestnetAlpha react-scripts start",
-    "start:roc-testnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.rdocTestnet react-scripts start",
-    "start:roc-mainnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.rdocMainnet react-scripts start",
-    "build:moc-alpha-testnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.mocTestnetAlpha react-scripts build && rm build/projects/ -R",
-    "build:moc-testnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.mocTestnet react-scripts build && rm build/projects/ -R",
-    "build:moc-mainnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.mocMainnet2 react-scripts build && rm build/projects/ -R",
-    "build:roc-alpha-testnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.rdocTestnetAlpha react-scripts build && rm build/projects/ -R",
-    "build:roc-testnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.rdocTestnet react-scripts build && rm build/projects/ -R",
-    "build:roc-mainnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.rdocMainnet react-scripts build && rm build/projects/ -R",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@pawjs/sass": "^2.2.6",
-    "source-map-explorer": "^2.5.2",
-    "webpack": "4.46.0",
-    "webpack-cli": "^4.10.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+    "name": "stable-protocol-interface",
+    "version": "2.0.124",
+    "private": true,
+    "homepage": ".",
+    "dependencies": {
+        "@ant-design/icons": "^4.7.0",
+        "@testing-library/jest-dom": "^5.16.2",
+        "abi-decoder": "^2.4.0",
+        "antd": "^4.19.3",
+        "axios": "^0.27.2",
+        "bignumber.js": "^9.0.2",
+        "bitcoin-address-validation": "^2.2.1",
+        "classnames": "^2.3.2",
+        "env-cmd": "^10.1.0",
+        "husky": "^8.0.3",
+        "i18next": "^21.8.2",
+        "lint-staged": "^13.2.1",
+        "lodash.debounce": "^4.0.8",
+        "moment": "^2.29.3",
+        "prettier": "^2.8.7",
+        "prop-types": "^15.8.1",
+        "react": "^17.0.2",
+        "react-countup": "^6.2.0",
+        "react-debounce-input": "^3.2.5",
+        "react-dom": "^17.0.2",
+        "react-i18next": "^11.16.9",
+        "react-moment": "^1.1.2",
+        "react-pretty-numbers": "^3.0.0",
+        "react-qr-code": "^2.0.5",
+        "react-router-dom": "^6.2.2",
+        "react-scripts": "^4.0.3",
+        "recharts": "^2.1.9",
+        "rskjs-util": "^1.0.3",
+        "sass": "^1.51.0",
+        "satoshi-bitcoin": "^1.0.5",
+        "socket.io-client": "^4.5.1",
+        "web-vitals": "^0.2.4",
+        "web3": "^1.8.0",
+        "workbox-core": "^5.1.4",
+        "workbox-expiration": "^5.1.4",
+        "workbox-precaching": "^5.1.4",
+        "workbox-routing": "^5.1.4",
+        "workbox-strategies": "^5.1.4"
+    },
+    "scripts": {
+        "reload:moc-testnet": "export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocTestnet react-scripts start",
+        "start:moc-alpha-testnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocTestnetAlpha react-scripts start",
+        "start:moc-testnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocTestnet react-scripts start",
+        "start:moc-mainnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocMainnet2 react-scripts start",
+        "start:roc-alpha-testnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.rdocTestnetAlpha react-scripts start",
+        "start:roc-testnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.rdocTestnet react-scripts start",
+        "start:roc-mainnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.rdocMainnet react-scripts start",
+        "build:moc-alpha-testnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.mocTestnetAlpha react-scripts build && rm build/projects/ -R",
+        "build:moc-testnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.mocTestnet react-scripts build && rm build/projects/ -R",
+        "build:moc-mainnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.mocMainnet2 react-scripts build && rm build/projects/ -R",
+        "build:roc-alpha-testnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.rdocTestnetAlpha react-scripts build && rm build/projects/ -R",
+        "build:roc-testnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.rdocTestnet react-scripts build && rm build/projects/ -R",
+        "build:roc-mainnet": "bash ./prepare_target.sh roc && export REACT_APP_VERSION=$npm_package_version && export NODE_OPTIONS=--max_old_space_size=4096 && env-cmd -f .env.rdocMainnet react-scripts build && rm build/projects/ -R",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "analyze": "source-map-explorer 'build/static/js/*.js'"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@pawjs/sass": "^2.2.6",
+        "source-map-explorer": "^2.5.2",
+        "webpack": "4.46.0",
+        "webpack-cli": "^4.10.0"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
     }
-  }
 }

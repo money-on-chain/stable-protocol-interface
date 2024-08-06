@@ -1,5 +1,5 @@
 import { Row, Col, Alert } from 'antd';
-import React, { Fragment, useContext, useEffect, useState} from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 
 import AmountCard from '../../../components/Cards/AmountCard';
 import YourAddressCard from '../../../components/Cards/YourAddressCard';
@@ -38,43 +38,47 @@ export default function Mint(props) {
                     className="AlertNoConnection"
                 />
             )}
-            <h1 className="PageTitle">
-                {t(`${AppProject}.wallets.TC.title`, { ns: ns })}
-            </h1>
-            <h3 className="PageSubTitle">
-                {t(`${AppProject}.wallets.TC.subtitle`, { ns: ns })}
-            </h3>
-            <Row gutter={15}>
-                <Col xs={24} md={12} xl={5}>
-                    <AmountCard
-                        tokenName="TC"
-                        titleName="BPro"
-                        StatusData={auth.contractStatusData}
-                    />
-                </Col>
-                <Col xs={24} md={12} xl={5}>
-                    <YourAddressCard
-                        height="23.4em"
-                        tokenToSend="TC"
-                        currencyOptions={['RESERVE', 'TC']}
-                    />
-                </Col>
-                <Col xs={24} xl={14}>
-                    {isLoaded ? (
-                        <MintOrRedeemToken
-                            token={'TC'}
-                            AccountData={auth.accountData}
-                            userState={auth.userBalanceData}
-                            mocState={auth.contractStatusData}
-                            style={'height'}
+            <div className="sect__exchange__container">
+                <div className="sect__exchange__header">
+                    <h1 className="PageTitle">
+                        {t(`${AppProject}.wallets.TC.title`, { ns: ns })}
+                    </h1>
+                    <h3 className="PageSubTitle">
+                        {t(`${AppProject}.wallets.TC.subtitle`, { ns: ns })}
+                    </h3>
+                </div>
+                <div className="sect__exchange__cards__container">
+                    <div className="sect__exchange__balance">
+                        <AmountCard
+                            tokenName="TC"
+                            titleName="BPro"
+                            StatusData={auth.contractStatusData}
                         />
-                    ) : (
-                        <OnLoadingAuthBody
-                            title={t('global.MintOrRedeemToken_Mint')}
+                    </div>
+                    <div className="sect__exchange__address">
+                        <YourAddressCard
+                            height="23.4em"
+                            tokenToSend="TC"
+                            currencyOptions={['RESERVE', 'TC']}
                         />
-                    )}
-                </Col>
-            </Row>
+                    </div>
+                    <div className="sect__exchange__card">
+                        {isLoaded ? (
+                            <MintOrRedeemToken
+                                token={'TC'}
+                                AccountData={auth.accountData}
+                                userState={auth.userBalanceData}
+                                mocState={auth.contractStatusData}
+                                style={'height'}
+                            />
+                        ) : (
+                            <OnLoadingAuthBody
+                                title={t('global.MintOrRedeemToken_Mint')}
+                            />
+                        )}
+                    </div>
+                </div>
+            </div>
             <div className="Card WalletOperations">
                 <ListOperations token={'TC'}></ListOperations>
             </div>

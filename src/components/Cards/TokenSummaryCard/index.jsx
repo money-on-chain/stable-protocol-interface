@@ -19,6 +19,7 @@ import { ReactComponent as LogoIconTC } from './../../../assets/icons/icon-tc.sv
 import { ReactComponent as LogoIconTX } from './../../../assets/icons/icon-tx.svg';
 import { ReactComponent as LogoIconTG } from './../../../assets/icons/icon-tg.svg';
 import { ReactComponent as LogoIconRBTC } from './../../../assets/icons/icon-tg.svg';
+import './../../../assets/css/TokenSummaryCard.scss';
 
 const amountCardLogos = {
     RESERVE: <LogoIconReserve width="45" height="45" alt="RESERVE" />,
@@ -61,91 +62,38 @@ export default function TokenSummaryCard(props) {
     }, [auth]);
 
     return (
-        <div
-            className="Card TokenSummaryCard"
-            style={{ height: '135px', display: 'flex' }}
-        >
+        <div className="Card TokenSummaryCard">
             {!loading ? (
-                <>
-                    <InformationModal currencyCode={currencyCode} />
-                    <div
-                        // span={7}
-                        style={{
-                            display: 'flex',
-                            width: '210px'
-                        }}
-                    >
-                        <div className="" style={{ display: 'flex' }}>
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    'place-items': 'center'
-                                }}
-                            >
-                                {logoIcon}
-                            </div>
-                            <div
-                                style={{
-                                    textAlign: 'right',
-                                    width: '200px',
-                                    display: 'flex',
-                                    'align-items': 'center'
-                                }}
-                            >
-                                <span
-                                    className={`Number ${AppProject}-${tokenName}`}
-                                    style={{
-                                        'text-align': 'right',
-                                        width: '100%'
-                                    }}
-                                >
-                                    {' '}
-                                    {/* style={{ color }}> */}
-                                    <LargeNumber
-                                        amount={balance}
-                                        currencyCode={currencyCode}
-                                    />
-                                </span>
-                            </div>
+                <div className="token__summary__content">
+                    <div className="token__summary__content__balance">
+                        <div>{logoIcon}</div>
+                        <div className={`Number ${AppProject}-${tokenName}`}>
+                            <LargeNumber
+                                amount={balance}
+                                currencyCode={currencyCode}
+                            />
                         </div>
                     </div>
-                    <div
-                        // span={14}
-                        style={{
-                            ...styleCentered,
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            textAlign: 'right',
-                            flexGrow: '1'
-                        }}
-                    >
-                        <div className="Numbers Right">
-                            <Tooltip
-                                placement="top"
-                                title={userBalance.collateral_tooltip}
-                            >
-                                <div className="Number Few">
-                                    {userBalance.collateral} {/*{labelCoin}*/}
-                                    {getCoinName('RESERVE')}
-                                </div>
-                            </Tooltip>
-                            <Tooltip
-                                placement="top"
-                                title={userBalance.usd_tooltip}
-                            >
-                                <div className="Number Few">
-                                    {userBalance.usd} USD
-                                </div>
-                            </Tooltip>
-                        </div>
+                    <div className="Numbers token__summary__content__usdbtc">
+                        <Tooltip
+                            placement="top"
+                            title={userBalance.collateral_tooltip}
+                        >
+                            <div className="Number Few">
+                                {userBalance.collateral} {/*{labelCoin}*/}
+                                {getCoinName('RESERVE')}
+                            </div>
+                        </Tooltip>
+                        <Tooltip
+                            placement="top"
+                            title={userBalance.usd_tooltip}
+                        >
+                            <div className="Number Few">
+                                {userBalance.usd} USD
+                            </div>
+                        </Tooltip>
                     </div>
-                    <div
-                        // span={3}
-                        style={{
-                            ...styleCentered,
-                            justifyContent: 'flex-end'
-                        }}
-                    >
+                    <div className="token__summary__content__button">
                         <Button
                             className="ArrowButton"
                             type="primary"
@@ -153,8 +101,9 @@ export default function TokenSummaryCard(props) {
                             onClick={() => navigate(page)}
                             icon={<ArrowRightOutlined />}
                         />
+                        <InformationModal currencyCode={currencyCode} />
                     </div>
-                </>
+                </div>
             ) : (
                 <Skeleton active={true} paragraph={{ rows: 2 }}></Skeleton>
             )}

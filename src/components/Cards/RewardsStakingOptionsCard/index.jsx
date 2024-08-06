@@ -199,25 +199,24 @@ export default function RewardsStakingOptions(props) {
         return (
             <div className="StakingTabContent">
                 {!loading ? (
-                    <Row>
-                        <Col xs={4}>
+                    <div className="sect__staking">
+                        <div className="sect__staking__performance">
                             {auth.isLoggedIn && <PerformanceChart />}
-                        </Col>
-                        <Col
-                            xs={20}
-                            style={{ maxWidth: 520, marginLeft: '3em' }}
-                        >
-                            <Row className="RewardsOptionsOverview">
+                        </div>
+                        <div className="sect__staking__stake">
+                            <div className="RewardsOptionsOverview sect__staking__overview">
                                 <div>
                                     {t(
                                         'global.RewardsOptions_AvailableToStake',
-                                        { ns: 'global' }
+                                        {
+                                            ns: 'global'
+                                        }
                                     )}
                                     <h3 className="amount">
                                         <LargeNumber
                                             amount={mocBalance}
                                             currencyCode="REWARD"
-                                        />{' '}
+                                        />
                                         {t(`${AppProject}.Tokens_TG_code`, {
                                             ns: ns
                                         })}
@@ -231,55 +230,46 @@ export default function RewardsStakingOptions(props) {
                                         <LargeNumber
                                             amount={stackedBalance}
                                             currencyCode="REWARD"
-                                        />{' '}
+                                        />
                                         {t(`${AppProject}.Tokens_TG_code`, {
                                             ns: ns
                                         })}
                                     </h3>
                                 </div>
-                            </Row>
-                            <Row style={{ marginTop: '1em' }}>
-                                <Col xs={24}>
-                                    <InputWithCurrencySelector
-                                        cleanInputCount={cleanInputCount}
-                                        title={t(
-                                            'global.RewardsOptions_AmountToStakePlaceholder'
-                                        )}
-                                        currencySelected={'TG'}
-                                        onCurrencySelect={() => {}}
-                                        // onCurrencySelect={onChangeCurrencyYouExchange}
-                                        inputValueInWei={
-                                            stakingAmountInputValue
-                                        }
-                                        onInputValueChange={
-                                            onStakingInputValueChange
-                                        }
-                                        currencyOptions={['TG']}
-                                        // onValidationStatusChange={onYouExchangeValidityChange}
-                                        onValidationStatusChange={() => {}}
-                                        maxValueAllowedInWei={mocBalance}
-                                        showMaxValueAllowed
-                                        validate={auth}
-                                        isDirty={stakingAmountIsDirty}
-                                        onMaxValueChange={
-                                            onStakingMaxInputValueChange
-                                        }
-                                    />
-                                </Col>
-                            </Row>
-                            <Row
-                                style={{ marginTop: '1em' }}
-                                className="typography"
-                            >
-                                <Col xs={24}>
-                                    <span>
-                                        {t(
-                                            'global.RewardsOptions_AmountToStakeNote',
-                                            { ns: 'global' }
-                                        )}
-                                    </span>
-                                </Col>
-                            </Row>
+                            </div>
+                            <div className="sect__staking__input">
+                                <InputWithCurrencySelector
+                                    cleanInputCount={cleanInputCount}
+                                    title={t(
+                                        'global.RewardsOptions_AmountToStakePlaceholder'
+                                    )}
+                                    currencySelected={'TG'}
+                                    onCurrencySelect={() => {}}
+                                    // onCurrencySelect={onChangeCurrencyYouExchange}
+                                    inputValueInWei={stakingAmountInputValue}
+                                    onInputValueChange={
+                                        onStakingInputValueChange
+                                    }
+                                    currencyOptions={['TG']}
+                                    // onValidationStatusChange={onYouExchangeValidityChange}
+                                    onValidationStatusChange={() => {}}
+                                    maxValueAllowedInWei={mocBalance}
+                                    showMaxValueAllowed
+                                    validate={auth}
+                                    isDirty={stakingAmountIsDirty}
+                                    onMaxValueChange={
+                                        onStakingMaxInputValueChange
+                                    }
+                                />
+                            </div>
+                            <div className="sect__staking__input">
+                                <span>
+                                    {t(
+                                        'global.RewardsOptions_AmountToStakeNote',
+                                        { ns: 'global' }
+                                    )}
+                                </span>
+                            </div>
                             <Row style={{ marginTop: '2em' }}>
                                 <Button
                                     disabled={btnDisable}
@@ -295,8 +285,8 @@ export default function RewardsStakingOptions(props) {
                                     Stake
                                 </Button>
                             </Row>
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
                 ) : (
                     <Skeleton active={true} />
                 )}
@@ -311,10 +301,12 @@ export default function RewardsStakingOptions(props) {
         }
         return (
             <div className="StakingTabContent">
-                <Row>
-                    <Col xs={4}>{auth.isLoggedIn && <PerformanceChart />}</Col>
-                    <Col xs={20} style={{ maxWidth: 520, marginLeft: '3em' }}>
-                        <Row className="RewardsOptionsOverview">
+                <div className="sect__staking">
+                    <div className="sect__staking__performance">
+                        {auth.isLoggedIn && <PerformanceChart />}
+                    </div>
+                    <div className="sect__staking__stake">
+                        <div className="RewardsOptionsOverview sect__staking__overview">
                             <div>
                                 {t('global.RewardsOptions_AvailableToUnstake', {
                                     ns: 'global'
@@ -323,7 +315,7 @@ export default function RewardsStakingOptions(props) {
                                     <LargeNumber
                                         amount={stackedBalance}
                                         currencyCode="REWARD"
-                                    />{' '}
+                                    />
                                     {t(`${AppProject}.Tokens_TG_code`, {
                                         ns: ns
                                     })}
@@ -338,64 +330,57 @@ export default function RewardsStakingOptions(props) {
                                         <LargeNumber
                                             amount={lockedBalance}
                                             currencyCode="REWARD"
-                                        />{' '}
+                                        />
                                         {t(`${AppProject}.Tokens_TG_code`, {
                                             ns: ns
                                         })}
                                     </h3>
                                 </div>
                             )}
-                        </Row>
-                        <Row style={{ marginTop: '1em' }}>
-                            <Col xs={24}>
-                                <InputWithCurrencySelector
-                                    cleanInputCount={cleanInputCount}
-                                    title={t(
-                                        'global.RewardsOptions_AmountToUnstakePlaceholder'
-                                    )}
-                                    currencySelected={'TG'}
-                                    onCurrencySelect={() => {}}
-                                    // onCurrencySelect={onChangeCurrencyYouExchange}
-                                    inputValueInWei={unstakingAmountInputValue}
-                                    onInputValueChange={
-                                        onUnstakingInputValueChange /*() => setUnstakingAmountInputValue(stackedBalance)*/
-                                    }
-                                    currencyOptions={['TG']}
-                                    // onValidationStatusChange={onYouExchangeValidityChange}
-                                    onValidationStatusChange={() => {}}
-                                    maxValueAllowedInWei={stackedBalance}
-                                    showMaxValueAllowed
-                                    validate={auth}
-                                    isDirty={unstakingAmountIsDirty}
-                                    onMaxValueChange={
-                                        onUnstakingMaxInputValueChange
-                                    }
-                                />
-                            </Col>
-                        </Row>
-                        <Row
-                            style={{ marginTop: '1em' }}
-                            className="typography"
-                        >
-                            <Col xs={24}>
-                                <span>
+                        </div>
+                        <div className="sect__staking__input">
+                            <InputWithCurrencySelector
+                                cleanInputCount={cleanInputCount}
+                                title={t(
+                                    'global.RewardsOptions_AmountToUnstakePlaceholder'
+                                )}
+                                currencySelected={'TG'}
+                                onCurrencySelect={() => {}}
+                                // onCurrencySelect={onChangeCurrencyYouExchange}
+                                inputValueInWei={unstakingAmountInputValue}
+                                onInputValueChange={
+                                    onUnstakingInputValueChange /*() => setUnstakingAmountInputValue(stackedBalance)*/
+                                }
+                                currencyOptions={['TG']}
+                                // onValidationStatusChange={onYouExchangeValidityChange}
+                                onValidationStatusChange={() => {}}
+                                maxValueAllowedInWei={stackedBalance}
+                                showMaxValueAllowed
+                                validate={auth}
+                                isDirty={unstakingAmountIsDirty}
+                                onMaxValueChange={
+                                    onUnstakingMaxInputValueChange
+                                }
+                            />
+                        </div>
+                        <div className="sect__staking__input">
+                            <span>
+                                {t(
+                                    'global.RewardsOptions_UnstakingNote.first',
+                                    { ns: 'global' }
+                                )}
+                                <a onClick={() => setSelectedTab('2')}>
                                     {t(
-                                        'global.RewardsOptions_UnstakingNote.first',
+                                        'global.RewardsOptions_UnstakingNote.link',
                                         { ns: 'global' }
                                     )}
-                                    <a onClick={() => setSelectedTab('2')}>
-                                        {t(
-                                            'global.RewardsOptions_UnstakingNote.link',
-                                            { ns: 'global' }
-                                        )}
-                                    </a>{' '}
-                                    {t(
-                                        'global.RewardsOptions_UnstakingNote.second',
-                                        { ns: 'global' }
-                                    )}
-                                </span>
-                            </Col>
-                        </Row>
+                                </a>
+                                {t(
+                                    'global.RewardsOptions_UnstakingNote.second',
+                                    { ns: 'global' }
+                                )}
+                            </span>
+                        </div>
                         <Row style={{ marginTop: '3.8em' }}>
                             <Button
                                 disabled={btnDisable}
@@ -410,8 +395,8 @@ export default function RewardsStakingOptions(props) {
                                 Unstake
                             </Button>
                         </Row>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </div>
         );
     };
