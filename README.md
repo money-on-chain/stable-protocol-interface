@@ -30,7 +30,7 @@ You can:
 
 Each release gets deployed to IPFS automatically.
 
-Please go to release section, there are several links to [releases](https://github.com/money-on-chain/release) 
+Please go to release section, there are several links to [releases](https://github.com/money-on-chain/stable-protocol-interface/releases) 
 
 **MOC Release**: You can always get the last stable release on: [dapp.moneyonchain.com](https://dapp.moneyonchain.com)
 
