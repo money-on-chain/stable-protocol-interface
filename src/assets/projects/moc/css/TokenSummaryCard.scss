@@ -113,7 +113,14 @@
     width: 156px;
     margin-right: 32px;
 }
-
+.sect__staking__overview__data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 16px;
+}
 @media all and (max-width: 600px) {
     .TokenSummaryCard {
         width: 100%;

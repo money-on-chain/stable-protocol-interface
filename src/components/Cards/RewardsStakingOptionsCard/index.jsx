@@ -205,36 +205,38 @@ export default function RewardsStakingOptions(props) {
                         </div>
                         <div className="sect__staking__stake">
                             <div className="RewardsOptionsOverview sect__staking__overview">
-                                <div>
-                                    {t(
-                                        'global.RewardsOptions_AvailableToStake',
-                                        {
+                                <div className="sect__staking__overview__data">
+                                    <div>
+                                        {t(
+                                            'global.RewardsOptions_AvailableToStake',
+                                            {
+                                                ns: 'global'
+                                            }
+                                        )}
+                                        <h3 className="amount">
+                                            <LargeNumber
+                                                amount={mocBalance}
+                                                currencyCode="REWARD"
+                                            />
+                                            {t(`${AppProject}.Tokens_TG_code`, {
+                                                ns: ns
+                                            })}
+                                        </h3>
+                                    </div>
+                                    <div>
+                                        {t('global.RewardsOptions_Staked', {
                                             ns: 'global'
-                                        }
-                                    )}
-                                    <h3 className="amount">
-                                        <LargeNumber
-                                            amount={mocBalance}
-                                            currencyCode="REWARD"
-                                        />
-                                        {t(`${AppProject}.Tokens_TG_code`, {
-                                            ns: ns
                                         })}
-                                    </h3>
-                                </div>
-                                <div style={{ textAlign: 'right' }}>
-                                    {t('global.RewardsOptions_Staked', {
-                                        ns: 'global'
-                                    })}
-                                    <h3 className="amount">
-                                        <LargeNumber
-                                            amount={stackedBalance}
-                                            currencyCode="REWARD"
-                                        />
-                                        {t(`${AppProject}.Tokens_TG_code`, {
-                                            ns: ns
-                                        })}
-                                    </h3>
+                                        <h3 className="amount">
+                                            <LargeNumber
+                                                amount={stackedBalance}
+                                                currencyCode="REWARD"
+                                            />
+                                            {t(`${AppProject}.Tokens_TG_code`, {
+                                                ns: ns
+                                            })}
+                                        </h3>
+                                    </div>
                                 </div>
                             </div>
                             <div className="sect__staking__input">
@@ -307,28 +309,17 @@ export default function RewardsStakingOptions(props) {
                     </div>
                     <div className="sect__staking__stake">
                         <div className="RewardsOptionsOverview sect__staking__overview">
-                            <div>
-                                {t('global.RewardsOptions_AvailableToUnstake', {
-                                    ns: 'global'
-                                })}
-                                <h3 className="amount">
-                                    <LargeNumber
-                                        amount={stackedBalance}
-                                        currencyCode="REWARD"
-                                    />
-                                    {t(`${AppProject}.Tokens_TG_code`, {
-                                        ns: ns
-                                    })}
-                                </h3>
-                            </div>
-                            {parseFloat(lockedBalance) > 0 && (
+                            <div className="sect__staking__overview__data">
                                 <div>
-                                    {t('global.RewardsOptions_Locked', {
-                                        ns: 'global'
-                                    })}
+                                    {t(
+                                        'global.RewardsOptions_AvailableToUnstake',
+                                        {
+                                            ns: 'global'
+                                        }
+                                    )}
                                     <h3 className="amount">
                                         <LargeNumber
-                                            amount={lockedBalance}
+                                            amount={stackedBalance}
                                             currencyCode="REWARD"
                                         />
                                         {t(`${AppProject}.Tokens_TG_code`, {
@@ -336,8 +327,25 @@ export default function RewardsStakingOptions(props) {
                                         })}
                                     </h3>
                                 </div>
-                            )}
+                                {parseFloat(lockedBalance) > 0 && (
+                                    <div>
+                                        {t('global.RewardsOptions_Locked', {
+                                            ns: 'global'
+                                        })}
+                                        <h3 className="amount">
+                                            <LargeNumber
+                                                amount={lockedBalance}
+                                                currencyCode="REWARD"
+                                            />
+                                            {t(`${AppProject}.Tokens_TG_code`, {
+                                                ns: ns
+                                            })}
+                                        </h3>
+                                    </div>
+                                )}
+                            </div>
                         </div>
+
                         <div className="sect__staking__input">
                             <InputWithCurrencySelector
                                 cleanInputCount={cleanInputCount}
