@@ -26,10 +26,7 @@ function WalletBalance(props) {
     return (
         <>
             {!loading ? (
-                <div
-                    className="WalletBalance mrc-15"
-                    style={{ height: '100%' }}
-                >
+                <div className="WalletBalance" style={{ height: '100%' }}>
                     <div className="mrb-25 color-707070">
                         {t('global.TotalBalanceCard_totalBalance', {
                             ns: 'global'
@@ -66,15 +63,8 @@ function WalletBalance(props) {
                     )}
                 </div>
             ) : (
-                <div
-                    className="WalletBalance mrc-15"
-                    style={{ height: '100%' }}
-                >
-                    {' '}
-                    <Skeleton
-                        active={true}
-                        paragraph={{ rows: 5 }}
-                    ></Skeleton>{' '}
+                <div className="WalletBalance" style={{ height: '100%' }}>
+                    <Skeleton active={true} paragraph={{ rows: 5 }}></Skeleton>
                 </div>
             )}
         </>

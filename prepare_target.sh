@@ -1,24 +1,38 @@
 #!/bin/bash
-echo "Preparing to run project: $1"
 
-# public
-echo "Copying public files ..."
-cp public/projects/$1/*.* public/
-cp public/projects/$1/icons/ public/ -R
-#cp public/projects/$1/img/ public/ -R
-echo "Copying public files done!"
+PROJECT_NAME=$1
 
-# Assets
-echo "Copying assets files ..."
-cp src/assets/projects/$1/css/ src/assets/ -R
-cp src/assets/projects/$1/fonts/ src/assets/ -R
-cp src/assets/projects/$1/icons/ src/assets/ -R
-echo "Copying assets files done!"
+if [ -z "$PROJECT_NAME" ]; then
+    echo "Error: No project name specified."
+    exit 1
+fi
 
-# Contracts
-echo "Copying contract files ..."
-cp src/contracts/projects/$1/*.* src/contracts/
-cp src/contracts/projects/$1/omoc/ src/contracts/ -R
-echo "Copying assets files done!"
+echo "Preparing to run project: $PROJECT_NAME"
 
-echo "Done preparing project! "
+copy_assets() {
+    SOURCE_DIR=$1
+    TARGET_DIR=$2
+
+    if [ ! -d "$SOURCE_DIR" ]; then
+        echo "Directory $SOURCE_DIR does not exist. Skipping..."
+        return
+    fi
+
+    mkdir -p "$TARGET_DIR"
+    cp -a "$SOURCE_DIR/." "$TARGET_DIR/"
+}
+
+#Common paths
+PUBLIC_DIR="public/projects/$PROJECT_NAME"
+SRC_DIR="src"
+ASSETS_DIR="$SRC_DIR/assets/projects/$PROJECT_NAME"
+COMMON_DIR="$SRC_DIR/assets"
+
+#Copy
+copy_assets "$PUBLIC_DIR" "public"
+copy_assets "$ASSETS_DIR/css" "$COMMON_DIR/css"
+copy_assets "$ASSETS_DIR/icons" "$COMMON_DIR/icons"
+copy_assets "$ASSETS_DIR/fonts" "$COMMON_DIR/fonts"
+copy_assets "$SRC_DIR/contracts/projects/$PROJECT_NAME" "$SRC_DIR/contracts"
+
+echo "Done preparing project: $PROJECT_NAME!"

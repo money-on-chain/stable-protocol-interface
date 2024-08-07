@@ -38,45 +38,49 @@ export default function Mint(props) {
                     className="AlertNoConnection"
                 />
             )}
-            <h1 className="PageTitle">
-                {t(`${AppProject}.wallets.TP.title`, { ns: ns })}
-            </h1>
-            <h3 className="PageSubTitle">
-                {t(`${AppProject}.wallets.TP.subtitle`, { ns: ns })}
-            </h3>
-            <Row gutter={15}>
-                <Col xs={24} md={12} xl={5}>
-                    <AmountCard
-                        tokenName="TP"
-                        titleName="DoC"
-                        StatusData={auth.contractStatusData}
-                    />
-                </Col>
-                <Col xs={24} md={12} xl={5}>
-                    <YourAddressCard
-                        height="23.4em"
-                        tokenToSend="TP"
-                        currencyOptions={['RESERVE', 'TP']}
-                    />
-                </Col>
-                <Col xs={24} xl={14}>
-                    {isLoaded ? (
-                        <MintOrRedeemToken
-                            token={'TP'}
-                            AccountData={auth.accountData}
-                            userState={auth.userBalanceData}
-                            mocState={auth.contractStatusData}
-                            style={'height'}
+            <div className="sect__exchange__container">
+                <div className="sect__exchange__header">
+                    <h1 className="PageTitle">
+                        {t(`${AppProject}.wallets.TP.title`, { ns: ns })}
+                    </h1>
+                    <h3 className="PageSubTitle">
+                        {t(`${AppProject}.wallets.TP.subtitle`, { ns: ns })}
+                    </h3>
+                </div>
+                <div className="sect__exchange__cards__container">
+                    <div className="sect__exchange__balance">
+                        <AmountCard
+                            tokenName="TP"
+                            titleName="DoC"
+                            StatusData={auth.contractStatusData}
                         />
-                    ) : (
-                        <OnLoadingAuthBody
-                            title={t('global.MintOrRedeemToken_Mint')}
+                    </div>
+                    <div className="sect__exchange__address">
+                        <YourAddressCard
+                            height="23.4em"
+                            tokenToSend="TP"
+                            currencyOptions={['RESERVE', 'TP']}
                         />
-                    )}
-                </Col>
-            </Row>
-            <div className="Card WalletOperations">
-                <ListOperations token={'TP'}></ListOperations>
+                    </div>
+                    <div className="sect__exchange__card">
+                        {isLoaded ? (
+                            <MintOrRedeemToken
+                                token={'TP'}
+                                AccountData={auth.accountData}
+                                userState={auth.userBalanceData}
+                                mocState={auth.contractStatusData}
+                                style={'height'}
+                            />
+                        ) : (
+                            <OnLoadingAuthBody
+                                title={t('global.MintOrRedeemToken_Mint')}
+                            />
+                        )}
+                    </div>
+                </div>
+                <div className="Card WalletOperations">
+                    <ListOperations token={'TP'}></ListOperations>
+                </div>
             </div>
         </Fragment>
     );

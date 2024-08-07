@@ -163,7 +163,6 @@ export default function ListOperations(props) {
     }, [window.innerWidth]);
 
     const changeStatus = (percent, txt) => {
-
         percent = percent || 0;
 
         if (width <= 768) {
@@ -264,9 +263,7 @@ export default function ListOperations(props) {
         /*******************************sort descending by date createdAt***********************************/
         if (dataJson.transactions !== undefined) {
             dataJson.transactions.sort((a, b) => {
-                return (
-                    myParseDate(b.createdAt) - myParseDate(a.createdAt)
-                );
+                return myParseDate(b.createdAt) - myParseDate(a.createdAt);
             });
         }
         /*******************************end sort descending by date createdAt***********************************/

@@ -40,28 +40,28 @@ export default function Rewards(props) {
             <h3 className="PageSubTitle">
                 {t(`${AppProject}.wallets.TG.subtitle`, { ns: ns })}
             </h3>
-            <Row gutter={15}>
-                <Col xs={24} md={12} xl={5}>
+            <div className="sect__exchange__cards__container">
+                <div className="sect__exchange__balance">
                     <div className="ContainerMocAmountDatas">
                         <MocAmount />
                         <MocLiquidity rewards={true} />
                     </div>
-                </Col>
-                <Col xs={24} md={12} xl={4}>
+                </div>
+                <div className="sect__exchange__address">
                     <YourAddressCard
                         height="100%"
                         tokenToSend="TG"
                         view={'moc'}
                         // currencyOptions={['RESERVE', 'MOC']}
                     />
-                </Col>
-                <Col xs={24} md={24} xl={15}>
+                </div>
+                <div className="gov__staking__options">
                     <RewardsStakingOptions
                         AccountData={auth.accountData}
                         UserBalanceData={auth.userBalanceData}
                     />
-                </Col>
-            </Row>
+                </div>
+            </div>
             <div className="Card WalletOperations">
                 {!loading ? <Claims /> : <Skeleton active={true} />}
             </div>

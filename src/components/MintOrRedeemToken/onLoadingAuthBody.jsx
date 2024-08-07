@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-  Card,
-  Skeleton
-} from 'antd';
+import { Card, Skeleton } from 'antd';
 const OnLoadingAuthBody = (props) => {
-  const { title } = props;
+    const { title } = props;
     return (
         <Card
             title={title}
