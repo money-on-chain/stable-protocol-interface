@@ -163,17 +163,15 @@ function SystemStatus(props) {
                                         marginLeft: 10,
                                         fontSize: '19.6px'
                                     }}
-                                    dangerouslySetInnerHTML={{
-                                        __html: customTitle(
-                                            t(
-                                                `${AppProject}.metrics.`.concat(
-                                                    className.concat('.title')
-                                                ),
-                                                { ns: ns }
-                                            )
-                                        )
-                                    }}
-                                ></div>
+
+                                >
+                                    {t(
+                                        `${AppProject}.metrics.`.concat(
+                                            className.concat('.title')
+                                        ),
+                                        { ns: ns }
+                                    )}
+                                </div>
                             </div>
                             <h5 style={{ marginLeft: 35 }}>
                                 {' '}

@@ -39,15 +39,12 @@ export default function InformationModal({ currencyCode }) {
                     `${AppProject}.TokenInformationContent.${token}.factSheet`,
                     { ns: ns }
                 )}`}</p>
-                <h4
-                    className="FactSheetTitle"
-                    dangerouslySetInnerHTML={{
-                        __html: t(
-                            `${AppProject}.TokenInformationContent.${token}.title`,
-                            { ns: ns, returnObjectTrees: false }
-                        )
-                    }}
-                />
+                <h4>
+                    {t(
+                    `${AppProject}.TokenInformationContent.${token}.title`,
+                    { ns: ns, returnObjectTrees: false }
+                    )}
+                </h4>
             </Col>
             <Col xs={24} sm={24} md={12}>
                 <ul>
