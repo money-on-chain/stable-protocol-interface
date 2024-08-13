@@ -942,6 +942,20 @@
                     "alertDescription": "Sovryn’s FastBTC is temporarily unavailable. Please, come back later."
                 }
             },
+            "pegOut": {
+                "alert": "  Double check that you are entering the correct BTC destination address.",
+                "inputAddressLabel": "Destination BTC address",
+                "inputAddressPlaceholder": "Destination BTC Address",
+                "alertDescription": "Sovryn’s FastBTC is temporarily unavailable. Please, come back later.",
+                "invalidBtcAddress": "Invalid BTC Address -Taproot type address is not supported!.",
+                "limitsTitle": "Conversion limits",
+                "limitsMin": "Min: ",
+                "limitsMax": "Max: ",
+                "limitsFee": "Fee: ",
+                "inputAmountPlaceholder": "Enter rBTC amount to send",
+                "errorRequiredField": "This field is required",
+                "ctaContinue": "Continue"
+            },
             "leftPannel": {
                 "header": "You will need rBTC in your wallet to:",
                 "items": [

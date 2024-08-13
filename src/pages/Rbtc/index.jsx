@@ -108,7 +108,7 @@ export default function Rbtc(props) {
                                 ns: ns
                             })}
                             <a
-                                href="https://sovryn.freshdesk.com/support/tickets/new"
+                                href="https://wiki.sovryn.com/en/faqs/faq-index"
                                 target="_blank"
                             >
                                 {t(

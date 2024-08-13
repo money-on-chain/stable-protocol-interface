@@ -244,9 +244,12 @@ export default function RbtcToBtcGenerateModal(props) {
                         <li>
                             If BTC is not visible in your destination wallet
                             after 90 mins, open a
-                            <a href="https://sovryn.freshdesk.com/support/tickets/new">
+                            <a
+                                href="https://wiki.sovryn.com/en/faqs/faq-index"
+                                target="_blank"
+                            >
                                 <strong> support ticket</strong>
-                            </a>{' '}
+                            </a>
                             at Sovryn.
                         </li>
                     </ul>

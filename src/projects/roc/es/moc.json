@@ -931,6 +931,20 @@
                     "alertDescription": "El servicio FastBTC de Sovryn momentáneamente no está disponible. Por favor, reintenta más tarde."
                 }
             },
+            "pegOut": {
+                "alert": "Asegúrate de que estás ingresando la dirección de destino de BTC correcta.",
+                "inputAddressLabel": "Dirección de destino de BTC",
+                "inputAddressPlaceholder": "Dirección de destino de BTC",
+                "alertDescription": "FastBTC de Sovryn no está disponible temporalmente. Por favor, regresa luego.",
+                "invalidBtcAddress": "Dirección de BTC inválida - Las direcciones tipo Taproot no están soportadas.",
+                "limitsTitle": "Límites de conversión",
+                "limitsMin": "Min: ",
+                "limitsMax": "Max: ",
+                "limitsFee": "Fee: ",
+                "inputAmountPlaceholder": "Ingrese cantidad de rBTC para enviar",
+                "errorRequiredField": "Este campo es obligatorio",
+                "ctaContinue": "Continuar"
+            },
             "leftPannel": {
                 "header": "Vas a necesitar rBTC en tu billetera para:",
                 "items": [
