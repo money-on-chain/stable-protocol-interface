@@ -180,7 +180,7 @@ export default function BtcToRbtcGenerateModal(props) {
                                                 )}
                                             </li>
                                             <li>
-                                                <p>Fee: 0.00006 BTC + 0.2%</p>
+                                                <p>Fee: 0.00005 BTC + 0.75 %</p>
                                             </li>
                                         </ul>
                                     </div>
