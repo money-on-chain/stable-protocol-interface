@@ -15,7 +15,7 @@ import { ReactComponent as LogoIconFastBTC } from '../../../assets/icons/icon-so
 import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-atention.svg';
 
 import './style.scss';
-import IconStatusPending from "../../../assets/icons/status-pending.png";
+import IconStatusPending from '../../../assets/icons/status-pending.png';
 
 export default function BtcToRbtcGenerateModal(props) {
     const auth = useContext(AuthenticateContext);
@@ -156,10 +156,12 @@ export default function BtcToRbtcGenerateModal(props) {
                                                     {
                                                         ns: ns,
                                                         minValue: parseFloat(
-                                                            (stateFBtc.limits.min < 0.0005) ? 0.0005 :
-                                                                stateFBtc.limits.min.toFixed(
-                                                                    8
-                                                                )
+                                                            stateFBtc.limits
+                                                                .min < 0.0005
+                                                                ? 0.0005
+                                                                : stateFBtc.limits.min.toFixed(
+                                                                      8
+                                                                  )
                                                         )
                                                     }
                                                 )}
@@ -178,7 +180,7 @@ export default function BtcToRbtcGenerateModal(props) {
                                                 )}
                                             </li>
                                             <li>
-                                                <p>Fee: 0.00006 BTC + 0.2%</p>
+                                                <p>Fee: 0.00005 BTC + 0.75 %</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -212,12 +214,14 @@ export default function BtcToRbtcGenerateModal(props) {
                                                 If rBTC is not visible in your
                                                 destination wallet after 60
                                                 mins, open a
-                                                <a href="https://sovryn.freshdesk.com/support/tickets/new">
+                                                <a
+                                                    href="https://wiki.sovryn.com/en/faqs/faq-index"
+                                                    target="_blank"
+                                                >
                                                     <strong>
-                                                        {' '}
                                                         support ticket
                                                     </strong>
-                                                </a>{' '}
+                                                </a>
                                                 at Sovryn.
                                             </li>
                                         </ul>
@@ -292,7 +296,7 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
 
     return (
         <div className="TxActions">
-            {(state.step === Step.WALLET && state.deposit.address !== '') && (
+            {state.step === Step.WALLET && state.deposit.address !== '' && (
                 <div className="AddressQrCode">
                     <div className="tw-text-lg tw-ml-8 tw-mb-2.5">
                         <b className="AddressTitle">
@@ -330,7 +334,7 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
                 </div>
             )}
 
-            {(state.step === Step.WALLET && state.deposit.address === '') && (
+            {state.step === Step.WALLET && state.deposit.address === '' && (
                 <div>
                     <img
                         src={IconStatusPending}
@@ -339,7 +343,11 @@ const MainScreen = ({ state, setState, socket, address, underMaintenance }) => {
                         alt="pending"
                         className="img-status rotate"
                     />
-                    <div> Please wait ... getting btc address deposit from fastbtc servers. </div>
+                    <div>
+                        {' '}
+                        Please wait ... getting btc address deposit from fastbtc
+                        servers.{' '}
+                    </div>
                 </div>
             )}
 

@@ -5,14 +5,18 @@ import { validate, getAddressInfo } from 'bitcoin-address-validation';
 import { AuthenticateContext } from '../../../context/Auth';
 import Step3 from './step3';
 import BigNumber from 'bignumber.js';
+import { useProjectTranslation } from '../../../helpers/translations';
+import { config } from '../../../projects/config';
 
 import { ReactComponent as LogoIconAttention } from '../../../assets/icons/icon-atention.svg';
 import { ReactComponent as LogoIconReserve } from '../../../assets/icons/icon-reserve2.svg';
 
 const VALID_BTC_TYPE_ADDRESS = ['p2pkh', 'p2sh', 'p2wpkh', 'p2wsh']; // Taproot not compatible 'p2tr'
 
-
 function Step2(props) {
+    const [t, i18n, ns] = useProjectTranslation();
+    const AppProject = config.environment.AppProject;
+
     const amountInput = useRef();
     const { auth } = props;
 
@@ -46,12 +50,12 @@ function Step2(props) {
     const validateAmount = (amount) => {
         let isValid;
         if (new BigNumber(amount).gt(0)) {
-            isValid = true
+            isValid = true;
         } else {
-            isValid = false
+            isValid = false;
         }
         return isValid;
-    }
+    };
 
     const handleChangeAmount = (event) => {
         if (!validateAmount(event.target.value)) return;
@@ -71,12 +75,16 @@ function Step2(props) {
         let isValid = false;
         if (validate(btcAddress)) {
             const infoAddress = getAddressInfo(btcAddress);
-            if (infoAddress && VALID_BTC_TYPE_ADDRESS.includes(infoAddress.type) && btcEnvironment === infoAddress.network) {
-                isValid = true
+            if (
+                infoAddress &&
+                VALID_BTC_TYPE_ADDRESS.includes(infoAddress.type) &&
+                btcEnvironment === infoAddress.network
+            ) {
+                isValid = true;
             }
         }
-        return isValid
-    }
+        return isValid;
+    };
 
     const handleChangeAddress = (event) => {
         const isValid = validateBTCAddress(event.target.value);
@@ -110,8 +118,10 @@ function Step2(props) {
                                             alt="img"
                                         />
                                         <p>
-                                            Double check that you are entering
-                                            the correct BTC destination address.
+                                            {t(
+                                                `${AppProject}.fastbtc.pegOut.alert`,
+                                                { ns: ns }
+                                            )}
                                         </p>
                                     </div>
                                 </div>
@@ -119,7 +129,10 @@ function Step2(props) {
                                 <div className={'ModalUpTopContainer'}>
                                     <div className="InputAddressContainer separation">
                                         <p className="InputAddressLabel">
-                                            Destination BTC Addresss
+                                            {t(
+                                                `${AppProject}.fastbtc.pegOut.inputAddressLabel`,
+                                                { ns: ns }
+                                            )}{' '}
                                         </p>
                                         <form className="ant-form ant-form-horizontal">
                                             <div className="ant-row ant-form-item">
@@ -127,7 +140,10 @@ function Step2(props) {
                                                     <div className="ant-form-item-control-input">
                                                         <div className="ant-form-item-control-input-content">
                                                             <input
-                                                                placeholder="Destination BTC Addresss"
+                                                                placeholder={t(
+                                                                    `${AppProject}.fastbtc.pegOut.inputAddressPlaceholder`,
+                                                                    { ns: ns }
+                                                                )}
                                                                 className=""
                                                                 type="text"
                                                                 onChange={
@@ -145,7 +161,12 @@ function Step2(props) {
                                                                             'error'
                                                                         }
                                                                     >
-                                                                        Invalid BTC Address - Taproot type address is not supported!.
+                                                                        {t(
+                                                                            `${AppProject}.fastbtc.pegOut.invalidBtcAddress`,
+                                                                            {
+                                                                                ns: ns
+                                                                            }
+                                                                        )}
                                                                     </p>
                                                                 </Fragment>
                                                             )}
@@ -158,10 +179,36 @@ function Step2(props) {
                                 </div>
 
                                 <div className="conversion-limits">
-                                    <b>Conversion limits</b>
-                                    <p>Min: {props.min} RBTC</p>
-                                    <p>Max: {props.max} RBTC</p>
-                                    <p>Fee: {props.fee}</p>
+                                    <b>
+                                        {t(
+                                            `${AppProject}.fastbtc.pegOut.limitsTitle`,
+                                            { ns: ns }
+                                        )}
+                                    </b>
+                                    <p>
+                                        {' '}
+                                        {t(
+                                            `${AppProject}.fastbtc.pegOut.limitsMin`,
+                                            { ns: ns }
+                                        )}
+                                        {props.min} RBTC
+                                    </p>
+                                    <p>
+                                        {' '}
+                                        {t(
+                                            `${AppProject}.fastbtc.pegOut.limitsMax`,
+                                            { ns: ns }
+                                        )}
+                                        {props.max} RBTC
+                                    </p>
+                                    <p>
+                                        {' '}
+                                        {t(
+                                            `${AppProject}.fastbtc.pegOut.limitsFee`,
+                                            { ns: ns }
+                                        )}
+                                        {props.fee}
+                                    </p>
                                 </div>
 
                                 <div className={'inputAmount'}>
@@ -170,22 +217,27 @@ function Step2(props) {
                                         ref={amountInput}
                                         onBlur={handleChangeAmount}
                                         onMouseLeave={handleChangeAmount}
-                                        placeholder="Enter rBTC amount to send"
+                                        placeholder={t(
+                                            `${AppProject}.fastbtc.pegOut.inputAmountPlaceholder`,
+                                            { ns: ns }
+                                        )}
                                         className="valueInput"
                                     />
-                                    <div>
+                                    <div className="fastBtcIconBtc__container">
                                         <LogoIconReserve
                                             alt={'img'}
-                                            width="30"
-                                            height="30"
+                                            className="fastBtcIconBtc"
                                         />
-                                        <span>RBTC </span>
+                                        <span line-height="0.11">RBTC </span>
                                     </div>
                                 </div>
                                 {errorRbtcAmount && (
                                     <Fragment>
                                         <p className={'error'}>
-                                            This field is required
+                                            {t(
+                                                `${AppProject}.fastbtc.pegOut.errorRequiredField`,
+                                                { ns: ns }
+                                            )}
                                         </p>
                                     </Fragment>
                                 )}
@@ -286,7 +338,13 @@ function Step2(props) {
                                         type="primary"
                                         onClick={(event) => handleSubmit(event)}
                                     >
-                                        <b>Continue</b>
+                                        <b>
+                                            {' '}
+                                            {t(
+                                                `${AppProject}.fastbtc.pegOut.ctaContinue`,
+                                                { ns: ns }
+                                            )}
+                                        </b>
                                     </Button>
                                 </div>
                             </Fragment>

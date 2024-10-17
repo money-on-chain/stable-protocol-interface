@@ -357,7 +357,7 @@ export default function MintModal(props) {
     };
 
     const onError = async (error) => {
-        console.log("On transaction error:", error)
+        console.log('On transaction error:', error);
         setLoading(false);
         setTxtTransaction('ERROR');
         notification['error']({
@@ -875,20 +875,22 @@ export default function MintModal(props) {
                         )}
                     </div>
                     <br />
-                    <Button
-                        type="default"
-                        onClick={() => cancelFull()}
-                        className={'width-140'}
-                    >
-                        {'Close'}
-                    </Button>
-                    <Button
-                        type="primary"
-                        onClick={() => changeContent(1)}
-                        className={'float-right width-140'}
-                    >
-                        {'Return'}
-                    </Button>
+                    <div className="cta_group">
+                        <Button
+                            type="default"
+                            onClick={() => cancelFull()}
+                            className={'width-140 button_custom'}
+                        >
+                            {'Close'}
+                        </Button>
+                        <Button
+                            type="primary"
+                            onClick={() => changeContent(1)}
+                            className={'float-right width-140 button_custom'}
+                        >
+                            {'Return'}
+                        </Button>
+                    </div>
                 </div>
             </Modal>
             <div className={'StakingOptionsModal'}>

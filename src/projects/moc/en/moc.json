@@ -880,7 +880,7 @@
                 "getBTCAddressButtonUnderMaintenance": "Sovryn's FastBTC service is currently under maintenance",
                 "footer": "Always generate the BTC deposit address, as the system might update it",
                 "header": "Double check that you are entering the correct BTC destination address.",
-                "header_processing": "The operation is being processed. If your transaction takes longer than 90 mins, <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>open a support ticket</a> at Sovryn.",
+                "header_processing": "The operation is being processed. If your transaction takes longer than 90 mins, <a href='https://wiki.sovryn.com/en/faqs/faq-index' target='_blank'>open a support ticket</a> at Sovryn.",
                 "header_complete": "Confirmed",
                 "destinationAddress": "Destination BTC Addresss",
                 "valueBTC": "{{value}}",
@@ -913,7 +913,7 @@
                         "Do not deposit anything other than BTC.",
                         "Do not send more BTC than the MAX limit.",
                         "Allow up to 60 mins for the transaction to process.",
-                        "If rBTC is not visible in your wallet after 60 mins open a <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>support ticket</a> at Sovryn."
+                        "If rBTC is not visible in your wallet after 60 mins open a <a href='https://wiki.sovryn.com/en/faqs/faq-index' target='_blank'>support ticket</a> at Sovryn."
                     ]
                 },
                 "instructions_pegout": {
@@ -923,7 +923,7 @@
                         "Do not send anything other than rBTC.",
                         "Do not send more rBTC than the MAX limit.",
                         "Allow up to 90 mins for the transaction to precess.",
-                        "If BTC is not visible in your destination wallet after 90 mins, open a <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>support ticket</a> at Sovryn."
+                        "If BTC is not visible in your destination wallet after 90 mins, open a <a href='https://wiki.sovryn.com/en/faqs/faq-index' target='_blank'>support ticket</a> at Sovryn."
                     ]
                 },
                 "txactions": {
@@ -933,6 +933,20 @@
                 "underMaintenance": {
                     "alertDescription": "Sovryn’s FastBTC is temporarily unavailable. Please, come back later."
                 }
+            },
+            "pegOut": {
+                "alert": "  Double check that you are entering the correct BTC destination address.",
+                "inputAddressLabel": "Destination BTC address",
+                "inputAddressPlaceholder": "Destination BTC Address",
+                "alertDescription": "Sovryn’s FastBTC is temporarily unavailable. Please, come back later.",
+                "invalidBtcAddress": "Invalid BTC Address -Taproot type address is not supported!.",
+                "limitsTitle": "Conversion limits",
+                "limitsMin": "Min: ",
+                "limitsMax": "Max: ",
+                "limitsFee": "Fee: ",
+                "inputAmountPlaceholder": "Enter rBTC amount to send",
+                "errorRequiredField": "This field is required",
+                "ctaContinue": "Continue"
             },
             "leftPannel": {
                 "header": "You will need rBTC in your wallet to:",
