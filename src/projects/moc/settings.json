@@ -22,11 +22,11 @@
     "tokens": {
         "COINBASE": {
             "name": "RBTC",
-            "decimals": "6"
+            "decimals": "8"
         },
         "RESERVE": {
             "name": "RBTC",
-            "decimals": "6"
+            "decimals": "8"
         },
         "TP": {
             "name": "DOC",
@@ -34,11 +34,11 @@
         },
         "TC": {
             "name": "BPRO",
-            "decimals": "6"
+            "decimals": "8"
         },
         "TX": {
             "name": "BTCX",
-            "decimals": "6"
+            "decimals": "8"
         },
         "TG": {
             "name": "MOC",

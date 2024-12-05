@@ -9,65 +9,80 @@ function RowDetail(props) {
     return (
         <table>
             <tbody>
-                <tr className="ant-descriptions-row">
-                    <th
-                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {t(`${AppProject}.operations.columns_detailed.event`, {
-                            ns: ns
-                        })}
-                    </th>
-                    <td
-                        className="ant-descriptions-item-content ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {props.detail.event}{' '}
-                    </td>
-                    <th
-                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {t(
-                            `${AppProject}.operations.columns_detailed.created`,
-                            { ns: ns }
-                        )}
-                    </th>
-                    <td
-                        className="ant-descriptions-item-content ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {props.detail.created}
-                    </td>
-                    <th
-                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {t(`${AppProject}.operations.columns_detailed.detail`, {
-                            ns: ns
-                        })}
-                    </th>
-                    <td
-                        className="ant-descriptions-item-content ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        <div>{props.detail.details} </div>
-                    </td>
-                </tr>
-                <tr className="ant-descriptions-row">
-                    <th
-                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {t(`${AppProject}.operations.columns_detailed.asset`, {
-                            ns: ns
-                        })}
-                    </th>
-                    <td
-                        className="ant-descriptions-item-content ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {props.detail.asset}{' '}
+            <tr className="ant-descriptions-row">
+                <th
+                    className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
+                    colSpan="1"
+                >
+                    {t(`${AppProject}.operations.columns_detailed.event`, {
+                        ns: ns
+                    })}
+                </th>
+                <td
+                    className="ant-descriptions-item-content ant-descriptions-border-bottom"
+                    colSpan="1"
+                >
+                    {props.detail.event}{' '}
+                </td>
+                <th
+                    className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
+                    colSpan="1"
+                >
+                    {t(
+                        `${AppProject}.operations.columns_detailed.created`,
+                        {ns: ns}
+                    )}
+                </th>
+                <td
+                    className="ant-descriptions-item-content ant-descriptions-border-bottom"
+                    colSpan="1"
+                >
+                    {props.detail.created}
+                </td>
+                {/*<th*/}
+                {/*    className="ant-descriptions-item-label-th ant-descriptions-border-bottom"*/}
+                {/*    colSpan="1"*/}
+                {/*>*/}
+                {/*    {t(`${AppProject}.operations.columns_detailed.detail`, {*/}
+                {/*        ns: ns*/}
+                {/*    })}*/}
+                {/*</th>*/}
+                {/*<td*/}
+                {/*    className="ant-descriptions-item-content ant-descriptions-border-bottom"*/}
+                {/*    colSpan="1"*/}
+                {/*>*/}
+                {/*    <div>{props.detail.details} </div>*/}
+                {/*</td>*/}
+                <th
+                    className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
+                    colSpan="1"
+                >
+                    {t(
+                        `${AppProject}.operations.columns_detailed.reserve_price`,
+                        {ns: 'moc'}
+                    )}
+                </th>
+                <td
+                    className="ant-descriptions-item-content ant-descriptions-border-bottom"
+                    colSpan="1"
+                >
+                    {props.detail.price}
+                </td>
+            </tr>
+            <tr className="ant-descriptions-row">
+                <th
+                    className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
+                    colSpan="1"
+                >
+                    {t(`${AppProject}.operations.columns_detailed.asset`, {
+                        ns: ns
+                    })}
+                </th>
+                <td
+                    className="ant-descriptions-item-content ant-descriptions-border-bottom"
+                    colSpan="1"
+                >
+                    {props.detail.asset}{' '}
                     </td>
                     <th
                         className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
@@ -193,54 +208,54 @@ function RowDetail(props) {
                             <span>{props.detail.tx_hash_truncate} </span>
                         </a>
                     </td>{' '}
-                    <td
-                        className="ant-descriptions-item-content ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {props.detail.gas_fee}
-                    </td>
-                    <th
-                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {t(
-                            `${AppProject}.operations.columns_detailed.reserve_price`,
-                            { ns: 'moc' }
-                        )}
-                    </th>
-                    <td
-                        className="ant-descriptions-item-content ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {props.detail.price}
-                    </td>
+                    {/*<td*/}
+                    {/*    className="ant-descriptions-item-content ant-descriptions-border-bottom"*/}
+                    {/*    colSpan="1"*/}
+                    {/*>*/}
+                    {/*    {props.detail.gas_fee}*/}
+                    {/*</td>*/}
+                    {/*<th*/}
+                    {/*    className="ant-descriptions-item-label-th ant-descriptions-border-bottom"*/}
+                    {/*    colSpan="1"*/}
+                    {/*>*/}
+                    {/*    {t(*/}
+                    {/*        `${AppProject}.operations.columns_detailed.reserve_price`,*/}
+                    {/*        { ns: 'moc' }*/}
+                    {/*    )}*/}
+                    {/*</th>*/}
+                    {/*<td*/}
+                    {/*    className="ant-descriptions-item-content ant-descriptions-border-bottom"*/}
+                    {/*    colSpan="1"*/}
+                    {/*>*/}
+                    {/*    {props.detail.price}*/}
+                    {/*</td>*/}
                 </tr>
-                <tr className="ant-descriptions-row">
-                    {' '}
-                    {/* <th
-                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {t(
-                            `${AppProject}.operations.columns_detailed.leverage`,
-                            { ns: 'moc' }
-                        )}
-                    </th>
-                    <td
-                        className="ant-descriptions-item-content ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        <span>{props.detail.leverage} </span>
-                    </td> */}
-                    {/* <th
-                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {t(`${AppProject}.operations.columns_detailed.gas`, {
-                            ns: 'moc'
-                        })}
-                    </th> */}
-                </tr>
+                {/*<tr className="ant-descriptions-row">*/}
+                {/*    {' '}*/}
+                {/*    /!* <th*/}
+                {/*        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"*/}
+                {/*        colSpan="1"*/}
+                {/*    >*/}
+                {/*        {t(*/}
+                {/*            `${AppProject}.operations.columns_detailed.leverage`,*/}
+                {/*            { ns: 'moc' }*/}
+                {/*        )}*/}
+                {/*    </th>*/}
+                {/*    <td*/}
+                {/*        className="ant-descriptions-item-content ant-descriptions-border-bottom"*/}
+                {/*        colSpan="1"*/}
+                {/*    >*/}
+                {/*        <span>{props.detail.leverage} </span>*/}
+                {/*    </td> *!/*/}
+                {/*    /!* <th*/}
+                {/*        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"*/}
+                {/*        colSpan="1"*/}
+                {/*    >*/}
+                {/*        {t(`${AppProject}.operations.columns_detailed.gas`, {*/}
+                {/*            ns: 'moc'*/}
+                {/*        })}*/}
+                {/*    </th> *!/*/}
+                {/*</tr>*/}
             </tbody>
         </table>
     );

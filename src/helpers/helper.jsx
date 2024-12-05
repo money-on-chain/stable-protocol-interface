@@ -8,7 +8,7 @@ import {
     DetailedLargeNumber,
     getExplainByEvent
 } from '../components/LargeNumber';
-import { formatLocalMap2 } from './Formats';
+import {formatLocalMap2, formatValueToContract} from './Formats';
 
 const ns = config.environment.AppProject.toLowerCase();
 const AppProject = config.environment.AppProject;
@@ -289,13 +289,26 @@ export function readJsonTable(data_j, t, i18n) {
 
     const blockNumber =
         data_j.blockNumber !== undefined ? data_j.blockNumber : '--';
+
+    let wallet_amount = new BigNumber(0)
+    if (data_j.event.includes('Mint')) {
+        wallet_amount = data_j.RBTCAmount && data_j.rbtcCommission ? new BigNumber(Web3.utils.fromWei(data_j.RBTCAmount))
+            .plus(new BigNumber(Web3.utils.fromWei(data_j.rbtcCommission))) : new BigNumber(0)
+    } else if (data_j.event.includes('Redeem')) {
+        wallet_amount = data_j.RBTCAmount && data_j.rbtcCommission ? new BigNumber(Web3.utils.fromWei(data_j.RBTCAmount))
+            .minus(new BigNumber(Web3.utils.fromWei(data_j.rbtcCommission))) : new BigNumber(0)
+    }
+
+    const wallet_amount_usd = data_j.reservePrice ? wallet_amount
+        .multipliedBy(new BigNumber(Web3.utils.fromWei(data_j.reservePrice))) : new BigNumber(0)
+
     const wallet_value = DetailedLargeNumber({
-        amount: data_j.RBTCTotal ? data_j.RBTCTotal : data_j.RBTCAmount,
+        amount: formatValueToContract(wallet_amount, 'RESERVE'),
         currencyCode: 'RESERVE',
         includeCurrency: true,
         isPositive: !data_j.isPositive,
         showSign: true,
-        amountUSD: data_j.USDTotal ? data_j.USDTotal : 0,
+        amountUSD: formatValueToContract(wallet_amount_usd, 'RESERVE'),
         showUSD: true,
         t: t,
         i18n: i18n
