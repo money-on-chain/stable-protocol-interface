@@ -119,7 +119,7 @@ function RowColumn(props) {
                         <span>{props.detail.wallet}</span>
                     </td>
                 </tr>
-                <tr className="ant-descriptions-row">
+                {/* <tr className="ant-descriptions-row">
                     <th className="ant-descriptions-item-label-th" colSpan="1">
                         {t(
                             `${AppProject}.operations.columns_detailed.interests`,
@@ -129,7 +129,7 @@ function RowColumn(props) {
                     <td className="ant-descriptions-item-content" colSpan="1">
                         <span>{props.detail.interests}</span>
                     </td>
-                </tr>
+                </tr> */}
                 <tr className="ant-descriptions-row">
                     <th className="ant-descriptions-item-label-th" colSpan="1">
                         {t(`${AppProject}.operations.columns_detailed.tx`, {
@@ -146,7 +146,7 @@ function RowColumn(props) {
                         </a>
                     </td>
                 </tr>
-                <tr className="ant-descriptions-row">
+                {/* <tr className="ant-descriptions-row">
                     <th className="ant-descriptions-item-label-th" colSpan="1">
                         {t(
                             `${AppProject}.operations.columns_detailed.leverage`,
@@ -156,8 +156,8 @@ function RowColumn(props) {
                     <td className="ant-descriptions-item-content" colSpan="1">
                         <span>{props.detail.leverage}</span>
                     </td>
-                </tr>
-                <tr className="ant-descriptions-row">
+                </tr> */}
+                {/* <tr className="ant-descriptions-row">
                     <th className="ant-descriptions-item-label-th" colSpan="1">
                         {t(`${AppProject}.operations.columns_detailed.gas`, {
                             ns: ns
@@ -166,7 +166,7 @@ function RowColumn(props) {
                     <td className="ant-descriptions-item-content" colSpan="1">
                         <span>{props.detail.gas_fee}</span>
                     </td>
-                </tr>
+                </tr> */}
                 <tr className="ant-descriptions-row">
                     <th className="ant-descriptions-item-label-th" colSpan="1">
                         {t(

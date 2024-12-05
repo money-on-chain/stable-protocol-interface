@@ -158,7 +158,7 @@ function RowDetail(props) {
                     >
                         {props.detail.wallet}
                     </td>
-                    <th
+                    {/* <th
                         className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
                         colSpan="1"
                     >
@@ -172,7 +172,7 @@ function RowDetail(props) {
                         colSpan="1"
                     >
                         <span>{props.detail.interests} </span>
-                    </td>
+                    </td> */}
                     <th
                         className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
                         colSpan="1"
@@ -192,32 +192,7 @@ function RowDetail(props) {
                         >
                             <span>{props.detail.tx_hash_truncate} </span>
                         </a>
-                    </td>
-                </tr>
-                <tr className="ant-descriptions-row">
-                    <th
-                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {t(
-                            `${AppProject}.operations.columns_detailed.leverage`,
-                            { ns: 'moc' }
-                        )}
-                    </th>
-                    <td
-                        className="ant-descriptions-item-content ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        <span>{props.detail.leverage} </span>
-                    </td>
-                    <th
-                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
-                        colSpan="1"
-                    >
-                        {t(`${AppProject}.operations.columns_detailed.gas`, {
-                            ns: 'moc'
-                        })}
-                    </th>
+                    </td>{' '}
                     <td
                         className="ant-descriptions-item-content ant-descriptions-border-bottom"
                         colSpan="1"
@@ -239,6 +214,32 @@ function RowDetail(props) {
                     >
                         {props.detail.price}
                     </td>
+                </tr>
+                <tr className="ant-descriptions-row">
+                    {' '}
+                    {/* <th
+                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
+                        colSpan="1"
+                    >
+                        {t(
+                            `${AppProject}.operations.columns_detailed.leverage`,
+                            { ns: 'moc' }
+                        )}
+                    </th>
+                    <td
+                        className="ant-descriptions-item-content ant-descriptions-border-bottom"
+                        colSpan="1"
+                    >
+                        <span>{props.detail.leverage} </span>
+                    </td> */}
+                    {/* <th
+                        className="ant-descriptions-item-label-th ant-descriptions-border-bottom"
+                        colSpan="1"
+                    >
+                        {t(`${AppProject}.operations.columns_detailed.gas`, {
+                            ns: 'moc'
+                        })}
+                    </th> */}
                 </tr>
             </tbody>
         </table>

@@ -1183,3 +1183,21 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
     -moz-appearance: textfield;
 }
+
+.sendCTA {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    .sendButton {
+        width: 140px;
+    }
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+        .sendButton {
+            width: 100% !important;
+        }
+    }
+}
