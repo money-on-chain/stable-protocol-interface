@@ -184,7 +184,7 @@ export default function SendModal(props) {
     };
 
     const onError = (error) => {
-        console.log("Error Transaction", error)
+        console.log('Error Transaction', error);
     };
 
     const onTransaction = (transactionHash) => {
@@ -291,7 +291,7 @@ export default function SendModal(props) {
                                     onMaxValueChange={onMaxValueChange}
                                 />
                                 <Row style={{ marginTop: '2em' }}>
-                                    <Col
+                                    {/* <Col
                                         span={24}
                                         style={{
                                             display: 'flex',
@@ -312,7 +312,25 @@ export default function SendModal(props) {
                                         >
                                             Confirm
                                         </Button>
-                                    </Col>
+                                    </Col> */}
+                                    <div className="sendCTA">
+                                        <Button
+                                            onClick={() => handleCancel()}
+                                            // className={'width-140'}
+                                            className="sendButton"
+                                        >
+                                            Cancel
+                                        </Button>
+                                        <Button
+                                            type="primary"
+                                            onClick={() => changeContent(0)}
+                                            // className={'width-140'}
+                                            className="sendButton"
+                                            disabled={address == ''}
+                                        >
+                                            Confirm
+                                        </Button>
+                                    </div>
                                 </Row>
                             </>
                         )}
