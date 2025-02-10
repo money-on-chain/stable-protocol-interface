@@ -49,11 +49,6 @@ const getAppMode = () => {
         case 'mocMainnet2':
             appMode = 'MoC';
             break;
-        case 'rdocTestnetAlpha':
-        case 'rdocTestnet':
-        case 'rdocMainnet':
-            appMode = 'RRC20';
-            break;
         default:
             throw new Error(
                 'Environment not implemented! Please refer to table list of MoC Environments'
@@ -71,11 +66,6 @@ const getAppMoCProject = () => {
         case 'mocTestnet':
         case 'mocMainnet2':
             appProject = 'MoC';
-            break;
-        case 'rdocTestnetAlpha':
-        case 'rdocTestnet':
-        case 'rdocMainnet':
-            appProject = 'RDoC';
             break;
         default:
             throw new Error(

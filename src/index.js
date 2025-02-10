@@ -36,15 +36,11 @@ async function loadTranslations() {
             resources: {
                 es: {
                     global: await import('./projects/global-es.json'),
-                    moc: langES,
-                    roc: langES,
-                    flipago: langES
+                    moc: langES
                 },
                 en: {
                     global: await import('./projects/global-en.json'),
-                    moc: langEN,
-                    roc: langEN,
-                    flipago: langEN
+                    moc: langEN
                 }
             }
         });

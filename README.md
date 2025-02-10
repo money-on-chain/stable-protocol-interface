@@ -1,6 +1,6 @@
 # Stable protocol interface version 2.0
 
-Open source **decentralized interface** for multi-collateral stable protocol **Money on Chain**
+Open source **decentralized interface** for multi-collateral stable protocol **Money on Chain** for contracts version 1.0 
 
 You can:
 
@@ -16,7 +16,6 @@ You can:
 **Projects**
 
 * Dollar on Chain (DoC) (Main project - Collateral RBTC) please review the contracts [here](https://github.com/money-on-chain/main-RBTC-contract)
-* RIF on Chain (RoC) (Collateral RIF) was migrated to [V2](https://github.com/money-on-chain/stable-protocol-interface-v2) 
 
 
 | Token | Token name       | Project | Token Name | Collateral |
