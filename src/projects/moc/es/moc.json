@@ -138,7 +138,6 @@
             "TCWallet": "Token BPro",
             "TXWallet": "Posición BTCx",
             "TPWallet": "Token DoC",
-            "getRBTC": "Convierte BTC a RBTC",
             "wiki-url": "https://wiki.moneyonchain.com/v/espanol",
             "repository-url": "https://github.com/money-on-chain/main-RBTC-contract"
         },
@@ -157,8 +156,7 @@
             "TCWallet": "BPro",
             "TXWallet": "BTCx",
             "Metrics": "Métricas",
-            "TPWallet": "DoC",
-            "getRBTC": "BTC a RBTC"
+            "TPWallet": "DoC"
         },
         "drawer-allowance": {
             "title": "Setear Autorización",
@@ -804,163 +802,6 @@
             "signButton": "Haz click aquí para inicar sesión"
         },
         "login": "Conectarse",
-        "fastbtc": {
-            "title": "FastBTC",
-            "titleCard_pegin": "BTC to rBTC Peg In",
-            "getRBTC": "Convierte BTC a rBTC",
-            "getRBTC_description": "Convierta BTC de la red Bitcoin a rBTC Smart Bitcoins utilizando el FastBTC integrado de Sovryn.",
-            "titleCard_pegout": "rBTC to BTC Peg Out",
-            "getBTC": "Convierte rBTC a BTC",
-            "getBTC_description": "Convierta rBTC Smart Bitcoins a BTC utilizando el FastBTC integrado de Sovryn.",
-            "subTitle": "Integracion de Sovryn FastBTC",
-            "history": {
-                "title": "Ultimas operaciones de FastBTC",
-                "columns_headers": {
-                    "id": "Id",
-                    "step": "Paso",
-                    "type": "Tipo de Operacion",
-                    "dateAdded": "Fecha añadida",
-                    "status": "Estado",
-                    "valueBtc": "Valor (BTC)",
-                    "btcadr": "Direccion de BTC",
-                    "web3adr": "Direccion de RSK",
-                    "txHash": "Tx hash",
-                    "btcAmount": "Monto de BTC",
-                    "transferId": "Id de Transferencia",
-                    "blockN": "Nº de Bloque",
-                    "feebtc": "Tarifa de BTC",
-                    "txLastUpdated": "Última actualización TX",
-                    "dateLastUpdated": "Fecha de última actualización"
-                },
-                "columns": {
-                    "valueBTC": "{{value}} BTC",
-                    "valueRBTC": "{{value}} rBTC",
-                    "step_1": "1/2",
-                    "step_2": "2/2",
-                    "type_deposit": "Depósito de BTC",
-                    "type_transfer": "Recepción de rBTC",
-                    "status_pending": "Pendiente",
-                    "status_confirmed": "Confirmado",
-                    "dateAddedFormat": "YYYY-MM-DD HH:mm:SS"
-                },
-                "upperSummary_1": "Si el rBTC no se encuentra visible en su billetera después de 60 minutos abra un ",
-                "upperSummary_2": "ticket de soporte",
-                "upperSummary_3": " en Sovryn",
-                "table": {
-                    "triggerDesc": "Ordenear descendentemente",
-                    "triggerAsc": "Ordenar ascendentemente"
-                },
-                "underMaintenance": {
-                    "spinTip": "El servicio FastBTC de Sovryn momentáneamente no está disponible",
-                    "spinAlertTitle": "FastBTC de Sovryn no está disponible",
-                    "spinAlertDescription": "El servicio FastBTC de Sovryn momentáneamente no está disponible. Por favor, reintenta más tarde."
-                }
-            },
-            "newsModal": {
-                "title": "FastBTC",
-                "line1": "Vas a necesitar rBTC en tu billetera para poder comprar DOC, BPro y pagar las tarifas de gas en la red de RSK.",
-                "line2": "Ahora puedes obtener rBTC de una forma fácil y simple a través de nuestra integración del servicio FastBTC de Sovryn.",
-                "line3": {
-                    "preIconText": "Ve a ",
-                    "postIconPreLinkText": " en el menú lateral izquierdo de tu pantalla o clickea",
-                    "linkText": "aquí",
-                    "postLinkText": "."
-                },
-                "line4": {
-                    "preLinkText": "Haz click ",
-                    "linkText": "aquí",
-                    "postLinkText": " para obtener más información sobre el servicio de FastBTC de Sovryn."
-                },
-                "checkboxText": "No mostrar nuevamente"
-            },
-            "topUpWalletModal": {
-                "title": "FastBTC",
-                "subtitle": "Deposita BTC para recibir rBTC en tu billetera",
-                "subtitle_pegout": "Por favor, revise los límites de conversión antes de proceder con la conversión de rBTC a BTC.",
-                "info": "Vas a necesitar rBTC en tu billetera para poder comprar DOC y pagar las tarifas de gas en la red de RSK",
-                "help": "Conoce acerca de rBTC en RSK",
-                "getBTCAddressButton": "Generar dirección de depósito de BTC",
-                "getBTCAddressButtonConnecting": "Conectando con servicio FastBTC de Sovryn...",
-                "getBTCAddressButtonUnderMaintenance": "El servicio FastBTC de Sovryn está en mantenimiento",
-                "footer": "Siempre verifique la dirección de depósito de BTC dado que es actualizada por el servicio de FastBTC",
-                "header": "Vuelva a verificar que esté ingresando la dirección de destino BTC correcta.",
-                "header_processing": "The operation is being processed. If your transaction takes longer than 90 mins, <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>open a support ticket</a> at Sovryn.",
-                "header_complete": "Confirmed",
-                "destinationAddress": "Dirección BTC de destino",
-                "valueBTC": "{{value}}",
-                "valueRBTC": "{{value}}",
-                "transaction1DetailsTitle": "Paso 1/2: TRANSACCIÓN BTC",
-                "transaction2DetailsTitle": "Paso 2/2: TRANSACCIÓN rBTC",
-                "transactionInfo": {
-                    "step": "PASO {{step}}: Transacción {{txName}}",
-                    "status_pending": "Estado {{statusIndex}}/2 pendiente",
-                    "status_confirmed": "Estado {{statusIndex}}/2 confirmado",
-                    "valueDeposited": "Valor depositado: {{value}}",
-                    "toLabel": "Para TX:",
-                    "txHashLabel": "Tx hash:",
-                    "fromLabel": "De TX:"
-                },
-                "limits": {
-                    "header": "Límites de Conversion",
-                    "min": "Mínimo: {{minValue}} BTC",
-                    "max": "Máximo: {{maxValue}} BTC"
-                },
-                "limits_pegout": {
-                    "header": "Límites de Conversion",
-                    "min": "Mínimo: {{minValue}} BTC",
-                    "max": "Máximo: {{maxValue}} BTC",
-                    "fee": "Fee: {{feeValue}}"
-                },
-                "instructions": {
-                    "header": "Instrucciones",
-                    "items": [
-                        "No deposites ningún activo que no sea BTC",
-                        "No envíes más BTC del límite máximo",
-                        "Espera 60 minutos para que la transacción sea procesada",
-                        "Si el rBTC no se encuentra visible en su billetera después de 60 minutos abra un <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>ticket de soporte</a> en Sovryn"
-                    ]
-                },
-                "instructions_pegout": {
-                    "header": "Instrucciones",
-                    "items": [
-                        "Verifique y confirme que la dirección a la que está enviando es una dirección BTC.",
-                        "No envíe nada más que rBTC.",
-                        "No envíe más rBTC que el límite MAX.",
-                        "Permita hasta 90 minutos para que se complete la transacción.",
-                        "Si BTC no está visible en su billetera de destino después de 90 minutos, abra un <a href='https://sovryn.freshdesk.com/support/tickets/new' target='_blank'>ticket de soporte</a> en Sovryn."
-                    ]
-                },
-                "txactions": {
-                    "sendBTCTitle": "Envie BTC a esta dirección",
-                    "copyableBTCAddressLabel": "Dirección"
-                },
-                "underMaintenance": {
-                    "alertDescription": "El servicio FastBTC de Sovryn momentáneamente no está disponible. Por favor, reintenta más tarde."
-                }
-            },
-            "pegOut": {
-                "alert": "Asegúrate de que estás ingresando la dirección de destino de BTC correcta.",
-                "inputAddressLabel": "Dirección de destino de BTC",
-                "inputAddressPlaceholder": "Dirección de destino de BTC",
-                "alertDescription": "FastBTC de Sovryn no está disponible temporalmente. Por favor, regresa luego.",
-                "invalidBtcAddress": "Dirección de BTC inválida - Las direcciones tipo Taproot no están soportadas.",
-                "limitsTitle": "Límites de conversión",
-                "limitsMin": "Min: ",
-                "limitsMax": "Max: ",
-                "limitsFee": "Fee: ",
-                "inputAmountPlaceholder": "Ingrese cantidad de rBTC para enviar",
-                "errorRequiredField": "Este campo es obligatorio",
-                "ctaContinue": "Continuar"
-            },
-            "leftPannel": {
-                "header": "Vas a necesitar rBTC en tu billetera para:",
-                "items": [
-                    "Mintear DoC y BPro",
-                    "Pagar tarifas de gas en la red RSK"
-                ],
-                "learnMore": "Conoce más acerca de rBTC"
-            }
-        },
         "staking": "Staking",
         "Staking_AnnualizedPerformanceTitle": "MoC Staking Annualized Performance",
         "PleaseReviewYourWallet": "Firme la transacción en su billetera."

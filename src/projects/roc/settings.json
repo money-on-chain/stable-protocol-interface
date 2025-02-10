@@ -110,7 +110,6 @@
         "Multicall2": "",
         "BProToken": "0x4dA7997A819bb46B6758B9102234c289dD2Ad3bf",
         "IRegistry": "",
-        "fastBtcBridgeAddress": "",
         "LiquidityCollateralToken": "",
         "rns": {
             "url": "",
@@ -125,7 +124,6 @@
             "operations": "",
             "incentives": ""
         },
-        "explorerUrl": "",
-        "btcExplorer": ""
+        "explorerUrl": ""
     }
 }

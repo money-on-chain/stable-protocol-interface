@@ -4,7 +4,6 @@ import Web3 from 'web3';
 import BigNumber from 'bignumber.js';
 
 import addressHelper from '../helpers/addressHelper';
-import FastBtcSocketWrapper from '../lib/fastBTC/FastBtcSocketWrapper';
 import { config } from '../projects/config';
 import { readContracts } from '../lib/integration/contracts';
 import { contractStatus, userBalance } from '../lib/integration/multicall';
@@ -176,9 +175,6 @@ const AuthenticateProvider = ({ children }) => {
     });
     //let balanceData;
     // const [transactionReceipt, setTransactionReceipt] = useState(null);
-
-    // Fast BTC socket
-    const socket = new FastBtcSocketWrapper();
 
     async function loadCss() {
         let css_logout = await import('../assets/css/logout.scss');
@@ -1028,7 +1024,6 @@ const AuthenticateProvider = ({ children }) => {
                 interfaceCalcMintInterestValues,
                 interfaceVendorMarkup,
                 interfaceApproveReserve,
-                socket,
                 convertToken,
                 getSpendableBalance,
                 getReserveAllowance,

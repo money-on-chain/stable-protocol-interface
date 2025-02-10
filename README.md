@@ -9,7 +9,6 @@ You can:
 * Metrics
 * Last operations
 * Claim / Stake TG (MOC)
-* FastBTC Bridge
 
 
 ### Money on Chain projects and tokens 

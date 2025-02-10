@@ -16,8 +16,8 @@ const MintTC = React.lazy(() => import('../../../pages/Mint/MintTC'));
 const MintTP = React.lazy(() => import('../../../pages/Mint/MintTP'));
 const MintTX = React.lazy(() => import('../../../pages/Mint/MintTX'));
 const Rewards = React.lazy(() => import('../../../pages/Rewards'));
-const Rbtc = React.lazy(() => import('../../../pages/Rbtc'));
 const Metrics = React.lazy(() => import('../../../pages/Metrics'));
+
 
 export default function Router() {
     return useRoutes([
@@ -40,10 +40,6 @@ export default function Router() {
                 {
                     path: 'rewards',
                     element: <Rewards />
-                },
-                {
-                    path: 'getRBTC',
-                    element: <Rbtc />
                 },
                 {
                     path: 'metrics',

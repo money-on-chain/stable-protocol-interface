@@ -109,7 +109,6 @@
         "MoC": "",
         "Multicall2": "",
         "IRegistry": "",
-        "fastBtcBridgeAddress": "",
         "LiquidityCollateralToken": "",
         "vendor": {
             "address": "",
@@ -124,7 +123,6 @@
             "incentives": ""
         },
         "chainId": 31,
-        "explorerUrl": "",
-        "btcExplorer": ""
+        "explorerUrl": ""
     }
 }

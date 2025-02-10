@@ -20,9 +20,6 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_ENVIRONMENT_IREGISTRY)
         projSettings.environment.IRegistry =
             process.env.REACT_APP_ENVIRONMENT_IREGISTRY;
-    if (process.env.REACT_APP_ENVIRONMENT_FASTBTC_BRIDGE_ADDRESS)
-        projSettings.environment.fastBtcBridgeAddress =
-            process.env.REACT_APP_ENVIRONMENT_FASTBTC_BRIDGE_ADDRESS;
     if (process.env.REACT_APP_ENVIRONMENT_API_OPERATIONS)
         projSettings.environment.api.operations =
             process.env.REACT_APP_ENVIRONMENT_API_OPERATIONS;
@@ -41,9 +38,6 @@ const configFromEnvironment = () => {
     if (process.env.REACT_APP_ENVIRONMENT_EXPLORER_URL)
         projSettings.environment.explorerUrl =
             process.env.REACT_APP_ENVIRONMENT_EXPLORER_URL;
-    if (process.env.REACT_APP_ENVIRONMENT_BTC_EXPLORER)
-        projSettings.environment.btcExplorer =
-            process.env.REACT_APP_ENVIRONMENT_BTC_EXPLORER;
     if (process.env.REACT_APP_ENVIRONMENT_RNS_ADDRESS)
         projSettings.environment.rns.address =
             process.env.REACT_APP_ENVIRONMENT_RNS_ADDRESS;

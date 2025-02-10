@@ -63,8 +63,6 @@ export default function Skeleton() {
             selectedMenuKey = 'rewards';
         } else if (location.pathname === '/metrics') {
             selectedMenuKey = 'metrics';
-        } else if (location.pathname === '/getRBTC') {
-            selectedMenuKey = 'getRBTC';
         }
 
         setSelectedMenu(selectedMenuKey);
@@ -150,19 +148,6 @@ export default function Skeleton() {
                         }
                     >
                         {t(`${AppProject}.menu-sidebar.rewards`, { ns: ns })}
-                    </Menu.Item>
-                    <Menu.Item
-                        key="getRBTC"
-                        onClick={() => navigate('/getRBTC')}
-                        icon={
-                            <p
-                                className={`set-icon-rbtc ${
-                                    selectedMenu == 'getRBTC' ? 'active' : ''
-                                }`}
-                            ></p>
-                        }
-                    >
-                        {t(`${AppProject}.menu-sidebar.getRBTC`, { ns: ns })}
                     </Menu.Item>
                     <Menu.Item
                         key="metrics"
@@ -316,17 +301,6 @@ export default function Skeleton() {
                         >
                             {t(`${AppProject}.menu-drawer.rewards`, { ns: ns })}
                         </Menu.Item>
-
-                        <Menu.Item
-                            key="getRBTC"
-                            onClick={() => navigate('/getRBTC')}
-                            icon={<span className="icon-icon-btc"></span>}
-                        >
-                            {t(`${AppProject}.menu-sidebar.getRBTC`, {
-                                ns: ns
-                            })}
-                        </Menu.Item>
-
                         <Menu.Item
                             key="metrics"
                             onClick={() => navigate('/metrics')}
