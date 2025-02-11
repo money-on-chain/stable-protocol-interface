@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useContext } from 'react';
-import { Button, Skeleton } from 'antd';
+import { Skeleton } from 'antd';
 
 import WalletBalancePie from '../WalletBalancePie';
 import Copy from '../../Page/Copy';

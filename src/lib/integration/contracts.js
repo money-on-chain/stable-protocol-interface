@@ -169,18 +169,6 @@ const readContracts = async (web3, environment) => {
     const mocvendors = new web3.eth.Contract(MoCVendors.abi, mocVendorsAddress);
     dContracts.contracts.mocvendors = mocvendors;
 
-  // Token migrator & Legacy token
-  if (process.env.REACT_APP_CONTRACT_LEGACY_TP) {
-
-    const tpLegacy = new web3.eth.Contract(TP.abi, process.env.REACT_APP_CONTRACT_LEGACY_TP)
-    dContracts.contracts.tp_legacy = tpLegacy
-
-    if (!process.env.REACT_APP_CONTRACT_TOKEN_MIGRATOR) console.log("Error: Please set token migrator address!")
-
-    const tokenMigrator = new web3.eth.Contract(TokenMigrator.abi, process.env.REACT_APP_CONTRACT_TOKEN_MIGRATOR)
-    dContracts.contracts.token_migrator = tokenMigrator
-  }
-
     const {
         IRegistry,
         IStakingMachine,
