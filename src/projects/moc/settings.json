@@ -1,7 +1,7 @@
 {
     "forceChecksumAddressInput": true,
     "forceRskIp60Addresses": true,
-    "minimumUserBalanceToOperate": "120000000000000",
+    "minimumUserBalanceToOperate": "50000000000000",
     "transfer": [
         {
             "address": "0xA066d6e20e122deB1139FA3Ae3e96d04578c67B5",
