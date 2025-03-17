@@ -14,17 +14,24 @@ const BUCKET_X2 =
 const BUCKET_C0 =
     '0x4330000000000000000000000000000000000000000000000000000000000000';
 
-const getGasPrice = async (web3) => {
+const getGasPrice = async (web3, protocolMaxPriceAllowed) => {
     try {
         // Get gas price from node
         const nodeGasPrice = await web3.eth.getGasPrice();
-        // Min from node gas price and fixed value.
-        const gasPrice = Math.min(
-            parseInt(nodeGasPrice.toString()),
-            parseInt(process.env.REACT_APP_ENVIRONMENT_GAS_PRICE_LIMIT)
-        )
         console.log("Node gas price: ", parseInt(nodeGasPrice.toString()))
-        console.log("Fixed gas price: ", parseInt(process.env.REACT_APP_ENVIRONMENT_GAS_PRICE_LIMIT))
+
+        let gasPrice;
+        if (protocolMaxPriceAllowed !== undefined) {
+            // Min from node gas price and protocolMaxPriceAllowed
+            gasPrice = Math.min(
+              parseInt(nodeGasPrice.toString()),
+              parseInt(protocolMaxPriceAllowed.toString())
+            )
+            console.log("Protocol Max gas price allowed: ", parseInt(protocolMaxPriceAllowed))
+        } else {
+            gasPrice = parseInt(nodeGasPrice.toString())
+        }
+
         console.log("Sending gas price: ", gasPrice)
         return gasPrice.toString();
     } catch (e) {

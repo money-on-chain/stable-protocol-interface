@@ -404,7 +404,12 @@ const contractStatus = async (web3, dContracts, appMode) => {
                 mocstate.options.address,
                 mocstate.methods.getMoCVendors().encodeABI(),
                 'address'
-            ] // 52
+            ], // 52
+            [
+                moc.options.address,
+                moc.methods.maxGasPrice().encodeABI(),
+                'uint256'
+            ] // 53
         ];
     } else {
         listMethods = [
@@ -670,55 +675,60 @@ const contractStatus = async (web3, dContracts, appMode) => {
                 'address'
             ], // 52
             [
-                mocexchange.options.address,
-                mocexchange.methods.maxAbsoluteOperation().encodeABI(),
+                moc.options.address,
+                moc.methods.maxGasPrice().encodeABI(),
                 'uint256'
             ], // 53
             [
                 mocexchange.options.address,
-                mocexchange.methods.maxOperationalDifference().encodeABI(),
+                mocexchange.methods.maxAbsoluteOperation().encodeABI(),
                 'uint256'
             ], // 54
             [
                 mocexchange.options.address,
-                mocexchange.methods.decayBlockSpan().encodeABI(),
+                mocexchange.methods.maxOperationalDifference().encodeABI(),
                 'uint256'
             ], // 55
             [
                 mocexchange.options.address,
-                mocexchange.methods.absoluteAccumulator().encodeABI(),
+                mocexchange.methods.decayBlockSpan().encodeABI(),
                 'uint256'
             ], // 56
             [
                 mocexchange.options.address,
-                mocexchange.methods.differentialAccumulator().encodeABI(),
+                mocexchange.methods.absoluteAccumulator().encodeABI(),
                 'uint256'
             ], // 57
             [
                 mocexchange.options.address,
-                mocexchange.methods.lastOperationBlockNumber().encodeABI(),
+                mocexchange.methods.differentialAccumulator().encodeABI(),
                 'uint256'
             ], // 58
             [
                 mocexchange.options.address,
-                mocexchange.methods.lastMaxReserveAllowedToMint().encodeABI(),
+                mocexchange.methods.lastOperationBlockNumber().encodeABI(),
                 'uint256'
             ], // 59
             [
                 mocexchange.options.address,
-                mocexchange.methods.maxReserveAllowedToMint().encodeABI(),
+                mocexchange.methods.lastMaxReserveAllowedToMint().encodeABI(),
                 'uint256'
             ], // 60
             [
                 mocexchange.options.address,
-                mocexchange.methods.maxReserveAllowedToRedeem().encodeABI(),
+                mocexchange.methods.maxReserveAllowedToMint().encodeABI(),
                 'uint256'
             ], // 61
             [
                 mocexchange.options.address,
+                mocexchange.methods.maxReserveAllowedToRedeem().encodeABI(),
+                'uint256'
+            ], // 62
+            [
+                mocexchange.options.address,
                 mocexchange.methods.lastMaxReserveAllowedToRedeem().encodeABI(),
                 'uint256'
-            ] // 62
+            ] // 63
         ];
     }
 
@@ -810,19 +820,20 @@ const contractStatus = async (web3, dContracts, appMode) => {
     dMocState.getMoCPriceProvider = listReturnData[50];
     dMocState.getBtcPriceProvider = listReturnData[51];
     dMocState.getMoCVendors = listReturnData[52];
+    dMocState.maxGasPrice = listReturnData[53];
 
     // Flux capacitor only enabled in RRC20 app mode
     if (appMode === 'RRC20') {
-        dMocState.maxAbsoluteOperation = listReturnData[53];
-        dMocState.maxOperationalDifference = listReturnData[54];
-        dMocState.decayBlockSpan = listReturnData[55];
-        dMocState.absoluteAccumulator = listReturnData[56];
-        dMocState.differentialAccumulator = listReturnData[57];
-        dMocState.lastOperationBlockNumber = listReturnData[58];
-        dMocState.lastMaxReserveAllowedToMint = listReturnData[59];
-        dMocState.maxReserveAllowedToMint = listReturnData[60];
-        dMocState.maxReserveAllowedToRedeem = listReturnData[61];
-        dMocState.lastMaxReserveAllowedToRedeem = listReturnData[62];
+        dMocState.maxAbsoluteOperation = listReturnData[54];
+        dMocState.maxOperationalDifference = listReturnData[55];
+        dMocState.decayBlockSpan = listReturnData[56];
+        dMocState.absoluteAccumulator = listReturnData[57];
+        dMocState.differentialAccumulator = listReturnData[58];
+        dMocState.lastOperationBlockNumber = listReturnData[59];
+        dMocState.lastMaxReserveAllowedToMint = listReturnData[60];
+        dMocState.maxReserveAllowedToMint = listReturnData[61];
+        dMocState.maxReserveAllowedToRedeem = listReturnData[62];
+        dMocState.lastMaxReserveAllowedToRedeem = listReturnData[63];
     }
 
     // Commission rates

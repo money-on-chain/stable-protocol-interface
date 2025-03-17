@@ -92,7 +92,7 @@ const mintTP = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: toContractPrecision(valueToSend),
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
@@ -175,7 +175,7 @@ const redeemTP = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: '0x',
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
@@ -267,7 +267,7 @@ const mintTC = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: toContractPrecision(valueToSend),
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
@@ -347,7 +347,7 @@ const redeemTC = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: '0x',
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
@@ -467,7 +467,7 @@ const mintTX = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: toContractPrecision(valueToSend),
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
@@ -543,7 +543,7 @@ const redeemTX = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: '0x',
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
