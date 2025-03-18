@@ -154,7 +154,7 @@ const mintTPRRC20 = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: '0x',
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
@@ -237,7 +237,7 @@ const redeemTPRRC20 = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: '0x',
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
@@ -344,7 +344,7 @@ const mintTCRRC20 = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: '0x',
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
@@ -427,7 +427,7 @@ const redeemTCRRC20 = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: '0x',
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
@@ -541,7 +541,7 @@ const mintTXRRC20 = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: '0x',
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
@@ -617,7 +617,7 @@ const redeemTXRRC20 = async (
         .send({
             from: web3.utils.toChecksumAddress(account),
             value: '0x',
-            gasPrice: await getGasPrice(web3),
+            gasPrice: await getGasPrice(web3, contractStatusData.maxGasPrice),
             gas: estimateGas * 2,
             gasLimit: estimateGas * 2
         })
