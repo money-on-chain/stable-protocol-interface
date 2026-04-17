@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useContext } from 'react';
-import { Row, Alert } from 'antd';
+import { Row, Alert, Button } from 'antd';
 
 import { AuthenticateContext } from '../../context/Auth';
 import WalletBalance from '../../components/Cards/WalletBalance';
@@ -35,6 +35,27 @@ function Home(props) {
                     className="AlertNoConnection"
                 />
             )}
+
+            {auth.contractStatusData && auth.contractStatusData.paused && (
+                <Alert
+                    message={t('global.Paused_alertTitle')}
+                    description={t('global.Paused_alertDescription')}
+                    type="warning"
+                    showIcon
+                    className="AlertPaused"
+                    action={
+                        <Button 
+                            size="medium" 
+                            onClick={() => {
+                                window.open('https://x.com/moneyonchainok/status/2044857700228473318?s=20', '_blank');
+                            }}
+                            >
+                        {t('global.Paused_alertMoreDetails')}
+                        </Button>
+                      }
+                />
+            )}
+
             <h1 className="PageTitle">
                 {t(`${AppProject}.home.title`, { ns: ns })}
             </h1>

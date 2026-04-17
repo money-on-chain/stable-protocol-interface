@@ -1,4 +1,4 @@
-import { Row, Col, Alert } from 'antd';
+import { Row, Col, Alert, Button } from 'antd';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 
 import AmountCard from '../../../components/Cards/AmountCard';
@@ -38,6 +38,27 @@ export default function Mint(props) {
                     className="AlertNoConnection"
                 />
             )}
+
+            {auth.contractStatusData && auth.contractStatusData.paused && (
+                <Alert
+                    message={t('global.Paused_alertTitle')}
+                    description={t('global.Paused_alertDescription')}
+                    type="warning"
+                    showIcon
+                    className="AlertPaused"
+                    action={
+                        <Button 
+                            size="medium" 
+                            onClick={() => {
+                                window.open('https://x.com/moneyonchainok/status/2044857700228473318?s=20', '_blank');
+                            }}
+                            >
+                        {t('global.Paused_alertMoreDetails')}
+                        </Button>
+                      }
+                />
+            )}
+
             <div className="sect__exchange__container">
                 <div className="sect__exchange__header">
                     <h1 className="PageTitle">

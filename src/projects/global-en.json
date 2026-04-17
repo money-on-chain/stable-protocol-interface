@@ -244,6 +244,10 @@
         "CustomizePrize_VariationToleranceSettingsTitle": "Customize Price Variation Tolerance",
         "CustomizePrize_VariationToleranceTitle": "Price Variation Tolerance",
         "Connected_Wallet": "Connected Wallet",
-        "Disconnect": "Disconnect"
+        "Disconnect": "Disconnect",
+
+        "Paused_alertTitle": "Important update",
+        "Paused_alertDescription": "Minting and redemption are temporarily paused as a precaution. Transfers remain unaffected.",
+        "Paused_alertMoreDetails": "View the announcement"
     }
 }
