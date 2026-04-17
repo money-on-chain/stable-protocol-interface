@@ -244,6 +244,10 @@
         "CustomizePrize_VariationToleranceSettingsTitle": "Personalizar la tolerancia de variación de precios",
         "CustomizePrize_VariationToleranceTitle": "Tolerancia de variación de precio",
         "Connected_Wallet": "Cartera conectada",
-        "Disconnect": "Desconectar"
+        "Disconnect": "Desconectar",
+
+        "Paused_alertTitle": "Actualización importante",
+        "Paused_alertDescription": "Emitir y redimir están temporalmente pausados como precaución. Las transferencias permanecen sin afectación.",
+        "Paused_alertMoreDetails": "Ver el anuncio"
     }
 }

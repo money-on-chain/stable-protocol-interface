@@ -65,6 +65,16 @@ const MintOrRedeemToken = (props) => {
     const [youExchangeIsValid, onYouExchangeValidityChange] = useState(false);
     const [youReceiveIsValid, onYouReceiveValidityChange] = useState(false);
     const [confirmingTransaction, setConfirmingTransaction] = useState(false);
+
+    const [protocolIsPaused, setProtocolIsPaused] = useState(false);
+    useEffect(() => {
+        if (auth.contractStatusData && auth.contractStatusData.paused) {
+            setProtocolIsPaused(true);
+        } else {
+            setProtocolIsPaused(false);
+        }
+    }, [auth.contractStatusData]);
+
     const [interests, setInterests] = useState({
         interestRate: '0',
         interestValue: '0'
@@ -735,7 +745,8 @@ const MintOrRedeemToken = (props) => {
                             !youExchangeIsValid ||
                             !youReceiveIsValid ||
                             valueYouExchange == 0 ||
-                            valueYouReceive == 0
+                            valueYouReceive == 0 ||
+                            protocolIsPaused
                         }
                     >
                         {actionIsMint

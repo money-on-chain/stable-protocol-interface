@@ -41,13 +41,17 @@ Please go to release section, there are several links to [releases](https://gith
 
 Requires:
 
+* node-gyp needs:
+
+`sudo apt install python3-setuptools`
+
 * Nodejs > 12
 
 `nvm use`
 
 Install packages
 
-`npm install`
+`npm install --ignore-scripts`
 
 Run
 
