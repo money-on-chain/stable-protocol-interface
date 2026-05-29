@@ -14,7 +14,7 @@
         "@testing-library/jest-dom": "^5.17.0",
         "abi-decoder": "^2.4.0",
         "antd": "^4.24.16",
-        "axios": "^0.27.2",
+        "axios": "^1.16.1",
         "bignumber.js": "^9.1.2",
         "classnames": "^2.5.1",
         "env-cmd": "^10.1.0",
