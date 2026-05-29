@@ -12,6 +12,11 @@ const PACKAGES = [
   '@ethereumjs/util',
   'web3-core-method',
   'micro-ftch',
+  '@rsksmart/rlogin-walletconnect2-provider',
+  '@rsksmart/rlogin',
+  '@rsksmart/rlogin-ledger-provider',
+  '@rsksmart/rlogin-trezor-provider',
+  '@rsksmart/rlogin-dcent-provider',
 ];
 
 const BABEL_OPTS = {
@@ -21,6 +26,9 @@ const BABEL_OPTS = {
     require.resolve('@babel/plugin-transform-optional-chaining'),
     require.resolve('@babel/plugin-transform-nullish-coalescing-operator'),
     require.resolve('@babel/plugin-transform-logical-assignment-operators'),
+    require.resolve('@babel/plugin-transform-class-properties'),
+    require.resolve('@babel/plugin-transform-private-methods'),
+    require.resolve('@babel/plugin-transform-private-property-in-object'),
   ],
   retainLines: true,
   sourceMaps: false,
@@ -38,7 +46,7 @@ function walkDir(dir, cb) {
 }
 
 function hasModernSyntax(content) {
-  return content.includes('?.') || content.includes('??') || content.includes('||=') || content.includes('&&=') || content.includes('??=');
+  return content.includes('?.') || content.includes('??') || content.includes('||=') || content.includes('&&=') || content.includes('??=') || /#[a-zA-Z_]/.test(content);
 }
 
 let patched = 0;
