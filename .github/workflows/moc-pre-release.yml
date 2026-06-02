@@ -36,6 +36,8 @@ jobs:
     runs-on: ubuntu-22.04
     needs: bump_version
     if: ${{ needs.bump_version.outputs.new_tag != null }}
+    env:
+      REACT_APP_RLOGIN_WALLETCONNECT2_PROJECTID: ${{ secrets.REACT_APP_RLOGIN_WALLETCONNECT2_PROJECTID }}
     steps:
       - name: Checkout
         uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0

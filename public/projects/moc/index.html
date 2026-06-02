@@ -2,6 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com data:;
+      img-src 'self' data: blob: https:;
+      connect-src 'self'
+        https://api-operations.moneyonchain.com
+        https://api-operations-testnet.moneyonchain.com
+        https://api-operations-alpha-testnet.moneyonchain.com
+        https://moc-incentives.moneyonchain.com
+        https://moc-incentives-testnet.moneyonchain.com
+        https://moc-incentives-alpha.moneyonchain.com
+        https://api.moneyonchain.com
+        https://public-node.rsk.co
+        https://public-node.testnet.rsk.co
+        wss://relay.walletconnect.com
+        wss://relay.walletconnect.org
+        https://rpc.walletconnect.com
+        https://explorer-api.walletconnect.com
+        https://verify.walletconnect.com
+        https://bridge.dcentwallet.com;
+      frame-src https://connect.trezor.io;
+      worker-src 'self' blob:;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      manifest-src 'self';
+    " />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name="theme-color" content="#000000" />
@@ -25,15 +54,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
-
-    <!-- RLogin external libs -->
-    <script src="https://unpkg.com/@rsksmart/rlogin@1.6.1/dist/index.js"></script>
-    <script src="https://unpkg.com/@rsksmart/rlogin-dcent-provider@1.0.2-beta.6/dist/bundle.js"></script>
-    <script src="https://unpkg.com/@rsksmart/rlogin-walletconnect2-provider@1.0.1/dist/bundle.js"></script>
-    <script src="https://unpkg.com/@rsksmart/rlogin-ledger-provider@1.0.3/dist/bundle.js"></script>
-    <script src="https://unpkg.com/@rsksmart/rlogin-trezor-provider@1.0.6/dist/bundle.js"></script>
-    <script src="https://unpkg.com/@rsksmart/rns@1.9.0/lib/rns.min.js"></script>
-
+    
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

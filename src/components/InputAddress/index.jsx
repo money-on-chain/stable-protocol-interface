@@ -4,6 +4,7 @@ import { AuthenticateContext } from '../../context/Auth';
 import addressHelper from '../../helpers/addressHelper';
 import { DebounceInput } from 'react-debounce-input';
 import { config } from '../../projects/config';
+import RNS from '@rsksmart/rns';
 
 export default function InputAddress(props) {
     const auth = useContext(AuthenticateContext);
@@ -14,7 +15,7 @@ export default function InputAddress(props) {
     const [help, setHelp] = useState('');
     const [value, setValue] = useState('');
 
-    const rns = new window.RNS(
+    const rns = new RNS(
         web3,
         config.environment.rns.address && {
             contractAddresses: {
