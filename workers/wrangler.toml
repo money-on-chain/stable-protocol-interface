@@ -1,0 +1,61 @@
+name = "dapp-proxy"
+main = "src/worker.js"
+compatibility_date = "2024-09-23"
+
+# Deploy steps (run once from your machine with `wrangler login` first):
+#
+# 1. Create a KV namespace for each domain:
+#      wrangler kv namespace create DAPP_KV --env moc
+#      wrangler kv namespace create DAPP_KV --env moc-testnet
+#    Copy the `id` values printed by each command into the placeholders below.
+#
+# 2. Deploy each worker:
+#      wrangler deploy --env moc
+#      wrangler deploy --env moc-testnet
+#
+# 3. In Cloudflare dashboard → Workers & Pages → each worker → Settings → Triggers,
+#    confirm the route is active. The DNS CNAME to Pinata can stay as-is;
+#    the Worker route intercepts requests before they reach the origin.
+#
+# NOTE: worker names below (dapp-proxy-moc-app / dapp-proxy-moc-app-testnet) are
+# deliberately different from the stable-protocol-interface-v3 repo's
+# dapp-proxy-moc / dapp-proxy-moc-testnet workers, which already own the
+# manage.moneyonchain.com / manage-testnet.moneyonchain.com routes for the
+# Voting app. Worker names must be unique per Cloudflare account, so do not
+# rename these to match.
+#
+# GitHub Actions secrets required (Settings → Secrets → Actions):
+#   CF_ACCOUNT_ID                 — Cloudflare account ID
+#   CF_API_TOKEN                  — API token with "Workers KV Storage:Edit" permission
+#   CF_KV_NAMESPACE_ID_MOC        — id of the KV namespace created for the moc env
+#   CF_KV_NAMESPACE_ID_MOC_TESTNET — id of the KV namespace created for the moc-testnet env
+
+# ─── MoC (dapp.moneyonchain.com) ─────────────────────────────────────────────
+[env.moc]
+name = "dapp-proxy-moc-app"
+
+[env.moc.vars]
+PINATA_GATEWAY = "https://moneyonchain.mypinata.cloud"
+
+[[env.moc.kv_namespaces]]
+binding = "DAPP_KV"
+id = "REPLACE_WITH_MOC_KV_NAMESPACE_ID"
+
+[[env.moc.routes]]
+pattern = "dapp.moneyonchain.com/*"
+zone_name = "moneyonchain.com"
+
+# ─── MoC Testnet (dapp-testnet.moneyonchain.com) ─────────────────────────────
+[env.moc-testnet]
+name = "dapp-proxy-moc-app-testnet"
+
+[env.moc-testnet.vars]
+PINATA_GATEWAY = "https://moneyonchain.mypinata.cloud"
+
+[[env.moc-testnet.kv_namespaces]]
+binding = "DAPP_KV"
+id = "REPLACE_WITH_MOC_TESTNET_KV_NAMESPACE_ID"
+
+[[env.moc-testnet.routes]]
+pattern = "dapp-testnet.moneyonchain.com/*"
+zone_name = "moneyonchain.com"
