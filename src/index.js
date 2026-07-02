@@ -14,6 +14,10 @@ import { AuthenticateProvider } from './context/Auth';
 import { config } from './projects/config';
 import IconWaiting from './assets/icons/status-pending.png';
 import Router from './router';
+import {
+    showUpdateToast,
+    listenForControllerChange
+} from './components/UpdateToast';
 
 console.log(`Starting app version: ${process.env.REACT_APP_VERSION}`);
 
@@ -84,10 +88,10 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.unregister();
+listenForControllerChange();
+serviceWorkerRegistration.register({
+    onUpdate: registration => showUpdateToast(registration)
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
