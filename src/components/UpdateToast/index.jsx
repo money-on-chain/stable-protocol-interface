@@ -1,5 +1,6 @@
 import React from 'react';
 import { notification, Button } from 'antd';
+import i18next from 'i18next';
 
 const NOTIFICATION_KEY = 'app-update-available';
 
@@ -16,9 +17,10 @@ function reloadWaitingWorker(registration) {
 export function showUpdateToast(registration) {
     notification.open({
         key: NOTIFICATION_KEY,
-        message: 'Update available',
-        description:
-            'A new version of this app is available. Reload to update.',
+        message: i18next.t('global.UpdateToast_message', { ns: 'global' }),
+        description: i18next.t('global.UpdateToast_description', {
+            ns: 'global'
+        }),
         duration: 0,
         placement: 'bottomRight',
         btn: (
@@ -30,7 +32,7 @@ export function showUpdateToast(registration) {
                     reloadWaitingWorker(registration);
                 }}
             >
-                Reload
+                {i18next.t('global.UpdateToast_reload', { ns: 'global' })}
             </Button>
         )
     });

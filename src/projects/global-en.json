@@ -248,6 +248,10 @@
 
         "Paused_alertTitle": "Important update",
         "Paused_alertDescription": "Minting and redemption are temporarily paused as a precaution. Transfers remain unaffected.",
-        "Paused_alertMoreDetails": "View the announcement"
+        "Paused_alertMoreDetails": "View the announcement",
+
+        "UpdateToast_message": "Update available",
+        "UpdateToast_description": "A new version of this app is available. Reload to update.",
+        "UpdateToast_reload": "Reload"
     }
 }

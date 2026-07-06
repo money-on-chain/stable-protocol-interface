@@ -248,6 +248,10 @@
 
         "Paused_alertTitle": "Actualización importante",
         "Paused_alertDescription": "Emitir y redimir están temporalmente pausados como precaución. Las transferencias permanecen sin afectación.",
-        "Paused_alertMoreDetails": "Ver el anuncio"
+        "Paused_alertMoreDetails": "Ver el anuncio",
+
+        "UpdateToast_message": "Actualización disponible",
+        "UpdateToast_description": "Hay una nueva versión de la aplicación disponible. Recargá para actualizar.",
+        "UpdateToast_reload": "Recargar"
     }
 }
