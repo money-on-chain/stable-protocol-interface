@@ -1,10 +1,10 @@
-import React from 'react';
-import { notification, Button } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Alert, Button } from 'antd';
 import i18next from 'i18next';
 
-const NOTIFICATION_KEY = 'app-update-available';
-
 let isReloading = false;
+let pendingRegistration = null;
+const listeners = new Set();
 
 function reloadWaitingWorker(registration) {
     const waitingWorker = registration.waiting;
@@ -14,28 +14,12 @@ function reloadWaitingWorker(registration) {
     }
 }
 
+// Called imperatively from src/index.js's serviceWorkerRegistration onUpdate
+// callback, outside the React tree — fans out to whichever <UpdateToast/>
+// instance is currently mounted (see Skeleton.jsx) via the listeners set.
 export function showUpdateToast(registration) {
-    notification.open({
-        key: NOTIFICATION_KEY,
-        message: i18next.t('global.UpdateToast_message', { ns: 'global' }),
-        description: i18next.t('global.UpdateToast_description', {
-            ns: 'global'
-        }),
-        duration: 0,
-        placement: 'bottomRight',
-        btn: (
-            <Button
-                type="primary"
-                size="small"
-                onClick={() => {
-                    notification.close(NOTIFICATION_KEY);
-                    reloadWaitingWorker(registration);
-                }}
-            >
-                {i18next.t('global.UpdateToast_reload', { ns: 'global' })}
-            </Button>
-        )
-    });
+    pendingRegistration = registration;
+    listeners.forEach(listener => listener(registration));
 }
 
 // The waiting worker only takes control once skipWaiting() runs, which
@@ -52,4 +36,40 @@ export function listenForControllerChange() {
         isReloading = true;
         window.location.reload();
     });
+}
+
+export default function UpdateToast() {
+    const [registration, setRegistration] = useState(pendingRegistration);
+
+    useEffect(() => {
+        listeners.add(setRegistration);
+        return () => listeners.delete(setRegistration);
+    }, []);
+
+    if (!registration) {
+        return null;
+    }
+
+    return (
+        <Alert
+            message={i18next.t('global.UpdateToast_message', { ns: 'global' })}
+            description={i18next.t('global.UpdateToast_description', {
+                ns: 'global'
+            })}
+            type="warning"
+            showIcon
+            className="AlertUpdate"
+            action={
+                <Button
+                    size="medium"
+                    onClick={() => {
+                        setRegistration(null);
+                        reloadWaitingWorker(registration);
+                    }}
+                >
+                    {i18next.t('global.UpdateToast_reload', { ns: 'global' })}
+                </Button>
+            }
+        />
+    );
 }
