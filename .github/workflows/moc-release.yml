@@ -128,10 +128,13 @@ jobs:
           tag_name: ${{ needs.bump_version.outputs.new_tag }}
           name: MoC Release ${{ needs.bump_version.outputs.new_tag }}
           body: |
-            **MoC Mainnet gateways**:
+
             - CIDv0: `${{ steps.upload.outputs.hash }}`
             - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`
-            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload.outputs.hash }}
+
+            **MoC Mainnet gateways**:
+            - Always last version available: [https://dapp.moneyonchain.com](https://dapp.moneyonchain.com)
+            - https://dapp.moneyonchain.com/ipfs/${{ steps.upload.outputs.hash }}
             - https://gateway.pinata.cloud/ipfs/${{ steps.upload.outputs.hash }}
             - https://cloudflare-ipfs.com/ipfs/${{ steps.upload.outputs.hash }}
             - https://ipfs.io/ipfs/${{ steps.upload.outputs.hash }}

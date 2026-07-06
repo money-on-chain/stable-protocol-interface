@@ -132,11 +132,12 @@ jobs:
           body: |
             **IMPORTANT:** This is a pre-release!, please use at your own RISK... is for testing purpose!
 
-            **MoC Testnet gateways**:
-            - [https://dapp-testnet.moneyonchain.com](https://dapp-testnet.moneyonchain.com)
             - CIDv0: `${{ steps.upload_staging.outputs.hash }}`
             - CIDv1: `${{ steps.convert_cidv0_staging.outputs.cidv1 }}`
-            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_staging.outputs.hash }}
+
+            **MoC Testnet gateways**:
+            - Always last version available: [https://dapp-testnet.moneyonchain.com](https://dapp-testnet.moneyonchain.com)
+            - https://dapp-testnet.moneyonchain.com/ipfs/${{ steps.upload_staging.outputs.hash }}
             - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_staging.outputs.hash }}
 
             ${{ needs.bump_version.outputs.changelog }}
