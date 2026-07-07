@@ -26,6 +26,7 @@ export default function CopyModal(props) {
                     className=""
                     href={`${config.environment.explorerUrl}/address/${textToCopy}`}
                     target="_blank"
+                    rel="noopener noreferrer"
                 >
                     {textToShow}
                 </a>

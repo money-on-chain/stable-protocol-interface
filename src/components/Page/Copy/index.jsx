@@ -57,6 +57,7 @@ export default function Copy(props) {
                         }}
                         href={url_set}
                         target="_blank"
+                        rel="noopener noreferrer"
                     >
                         {textToShow}
                     </a>

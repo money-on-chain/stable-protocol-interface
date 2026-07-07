@@ -70,6 +70,7 @@ const OperationStatusModal = ({
             <a
                 href={`${config.environment.explorerUrl}/tx/${txHash}`}
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 {t('global.RewardsClaimButton_Modal_ViewOnExplorer')}
             </a>

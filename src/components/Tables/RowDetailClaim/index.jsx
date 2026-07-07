@@ -101,6 +101,7 @@ function RowDetail(props) {
                             className="ant-descriptions-a"
                             href={`${config.environment.explorerUrl}/tx/${props.detail.hash}`}
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <span>{props.detail.truncate_hash}</span>
                         </a>
@@ -149,6 +150,7 @@ function RowDetail(props) {
                             className="ant-descriptions-a"
                             href={`${config.environment.explorerUrl}/tx/${props.detail.sent_hash}`}
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <span>{props.detail.truncate_sent_hash}</span>
                         </a>
