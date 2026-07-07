@@ -21,8 +21,20 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check_branch:
+    name: Verify branch
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Ensure running on master
+        run: |
+          if [ "${{ github.ref_name }}" != "master" ]; then
+            echo "::error::MoC-Release publishes to production (dapp.moneyonchain.com) and must only run from 'master' (got '${{ github.ref_name }}'). Refusing to continue."
+            exit 1
+          fi
+
   bump_version:
     name: Bump Version
+    needs: check_branch
     uses: ./.github/workflows/bump-version.yml
     with:
       bump_type: ${{ inputs.bump_type || 'auto' }}
