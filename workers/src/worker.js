@@ -49,7 +49,5 @@ export default {
 
 function fetchFromGateway(gateway, cid, path) {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  // Pinata pins the build output wrapped in a single "build/" directory
-  // (pinFileToIPFS rejects multi-file pins without one common top-level folder).
-  return fetch(`${gateway}/ipfs/${cid}/build${normalizedPath}`, { redirect: "follow" });
+  return fetch(`${gateway}/ipfs/${cid}${normalizedPath}`, { redirect: "follow" });
 }
