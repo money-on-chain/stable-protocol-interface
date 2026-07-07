@@ -193,15 +193,18 @@ const AuthenticateProvider = ({ children }) => {
                 disableLogin();
             }
         }
-    });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const disableLogin = () => {
-        document
-            .querySelectorAll('.rlogin-modal-hitbox')[0]
-            .addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-            });
+        const hitbox = document.querySelectorAll('.rlogin-modal-hitbox')[0];
+        if (!hitbox) {
+            return;
+        }
+        hitbox.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
         loadCss();
     };
 
