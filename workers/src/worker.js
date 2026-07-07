@@ -2,7 +2,7 @@
 const STATIC_ASSET_RE = /\.(?:js|mjs|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot|webp|avif|json|map|txt|xml)(\?.*)?$/i;
 
 // Unversioned PWA files must not be cached — browsers use them to detect SW updates
-const NO_CACHE_RE = /^\/(sw\.js|manifest\.webmanifest|manifest\.json)([\?#].*)?$/i;
+const NO_CACHE_RE = /^\/(sw\.js|service-worker\.js|manifest\.webmanifest|manifest\.json)([\?#].*)?$/i;
 
 export default {
   async fetch(request, env) {
