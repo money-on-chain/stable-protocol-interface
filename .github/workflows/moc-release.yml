@@ -80,7 +80,7 @@ jobs:
             exit 1
           fi
           for FILE in "${DIST_FILES[@]}"; do
-            REL="${FILE#./build/}"
+            REL="${FILE#./}"
             FORM_ARGS+=(-F "file=@${FILE};filename=${REL}")
           done
           FORM_ARGS+=(-F "pinataMetadata={\"name\":\"$PIN_NAME\"}")
