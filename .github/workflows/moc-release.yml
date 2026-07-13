@@ -124,6 +124,43 @@ jobs:
           fi
           echo "cidv1=$CIDV1" >> "$GITHUB_OUTPUT"
 
+      - name: Wait for Pinata gateway propagation
+        timeout-minutes: 5
+        env:
+          PINATA_GATEWAY: https://moneyonchain.mypinata.cloud
+          HASH: ${{ steps.upload.outputs.hash }}
+        run: |
+          set -e
+          # Pinata accepts a pin instantly, but individual files can take a
+          # few seconds to become servable from the gateway. worker.js serves
+          # 404s straight through for static assets (no SPA fallback), so if
+          # we flip the KV before every file is actually reachable, clients
+          # can hit a transient 404 on a lazy-loaded chunk. Poll every pinned
+          # file until the gateway serves it before updating current_cid.
+          mapfile -t DIST_FILES < <(find ./build -type f | sort)
+
+          check_file() {
+            # fetchFromGateway in worker.js fetches with no "build/" prefix —
+            # the CID root is the *contents* of build/, not a build/ folder
+            # (the prefix is only needed in the upload filename= field to
+            # satisfy Pinata's single-shared-root requirement).
+            local rel="${1#./build/}"
+            local url="$PINATA_GATEWAY/ipfs/$HASH/$rel"
+            for _ in $(seq 1 30); do
+              code=$(curl -s -o /dev/null -w '%{http_code}' "$url")
+              if [ "$code" = "200" ]; then
+                return 0
+              fi
+              sleep 2
+            done
+            echo "::error::Gateway never served $url (last status $code)"
+            return 1
+          }
+          export -f check_file
+          export PINATA_GATEWAY HASH
+
+          printf '%s\n' "${DIST_FILES[@]}" | xargs -P 8 -I{} bash -c 'check_file "$@"' _ {}
+
       - name: Update Cloudflare Worker KV Mainnet
         run: |
           curl --fail -X PUT \
