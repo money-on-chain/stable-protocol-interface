@@ -1,9 +1,10 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import { config } from '../../../projects/config';
+import lazyWithRetry from '../../../helpers/lazyWithRetry';
 
 import NotFound from '../../../pages/NotFound';
-const Skeleton = React.lazy(() =>
+const Skeleton = lazyWithRetry(() =>
     import(
         '../../../layouts/projects/' +
             config.environment.AppProject.toLowerCase() +
@@ -11,12 +12,12 @@ const Skeleton = React.lazy(() =>
     )
 );
 
-const Home = React.lazy(() => import('../../../pages/Home/index'));
-const MintTC = React.lazy(() => import('../../../pages/Mint/MintTC'));
-const MintTP = React.lazy(() => import('../../../pages/Mint/MintTP'));
-const MintTX = React.lazy(() => import('../../../pages/Mint/MintTX'));
-const Rewards = React.lazy(() => import('../../../pages/Rewards'));
-const Metrics = React.lazy(() => import('../../../pages/Metrics'));
+const Home = lazyWithRetry(() => import('../../../pages/Home/index'));
+const MintTC = lazyWithRetry(() => import('../../../pages/Mint/MintTC'));
+const MintTP = lazyWithRetry(() => import('../../../pages/Mint/MintTP'));
+const MintTX = lazyWithRetry(() => import('../../../pages/Mint/MintTX'));
+const Rewards = lazyWithRetry(() => import('../../../pages/Rewards'));
+const Metrics = lazyWithRetry(() => import('../../../pages/Metrics'));
 
 
 export default function Router() {

@@ -1,8 +1,7 @@
-import React from 'react';
-
 import { config } from '../projects/config';
+import lazyWithRetry from '../helpers/lazyWithRetry';
 
-const RouterMoC = React.lazy(() => import('./projects/moc'));
+const RouterMoC = lazyWithRetry(() => import('./projects/moc'));
 
 const Router = () => {
     switch (config.environment.AppProject.toLowerCase()) {
