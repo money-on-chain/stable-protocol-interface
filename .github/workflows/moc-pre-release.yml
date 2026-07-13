@@ -129,7 +129,11 @@ jobs:
           mapfile -t DIST_FILES < <(find ./build -type f | sort)
 
           check_file() {
-            local rel="${1#./}"
+            # fetchFromGateway in worker.js fetches with no "build/" prefix —
+            # the CID root is the *contents* of build/, not a build/ folder
+            # (the prefix is only needed in the upload filename= field to
+            # satisfy Pinata's single-shared-root requirement).
+            local rel="${1#./build/}"
             local url="$PINATA_GATEWAY/ipfs/$HASH/$rel"
             for _ in $(seq 1 30); do
               code=$(curl -s -o /dev/null -w '%{http_code}' "$url")
