@@ -12,6 +12,13 @@ export default {
     }
 
     const url = new URL(request.url);
+
+    if (url.pathname === "/_version") {
+      return new Response(JSON.stringify({ cid }), {
+        headers: { "content-type": "application/json", "cache-control": "no-cache" },
+      });
+    }
+
     let response = await fetchFromGateway(env.PINATA_GATEWAY, cid, url.pathname + url.search);
 
     // SPA fallback: unknown paths that aren't static assets get index.html
