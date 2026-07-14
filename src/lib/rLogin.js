@@ -49,7 +49,7 @@ const getRLogin = (port) => {
                 options: {
                     rpcUrl: rpcUrls[parseInt(chainId)],
                     chainId: parseInt(chainId),
-                    debug: true
+                    debug: process.env.NODE_ENV !== 'production'
                 }
             },
             'custom-trezor': {

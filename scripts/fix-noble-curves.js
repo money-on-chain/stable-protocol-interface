@@ -38,7 +38,11 @@ function walkDir(dir, cb) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name !== 'esm' && entry.name !== 'node_modules') walkDir(full, cb);
+      // Descend into nested node_modules too: packages like @ethereumjs/util
+      // ship their own pinned copy of @noble/curves under
+      // node_modules/@ethereumjs/util/node_modules/@noble/curves, which is a
+      // different file tree than the hoisted root-level @noble/curves.
+      if (entry.name !== 'esm') walkDir(full, cb);
     } else if (entry.isFile() && entry.name.endsWith('.js')) {
       cb(full);
     }

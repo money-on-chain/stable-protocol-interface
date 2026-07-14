@@ -204,6 +204,7 @@ function RowDetail(props) {
                             className="ant-descriptions-a"
                             href={`${config.environment.explorerUrl}/tx/${props.detail.tx_hash}`}
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <span>{props.detail.tx_hash_truncate} </span>
                         </a>

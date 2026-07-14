@@ -1,75 +1,53 @@
 name: MoC-Pre-Release
 on:
   workflow_dispatch:
+    inputs:
+      bump_type:
+        description: 'Version bump type (auto = detect from commits)'
+        required: false
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write
+
+concurrency:
+  group: version-bump
+  cancel-in-progress: false
 
 jobs:
   bump_version:
     name: Bump Version
-    runs-on: ubuntu-22.04
-    outputs:
-      new_tag: ${{ steps.github_tag_action.outputs.new_tag }}
-      changelog: ${{ steps.github_tag_action.outputs.changelog }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
-
-      - name: setup Node
-        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # v3.5.1
-        with:
-          node-version: 14.x
-          registry-url: 'https://npm.pkg.github.com'
-
-      - name: package-version
-        run: node -p -e '`PACKAGE_VERSION=${require("./package.json").version}`' >> $GITHUB_ENV
-
-      - name: Bump version and push tag
-        id: github_tag_action
-        uses: mathieudutour/github-tag-action@fcfbdceb3093f6d85a3b194740f8c6cec632f4e2  # v6.1
-        with:
-          github_token: ${{ secrets.PERSONAL_TOKEN }}
-          release_branches: master, develop
-          default_bump: fix
-          custom_tag: ${{ env.PACKAGE_VERSION }}
+    uses: ./.github/workflows/bump-version.yml
+    with:
+      bump_type: ${{ inputs.bump_type || 'auto' }}
 
   create_release:
     name: Create Release
     runs-on: ubuntu-22.04
     needs: bump_version
-    if: ${{ needs.bump_version.outputs.new_tag != null }}
+    if: ${{ needs.bump_version.result == 'success' && needs.bump_version.outputs.new_tag != '' }}
+    permissions:
+      contents: write
     env:
       REACT_APP_RLOGIN_WALLETCONNECT2_PROJECTID: ${{ secrets.REACT_APP_RLOGIN_WALLETCONNECT2_PROJECTID }}
     steps:
       - name: Checkout
-        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
 
       - name: setup Node
-        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # v3.5.1
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: 14.x
           registry-url: 'https://npm.pkg.github.com'
 
       - name: Install setup
         run: npm ci
-
-      # Target Mainnet
-
-      - name: Build setup Mainnet
-        run: CI=false npm run build:moc-mainnet
-
-      - name: Pin to IPFS Mainnet
-        id: upload
-        uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
-        with:
-          pin-name: MoC Mainnet ${{ needs.bump_version.outputs.new_tag }}
-          path: './build'
-          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
-          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
-
-      - name: Convert CIDv0 to CIDv1 Mainnet
-        id: convert_cidv0
-        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
-        with:
-          cidv0: ${{ steps.upload.outputs.hash }}
 
       # Target Staging Testnet
 
@@ -78,42 +56,125 @@ jobs:
 
       - name: Pin to IPFS Staging
         id: upload_staging
-        uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
-        with:
-          pin-name: MoC Testnet ${{ needs.bump_version.outputs.new_tag }}
-          path: './build'
-          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
-          pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET_KEY }}
+        env:
+          PINATA_API_KEY: ${{ secrets.PINATA_API_KEY }}
+          PINATA_SECRET_KEY: ${{ secrets.PINATA_API_SECRET_KEY }}
+          PIN_NAME: MoC Testnet ${{ needs.bump_version.outputs.new_tag }}
+        run: |
+          set -e
+          FORM_ARGS=()
+          mapfile -t DIST_FILES < <(find ./build -type f | sort)
+          if [ ${#DIST_FILES[@]} -eq 0 ]; then
+            echo "::error::No files found in ./build — build may have failed"
+            exit 1
+          fi
+          for FILE in "${DIST_FILES[@]}"; do
+            REL="${FILE#./}"
+            FORM_ARGS+=(-F "file=@${FILE};filename=${REL}")
+          done
+          FORM_ARGS+=(-F "pinataMetadata={\"name\":\"$PIN_NAME\"}")
+
+          if ! RESPONSE=$(curl -s --fail-with-body -X POST "https://api.pinata.cloud/pinning/pinFileToIPFS" \
+            -H "pinata_api_key: $PINATA_API_KEY" \
+            -H "pinata_secret_api_key: $PINATA_SECRET_KEY" \
+            "${FORM_ARGS[@]}"); then
+            echo "::error::Pinata upload failed: $RESPONSE"
+            exit 1
+          fi
+
+          HASH=$(echo "$RESPONSE" | python3 -c "import sys, json; print(json.load(sys.stdin)['IpfsHash'])")
+          if [ -z "$HASH" ]; then
+            echo "::error::Pinata returned unexpected response: $RESPONSE"
+            exit 1
+          fi
+          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
 
       - name: Convert CIDv0 to CIDv1 Staging
         id: convert_cidv0_staging
-        uses: money-on-chain/convert-cidv0-cidv1@v1.0.0
-        with:
-          cidv0: ${{ steps.upload_staging.outputs.hash }}
+        env:
+          CIDV0: ${{ steps.upload_staging.outputs.hash }}
+        run: |
+          set -e
+          CIDV1=$(python3 << 'PYEOF'
+          import base64, os
+          def b58decode(s):
+              alph = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+              n = 0
+              for c in s: n = n * 58 + alph.index(c)
+              size = (n.bit_length() + 7) // 8
+              return n.to_bytes(max(size, 1), 'big')
+          mh = b58decode(os.environ['CIDV0'])
+          print('b' + base64.b32encode(b'\x01\x70' + mh).decode().lower().rstrip('='))
+          PYEOF
+          )
+          if [ -z "$CIDV1" ]; then
+            echo "::error::CIDv0 to CIDv1 conversion failed"
+            exit 1
+          fi
+          echo "cidv1=$CIDV1" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for Pinata gateway propagation
+        timeout-minutes: 5
+        env:
+          PINATA_GATEWAY: https://moneyonchain.mypinata.cloud
+          HASH: ${{ steps.upload_staging.outputs.hash }}
+        run: |
+          set -e
+          # Pinata accepts a pin instantly, but individual files can take a
+          # few seconds to become servable from the gateway. worker.js serves
+          # 404s straight through for static assets (no SPA fallback), so if
+          # we flip the KV before every file is actually reachable, clients
+          # can hit a transient 404 on a lazy-loaded chunk. Poll every pinned
+          # file until the gateway serves it before updating current_cid.
+          mapfile -t DIST_FILES < <(find ./build -type f | sort)
+
+          check_file() {
+            # fetchFromGateway in worker.js fetches with no "build/" prefix —
+            # the CID root is the *contents* of build/, not a build/ folder
+            # (the prefix is only needed in the upload filename= field to
+            # satisfy Pinata's single-shared-root requirement).
+            local rel="${1#./build/}"
+            local url="$PINATA_GATEWAY/ipfs/$HASH/$rel"
+            for _ in $(seq 1 30); do
+              code=$(curl -s -o /dev/null -w '%{http_code}' "$url")
+              if [ "$code" = "200" ]; then
+                return 0
+              fi
+              sleep 2
+            done
+            echo "::error::Gateway never served $url (last status $code)"
+            return 1
+          }
+          export -f check_file
+          export PINATA_GATEWAY HASH
+
+          printf '%s\n' "${DIST_FILES[@]}" | xargs -P 8 -I{} bash -c 'check_file "$@"' _ {}
+
+      - name: Update Cloudflare Worker KV Testnet
+        run: |
+          curl --fail -X PUT \
+            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/storage/kv/namespaces/${{ secrets.CF_KV_NAMESPACE_ID_MOC_TESTNET }}/values/current_cid" \
+            -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+            -H "Content-Type: text/plain" \
+            --data "${{ steps.upload_staging.outputs.hash }}"
 
       # Create the release
       - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b # v3.0.1
         with:
+          token: ${{ github.token }}
           tag_name: ${{ needs.bump_version.outputs.new_tag }}
-          release_name: MoC Pre-release ${{ needs.bump_version.outputs.new_tag }}
+          name: MoC Pre-release ${{ needs.bump_version.outputs.new_tag }}
           prerelease: true
           body: |
             **IMPORTANT:** This is a pre-release!, please use at your own RISK... is for testing purpose!
 
-            **MoC Mainnet gateways**:
-            - CIDv0: `${{ steps.upload.outputs.hash }}`
-            - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`
-            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload.outputs.hash }}
-            - https://cloudflare-ipfs.com/ipfs/${{ steps.upload.outputs.hash }}
-
-            **MoC Testnet gateways**:
             - CIDv0: `${{ steps.upload_staging.outputs.hash }}`
             - CIDv1: `${{ steps.convert_cidv0_staging.outputs.cidv1 }}`
-            - https://moneyonchain.mypinata.cloud/ipfs/${{ steps.upload_staging.outputs.hash }}
+
+            **MoC Testnet gateways**:
+            - Always last version available: [https://dapp-testnet.moneyonchain.com](https://dapp-testnet.moneyonchain.com)
+            - https://dapp-testnet.moneyonchain.com/ipfs/${{ steps.upload_staging.outputs.hash }}
             - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_staging.outputs.hash }}
 
             ${{ needs.bump_version.outputs.changelog }}

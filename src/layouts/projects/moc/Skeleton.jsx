@@ -15,6 +15,7 @@ import LoginButton from '../../../components/Auth/LoginButton/index';
 import '../../../assets/css/global.scss';
 import { AuthenticateContext } from '../../../context/Auth';
 import HeaderCoins from '../../../components/Page/HeaderCoins';
+import UpdateToast from '../../../components/UpdateToast';
 import { useProjectTranslation } from '../../../helpers/translations';
 
 import { ReactComponent as LogoIcon } from '../../../assets/icons/logo.svg';
@@ -251,6 +252,7 @@ export default function Skeleton() {
                     />
                 </Header>
                 <Content className="page-container">
+                    <UpdateToast />
                     <Outlet />
                 </Content>
                 <Drawer

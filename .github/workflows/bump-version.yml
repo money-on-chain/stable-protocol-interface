@@ -1,0 +1,95 @@
+name: Bump Version
+on:
+    workflow_call:
+        inputs:
+            bump_type:
+                description: 'Version bump type (auto = detect from commits)'
+                required: false
+                default: 'auto'
+                type: string
+        outputs:
+            new_tag:
+                description: 'The new semver tag, or empty if nothing to release'
+                value: ${{ jobs.bump.outputs.new_tag }}
+            changelog:
+                description: 'Commit log since the last tag'
+                value: ${{ jobs.bump.outputs.changelog }}
+
+jobs:
+    bump:
+        name: Bump Version
+        runs-on: ubuntu-22.04
+        permissions:
+            contents: write
+        outputs:
+            new_tag: ${{ steps.bump_version_step.outputs.new_tag }}
+            changelog: ${{ steps.bump_version_step.outputs.changelog }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+              with:
+                  fetch-depth: 0
+
+            - name: Bump version and push tag
+              id: bump_version_step
+              env:
+                  BUMP_TYPE: ${{ inputs.bump_type || 'auto' }}
+              run: |
+                  set -e
+
+                  LATEST_TAG=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -1)
+
+                  if [ -z "$LATEST_TAG" ]; then
+                    MAJOR=0; MINOR=0; PATCH=0
+                    FIRST_COMMIT=$(git rev-list --max-parents=0 HEAD)
+                    LOG_RANGE="${FIRST_COMMIT}..HEAD"
+                    echo "Latest tag: none (first release)"
+                  else
+                    echo "Latest tag: $LATEST_TAG"
+                    IFS='.' read -r MAJOR MINOR PATCH <<< "${LATEST_TAG#v}"
+                    LOG_RANGE="${LATEST_TAG}..HEAD"
+                  fi
+
+                  BUMP="$BUMP_TYPE"
+                  if [ "$BUMP" = "auto" ]; then
+                    if [ -z "$(git log "$LOG_RANGE" --oneline)" ]; then
+                      echo "No commits since ${LATEST_TAG:-the beginning}. Nothing to release."
+                      exit 0
+                    fi
+                    FULL_MESSAGES=$(git log "$LOG_RANGE" --pretty=format:"%B")
+                    SUBJECTS=$(git log "$LOG_RANGE" --pretty=format:"%s")
+                    if echo "$FULL_MESSAGES" | grep -qE "^BREAKING[- ]CHANGE:" || \
+                       echo "$SUBJECTS" | grep -qE "^[a-z]+(\([^)]*\))?!:"; then
+                      BUMP="major"
+                    elif echo "$SUBJECTS" | grep -qE "^feat(\([^)]*\))?:"; then
+                      BUMP="minor"
+                    else
+                      BUMP="patch"
+                    fi
+                  fi
+                  echo "Bump type: $BUMP"
+
+                  case "$BUMP" in
+                    major) MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0 ;;
+                    minor) MINOR=$((MINOR + 1)); PATCH=0 ;;
+                    patch) PATCH=$((PATCH + 1)) ;;
+                    *) echo "::error::Unknown bump_type '$BUMP' — must be auto, patch, minor, or major"; exit 1 ;;
+                  esac
+
+                  NEW_TAG="v${MAJOR}.${MINOR}.${PATCH}"
+                  echo "New tag: $NEW_TAG"
+
+                  CHANGELOG=$(git log "$LOG_RANGE" --pretty=format:"- %s (%h)")
+
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  git tag "$NEW_TAG"
+                  git push origin "$NEW_TAG"
+
+                  echo "new_tag=$NEW_TAG" >> "$GITHUB_OUTPUT"
+                  EOF_DELIM="CHANGELOG_$(openssl rand -hex 8)"
+                  {
+                    echo "changelog<<$EOF_DELIM"
+                    echo "$CHANGELOG"
+                    echo "$EOF_DELIM"
+                  } >> "$GITHUB_OUTPUT"

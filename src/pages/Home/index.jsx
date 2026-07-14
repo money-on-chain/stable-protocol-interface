@@ -47,7 +47,7 @@ function Home(props) {
                         <Button 
                             size="medium" 
                             onClick={() => {
-                                window.open('https://x.com/moneyonchainok/status/2044857700228473318?s=20', '_blank');
+                                window.open('https://x.com/moneyonchainok/status/2044857700228473318?s=20', '_blank', 'noopener,noreferrer');
                             }}
                             >
                         {t('global.Paused_alertMoreDetails')}
