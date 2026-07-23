@@ -46,7 +46,7 @@
         "workbox-strategies": "^5.1.4"
     },
     "scripts": {
-        "dev:from-env": "bash ./prepare_target.sh $VITE_APP_PROJECT && export REACT_APP_VERSION=$npm_package_version && export HOST=$VITE_HOST && export PORT=$VITE_PORT && export BROWSER=none && export NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+        "dev:from-env": "bash ./prepare_target.sh $VITE_APP_PROJECT && export REACT_APP_VERSION=$npm_package_version && export HOST=$VITE_HOST && export PORT=$VITE_PORT && export BROWSER=none && react-scripts start",
         "reload:moc-testnet": "export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocTestnet react-scripts start",
         "start:moc-alpha-testnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocTestnetAlpha react-scripts start",
         "start:moc-testnet": "bash ./prepare_target.sh moc && export REACT_APP_VERSION=$npm_package_version && env-cmd -f .env.mocTestnet react-scripts start",
