@@ -51,11 +51,11 @@ Requires:
 
 Install packages
 
-`npm install --ignore-scripts`
+`corepack pnpm install --ignore-scripts`
 
 Run
 
-`npm run start:moc-mainnet`
+`corepack pnpm run start:moc-mainnet`
 
 **Note:** Start the environment you want to run ex. **"start:moc-mainnet"** to start environment Moc Production Mainnet 
 
@@ -67,9 +67,9 @@ Then in your browser:
 ### Environment table
 
 Environment is our already deployed contracts. 
-**Develop**: npm run start:<environment>
+**Develop**: `corepack pnpm run start:<environment>`
 
-| Name             | Project | Main Gateway                           | Environment | Network | npm run                 |
+| Name             | Project | Main Gateway                           | Environment | Network | pnpm run                |
 |------------------|---------|----------------------------------------|-------------|---------|-------------------------|
 | MoC TestnetAlpha | MOC     |                                        | Testnet     | RSK     | start:moc-alpha-testnet |
 | MoC Testnet      | MOC     |                                        | Testnet     | RSK     | start:moc-testnet       |

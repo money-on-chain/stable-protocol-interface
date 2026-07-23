@@ -20,18 +20,18 @@ These are intentionally separate from the `dapp-proxy-moc` / `dapp-proxy-moc-tes
 ## Prerequisites
 
 - Node.js v22+
-- Wrangler: `npx wrangler login`
+- Wrangler: `corepack pnpm dlx wrangler login`
 
 ## Deploy
 
 ```bash
 # Deploy a single environment
-npx wrangler deploy --env moc
-npx wrangler deploy --env moc-testnet
+corepack pnpm dlx wrangler deploy --env moc
+corepack pnpm dlx wrangler deploy --env moc-testnet
 
 # Deploy all at once
 for env in moc moc-testnet; do
-  npx wrangler deploy --env $env
+  corepack pnpm dlx wrangler deploy --env $env
 done
 ```
 
@@ -47,8 +47,8 @@ done
 ## Creating new KV namespaces (first-time setup)
 
 ```bash
-npx wrangler kv namespace create legacy-DAPP_KV --env moc
-npx wrangler kv namespace create legacy-DAPP_KV --env moc-testnet
+corepack pnpm dlx wrangler kv namespace create legacy-DAPP_KV --env moc
+corepack pnpm dlx wrangler kv namespace create legacy-DAPP_KV --env moc-testnet
 ```
 
 The positional name (`legacy-DAPP_KV`) only sets the namespace's dashboard title — plain `DAPP_KV` collides with the `stable-protocol-interface-v3` repo's Voting app workers, which already own the `moc-DAPP_KV` / `moc-testnet-DAPP_KV` titles. `legacy` reflects that this repo is the legacy dapp. The `binding = "DAPP_KV"` in `wrangler.toml` is unrelated and unaffected by this name.

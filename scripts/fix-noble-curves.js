@@ -1,6 +1,6 @@
 // Transpiles optional chaining (?.) and nullish coalescing (??) out of
 // packages that webpack 4 (react-scripts 4) cannot parse.
-// Runs via `postinstall` so it re-applies after every `npm install`.
+// Runs via `postinstall` so it re-applies after every `pnpm install`.
 const babel = require('@babel/core');
 const fs = require('fs');
 const path = require('path');

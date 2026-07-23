@@ -1,3 +1,3 @@
 #!/bin/bash
 echo $TARGET_BUILD
-npm run "$TARGET_BUILD"
+corepack pnpm run "$TARGET_BUILD"
