@@ -53,16 +53,38 @@ function hasModernSyntax(content) {
   return content.includes('?.') || content.includes('??') || content.includes('||=') || content.includes('&&=') || content.includes('??=') || /#[a-zA-Z_]/.test(content);
 }
 
+function packageDirs(pkg) {
+  const candidates = [path.join(ROOT, 'node_modules', pkg)];
+  const pnpmDir = path.join(ROOT, 'node_modules', '.pnpm');
+
+  if (fs.existsSync(pnpmDir)) {
+    for (const entry of fs.readdirSync(pnpmDir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      candidates.push(path.join(pnpmDir, entry.name, 'node_modules', pkg));
+    }
+  }
+
+  const seen = new Set();
+  return candidates.filter(candidate => {
+    if (!fs.existsSync(candidate)) return false;
+    const real = fs.realpathSync(candidate);
+    if (seen.has(real)) return false;
+    seen.add(real);
+    return true;
+  });
+}
+
 let patched = 0;
 
 for (const pkg of PACKAGES) {
-  const pkgDir = path.join(ROOT, 'node_modules', pkg);
-  if (!fs.existsSync(pkgDir)) {
+  const dirs = packageDirs(pkg);
+  if (dirs.length === 0) {
     console.log(`[fix] ${pkg} not found, skipping`);
     continue;
   }
 
-  walkDir(pkgDir, (file) => {
+  for (const pkgDir of dirs) {
+    walkDir(pkgDir, (file) => {
     const original = fs.readFileSync(file, 'utf8');
     if (!hasModernSyntax(original)) return;
 
@@ -77,6 +99,7 @@ for (const pkg of PACKAGES) {
       console.warn(`[fix] failed to transform ${path.relative(ROOT, file)}: ${e.message}`);
     }
   });
+  }
 }
 
 console.log(`[fix] done — ${patched} file(s) patched`);
