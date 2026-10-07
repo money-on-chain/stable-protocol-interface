@@ -37,7 +37,18 @@ compatibility_date = "2024-09-23"
 #   CF_KV_NAMESPACE_ID_MOC        — id of the KV namespace created for the moc env
 #   CF_KV_NAMESPACE_ID_MOC_TESTNET — id of the KV namespace created for the moc-testnet env
 
-# ─── MoC (dapp.moneyonchain.com) ─────────────────────────────────────────────
+# MIGRATION: this legacy (classic) dapp is moving to dapp-classic.moneyonchain.com /
+# dapp-classic-testnet.moneyonchain.com, and the stable-protocol-interface-v3
+# dapp takes over dapp.moneyonchain.com / dapp-testnet.moneyonchain.com.
+# Phase 1 (now): this worker serves BOTH the old and the new hostname, so the
+#   classic dapp is reachable on dapp-classic while dapp.moneyonchain.com keeps
+#   working. The dapp-classic DNS records must exist and be proxied (orange
+#   cloud), otherwise the route never fires.
+# Phase 2 (cutover): delete the old dapp.moneyonchain.com / dapp-testnet routes
+#   below and redeploy this worker BEFORE deploying the v3 worker with those
+#   patterns — a route pattern can only be assigned to one worker.
+
+# ─── MoC (dapp-classic.moneyonchain.com) ─────────────────────────────────────
 [env.moc]
 name = "dapp-proxy-moc-app"
 
@@ -49,10 +60,15 @@ binding = "DAPP_KV"
 id = "8348f31685564a62b67c65295f3f7174"
 
 [[env.moc.routes]]
+pattern = "dapp-classic.moneyonchain.com/*"
+zone_name = "moneyonchain.com"
+
+# Old hostname — remove at cutover (phase 2), see MIGRATION note above.
+[[env.moc.routes]]
 pattern = "dapp.moneyonchain.com/*"
 zone_name = "moneyonchain.com"
 
-# ─── MoC Testnet (dapp-testnet.moneyonchain.com) ─────────────────────────────
+# ─── MoC Testnet (dapp-classic-testnet.moneyonchain.com) ─────────────────────
 [env.moc-testnet]
 name = "dapp-proxy-moc-app-testnet"
 
@@ -63,6 +79,11 @@ PINATA_GATEWAY = "https://moneyonchain.mypinata.cloud"
 binding = "DAPP_KV"
 id = "dcc9d7a82def4266977867afb21b68ac"
 
+[[env.moc-testnet.routes]]
+pattern = "dapp-classic-testnet.moneyonchain.com/*"
+zone_name = "moneyonchain.com"
+
+# Old hostname — remove at cutover (phase 2), see MIGRATION note above.
 [[env.moc-testnet.routes]]
 pattern = "dapp-testnet.moneyonchain.com/*"
 zone_name = "moneyonchain.com"

@@ -30,7 +30,7 @@ Each release gets deployed to IPFS automatically.
 
 Please go to release section, there are several links to [releases](https://github.com/money-on-chain/stable-protocol-interface/releases) 
 
-**MOC Release**: You can always get the last stable release on: [dapp.moneyonchain.com](https://dapp.moneyonchain.com)
+**MOC Release**: You can always get the last stable release on: [dapp-classic.moneyonchain.com](https://dapp-classic.moneyonchain.com)
 
 **Notes:** The list of operations of the user is get it through an  API. We use an api also for the liquidity mining program, but is not need it to run or to exchange tokens.
 

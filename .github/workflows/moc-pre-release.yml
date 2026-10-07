@@ -173,8 +173,8 @@ jobs:
             - CIDv1: `${{ steps.convert_cidv0_staging.outputs.cidv1 }}`
 
             **MoC Testnet gateways**:
-            - Always last version available: [https://dapp-testnet.moneyonchain.com](https://dapp-testnet.moneyonchain.com)
-            - https://dapp-testnet.moneyonchain.com/ipfs/${{ steps.upload_staging.outputs.hash }}
+            - Always last version available: [https://dapp-classic-testnet.moneyonchain.com](https://dapp-classic-testnet.moneyonchain.com)
+            - https://dapp-classic-testnet.moneyonchain.com/ipfs/${{ steps.upload_staging.outputs.hash }}
             - https://cloudflare-ipfs.com/ipfs/${{ steps.upload_staging.outputs.hash }}
 
             ${{ needs.bump_version.outputs.changelog }}
