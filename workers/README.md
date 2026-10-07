@@ -12,8 +12,15 @@ Each worker sits in front of a Pinata IPFS gateway and serves the latest dapp bu
 
 | Env | Worker name | Domain |
 |-----|-------------|--------|
-| `moc` | dapp-proxy-moc-app | dapp.moneyonchain.com |
-| `moc-testnet` | dapp-proxy-moc-app-testnet | dapp-testnet.moneyonchain.com |
+| `moc` | dapp-proxy-moc-app | dapp-classic.moneyonchain.com (+ dapp.moneyonchain.com until cutover) |
+| `moc-testnet` | dapp-proxy-moc-app-testnet | dapp-classic-testnet.moneyonchain.com (+ dapp-testnet.moneyonchain.com until cutover) |
+
+### Domain migration
+
+This legacy (classic) dapp is moving to `dapp-classic.moneyonchain.com` / `dapp-classic-testnet.moneyonchain.com`; the `stable-protocol-interface-v3` dapp takes over `dapp.moneyonchain.com` / `dapp-testnet.moneyonchain.com`.
+
+1. **Phase 1 (now)** — the workers serve both the new `dapp-classic*` hostnames and the old ones. Create proxied (orange-cloud) DNS records for `dapp-classic` and `dapp-classic-testnet` in the `moneyonchain.com` zone, then `npx wrangler deploy --env moc` / `--env moc-testnet`.
+2. **Phase 2 (cutover)** — remove the old `dapp.moneyonchain.com/*` / `dapp-testnet.moneyonchain.com/*` routes from `wrangler.toml` and redeploy these workers **before** deploying the v3 workers with those patterns (a route pattern can only belong to one worker).
 
 These are intentionally separate from the `dapp-proxy-moc` / `dapp-proxy-moc-testnet` workers in the `stable-protocol-interface-v3` repo, which own `manage.moneyonchain.com` / `manage-testnet.moneyonchain.com` for the Voting app.
 
