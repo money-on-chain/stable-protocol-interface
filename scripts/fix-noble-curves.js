@@ -91,7 +91,12 @@ for (const pkg of PACKAGES) {
     try {
       const result = babel.transformSync(original, { ...BABEL_OPTS, filename: file });
       if (result && result.code && result.code !== original) {
-        fs.writeFileSync(file, result.code, 'utf8');
+        // Write to a temp file and rename instead of writing in place: pnpm
+        // hardlinks node_modules files to its global store, so an in-place
+        // write would corrupt the store copy (and pnpm later restores it).
+        const tmp = `${file}.fix-tmp`;
+        fs.writeFileSync(tmp, result.code, 'utf8');
+        fs.renameSync(tmp, file);
         console.log(`[fix] patched ${path.relative(ROOT, file)}`);
         patched++;
       }

@@ -86,6 +86,7 @@
         "@babel/plugin-transform-private-methods": "7.29.7",
         "@babel/plugin-transform-private-property-in-object": "7.29.7",
         "@pawjs/sass": "^2.2.6",
+        "@svgr/webpack": "5.5.0",
         "source-map-explorer": "^2.5.2",
         "webpack": "4.46.0",
         "webpack-cli": "^4.10.0"
