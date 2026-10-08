@@ -47,12 +47,12 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
 
       - name: Install setup
-        run: npm ci
+        run: corepack pnpm install --frozen-lockfile
 
       # Target Staging Testnet
 
       - name: Build setup Testnet
-        run: CI=false npm run build:moc-testnet
+        run: CI=false corepack pnpm run build:moc-testnet
 
       - name: Pin to IPFS Staging
         id: upload_staging

@@ -59,11 +59,11 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
 
       - name: Install setup
-        run: npm ci
+        run: corepack pnpm install --frozen-lockfile
 
       # Target Mainnet
       - name: Build setup Mainnet
-        run: CI=false npm run build:moc-mainnet
+        run: CI=false corepack pnpm run build:moc-mainnet
 
       - name: Pin to IPFS Mainnet
         id: upload

@@ -4,9 +4,8 @@ FROM node:14
 MAINTAINER Nicolas Flores & Martin Mulone
 
 WORKDIR /usr/src/app
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN corepack pnpm install --frozen-lockfile
 
 # copy environments targets
 COPY .env ./

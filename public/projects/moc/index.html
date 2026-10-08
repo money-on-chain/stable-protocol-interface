@@ -9,6 +9,7 @@
       font-src 'self' https://fonts.gstatic.com data:;
       img-src 'self' data: blob: https:;
       connect-src 'self'
+        %REACT_APP_ENVIRONMENT_API_OPERATIONS%
         https://api-operations.moneyonchain.com
         https://api-operations-testnet.moneyonchain.com
         https://api-operations-alpha-testnet.moneyonchain.com
@@ -48,7 +49,7 @@
 
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
+      Learn how to configure a non-root public URL by running `pnpm run build`.
     -->
     <title>Money On Chain - Dollar On Chain - Stable Interface</title>
 
@@ -67,8 +68,8 @@
       You can add webfonts, meta tags, or analytics to this file.
       The build step will place the bundled scripts into the <body> tag.
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
+      To begin development, run `pnpm start`.
+      To create a production bundle, use `pnpm run build`.
     -->
   </body>
 </html>

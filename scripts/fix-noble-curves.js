@@ -1,6 +1,6 @@
 // Transpiles optional chaining (?.) and nullish coalescing (??) out of
 // packages that webpack 4 (react-scripts 4) cannot parse.
-// Runs via `postinstall` so it re-applies after every `npm install`.
+// Runs via `postinstall` so it re-applies after every `pnpm install`.
 const babel = require('@babel/core');
 const fs = require('fs');
 const path = require('path');
@@ -53,23 +53,50 @@ function hasModernSyntax(content) {
   return content.includes('?.') || content.includes('??') || content.includes('||=') || content.includes('&&=') || content.includes('??=') || /#[a-zA-Z_]/.test(content);
 }
 
+function packageDirs(pkg) {
+  const candidates = [path.join(ROOT, 'node_modules', pkg)];
+  const pnpmDir = path.join(ROOT, 'node_modules', '.pnpm');
+
+  if (fs.existsSync(pnpmDir)) {
+    for (const entry of fs.readdirSync(pnpmDir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      candidates.push(path.join(pnpmDir, entry.name, 'node_modules', pkg));
+    }
+  }
+
+  const seen = new Set();
+  return candidates.filter(candidate => {
+    if (!fs.existsSync(candidate)) return false;
+    const real = fs.realpathSync(candidate);
+    if (seen.has(real)) return false;
+    seen.add(real);
+    return true;
+  });
+}
+
 let patched = 0;
 
 for (const pkg of PACKAGES) {
-  const pkgDir = path.join(ROOT, 'node_modules', pkg);
-  if (!fs.existsSync(pkgDir)) {
+  const dirs = packageDirs(pkg);
+  if (dirs.length === 0) {
     console.log(`[fix] ${pkg} not found, skipping`);
     continue;
   }
 
-  walkDir(pkgDir, (file) => {
+  for (const pkgDir of dirs) {
+    walkDir(pkgDir, (file) => {
     const original = fs.readFileSync(file, 'utf8');
     if (!hasModernSyntax(original)) return;
 
     try {
       const result = babel.transformSync(original, { ...BABEL_OPTS, filename: file });
       if (result && result.code && result.code !== original) {
-        fs.writeFileSync(file, result.code, 'utf8');
+        // Write to a temp file and rename instead of writing in place: pnpm
+        // hardlinks node_modules files to its global store, so an in-place
+        // write would corrupt the store copy (and pnpm later restores it).
+        const tmp = `${file}.fix-tmp`;
+        fs.writeFileSync(tmp, result.code, 'utf8');
+        fs.renameSync(tmp, file);
         console.log(`[fix] patched ${path.relative(ROOT, file)}`);
         patched++;
       }
@@ -77,6 +104,7 @@ for (const pkg of PACKAGES) {
       console.warn(`[fix] failed to transform ${path.relative(ROOT, file)}: ${e.message}`);
     }
   });
+  }
 }
 
 console.log(`[fix] done — ${patched} file(s) patched`);
