@@ -155,12 +155,44 @@ jobs:
           printf '%s\n' "${DIST_FILES[@]}" | xargs -P 8 -I{} bash -c 'check_file "$@"' _ {}
 
       - name: Update Cloudflare Worker KV Testnet
+        env:
+          KV_URL: https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/storage/kv/namespaces/${{ secrets.CF_KV_NAMESPACE_ID_MOC_TESTNET }}/values
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          NEW_CID: ${{ steps.upload_staging.outputs.hash }}
         run: |
-          curl --fail -X PUT \
-            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/storage/kv/namespaces/${{ secrets.CF_KV_NAMESPACE_ID_MOC_TESTNET }}/values/current_cid" \
-            -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+          set -e
+          # Keep a history of recent CIDs so the worker can still serve hashed
+          # assets of older builds to clients whose service worker cached an
+          # old index.html (otherwise they get a blank page). Written before
+          # current_cid so the outgoing build is in the fallback list first.
+          kv_get() {
+            curl -s --fail "$KV_URL/$1" -H "Authorization: Bearer $CF_API_TOKEN" || true
+          }
+          OLD_CID=$(kv_get current_cid)
+          OLD_PREVIOUS=$(kv_get previous_cids)
+          PREVIOUS=$(OLD_CID="$OLD_CID" OLD_PREVIOUS="$OLD_PREVIOUS" python3 << 'PYEOF'
+          import json, os
+          try:
+              prev = json.loads(os.environ['OLD_PREVIOUS'])
+              if not isinstance(prev, list): prev = []
+          except ValueError:
+              prev = []
+          new, old = os.environ['NEW_CID'], os.environ['OLD_CID'].strip()
+          cids = [c for c in [old] + prev if c and c != new]
+          print(json.dumps(list(dict.fromkeys(cids))[:20]))
+          PYEOF
+          )
+          echo "previous_cids: $PREVIOUS"
+
+          curl --fail -X PUT "$KV_URL/previous_cids" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data "$PREVIOUS"
+
+          curl --fail -X PUT "$KV_URL/current_cid" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
             -H "Content-Type: text/plain" \
-            --data "${{ steps.upload_staging.outputs.hash }}"
+            --data "$NEW_CID"
 
       # Create the release
       - name: Create GitHub Release
