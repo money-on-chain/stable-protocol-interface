@@ -19,7 +19,20 @@ export default {
       });
     }
 
+    let servedCid = cid;
     let response = await fetchFromGateway(env.PINATA_GATEWAY, cid, url.pathname + url.search);
+
+    // Clients running an older build (e.g. index.html served by a previously
+    // installed service worker) request hashed chunks that no longer exist in
+    // the current CID. Workbox only precaches files <5MB, so the large vendor
+    // chunk always comes from the network — a 404 there means a blank page.
+    // Look the asset up in recent previous deploys before giving up.
+    if (response.status === 404 && STATIC_ASSET_RE.test(url.pathname)) {
+      const fallback = await fetchFromPreviousCids(env, cid, url.pathname + url.search);
+      if (fallback) {
+        ({ response, cid: servedCid } = fallback);
+      }
+    }
 
     // SPA fallback: unknown paths that aren't static assets get index.html
     if (response.status === 404 && !STATIC_ASSET_RE.test(url.pathname)) {
@@ -49,10 +62,22 @@ export default {
     if (NO_CACHE_RE.test(url.pathname)) {
       headers.set("cache-control", "no-cache");
     }
-    headers.set("x-ipfs-cid", cid);
+    headers.set("x-ipfs-cid", servedCid);
     return new Response(response.body, { status: response.status, headers });
   },
 };
+
+// previous_cids is a JSON array of earlier deploys, newest first, maintained
+// by the release workflows when they update current_cid.
+async function fetchFromPreviousCids(env, currentCid, path) {
+  const previous = (await env.DAPP_KV.get("previous_cids", { type: "json" })) ?? [];
+  for (const cid of previous) {
+    if (cid === currentCid) continue;
+    const response = await fetchFromGateway(env.PINATA_GATEWAY, cid, path);
+    if (response.ok) return { response, cid };
+  }
+  return null;
+}
 
 function fetchFromGateway(gateway, cid, path) {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
