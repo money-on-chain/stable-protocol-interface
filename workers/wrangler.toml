@@ -44,9 +44,16 @@ compatibility_date = "2024-09-23"
 #   classic dapp is reachable on dapp-classic while dapp.moneyonchain.com keeps
 #   working. The dapp-classic DNS records must exist and be proxied (orange
 #   cloud), otherwise the route never fires.
-# Phase 2 (cutover): delete the old dapp.moneyonchain.com / dapp-testnet routes
-#   below and redeploy this worker BEFORE deploying the v3 worker with those
-#   patterns — a route pattern can only be assigned to one worker.
+# Phase 2 (cutover): the v3 dapp's moc-v1 build (env moc / moc-testnet in the
+#   stable-protocol-interface-v3 repo, today on manage.*) takes over the old
+#   hostnames. Delete the old dapp.moneyonchain.com / dapp-testnet routes below
+#   and redeploy this worker BEFORE deploying the v3 worker with those
+#   patterns — a route pattern can only be assigned to one worker. The v3
+#   worker serves a kill switch at /service-worker.js that removes this app's
+#   service worker from returning visitors. See the MIGRATION note in the v3
+#   repo's workers/wrangler.toml for the full runbook.
+# Rollback: re-add the routes here and deploy (after removing them from the v3
+#   worker). This worker serves a kill switch at /sw.js for the v3 SW.
 
 # ─── MoC (dapp-classic.moneyonchain.com) ─────────────────────────────────────
 [env.moc]

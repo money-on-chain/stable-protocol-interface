@@ -4,14 +4,42 @@ const STATIC_ASSET_RE = /\.(?:js|mjs|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot
 // Unversioned PWA files must not be cached — browsers use them to detect SW updates
 const NO_CACHE_RE = /^\/(sw\.js|service-worker\.js|manifest\.webmanifest|manifest\.json)([\?#].*)?$/i;
 
+// Service worker that replaces whatever SW is registered at its URL, wipes
+// the caches, unregisters itself and reloads the open tabs. Served at /sw.js,
+// the path of the v3 dapp's service worker (stable-protocol-interface-v3),
+// which takes over dapp.moneyonchain.com at the phase 2 cutover. If routes
+// are ever rolled back to this worker, browsers with the v3 SW installed would
+// otherwise keep serving the cached v3 app forever. This app's own SW is
+// /service-worker.js, so nothing here ever registers /sw.js.
+const SW_KILL_SWITCH = `
+self.addEventListener("install", () => self.skipWaiting());
+self.addEventListener("activate", (event) => {
+  event.waitUntil((async () => {
+    for (const key of await caches.keys()) await caches.delete(key);
+    await self.registration.unregister();
+    const clients = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+    for (const client of clients) client.navigate(client.url);
+  })());
+});
+`;
+
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/sw.js") {
+      return new Response(SW_KILL_SWITCH, {
+        headers: {
+          "content-type": "application/javascript; charset=utf-8",
+          "cache-control": "no-cache",
+        },
+      });
+    }
+
     const cid = await env.DAPP_KV.get("current_cid");
     if (!cid) {
       return new Response("No version deployed yet.", { status: 503 });
     }
-
-    const url = new URL(request.url);
 
     if (url.pathname === "/_version") {
       return new Response(JSON.stringify({ cid }), {
