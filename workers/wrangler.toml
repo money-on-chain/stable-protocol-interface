@@ -70,10 +70,11 @@ id = "8348f31685564a62b67c65295f3f7174"
 pattern = "dapp-classic.moneyonchain.com/*"
 zone_name = "moneyonchain.com"
 
-# Old hostname — remove at cutover (phase 2), see MIGRATION note above.
-[[env.moc.routes]]
-pattern = "dapp.moneyonchain.com/*"
-zone_name = "moneyonchain.com"
+# Old hostname — handed over to the v3 dapp worker (phase 2 cutover, mainnet).
+# Rollback: uncomment and deploy, after removing it from the v3 worker.
+# [[env.moc.routes]]
+# pattern = "dapp.moneyonchain.com/*"
+# zone_name = "moneyonchain.com"
 
 # ─── MoC Testnet (dapp-classic-testnet.moneyonchain.com) ─────────────────────
 [env.moc-testnet]
